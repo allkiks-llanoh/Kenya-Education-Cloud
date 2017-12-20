@@ -8,5 +8,14 @@ namespace KEC.Voucher.Data.Models
 {
     class DbVouchers
     {
+        public int Id { get; set; }
+        public string VoucherCode { get; set; }
+        public string VoucherSerial { get; set; }
+        public int VoucherYear { get; set; }
+        public DbSchools SchoolId { get; set; }
+        public DbStatuses StatusId { get; set; }
+        public DbWallets WalletId { get; set; }
+        public ICollection<DbTransactions> Transactions { get; set; }
+
     }
 }
