@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ecommerce"
+    "\\Licensing",
+    "\\Reader",
+    "\\Voucher"
   ],
+  "SelectedNode": "\\Distributor",
   "PreviewInSolutionExplorer": false
 }
