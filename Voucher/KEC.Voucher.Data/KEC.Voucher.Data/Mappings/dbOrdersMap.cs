@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Mappings
 {
-    internal class DbCountiesMap : EntityTypeConfiguration<DbCounties>
+    internal class DbOrdersMap : EntityTypeConfiguration<DbOrders>
     {
-        public DbCountiesMap()
+        public DbOrdersMap()
         {
-            this.ToTable("Counties")
-                .HasKey(t =>t.Id);
+            this.ToTable("Orders")
+                .HasKey(t => t.Id);
         }
     }
 }

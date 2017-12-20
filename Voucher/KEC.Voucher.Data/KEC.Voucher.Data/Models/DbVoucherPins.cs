@@ -8,5 +8,10 @@ namespace KEC.Voucher.Data.Models
 {
     class DbVoucherPins
     {
+        public int Id { get; set; }
+        public DbVouchers VoucherId{ get; set; }
+        public string Status { get; set; }
+        public DateTime CreatedOnUtc { get; set; }
+
     }
 }

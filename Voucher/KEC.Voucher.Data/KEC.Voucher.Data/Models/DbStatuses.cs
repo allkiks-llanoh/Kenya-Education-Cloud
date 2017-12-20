@@ -8,5 +8,9 @@ namespace KEC.Voucher.Data.Models
 {
     class DbStatuses
     {
+        public int Id { get; set; }
+        public string StatusName { get; set; }
+        public string StatusDescription { get; set; }
+        public DateTime TimeStamp { get; set; }
     }
 }

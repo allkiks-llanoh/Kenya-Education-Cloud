@@ -8,5 +8,7 @@ namespace KEC.Voucher.Data.Models
 {
     class DbSchoolTypes
     {
+        public int Id { get; set; }
+        public string SchoolType { get; set; }
     }
 }
