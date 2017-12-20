@@ -44,9 +44,24 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Mappings\" />
-    <Folder Include="Models\" />
+    <Compile Include="Mappings\DbBatchesMap.cs" />
+    <Compile Include="Mappings\DbCountiesMap.cs" />
+    <Compile Include="Mappings\DbSchoolsMap.cs" />
+    <Compile Include="Mappings\DbSchoolTypesMap.cs" />
+    <Compile Include="Mappings\DbStatusesMap.cs" />
+    <Compile Include="Mappings\DbTransactionsMap.cs" />
+    <Compile Include="Mappings\DbVoucherPinsMap.cs" />
+    <Compile Include="Models\DbBatches.cs" />
+    <Compile Include="Models\DbCounties.cs" />
+    <Compile Include="Models\DbSchools.cs" />
+    <Compile Include="Models\DbSchoolTypes.cs" />
+    <Compile Include="Models\DbStatuses.cs" />
+    <Compile Include="Models\DbTransactions.cs" />
+    <Compile Include="Models\DbVouchers.cs" />
+    <Compile Include="Models\DbVoucherPins.cs" />
+    <Compile Include="Models\DbWallets.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

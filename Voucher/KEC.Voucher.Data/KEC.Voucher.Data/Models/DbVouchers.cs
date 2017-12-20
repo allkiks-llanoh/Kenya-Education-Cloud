@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Models
 {
-    class DbVendors
+    class DbVouchers
     {
     }
 }
