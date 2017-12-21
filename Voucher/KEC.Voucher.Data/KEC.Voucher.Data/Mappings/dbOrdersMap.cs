@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Mappings
 {
-    internal class DbOrdersMap : EntityTypeConfiguration<DbOrders>
+    internal class DbOrdersMap : EntityTypeConfiguration<DbOrder>
     {
         public DbOrdersMap()
         {

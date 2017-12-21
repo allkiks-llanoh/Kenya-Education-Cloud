@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Models
 {
-    class DbBatches
+   public class DbBatch
     {
         public int Id { get; set; }
-        public DbCounties CountyId { get; set; }
+        public DbCounty CountyId { get; set; }
         //Batch number will be Countycode plus some appended figures :-)
         public string BatchNumber { get; set; }
         //Serial number should be a GUID

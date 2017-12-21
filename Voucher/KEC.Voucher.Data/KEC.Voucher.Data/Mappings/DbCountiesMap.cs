@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Mappings
 {
-    internal class DbCountiesMap : EntityTypeConfiguration<DbCounties>
+    internal class DbCountiesMap : EntityTypeConfiguration<DbCounty>
     {
         public DbCountiesMap()
         {

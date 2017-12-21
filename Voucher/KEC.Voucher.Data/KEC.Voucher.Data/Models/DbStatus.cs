@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Models
 {
-    class DbStatuses
+   public class DbStatus
     {
         public int Id { get; set; }
         public string StatusName { get; set; }

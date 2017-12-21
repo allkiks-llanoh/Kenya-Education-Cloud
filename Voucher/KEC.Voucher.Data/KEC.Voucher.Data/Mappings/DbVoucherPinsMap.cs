@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Mappings
 {
-    internal class DbVoucherPinsMap : EntityTypeConfiguration<DbVoucherPins>
+    internal class DbVoucherPinsMap : EntityTypeConfiguration<DbVoucherPin>
     {
         public DbVoucherPinsMap()
         {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Mappings
 {
-    internal class DbSchoolTypesMap : EntityTypeConfiguration<DbSchoolTypes>
+    internal class DbSchoolTypesMap : EntityTypeConfiguration<DbSchoolType>
     {
         public DbSchoolTypesMap()
         {

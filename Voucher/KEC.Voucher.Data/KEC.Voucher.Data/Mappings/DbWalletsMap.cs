@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Mappings
 {
-    internal class DbWalletsMap : EntityTypeConfiguration<DbWallets>
+    internal class DbWalletsMap : EntityTypeConfiguration<DbWallet>
     {
         public DbWalletsMap()
         {

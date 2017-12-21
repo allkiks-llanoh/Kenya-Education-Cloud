@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Models
 {
-    class DbSchoolAdmin
+   public class DbSchoolAdmin
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

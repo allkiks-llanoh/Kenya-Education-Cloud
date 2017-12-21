@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Models
 {
-    class DbSchoolTypes
+    public class DbVoucherPin
     {
         public int Id { get; set; }
-        public string SchoolType { get; set; }
+        public DbVoucher VoucherId{ get; set; }
+        public string Status { get; set; }
+        public DateTime CreatedOnUtc { get; set; }
+
     }
 }

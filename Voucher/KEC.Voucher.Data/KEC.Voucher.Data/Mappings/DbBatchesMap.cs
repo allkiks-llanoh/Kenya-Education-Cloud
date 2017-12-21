@@ -8,7 +8,7 @@ using KEC.Voucher.Data.Models;
 
 namespace KEC.Voucher.Data.Mappings
 {
-    internal class DbBatchesMap : EntityTypeConfiguration<DbBatches>
+    internal class DbBatchesMap : EntityTypeConfiguration<DbBatch>
     {
         public DbBatchesMap()
         {

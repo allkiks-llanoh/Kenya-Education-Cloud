@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Models
 {
-    class DbTransactions
+    public class DbTransaction
     {
         public int Id { get; set; }
-        public DbVouchers VoucherId { get; set; }
-        public DbOrders OrderTotal { get; set; }
+        public DbVoucher VoucherId { get; set; }
+        public DbOrder OrderTotal { get; set; }
         public string TransactionDescription { get; set; }
         public int PinId { get; set; }
         public DbSchoolAdmin SchoolAdminId { get; set; }
-        public ICollection<DbOrders> Order { get; set; }
+        public ICollection<DbOrder> Order { get; set; }
         public DateTime CreatedOnUtc { get; set; }
     }
 }
