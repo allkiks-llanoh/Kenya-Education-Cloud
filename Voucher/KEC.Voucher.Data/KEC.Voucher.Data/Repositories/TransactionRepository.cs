@@ -5,7 +5,7 @@ namespace KEC.Voucher.Data.Repositories
 {
     public class TransactionRepository : Repository<DbTransaction>
     {
-        public TransactionRepository(DbContext context) : base(context)
+        public TransactionRepository(VoucherDb context) : base(context)
         {
         }
     }

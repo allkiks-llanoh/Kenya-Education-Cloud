@@ -10,7 +10,7 @@ namespace KEC.Voucher.Data.Repositories
 {
     public class SchoolTypeRepository : Repository<DbSchoolType>
     {
-        public SchoolTypeRepository(DbContext context) : base(context)
+        public SchoolTypeRepository(VoucherDb context) : base(context)
         {
         }
     }

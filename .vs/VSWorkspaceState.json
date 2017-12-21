@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Voucher",
     "\\Voucher\\KEC.Voucher.Data",
-    "\\Voucher\\KEC.Voucher.Data\\KEC.Voucher.Data",
     "\\Voucher\\KEC.Voucher.Data\\KEC.Voucher.Data\\obj"
   ],
+  "SelectedNode": "\\Voucher\\KEC.Voucher.Data\\KEC.Voucher.Data.sln",
   "PreviewInSolutionExplorer": false
 }

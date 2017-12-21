@@ -10,7 +10,7 @@ namespace KEC.Voucher.Data.Repositories
 {
     public class SchoolAdminRepository : Repository<DbSchoolAdmin>
     {
-        public SchoolAdminRepository(DbContext context) : base(context)
+        public SchoolAdminRepository(VoucherDb context) : base(context)
         {
         }
     }

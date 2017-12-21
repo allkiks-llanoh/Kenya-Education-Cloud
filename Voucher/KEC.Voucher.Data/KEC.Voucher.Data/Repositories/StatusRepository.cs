@@ -5,7 +5,7 @@ namespace KEC.Voucher.Data.Repositories
 {
     public class StatusRepository : Repository<DbStatus>
     {
-        public StatusRepository(DbContext context) : base(context)
+        public StatusRepository(VoucherDb context) : base(context)
         {
         }
     }

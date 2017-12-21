@@ -5,7 +5,7 @@ namespace KEC.Voucher.Data.Repositories
 {
     public class WalletRepository : Repository<DbWallet>
     {
-        public WalletRepository(DbContext context) : base(context)
+        public WalletRepository(VoucherDb context) : base(context)
         {
         }
     }

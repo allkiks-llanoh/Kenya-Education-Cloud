@@ -10,7 +10,7 @@ namespace KEC.Voucher.Data.Repositories
 {
     public class BatchRepository : Repository<DbBatch>
     {
-        public BatchRepository(DbContext context) : base(context)
+        public BatchRepository(VoucherDb context) : base(context)
         {
         }
     }

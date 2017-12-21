@@ -10,7 +10,7 @@ namespace KEC.Voucher.Data.Repositories
 {
     public class OrderRepository : Repository<DbOrder>
     {
-        public OrderRepository(DbContext context) : base(context)
+        public OrderRepository(VoucherDb context) : base(context)
         {
         }
     }

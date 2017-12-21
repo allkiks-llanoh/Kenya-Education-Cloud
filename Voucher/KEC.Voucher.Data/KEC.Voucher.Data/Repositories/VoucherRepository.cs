@@ -5,7 +5,7 @@ namespace KEC.Voucher.Data.Repositories
 {
     public class VoucherRepository : Repository<DbVoucher>
     {
-        public VoucherRepository(DbContext context) : base(context)
+        public VoucherRepository(VoucherDb context) : base(context)
         {
         }
     }
