@@ -11,11 +11,13 @@ namespace KEC.Voucher.Data.Models
         public int Id { get; set; }
         public string SchoolName { get; set; }
         public string SchoolCode { get; set; }
-        public DbSchoolAdmin SchoolAdminID { get; set; }
-        public DbSchoolType SchoolTypeID { get; set; }
-        public DbCounty CountyID { get; set; }
+        public int SchoolAdminID { get; set; }
+        public int SchoolTypeID { get; set; }
+        public int CountyID { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateChanged { get; set; }
+        public virtual DbSchoolType SchoolType { get; set; }
+        public virtual DbSchoolAdmin SchoolAdmin { get; set; }
 
     }
 }

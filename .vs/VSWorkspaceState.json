@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Licensing",
-    "\\Reader",
-    "\\Voucher"
+    "\\Voucher\\KEC.Voucher.Data",
+    "\\Voucher\\KEC.Voucher.Data\\KEC.Voucher.Data",
+    "\\Voucher\\KEC.Voucher.Data\\KEC.Voucher.Data\\obj"
   ],
-  "SelectedNode": "\\Distributor",
   "PreviewInSolutionExplorer": false
 }

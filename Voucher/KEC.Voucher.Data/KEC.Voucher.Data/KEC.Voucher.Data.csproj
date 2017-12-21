@@ -69,8 +69,20 @@
     <Compile Include="Models\DbVoucherPin.cs" />
     <Compile Include="Models\DbWallet.cs" />
     <Compile Include="Repositories.Core\IRepository.cs" />
+    <Compile Include="Repositories\BatchRepository.cs" />
+    <Compile Include="Repositories\CountyRepository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\SchoolAdminRepository.cs" />
+    <Compile Include="Repositories\SchoolRepository.cs" />
+    <Compile Include="Repositories\SchoolTypeRepository.cs" />
+    <Compile Include="Repositories\StatusRepository.cs" />
+    <Compile Include="Repositories\TransactionRepository.cs" />
+    <Compile Include="Repositories\VoucherPinRepository.cs" />
+    <Compile Include="Repositories\VoucherRepository.cs" />
+    <Compile Include="Repositories\WalletRepository.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
