@@ -15,7 +15,7 @@ namespace KEC.Voucher.Data.Mappings
             this.ToTable("Batches")
                 .HasKey(t => t.Id);
 
-            this.HasRequired(t => t.CountyId)
+            this.HasRequired(t => t.County)
                 .WithMany()
                 .HasForeignKey(t => t.CountyId)
                 .WillCascadeOnDelete(false);

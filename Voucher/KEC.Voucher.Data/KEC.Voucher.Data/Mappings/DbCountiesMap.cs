@@ -12,8 +12,17 @@ namespace KEC.Voucher.Data.Mappings
     {
         public DbCountiesMap()
         {
-            this.ToTable("Counties")
-                .HasKey(t =>t.Id);
+            ToTable("Counties")
+                .HasKey(t => t.Id);
+            // Batches
+            HasMany(t => t.Batches)
+                .WithRequired(t => t.County)
+                .WillCascadeOnDelete(false);
+            // Schools
+            HasMany(t => t.Schools)
+                .WithRequired(t => t.County)
+                .WillCascadeOnDelete(false);
+                
         }
     }
 }

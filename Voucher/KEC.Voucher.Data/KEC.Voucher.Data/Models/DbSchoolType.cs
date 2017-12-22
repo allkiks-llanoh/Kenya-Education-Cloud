@@ -10,5 +10,6 @@ namespace KEC.Voucher.Data.Models
     {
         public int Id { get; set; }
         public string SchoolType { get; set; }
+        public ICollection<DbSchool> Schools { get; set; }
     }
 }

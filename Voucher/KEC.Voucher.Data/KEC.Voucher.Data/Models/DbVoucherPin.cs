@@ -9,9 +9,10 @@ namespace KEC.Voucher.Data.Models
     public class DbVoucherPin
     {
         public int Id { get; set; }
-        public DbVoucher VoucherId{ get; set; }
+        public int VoucherId{ get; set; }
         public string Status { get; set; }
         public DateTime CreatedOnUtc { get; set; }
+        public virtual DbVoucher Voucher { get; set; }
 
     }
 }

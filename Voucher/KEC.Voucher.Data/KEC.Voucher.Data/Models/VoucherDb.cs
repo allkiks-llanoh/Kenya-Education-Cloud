@@ -5,32 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using KEC.Voucher.Data.Mappings;
+using System.Diagnostics;
 
 namespace KEC.Voucher.Data.Models
 {
-    public class VoucherDb: DbContext
+    public class VoucherDb : DbContext
     {
         //static VoucherDb()
         //{
         //    //Database.SetInitializer<VoucherDb>(new MigrateDatabaseToLatestVersion<VoucherDb, Configuration>());
         //}
-
-        ////        public VoucherDb()
-        ////            : base("VoucherDb")
-        ////        {
-        ////#if (DEBUG)
-        ////            base.Database.Log = sql => Debug.WriteLine(sql);
-        ////#endif
-        ////        }
-
         //public static VoucherDb Create()
         //{
         //    return new VoucherDb();
         //}
         public VoucherDb()
-            :base("name=VoucherDb")
+            : base("name=VoucherDb")
         {
             Database.CreateIfNotExists();
+            #if (DEBUG)
+                        base.Database.Log = sql => Debug.WriteLine(sql);
+            #endif
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -44,6 +39,7 @@ namespace KEC.Voucher.Data.Models
             modelBuilder.Configurations.Add(new DbVoucherPinsMap());
             modelBuilder.Configurations.Add(new DbVouchersMap());
             modelBuilder.Configurations.Add(new DbWalletsMap());
+            modelBuilder.Configurations.Add(new DbSchoolAdminMap());
         }
         public DbSet<DbBatch> Batches { get; set; }
         public DbSet<DbCounty> Counties { get; set; }

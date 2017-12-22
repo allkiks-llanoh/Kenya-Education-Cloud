@@ -12,7 +12,7 @@ namespace KEC.Voucher.Data.Mappings
     {
         public DbVoucherPinsMap()
         {
-
+            ToTable("VoucherPins");
         }
     }
     

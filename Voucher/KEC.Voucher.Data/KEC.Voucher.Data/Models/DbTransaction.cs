@@ -9,12 +9,12 @@ namespace KEC.Voucher.Data.Models
     public class DbTransaction
     {
         public int Id { get; set; }
-        public DbVoucher VoucherId { get; set; }
-        public DbOrder OrderTotal { get; set; }
+        public int VoucherId { get; set; }
         public string TransactionDescription { get; set; }
         public int PinId { get; set; }
-        public DbSchoolAdmin SchoolAdminId { get; set; }
-        public ICollection<DbOrder> Order { get; set; }
+        public int SchoolAdminId { get; set; }
         public DateTime CreatedOnUtc { get; set; }
+        public virtual DbSchoolAdmin SchoolAdmin { get; set; }
+        public virtual DbVoucher Voucher { get; set; }
     }
 }

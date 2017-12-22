@@ -12,7 +12,7 @@ namespace KEC.Voucher.Data.Mappings
     {
         public DbStatusesMap()
         {
-
+            ToTable("Statuses");
         }
     }
     

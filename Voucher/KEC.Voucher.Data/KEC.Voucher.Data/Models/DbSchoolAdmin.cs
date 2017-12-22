@@ -14,5 +14,7 @@ namespace KEC.Voucher.Data.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string guid { get; set; }
+
+        public virtual DbSchoolAdmin SchoolAdmin { get; set; }
     }
 }

@@ -12,10 +12,15 @@ namespace KEC.Voucher.Data.Models
         public string VoucherCode { get; set; }
         public string VoucherSerial { get; set; }
         public int VoucherYear { get; set; }
-        public DbSchool SchoolId { get; set; }
-        public DbStatus StatusId { get; set; }
-        public DbWallet WalletId { get; set; }
-        public ICollection<DbTransaction> Transactions { get; set; }
+        public int SchoolId { get; set; }
+        public int StatusId { get; set; }
+        public int WalletId { get; set; }
+        public virtual ICollection<DbTransaction> Transactions { get; set; }
+        public virtual ICollection<DbVoucherPin> VoucherPins { get; set; }
+        public virtual DbWallet Wallet { get; set; }
+        public virtual DbSchool School { get; set; }
+        public virtual ICollection<DbStatus> VoucherStatuses { get; set; }
+
 
     }
 }

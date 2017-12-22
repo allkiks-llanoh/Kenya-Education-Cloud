@@ -62,6 +62,7 @@
     <Compile Include="Mappings\DbBatchesMap.cs" />
     <Compile Include="Mappings\DbCountiesMap.cs" />
     <Compile Include="Mappings\dbOrdersMap.cs" />
+    <Compile Include="Mappings\DbSchoolAdminsMap.cs" />
     <Compile Include="Mappings\DbSchoolsMap.cs" />
     <Compile Include="Mappings\DbSchoolTypesMap.cs" />
     <Compile Include="Mappings\DbStatusesMap.cs" />

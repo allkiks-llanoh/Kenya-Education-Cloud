@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Models
 {
-   public class DbBatch
+    public class DbBatch
     {
         public int Id { get; set; }
-        public DbCounty CountyId { get; set; }
+        public int CountyId { get; set; }
         //Batch number will be Countycode plus some appended figures :-)
         public string BatchNumber { get; set; }
         //Serial number should be a GUID
         public string SerialNumber { get; set; }
         public int Year { get; set; }
-        public int SchoolType { get; set; }
+        public int SchoolTypeId { get; set; }
+
+        public virtual DbCounty County { get; set; }
+        public virtual DbSchoolType SchoolType {get; set;}
 
     }
 }

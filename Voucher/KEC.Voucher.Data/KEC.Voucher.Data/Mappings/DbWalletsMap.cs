@@ -12,7 +12,10 @@ namespace KEC.Voucher.Data.Mappings
     {
         public DbWalletsMap()
         {
-
+            this.ToTable("Wallets")
+                .HasKey(t => t.Id)
+                .HasRequired(t => t.Voucher);
+                
         }
     }
     

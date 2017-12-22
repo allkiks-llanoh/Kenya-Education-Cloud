@@ -12,7 +12,9 @@ namespace KEC.Voucher.Data.Mappings
     {
         public DbSchoolsMap()
         {
-
+            ToTable("Schools");
+            HasMany(t => t.Vouchers)
+                .WithRequired(t => t.School);
         }
     }
    

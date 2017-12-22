@@ -12,7 +12,10 @@ namespace KEC.Voucher.Data.Mappings
     {
         public DbSchoolTypesMap()
         {
-
+            ToTable("SchoolTypes");
+            HasMany(t => t.Schools)
+                .WithRequired(t => t.SchoolType)
+                .WillCascadeOnDelete(false);
         }
     }
 }
