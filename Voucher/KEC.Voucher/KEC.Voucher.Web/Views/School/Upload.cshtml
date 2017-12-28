@@ -1,0 +1,13 @@
+﻿<h4>School Upload</h4>
+@using(Html.BeginForm("Upload", "School",null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <div class="form-group">
+        <input type="file" id="dataFile" name="postedFile" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Upload" class="btn btn-default" />
+    </div>
+}
+

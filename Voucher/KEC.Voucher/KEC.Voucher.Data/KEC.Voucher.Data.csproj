@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{453CB54C-3CA3-472F-91D4-C753F1804692}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>KEC.Voucher.Data</RootNamespace>
+    <AssemblyName>KEC.Voucher.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Common">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SqlClient, Version=4.2.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.4.2\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Mappings\DbBatchesMap.cs" />
+    <Compile Include="Mappings\DbCountiesMap.cs" />
+    <Compile Include="Mappings\DbFundAllocationMap.cs" />
+    <Compile Include="Mappings\dbOrdersMap.cs" />
+    <Compile Include="Mappings\DbSchoolAdminsMap.cs" />
+    <Compile Include="Mappings\DbSchoolsMap.cs" />
+    <Compile Include="Mappings\DbSchoolTypesMap.cs" />
+    <Compile Include="Mappings\DbStatusesMap.cs" />
+    <Compile Include="Mappings\DbTransactionsMap.cs" />
+    <Compile Include="Mappings\DbVoucherPinsMap.cs" />
+    <Compile Include="Mappings\DbVouchersMap.cs" />
+    <Compile Include="Mappings\DbWalletsMap.cs" />
+    <Compile Include="Models\DbBatch.cs" />
+    <Compile Include="Models\DbCounty.cs" />
+    <Compile Include="Models\DbFundAllocation.cs" />
+    <Compile Include="Models\DbOrder.cs" />
+    <Compile Include="Models\DbSchoolAdmin.cs" />
+    <Compile Include="Models\DbSchool.cs" />
+    <Compile Include="Models\DbSchoolType.cs" />
+    <Compile Include="Models\DbStatus.cs" />
+    <Compile Include="Models\DbTransaction.cs" />
+    <Compile Include="Models\DbVoucher.cs" />
+    <Compile Include="Models\DbVoucherPin.cs" />
+    <Compile Include="Models\DbWallet.cs" />
+    <Compile Include="Models\VoucherDb.cs" />
+    <Compile Include="Repositories.Core\IRepository.cs" />
+    <Compile Include="Repositories\BatchRepository.cs" />
+    <Compile Include="Repositories\CountyRepository.cs" />
+    <Compile Include="Repositories\FundAllocationRespository.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\SchoolAdminRepository.cs" />
+    <Compile Include="Repositories\SchoolRepository.cs" />
+    <Compile Include="Repositories\SchoolTypeRepository.cs" />
+    <Compile Include="Repositories\StatusRepository.cs" />
+    <Compile Include="Repositories\TransactionRepository.cs" />
+    <Compile Include="Repositories\VoucherPinRepository.cs" />
+    <Compile Include="Repositories\VoucherRepository.cs" />
+    <Compile Include="Repositories\WalletRepository.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\EFUnitOfWork.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

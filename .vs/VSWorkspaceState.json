@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Voucher\\KEC.Voucher.Data"
+    "\\Voucher",
+    "\\Voucher\\KEC.Voucher.Web"
   ],
-  "SelectedNode": "\\Voucher",
+  "SelectedNode": "\\Voucher\\KEC.Voucher.Web\\Default.cs",
   "PreviewInSolutionExplorer": false
 }
