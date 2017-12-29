@@ -8,6 +8,10 @@ namespace KEC.Voucher.Data.Models
 {
     public class DbBatch
     {
+        public DbBatch()
+        {
+            Vouchers = new List<DbVoucher>();
+        }
         public int Id { get; set; }
         public int CountyId { get; set; }
         //Batch number will be Countycode plus some appended figures :-)
@@ -19,6 +23,7 @@ namespace KEC.Voucher.Data.Models
 
         public virtual DbCounty County { get; set; }
         public virtual DbSchoolType SchoolType {get; set;}
+        public virtual ICollection<DbVoucher> Vouchers { get; set; }
 
     }
 }

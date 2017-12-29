@@ -12,13 +12,19 @@ namespace KEC.Voucher.Data.Mappings
     {
         public DbBatchesMap()
         {
+            // Batches
             this.ToTable("Batches")
                 .HasKey(t => t.Id);
-
+            // County
             this.HasRequired(t => t.County)
                 .WithMany()
                 .HasForeignKey(t => t.CountyId)
                 .WillCascadeOnDelete(false);
+            // Vouchers
+            HasMany(p => p.Vouchers)
+                .WithRequired(p => p.Batch)
+                .WillCascadeOnDelete(false);
+            
 
         }
     }
