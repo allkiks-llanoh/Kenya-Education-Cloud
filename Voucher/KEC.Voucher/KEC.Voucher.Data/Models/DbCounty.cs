@@ -10,7 +10,7 @@ namespace KEC.Voucher.Data.Models
     {
         public int Id { get; set; }
         public string CountyName { get; set; }
-        public int CountyCode { get; set; }
+        public string CountyCode { get; set; }
         
         public virtual ICollection<DbBatch> Batches { get; set; }
         public virtual ICollection<DbSchool> Schools { get; set; }

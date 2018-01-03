@@ -39,12 +39,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=6.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.6.1.0\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -57,7 +61,11 @@
     </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201801031248424_WebApiInitial.resx">
+      <DependentUpon>201801031248424_WebApiInitial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Mappings\DbBatchesMap.cs" />
     <Compile Include="Mappings\DbCountiesMap.cs" />
@@ -71,6 +79,11 @@
     <Compile Include="Mappings\DbVoucherPinsMap.cs" />
     <Compile Include="Mappings\DbVouchersMap.cs" />
     <Compile Include="Mappings\DbWalletsMap.cs" />
+    <Compile Include="Migrations\201801031248424_WebApiInitial.cs" />
+    <Compile Include="Migrations\201801031248424_WebApiInitial.Designer.cs">
+      <DependentUpon>201801031248424_WebApiInitial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbBatch.cs" />
     <Compile Include="Models\DbCounty.cs" />
     <Compile Include="Models\DbFundAllocation.cs" />
