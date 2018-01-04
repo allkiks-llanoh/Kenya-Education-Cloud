@@ -35,7 +35,9 @@ namespace KEC.Voucher.Web.Api.Controllers
         }
 
         // POST api/<controller>
-        public HttpResponseMessage Post([FromBody]string pin, string voucherCode, string adminGuid, decimal transactionAmount,string transactionDescription)
+        public HttpResponseMessage Post(
+            [FromBody]string pin, [FromBody] string voucherCode,[FromBody] string adminGuid,
+            [FromBody] decimal transactionAmount,[FromBody] string transactionDescription)
         {
             var voucher = _uow.VoucherRepository.Find(p => p.VoucherCode.Equals(voucherCode)).FirstOrDefault();
             var admin = _uow.SchoolAdminRepository.Find(p => p.guid.Equals(adminGuid)).FirstOrDefault();
@@ -43,7 +45,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             //TODO Check if school admin is active admin for the school
             if (admin == null)
             {
-
+                return requestError;
             }
             //TODO: Check voucher against user GUID and check for expiry
             if (voucher == null)
