@@ -34,7 +34,6 @@ namespace KEC.Voucher.Web.Api.Models
                 return _dbschool.SchoolCode;
             }
         }
-        //public int SchoolAdminId { get; set; }
         public int SchoolTypeId
         {
             get
