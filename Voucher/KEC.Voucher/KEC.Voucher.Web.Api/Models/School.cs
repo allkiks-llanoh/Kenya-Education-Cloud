@@ -122,4 +122,68 @@ namespace KEC.Voucher.Web.Api.Models
             }
         }
     }
+    public class Transaction
+    {
+        private readonly DbTransaction _dbTransaction;
+        public Transaction(DbTransaction dbTransaction)
+        {
+            _dbTransaction = dbTransaction;
+        }
+        public int Id
+        {
+            get
+            {
+                return _dbTransaction.Id;
+            }
+        }
+        public int VoucherId
+        {
+            get
+            {
+                return _dbTransaction.VoucherId;
+            }
+        }
+        public string TransactionDescription
+        {
+            get
+            {
+                return _dbTransaction.TransactionDescription;
+            }
+        }
+        public int PinId
+        {
+            get
+            {
+                return _dbTransaction.PinId;
+            }
+        }
+        public int SchoolAdminId
+        {
+            get
+            {
+                return _dbTransaction.SchoolAdminId;
+            }
+        }
+        public DateTime CreatedOnUtc
+        {
+            get
+            {
+                return _dbTransaction.CreatedOnUtc;
+            }
+        }
+        public SchoolAdmin SchoolAdmin
+        {
+            get
+            {
+                return new SchoolAdmin(_dbTransaction.SchoolAdmin);
+            }
+        }
+        public Voucher Voucher
+        {
+            get
+            {
+                return new Voucher(_dbTransaction.Voucher);
+            }
+        }
+    }
 }
