@@ -54,12 +54,6 @@ namespace KEC.Voucher.Web.Api.Models
                 _dbFundAllocation.Year = value;
             }
         }
-        public School School
-        {
-            get
-            {
-                return new School(_dbFundAllocation.School);
-            }
-        }
+      
     }
 }

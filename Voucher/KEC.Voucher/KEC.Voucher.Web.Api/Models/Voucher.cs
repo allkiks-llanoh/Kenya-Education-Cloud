@@ -11,14 +11,62 @@ namespace KEC.Voucher.Web.Api.Models
         {
             _dbVoucher = dbVoucher;
         }
-        public int Id { get; set; }
-        public string VoucherCode { get; set; }
-        public string VoucherSerial { get; set; }
-        public int VoucherYear { get; set; }
-        public int SchoolId { get; set; }
-        public int StatusId { get; set; }
-        public int WalletId { get; set; }
-        public int BatchId { get; set; }
-       
+        public int Id
+        {
+            get
+            {
+                return _dbVoucher.Id;
+            }
+        }
+        public string VoucherCode
+        {
+            get
+            {
+                return _dbVoucher.VoucherCode;
+            }
+        }
+        public string VoucherSerial
+        {
+            get
+            {
+                return _dbVoucher.VoucherSerial;
+            }
+        }
+        public int VoucherYear
+        {
+            get
+            {
+                return _dbVoucher.VoucherYear;
+            }
+        }
+        public int SchoolId
+        {
+            get
+            {
+                return _dbVoucher.SchoolId;
+            }
+        }
+        public int StatusId
+        {
+            get
+            {
+                return _dbVoucher.StatusId;
+            }
+        }
+        public int WalletId
+        {
+            get
+            {
+                return _dbVoucher.WalletId;
+            }
+        }
+        public int BatchId
+        {
+            get
+            {
+                return _dbVoucher.BatchId;
+            }
+        }
+
     }
 }

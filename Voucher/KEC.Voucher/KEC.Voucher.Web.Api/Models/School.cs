@@ -55,7 +55,7 @@ namespace KEC.Voucher.Web.Api.Models
             {
                 return _dbschool.DateCreated;
             }
-            
+
         }
         public DateTime DateChanged
         {
@@ -63,7 +63,7 @@ namespace KEC.Voucher.Web.Api.Models
             {
                 return _dbschool.DateChanged;
             }
-           
+
         }
         public string SchoolType
         {
@@ -89,6 +89,38 @@ namespace KEC.Voucher.Web.Api.Models
                 return _dbschool.County.CountyName;
             }
         }
+        public ICollection<FundAllocation> FundAllocations
+        {
+            get
+            {
+                return _dbschool.FundAllocations.Select(p => new FundAllocation(p)).ToList();
+            }
+        }
+        public FundAllocation CurrentFundAllocation
+        {
+            get
+            {
+                var allocation = _dbschool.FundAllocations.FirstOrDefault(p => p.Year == DateTime.Now.Year);
+                return allocation == null ? null : new FundAllocation(allocation);
+            }
+        }
+        public ICollection<Voucher> Vouchers
+        {
+            get
+            {
+                return _dbschool.Vouchers.Select(p => new Voucher(p)).ToList();
+            }
+        }
+        public Voucher CurrentVoucher
+        {
+            get
+            {
+                var dbVoucher = _dbschool.Vouchers
+                    .Where(p => p.VoucherYear == DateTime.Now.Year)
+                    .FirstOrDefault();
+                return dbVoucher == null ? null : new Voucher(dbVoucher);
 
+            }
+        }
     }
 }

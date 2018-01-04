@@ -20,8 +20,8 @@ namespace KEC.Voucher.Web.Api.Controllers
         private readonly IUnitOfWork _uow = new EFUnitOfWork();
 
         //GET api/<controller>?countrycode=value
-        [HttpGet]
-        public IEnumerable<School> Get(string countycode)
+        [HttpGet, Route("")]
+        public IEnumerable<School> SchoolsByCountyCode(string countycode)
         {
             var schools = _uow.SchoolRepository
                 .Find(p => p.County.CountyCode.Equals(countycode))
@@ -30,7 +30,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         }
         //GET api/<controller>/schoolcode
         [HttpGet, Route("{schoolcode}")]
-        public School School(string schoolcode)
+        public School SchoolByCode(string schoolcode)
         {
             var school = _uow.SchoolRepository
                .Find(p => p.SchoolCode.Equals(schoolcode))
@@ -38,9 +38,25 @@ namespace KEC.Voucher.Web.Api.Controllers
             return school;
         }
 
+        //Get api/<controller>/id
+        [HttpGet, Route("{id:int}")]
+        public School SchoolById(int id)
+        {
+            var dbschool = _uow.SchoolRepository.Get(id);
+            return dbschool == null ? null : new School(dbschool);
+        }
+        //Get api/<controller>?countyCode=value&TypeId=value
+        [HttpGet,Route("")]
+        public ICollection<School> SchoolsByCountyCodeAndTypeId(string countyCode, int typeId)
+        {
+            var schools = _uow.SchoolRepository
+                .Find(p => p.County.CountyCode.Equals(countyCode)
+                && p.SchoolTypeId == typeId).Select(p=> new School(p)).ToList();
+            return schools;
+        }
         //POST api/<controller>
-        [HttpPost]
-        public HttpResponseMessage Post()
+        [HttpPost, Route("")]
+        public HttpResponseMessage SchoolsUpload()
         {
             var httpRequest = HttpContext.Current.Request;
             if (httpRequest.Files.Count <= 0)
