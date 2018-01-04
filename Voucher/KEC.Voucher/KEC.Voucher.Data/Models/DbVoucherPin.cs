@@ -10,6 +10,7 @@ namespace KEC.Voucher.Data.Models
     {
         public int Id { get; set; }
         public int VoucherId{ get; set; }
+        public string Pin { get; set; }
         public string Status { get; set; }
         public DateTime CreatedOnUtc { get; set; }
         public virtual DbVoucher Voucher { get; set; }

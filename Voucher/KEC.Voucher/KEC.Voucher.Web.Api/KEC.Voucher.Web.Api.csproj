@@ -194,11 +194,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SchoolsController.cs" />
     <Compile Include="Controllers\SchoolTypesController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\FundAllocation.cs" />
     <Compile Include="Models\School.cs" />
+    <Compile Include="Models\SchoolAdmin.cs" />
     <Compile Include="Models\SchoolType.cs" />
     <Compile Include="Models\Voucher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -62,11 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801031248424_WebApiInitial.resx">
-      <DependentUpon>201801031248424_WebApiInitial.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Mappings\DbBatchesMap.cs" />
     <Compile Include="Mappings\DbCountiesMap.cs" />
     <Compile Include="Mappings\DbFundAllocationMap.cs" />
@@ -79,9 +74,17 @@
     <Compile Include="Mappings\DbVoucherPinsMap.cs" />
     <Compile Include="Mappings\DbVouchersMap.cs" />
     <Compile Include="Mappings\DbWalletsMap.cs" />
-    <Compile Include="Migrations\201801031248424_WebApiInitial.cs" />
-    <Compile Include="Migrations\201801031248424_WebApiInitial.Designer.cs">
-      <DependentUpon>201801031248424_WebApiInitial.cs</DependentUpon>
+    <Compile Include="Migrations\201801041301483_InitialMigration.cs" />
+    <Compile Include="Migrations\201801041301483_InitialMigration.Designer.cs">
+      <DependentUpon>201801041301483_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801041310019_AddedAmountToTransactions.cs" />
+    <Compile Include="Migrations\201801041310019_AddedAmountToTransactions.Designer.cs">
+      <DependentUpon>201801041310019_AddedAmountToTransactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801041340571_AddedPinToVoucherPins.cs" />
+    <Compile Include="Migrations\201801041340571_AddedPinToVoucherPins.Designer.cs">
+      <DependentUpon>201801041340571_AddedPinToVoucherPins.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbBatch.cs" />
@@ -113,6 +116,17 @@
     <Compile Include="Repositories\WalletRepository.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\EFUnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201801041301483_InitialMigration.resx">
+      <DependentUpon>201801041301483_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801041310019_AddedAmountToTransactions.resx">
+      <DependentUpon>201801041310019_AddedAmountToTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801041340571_AddedPinToVoucherPins.resx">
+      <DependentUpon>201801041340571_AddedPinToVoucherPins.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
