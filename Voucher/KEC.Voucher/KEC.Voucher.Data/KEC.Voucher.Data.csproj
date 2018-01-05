@@ -94,6 +94,10 @@
     <Compile Include="Migrations\201801051636127_AddVoucherStatustMap.Designer.cs">
       <DependentUpon>201801051636127_AddVoucherStatustMap.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801051656340_RemoveNameFromStatus.cs" />
+    <Compile Include="Migrations\201801051656340_RemoveNameFromStatus.Designer.cs">
+      <DependentUpon>201801051656340_RemoveNameFromStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbBatch.cs" />
     <Compile Include="Models\DbCounty.cs" />
@@ -108,6 +112,7 @@
     <Compile Include="Models\DbVoucherPin.cs" />
     <Compile Include="Models\DbWallet.cs" />
     <Compile Include="Models\VoucherDb.cs" />
+    <Compile Include="Models\VoucherStatus.cs" />
     <Compile Include="Repositories.Core\IRepository.cs" />
     <Compile Include="Repositories\BatchRepository.cs" />
     <Compile Include="Repositories\CountyRepository.cs" />
@@ -140,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801051636127_AddVoucherStatustMap.resx">
       <DependentUpon>201801051636127_AddVoucherStatustMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051656340_RemoveNameFromStatus.resx">
+      <DependentUpon>201801051656340_RemoveNameFromStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

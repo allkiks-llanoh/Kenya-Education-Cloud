@@ -10,7 +10,6 @@ namespace KEC.Voucher.Data.Models
         DbStatus
     {
         public int Id { get; set; }
-        public string StatusName { get; set; }
         public string StatusDescription { get; set; }
         public DateTime TimeStamp { get; set; }
         public virtual DbVoucher Voucher { get; set; }

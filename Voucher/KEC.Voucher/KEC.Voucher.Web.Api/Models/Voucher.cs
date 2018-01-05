@@ -46,13 +46,7 @@ namespace KEC.Voucher.Web.Api.Models
                 return _dbVoucher.SchoolId;
             }
         }
-        public int StatusId
-        {
-            get
-            {
-                return _dbVoucher.StatusId;
-            }
-        }
+       
         public int WalletId
         {
             get
