@@ -21,7 +21,7 @@ namespace KEC.Voucher.Data.Models
         public virtual DbWallet Wallet { get; set; }
         public virtual DbSchool School { get; set; }
         public virtual DbBatch Batch { get; set; }
-        public virtual ICollection<DbStatus> VoucherStatuses { get; set; }
+        public virtual DbStatus Status { get; set; }
 
 
     }

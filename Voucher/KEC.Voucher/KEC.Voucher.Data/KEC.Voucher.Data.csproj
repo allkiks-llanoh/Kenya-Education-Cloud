@@ -82,6 +82,18 @@
     <Compile Include="Migrations\201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.Designer.cs">
       <DependentUpon>201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801051626448_DropVoucherStatusRelationship.cs" />
+    <Compile Include="Migrations\201801051626448_DropVoucherStatusRelationship.Designer.cs">
+      <DependentUpon>201801051626448_DropVoucherStatusRelationship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801051632167_RemoveVoucherIdFromStatus.cs" />
+    <Compile Include="Migrations\201801051632167_RemoveVoucherIdFromStatus.Designer.cs">
+      <DependentUpon>201801051632167_RemoveVoucherIdFromStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801051636127_AddVoucherStatustMap.cs" />
+    <Compile Include="Migrations\201801051636127_AddVoucherStatustMap.Designer.cs">
+      <DependentUpon>201801051636127_AddVoucherStatustMap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbBatch.cs" />
     <Compile Include="Models\DbCounty.cs" />
@@ -119,6 +131,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.resx">
       <DependentUpon>201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051626448_DropVoucherStatusRelationship.resx">
+      <DependentUpon>201801051626448_DropVoucherStatusRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051632167_RemoveVoucherIdFromStatus.resx">
+      <DependentUpon>201801051632167_RemoveVoucherIdFromStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051636127_AddVoucherStatustMap.resx">
+      <DependentUpon>201801051636127_AddVoucherStatustMap.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
