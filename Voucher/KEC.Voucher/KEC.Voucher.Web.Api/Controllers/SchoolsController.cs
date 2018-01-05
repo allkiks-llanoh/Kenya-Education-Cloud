@@ -103,6 +103,14 @@ namespace KEC.Voucher.Web.Api.Controllers
                             Amount = csvReader.GetField<Decimal>("Amount"),
                             Year = csvReader.GetField<int>("Year")
                         };
+                        var schoolAdmin = new DbSchoolAdmin
+                        {
+                            Email = csvReader.GetField<string>("SchoolAdminPhoneNumber"),
+                            FirstName = csvReader.GetField<string>("SchoolAdminFirstName"),
+                            LastName = csvReader.GetField<string>("SchoolAdminLastName"),
+                            PhoneNumber = csvReader.GetField<string>("SchoolAdminPhoneNumber"),
+                            guid = Guid.NewGuid().ToString()
+                        };
                         _uow.SchoolRepository.AddFromCSV(school, fundAllocation);
 
                     }

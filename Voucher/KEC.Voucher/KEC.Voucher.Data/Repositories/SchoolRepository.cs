@@ -27,7 +27,7 @@ namespace KEC.Voucher.Data.Repositories
                                      && p.Year == fundAllocation.Year);
                 if (!hasAllocation)
                 {
-                    school.FundAllocations.Add(fundAllocation);
+                    retrievedSchool.FundAllocations.Add(fundAllocation);
                 }
             }
             else

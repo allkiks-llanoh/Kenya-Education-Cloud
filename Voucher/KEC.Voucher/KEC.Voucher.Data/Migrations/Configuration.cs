@@ -1,12 +1,11 @@
 namespace KEC.Voucher.Data.Migrations
 {
-    using KEC.Voucher.Data.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<VoucherDb>
+    internal sealed class Configuration : DbMigrationsConfiguration<KEC.Voucher.Data.Models.VoucherDb>
     {
         public Configuration()
         {

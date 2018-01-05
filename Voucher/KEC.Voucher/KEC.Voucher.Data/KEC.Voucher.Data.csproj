@@ -74,17 +74,13 @@
     <Compile Include="Mappings\DbVoucherPinsMap.cs" />
     <Compile Include="Mappings\DbVouchersMap.cs" />
     <Compile Include="Mappings\DbWalletsMap.cs" />
-    <Compile Include="Migrations\201801041301483_InitialMigration.cs" />
-    <Compile Include="Migrations\201801041301483_InitialMigration.Designer.cs">
-      <DependentUpon>201801041301483_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201801051505072_InitialCreate.cs" />
+    <Compile Include="Migrations\201801051505072_InitialCreate.Designer.cs">
+      <DependentUpon>201801051505072_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801041310019_AddedAmountToTransactions.cs" />
-    <Compile Include="Migrations\201801041310019_AddedAmountToTransactions.Designer.cs">
-      <DependentUpon>201801041310019_AddedAmountToTransactions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801041340571_AddedPinToVoucherPins.cs" />
-    <Compile Include="Migrations\201801041340571_AddedPinToVoucherPins.Designer.cs">
-      <DependentUpon>201801041340571_AddedPinToVoucherPins.cs</DependentUpon>
+    <Compile Include="Migrations\201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.cs" />
+    <Compile Include="Migrations\201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.Designer.cs">
+      <DependentUpon>201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbBatch.cs" />
@@ -118,14 +114,11 @@
     <Compile Include="UnitOfWork\EFUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801041301483_InitialMigration.resx">
-      <DependentUpon>201801041301483_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801051505072_InitialCreate.resx">
+      <DependentUpon>201801051505072_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801041310019_AddedAmountToTransactions.resx">
-      <DependentUpon>201801041310019_AddedAmountToTransactions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801041340571_AddedPinToVoucherPins.resx">
-      <DependentUpon>201801041340571_AddedPinToVoucherPins.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.resx">
+      <DependentUpon>201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

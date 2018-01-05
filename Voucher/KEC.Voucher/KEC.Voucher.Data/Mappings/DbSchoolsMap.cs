@@ -20,6 +20,9 @@ namespace KEC.Voucher.Data.Mappings
             HasMany(t => t.FundAllocations)
                 .WithRequired(t => t.School)
                 .WillCascadeOnDelete(false);
+            // SchoolAdmin
+            HasOptional(x => x.SchoolAdmin)
+            .WithOptionalDependent(l => l.School);
         }
     }
 
