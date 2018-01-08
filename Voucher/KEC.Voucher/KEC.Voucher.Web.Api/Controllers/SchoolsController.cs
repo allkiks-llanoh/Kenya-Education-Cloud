@@ -58,7 +58,9 @@ namespace KEC.Voucher.Web.Api.Controllers
         [HttpPost, Route("")]
         public HttpResponseMessage SchoolsUpload()
         {
+            
             var httpRequest = HttpContext.Current.Request;
+    
             if (httpRequest.Files.Count <= 0)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Please upload your csv file");

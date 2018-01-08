@@ -1,5 +1,7 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using KEC.Voucher.Data.Models;
+using KEC.Voucher.Services;
 
 namespace KEC.Voucher.Data.Repositories
 {
@@ -7,6 +9,16 @@ namespace KEC.Voucher.Data.Repositories
     {
         public VoucherPinRepository(VoucherDb context) : base(context)
         {
+        }
+        public string GetVoucherPin()
+        {
+            var pin = string.Empty;
+            do
+            {
+                pin = RandomCodeGenerator.VoucherPin();
+            } while (Find(p => p.Pin.Equals(pin)).FirstOrDefault() != null);
+           
+            return pin;
         }
     }
 }
