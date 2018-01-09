@@ -54,8 +54,8 @@ namespace KEC.Voucher.Web.Api.Controllers
 
 
             var vouchersList = new List<DbVoucher>();
-
-            foreach (var school in schools)
+            var padLock = new object();
+            Parallel.ForEach(schools, (school, loopState) =>
             {
                 var voucher = new DbVoucher
                 {
@@ -65,18 +65,25 @@ namespace KEC.Voucher.Web.Api.Controllers
                     SchoolId = school.Id
                 };
 
-                voucher.VoucherCode = _uow.VoucherRepository.GetVoucherCode(batch.BatchNumber);
-
-                voucher.Wallet = new DbWallet
+                lock (padLock)
                 {
-                    WalletAmount = school.AllocatedAmount,
-                    Balance = school.AllocatedAmount,
-                    UpdatedOnUtc = DateTime.UtcNow,
-                    CreatedOnUtc = DateTime.UtcNow
-                };
+                    voucher.VoucherCode = _uow.VoucherRepository.GetVoucherCode(batch.BatchNumber);
+                    voucher.Wallet = new DbWallet
+                    {
+                        WalletAmount = school.AllocatedAmount,
+                        Balance = school.AllocatedAmount,
+                        UpdatedOnUtc = DateTime.UtcNow,
+                        CreatedOnUtc = DateTime.UtcNow
+                    };
+                }
 
-                vouchersList.Add(voucher);
-            }
+               
+                lock (padLock)
+                {
+                    vouchersList.Add(voucher);
+                }
+               
+            });
 
 
             var schoolsWithNoAllocation = vouchersList.Where(p => p.Wallet.WalletAmount == 0).Select(p => $"{p.School.SchoolName}:{p.School.SchoolCode}");

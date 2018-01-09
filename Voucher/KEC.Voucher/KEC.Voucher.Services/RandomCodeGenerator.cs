@@ -10,7 +10,7 @@ namespace KEC.Voucher.Services
     public static class RandomCodeGenerator
     {
         public static string VoucherPin() => RandomCode(12);
-        public static string GetVoucherCode(string batchNumber) => $"{batchNumber}{RandomCode(8)}";
+        public static string GetVoucherCode(string voucherCode) => $"{voucherCode}{RandomCode(8)}";
         public static string GetBatchNumber(string countyCode) =>$"{countyCode}{RandomCode(5)}";
         static string RandomCode(int length)
         {

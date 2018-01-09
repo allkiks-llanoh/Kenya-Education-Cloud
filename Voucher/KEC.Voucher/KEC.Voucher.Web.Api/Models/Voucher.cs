@@ -47,7 +47,7 @@ namespace KEC.Voucher.Web.Api.Models
             }
         }
 
-        public Wallet MyProperty
+        public Wallet Wallet
         {
             get
             {
