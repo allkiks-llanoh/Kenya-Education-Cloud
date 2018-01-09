@@ -46,12 +46,12 @@ namespace KEC.Voucher.Web.Api.Models
                 return _dbVoucher.SchoolId;
             }
         }
-       
-        public int WalletId
+
+        public Wallet MyProperty
         {
             get
             {
-                return _dbVoucher.WalletId;
+                return _dbVoucher.Wallet == null ? null : new Wallet(_dbVoucher.Wallet);
             }
         }
         public int BatchId

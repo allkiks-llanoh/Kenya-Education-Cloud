@@ -35,14 +35,21 @@ namespace KEC.Voucher.Web.Api.Controllers
         }
 
         // POST api/<controller>
-        public HttpResponseMessage Post(
-            [FromBody]string pin, [FromBody] string voucherCode,[FromBody] string adminGuid,
-            [FromBody] decimal transactionAmount,[FromBody] string transactionDescription)
+        public HttpResponseMessage Post(TransactionParam  transactionParam)
         {
+            var voucherCode = transactionParam.VoucherCode;
+            var adminGuid = transactionParam.AdminGuid;
+            var transactionAmount = transactionParam.Amount;
+            var transactionDescription = transactionParam.Description;
             var voucher = _uow.VoucherRepository.Find(p => p.VoucherCode.Equals(voucherCode)).FirstOrDefault();
             var admin = _uow.SchoolAdminRepository.Find(p => p.guid.Equals(adminGuid)).FirstOrDefault();
-            var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, new Exception("Invalid voucher number or pin or School admin Guid"));
-            //TODO Check if school admin is active admin for the school
+            var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, new Exception("Invalid voucher number or pin or School admin or transction amount or description"));
+            if (voucherCode==null || adminGuid==null || transactionAmount==0 || transactionDescription == null)
+            {
+                return requestError;
+            }
+          
+          
             if (admin == null)
             {
                 return requestError;
@@ -58,7 +65,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             {
                 return requestError;
             }
-            if (voucher.Wallet.WalletAmount < transactionAmount)
+            if (voucher.Wallet.Balance < transactionAmount)
             {
                 return requestError;
             }
@@ -71,7 +78,7 @@ namespace KEC.Voucher.Web.Api.Controllers
                 CreatedOnUtc = DateTime.UtcNow,
                 SchoolAdminId = admin.Id
             };
-            voucher.Wallet.WalletAmount -= transactionAmount;
+            voucher.Wallet.Balance -= transactionAmount;
             _uow.Complete();
             return Request.CreateResponse(HttpStatusCode.OK, transaction.Id);
         }

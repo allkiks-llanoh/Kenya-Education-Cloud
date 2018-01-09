@@ -40,7 +40,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         [HttpPost, Route("")]
         public HttpResponseMessage Post(VoucherParam voucherParam)
         {
-          
+
 
             var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, new Exception("There Was an Error When Attempting To Create Vouchers"));
             var batchId = voucherParam.BatchId;
@@ -77,12 +77,12 @@ namespace KEC.Voucher.Web.Api.Controllers
 
                 vouchersList.Add(voucher);
             }
-             
 
-            var schoolsWithNoAllocation = vouchersList.Where(p => p.Wallet.WalletAmount == 0).Select(p=> $"{p.School.SchoolName}:{p.School.SchoolCode}");
+
+            var schoolsWithNoAllocation = vouchersList.Where(p => p.Wallet.WalletAmount == 0).Select(p => $"{p.School.SchoolName}:{p.School.SchoolCode}");
             if (schoolsWithNoAllocation.Any())
             {
-                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, $"Some of the selected schools dont have fund allocations for the year {DateTime.Now}: ${string.Join(",",schoolsWithNoAllocation)}");
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, $"Some of the selected schools dont have fund allocations for the year {DateTime.Now}: ${string.Join(",", schoolsWithNoAllocation)}");
             }
             _uow.VoucherRepository.AddRange(vouchersList);
             _uow.Complete();
