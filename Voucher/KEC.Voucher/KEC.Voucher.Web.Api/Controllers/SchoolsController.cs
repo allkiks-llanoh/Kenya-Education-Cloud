@@ -2,8 +2,10 @@
 using KEC.Voucher.Data.Models;
 using KEC.Voucher.Data.UnitOfWork;
 using KEC.Voucher.Web.Api.Models;
+using MultipartDataMediaFormatter.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -52,36 +54,31 @@ namespace KEC.Voucher.Web.Api.Controllers
             var schools = _uow.SchoolRepository
                 .Find(p => p.County.CountyCode.Equals(countyCode)
                 && p.SchoolTypeId == typeId).Select(p=> new School(p)).ToList();
+            
             return schools;
         }
         //POST api/<controller>
         [HttpPost, Route("")]
-        public HttpResponseMessage SchoolsUpload()
+        public async Task<HttpResponseMessage> SchoolsUpload(FormData formData)
         {
             
-            var httpRequest = HttpContext.Current.Request;
-    
-            if (httpRequest.Files.Count <= 0)
+            formData.TryGetValue("postedFile", CultureInfo.CurrentCulture, out HttpFile postedFile);
+            if (postedFile==null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Please upload your csv file");
             }
-            if (httpRequest.Files.Count < 1)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Multiple file upload is not supported");
-            }
-            var postedFile = httpRequest.Files[0];
             if (!postedFile.FileName.EndsWith(".csv"))
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new Exception("The file format is not supported"));
             }
             try
             {
-                StreamReader streamReader = new StreamReader(postedFile.InputStream);
+                StreamReader streamReader = new StreamReader(postedFile.FileName);
                 using (CsvReader csvReader = new CsvReader(streamReader, false))
                 {
-                    csvReader.Read();
+                    await csvReader.ReadAsync();
                     csvReader.ReadHeader();
-                    while (csvReader.Read())
+                    while (await csvReader.ReadAsync())
                     {
                         var schoolType = csvReader.GetField<string>("SchoolType");
                         var schoolTypeId = _uow.SchoolTypeRepository

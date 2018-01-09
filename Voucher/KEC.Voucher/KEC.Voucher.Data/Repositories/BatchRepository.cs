@@ -19,7 +19,7 @@ namespace KEC.Voucher.Data.Repositories
             var batchNumber = string.Empty;
             do
             {
-                batchNumber = RandomCodeGenerator.BatchNumber(countycode);
+                batchNumber = RandomCodeGenerator.GetBatchNumber(countycode);
             } while (Find(p => p.BatchNumber.Equals(batchNumber)).FirstOrDefault() != null);
 
             return batchNumber;

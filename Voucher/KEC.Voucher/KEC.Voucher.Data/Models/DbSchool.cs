@@ -25,6 +25,13 @@ namespace KEC.Voucher.Data.Models
         public virtual DbCounty County { get; set; }
         public virtual ICollection<DbVoucher> Vouchers { get; set; }
         public virtual ICollection<DbFundAllocation> FundAllocations { get; set; }
-
+        public decimal AllocatedAmount
+        {
+            get
+            {
+                var allocation = FundAllocations.Where(p => p.Year.Equals(DateTime.Now.Year)).FirstOrDefault();
+                return allocation == null ? 0 : allocation.Amount;
+            }
+        }
     }
 }

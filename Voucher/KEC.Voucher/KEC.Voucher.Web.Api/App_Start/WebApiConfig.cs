@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using MultipartDataMediaFormatter;
+using MultipartDataMediaFormatter.Infrastructure;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,7 @@ namespace KEC.Voucher.Web.Api
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Formatters.Add(new FormMultipartEncodedMediaTypeFormatter(new MultipartFormatterSettings()));
         }
     }
 }

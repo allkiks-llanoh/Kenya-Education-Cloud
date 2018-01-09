@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using AfricasTalkingCS;
 namespace KEC.Voucher.Services
 {
@@ -15,13 +16,27 @@ namespace KEC.Voucher.Services
 
 
         }
-        public string SendSms(string recipient, string message)
+        public void SendSms(string recipient, string message)
         {
             try
             {
-                var sms = _gateway.SendMessage(recipient, message);
-                var res = sms["SMSMessageData"]["Recipients"][0];
-                return $"Number: {res["number"]},Status:{res["status"]},MessageId: {res["messageId"]},Cost: {res["cost"]}";
+                var sms = _gateway.SendMessage($"\"{recipient}\"", $"\"{message}\"");
+                var res = sms["SMSMessageData"]["Recipients"];
+                foreach (var re in res["SMSMessageData"]["Recipients"])
+
+                {
+
+                    Console.WriteLine((string)re["number"] + ": ");
+
+                    Console.WriteLine((string)re["status"] + ": ");
+
+                    Console.WriteLine((string)re["messageId"] + ": ");
+
+                    Console.WriteLine((string)re["cost"] + ": ");
+
+                }
+
+              
             }
             catch (AfricasTalkingGatewayException)
             {

@@ -25,6 +25,7 @@ namespace KEC.Voucher.Web.Api.Controllers
 
             }
             ViewBag.Title = list.Distinct().Count()+list.First();
+         
             return View();
         }
     }

@@ -17,11 +17,10 @@ namespace KEC.Voucher.Web.Api.Controllers
     {
         private readonly IUnitOfWork _uow = new EFUnitOfWork();
         // POST api/<controller>
-        public HttpResponseMessage Post()
+        public HttpResponseMessage Post(PinParam pinParam)
         {
-            var form = HttpContext.Current.Request.Form;
-            var voucherCode = form.Get("voucherCode");
-            var userguid = form.Get("userguid");
+            var voucherCode = pinParam.VoucherCode;
+            var userguid = pinParam.UserGuid;
             var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, new Exception("Invalid voucher code or user guid"));
             if (voucherCode == null || userguid == null)
             {
