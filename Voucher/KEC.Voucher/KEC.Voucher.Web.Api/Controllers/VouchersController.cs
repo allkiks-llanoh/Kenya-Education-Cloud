@@ -19,21 +19,21 @@ namespace KEC.Voucher.Web.Api.Controllers
 
         //GET api/<controller>?countrycode=value
         [HttpGet, Route("")]
-        public IEnumerable<Models.Voucher> VouchersBatchNumber(string batchnumber)
+        public HttpResponseMessage VouchersBatchNumber(string batchnumber)
         {
             var vouchers = _uow.VoucherRepository
-                .Find(p => p.Batch.Equals(batchnumber))
-                .Select(p => new Models.Voucher(p)).ToList();
-            return vouchers;
+                .Find(p => p.Batch.Equals(batchnumber)).ToList();
+            return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.OK, vouchers.Select(v => new Models.Voucher(v)).ToList()) :
+                Request.CreateResponse(HttpStatusCode.NotFound);
         }
         //GET api/<controller>/schoolcode
         [HttpGet, Route("{schoolcode}")]
-        public IList<Models.Voucher> VoucherBySchoolCode(string schoolcode)
+        public HttpResponseMessage VoucherBySchoolCode(string schoolcode)
         {
             var vouchers = _uow.VoucherRepository
-               .Find(p => p.School.SchoolCode.Equals(schoolcode))
-               .Select(p => new Models.Voucher(p)).ToList();
-            return vouchers;
+               .Find(p => p.School.SchoolCode.Equals(schoolcode)).ToList();
+            return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.OK, vouchers.Select(v => new Models.Voucher(v))) :
+                                    Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
         //POST api/<controller>
@@ -47,12 +47,12 @@ namespace KEC.Voucher.Web.Api.Controllers
 
             var batch = _uow.BatchRepository.Get(batchId);
             var county = batch.County;
-            var schoolsCodesWithVoucher = _uow.VoucherRepository.Find(p => p.School.CountyId.Equals(county.Id) 
-            && p.School.SchoolTypeId.Equals(batch.SchoolTypeId) && 
+            var schoolsCodesWithVoucher = _uow.VoucherRepository.Find(p => p.School.CountyId.Equals(county.Id)
+            && p.School.SchoolTypeId.Equals(batch.SchoolTypeId) &&
             ((p.Status.StatusValue == VoucherStatus.Active || p.Status.StatusValue == VoucherStatus.Suspended ||
                                                           p.Status.StatusValue == VoucherStatus.Created || p.Status.StatusValue == VoucherStatus.Expired)
-                                                          && p.VoucherYear.Equals(DateTime.Now.Year))).Select(s=> s.School.SchoolCode).ToList();
-            var schools = _uow.SchoolRepository.Find(p => p.CountyId.Equals(county.Id) 
+                                                          && p.VoucherYear.Equals(DateTime.Now.Year))).Select(s => s.School.SchoolCode).ToList();
+            var schools = _uow.SchoolRepository.Find(p => p.CountyId.Equals(county.Id)
                                                         && p.SchoolTypeId.Equals(batch.SchoolTypeId)
                                                         && !schoolsCodesWithVoucher.Contains(p.SchoolCode)).ToList();
 
@@ -105,22 +105,35 @@ namespace KEC.Voucher.Web.Api.Controllers
             _uow.VoucherRepository.AddRange(vouchersList);
             _uow.Complete();
             var vouchers = vouchersList.Select(p => new Models.Voucher(p));
-            return Request.CreateResponse(HttpStatusCode.Created, vouchers);
+            return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.Created, vouchers) :
+                Request.CreateResponse(HttpStatusCode.Forbidden,$"All vouchers have been created for the batch {batch.BatchNumber}");
 
         }
         //GET api/<controller>/approval
         [HttpGet, Route("created")]
-        public IEnumerable<Models.Voucher> CreatedVouchers(int batchId)
+        public HttpResponseMessage CreatedVouchers(int batchId)
         {
             var vouchers = _uow.VoucherRepository.Find(p => p.BatchId.Equals(batchId)
                                                             && p.VoucherYear.Equals(DateTime.Now.Year)
-                                                            && p.Status.StatusValue==VoucherStatus.Created);
-            return vouchers.Any() ? vouchers.Select(p => new Models.Voucher(p)).ToList() : null;
+                                                            && p.Status.StatusValue == VoucherStatus.Created);
+
+            if (vouchers.Any())
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, vouchers.Select(p => new Models.Voucher(p)).ToList());
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound,$"No vouchers pending approval for the batch number");
+            }
         }
         [HttpPatch, Route("approve")]
-        public IEnumerable<Models.Voucher> ApproveVoucher(VoucherApprovalParam approvalParam)
+        public HttpResponseMessage ApproveVoucher(VoucherApprovalParam approvalParam)
         {
             var voucher = _uow.VoucherRepository.Get(approvalParam.VoucherId);
+            if (voucher == null)
+            {
+              return  Request.CreateResponse(HttpStatusCode.NotFound);
+            }
             if (approvalParam.Status == VoucherStatus.Rejected)
             {
                 var wallet = voucher.Wallet;
@@ -144,14 +157,21 @@ namespace KEC.Voucher.Web.Api.Controllers
             }
             var vouchers = _uow.VoucherRepository.Find(p => p.BatchId.Equals(approvalParam.BatchId)
                                                           && p.VoucherYear.Equals(DateTime.Now.Year)
-                                                          && p.Status.StatusValue==VoucherStatus.Created);
-            return vouchers.Any() ? vouchers.Select(p => new Models.Voucher(p)).ToList() : null;
+                                                          && p.Status.StatusValue == VoucherStatus.Created);
+            if (vouchers.Any())
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, vouchers.Select(p => new Models.Voucher(p)).ToList());
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new List<Models.Voucher>());
+            }
         }
         [HttpPatch, Route("selected/activate")]
-        public IEnumerable<Models.Voucher> ActivateSelectedVoucher(VoucherApprovalParam approvalParam)
+        public HttpResponseMessage ActivateSelectedVoucher(VoucherApprovalParam approvalParam)
         {
             var vouchers = _uow.VoucherRepository.Find(p => approvalParam.SelectedVouchers.Contains(p.Id)
-            && p.VoucherYear.Equals(DateTime.Now.Year) && p.Status.StatusValue==VoucherStatus.Created).ToList();
+            && p.VoucherYear.Equals(DateTime.Now.Year) && p.Status.StatusValue == VoucherStatus.Created).ToList();
             var padLock = new object();
             Parallel.ForEach(vouchers, (voucher) =>
             {
@@ -165,8 +185,15 @@ namespace KEC.Voucher.Web.Api.Controllers
             });
             var pendingvouchers = _uow.VoucherRepository.Find(p => p.BatchId.Equals(approvalParam.BatchId)
                                                         && p.VoucherYear.Equals(DateTime.Now.Year)
-                                                        && p.Status.StatusValue==VoucherStatus.Created);
-            return pendingvouchers.Any() ? pendingvouchers.Select(p => new Models.Voucher(p)).ToList() : null;
+                                                        && p.Status.StatusValue == VoucherStatus.Created);
+            if (pendingvouchers.Any())
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, pendingvouchers.Select(p => new Models.Voucher(p)).ToList());
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new List<Models.Voucher>());
+            }
         }
 
 

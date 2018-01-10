@@ -23,47 +23,50 @@ namespace KEC.Voucher.Web.Api.Controllers
 
         //GET api/<controller>?countrycode=value
         [HttpGet, Route("")]
-        public IEnumerable<School> SchoolsByCountyCode(string countycode)
+        public HttpResponseMessage SchoolsByCountyCode(string countycode)
         {
             var schools = _uow.SchoolRepository
-                .Find(p => p.County.CountyCode.Equals(countycode))
-                .Select(p => new School(p)).ToList();
-            return schools;
+                .Find(p => p.County.CountyCode.Equals(countycode));
+            return schools.Any() ? Request.CreateResponse(HttpStatusCode.OK, schools.Select(p => new School(p))) :
+                Request.CreateResponse(HttpStatusCode.NotFound);
         }
         //GET api/<controller>/schoolcode
         [HttpGet, Route("{schoolcode}")]
-        public School SchoolByCode(string schoolcode)
+        public HttpResponseMessage SchoolByCode(string schoolcode)
         {
             var school = _uow.SchoolRepository
-               .Find(p => p.SchoolCode.Equals(schoolcode))
-               .Select(p => new School(p)).SingleOrDefault();
-            return school;
+               .Find(p => p.SchoolCode.Equals(schoolcode)).FirstOrDefault();
+            return school == null ? Request.CreateResponse(HttpStatusCode.NotFound) :
+                Request.CreateResponse(HttpStatusCode.OK, new School(school));
         }
 
         //Get api/<controller>/id
         [HttpGet, Route("{id:int}")]
-        public School SchoolById(int id)
+        public HttpResponseMessage SchoolById(int id)
         {
             var dbschool = _uow.SchoolRepository.Get(id);
-            return dbschool == null ? null : new School(dbschool);
+            return dbschool == null ? Request.CreateResponse(HttpStatusCode.NotFound) :
+                Request.CreateResponse(HttpStatusCode.OK, new School(dbschool));
         }
         //Get api/<controller>?countyCode=value&TypeId=value
-        [HttpGet,Route("")]
-        public ICollection<School> SchoolsByCountyCodeAndTypeId(string countyCode, int typeId)
+        [HttpGet, Route("")]
+        public HttpResponseMessage SchoolsByCountyCodeAndTypeId(string countyCode, int typeId)
         {
             var schools = _uow.SchoolRepository
                 .Find(p => p.County.CountyCode.Equals(countyCode)
-                && p.SchoolTypeId == typeId).Select(p=> new School(p)).ToList();
-            
-            return schools;
+                && p.SchoolTypeId == typeId).ToList();
+
+            return schools.Any() ? Request.CreateResponse(HttpStatusCode.OK,
+                                    schools.Select(s => new School(s)).ToList()) :
+                                 Request.CreateResponse(HttpStatusCode.NotFound);
         }
         //POST api/<controller>
         [HttpPost, Route("")]
         public async Task<HttpResponseMessage> SchoolsUpload(FormData formData)
         {
-            
+
             formData.TryGetValue("postedFile", CultureInfo.CurrentCulture, out HttpFile postedFile);
-            if (postedFile==null)
+            if (postedFile == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Please upload your csv file");
             }

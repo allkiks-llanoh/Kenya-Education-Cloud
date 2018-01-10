@@ -13,18 +13,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         public ActionResult Index()
         {
             var list = new List<string>();
-
-            while (list.Count < 20000)
-            {
-               
-                    var pin = RandomCodeGenerator.VoucherPin();
-                    if (!list.Contains(pin))
-                    {
-                        list.Add(pin);
-                    }
-
-            }
-            ViewBag.Title = list.Distinct().Count()+list.First();
+            ViewBag.Title = "Home";
          
             return View();
         }

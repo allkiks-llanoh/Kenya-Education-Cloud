@@ -2,6 +2,8 @@
 using KEC.Voucher.Web.Api.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace KEC.Voucher.Web.Api.Controllers
@@ -10,24 +12,31 @@ namespace KEC.Voucher.Web.Api.Controllers
     {
         private readonly IUnitOfWork _uow = new EFUnitOfWork();
         // GET api/<controller>
-        public IEnumerable<County> Get()
+        public HttpResponseMessage Get()
         {
-            return _uow.CountyRepository.GetAll().Select(p => new County(p)).ToList();
+            var counties = _uow.CountyRepository.GetAll().ToList();
+
+            return counties.Any() ? Request.CreateResponse(HttpStatusCode.OK, counties.Select(c=> new County(c)).ToList()) :
+                                  Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
         // GET api/<controller>/5
-        public County Get(int id)
+        public HttpResponseMessage Get(int id)
         {
             var dbCounty = _uow.CountyRepository.Get(id);
-            return dbCounty == null ? null : new County(dbCounty);
+            return dbCounty == null ?
+                Request.CreateResponse(HttpStatusCode.NotFound) :
+                Request.CreateResponse(HttpStatusCode.OK, new County(dbCounty));
         }
         // GET api/<controller>?countycode=countycode
-        public County Get(string countycode)
+        public HttpResponseMessage Get(string countycode)
         {
             var dbCounty = _uow.CountyRepository
                 .Find(p => p.CountyCode.Equals(countycode))
                 .FirstOrDefault();
-            return dbCounty == null ? null : new County(dbCounty);
+            return dbCounty == null ?
+                Request.CreateResponse(HttpStatusCode.NotFound) :
+                Request.CreateResponse(HttpStatusCode.OK, new County(dbCounty));
         }
     }
 }

@@ -18,19 +18,20 @@ namespace KEC.Voucher.Web.Api.Controllers
 
         // GET api/<controller>/year/schoolcode
         [HttpGet, Route("{year:int}/{schoolcode}")]
-        public IEnumerable<Transaction> Get(int year, string schoolcode)
+        public HttpResponseMessage Get(int year, string schoolcode)
         {
             var transactions = _uow.TransactionRepository.Find(p => p.CreatedOnUtc.Year.Equals(year)
-                                          && p.Voucher.School.SchoolCode.Equals(schoolcode))
-                                           .Select(p => new Transaction(p)).ToList();
-            return transactions;
+                                          && p.Voucher.School.SchoolCode.Equals(schoolcode)).ToList();
+            return transactions.Any()? Request.CreateResponse(HttpStatusCode.OK,transactions.Select(t=> new Transaction(t)).ToList()):
+                                        Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
         // GET api/<controller>/5
-        public Transaction Get(int id)
+        public HttpResponseMessage Get(int id)
         {
             var dbTransaction = _uow.TransactionRepository.Get(id);
-            return dbTransaction == null ? null : new Transaction(dbTransaction);
+            return dbTransaction == null ? Request.CreateResponse(HttpStatusCode.NotFound) :
+                Request.CreateResponse(HttpStatusCode.OK, new Transaction(dbTransaction));
 
         }
 
