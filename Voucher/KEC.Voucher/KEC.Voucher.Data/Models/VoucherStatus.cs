@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace KEC.Voucher.Data.Models
 {
-    public static class VoucherStatus
+    public enum VoucherStatus
     {
-        public const string Active = "Active";
-        public const string Created = "Created";
-        public const string Suspended = "Suspended";
-        public const string Expired = "Expired";
+    [Description("Created")]
+     Created=0,
+     [Description("Active")]
+     Active =1,
+     [Description("Suspended")]
+     Suspended=2,
+     [Description("Expired")]
+     Expired = 3,
+     [Description("Rejected")]
+     Rejected=4
+
     }
 }

@@ -26,8 +26,8 @@ namespace KEC.Voucher.Web.Api.Controllers
             {
                 return requestError;
             }
-            var voucher = _uow.VoucherRepository.Find(p => p.VoucherCode.Equals(voucherCode) 
-                            && p.Status.StatusDescription.Equals(VoucherStatus.Active)).FirstOrDefault();
+            var voucher = _uow.VoucherRepository.Find(p => p.VoucherCode.Equals(voucherCode)
+                            && p.Status.StatusValue==VoucherStatus.Active).FirstOrDefault();
             if (voucher == null)
             {
                 return requestError;

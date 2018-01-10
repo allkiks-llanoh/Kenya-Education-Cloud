@@ -1,5 +1,6 @@
 ﻿using KEC.Voucher.Data.Models;
 using KEC.Voucher.Services;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -10,13 +11,14 @@ namespace KEC.Voucher.Data.Repositories
         public VoucherRepository(VoucherDb context) : base(context)
         {
         }
-        public string GetVoucherCode(string batchNumber)
+        public string GetVoucherCode(string batchNumber,List<DbVoucher> voucherList)
         {
             var voucherCode = string.Empty;
             do
             {
                 voucherCode = RandomCodeGenerator.GetVoucherCode(batchNumber);
-            } while (Find(p => p.VoucherCode.Equals(voucherCode)).FirstOrDefault() != null);
+            } while ((Find(p => p.VoucherCode.Equals(voucherCode)).FirstOrDefault() != null) &&
+            (voucherList.Where(p => p.VoucherCode.Equals(voucherCode)).FirstOrDefault() != null));
 
             return voucherCode;
         }

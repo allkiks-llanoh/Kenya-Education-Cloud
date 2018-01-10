@@ -45,10 +45,16 @@ namespace KEC.Voucher.Web.Api.Controllers
             var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, new Exception("There Was an Error When Attempting To Create Vouchers"));
             var batchId = voucherParam.BatchId;
 
-
             var batch = _uow.BatchRepository.Get(batchId);
             var county = batch.County;
-            var schools = _uow.SchoolRepository.Find(p => p.CountyId.Equals(county.Id) && p.SchoolTypeId.Equals(batch.SchoolTypeId)).ToList();
+            var schoolsCodesWithVoucher = _uow.VoucherRepository.Find(p => p.School.CountyId.Equals(county.Id) 
+            && p.School.SchoolTypeId.Equals(batch.SchoolTypeId) && 
+            ((p.Status.StatusValue == VoucherStatus.Active || p.Status.StatusValue == VoucherStatus.Suspended ||
+                                                          p.Status.StatusValue == VoucherStatus.Created || p.Status.StatusValue == VoucherStatus.Expired)
+                                                          && p.VoucherYear.Equals(DateTime.Now.Year))).Select(s=> s.School.SchoolCode).ToList();
+            var schools = _uow.SchoolRepository.Find(p => p.CountyId.Equals(county.Id) 
+                                                        && p.SchoolTypeId.Equals(batch.SchoolTypeId)
+                                                        && !schoolsCodesWithVoucher.Contains(p.SchoolCode)).ToList();
 
 
 
@@ -62,12 +68,17 @@ namespace KEC.Voucher.Web.Api.Controllers
                     VoucherSerial = Guid.NewGuid().ToString(),
                     VoucherYear = DateTime.Now.Year,
                     BatchId = batch.Id,
-                    SchoolId = school.Id
+                    SchoolId = school.Id,
+                    Status = new DbStatus
+                    {
+                        StatusValue = VoucherStatus.Created,
+                        TimeStamp = DateTime.Now
+                    }
                 };
 
                 lock (padLock)
                 {
-                    voucher.VoucherCode = _uow.VoucherRepository.GetVoucherCode(batch.BatchNumber);
+                    voucher.VoucherCode = _uow.VoucherRepository.GetVoucherCode(batch.BatchNumber, vouchersList);
                     voucher.Wallet = new DbWallet
                     {
                         WalletAmount = school.AllocatedAmount,
@@ -77,12 +88,12 @@ namespace KEC.Voucher.Web.Api.Controllers
                     };
                 }
 
-               
+
                 lock (padLock)
                 {
                     vouchersList.Add(voucher);
                 }
-               
+
             });
 
 
@@ -97,5 +108,67 @@ namespace KEC.Voucher.Web.Api.Controllers
             return Request.CreateResponse(HttpStatusCode.Created, vouchers);
 
         }
+        //GET api/<controller>/approval
+        [HttpGet, Route("created")]
+        public IEnumerable<Models.Voucher> CreatedVouchers(int batchId)
+        {
+            var vouchers = _uow.VoucherRepository.Find(p => p.BatchId.Equals(batchId)
+                                                            && p.VoucherYear.Equals(DateTime.Now.Year)
+                                                            && p.Status.StatusValue==VoucherStatus.Created);
+            return vouchers.Any() ? vouchers.Select(p => new Models.Voucher(p)).ToList() : null;
+        }
+        [HttpPatch, Route("approve")]
+        public IEnumerable<Models.Voucher> ApproveVoucher(VoucherApprovalParam approvalParam)
+        {
+            var voucher = _uow.VoucherRepository.Get(approvalParam.VoucherId);
+            if (approvalParam.Status == VoucherStatus.Rejected)
+            {
+                var wallet = voucher.Wallet;
+                var status = voucher.Status;
+                _uow.VoucherRepository.Remove(voucher);
+                _uow.Complete();
+                _uow.StatusRepository.Remove(status);
+                _uow.Complete();
+                _uow.WalletRepository.Remove(wallet);
+                _uow.Complete();
+            }
+            else
+            {
+                voucher.Status.StatusValue = approvalParam.Status;
+                voucher.Status.TimeStamp = DateTime.Now;
+                if (approvalParam.Status == VoucherStatus.Active)
+                {
+                    voucher.Status.ActivatedBy = approvalParam.UserGuid;
+                }
+                _uow.Complete();
+            }
+            var vouchers = _uow.VoucherRepository.Find(p => p.BatchId.Equals(approvalParam.BatchId)
+                                                          && p.VoucherYear.Equals(DateTime.Now.Year)
+                                                          && p.Status.StatusValue==VoucherStatus.Created);
+            return vouchers.Any() ? vouchers.Select(p => new Models.Voucher(p)).ToList() : null;
+        }
+        [HttpPatch, Route("selected/activate")]
+        public IEnumerable<Models.Voucher> ActivateSelectedVoucher(VoucherApprovalParam approvalParam)
+        {
+            var vouchers = _uow.VoucherRepository.Find(p => approvalParam.SelectedVouchers.Contains(p.Id)
+            && p.VoucherYear.Equals(DateTime.Now.Year) && p.Status.StatusValue==VoucherStatus.Created).ToList();
+            var padLock = new object();
+            Parallel.ForEach(vouchers, (voucher) =>
+            {
+                lock (padLock)
+                {
+                    voucher.Status.StatusValue = VoucherStatus.Active;
+                    voucher.Status.TimeStamp = DateTime.Now;
+                    voucher.Status.ActivatedBy = approvalParam.UserGuid;
+                    _uow.Complete();
+                }
+            });
+            var pendingvouchers = _uow.VoucherRepository.Find(p => p.BatchId.Equals(approvalParam.BatchId)
+                                                        && p.VoucherYear.Equals(DateTime.Now.Year)
+                                                        && p.Status.StatusValue==VoucherStatus.Created);
+            return pendingvouchers.Any() ? pendingvouchers.Select(p => new Models.Voucher(p)).ToList() : null;
+        }
+
+
     }
 }

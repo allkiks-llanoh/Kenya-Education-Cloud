@@ -26,7 +26,7 @@ namespace KEC.Voucher.Data.Repositories
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return _context.Set<TEntity>().Where(predicate);
+            return _context.Set<TEntity>().Where(predicate).ToList();
         }
 
         public TEntity Get(int id)

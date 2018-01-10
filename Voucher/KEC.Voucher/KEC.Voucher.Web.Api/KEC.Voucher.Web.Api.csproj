@@ -241,6 +241,7 @@
     <Compile Include="Models\TransactionParam.cs" />
     <Compile Include="Models\Voucher.cs" />
     <Compile Include="Models\PinParam.cs" />
+    <Compile Include="Models\VoucherApprovalParam.cs" />
     <Compile Include="Models\VoucherParam.cs" />
     <Compile Include="Models\Wallet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

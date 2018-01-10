@@ -114,6 +114,18 @@
     <Compile Include="Migrations\201801091440123_DropSchoolIdFromWallet.Designer.cs">
       <DependentUpon>201801091440123_DropSchoolIdFromWallet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801100946498_DropStatustDescriptionColumnInVoucherStatuses.cs" />
+    <Compile Include="Migrations\201801100946498_DropStatustDescriptionColumnInVoucherStatuses.Designer.cs">
+      <DependentUpon>201801100946498_DropStatustDescriptionColumnInVoucherStatuses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801100950259_AddStatusValueColumnInVoucherStatuses.cs" />
+    <Compile Include="Migrations\201801100950259_AddStatusValueColumnInVoucherStatuses.Designer.cs">
+      <DependentUpon>201801100950259_AddStatusValueColumnInVoucherStatuses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801100957146_AddActivatedByColumnInVoucherStatuses.cs" />
+    <Compile Include="Migrations\201801100957146_AddActivatedByColumnInVoucherStatuses.Designer.cs">
+      <DependentUpon>201801100957146_AddActivatedByColumnInVoucherStatuses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbBatch.cs" />
     <Compile Include="Models\DbCounty.cs" />
@@ -180,6 +192,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801091440123_DropSchoolIdFromWallet.resx">
       <DependentUpon>201801091440123_DropSchoolIdFromWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801100946498_DropStatustDescriptionColumnInVoucherStatuses.resx">
+      <DependentUpon>201801100946498_DropStatustDescriptionColumnInVoucherStatuses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801100950259_AddStatusValueColumnInVoucherStatuses.resx">
+      <DependentUpon>201801100950259_AddStatusValueColumnInVoucherStatuses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801100957146_AddActivatedByColumnInVoucherStatuses.resx">
+      <DependentUpon>201801100957146_AddActivatedByColumnInVoucherStatuses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

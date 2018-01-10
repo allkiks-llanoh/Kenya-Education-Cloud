@@ -1,5 +1,5 @@
 ﻿using KEC.Voucher.Data.Models;
-using System.Collections.Generic;
+using KEC.Voucher.Services.Extensions;
 
 namespace KEC.Voucher.Web.Api.Models
 {
@@ -39,14 +39,20 @@ namespace KEC.Voucher.Web.Api.Models
                 return _dbVoucher.VoucherYear;
             }
         }
-        public int SchoolId
+        public string SchoolCode
         {
             get
             {
-                return _dbVoucher.SchoolId;
+                return _dbVoucher.School.SchoolCode;
             }
         }
-
+        public string Status
+        {
+            get
+            {
+                return _dbVoucher.Status.StatusValue.GetDescription();
+            }
+        }
         public Wallet Wallet
         {
             get
