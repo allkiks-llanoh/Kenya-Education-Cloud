@@ -4,7 +4,9 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Http.Cors;
 using System.Web.Http;
+using System.Net.Http.Formatting;
 
 namespace KEC.Voucher.Web.Api
 {
@@ -22,6 +24,8 @@ namespace KEC.Voucher.Web.Api
                 defaults: new { id = RouteParameter.Optional }
             );
             config.Formatters.Add(new FormMultipartEncodedMediaTypeFormatter(new MultipartFormatterSettings()));
+            config.Formatters.Add(new JsonMediaTypeFormatter());
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*", "*"));
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using KEC.Voucher.Data.UnitOfWork;
 using KEC.Voucher.Web.Api.Models;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,6 +7,7 @@ using System.Web.Http;
 
 namespace KEC.Voucher.Web.Api.Controllers
 {
+   
     public class CountiesController : ApiController
     {
         private readonly IUnitOfWork _uow = new EFUnitOfWork();
@@ -15,6 +15,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         public HttpResponseMessage Get()
         {
             var counties = _uow.CountyRepository.GetAll().ToList();
+          
 
             return counties.Any() ? Request.CreateResponse(HttpStatusCode.OK, counties.Select(c=> new County(c)).ToList()) :
                                   Request.CreateResponse(HttpStatusCode.NotFound);

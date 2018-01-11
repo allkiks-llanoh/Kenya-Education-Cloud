@@ -4,18 +4,17 @@ using KEC.Voucher.Data.UnitOfWork;
 using KEC.Voucher.Web.Api.Models;
 using MultipartDataMediaFormatter.Infrastructure;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 
 namespace KEC.Voucher.Web.Api.Controllers
 {
+    
     [RoutePrefix("api/schools")]
     public class SchoolsController : ApiController
     {
@@ -29,6 +28,8 @@ namespace KEC.Voucher.Web.Api.Controllers
                 .Find(p => p.County.CountyCode.Equals(countycode));
             return schools.Any() ? Request.CreateResponse(HttpStatusCode.OK, schools.Select(p => new School(p))) :
                 Request.CreateResponse(HttpStatusCode.NotFound);
+
+
         }
         //GET api/<controller>/schoolcode
         [HttpGet, Route("{schoolcode}")]

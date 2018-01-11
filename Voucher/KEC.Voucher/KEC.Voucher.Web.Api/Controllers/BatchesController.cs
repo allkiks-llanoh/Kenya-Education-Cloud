@@ -53,18 +53,18 @@ namespace KEC.Voucher.Web.Api.Controllers
             var SchoolTypeId = batchParam.SchoolTypeId;
             if (countycode == null || SchoolTypeId == 0)
             {
-                return Request.CreateResponse(HttpStatusCode.Forbidden, "Invalid school type or county code");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid school type or county code");
             }
             var county = _uow.CountyRepository.Find(p => p.CountyCode.Equals(countycode)).FirstOrDefault();
             var schoolType = _uow.SchoolTypeRepository.Find(p => p.Id.Equals(SchoolTypeId)).FirstOrDefault();
-            var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, new Exception("Invalid County or School Type"));
+            var requestError = Request.CreateErrorResponse(HttpStatusCode.BadRequest, new Exception("Invalid County or School Type"));
             if (county == null)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, "Invalid county code");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid county code");
             }
             if (schoolType == null)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, "Invalid school type");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid school type");
             }
 
             if (county.Batches.Any((x => x.SchoolTypeId.Equals(SchoolTypeId) && x.Year.Equals(DateTime.Now.Year))))
