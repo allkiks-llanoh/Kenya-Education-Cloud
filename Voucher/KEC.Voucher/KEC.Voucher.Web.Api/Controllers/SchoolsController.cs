@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 
 namespace KEC.Voucher.Web.Api.Controllers
@@ -63,64 +64,73 @@ namespace KEC.Voucher.Web.Api.Controllers
         }
         //POST api/<controller>
         [HttpPost, Route("")]
-        public async Task<HttpResponseMessage> SchoolsUpload(FormData formData)
+        public async Task<HttpResponseMessage> SchoolsUpload()
         {
 
-            formData.TryGetValue("postedFile", CultureInfo.CurrentCulture, out HttpFile postedFile);
-            if (postedFile == null)
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count <= 0)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Please upload your csv file");
             }
+            if (httpRequest.Files.Count < 1)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Multiple file upload is not supported");
+            }
+            var postedFile = httpRequest.Files[0];
             if (!postedFile.FileName.EndsWith(".csv"))
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new Exception("The file format is not supported"));
             }
             try
             {
-                StreamReader streamReader = new StreamReader(postedFile.FileName);
-                using (CsvReader csvReader = new CsvReader(streamReader, false))
+                using (var streamReader = new StreamReader(postedFile.InputStream))
                 {
-                    await csvReader.ReadAsync();
-                    csvReader.ReadHeader();
-                    while (await csvReader.ReadAsync())
+                    using (CsvReader csvReader = new CsvReader(streamReader, false))
                     {
-                        var schoolType = csvReader.GetField<string>("SchoolType");
-                        var schoolTypeId = _uow.SchoolTypeRepository
-                            .Find(p => p.SchoolType.Equals(schoolType))
-                            .FirstOrDefault()?.Id;
-                        var county = csvReader.GetField<string>("County");
-                        var countyId = _uow.CountyRepository
-                            .Find(p => p.CountyName.Equals(county))
-                            .FirstOrDefault()?.Id;
-                        var school = new DbSchool
+                        await csvReader.ReadAsync();
+                        csvReader.ReadHeader();
+                        while (await csvReader.ReadAsync())
                         {
-                            SchoolName = csvReader.GetField<string>("SchoolName"),
-                            SchoolCode = csvReader.GetField<string>("SchoolCode"),
-                            SchoolTypeId = schoolTypeId.GetValueOrDefault(),
-                            CountyId = countyId.GetValueOrDefault(),
-                            DateCreated = DateTime.Now,
-                            DateChanged = DateTime.Now,
-                        };
-                        var fundAllocation = new DbFundAllocation
-                        {
-                            Amount = csvReader.GetField<Decimal>("Amount"),
-                            Year = csvReader.GetField<int>("Year")
-                        };
-                        var schoolAdmin = new DbSchoolAdmin
-                        {
-                            Email = csvReader.GetField<string>("SchoolAdminPhoneNumber"),
-                            FirstName = csvReader.GetField<string>("SchoolAdminFirstName"),
-                            LastName = csvReader.GetField<string>("SchoolAdminLastName"),
-                            PhoneNumber = csvReader.GetField<string>("SchoolAdminPhoneNumber"),
-                            guid = Guid.NewGuid().ToString()
-                        };
-                        _uow.SchoolRepository.AddFromCSV(school, fundAllocation);
+                            var schoolType = csvReader.GetField<string>("SchoolType");
+                            var schoolTypeId = _uow.SchoolTypeRepository
+                                .Find(p => p.SchoolType.Equals(schoolType))
+                                .FirstOrDefault()?.Id;
+                            var county = csvReader.GetField<string>("County");
+                            var countyId = _uow.CountyRepository
+                                .Find(p => p.CountyName.Equals(county))
+                                .FirstOrDefault()?.Id;
+                            var school = new DbSchool
+                            {
+                                SchoolName = csvReader.GetField<string>("SchoolName"),
+                                SchoolCode = csvReader.GetField<string>("SchoolCode"),
+                                SchoolTypeId = schoolTypeId.GetValueOrDefault(),
+                                CountyId = countyId.GetValueOrDefault(),
+                                DateCreated = DateTime.Now,
+                                DateChanged = DateTime.Now,
+                            };
+                            var fundAllocation = new DbFundAllocation
+                            {
+                                Amount = csvReader.GetField<Decimal>("Amount"),
+                                Year = csvReader.GetField<int>("Year")
+                            };
+                            var schoolAdmin = new DbSchoolAdmin
+                            {
+                                Email = csvReader.GetField<string>("SchoolAdminPhoneNumber"),
+                                FirstName = csvReader.GetField<string>("SchoolAdminFirstName"),
+                                LastName = csvReader.GetField<string>("SchoolAdminLastName"),
+                                PhoneNumber = csvReader.GetField<string>("SchoolAdminPhoneNumber"),
+                                guid = Guid.NewGuid().ToString()
+                            };
+                            _uow.SchoolRepository.AddFromCSV(school, fundAllocation);
+
+                        }
+                        _uow.Complete();
+                        return Request.CreateResponse(HttpStatusCode.OK);
 
                     }
-                    _uow.Complete();
-                    return Request.CreateResponse(HttpStatusCode.OK);
-
                 }
+               
+
             }
             catch (Exception ex)
             {

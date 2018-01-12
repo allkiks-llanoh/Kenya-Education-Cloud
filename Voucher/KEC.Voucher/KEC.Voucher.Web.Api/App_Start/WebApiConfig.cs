@@ -24,7 +24,6 @@ namespace KEC.Voucher.Web.Api
                 defaults: new { id = RouteParameter.Optional }
             );
             config.Formatters.Add(new FormMultipartEncodedMediaTypeFormatter(new MultipartFormatterSettings()));
-            config.Formatters.Add(new JsonMediaTypeFormatter());
             config.EnableCors(new EnableCorsAttribute("*", "*", "*", "*"));
         }
     }
