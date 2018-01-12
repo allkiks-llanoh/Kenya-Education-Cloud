@@ -17,14 +17,12 @@ namespace KEC.Voucher.Services.AfricasTalking
 
 
         }
-        public string SendSms(string recipient, string message)
+         public void SendSms(string recipient, string message)
         {
             try
             {
-                var sms = _gateway.sendMessage(ProcessNumber(recipient), message);
-                return string.Empty;
-                //return $"Number: {res["number"]}, Status: {res["status"]},MessageId: {res["messageId"]},Cost: {res["messageId"]}";
-              
+               _gateway.sendMessage(ProcessNumber(recipient), message);
+                
             }
             catch (AfricasTalkingGatewayException)
             {
@@ -42,6 +40,10 @@ namespace KEC.Voucher.Services.AfricasTalking
             if (number.StartsWith("7"))
             {
                 number = $"254{number}";
+            }
+            if (number.StartsWith("+"))
+            {
+                number=number.Remove(0, 1);
             }
             return number;
         }
