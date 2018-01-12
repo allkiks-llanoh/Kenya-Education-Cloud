@@ -76,7 +76,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Multiple file upload is not supported");
             }
-            var postedFile = httpRequest.Files[0];
+            var postedFile = httpRequest.Files["postedFile"];
             if (!postedFile.FileName.EndsWith(".csv"))
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new Exception("The file format is not supported"));
@@ -112,14 +112,6 @@ namespace KEC.Voucher.Web.Api.Controllers
                             {
                                 Amount = csvReader.GetField<Decimal>("Amount"),
                                 Year = csvReader.GetField<int>("Year")
-                            };
-                            var schoolAdmin = new DbSchoolAdmin
-                            {
-                                Email = csvReader.GetField<string>("SchoolAdminPhoneNumber"),
-                                FirstName = csvReader.GetField<string>("SchoolAdminFirstName"),
-                                LastName = csvReader.GetField<string>("SchoolAdminLastName"),
-                                PhoneNumber = csvReader.GetField<string>("SchoolAdminPhoneNumber"),
-                                guid = Guid.NewGuid().ToString()
                             };
                             _uow.SchoolRepository.AddFromCSV(school, fundAllocation);
 
