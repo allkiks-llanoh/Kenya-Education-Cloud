@@ -1,13 +1,11 @@
 ﻿using KEC.Voucher.Data.Models;
 using KEC.Voucher.Data.UnitOfWork;
-using KEC.Voucher.Services;
+using KEC.Voucher.Services.AfricasTalking;
 using KEC.Voucher.Web.Api.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 
 namespace KEC.Voucher.Web.Api.Controllers

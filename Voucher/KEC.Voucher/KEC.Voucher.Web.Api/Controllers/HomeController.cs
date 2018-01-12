@@ -1,9 +1,5 @@
-﻿using KEC.Voucher.Services;
-using KEC.Voucher.Web.Api.Models;
-using System.Collections.Concurrent;
+﻿using KEC.Voucher.Services.AfricasTalking;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace KEC.Voucher.Web.Api.Controllers
@@ -14,7 +10,8 @@ namespace KEC.Voucher.Web.Api.Controllers
         {
             var list = new List<string>();
             ViewBag.Title = "Home";
-         
+            var smsService = new AfricasTalkingSmsService();
+            smsService.SendSms("+254711861170","This is a test");
             return View();
         }
     }
