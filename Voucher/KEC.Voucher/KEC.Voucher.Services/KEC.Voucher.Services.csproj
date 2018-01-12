@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="AfricasTalking\AfricasTalkingGateway.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\StringExensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomCodeGenerator.cs" />
     <Compile Include="AfricasTalking\AfricasTalkingSmsService.cs" />

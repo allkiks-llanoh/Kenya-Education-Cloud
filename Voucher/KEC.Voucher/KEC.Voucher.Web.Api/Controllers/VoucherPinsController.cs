@@ -1,6 +1,7 @@
 ﻿using KEC.Voucher.Data.Models;
 using KEC.Voucher.Data.UnitOfWork;
 using KEC.Voucher.Services.AfricasTalking;
+using KEC.Voucher.Services.Extensions;
 using KEC.Voucher.Web.Api.Models;
 using System;
 using System.Linq;
@@ -51,6 +52,10 @@ namespace KEC.Voucher.Web.Api.Controllers
                 _uow.VoucherPinRepository.Add(pin);
                 _uow.Complete();
                 var smsService = new AfricasTalkingSmsService();
+                if (!schoolAdmin.PhoneNumber.PhoneValid())
+                {
+                   return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid School admin phone number");
+                }
                 smsService.SendSms(schoolAdmin.PhoneNumber, pin.Pin);
                 return Request.CreateResponse(HttpStatusCode.OK, "Sending voucher pin sms");
             }
