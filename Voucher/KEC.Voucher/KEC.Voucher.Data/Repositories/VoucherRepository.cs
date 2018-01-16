@@ -1,7 +1,6 @@
 ﻿using KEC.Voucher.Data.Models;
-using KEC.Voucher.Services;
+using KEC.Voucher.Services.Helpers;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace KEC.Voucher.Data.Repositories

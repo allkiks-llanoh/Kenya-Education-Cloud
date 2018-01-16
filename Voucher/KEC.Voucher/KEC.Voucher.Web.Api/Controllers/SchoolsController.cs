@@ -2,9 +2,7 @@
 using KEC.Voucher.Data.Models;
 using KEC.Voucher.Data.UnitOfWork;
 using KEC.Voucher.Web.Api.Models;
-using MultipartDataMediaFormatter.Infrastructure;
 using System;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -15,7 +13,7 @@ using System.Web.Http;
 
 namespace KEC.Voucher.Web.Api.Controllers
 {
-    
+
     [RoutePrefix("api/schools")]
     public class SchoolsController : ApiController
     {
@@ -66,7 +64,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         [HttpPost, Route("")]
         public async Task<HttpResponseMessage> SchoolsUpload()
         {
-
+           
             var httpRequest = HttpContext.Current.Request;
             if (httpRequest.Files.Count <= 0)
             {

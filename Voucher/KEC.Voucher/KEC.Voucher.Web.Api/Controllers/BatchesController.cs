@@ -1,6 +1,6 @@
 ﻿using KEC.Voucher.Data.Models;
 using KEC.Voucher.Data.UnitOfWork;
-using KEC.Voucher.Services;
+using KEC.Voucher.Services.Helpers;
 using KEC.Voucher.Web.Api.Models;
 using System;
 using System.Linq;

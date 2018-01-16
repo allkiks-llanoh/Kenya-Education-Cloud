@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KEC.Voucher.Services
+namespace KEC.Voucher.Services.Helpers
 {
     public static class RandomCodeGenerator
     {

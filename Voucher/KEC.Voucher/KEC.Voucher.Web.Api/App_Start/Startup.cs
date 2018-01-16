@@ -25,6 +25,7 @@ namespace KEC.Voucher.Web.Api.App_Start
         }
         public void ConfigureAuth(IAppBuilder app)
         {
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
