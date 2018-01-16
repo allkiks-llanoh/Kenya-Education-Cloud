@@ -80,62 +80,6 @@
     <Compile Include="Mappings\DbVoucherPinsMap.cs" />
     <Compile Include="Mappings\DbVouchersMap.cs" />
     <Compile Include="Mappings\DbWalletsMap.cs" />
-    <Compile Include="Migrations\201801051505072_InitialCreate.cs" />
-    <Compile Include="Migrations\201801051505072_InitialCreate.Designer.cs">
-      <DependentUpon>201801051505072_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.cs" />
-    <Compile Include="Migrations\201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.Designer.cs">
-      <DependentUpon>201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801051626448_DropVoucherStatusRelationship.cs" />
-    <Compile Include="Migrations\201801051626448_DropVoucherStatusRelationship.Designer.cs">
-      <DependentUpon>201801051626448_DropVoucherStatusRelationship.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801051632167_RemoveVoucherIdFromStatus.cs" />
-    <Compile Include="Migrations\201801051632167_RemoveVoucherIdFromStatus.Designer.cs">
-      <DependentUpon>201801051632167_RemoveVoucherIdFromStatus.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801051636127_AddVoucherStatustMap.cs" />
-    <Compile Include="Migrations\201801051636127_AddVoucherStatustMap.Designer.cs">
-      <DependentUpon>201801051636127_AddVoucherStatustMap.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801051656340_RemoveNameFromStatus.cs" />
-    <Compile Include="Migrations\201801051656340_RemoveNameFromStatus.Designer.cs">
-      <DependentUpon>201801051656340_RemoveNameFromStatus.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801091414195_DropVoucherWalletMapping.cs" />
-    <Compile Include="Migrations\201801091414195_DropVoucherWalletMapping.Designer.cs">
-      <DependentUpon>201801091414195_DropVoucherWalletMapping.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801091420284_AddMigrationVoucherWalletMapping.cs" />
-    <Compile Include="Migrations\201801091420284_AddMigrationVoucherWalletMapping.Designer.cs">
-      <DependentUpon>201801091420284_AddMigrationVoucherWalletMapping.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801091430214_DropMigrationVoucherWalletMapping.cs" />
-    <Compile Include="Migrations\201801091430214_DropMigrationVoucherWalletMapping.Designer.cs">
-      <DependentUpon>201801091430214_DropMigrationVoucherWalletMapping.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801091433055_VoucherWalletMapping.cs" />
-    <Compile Include="Migrations\201801091433055_VoucherWalletMapping.Designer.cs">
-      <DependentUpon>201801091433055_VoucherWalletMapping.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801091440123_DropSchoolIdFromWallet.cs" />
-    <Compile Include="Migrations\201801091440123_DropSchoolIdFromWallet.Designer.cs">
-      <DependentUpon>201801091440123_DropSchoolIdFromWallet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801100946498_DropStatustDescriptionColumnInVoucherStatuses.cs" />
-    <Compile Include="Migrations\201801100946498_DropStatustDescriptionColumnInVoucherStatuses.Designer.cs">
-      <DependentUpon>201801100946498_DropStatustDescriptionColumnInVoucherStatuses.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801100950259_AddStatusValueColumnInVoucherStatuses.cs" />
-    <Compile Include="Migrations\201801100950259_AddStatusValueColumnInVoucherStatuses.Designer.cs">
-      <DependentUpon>201801100950259_AddStatusValueColumnInVoucherStatuses.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801100957146_AddActivatedByColumnInVoucherStatuses.cs" />
-    <Compile Include="Migrations\201801100957146_AddActivatedByColumnInVoucherStatuses.Designer.cs">
-      <DependentUpon>201801100957146_AddActivatedByColumnInVoucherStatuses.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DbBatch.cs" />
     <Compile Include="Models\DbCounty.cs" />
@@ -168,50 +112,6 @@
     <Compile Include="Repositories\WalletRepository.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\EFUnitOfWork.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801051505072_InitialCreate.resx">
-      <DependentUpon>201801051505072_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.resx">
-      <DependentUpon>201801051508382_AddedSchoolAdminSchoolOneToOneOrZero.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801051626448_DropVoucherStatusRelationship.resx">
-      <DependentUpon>201801051626448_DropVoucherStatusRelationship.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801051632167_RemoveVoucherIdFromStatus.resx">
-      <DependentUpon>201801051632167_RemoveVoucherIdFromStatus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801051636127_AddVoucherStatustMap.resx">
-      <DependentUpon>201801051636127_AddVoucherStatustMap.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801051656340_RemoveNameFromStatus.resx">
-      <DependentUpon>201801051656340_RemoveNameFromStatus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801091414195_DropVoucherWalletMapping.resx">
-      <DependentUpon>201801091414195_DropVoucherWalletMapping.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801091420284_AddMigrationVoucherWalletMapping.resx">
-      <DependentUpon>201801091420284_AddMigrationVoucherWalletMapping.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801091430214_DropMigrationVoucherWalletMapping.resx">
-      <DependentUpon>201801091430214_DropMigrationVoucherWalletMapping.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801091433055_VoucherWalletMapping.resx">
-      <DependentUpon>201801091433055_VoucherWalletMapping.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801091440123_DropSchoolIdFromWallet.resx">
-      <DependentUpon>201801091440123_DropSchoolIdFromWallet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801100946498_DropStatustDescriptionColumnInVoucherStatuses.resx">
-      <DependentUpon>201801100946498_DropStatustDescriptionColumnInVoucherStatuses.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801100950259_AddStatusValueColumnInVoucherStatuses.resx">
-      <DependentUpon>201801100950259_AddStatusValueColumnInVoucherStatuses.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801100957146_AddActivatedByColumnInVoucherStatuses.resx">
-      <DependentUpon>201801100957146_AddActivatedByColumnInVoucherStatuses.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KEC.Voucher.Services\KEC.Voucher.Services.csproj">
