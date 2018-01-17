@@ -167,8 +167,8 @@ namespace KEC.Voucher.Web.Api.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK, new List<Models.Voucher>());
             }
         }
-        [HttpPatch, Route("selected/activate")]
-        public HttpResponseMessage ActivateSelectedVoucher(VoucherApprovalParam approvalParam)
+        [HttpPatch, Route("selected/accept")]
+        public HttpResponseMessage AcceptSelectedVouchers(VoucherApprovalParam approvalParam)
         {
             var vouchers = _uow.VoucherRepository.Find(p => approvalParam.SelectedVouchers.Contains(p.Id)
             && p.VoucherYear.Equals(DateTime.Now.Year) && p.Status.StatusValue == VoucherStatus.Created).ToList();
@@ -195,7 +195,34 @@ namespace KEC.Voucher.Web.Api.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK, new List<Models.Voucher>());
             }
         }
-
+        [HttpPatch, Route("selected/reject")]
+        public HttpResponseMessage RejectSelectedVouchers(VoucherApprovalParam approvalParam)
+        {
+            var vouchers = _uow.VoucherRepository.Find(p => approvalParam.SelectedVouchers.Contains(p.Id)
+            && p.VoucherYear.Equals(DateTime.Now.Year) && p.Status.StatusValue == VoucherStatus.Created).ToList();
+            var padLock = new object();
+            Parallel.ForEach(vouchers, (voucher) =>
+            {
+                lock (padLock)
+                {
+                    voucher.Status.StatusValue = VoucherStatus.Rejected;
+                    voucher.Status.TimeStamp = DateTime.Now;
+                    voucher.Status.ActivatedBy = approvalParam.UserGuid;
+                    _uow.Complete();
+                }
+            });
+            var pendingvouchers = _uow.VoucherRepository.Find(p => p.BatchId.Equals(approvalParam.BatchId)
+                                                        && p.VoucherYear.Equals(DateTime.Now.Year)
+                                                        && p.Status.StatusValue == VoucherStatus.Created);
+            if (pendingvouchers.Any())
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, pendingvouchers.Select(p => new Models.Voucher(p)).ToList());
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new List<Models.Voucher>());
+            }
+        }
 
     }
 }
