@@ -3,6 +3,7 @@ using KEC.Voucher.Data.UnitOfWork;
 using KEC.Voucher.Services.Helpers;
 using KEC.Voucher.Web.Api.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,13 +17,14 @@ namespace KEC.Voucher.Web.Api.Controllers
         private readonly IUnitOfWork _uow = new EFUnitOfWork();
 
         //GET api/<controller>?countrycode=value
-        [HttpGet, Route("")]
-        public HttpResponseMessage BatchByCountyCode(string countycode)
+        [HttpGet, Route("batches/{year:int?}")]
+        public HttpResponseMessage Batches(int? year)
         {
-            var batches = _uow.BatchRepository
-                .Find(p => p.County.CountyCode.Equals(countycode))
-                .Select(p => new Batch(p)).ToList();
-            return Request.CreateResponse(HttpStatusCode.OK, batches);
+            var queryYear = year ?? DateTime.Now.Year;
+            var DbBatches = _uow.BatchRepository
+                .Find(p => p.Year.Equals(queryYear));
+                var batches = DbBatches.Any()? DbBatches.Select(p => new Batch(p)) : new List<Batch>();
+                return Request.CreateResponse(HttpStatusCode.OK, batches);
         }
         //GET api/<controller>/batchcode
         [HttpGet, Route("{batchnumber}")]

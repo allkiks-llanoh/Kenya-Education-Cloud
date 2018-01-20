@@ -1,14 +1,12 @@
 ﻿using KEC.Voucher.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace KEC.Voucher.Web.Api.Models
 {
     public class Batch
     {
         private readonly DbBatch _dbbatch;
+        private readonly string _createVouchersUrl;
+        private readonly string _getVouchersUrl;
         public Batch(DbBatch dbBatch)
         {
             _dbbatch = dbBatch;
@@ -20,14 +18,20 @@ namespace KEC.Voucher.Web.Api.Models
                 return _dbbatch.Id;
             }
         }
-        public int CountyId
+        public string CountyCode
         {
             get
             {
-                return _dbbatch.CountyId;
+                return _dbbatch.County.CountyCode;
             }
         }
-
+        public string CountyName
+        {
+            get
+            {
+                return _dbbatch.County.CountyName;
+            }
+        }
         public string BatchNumber
         {
             get
@@ -36,28 +40,20 @@ namespace KEC.Voucher.Web.Api.Models
             }
         }
 
-        public string SerialNumber
-        {
-            get
-            {
-                return _dbbatch.SerialNumber;
-            }
-        }
         public int Year
         {
             get
             {
                 return _dbbatch.Year;
             }
-            set { }
         }
-        public int SchoolTypeId
+        public string SchoolType
         {
             get
             {
-                return _dbbatch.SchoolTypeId;
+                return _dbbatch.SchoolType.SchoolType;
             }
         }
     }
-    
+
 }

@@ -1,6 +1,7 @@
 ﻿using KEC.Voucher.Data.Models;
 using KEC.Voucher.Data.UnitOfWork;
 using KEC.Voucher.Web.Api.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,12 +41,19 @@ namespace KEC.Voucher.Web.Api.Controllers
         [HttpPost, Route("")]
         public HttpResponseMessage Post(VoucherParam voucherParam)
         {
-
-
+            if(voucherParam==null || voucherParam.BatchId == 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            
             var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, new Exception("There Was an Error When Attempting To Create Vouchers"));
             var batchId = voucherParam.BatchId;
 
             var batch = _uow.BatchRepository.Get(batchId);
+            if (batch == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound,"Invalid batch");
+            }
             var county = batch.County;
             var schoolsCodesWithVoucher = _uow.VoucherRepository.Find(p => p.School.CountyId.Equals(county.Id)
             && p.School.SchoolTypeId.Equals(batch.SchoolTypeId) &&
@@ -55,10 +63,6 @@ namespace KEC.Voucher.Web.Api.Controllers
             var schools = _uow.SchoolRepository.Find(p => p.CountyId.Equals(county.Id)
                                                         && p.SchoolTypeId.Equals(batch.SchoolTypeId)
                                                         && !schoolsCodesWithVoucher.Contains(p.SchoolCode)).ToList();
-
-
-
-
             var vouchersList = new List<DbVoucher>();
             var padLock = new object();
             Parallel.ForEach(schools, (school, loopState) =>
@@ -95,12 +99,12 @@ namespace KEC.Voucher.Web.Api.Controllers
                 }
 
             });
+           
+            var schoolsWithNoAllocation = vouchersList.Any(p => p.Wallet.WalletAmount == 0);
 
-
-            var schoolsWithNoAllocation = vouchersList.Where(p => p.Wallet.WalletAmount == 0).Select(p => $"{p.School.SchoolName}:{p.School.SchoolCode}");
-            if (schoolsWithNoAllocation.Any())
+            if (schoolsWithNoAllocation)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, $"Some of the selected schools dont have fund allocations for the year {DateTime.Now}: ${string.Join(",", schoolsWithNoAllocation)}");
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, "Some of the selected schools dont have fund allocations for the year");
             }
             _uow.VoucherRepository.AddRange(vouchersList);
             _uow.Complete();
@@ -109,16 +113,28 @@ namespace KEC.Voucher.Web.Api.Controllers
                 Request.CreateResponse(HttpStatusCode.Forbidden,$"All vouchers have been created for the batch {batch.BatchNumber}");
 
         }
-        //GET api/<controller>/approval
+        //GET api/<controller>/created
         [HttpGet, Route("created")]
-        public HttpResponseMessage CreatedVouchers(int batchId)
+        public HttpResponseMessage CreatedVouchers(int batchId,int pageIndex,int pageSize=20)
         {
-            var vouchers = _uow.VoucherRepository.Find(p => p.BatchId.Equals(batchId)
-                                                            && p.VoucherYear.Equals(DateTime.Now.Year)
-                                                            && p.Status.StatusValue == VoucherStatus.Created);
+            var vouchers = _uow.VoucherRepository.GetCreatedVouchers(batchId, pageIndex, pageSize);
+            var totalCount = _uow.VoucherRepository.Find(v => v.BatchId.Equals(batchId) && v.VoucherYear.Equals(DateTime.Now.Year)).Count();
+            var previousPage = pageIndex > 1 ? "Yes" : "No";
+            var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+            var nextPage = pageIndex < totalPages ? "Yes" : "No";
+            var paginationMetadata = new
+            {
+                RecordCount = totalCount,
+                PageSize = pageSize,
+                CurrentPage = pageIndex,
+                TotalPages = totalPages,
+                PreviousPage= previousPage,
+                NextPage= nextPage
+            };
 
             if (vouchers.Any())
             {
+                Request.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationMetadata));
                 return Request.CreateResponse(HttpStatusCode.OK, vouchers.Select(p => new Models.Voucher(p)).ToList());
             }
             else
