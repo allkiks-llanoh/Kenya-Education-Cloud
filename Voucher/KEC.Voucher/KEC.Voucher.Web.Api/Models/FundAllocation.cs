@@ -27,10 +27,7 @@ namespace KEC.Voucher.Web.Api.Models
             {
                 return _dbFundAllocation.Amount;
             }
-            set
-            {
-                _dbFundAllocation.Amount = value;
-            }
+           
         }
         public int SchoolId
         {
@@ -38,10 +35,23 @@ namespace KEC.Voucher.Web.Api.Models
             {
                 return _dbFundAllocation.SchoolId;
             }
-            set
+           
+        }
+        public string School
+        {
+            get
             {
-                _dbFundAllocation.SchoolId = value;
+                return _dbFundAllocation.School.SchoolName;
             }
+           
+        }
+        public string SchoolCode
+        {
+            get
+            {
+                return _dbFundAllocation.School.SchoolCode;
+            }
+
         }
         public int Year
         {

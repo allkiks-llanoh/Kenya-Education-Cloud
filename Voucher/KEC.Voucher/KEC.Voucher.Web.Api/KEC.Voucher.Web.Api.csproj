@@ -267,6 +267,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BatchesController.cs" />
     <Compile Include="Controllers\CountiesController.cs" />
+    <Compile Include="Controllers\FundAllocationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SchoolsController.cs" />
     <Compile Include="Controllers\SchoolTypesController.cs" />
@@ -279,6 +280,7 @@
     <Compile Include="Models\Batch.cs" />
     <Compile Include="Models\BatchParam.cs" />
     <Compile Include="Models\County.cs" />
+    <Compile Include="Models\FundAllcationParam.cs" />
     <Compile Include="Models\FundAllocation.cs" />
     <Compile Include="Models\School.cs" />
     <Compile Include="Models\SchoolAdmin.cs" />

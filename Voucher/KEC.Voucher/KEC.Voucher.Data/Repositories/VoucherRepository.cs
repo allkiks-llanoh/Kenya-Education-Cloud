@@ -29,15 +29,6 @@ namespace KEC.Voucher.Data.Repositories
 
             return voucherCode;
         }
-        public IEnumerable<DbVoucher> GetCreatedVouchers(int batchId, int pageIndex, int pageSize)
-        {
-            return VoucherDbContext.Vouchers
-                .Where(v => v.BatchId.Equals(batchId)
-                            && v.Status.StatusValue == VoucherStatus.Created
-                            && v.VoucherYear.Equals(DateTime.Now.Year))
-                .OrderBy(v=> v.School.SchoolName)
-                .Skip((pageIndex - 1) * pageSize)
-                .Take(pageSize).ToList();
-        }
+      
     }
 }

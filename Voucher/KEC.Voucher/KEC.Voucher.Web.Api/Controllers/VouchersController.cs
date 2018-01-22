@@ -132,27 +132,13 @@ namespace KEC.Voucher.Web.Api.Controllers
         }
         //GET api/<controller>/created
         [HttpGet, Route("created")]
-        public HttpResponseMessage CreatedVouchers(int batchId,int pageIndex,int pageSize=20)
+        public HttpResponseMessage CreatedVouchers(int batchId)
         {
-            var vouchers = _uow.VoucherRepository.GetCreatedVouchers(batchId, pageIndex, pageSize);
-            var totalCount = _uow.VoucherRepository.Find(v => v.BatchId.Equals(batchId) && v.VoucherYear.Equals(DateTime.Now.Year)).Count();
-            var previousPage = pageIndex > 1 ? "Yes" : "No";
-            var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
-            var nextPage = pageIndex < totalPages ? "Yes" : "No";
-            var paginationMetadata = new
-            {
-                RecordCount = totalCount,
-                PageSize = pageSize,
-                CurrentPage = pageIndex,
-                TotalPages = totalPages,
-                PreviousPage= previousPage,
-                NextPage= nextPage
-            };
-
+           
+            var vouchers = _uow.VoucherRepository.Find(v => v.BatchId.Equals(batchId) && v.VoucherYear.Equals(DateTime.Now.Year));
+            
             if (vouchers.Any())
             {
-                HttpContext.Current.Response.AppendHeader("Pagination", JsonConvert.SerializeObject(paginationMetadata));
-              
                 return Request.CreateResponse(HttpStatusCode.OK, value: vouchers.Select(p => new Models.Voucher(p)).ToList());
             }
             else
