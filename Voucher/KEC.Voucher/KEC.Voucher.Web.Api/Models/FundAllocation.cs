@@ -14,7 +14,7 @@ namespace KEC.Voucher.Web.Api.Models
         {
             _dbFundAllocation = dbFundAllocation;
         }
-        public int id
+        public int Id
         {
             get
             {
