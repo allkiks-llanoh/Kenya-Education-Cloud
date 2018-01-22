@@ -1,5 +1,6 @@
 ﻿using KEC.Voucher.Data.Models;
 using KEC.Voucher.Data.UnitOfWork;
+using KEC.Voucher.Services.Extensions;
 using KEC.Voucher.Web.Api.Models;
 using Newtonsoft.Json;
 using System;
@@ -25,6 +26,14 @@ namespace KEC.Voucher.Web.Api.Controllers
                 .Find(p => p.Status.StatusValue== status && p.VoucherYear.Equals(queryYear)).ToList();
             return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.OK, value: vouchers.Select(v => new Models.Voucher(v)).ToList()) :
                 Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "No vouchers for the specified criteria");
+        }
+        [HttpGet, Route("statuses")]
+        public HttpResponseMessage VoucherStatuses()
+        {
+            var statuses = Enum.GetValues(typeof(VoucherStatus))
+                               .Cast<VoucherStatus>()
+                               .Select(p=>p.GetDescription()).ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, statuses);
         }
         //GET api/<controller>?countrycode=value
         [HttpGet, Route("batchnumber")]

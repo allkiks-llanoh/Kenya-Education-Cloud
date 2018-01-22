@@ -29,5 +29,6 @@ namespace KEC.Voucher.Services.Extensions
             }
             return enumerationValue.ToString();
         }
+     
     }
 }
