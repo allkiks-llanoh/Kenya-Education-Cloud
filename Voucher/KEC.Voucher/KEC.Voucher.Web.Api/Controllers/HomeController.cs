@@ -8,10 +8,7 @@ namespace KEC.Voucher.Web.Api.Controllers
     {
         public ActionResult Index()
         {
-            var list = new List<string>();
             ViewBag.Title = "Home";
-            var smsService = new AfricasTalkingSmsService();
-            smsService.SendSms("+254711861170","This is a test");
             return View();
         }
     }

@@ -8,6 +8,10 @@ namespace KEC.Voucher.Data.Models
 {
     public class DbCounty
     {
+        public DbCounty()
+        {
+            Batches = new List<DbBatch>();
+        }
         public int Id { get; set; }
         public string CountyName { get; set; }
         public string CountyCode { get; set; }

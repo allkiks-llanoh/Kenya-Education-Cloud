@@ -17,8 +17,8 @@ namespace KEC.Voucher.Web.Api.Controllers
             var counties = _uow.CountyRepository.GetAll().ToList();
           
 
-            return counties.Any() ? Request.CreateResponse(HttpStatusCode.OK, counties.Select(c=> new County(c)).ToList()) :
-                                  Request.CreateResponse(HttpStatusCode.NotFound);
+            return counties.Any() ? Request.CreateResponse(HttpStatusCode.OK, value: counties.Select(c=> new County(c)).ToList()) :
+                                  Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "No counties registered");
         }
 
         // GET api/<controller>/5
@@ -26,8 +26,8 @@ namespace KEC.Voucher.Web.Api.Controllers
         {
             var dbCounty = _uow.CountyRepository.Get(id);
             return dbCounty == null ?
-                Request.CreateResponse(HttpStatusCode.NotFound) :
-                Request.CreateResponse(HttpStatusCode.OK, new County(dbCounty));
+                Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "County with the specified Id not found") :
+                Request.CreateResponse(HttpStatusCode.OK, value: new County(dbCounty));
         }
         // GET api/<controller>?countycode=countycode
         public HttpResponseMessage Get(string countycode)
@@ -36,8 +36,8 @@ namespace KEC.Voucher.Web.Api.Controllers
                 .Find(p => p.CountyCode.Equals(countycode))
                 .FirstOrDefault();
             return dbCounty == null ?
-                Request.CreateResponse(HttpStatusCode.NotFound) :
-                Request.CreateResponse(HttpStatusCode.OK, new County(dbCounty));
+                Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "County with the specified code not found") :
+                Request.CreateResponse(HttpStatusCode.OK, value: new County(dbCounty));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         {
             var voucherCode = pinParam.VoucherCode;
             var userguid = pinParam.UserGuid;
-            var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, new Exception("Invalid voucher code or user guid"));
+            var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, message: "Invalid voucher code or user guid");
             if (voucherCode == null || userguid == null)
             {
                 return requestError;
@@ -54,15 +54,15 @@ namespace KEC.Voucher.Web.Api.Controllers
                 var smsService = new AfricasTalkingSmsService();
                 if (!schoolAdmin.PhoneNumber.PhoneValid())
                 {
-                   return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid School admin phone number");
+                   return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Invalid School admin phone number");
                 }
                 smsService.SendSms(schoolAdmin.PhoneNumber, pin.Pin);
-                return Request.CreateResponse(HttpStatusCode.OK, "Sending voucher pin sms");
+                return Request.CreateResponse(HttpStatusCode.OK, value: "Sending voucher pin sms");
             }
             catch (Exception)
             {
 
-                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message: "Internal server error");
             }
         }
 

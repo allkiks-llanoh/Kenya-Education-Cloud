@@ -5,8 +5,6 @@ namespace KEC.Voucher.Web.Api.Models
     public class Batch
     {
         private readonly DbBatch _dbbatch;
-        private readonly string _createVouchersUrl;
-        private readonly string _getVouchersUrl;
         public Batch(DbBatch dbBatch)
         {
             _dbbatch = dbBatch;
@@ -52,6 +50,13 @@ namespace KEC.Voucher.Web.Api.Models
             get
             {
                 return _dbbatch.SchoolType.SchoolType;
+            }
+        }
+        public int SchoolTypeId
+        {
+            get
+            {
+                return _dbbatch.SchoolTypeId;
             }
         }
     }

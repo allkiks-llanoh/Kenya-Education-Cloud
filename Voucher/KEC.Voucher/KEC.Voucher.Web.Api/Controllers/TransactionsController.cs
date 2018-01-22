@@ -22,16 +22,16 @@ namespace KEC.Voucher.Web.Api.Controllers
         {
             var transactions = _uow.TransactionRepository.Find(p => p.CreatedOnUtc.Year.Equals(year)
                                           && p.Voucher.School.SchoolCode.Equals(schoolcode)).ToList();
-            return transactions.Any()? Request.CreateResponse(HttpStatusCode.OK,transactions.Select(t=> new Transaction(t)).ToList()):
-                                        Request.CreateResponse(HttpStatusCode.NotFound);
+            return transactions.Any()? Request.CreateResponse(HttpStatusCode.OK, value: transactions.Select(t=> new Transaction(t)).ToList()):
+                                        Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "There are no transactions for the specified school");
         }
 
         // GET api/<controller>/5
         public HttpResponseMessage Get(int id)
         {
             var dbTransaction = _uow.TransactionRepository.Get(id);
-            return dbTransaction == null ? Request.CreateResponse(HttpStatusCode.NotFound) :
-                Request.CreateResponse(HttpStatusCode.OK, new Transaction(dbTransaction));
+            return dbTransaction == null ? Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "Transaction not found") :
+                Request.CreateResponse(HttpStatusCode.OK, value: new Transaction(dbTransaction));
 
         }
 
@@ -46,7 +46,7 @@ namespace KEC.Voucher.Web.Api.Controllers
                                                       && p.Status.StatusValue==VoucherStatus.Active).FirstOrDefault();
             var admin = _uow.SchoolAdminRepository.Find(p => p.guid.Equals(adminGuid)).FirstOrDefault();
             var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, 
-                new Exception("Invalid voucher number or pin or School admin or transction amount or description"));
+                message: "Invalid voucher number or pin or School admin or transction amount or description");
             if (voucherCode == null || adminGuid == null || transactionAmount == 0 || transactionDescription == null)
             {
                 return requestError;
@@ -83,7 +83,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             };
             voucher.Wallet.Balance -= transactionAmount;
             _uow.Complete();
-            return Request.CreateResponse(HttpStatusCode.OK, transaction.Id);
+            return Request.CreateResponse(HttpStatusCode.OK, value: "Transaction processed successfully");
         }
 
     }

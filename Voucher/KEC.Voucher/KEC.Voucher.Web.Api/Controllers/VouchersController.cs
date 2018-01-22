@@ -17,15 +17,23 @@ namespace KEC.Voucher.Web.Api.Controllers
     public class VouchersController : ApiController
     {
         private readonly IUnitOfWork _uow = new EFUnitOfWork();
-
+        [HttpGet,Route("{year:int?}")]
+        public HttpResponseMessage AllVouchers(int? year=null,VoucherStatus status=VoucherStatus.Active)
+        {
+            var queryYear = year ?? DateTime.Now.Year;
+            var vouchers = _uow.VoucherRepository
+                .Find(p => p.Status.StatusValue== status && p.VoucherYear.Equals(queryYear)).ToList();
+            return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.OK, value: vouchers.Select(v => new Models.Voucher(v)).ToList()) :
+                Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "No vouchers for the specified criteria");
+        }
         //GET api/<controller>?countrycode=value
-        [HttpGet, Route("")]
+        [HttpGet, Route("batchnumber")]
         public HttpResponseMessage VouchersBatchNumber(string batchnumber)
         {
             var vouchers = _uow.VoucherRepository
                 .Find(p => p.Batch.Equals(batchnumber)).ToList();
-            return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.OK, vouchers.Select(v => new Models.Voucher(v)).ToList()) :
-                Request.CreateResponse(HttpStatusCode.NotFound);
+            return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.OK, value: vouchers.Select(v => new Models.Voucher(v)).ToList()) :
+                Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "There are no vouchers for the specified batch number");
         }
         //GET api/<controller>/schoolcode
         [HttpGet, Route("{schoolcode}")]
@@ -33,8 +41,8 @@ namespace KEC.Voucher.Web.Api.Controllers
         {
             var vouchers = _uow.VoucherRepository
                .Find(p => p.School.SchoolCode.Equals(schoolcode)).ToList();
-            return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.OK, vouchers.Select(v => new Models.Voucher(v))) :
-                                    Request.CreateResponse(HttpStatusCode.NotFound);
+            return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.OK, value: vouchers.Select(v => new Models.Voucher(v))) :
+                                    Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "There are no vouchers for the specified school");
         }
 
         //POST api/<controller>
@@ -43,16 +51,16 @@ namespace KEC.Voucher.Web.Api.Controllers
         {
             if(voucherParam==null || voucherParam.BatchId == 0)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Please specify the vouchers batch");
             }
             
-            var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, new Exception("There Was an Error When Attempting To Create Vouchers"));
+            var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, message: "There Was an Error When Attempting To Create Vouchers");
             var batchId = voucherParam.BatchId;
 
             var batch = _uow.BatchRepository.Get(batchId);
             if (batch == null)
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound,"Invalid batch");
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "Invalid batch");
             }
             var county = batch.County;
             var schoolsCodesWithVoucher = _uow.VoucherRepository.Find(p => p.School.CountyId.Equals(county.Id)
@@ -104,13 +112,13 @@ namespace KEC.Voucher.Web.Api.Controllers
 
             if (schoolsWithNoAllocation)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, "Some of the selected schools dont have fund allocations for the year");
+                return Request.CreateErrorResponse(HttpStatusCode.Forbidden, message: "Some of the selected schools dont have fund allocations for the year");
             }
             _uow.VoucherRepository.AddRange(vouchersList);
             _uow.Complete();
             var vouchers = vouchersList.Select(p => new Models.Voucher(p));
             return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.Created, vouchers) :
-                Request.CreateResponse(HttpStatusCode.Forbidden,$"All vouchers have been created for the batch {batch.BatchNumber}");
+                Request.CreateErrorResponse(HttpStatusCode.Forbidden, message: $"All vouchers have been created for the batch {batch.BatchNumber}");
 
         }
         //GET api/<controller>/created
@@ -134,12 +142,13 @@ namespace KEC.Voucher.Web.Api.Controllers
 
             if (vouchers.Any())
             {
-                Request.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationMetadata));
-                return Request.CreateResponse(HttpStatusCode.OK, vouchers.Select(p => new Models.Voucher(p)).ToList());
+                HttpContext.Current.Response.AppendHeader("Pagination", JsonConvert.SerializeObject(paginationMetadata));
+              
+                return Request.CreateResponse(HttpStatusCode.OK, value: vouchers.Select(p => new Models.Voucher(p)).ToList());
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound,$"No vouchers pending approval for the batch number");
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, message: $"No vouchers pending approval for the batch number");
             }
         }
         [HttpPatch, Route("approve")]
@@ -148,7 +157,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             var voucher = _uow.VoucherRepository.Get(approvalParam.VoucherId);
             if (voucher == null)
             {
-              return  Request.CreateResponse(HttpStatusCode.NotFound);
+              return  Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "Invalid voucher or user");
             }
             if (approvalParam.Status == VoucherStatus.Rejected)
             {
@@ -176,11 +185,11 @@ namespace KEC.Voucher.Web.Api.Controllers
                                                           && p.Status.StatusValue == VoucherStatus.Created);
             if (vouchers.Any())
             {
-                return Request.CreateResponse(HttpStatusCode.OK, vouchers.Select(p => new Models.Voucher(p)).ToList());
+                return Request.CreateResponse(HttpStatusCode.OK, value: vouchers.Select(p => new Models.Voucher(p)).ToList());
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, new List<Models.Voucher>());
+                return Request.CreateResponse(HttpStatusCode.OK, value: new List<Models.Voucher>());
             }
         }
         [HttpPatch, Route("selected/accept")]
@@ -204,11 +213,11 @@ namespace KEC.Voucher.Web.Api.Controllers
                                                         && p.Status.StatusValue == VoucherStatus.Created);
             if (pendingvouchers.Any())
             {
-                return Request.CreateResponse(HttpStatusCode.OK, pendingvouchers.Select(p => new Models.Voucher(p)).ToList());
+                return Request.CreateResponse(HttpStatusCode.OK, value: pendingvouchers.Select(p => new Models.Voucher(p)).ToList());
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, new List<Models.Voucher>());
+                return Request.CreateResponse(HttpStatusCode.OK, value: new List<Models.Voucher>());
             }
         }
         [HttpPatch, Route("selected/reject")]
@@ -232,11 +241,11 @@ namespace KEC.Voucher.Web.Api.Controllers
                                                         && p.Status.StatusValue == VoucherStatus.Created);
             if (pendingvouchers.Any())
             {
-                return Request.CreateResponse(HttpStatusCode.OK, pendingvouchers.Select(p => new Models.Voucher(p)).ToList());
+                return Request.CreateResponse(HttpStatusCode.OK, value: pendingvouchers.Select(p => new Models.Voucher(p)).ToList());
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, new List<Models.Voucher>());
+                return Request.CreateResponse(HttpStatusCode.OK, value: new List<Models.Voucher>());
             }
         }
 

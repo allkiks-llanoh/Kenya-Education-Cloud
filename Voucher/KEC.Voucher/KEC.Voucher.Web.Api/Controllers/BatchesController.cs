@@ -17,14 +17,14 @@ namespace KEC.Voucher.Web.Api.Controllers
         private readonly IUnitOfWork _uow = new EFUnitOfWork();
 
         //GET api/<controller>?countrycode=value
-        [HttpGet, Route("batches/{year:int?}")]
-        public HttpResponseMessage Batches(int? year)
+        [HttpGet, Route("{year:int?}")]
+        public HttpResponseMessage Batches(int? year = null)
         {
             var queryYear = year ?? DateTime.Now.Year;
             var DbBatches = _uow.BatchRepository
                 .Find(p => p.Year.Equals(queryYear));
                 var batches = DbBatches.Any()? DbBatches.Select(p => new Batch(p)) : new List<Batch>();
-                return Request.CreateResponse(HttpStatusCode.OK, batches);
+                return Request.CreateResponse(HttpStatusCode.OK, value: batches);
         }
         //GET api/<controller>/batchcode
         [HttpGet, Route("{batchnumber}")]
@@ -32,7 +32,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         {
             var dbBatch = _uow.BatchRepository
                .Find(p => p.BatchNumber.Equals(batchnumber)).FirstOrDefault();
-            return dbBatch == null ? Request.CreateResponse(HttpStatusCode.NotFound) :
+            return dbBatch == null ? Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "Batch not found") :
                                    Request.CreateResponse(HttpStatusCode.OK, new Batch(dbBatch));
         }
 
@@ -44,7 +44,7 @@ namespace KEC.Voucher.Web.Api.Controllers
                 .Find(p => p.County.CountyCode.Equals(countyCode)
                 && p.SchoolTypeId == typeId).ToList();
             return dbBatches.Any() ? Request.CreateResponse(HttpStatusCode.OK, dbBatches.Select(b => new Batch(b)).ToList()) :
-                                     Request.CreateResponse(HttpStatusCode.NotFound);
+                                     Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "Batches for the selected county and school type not found");
         }
         //POST api/<controller>
         [HttpPost, Route("")]
@@ -55,23 +55,25 @@ namespace KEC.Voucher.Web.Api.Controllers
             var SchoolTypeId = batchParam.SchoolTypeId;
             if (countycode == null || SchoolTypeId == 0)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid school type or county code");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Invalid school type or county code");
             }
             var county = _uow.CountyRepository.Find(p => p.CountyCode.Equals(countycode)).FirstOrDefault();
             var schoolType = _uow.SchoolTypeRepository.Find(p => p.Id.Equals(SchoolTypeId)).FirstOrDefault();
-            var requestError = Request.CreateErrorResponse(HttpStatusCode.BadRequest, new Exception("Invalid County or School Type"));
+            var requestError = Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Invalid County or School Type");
             if (county == null)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid county code");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Invalid county code");
             }
             if (schoolType == null)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid school type");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Invalid school type");
             }
 
             if (county.Batches.Any((x => x.SchoolTypeId.Equals(SchoolTypeId) && x.Year.Equals(DateTime.Now.Year))))
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NotModified, $"Batch already exists for {county.CountyName} county for the year {DateTime.Now.Year}");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, 
+                    message: $"Batch already exists for {schoolType.SchoolType} " +
+                    $"schools in {county.CountyName} county for the year {DateTime.Now.Year}");
             }
             try
             {
@@ -86,12 +88,12 @@ namespace KEC.Voucher.Web.Api.Controllers
                 };
                 _uow.BatchRepository.Add(batch);
                 _uow.Complete();
-                return Request.CreateResponse(HttpStatusCode.Created, new Batch(batch));
+                return Request.CreateResponse(HttpStatusCode.Created, value: new Batch(batch));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message: "Internal server error");
             }
 
         }

@@ -20,16 +20,16 @@ namespace KEC.Voucher.Web.Api.Controllers
         {
             var schools = _uow.SchoolTypeRepository
                           .GetAll().ToList();
-           return schools.Any() ? Request.CreateResponse(HttpStatusCode.OK, schools.Select(s => new SchoolType(s))) :
-                            Request.CreateResponse(HttpStatusCode.NotFound);
+           return schools.Any() ? Request.CreateResponse(HttpStatusCode.OK, value: schools.Select(s => new SchoolType(s))) :
+                            Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "There are no school types registered");
         }
 
         // GET api/<controller>/5
         public HttpResponseMessage Get(int id)
         {
             var dbSchoolType = _uow.SchoolTypeRepository.Get(id);
-            return dbSchoolType == null ? Request.CreateResponse(HttpStatusCode.NotFound) : 
-                                          Request.CreateResponse(HttpStatusCode.OK, new SchoolType(dbSchoolType));
+            return dbSchoolType == null ? Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "School type not found") : 
+                                          Request.CreateResponse(HttpStatusCode.OK, value: new SchoolType(dbSchoolType));
         }
     }
 }

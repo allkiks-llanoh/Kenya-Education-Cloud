@@ -26,7 +26,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             var schools = _uow.SchoolRepository
                 .Find(p => p.County.CountyCode.Equals(countycode));
             return schools.Any() ? Request.CreateResponse(HttpStatusCode.OK, schools.Select(p => new School(p))) :
-                Request.CreateResponse(HttpStatusCode.NotFound);
+                Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "No schools registered for the specified county code");
 
 
         }
@@ -36,7 +36,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         {
             var school = _uow.SchoolRepository
                .Find(p => p.SchoolCode.Equals(schoolcode)).FirstOrDefault();
-            return school == null ? Request.CreateResponse(HttpStatusCode.NotFound) :
+            return school == null ? Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "School with the specified code not found") :
                 Request.CreateResponse(HttpStatusCode.OK, new School(school));
         }
 
@@ -45,7 +45,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         public HttpResponseMessage SchoolById(int id)
         {
             var dbschool = _uow.SchoolRepository.Get(id);
-            return dbschool == null ? Request.CreateResponse(HttpStatusCode.NotFound) :
+            return dbschool == null ? Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "School with the specified Id not found") :
                 Request.CreateResponse(HttpStatusCode.OK, new School(dbschool));
         }
         //Get api/<controller>?countyCode=value&TypeId=value
@@ -58,7 +58,7 @@ namespace KEC.Voucher.Web.Api.Controllers
 
             return schools.Any() ? Request.CreateResponse(HttpStatusCode.OK,
                                     schools.Select(s => new School(s)).ToList()) :
-                                 Request.CreateResponse(HttpStatusCode.NotFound);
+                                 Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "No schools of the specified type registered for the county");
         }
         //POST api/<controller>
         [HttpPost, Route("")]
@@ -68,16 +68,16 @@ namespace KEC.Voucher.Web.Api.Controllers
             var httpRequest = HttpContext.Current.Request;
             if (httpRequest.Files.Count <= 0)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Please upload your csv file");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Please upload your csv file");
             }
             if (httpRequest.Files.Count < 1)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Multiple file upload is not supported");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Multiple file upload is not supported");
             }
             var postedFile = httpRequest.Files["postedFile"];
             if (!postedFile.FileName.EndsWith(".csv"))
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new Exception("The file format is not supported"));
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "The file format is not supported");
             }
             try
             {
@@ -115,17 +115,17 @@ namespace KEC.Voucher.Web.Api.Controllers
 
                         }
                         _uow.Complete();
-                        return Request.CreateResponse(HttpStatusCode.OK);
+                        return Request.CreateResponse(HttpStatusCode.OK, value: "Schools data uploaded successfully");
 
                     }
                 }
                
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message: "Internal server error");
             }
         }
 

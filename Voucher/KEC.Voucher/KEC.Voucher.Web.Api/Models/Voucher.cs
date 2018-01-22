@@ -46,6 +46,13 @@ namespace KEC.Voucher.Web.Api.Models
                 return _dbVoucher.School.SchoolCode;
             }
         }
+        public string SchoolName
+        {
+            get
+            {
+                return _dbVoucher.School.SchoolName;
+            }
+        }
         public string Status
         {
             get

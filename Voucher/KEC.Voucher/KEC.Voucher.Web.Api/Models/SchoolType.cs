@@ -26,12 +26,6 @@ namespace KEC.Voucher.Web.Api.Models
                 return _dbSchoolType.SchoolType;
             }
         }
-        public ICollection<School> Schools
-        {
-            get
-            {
-                return _dbSchoolType.Schools.Select(p => new School(p)).ToList();
-            }
-        }
+       
     }
 }
