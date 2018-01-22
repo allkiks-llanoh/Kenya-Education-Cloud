@@ -16,17 +16,26 @@ namespace KEC.Voucher.Web.Api.Controllers
     {
         private readonly IUnitOfWork _uow = new EFUnitOfWork();
         // GET api/<controller>
-        [HttpGet,Route("{year:int?}")]
-        public HttpResponseMessage FundAllocations(int year,string schoolcode=null)
+        [HttpGet, Route("{year:int}")]
+        public HttpResponseMessage FundAllocations(int year, string schoolcode = null)
         {
-          List<DbFundAllocation> dbFundAllocations = null;
+            List<DbFundAllocation> dbFundAllocations = null;
+          
             if (schoolcode != null)
             {
-                dbFundAllocations = _uow.FundAllocationRespository.Find(p => p.Year.Equals(year) && p.School.SchoolCode.Equals(schoolcode)).ToList();
+                var schoolIds = _uow.VoucherRepository.Find(p => p.School.SchoolCode.Equals(schoolcode)
+                                                    && p.VoucherYear.Equals(year)
+                                                    && (p.Status.StatusValue == VoucherStatus.Active || p.Status.StatusValue == VoucherStatus.Expired
+                                                    || p.Status.StatusValue == VoucherStatus.Suspended)).ToList().Select(p=> p.SchoolId);
+                dbFundAllocations = _uow.FundAllocationRespository.Find(p => p.Year.Equals(year) && p.School.SchoolCode.Equals(schoolcode) 
+                                                                        && !schoolIds.Contains(p.SchoolId)).ToList();
             }
             else
             {
-                dbFundAllocations = _uow.FundAllocationRespository.Find(p => p.Year.Equals(year)).ToList();
+                var schoolIds = _uow.VoucherRepository.Find(p => p.VoucherYear.Equals(year)
+                                                   && (p.Status.StatusValue == VoucherStatus.Active || p.Status.StatusValue == VoucherStatus.Expired
+                                                   || p.Status.StatusValue == VoucherStatus.Suspended)).ToList().Select(p => p.SchoolId);
+                dbFundAllocations = _uow.FundAllocationRespository.Find(p => p.Year.Equals(year) && !schoolIds.Contains(p.SchoolId)).ToList();
             }
 
             if (dbFundAllocations.Any())
@@ -38,14 +47,22 @@ namespace KEC.Voucher.Web.Api.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "No school fund allocations matches the specified criteria");
             }
         }
-
-        
+        [HttpGet,Route("~/api/fundallocation/{id}")]
+        public HttpResponseMessage FundAllocation(int Id)
+        {
+            var fundAllocation = _uow.FundAllocationRespository.Get(Id);
+            if (fundAllocation == null)
+            {
+               return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Fund allocation not found");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, new FundAllocation(fundAllocation));
+        }
 
         // PUT api/<controller>/5
-        [HttpPatch,Route("")]
+        [HttpPatch, Route("")]
         public HttpResponseMessage FundAllocations(FundAllcationParam fundAllcationParam)
         {
-            if(fundAllcationParam==null)
+            if (fundAllcationParam == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Invalid fund allocation parameters");
             }
@@ -53,7 +70,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Invalid fun");
             }
-           
+
             if (fundAllcationParam.Amount == 0)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Invalid funds amount");
@@ -73,9 +90,9 @@ namespace KEC.Voucher.Web.Api.Controllers
             }
             fundAllocation.Amount = fundAllcationParam.Amount;
             _uow.Complete();
-            return Request.CreateResponse(HttpStatusCode.OK,"FundAllocation updated sucessfully");
+            return Request.CreateResponse(HttpStatusCode.OK, "FundAllocation updated sucessfully");
 
         }
-      
+
     }
 }
