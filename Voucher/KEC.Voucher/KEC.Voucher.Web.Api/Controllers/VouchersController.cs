@@ -146,6 +146,16 @@ namespace KEC.Voucher.Web.Api.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, message: $"No vouchers pending approval for the batch number");
             }
         }
+        [HttpGet,Route("info/{Id}")]
+        public HttpResponseMessage VoucherInformation(int Id)
+        {
+            var dbVoucher = _uow.VoucherRepository.Get(Id);
+            if (dbVoucher == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Voucher not found");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, new VoucherInfo(dbVoucher));
+        }
         [HttpPatch, Route("approve")]
         public HttpResponseMessage ApproveVoucher(VoucherApprovalParam approvalParam)
         {
