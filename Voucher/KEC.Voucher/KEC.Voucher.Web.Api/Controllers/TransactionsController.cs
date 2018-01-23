@@ -21,7 +21,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         public HttpResponseMessage GetVoucherTransaction(int Id)
         {
             var transactions = _uow.TransactionRepository.Find(p => p.Voucher.Id.Equals(Id)).ToList();
-            return transactions.Any()? Request.CreateResponse(HttpStatusCode.OK, value: transactions.Select(t=> new Transaction(t)).ToList()):
+            return transactions.Any()? Request.CreateResponse(HttpStatusCode.OK, value: transactions.Select(t=> new Transaction(t,_uow)).ToList()):
                                         Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "There are no transactions for the specified voucher");
         }
 
@@ -30,7 +30,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         {
             var dbTransaction = _uow.TransactionRepository.Get(id);
             return dbTransaction == null ? Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "Transaction not found") :
-                Request.CreateResponse(HttpStatusCode.OK, value: new Transaction(dbTransaction));
+                Request.CreateResponse(HttpStatusCode.OK, value: new Transaction(dbTransaction, _uow));
 
         }
 
