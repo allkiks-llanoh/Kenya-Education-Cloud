@@ -17,10 +17,10 @@ namespace KEC.Voucher.Web.Api.Controllers
         public readonly IUnitOfWork _uow = new EFUnitOfWork();
 
         // GET api/<controller>/year/schoolcode
-        [HttpGet, Route("{voucherId}")]
-        public HttpResponseMessage GetVoucherTransaction(int voucherId)
+        [HttpGet, Route("voucher/{Id}")]
+        public HttpResponseMessage GetVoucherTransaction(int Id)
         {
-            var transactions = _uow.TransactionRepository.Find(p => p.Voucher.Id.Equals(voucherId)).ToList();
+            var transactions = _uow.TransactionRepository.Find(p => p.Voucher.Id.Equals(Id)).ToList();
             return transactions.Any()? Request.CreateResponse(HttpStatusCode.OK, value: transactions.Select(t=> new Transaction(t)).ToList()):
                                         Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "There are no transactions for the specified voucher");
         }
