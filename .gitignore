@@ -260,4 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 # School csv files
-/Voucher/KEC.Voucher/KEC.Voucher.Web.Api/CsvFiles/*
+././././CsvFiles/*

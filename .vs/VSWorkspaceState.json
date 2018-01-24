@@ -2,7 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Voucher",
-    "\\Voucher\\KEC.Voucher"
+    "\\Voucher\\KEC.Voucher",
+    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api",
+    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\CsvFiles"
   ],
   "SelectedNode": "\\Voucher\\KEC.Voucher\\KEC.Voucher.sln",
   "PreviewInSolutionExplorer": false
