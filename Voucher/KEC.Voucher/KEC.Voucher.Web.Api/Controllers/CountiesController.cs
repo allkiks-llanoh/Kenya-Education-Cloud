@@ -13,7 +13,7 @@ namespace KEC.Voucher.Web.Api.Controllers
     {
         private readonly IUnitOfWork _uow = new EFUnitOfWork();
         // GET api/<controller>/pending/1/2018
-        [HttpGet,Route("pending/{year}")]
+        [HttpGet,Route("pending/schoolTypeId/{year}")]
         public HttpResponseMessage CountiesWithoutVouchers(int year,int schoolTypeId)
         {
             var countiesWithBatch = _uow.BatchRepository.Find(p => p.Year.Equals(year) && p.SchoolTypeId.Equals(schoolTypeId)).ToList().Select(p => p.CountyId);
