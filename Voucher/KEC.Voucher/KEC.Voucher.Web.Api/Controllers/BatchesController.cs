@@ -23,16 +23,30 @@ namespace KEC.Voucher.Web.Api.Controllers
             var queryYear = year ?? DateTime.Now.Year;
             var DbBatches = _uow.BatchRepository
                 .Find(p => p.Year.Equals(queryYear));
-                var batches = DbBatches.Any()? DbBatches.Select(p => new Batch(p)) : new List<Batch>();
-                return Request.CreateResponse(HttpStatusCode.OK, value: batches);
+            var batches = DbBatches.Any() ? DbBatches.Select(p => new Batch(p)) : new List<Batch>();
+            return Request.CreateResponse(HttpStatusCode.OK, value: batches);
         }
-        [HttpGet,Route("count")]
+        [HttpGet, Route("count")]
         public HttpResponseMessage BatchesCount()
         {
 
             var DbBatchesCount = _uow.BatchRepository
                 .Find(p => p.Year.Equals(DateTime.Now.Year)).Count();
             return Request.CreateResponse(HttpStatusCode.OK, value: DbBatchesCount);
+        }
+        [HttpGet, Route("{countyId}/pendingschooltypes")]
+        public HttpResponseMessage PendingCountySchoolTypeBatches(int countyId)
+        {
+            var schoolTypeIdsWithBatches = _uow.BatchRepository.Find(p => p.CountyId.Equals(countyId)
+                                                              && p.Year.Equals(DateTime.Now.Year))
+                                                              .Select(p => p.SchoolTypeId).Distinct();
+
+            var countySchoolTypeIdsWithoutBatch = _uow.SchoolRepository.Find(p => p.CountyId.Equals(countyId) 
+                                                           && !schoolTypeIdsWithBatches.Contains(p.SchoolTypeId))
+                                                           .Select(p => p.SchoolTypeId).Distinct();
+            var pendingSchoolTypes = _uow.SchoolTypeRepository.Find(p => countySchoolTypeIdsWithoutBatch.Contains(p.Id));
+            return Request.CreateResponse(HttpStatusCode.OK, value: pendingSchoolTypes.Any() ? 
+                                                             pendingSchoolTypes.Select(p=> new SchoolType(p)).ToList() : new List<SchoolType>());
         }
         //GET api/<controller>/batchcode
         [HttpGet, Route("{batchnumber}")]
@@ -79,7 +93,7 @@ namespace KEC.Voucher.Web.Api.Controllers
 
             if (county.Batches.Any((x => x.SchoolTypeId.Equals(SchoolTypeId) && x.Year.Equals(DateTime.Now.Year))))
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, 
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
                     message: $"Batch already exists for {schoolType.SchoolType} " +
                     $"schools in {county.CountyName} county for the year {DateTime.Now.Year}");
             }
