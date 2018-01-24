@@ -16,19 +16,28 @@ namespace KEC.Voucher.Web.Api.Controllers
             _uow = new EFUnitOfWork();
         }
         // GET api/<controller>
-        public HttpResponseMessage Get()
+        [HttpGet, Route("")]
+        public HttpResponseMessage GetAll()
         {
             var schools = _uow.SchoolTypeRepository
                           .GetAll().ToList();
-           return schools.Any() ? Request.CreateResponse(HttpStatusCode.OK, value: schools.Select(s => new SchoolType(s))) :
-                            Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "There are no school types registered");
+            return schools.Any() ? Request.CreateResponse(HttpStatusCode.OK, value: schools.Select(s => new SchoolType(s))) :
+                             Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "There are no school types registered");
         }
 
+        // GET api/<controller>
+        [HttpGet, Route("count")]
+        public HttpResponseMessage Count()
+        {
+            var schoolTypesCount = _uow.SchoolTypeRepository
+                          .GetAll().Count();
+            return Request.CreateResponse(HttpStatusCode.OK, value: schoolTypesCount);
+        }
         // GET api/<controller>/5
         public HttpResponseMessage Get(int id)
         {
             var dbSchoolType = _uow.SchoolTypeRepository.Get(id);
-            return dbSchoolType == null ? Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "School type not found") : 
+            return dbSchoolType == null ? Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "School type not found") :
                                           Request.CreateResponse(HttpStatusCode.OK, value: new SchoolType(dbSchoolType));
         }
     }

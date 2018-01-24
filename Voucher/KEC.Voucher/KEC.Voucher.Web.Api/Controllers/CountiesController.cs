@@ -39,7 +39,14 @@ namespace KEC.Voucher.Web.Api.Controllers
             return counties.Any() ? Request.CreateResponse(HttpStatusCode.OK, value: counties.Select(c => new County(c)).ToList()) :
                                   Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "No counties registered");
         }
+        [HttpGet, Route("count")]
+        public HttpResponseMessage Count()
+        {
+            var countiesCount = _uow.CountyRepository.GetAll().Count();
 
+
+            return Request.CreateResponse(HttpStatusCode.OK, value: countiesCount);
+        }
         // GET api/<controller>/5
         [HttpGet, Route("{Id}")]
         public HttpResponseMessage CountyId(int id)
