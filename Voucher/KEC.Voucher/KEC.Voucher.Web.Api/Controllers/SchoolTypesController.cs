@@ -1,6 +1,5 @@
 ﻿using KEC.Voucher.Data.UnitOfWork;
 using KEC.Voucher.Web.Api.Models;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,6 +7,7 @@ using System.Web.Http;
 
 namespace KEC.Voucher.Web.Api.Controllers
 {
+    [RoutePrefix("api/schooltypes")]
     public class SchoolTypesController : ApiController
     {
         private readonly IUnitOfWork _uow;
@@ -27,14 +27,15 @@ namespace KEC.Voucher.Web.Api.Controllers
 
         // GET api/<controller>
         [HttpGet, Route("count")]
-        public HttpResponseMessage Count()
+        public HttpResponseMessage SchoolTypesCount()
         {
             var schoolTypesCount = _uow.SchoolTypeRepository
                           .GetAll().Count();
             return Request.CreateResponse(HttpStatusCode.OK, value: schoolTypesCount);
         }
         // GET api/<controller>/5
-        public HttpResponseMessage Get(int id)
+        [HttpGet, Route("{Id}")]
+        public HttpResponseMessage SchoolType(int id)
         {
             var dbSchoolType = _uow.SchoolTypeRepository.Get(id);
             return dbSchoolType == null ? Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "School type not found") :

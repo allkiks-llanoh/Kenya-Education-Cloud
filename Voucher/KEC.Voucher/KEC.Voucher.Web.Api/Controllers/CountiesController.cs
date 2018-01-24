@@ -40,7 +40,7 @@ namespace KEC.Voucher.Web.Api.Controllers
                                   Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "No counties registered");
         }
         [HttpGet, Route("count")]
-        public HttpResponseMessage Count()
+        public HttpResponseMessage CountiesCount()
         {
             var countiesCount = _uow.CountyRepository.GetAll().Count();
 
