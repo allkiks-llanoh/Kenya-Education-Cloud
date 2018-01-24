@@ -1,6 +1,7 @@
 ﻿using CsvHelper;
 using KEC.Voucher.Data.Models;
 using KEC.Voucher.Data.UnitOfWork;
+using KEC.Voucher.Services.AfricasTalking;
 using KEC.Voucher.Web.Api.Models;
 using System;
 using System.IO;
@@ -9,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 
 namespace KEC.Voucher.Web.Api.Controllers
@@ -62,7 +64,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         }
         //POST api/<controller>
         [HttpPost, Route("")]
-        public async Task<HttpResponseMessage> SchoolsUpload()
+        public HttpResponseMessage SchoolsUpload()
         {
            
             var httpRequest = HttpContext.Current.Request;
@@ -79,9 +81,17 @@ namespace KEC.Voucher.Web.Api.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "The file format is not supported");
             }
+            var filePath = HttpContext.Current.Server.MapPath($"~/{postedFile.FileName}{DateTime.Now.ToString("yyyMMddHHmmss")}");
+            postedFile.SaveAs(filePath);
+            HostingEnvironment.QueueBackgroundWorkItem(ct => UploadCsv(filePath));
+            return Request.CreateResponse(HttpStatusCode.OK, value: "File uploaded successfully.Data processing,you will get an sms alert when done");
+        }
+        private async Task UploadCsv(string postedFilePath)
+        {
+            var smsService = new AfricasTalkingSmsService();
             try
             {
-                using (var streamReader = new StreamReader(postedFile.InputStream))
+                using (var streamReader = new StreamReader(postedFilePath))
                 {
                     using (CsvReader csvReader = new CsvReader(streamReader, false))
                     {
@@ -115,19 +125,19 @@ namespace KEC.Voucher.Web.Api.Controllers
 
                         }
                         _uow.Complete();
-                        return Request.CreateResponse(HttpStatusCode.OK, value: "Schools data uploaded successfully");
+                        //TODO: use logged in user number
+                        smsService.SendSms("0711861170","School data processed successfully");
 
                     }
                 }
-               
+
 
             }
             catch (Exception)
             {
-
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message: "Internal server error");
+                //TODO: use logged in user number
+                smsService.SendSms("0711861170", "An error occured while processing schools csv");
             }
         }
-
     }
 }

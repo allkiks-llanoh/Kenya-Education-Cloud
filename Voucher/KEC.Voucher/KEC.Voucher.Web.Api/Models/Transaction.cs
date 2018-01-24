@@ -7,10 +7,11 @@ namespace KEC.Voucher.Web.Api.Models
     public class Transaction
     {
         private readonly DbTransaction _dbTransaction;
-        private readonly EFUnitOfWork _uow;
+        private readonly IUnitOfWork _uow;
         public Transaction(DbTransaction dbTransaction, IUnitOfWork uow)
         {
             _dbTransaction = dbTransaction;
+            _uow = uow;
         }
         public int Id
         {
