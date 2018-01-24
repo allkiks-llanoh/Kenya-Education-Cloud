@@ -13,8 +13,8 @@ namespace KEC.Voucher.Web.Api.Controllers
     {
         private readonly IUnitOfWork _uow = new EFUnitOfWork();
         // GET api/<controller>/pending/1/2018
-        [HttpGet,Route("pending/{schoolTypeId}/{year}")]
-        public HttpResponseMessage CountiesWithoutVouchers(int year,int schoolTypeId)
+        [HttpGet, Route("pending/{schoolTypeId}/{year}")]
+        public HttpResponseMessage CountiesWithoutVouchers(int year, int schoolTypeId)
         {
             var countiesWithBatch = _uow.BatchRepository.Find(p => p.Year.Equals(year) && p.SchoolTypeId.Equals(schoolTypeId)).ToList().Select(p => p.CountyId);
             var countiesWithouthBatch = _uow.CountyRepository.Find(p => !countiesWithBatch.Contains(p.Id));
@@ -27,9 +27,10 @@ namespace KEC.Voucher.Web.Api.Controllers
         {
             var countiesWithBatch = _uow.BatchRepository.Find(p => p.Year.Equals(year) && p.SchoolTypeId.Equals(schoolTypeId)).Count();
             return Request.CreateResponse(HttpStatusCode.OK, countiesWithBatch);
-                                           
+
         }
         // GET api/<controller>
+        [HttpGet, Route("")]
         public HttpResponseMessage AllCounties()
         {
             var counties = _uow.CountyRepository.GetAll().ToList();
@@ -40,6 +41,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         }
 
         // GET api/<controller>/5
+        [HttpGet, Route("{Id}")]
         public HttpResponseMessage CountyId(int id)
         {
             var dbCounty = _uow.CountyRepository.Get(id);
@@ -48,6 +50,7 @@ namespace KEC.Voucher.Web.Api.Controllers
                 Request.CreateResponse(HttpStatusCode.OK, value: new County(dbCounty));
         }
         // GET api/<controller>?countycode=countycode
+        [HttpGet, Route("")]
         public HttpResponseMessage CountyByCode(string countycode)
         {
             var dbCounty = _uow.CountyRepository
