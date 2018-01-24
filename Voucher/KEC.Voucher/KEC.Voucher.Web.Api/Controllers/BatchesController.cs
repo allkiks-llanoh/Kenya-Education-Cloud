@@ -26,6 +26,14 @@ namespace KEC.Voucher.Web.Api.Controllers
                 var batches = DbBatches.Any()? DbBatches.Select(p => new Batch(p)) : new List<Batch>();
                 return Request.CreateResponse(HttpStatusCode.OK, value: batches);
         }
+        [HttpGet,Route("count")]
+        public HttpResponseMessage BatchesCount()
+        {
+
+            var DbBatchesCount = _uow.BatchRepository
+                .Find(p => p.Year.Equals(DateTime.Now.Year)).Count();
+            return Request.CreateResponse(HttpStatusCode.OK, value: DbBatchesCount);
+        }
         //GET api/<controller>/batchcode
         [HttpGet, Route("{batchnumber}")]
         public HttpResponseMessage BatchByBatchNumber(string batchnumber)
