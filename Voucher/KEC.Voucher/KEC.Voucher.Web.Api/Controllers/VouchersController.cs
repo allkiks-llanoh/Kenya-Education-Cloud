@@ -126,7 +126,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             _uow.VoucherRepository.AddRange(vouchersList);
             _uow.Complete();
             var vouchers = vouchersList.Select(p => new Models.Voucher(p));
-            return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.Created, vouchers) :
+            return vouchers.Any() ? Request.CreateResponse(HttpStatusCode.Created, $"{vouchers.Count()} voucher(s) created for batch {batch.BatchNumber} for {batch.SchoolType.SchoolType} schools in {batch.County.CountyName} county") :
                 Request.CreateErrorResponse(HttpStatusCode.Forbidden, message: $"All vouchers have been created for the batch {batch.BatchNumber}");
 
         }
