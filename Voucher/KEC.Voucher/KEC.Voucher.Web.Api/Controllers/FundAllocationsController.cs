@@ -91,6 +91,13 @@ namespace KEC.Voucher.Web.Api.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, "FundAllocation updated sucessfully");
 
         }
+        [HttpGet, Route("pending/{year}")]
+        public HttpResponseMessage PendingFunds(int year)
+        {
+            var schoolsWithFund = _uow.FundAllocationRespository.Find(p => p.Year.Equals(year)).Select(p => p.SchoolId);
+            var schoolsWithoutFund = _uow.SchoolRepository.Find(p => !schoolsWithFund.Contains(p.Id)).Count();
+            return Request.CreateResponse(HttpStatusCode.OK, schoolsWithoutFund);
+        }
 
     }
 }

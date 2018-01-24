@@ -56,7 +56,7 @@ namespace KEC.Voucher.Web.Api.Controllers
 
         //POST api/<controller>
         [HttpPost, Route("")]
-        public HttpResponseMessage Post(VoucherParam voucherParam)
+        public HttpResponseMessage CreateVouchers(VoucherParam voucherParam)
         {
             if(voucherParam==null || voucherParam.BatchId == 0)
             {
@@ -135,7 +135,8 @@ namespace KEC.Voucher.Web.Api.Controllers
         public HttpResponseMessage CreatedVouchers(int batchId)
         {
            
-            var vouchers = _uow.VoucherRepository.Find(v => v.BatchId.Equals(batchId) && v.VoucherYear.Equals(DateTime.Now.Year));
+            var vouchers = _uow.VoucherRepository.Find(v => v.BatchId.Equals(batchId) && v.VoucherYear.Equals(DateTime.Now.Year) 
+                                                       && v.Status.StatusValue==VoucherStatus.Created);
             
             if (vouchers.Any())
             {

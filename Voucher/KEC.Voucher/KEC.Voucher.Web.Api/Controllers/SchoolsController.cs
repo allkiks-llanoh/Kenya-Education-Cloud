@@ -32,6 +32,28 @@ namespace KEC.Voucher.Web.Api.Controllers
 
 
         }
+        [HttpGet, Route("pendingvouchers/{year}")]
+        public HttpResponseMessage PendingVouchers(int year)
+        {
+            var schoolsWithVoucher = _uow.VoucherRepository.Find(p => p.VoucherYear.Equals(year)).Select(p => p.SchoolId);
+            var schoolsWithoutVoucher = _uow.SchoolRepository.Find(p => !schoolsWithVoucher.Contains(p.Id)).Count();
+            return Request.CreateResponse(HttpStatusCode.OK, schoolsWithoutVoucher);
+        }
+        
+        [HttpGet, Route("approvedvouchers/{year}")]
+        public HttpResponseMessage ApprovedVouchers(int year)
+        {
+            var approvedVouchers = _uow.VoucherRepository.Find(p => p.VoucherYear.Equals(year)
+                                    && p.Status.StatusValue != VoucherStatus.Created).Count();
+            return Request.CreateResponse(HttpStatusCode.OK, approvedVouchers);
+        }
+        [HttpGet, Route("createdvouchers/{year}")]
+        public HttpResponseMessage CreatedVouchers(int year)
+        {
+            var createdVouchers = _uow.VoucherRepository.Find(p => p.VoucherYear.Equals(year)
+                                    && p.Status.StatusValue == VoucherStatus.Created).Count();
+            return Request.CreateResponse(HttpStatusCode.OK, createdVouchers);
+        }
         //GET api/<controller>/schoolcode
         [HttpGet, Route("{schoolcode}")]
         public HttpResponseMessage SchoolByCode(string schoolcode)
@@ -66,7 +88,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         [HttpPost, Route("")]
         public HttpResponseMessage SchoolsUpload()
         {
-           
+
             var httpRequest = HttpContext.Current.Request;
             if (httpRequest.Files.Count <= 0)
             {
@@ -126,7 +148,7 @@ namespace KEC.Voucher.Web.Api.Controllers
                         }
                         _uow.Complete();
                         //TODO: use logged in user number
-                        smsService.SendSms("0711861170","School data processed successfully");
+                        smsService.SendSms("0711861170", "School data processed successfully");
 
                     }
                 }
