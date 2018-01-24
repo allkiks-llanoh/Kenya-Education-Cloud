@@ -81,7 +81,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "The file format is not supported");
             }
-            var filePath = HttpContext.Current.Server.MapPath($"~/CsvFiles/{postedFile.FileName}{DateTime.Now.ToString("yyyMMddHHmmss")}");
+            var filePath = HttpContext.Current.Server.MapPath($"~/CsvFiles/{DateTime.Now.ToString("yyyMMddHHmmss")}{postedFile.FileName}");
             postedFile.SaveAs(filePath);
             HostingEnvironment.QueueBackgroundWorkItem(ct => UploadCsv(filePath));
             return Request.CreateResponse(HttpStatusCode.OK, value: "File uploaded successfully.Data processing,you will get an sms alert when done");
