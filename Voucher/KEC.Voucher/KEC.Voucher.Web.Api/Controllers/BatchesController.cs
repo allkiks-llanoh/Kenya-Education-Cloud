@@ -28,7 +28,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, value: batches);
         }
         [HttpGet, Route("{year:int?}/withpendingvouchers")]
-        public HttpResponseMessage Batches(int? year = null)
+        public HttpResponseMessage WithPendingVouchers(int? year = null)
         {
             var queryYear = year ?? DateTime.Now.Year;
             var batches = new List<Batch>();
