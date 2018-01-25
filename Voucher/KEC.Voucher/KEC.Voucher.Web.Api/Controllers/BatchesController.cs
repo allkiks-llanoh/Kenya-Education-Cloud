@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace KEC.Voucher.Web.Api.Controllers
@@ -18,12 +19,32 @@ namespace KEC.Voucher.Web.Api.Controllers
 
         //GET api/<controller>?countrycode=value
         [HttpGet, Route("{year:int?}")]
-        public HttpResponseMessage Batches(int? year = null)
+        public HttpResponseMessage AllBatches(int? year = null)
         {
             var queryYear = year ?? DateTime.Now.Year;
             var DbBatches = _uow.BatchRepository
                 .Find(p => p.Year.Equals(queryYear));
             var batches = DbBatches.Any() ? DbBatches.Select(p => new Batch(p)) : new List<Batch>();
+            return Request.CreateResponse(HttpStatusCode.OK, value: batches);
+        }
+        [HttpGet, Route("{year:int?}/withpendingvouchers")]
+        public HttpResponseMessage Batches(int? year = null)
+        {
+            var queryYear = year ?? DateTime.Now.Year;
+            var batches = new List<Batch>();
+            var padLock = new object();
+            var DbBatches = _uow.BatchRepository
+                .Find(p => p.Year.Equals(queryYear)).Distinct();
+            Parallel.ForEach(DbBatches, (dbBatch) =>
+            {
+                lock (padLock)
+                {
+                    if (HasPendingVouchers(dbBatch))
+                    {
+                        batches.Add(new Batch(dbBatch));
+                    }
+                }
+            });
             return Request.CreateResponse(HttpStatusCode.OK, value: batches);
         }
         [HttpGet, Route("count")]
@@ -41,12 +62,12 @@ namespace KEC.Voucher.Web.Api.Controllers
                                                               && p.Year.Equals(DateTime.Now.Year))
                                                               .Select(p => p.SchoolTypeId).Distinct();
 
-            var countySchoolTypeIdsWithoutBatch = _uow.SchoolRepository.Find(p => p.CountyId.Equals(countyId) 
+            var countySchoolTypeIdsWithoutBatch = _uow.SchoolRepository.Find(p => p.CountyId.Equals(countyId)
                                                            && !schoolTypeIdsWithBatches.Contains(p.SchoolTypeId))
                                                            .Select(p => p.SchoolTypeId).Distinct();
             var pendingSchoolTypes = _uow.SchoolTypeRepository.Find(p => countySchoolTypeIdsWithoutBatch.Contains(p.Id));
-            return Request.CreateResponse(HttpStatusCode.OK, value: pendingSchoolTypes.Any() ? 
-                                                             pendingSchoolTypes.Select(p=> new SchoolType(p)).ToList() : new List<SchoolType>());
+            return Request.CreateResponse(HttpStatusCode.OK, value: pendingSchoolTypes.Any() ?
+                                                             pendingSchoolTypes.Select(p => new SchoolType(p)).ToList() : new List<SchoolType>());
         }
         //GET api/<controller>/batchcode
         [HttpGet, Route("{batchnumber}")]
@@ -118,6 +139,16 @@ namespace KEC.Voucher.Web.Api.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message: "Internal server error");
             }
 
+        }
+        private bool HasPendingVouchers(DbBatch dbBatch)
+        {
+            var schoolIdsWithVoucher = _uow.VoucherRepository.Find(p => p.BatchId.Equals(dbBatch.Id) 
+                                                              && p.Status.StatusValue!=VoucherStatus.Rejected)
+                                                                 .ToList().Select(p=> p.SchoolId);
+            var schoolIdsWithoutVocher = _uow.FundAllocationRespository.Find(p => p.School.SchoolTypeId.Equals(dbBatch.SchoolTypeId)
+                                                                             && p.Year.Equals(dbBatch.Year)
+                                                                             && !schoolIdsWithVoucher.Contains(p.SchoolId));
+            return schoolIdsWithoutVocher.Any();
         }
     }
 }
