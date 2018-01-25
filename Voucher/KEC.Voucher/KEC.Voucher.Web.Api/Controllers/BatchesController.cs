@@ -31,21 +31,15 @@ namespace KEC.Voucher.Web.Api.Controllers
         public HttpResponseMessage WithPendingVouchers(int? year = null)
         {
             var queryYear = year ?? DateTime.Now.Year;
-            var batches = new List<Batch>();
-            var padLock = new object();
-            var DbBatches = _uow.BatchRepository
-                .Find(p => p.Year.Equals(queryYear)).Distinct();
-            Parallel.ForEach(DbBatches, (dbBatch) =>
-            {
-                lock (padLock)
-                {
-                    if (HasPendingVouchers(dbBatch))
-                    {
-                        batches.Add(new Batch(dbBatch));
-                    }
-                }
-            });
+            var batches = BatchesWithPendingVouchers(queryYear);
             return Request.CreateResponse(HttpStatusCode.OK, value: batches);
+        }
+        [HttpGet, Route("{year:int?}/withpendingvouchers/count")]
+        public HttpResponseMessage WithPendingVouchersCount(int? year = null)
+        {
+            var queryYear = year ?? DateTime.Now.Year;
+            var batches = BatchesWithPendingVouchers(queryYear);
+            return Request.CreateResponse(HttpStatusCode.OK, value: batches.Count());
         }
         [HttpGet, Route("count")]
         public HttpResponseMessage BatchesCount()
@@ -131,7 +125,7 @@ namespace KEC.Voucher.Web.Api.Controllers
                 };
                 _uow.BatchRepository.Add(batch);
                 _uow.Complete();
-                return Request.CreateResponse(HttpStatusCode.Created, value: new Batch(batch));
+                return Request.CreateResponse(HttpStatusCode.Created, value: batch.BatchNumber);
             }
             catch (Exception)
             {
@@ -146,9 +140,27 @@ namespace KEC.Voucher.Web.Api.Controllers
                                                               && p.Status.StatusValue!=VoucherStatus.Rejected)
                                                                  .ToList().Select(p=> p.SchoolId);
             var schoolIdsWithoutVocher = _uow.FundAllocationRespository.Find(p => p.School.SchoolTypeId.Equals(dbBatch.SchoolTypeId)
-                                                                             && p.Year.Equals(dbBatch.Year)
+                                                                             && p.Year.Equals(dbBatch.Year) && p.School.CountyId.Equals(dbBatch.CountyId)
                                                                              && !schoolIdsWithVoucher.Contains(p.SchoolId));
             return schoolIdsWithoutVocher.Any();
+        }
+        private List<Batch> BatchesWithPendingVouchers(int queryYear)
+        {
+            var batches = new List<Batch>();
+            var padLock = new object();
+            var DbBatches = _uow.BatchRepository
+                .Find(p => p.Year.Equals(queryYear)).Distinct();
+            Parallel.ForEach(DbBatches, (dbBatch) =>
+            {
+                lock (padLock)
+                {
+                    if (HasPendingVouchers(dbBatch))
+                    {
+                        batches.Add(new Batch(dbBatch));
+                    }
+                }
+            });
+            return batches;
         }
     }
 }
