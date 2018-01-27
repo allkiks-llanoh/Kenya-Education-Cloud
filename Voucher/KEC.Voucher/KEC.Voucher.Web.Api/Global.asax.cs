@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using KEC.Voucher.Web.Api.App_Start;
+using Newtonsoft.Json;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -15,6 +16,7 @@ namespace KEC.Voucher.Web.Api
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new TokenValidationHandler());
         }
     }
 }

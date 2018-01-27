@@ -14,11 +14,8 @@ namespace KEC.Voucher.Web.Api.App_Start
 {
     public class StartUp
     {
-        private static string clientid = ConfigurationManager.AppSettings["ida:ClientId"];
-        private static string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
-        private static string tenant = ConfigurationManager.AppSettings["ida:Tenant"];
-        private static string postlogoutredirecturi = ConfigurationManager.AppSettings["ida:PostLogoutRedirectUri"];
-        string authority = String.Format(CultureInfo.InvariantCulture, aadInstance, tenant);
+       
+     
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
@@ -28,20 +25,7 @@ namespace KEC.Voucher.Web.Api.App_Start
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
-            app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
-            {
-                ClientId = clientid,
-                Authority = authority,
-                PostLogoutRedirectUri = postlogoutredirecturi,
-                Notifications = new OpenIdConnectAuthenticationNotifications
-                {
-                    AuthenticationFailed = context => {
-                        context.HandleResponse();
-                        context.Response.Redirect("/Error/messages=" + context.Exception.Message);
-                        return Task.FromResult(0);
-                    }
-                }
-            });
+           
         }
        
     }
