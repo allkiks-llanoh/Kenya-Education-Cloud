@@ -39,6 +39,7 @@ namespace KEC.Voucher.Web.Api.App_Start
         //
         protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            
             // Get the jwt bearer token from the authorization header
             string jwtToken = null;
             AuthenticationHeaderValue authHeader = request.Headers.Authorization;
@@ -50,7 +51,7 @@ namespace KEC.Voucher.Web.Api.App_Start
             if (jwtToken == null)
             {
                 HttpResponseMessage response = BuildResponseErrorMessage(HttpStatusCode.Unauthorized);
-                return response;
+                return await base.SendAsync(request,cancellationToken);
             }
 
             string issuer;
@@ -67,7 +68,7 @@ namespace KEC.Voucher.Web.Api.App_Start
                     string stsDiscoveryEndpoint = string.Format("{0}/.well-known/openid-configuration", authority);
                     ConfigurationManager<OpenIdConnectConfiguration> configManager = new ConfigurationManager<OpenIdConnectConfiguration>(stsDiscoveryEndpoint);
                     OpenIdConnectConfiguration config = await configManager.GetConfigurationAsync();
-                    _issuer = config.Issuer;
+                    _issuer = "https://sts.windows.net/ccd02da8-a3cb-4cb7-adae-3bafa40d8d9e/";
                     _signingTokens = config.SigningTokens.ToList();
 
                     _stsMetadataRetrievalTime = DateTime.UtcNow;
@@ -115,9 +116,9 @@ namespace KEC.Voucher.Web.Api.App_Start
 
                 return await base.SendAsync(request, cancellationToken);
             }
-            catch (SecurityTokenValidationException)
+            catch (SecurityTokenValidationException ex)
             {
-                HttpResponseMessage response = BuildResponseErrorMessage(HttpStatusCode.Unauthorized);
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.Forbidden, ex);
                 return response;
             }
             catch (Exception)

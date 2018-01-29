@@ -6,8 +6,11 @@
     "\\Voucher",
     "\\Voucher\\KEC.Voucher",
     "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api",
-    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Controllers"
+    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Controllers",
+    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Models",
+    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Views",
+    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Views\\Home"
   ],
-  "SelectedNode": "\\Voucher\\KEC.Voucher\\KEC.Voucher.sln",
+  "SelectedNode": "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Controllers\\SchoolTypesController.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace KEC.Voucher.Web.Api.Controllers
-{
+{ 
+    [Authorize]
     [RoutePrefix("api/batches")]
     public class BatchesController : ApiController
     {
