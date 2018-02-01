@@ -2,15 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Licensing",
-    "\\Reader",
-    "\\Voucher",
-    "\\Voucher\\KEC.Voucher",
+    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Data",
+    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Data\\Migrations",
+    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Data\\Models",
     "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api",
-    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Controllers",
-    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Models",
-    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Views",
-    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Views\\Home"
+    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\App_Start",
+    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Models"
   ],
-  "SelectedNode": "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Controllers\\SchoolTypesController.cs",
   "PreviewInSolutionExplorer": false
 }

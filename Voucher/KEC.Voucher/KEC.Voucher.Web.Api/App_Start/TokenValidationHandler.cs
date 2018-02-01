@@ -51,7 +51,7 @@ namespace KEC.Voucher.Web.Api.App_Start
             if (jwtToken == null)
             {
                 HttpResponseMessage response = BuildResponseErrorMessage(HttpStatusCode.Unauthorized);
-                return await base.SendAsync(request,cancellationToken);
+                return response;
             }
 
             string issuer;
@@ -110,15 +110,15 @@ namespace KEC.Voucher.Web.Api.App_Start
                 // If the token is scoped, verify that required permission is set in the scope claim.
                 if (ClaimsPrincipal.Current.FindFirst(scopeClaimType) != null && ClaimsPrincipal.Current.FindFirst(scopeClaimType).Value != "user_impersonation")
                 {
-                    HttpResponseMessage response = BuildResponseErrorMessage(HttpStatusCode.Forbidden);
+                    HttpResponseMessage response = BuildResponseErrorMessage(HttpStatusCode.Unauthorized);
                     return response;
                 }
 
                 return await base.SendAsync(request, cancellationToken);
             }
-            catch (SecurityTokenValidationException ex)
+            catch (SecurityTokenValidationException)
             {
-                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.Forbidden, ex);
+                HttpResponseMessage response = BuildResponseErrorMessage(HttpStatusCode.Unauthorized);
                 return response;
             }
             catch (Exception)
