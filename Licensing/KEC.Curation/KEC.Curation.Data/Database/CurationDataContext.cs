@@ -8,7 +8,7 @@ namespace KEC.Curation.Data.Database
         public CurationDataContext(DbContextOptions options)
             :base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
         public DbSet<Publication> Publications { get; set; }
         public DbSet<Subject> Subjects { get; set; }
