@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "CurationDatabase": "Data Source=localhost;Initial Catalog=Curation;Integrated Security=True;"
+  }
+}

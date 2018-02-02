@@ -8,6 +8,7 @@ namespace KEC.Curation.Data.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public string KICDNumber { get; set; }
         public string ISBNNumber { get; set; }
         public string PublisherName { get; set; }
         public string AuthorName { get; set; }
@@ -24,8 +25,7 @@ namespace KEC.Curation.Data.Models
         public string CertificateUrl { get; set; }
         public string Owner { get; set; }
         public virtual Subject Subject { get; set; }
-        public virtual Grade Grade { get; set; }
-        public virtual ICollection<PublicationStage> PublicationStages { get; set; }
+        public virtual Level Level { get; set; }
         public virtual ICollection<PublicationStageLog> PublicationStageLogs { get; set; }
     }
 }

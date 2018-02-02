@@ -2,12 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Licensing",
-    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Data",
-    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Data\\Migrations",
-    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Data\\Models",
-    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api",
-    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\App_Start",
-    "\\Voucher\\KEC.Voucher\\KEC.Voucher.Web.Api\\Models"
+    "\\Licensing\\KEC.Curation",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.Data"
   ],
+  "SelectedNode": "\\Licensing\\KEC.Curation\\KEC.Curation.sln",
   "PreviewInSolutionExplorer": false
 }

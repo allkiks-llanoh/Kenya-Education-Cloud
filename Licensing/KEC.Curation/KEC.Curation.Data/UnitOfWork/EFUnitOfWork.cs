@@ -1,6 +1,7 @@
-﻿using System;
-using KEC.Curation.Data.Database;
+﻿using KEC.Curation.Data.Database;
 using KEC.Curation.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace KEC.Curation.Data.UnitOfWork
 {
@@ -9,7 +10,12 @@ namespace KEC.Curation.Data.UnitOfWork
         private readonly CurationDataContext _context;
         public EFUnitOfWork()
         {
-            // new context
+            var optionsBuilder = new DbContextOptionsBuilder();
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("Database.json").Build();
+            var connectionString = configuration.GetConnectionString("CurationDatabase");
+            optionsBuilder.UseSqlServer(connectionString);
+            _context = new CurationDataContext(optionsBuilder.Options);
         }
         public PublicationRepository PublicationRepository =>  new PublicationRepository(_context);
 
