@@ -35,6 +35,8 @@ namespace KEC.Curation.Web.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+           app.UseCors(builder =>
+           builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
             app.UseMvc();
         }

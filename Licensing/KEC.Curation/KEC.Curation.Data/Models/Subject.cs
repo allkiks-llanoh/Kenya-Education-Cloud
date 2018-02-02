@@ -7,7 +7,7 @@ namespace KEC.Curation.Data.Models
         public int Id { get; set; }
         public int SubjectTypeId { get; set; }
         public string Name { get; set; }
-        public virtual SubjectType SubjectType { get; set; }
+        public  SubjectType SubjectType { get; set; }
         public virtual ICollection<Publication> Publications { get; set; }
     }
 }

@@ -9,6 +9,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Database.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Database.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
@@ -17,13 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Database.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\KEC.Curation.Services\KEC.Curation.Services.csproj" />
   </ItemGroup>
 
 </Project>
