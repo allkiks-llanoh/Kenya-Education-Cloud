@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KEC.Curation.Data.Database
 {
-    public class IUnitOfWork : DbContext
+    public class CurationDataContext : DbContext
     {
-        public IUnitOfWork(DbContextOptions options)
+        public CurationDataContext(DbContextOptions options)
             :base(options)
         {
-            //Database.EnsureCreated();
+            
         }
         public DbSet<Publication> Publications { get; set; }
         public DbSet<Subject> Subjects { get; set; }

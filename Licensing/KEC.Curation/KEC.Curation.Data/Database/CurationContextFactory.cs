@@ -7,16 +7,16 @@ using System.Text;
 
 namespace KEC.Curation.Data.Database
 {
-    public class CurationContextFactory : IDesignTimeDbContextFactory<IUnitOfWork>
+    public class CurationContextFactory : IDesignTimeDbContextFactory<CurationDataContext>
     {
-        public IUnitOfWork CreateDbContext(string[] args)
+        public CurationDataContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder();
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("Database.json").Build();
             var connectionString = configuration.GetConnectionString("CurationDatabase");
             optionsBuilder.UseSqlServer(connectionString);
-            return new IUnitOfWork(optionsBuilder.Options);
+            return new CurationDataContext(optionsBuilder.Options);
         }
     }
 }

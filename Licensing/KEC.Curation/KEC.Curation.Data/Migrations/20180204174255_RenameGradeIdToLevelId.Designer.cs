@@ -10,7 +10,7 @@ using System;
 
 namespace KEC.Curation.Data.Migrations
 {
-    [DbContext(typeof(IUnitOfWork))]
+    [DbContext(typeof(CurationDataContext))]
     [Migration("20180204174255_RenameGradeIdToLevelId")]
     partial class RenameGradeIdToLevelId
     {

@@ -7,7 +7,7 @@ namespace KEC.Curation.Data.UnitOfWork
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-        private readonly Database.IUnitOfWork _context;
+        private readonly CurationDataContext _context;
         public EFUnitOfWork()
         {
             var optionsBuilder = new DbContextOptionsBuilder();
@@ -15,7 +15,7 @@ namespace KEC.Curation.Data.UnitOfWork
                 .AddJsonFile("Database.json").Build();
             var connectionString = configuration.GetConnectionString("CurationDatabase");
             optionsBuilder.UseSqlServer(connectionString);
-            _context = new Database.IUnitOfWork(optionsBuilder.Options);
+            _context = new Database.CurationDataContext(optionsBuilder.Options);
         }
         public PublicationRepository PublicationRepository =>  new PublicationRepository(_context);
 
@@ -28,6 +28,8 @@ namespace KEC.Curation.Data.UnitOfWork
         public CuratorAssignmentRepository CuratorAssignmentRepository => new CuratorAssignmentRepository(_context);
 
         public PublicationStageRepository PublicationStageRepository => new PublicationStageRepository(_context);
+
+        public LevelRepository LevelRepository => new LevelRepository(_context);
 
         PublicationStageLogRepository IUnitOfWork.PublicationStageLogRepository => new PublicationStageLogRepository(_context);
 

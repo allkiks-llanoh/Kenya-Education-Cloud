@@ -10,7 +10,7 @@ using System;
 
 namespace KEC.Curation.Data.Migrations
 {
-    [DbContext(typeof(IUnitOfWork))]
+    [DbContext(typeof(CurationDataContext))]
     [Migration("20180202194314_Initial")]
     partial class Initial
     {

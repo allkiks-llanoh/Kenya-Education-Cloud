@@ -9,7 +9,7 @@ namespace KEC.Curation.Data.Repositories
 {
     public class PublicationRepository : Repository<Publication>
     {
-        public PublicationRepository(IUnitOfWork context) : base(context)
+        public PublicationRepository(CurationDataContext context) : base(context)
         {
         }
         public string GetKICDNUmber(List<Publication> publications)

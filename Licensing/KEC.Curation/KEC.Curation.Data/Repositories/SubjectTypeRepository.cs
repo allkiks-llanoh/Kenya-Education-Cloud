@@ -5,7 +5,7 @@ namespace KEC.Curation.Data.Repositories
 {
     public class SubjectTypeRepository : Repository<SubjectType>
     {
-        public SubjectTypeRepository(IUnitOfWork context) : base(context)
+        public SubjectTypeRepository(CurationDataContext context) : base(context)
         {
         }
     }

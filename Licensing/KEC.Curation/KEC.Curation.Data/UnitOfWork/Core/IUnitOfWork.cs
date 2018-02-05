@@ -12,7 +12,7 @@ namespace KEC.Curation.Data.UnitOfWork
         CuratorAssignmentRepository CuratorAssignmentRepository { get; }
         PublicationStageRepository PublicationStageRepository { get; }
         PublicationStageLogRepository PublicationStageLogRepository  { get;}
-
+        LevelRepository LevelRepository { get; }
         int Complete();
 
     }

@@ -10,7 +10,7 @@ using System;
 
 namespace KEC.Curation.Data.Migrations
 {
-    [DbContext(typeof(IUnitOfWork))]
+    [DbContext(typeof(CurationDataContext))]
     partial class CurationDataContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
