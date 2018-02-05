@@ -60,7 +60,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 var subject = new Subject
                 {
                     Name = model.Name,
-                    SubjectTypeId = model.SubjectTypeId,
+                    SubjectTypeId = model.SubjectTypeId.Value,
                     CreatedAtUtc = DateTime.Now.ToUniversalTime(),
                     UpdatedAtUtc = DateTime.Now.ToUniversalTime()
                 };
@@ -91,7 +91,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     return NotFound("Subject could not retrieved for updating");
                 }
                 var exist = _uow.SubjectRepository.Find(p => p.Name.Equals(model.Name)
-                                                      && p.SubjectTypeId.Equals(model.SubjectTypeId)
+                                                      && p.SubjectTypeId.Equals(model.SubjectTypeId.GetValueOrDefault())
                                                       && !p.Id.Equals(Id)).Any();
                 if (exist)
                 {
@@ -99,7 +99,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 }
                 subject.Name = model.Name;
                 subject.UpdatedAtUtc = DateTime.Now.ToUniversalTime();
-                subject.SubjectTypeId = model.SubjectTypeId;
+                subject.SubjectTypeId = model.SubjectTypeId.Value;
                 _uow.Complete();
                 return Ok("Subject updated successfully");
             }

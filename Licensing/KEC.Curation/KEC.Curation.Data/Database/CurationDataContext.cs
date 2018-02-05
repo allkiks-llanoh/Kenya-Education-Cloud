@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KEC.Curation.Data.Database
 {
-    public class CurationDataContext : DbContext
+    public class IUnitOfWork : DbContext
     {
-        public CurationDataContext(DbContextOptions options)
+        public IUnitOfWork(DbContextOptions options)
             :base(options)
         {
             //Database.EnsureCreated();

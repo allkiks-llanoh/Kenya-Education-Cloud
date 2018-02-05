@@ -5,7 +5,7 @@ namespace KEC.Curation.Data.Repositories
 {
     public class CuratorAssignmentRepository : Repository<CuratorAssignment>
     {
-        public CuratorAssignmentRepository(CurationDataContext context) : base(context)
+        public CuratorAssignmentRepository(IUnitOfWork context) : base(context)
         {
         }
     }

@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 # School csv files
 /Voucher/KEC.Voucher/KEC.Voucher.Web.Api/CsvFiles/*
+/Licensing/KEC.Curation/KEC.Curation.Web.Api/Publications/*

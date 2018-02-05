@@ -5,7 +5,7 @@ namespace KEC.Curation.Data.Repositories
 {
     public class PublicationStageLogRepository : Repository<PublicationStageLog>
     {
-        public PublicationStageLogRepository(CurationDataContext context) : base(context)
+        public PublicationStageLogRepository(IUnitOfWork context) : base(context)
         {
         }
     }

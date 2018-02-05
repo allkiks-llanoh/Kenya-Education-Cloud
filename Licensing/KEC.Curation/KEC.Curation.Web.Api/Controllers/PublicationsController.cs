@@ -26,7 +26,7 @@ namespace KEC.Curation.Web.Api.Controllers
             _env = env;
         }
         [HttpPost("submit")]
-        public async Task<IActionResult> Submit([FromBody]PublicationUploadSerilizer model)
+        public async Task<IActionResult> Submit([FromForm]PublicationUploadSerilizer model)
         {
             if (!ModelState.IsValid)
             {
@@ -34,31 +34,32 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             try
             {
-                var filePath = $"{_env.ContentRootPath}/Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.FormFile.FileName}";
-                using (var memoryStream = new MemoryStream())
-                {
-                    await model.FormFile.CopyToAsync(memoryStream);
-                    var fileStream = new FileStream(filePath, FileMode.CreateNew, FileAccess.ReadWrite);
-                    memoryStream.WriteTo(fileStream);
-                }
-
+                var filePath = $"{_env.ContentRootPath}/Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
                 var publication = new Publication
                 {
                     AuthorName = model.AuthorName,
                     PublisherName = model.PublisherName,
-                    SubjectId = model.SubjectId,
-                    GradeId = model.GradeId,
-                    CompletionDate = model.CompletionDate,
+                    SubjectId = model.SubjectId.Value,
+                    LevelId = model.LevelId.Value,
+                    CompletionDate = model.CompletionDate.Value,
                     Description = model.Description,
                     ISBNNumber = model.ISBNNumber,
                     Title = model.Title,
-                    MimeType = model.FormFile.ContentType,
+                    MimeType = model.PublicationFile.ContentType,
                     Url = filePath,
                     KICDNumber = _uow.PublicationRepository
-                                      .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList())
+                                      .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
+                    CreatedTimeUtc = DateTime.UtcNow,
+                    ModifiedTimeUtc = DateTime.UtcNow
                 };
                 _uow.PublicationRepository.Add(publication);
                 _uow.Complete();
+                using (var memoryStream = new MemoryStream())
+                {
+                    await model.PublicationFile.CopyToAsync(memoryStream);
+                    var fileStream = new FileStream(filePath, FileMode.CreateNew, FileAccess.ReadWrite);
+                    memoryStream.WriteTo(fileStream);
+                }
                 return Ok(value: "Publication submitted successfully");
             }
             catch (Exception)

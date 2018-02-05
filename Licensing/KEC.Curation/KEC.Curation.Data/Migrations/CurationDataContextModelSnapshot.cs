@@ -10,7 +10,7 @@ using System;
 
 namespace KEC.Curation.Data.Migrations
 {
-    [DbContext(typeof(CurationDataContext))]
+    [DbContext(typeof(IUnitOfWork))]
     partial class CurationDataContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -72,13 +72,11 @@ namespace KEC.Curation.Data.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("GradeId");
-
                     b.Property<string>("ISBNNumber");
 
                     b.Property<string>("KICDNumber");
 
-                    b.Property<int?>("LevelId");
+                    b.Property<int>("LevelId");
 
                     b.Property<string>("MimeType");
 
@@ -215,7 +213,8 @@ namespace KEC.Curation.Data.Migrations
                 {
                     b.HasOne("KEC.Curation.Data.Models.Level", "Level")
                         .WithMany("Publications")
-                        .HasForeignKey("LevelId");
+                        .HasForeignKey("LevelId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("KEC.Curation.Data.Models.Subject", "Subject")
                         .WithMany("Publications")

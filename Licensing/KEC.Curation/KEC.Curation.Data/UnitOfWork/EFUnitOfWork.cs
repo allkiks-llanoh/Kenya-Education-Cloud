@@ -7,7 +7,7 @@ namespace KEC.Curation.Data.UnitOfWork
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-        private readonly CurationDataContext _context;
+        private readonly Database.IUnitOfWork _context;
         public EFUnitOfWork()
         {
             var optionsBuilder = new DbContextOptionsBuilder();
@@ -15,7 +15,7 @@ namespace KEC.Curation.Data.UnitOfWork
                 .AddJsonFile("Database.json").Build();
             var connectionString = configuration.GetConnectionString("CurationDatabase");
             optionsBuilder.UseSqlServer(connectionString);
-            _context = new CurationDataContext(optionsBuilder.Options);
+            _context = new Database.IUnitOfWork(optionsBuilder.Options);
         }
         public PublicationRepository PublicationRepository =>  new PublicationRepository(_context);
 

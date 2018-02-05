@@ -18,7 +18,7 @@ namespace KEC.Curation.Data.Models
         public string Url { get; set; }
         public string MimeType { get; set; }
         public int SubjectId { get; set; }
-        public int GradeId { get; set; }
+        public int LevelId { get; set; }
         public DateTime CreatedTimeUtc { get; set; }
         public DateTime ModifiedTimeUtc { get; set; }
         public string CertificateNumber { get; set; }
