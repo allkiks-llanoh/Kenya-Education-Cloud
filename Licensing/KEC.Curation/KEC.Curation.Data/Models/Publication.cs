@@ -6,6 +6,10 @@ namespace KEC.Curation.Data.Models
 {
     public class Publication
     {
+        public Publication()
+        {
+            PublicationStageLogs = new List<PublicationStageLog>();
+        }
         public int Id { get; set; }
         public string Title { get; set; }
         public string KICDNumber { get; set; }

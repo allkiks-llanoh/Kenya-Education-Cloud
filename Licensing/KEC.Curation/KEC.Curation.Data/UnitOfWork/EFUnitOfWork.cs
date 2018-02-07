@@ -17,7 +17,7 @@ namespace KEC.Curation.Data.UnitOfWork
             optionsBuilder.UseSqlServer(connectionString);
             _context = new Database.CurationDataContext(optionsBuilder.Options);
         }
-        public PublicationRepository PublicationRepository =>  new PublicationRepository(_context);
+        public PublicationRepository PublicationRepository => new PublicationRepository(_context);
 
         public PublicationSectionRepository PublicationSectionRepository => new PublicationSectionRepository(_context);
 
@@ -27,13 +27,11 @@ namespace KEC.Curation.Data.UnitOfWork
 
         public CuratorAssignmentRepository CuratorAssignmentRepository => new CuratorAssignmentRepository(_context);
 
-        public PublicationStageRepository PublicationStageRepository => new PublicationStageRepository(_context);
-
         public LevelRepository LevelRepository => new LevelRepository(_context);
 
-        PublicationStageLogRepository IUnitOfWork.PublicationStageLogRepository => new PublicationStageLogRepository(_context);
+        public PublicationStageLogRepository PublicationStageLogRepository => new PublicationStageLogRepository(_context);
 
-       public  int Complete()
+        public int Complete()
         {
             return _context.SaveChanges();
         }

@@ -51,7 +51,16 @@ namespace KEC.Curation.Web.Api.Controllers
                                       .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
                     CreatedTimeUtc = DateTime.UtcNow,
                     ModifiedTimeUtc = DateTime.UtcNow
+
                 };
+                publication.PublicationStageLogs.Add(new PublicationStageLog
+                {
+                    Stage = PublicationStage.NewPublication,
+                    Owner = model.UserGuid,
+                    CreatedAtUtc = DateTime.UtcNow,
+                    ActionTaken = ActionTaken.PublicationSubmitted
+
+                });
                 _uow.PublicationRepository.Add(publication);
                 _uow.Complete();
                 using (var memoryStream = new MemoryStream())
@@ -68,5 +77,27 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [HttpGet("{stage}")]
+        public IActionResult PublicationsByStage(PublicationStage stage)
+        {
+            try
+            {
+                var stageLevel = (int)stage;
+                var publicationIds = _uow.PublicationRepository
+                                         .Find(p => p.PublicationStageLogs.Count == stageLevel
+                                               && !p.PublicationStageLogs.Any(l => l.Stage > stage))
+                                         .Select(p => p.Id);
+                var publications = _uow.PublicationRepository.Find(p => publicationIds.Contains(p.Id));
+                var publicationList = publications.Any() ?
+                            publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                return Ok(value: publicationList);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+        }
+
     }
 }

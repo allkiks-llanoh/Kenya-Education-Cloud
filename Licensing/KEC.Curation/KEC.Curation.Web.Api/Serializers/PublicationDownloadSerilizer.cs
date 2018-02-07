@@ -11,9 +11,9 @@ namespace KEC.Curation.Web.Api.Serializers
     public class PublicationDownloadSerilizer
     {
         private readonly Publication _publication;
-        private readonly EFUnitOfWork _uow;
+        private readonly IUnitOfWork _uow;
 
-        public PublicationDownloadSerilizer(Publication publication, EFUnitOfWork uow)
+        public PublicationDownloadSerilizer(Publication publication, IUnitOfWork uow)
         {
             _publication = publication;
             _uow = uow;
