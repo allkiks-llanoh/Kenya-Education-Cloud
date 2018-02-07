@@ -77,15 +77,16 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpGet("{stage}")]
-        public IActionResult PublicationsByStage(PublicationStage stage)
+        [HttpGet("{subjectId:int}/{stage}")]
+        public IActionResult PublicationsByStage(PublicationStage stage,int subjectId)
         {
             try
             {
                 var stageLevel = (int)stage;
                 var publicationIds = _uow.PublicationRepository
                                          .Find(p => p.PublicationStageLogs.Count == stageLevel
-                                               && !p.PublicationStageLogs.Any(l => l.Stage > stage))
+                                               && !p.PublicationStageLogs.Any(l => l.Stage > stage)
+                                               && p.Subject.Id.Equals(subjectId))
                                          .Select(p => p.Id);
                 var publications = _uow.PublicationRepository.Find(p => publicationIds.Contains(p.Id));
                 var publicationList = publications.Any() ?
