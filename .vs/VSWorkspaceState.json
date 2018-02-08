@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Voucher",
-    "\\Voucher\\KEC.Voucher"
+    "\\Licensing",
+    "\\Licensing\\KEC.Curation",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.Data"
   ],
-  "SelectedNode": "\\Voucher\\KEC.Voucher\\KEC.Voucher.sln",
+  "SelectedNode": "\\Licensing\\KEC.Curation\\KEC.Curation.sln",
   "PreviewInSolutionExplorer": false
 }

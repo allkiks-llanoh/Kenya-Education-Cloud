@@ -8,8 +8,12 @@ namespace KEC.Voucher.Data.Models
 {
     public class DbSchoolType
     {
+        public DbSchoolType()
+        {
+            Schools = new List<DbSchool>();
+        }
         public int Id { get; set; }
         public string SchoolType { get; set; }
-        public ICollection<DbSchool> Schools { get; set; }
+        public virtual ICollection<DbSchool> Schools { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace KEC.Voucher.Data.Models
         public string TransactionDescription { get; set; }
         public int PinId { get; set; }
         public int SchoolAdminId { get; set; }
+        public Decimal Amount { get; set; }
         public DateTime CreatedOnUtc { get; set; }
         public virtual DbSchoolAdmin SchoolAdmin { get; set; }
         public virtual DbVoucher Voucher { get; set; }

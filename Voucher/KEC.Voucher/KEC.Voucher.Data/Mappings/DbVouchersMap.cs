@@ -13,19 +13,21 @@ namespace KEC.Voucher.Data.Mappings
         public DbVouchersMap()
         {
             this.ToTable("Vouchers");
-                // Transactions
-               HasMany(t => t.Transactions)
-                .WithRequired(t => t.Voucher)
-                .WillCascadeOnDelete(false);
+            // Transactions
+            HasMany(t => t.Transactions)
+             .WithRequired(t => t.Voucher)
+             .WillCascadeOnDelete(false);
             // Voucher Pins
             HasMany(t => t.VoucherPins)
                 .WithRequired(t => t.Voucher)
                 .WillCascadeOnDelete(false);
-            // Statuses
-            HasMany(t => t.VoucherStatuses)
-                .WithRequired(t => t.Voucher)
-                .WillCascadeOnDelete(false);
+            // Voucher
+            HasOptional(x => x.Status)
+            .WithOptionalDependent(l => l.Voucher);
+            //Wallet
+            HasOptional(x => x.Wallet)
+            .WithOptionalDependent(l => l.Voucher);
         }
     }
-   
+
 }
