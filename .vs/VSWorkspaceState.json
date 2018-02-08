@@ -2,9 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Licensing",
-    "\\Reader",
-    "\\Voucher"
+    "\\Licensing\\KEC.Curation",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.Data"
   ],
-  "SelectedNode": "\\Distributor",
+  "SelectedNode": "\\Licensing\\KEC.Curation\\KEC.Curation.sln",
   "PreviewInSolutionExplorer": false
 }
