@@ -91,6 +91,8 @@ namespace Nop.Services.Catalog
         /// <returns>Rental product price with period</returns>
         string FormatRentalProductPeriod(Product product, string price);
 
+
+
         /// <summary>
         /// Formats the shipping price
         /// </summary>
@@ -110,7 +112,6 @@ namespace Nop.Services.Catalog
         /// <returns>Price</returns>
         string FormatShippingPrice(decimal price, bool showCurrency, 
             Currency targetCurrency, Language language, bool priceIncludesTax);
-
         /// <summary>
         /// Formats the shipping price
         /// </summary>
@@ -135,6 +136,8 @@ namespace Nop.Services.Catalog
         /// <returns>Price</returns>
         string FormatShippingPrice(decimal price, bool showCurrency, 
             string currencyCode, Language language, bool priceIncludesTax);
+
+
 
         /// <summary>
         /// Formats the payment method additional fee
@@ -180,6 +183,8 @@ namespace Nop.Services.Catalog
         /// <returns>Price</returns>
         string FormatPaymentMethodAdditionalFee(decimal price, bool showCurrency, 
             string currencyCode, Language language, bool priceIncludesTax);
+
+
 
         /// <summary>
         /// Formats a tax rate

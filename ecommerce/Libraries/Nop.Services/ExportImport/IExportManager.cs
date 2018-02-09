@@ -13,7 +13,7 @@ namespace Nop.Services.ExportImport
     public partial interface IExportManager
     {
         /// <summary>
-        /// Export manufacturer list to XML
+        /// Export manufacturer list to xml
         /// </summary>
         /// <param name="manufacturers">Manufacturers</param>
         /// <returns>Result in XML format</returns>
@@ -26,7 +26,7 @@ namespace Nop.Services.ExportImport
         byte[] ExportManufacturersToXlsx(IEnumerable<Manufacturer> manufacturers);
 
         /// <summary>
-        /// Export category list to XML
+        /// Export category list to xml
         /// </summary>
         /// <returns>Result in XML format</returns>
         string ExportCategoriesToXml();
@@ -35,10 +35,10 @@ namespace Nop.Services.ExportImport
         /// Export categories to XLSX
         /// </summary>
         /// <param name="categories">Categories</param>
-        byte[] ExportCategoriesToXlsx(IList<Category> categories);
+        byte[] ExportCategoriesToXlsx(IEnumerable<Category> categories);
 
         /// <summary>
-        /// Export product list to XML
+        /// Export product list to xml
         /// </summary>
         /// <param name="products">Products</param>
         /// <returns>Result in XML format</returns>
@@ -51,7 +51,7 @@ namespace Nop.Services.ExportImport
         byte[] ExportProductsToXlsx(IEnumerable<Product> products);
 
         /// <summary>
-        /// Export order list to XML
+        /// Export order list to xml
         /// </summary>
         /// <param name="orders">Orders</param>
         /// <returns>Result in XML format</returns>
@@ -70,7 +70,7 @@ namespace Nop.Services.ExportImport
         byte[] ExportCustomersToXlsx(IList<Customer> customers);
 
         /// <summary>
-        /// Export customer list to XML
+        /// Export customer list to xml
         /// </summary>
         /// <param name="customers">Customers</param>
         /// <returns>Result in XML format</returns>

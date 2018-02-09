@@ -53,8 +53,7 @@ namespace Nop.Services.Tests.Customers
         {
             _customerSettings = new CustomerSettings
             {
-                UnduplicatedPasswordsNumber = 1,
-                HashedPasswordFormat = "SHA512"
+                UnduplicatedPasswordsNumber = 1
             };
             _securitySettings = new SecuritySettings
             {
@@ -113,8 +112,8 @@ namespace Nop.Services.Tests.Customers
             _customerRepo.Expect(x => x.Table).Return(new List<Customer> { customer1, customer2, customer3, customer4, customer5 }.AsQueryable());
 
             _customerPasswordRepo = MockRepository.GenerateMock<IRepository<CustomerPassword>>();
-            var saltKey = _encryptionService.CreateSaltKey(5);
-            var password = _encryptionService.CreatePasswordHash("password", saltKey, "SHA512");
+            string saltKey = _encryptionService.CreateSaltKey(5);
+            string password = _encryptionService.CreatePasswordHash("password", saltKey);
             var password1 = new CustomerPassword
             {
                 CustomerId = customer1.Id,

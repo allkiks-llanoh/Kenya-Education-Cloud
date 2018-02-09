@@ -1,3 +1,4 @@
+
 using Nop.Core.Domain.Localization;
 
 namespace Nop.Core.Domain.Directory
@@ -37,4 +38,5 @@ namespace Nop.Core.Domain.Directory
         /// </summary>
         public virtual Country Country { get; set; }
     }
+
 }

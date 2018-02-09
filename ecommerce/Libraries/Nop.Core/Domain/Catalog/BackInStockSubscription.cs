@@ -37,5 +37,7 @@ namespace Nop.Core.Domain.Catalog
         /// Gets the customer
         /// </summary>
         public virtual Customer Customer { get; set; }
+
     }
+
 }

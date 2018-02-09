@@ -16,28 +16,21 @@ namespace Nop.Services.Polls
 
         private readonly IRepository<Poll> _pollRepository;
         private readonly IRepository<PollAnswer> _pollAnswerRepository;
-        private readonly IRepository<PollVotingRecord> _pollVotingRecordRepository;
+        private readonly IRepository<PollVotingRecord> _pollVotingRecords;
         private readonly IEventPublisher _eventPublisher;
 
         #endregion
 
         #region Ctor
 
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="pollRepository">Poll repository</param>
-        /// <param name="pollAnswerRepository">Poll answer repository</param>
-        /// <param name="pollVotingRecordRepository">Poll voting record repository></param>
-        /// <param name="eventPublisher"></param>
         public PollService(IRepository<Poll> pollRepository, 
             IRepository<PollAnswer> pollAnswerRepository,
-            IRepository<PollVotingRecord> pollVotingRecordRepository,
+            IRepository<PollVotingRecord> pollVotingRecords,
             IEventPublisher eventPublisher)
         {
             this._pollRepository = pollRepository;
             this._pollAnswerRepository = pollAnswerRepository;
-            this._pollVotingRecordRepository = pollVotingRecordRepository;
+            this._pollVotingRecords = pollVotingRecords;
             this._eventPublisher = eventPublisher;
         }
 
@@ -87,7 +80,7 @@ namespace Nop.Services.Polls
             {
                 query = query.Where(p => p.LanguageId == languageId);
             }
-            if (!string.IsNullOrEmpty(systemKeyword))
+            if (!String.IsNullOrEmpty(systemKeyword))
             {
                 query = query.Where(p => p.SystemKeyword == systemKeyword);
             }
@@ -104,7 +97,7 @@ namespace Nop.Services.Polls
         public virtual void DeletePoll(Poll poll)
         {
             if (poll == null)
-                throw new ArgumentNullException(nameof(poll));
+                throw new ArgumentNullException("poll");
 
             _pollRepository.Delete(poll);
 
@@ -119,7 +112,7 @@ namespace Nop.Services.Polls
         public virtual void InsertPoll(Poll poll)
         {
             if (poll == null)
-                throw new ArgumentNullException(nameof(poll));
+                throw new ArgumentNullException("poll");
 
             _pollRepository.Insert(poll);
 
@@ -134,7 +127,7 @@ namespace Nop.Services.Polls
         public virtual void UpdatePoll(Poll poll)
         {
             if (poll == null)
-                throw new ArgumentNullException(nameof(poll));
+                throw new ArgumentNullException("poll");
 
             _pollRepository.Update(poll);
 
@@ -162,7 +155,7 @@ namespace Nop.Services.Polls
         public virtual void DeletePollAnswer(PollAnswer pollAnswer)
         {
             if (pollAnswer == null)
-                throw new ArgumentNullException(nameof(pollAnswer));
+                throw new ArgumentNullException("pollAnswer");
 
             _pollAnswerRepository.Delete(pollAnswer);
 
@@ -182,7 +175,7 @@ namespace Nop.Services.Polls
                 return false;
 
             var result = (from pa in _pollAnswerRepository.Table
-                          join pvr in _pollVotingRecordRepository.Table on pa.Id equals pvr.PollAnswerId
+                          join pvr in _pollVotingRecords.Table on pa.Id equals pvr.PollAnswerId
                           where pa.PollId == pollId && pvr.CustomerId == customerId
                           select pvr).Any();
             return result;

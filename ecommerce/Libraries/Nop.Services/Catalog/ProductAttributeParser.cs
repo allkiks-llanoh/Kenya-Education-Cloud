@@ -22,11 +22,6 @@ namespace Nop.Services.Catalog
 
         #region Ctor
 
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="context">DB context</param>
-        /// <param name="productAttributeService">Product attribute service</param>
         public ProductAttributeParser(IDbContext context,
             IProductAttributeService productAttributeService)
         {
@@ -46,7 +41,7 @@ namespace Nop.Services.Catalog
         protected virtual IList<int> ParseProductAttributeMappingIds(string attributesXml)
         {
             var ids = new List<int>();
-            if (string.IsNullOrEmpty(attributesXml))
+            if (String.IsNullOrEmpty(attributesXml))
                 return ids;
 
             try
@@ -59,8 +54,9 @@ namespace Nop.Services.Catalog
                 {
                     if (node1.Attributes != null && node1.Attributes["ID"] != null)
                     {
-                        var str1 = node1.Attributes["ID"].InnerText.Trim();
-                        if (int.TryParse(str1, out int id))
+                        string str1 = node1.Attributes["ID"].InnerText.Trim();
+                        int id;
+                        if (int.TryParse(str1, out id))
                         {
                             ids.Add(id);
                         }
@@ -95,7 +91,8 @@ namespace Nop.Services.Catalog
                 {
                     if (attributeNode.Attributes != null && attributeNode.Attributes["ID"] != null)
                     {
-                        if (int.TryParse(attributeNode.Attributes["ID"].InnerText.Trim(), out int attributeId) && attributeId == productAttributeMappingId)
+                        int attributeId;
+                        if (int.TryParse(attributeNode.Attributes["ID"].InnerText.Trim(), out attributeId) && attributeId == productAttributeMappingId)
                         {
                             foreach (XmlNode attributeValue in attributeNode.SelectNodes("ProductAttributeValue"))
                             {
@@ -120,11 +117,11 @@ namespace Nop.Services.Catalog
         public virtual IList<ProductAttributeMapping> ParseProductAttributeMappings(string attributesXml)
         {
             var result = new List<ProductAttributeMapping>();
-            if (string.IsNullOrEmpty(attributesXml))
+            if (String.IsNullOrEmpty(attributesXml))
                 return result;
 
             var ids = ParseProductAttributeMappingIds(attributesXml);
-            foreach (var id in ids)
+            foreach (int id in ids)
             {
                 var attribute = _productAttributeService.GetProductAttributeMappingById(id);
                 if (attribute != null)
@@ -160,12 +157,14 @@ namespace Nop.Services.Catalog
 
                 foreach (var attributeValue in ParseValuesWithQuantity(attributesXml, attribute.Id))
                 {
-                    if (!string.IsNullOrEmpty(attributeValue.Item1) && int.TryParse(attributeValue.Item1, out int attributeValueId))
+                    int attributeValueId;
+                    if (!string.IsNullOrEmpty(attributeValue.Item1) && int.TryParse(attributeValue.Item1, out attributeValueId))
                     {
                         var value = _productAttributeService.GetProductAttributeValueById(attributeValueId);
                         if (value != null)
                         {
-                            if (!string.IsNullOrEmpty(attributeValue.Item2) && int.TryParse(attributeValue.Item2, out int quantity) && quantity != value.Quantity)
+                            int quantity;
+                            if (!string.IsNullOrEmpty(attributeValue.Item2) && int.TryParse(attributeValue.Item2, out quantity) && quantity != value.Quantity)
                             {
                                 //if customer enters quantity, use new entity with new quantity
                                 var oldValue = _context.LoadOriginalCopy(value);
@@ -191,7 +190,7 @@ namespace Nop.Services.Catalog
         public virtual IList<string> ParseValues(string attributesXml, int productAttributeMappingId)
         {
             var selectedValues = new List<string>();
-            if (string.IsNullOrEmpty(attributesXml))
+            if (String.IsNullOrEmpty(attributesXml))
                 return selectedValues;
 
             try
@@ -204,15 +203,16 @@ namespace Nop.Services.Catalog
                 {
                     if (node1.Attributes != null && node1.Attributes["ID"] != null)
                     {
-                        var str1 =node1.Attributes["ID"].InnerText.Trim();
-                        if (int.TryParse(str1, out int id))
+                        string str1 =node1.Attributes["ID"].InnerText.Trim();
+                        int id;
+                        if (int.TryParse(str1, out id))
                         {
                             if (id == productAttributeMappingId)
                             {
                                 var nodeList2 = node1.SelectNodes(@"ProductAttributeValue/Value");
                                 foreach (XmlNode node2 in nodeList2)
                                 {
-                                    var value = node2.InnerText.Trim();
+                                    string value = node2.InnerText.Trim();
                                     selectedValues.Add(value);
                                 }
                             }
@@ -237,11 +237,11 @@ namespace Nop.Services.Catalog
         /// <returns>Updated result (XML format)</returns>
         public virtual string AddProductAttribute(string attributesXml, ProductAttributeMapping productAttributeMapping, string value, int? quantity = null)
         {
-            var result = string.Empty;
+            string result = string.Empty;
             try
             {
                 var xmlDoc = new XmlDocument();
-                if (string.IsNullOrEmpty(attributesXml))
+                if (String.IsNullOrEmpty(attributesXml))
                 {
                     var element1 = xmlDoc.CreateElement("Attributes");
                     xmlDoc.AppendChild(element1);
@@ -259,8 +259,9 @@ namespace Nop.Services.Catalog
                 {
                     if (node1.Attributes != null && node1.Attributes["ID"] != null)
                     {
-                        var str1 =node1.Attributes["ID"].InnerText.Trim();
-                        if (int.TryParse(str1, out int id))
+                        string str1 =node1.Attributes["ID"].InnerText.Trim();
+                        int id;
+                        if (int.TryParse(str1, out id))
                         {
                             if (id == productAttributeMapping.Id)
                             {
@@ -310,11 +311,11 @@ namespace Nop.Services.Catalog
         /// <returns>Updated result (XML format)</returns>
         public virtual string RemoveProductAttribute(string attributesXml, ProductAttributeMapping productAttributeMapping)
         {
-            var result = string.Empty;
+            string result = string.Empty;
             try
             {
                 var xmlDoc = new XmlDocument();
-                if (string.IsNullOrEmpty(attributesXml))
+                if (String.IsNullOrEmpty(attributesXml))
                 {
                     var element1 = xmlDoc.CreateElement("Attributes");
                     xmlDoc.AppendChild(element1);
@@ -332,8 +333,9 @@ namespace Nop.Services.Catalog
                 {
                     if (node1.Attributes != null && node1.Attributes["ID"] != null)
                     {
-                        var str1 = node1.Attributes["ID"].InnerText.Trim();
-                        if (int.TryParse(str1, out int id))
+                        string str1 = node1.Attributes["ID"].InnerText.Trim();
+                        int id;
+                        if (int.TryParse(str1, out id))
                         {
                             if (id == productAttributeMapping.Id)
                             {
@@ -382,10 +384,10 @@ namespace Nop.Services.Catalog
             if (attributes1.Count != attributes2.Count)
                 return false;
 
-            var attributesEqual = true;
+            bool attributesEqual = true;
             foreach (var a1 in attributes1)
             {
-                var hasAttribute = false;
+                bool hasAttribute = false;
                 foreach (var a2 in attributes2)
                 {
                     if (a1.Id == a2.Id)
@@ -397,7 +399,7 @@ namespace Nop.Services.Catalog
                         {
                             foreach (var str1 in values1Str)
                             {
-                                var hasValue = false;
+                                bool hasValue = false;
                                 foreach (var str2 in values2Str)
                                 {
                                     //case insensitive? 
@@ -443,10 +445,10 @@ namespace Nop.Services.Catalog
         public virtual bool? IsConditionMet(ProductAttributeMapping pam, string selectedAttributesXml)
         {
             if (pam == null)
-                throw new ArgumentNullException(nameof(pam));
+                throw new ArgumentNullException("pam");
 
             var conditionAttributeXml = pam.ConditionAttributeXml;
-            if (string.IsNullOrEmpty(conditionAttributeXml))
+            if (String.IsNullOrEmpty(conditionAttributeXml))
                 //no condition
                 return null;
 
@@ -460,7 +462,7 @@ namespace Nop.Services.Catalog
                 //ConditionAttributeXml can contain "empty" values (nothing is selected)
                 //but in other cases (like below) we do not store empty values
                 //that's why we remove empty values here
-                .Where(x => !string.IsNullOrEmpty(x))
+                .Where(x => !String.IsNullOrEmpty(x))
                 .ToList();
             var selectedValues = ParseValues(selectedAttributesXml, dependOnAttribute.Id);
             if (valuesThatShouldBeSelected.Count != selectedValues.Count)
@@ -470,7 +472,7 @@ namespace Nop.Services.Catalog
             var allFound = true;
             foreach (var t1 in valuesThatShouldBeSelected)
             {
-                var found = false;
+                bool found = false;
                 foreach (var t2 in selectedValues)
                     if (t1 == t2)
                         found = true;
@@ -492,7 +494,7 @@ namespace Nop.Services.Catalog
             string attributesXml, bool ignoreNonCombinableAttributes = true)
         {
             if (product == null)
-                throw new ArgumentNullException(nameof(product));
+                throw new ArgumentNullException("product");
 
             var combinations = _productAttributeService.GetAllProductAttributeCombinations(product.Id);
             return combinations.FirstOrDefault(x => 
@@ -508,7 +510,7 @@ namespace Nop.Services.Catalog
         public virtual IList<string> GenerateAllCombinations(Product product, bool ignoreNonCombinableAttributes = false)
         {
             if (product == null)
-                throw new ArgumentNullException(nameof(product));
+                throw new ArgumentNullException("product");
 
             var allProductAttributMappings = _productAttributeService.GetProductAttributeMappingsByProductId(product.Id);
             if (ignoreNonCombinableAttributes)
@@ -516,10 +518,10 @@ namespace Nop.Services.Catalog
                 allProductAttributMappings = allProductAttributMappings.Where(x => !x.IsNonCombinable()).ToList();
             }
             var allPossibleAttributeCombinations = new List<List<ProductAttributeMapping>>();
-            for (var counter = 0; counter < (1 << allProductAttributMappings.Count); ++counter)
+            for (int counter = 0; counter < (1 << allProductAttributMappings.Count); ++counter)
             {
                 var combination = new List<ProductAttributeMapping>();
-                for (var i = 0; i < allProductAttributMappings.Count; ++i)
+                for (int i = 0; i < allProductAttributMappings.Count; ++i)
                 {
                     if ((counter & (1 << i)) == 0)
                     {
@@ -548,10 +550,10 @@ namespace Nop.Services.Catalog
                     if (pam.AttributeControlType == AttributeControlType.Checkboxes ||
                         pam.AttributeControlType == AttributeControlType.ReadonlyCheckboxes)
                     {
-                        for (var counter = 0; counter < (1 << attributeValues.Count); ++counter)
+                        for (int counter = 0; counter < (1 << attributeValues.Count); ++counter)
                         {
                             var checkboxCombination = new List<ProductAttributeValue>();
-                            for (var i = 0; i < attributeValues.Count; ++i)
+                            for (int i = 0; i < attributeValues.Count; ++i)
                             {
                                 if ((counter & (1 << i)) == 0)
                                 {
@@ -577,7 +579,7 @@ namespace Nop.Services.Catalog
                                 {
                                     tmp1 = AddProductAttribute(tmp1, pam, checkboxValue.Id.ToString());
                                 }
-                                if (!string.IsNullOrEmpty(tmp1))
+                                if (!String.IsNullOrEmpty(tmp1))
                                 {
                                     attributesXml.Add(tmp1);
                                 }
@@ -610,7 +612,7 @@ namespace Nop.Services.Catalog
                                     {
                                         tmp1 = AddProductAttribute(tmp1, pam, checkboxValue.Id.ToString());
                                     }
-                                    if (!string.IsNullOrEmpty(tmp1))
+                                    if (!String.IsNullOrEmpty(tmp1))
                                     {
                                         attributesXmlTmp.Add(tmp1);
                                     }
@@ -640,7 +642,7 @@ namespace Nop.Services.Catalog
             //minor workaround:
             //once it's done (validation), then we could have some duplicated combinations in result
             //we don't remove them here (for performance optimization) because anyway it'll be done in the "GenerateAllAttributeCombinations" method of ProductController
-            for (var i = 0; i < allAttributesXml.Count; i++)
+            for (int i = 0; i < allAttributesXml.Count; i++)
             {
                 var attributesXml = allAttributesXml[i];
                 foreach (var attribute in allProductAttributMappings)
@@ -660,7 +662,7 @@ namespace Nop.Services.Catalog
         #region Gift card attributes
 
         /// <summary>
-        /// Add gift card attributes
+        /// Add gift card attrbibutes
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <param name="recipientName">Recipient name</param>
@@ -672,7 +674,7 @@ namespace Nop.Services.Catalog
         public string AddGiftCardAttribute(string attributesXml, string recipientName,
             string recipientEmail, string senderName, string senderEmail, string giftCardMessage)
         {
-            var result = string.Empty;
+            string result = string.Empty;
             try
             {
                 recipientName = recipientName.Trim();
@@ -681,7 +683,7 @@ namespace Nop.Services.Catalog
                 senderEmail = senderEmail.Trim();
 
                 var xmlDoc = new XmlDocument();
-                if (string.IsNullOrEmpty(attributesXml))
+                if (String.IsNullOrEmpty(attributesXml))
                 {
                     var element1 = xmlDoc.CreateElement("Attributes");
                     xmlDoc.AppendChild(element1);
@@ -730,7 +732,7 @@ namespace Nop.Services.Catalog
         }
 
         /// <summary>
-        /// Get gift card attributes
+        /// Get gift card attrbibutes
         /// </summary>
         /// <param name="attributesXml">Attributes</param>
         /// <param name="recipientName">Recipient name</param>

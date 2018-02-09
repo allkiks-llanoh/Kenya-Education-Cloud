@@ -56,7 +56,7 @@ namespace Nop.Core.Html.CodeFormatter
 			const string regAttributeMatch = @"(=?"".*?""|=?'.*?')|([\w:-]+)";
 			
 			//the regex object will handle all the replacements in one pass
-			var regAll = "(" + regJavaScript + ")|(" + regComment + ")|(" 
+			string regAll = "(" + regJavaScript + ")|(" + regComment + ")|(" 
 				+ regAspTag + ")|(" + regAspCode + ")|(" 
 				+ regTagDelimiter + ")|(" + regTagName + ")|("
 				+ regAttributes + ")|(" + regEntity + ")";

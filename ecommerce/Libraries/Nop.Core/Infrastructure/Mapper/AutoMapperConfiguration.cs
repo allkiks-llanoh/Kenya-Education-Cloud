@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
 
 namespace Nop.Core.Infrastructure.Mapper
 {
@@ -7,24 +9,46 @@ namespace Nop.Core.Infrastructure.Mapper
     /// </summary>
     public static class AutoMapperConfiguration
     {
-        /// <summary>
-        /// Mapper
-        /// </summary>
-        public static IMapper Mapper { get; private set; }
-
-        /// <summary>
-        /// Mapper configuration
-        /// </summary>
-        public static MapperConfiguration MapperConfiguration { get; private set; }
-
+        private static MapperConfiguration _mapperConfiguration;
+        private static IMapper _mapper;
+        
         /// <summary>
         /// Initialize mapper
         /// </summary>
-        /// <param name="config">Mapper configuration</param>
-        public static void Init(MapperConfiguration config)
+        /// <param name="configurationActions">Configuration actions</param>
+        public static void Init(List<Action<IMapperConfigurationExpression>> configurationActions)
         {
-            MapperConfiguration = config;
-            Mapper = config.CreateMapper();
+            if (configurationActions == null)
+                throw new ArgumentNullException("configurationActions");
+
+            _mapperConfiguration = new MapperConfiguration(cfg =>
+            {
+                foreach (var ca in configurationActions)
+                    ca(cfg);
+            });
+
+            _mapper = _mapperConfiguration.CreateMapper();
+        }
+
+        /// <summary>
+        /// Mapper
+        /// </summary>
+        public static IMapper Mapper
+        {
+            get
+            {
+                return _mapper;
+            }
+        }
+        /// <summary>
+        /// Mapper configuration
+        /// </summary>
+        public static MapperConfiguration MapperConfiguration
+        {
+            get
+            {
+                return _mapperConfiguration;
+            }
         }
     }
 }

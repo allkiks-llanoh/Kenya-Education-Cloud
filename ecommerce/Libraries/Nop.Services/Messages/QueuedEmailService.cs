@@ -10,9 +10,6 @@ using Nop.Services.Events;
 
 namespace Nop.Services.Messages
 {
-    /// <summary>
-    /// Queued email service
-    /// </summary>
     public partial class QueuedEmailService : IQueuedEmailService
     {
         private readonly IRepository<QueuedEmail> _queuedEmailRepository;
@@ -49,7 +46,7 @@ namespace Nop.Services.Messages
         public virtual void InsertQueuedEmail(QueuedEmail queuedEmail)
         {
             if (queuedEmail == null)
-                throw new ArgumentNullException(nameof(queuedEmail));
+                throw new ArgumentNullException("queuedEmail");
 
             _queuedEmailRepository.Insert(queuedEmail);
 
@@ -64,7 +61,7 @@ namespace Nop.Services.Messages
         public virtual void UpdateQueuedEmail(QueuedEmail queuedEmail)
         {
             if (queuedEmail == null)
-                throw new ArgumentNullException(nameof(queuedEmail));
+                throw new ArgumentNullException("queuedEmail");
 
             _queuedEmailRepository.Update(queuedEmail);
 
@@ -79,7 +76,7 @@ namespace Nop.Services.Messages
         public virtual void DeleteQueuedEmail(QueuedEmail queuedEmail)
         {
             if (queuedEmail == null)
-                throw new ArgumentNullException(nameof(queuedEmail));
+                throw new ArgumentNullException("queuedEmail");
 
             _queuedEmailRepository.Delete(queuedEmail);
 
@@ -94,7 +91,7 @@ namespace Nop.Services.Messages
         public virtual void DeleteQueuedEmails(IList<QueuedEmail> queuedEmails)
         {
             if (queuedEmails == null)
-                throw new ArgumentNullException(nameof(queuedEmails));
+                throw new ArgumentNullException("queuedEmails");
 
             _queuedEmailRepository.Delete(queuedEmails);
 
@@ -135,7 +132,7 @@ namespace Nop.Services.Messages
             var queuedEmails = query.ToList();
             //sort by passed identifiers
             var sortedQueuedEmails = new List<QueuedEmail>();
-            foreach (var id in queuedEmailIds)
+            foreach (int id in queuedEmailIds)
             {
                 var queuedEmail = queuedEmails.Find(x => x.Id == id);
                 if (queuedEmail != null)
@@ -163,13 +160,13 @@ namespace Nop.Services.Messages
             bool loadNotSentItemsOnly, bool loadOnlyItemsToBeSent, int maxSendTries,
             bool loadNewest, int pageIndex = 0, int pageSize = int.MaxValue)
         {
-            fromEmail = (fromEmail ?? string.Empty).Trim();
-            toEmail = (toEmail ?? string.Empty).Trim();
+            fromEmail = (fromEmail ?? String.Empty).Trim();
+            toEmail = (toEmail ?? String.Empty).Trim();
             
             var query = _queuedEmailRepository.Table;
-            if (!string.IsNullOrEmpty(fromEmail))
+            if (!String.IsNullOrEmpty(fromEmail))
                 query = query.Where(qe => qe.From.Contains(fromEmail));
-            if (!string.IsNullOrEmpty(toEmail))
+            if (!String.IsNullOrEmpty(toEmail))
                 query = query.Where(qe => qe.To.Contains(toEmail));
             if (createdFromUtc.HasValue)
                 query = query.Where(qe => qe.CreatedOnUtc >= createdFromUtc);
@@ -205,8 +202,8 @@ namespace Nop.Services.Messages
 
 
                 //do all databases support "Truncate command"?
-                var queuedEmailTableName = _dbContext.GetTableName<QueuedEmail>();
-                _dbContext.ExecuteSqlCommand($"TRUNCATE TABLE [{queuedEmailTableName}]");
+                string queuedEmailTableName = _dbContext.GetTableName<QueuedEmail>();
+                _dbContext.ExecuteSqlCommand(String.Format("TRUNCATE TABLE [{0}]", queuedEmailTableName));
             }
             else
             {

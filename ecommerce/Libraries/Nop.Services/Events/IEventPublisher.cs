@@ -1,4 +1,5 @@
-﻿namespace Nop.Services.Events
+﻿
+namespace Nop.Services.Events
 {
     /// <summary>
     /// Evnt publisher

@@ -6,14 +6,6 @@
     public abstract class BasePlugin : IPlugin
     {
         /// <summary>
-        /// Gets a configuration page URL
-        /// </summary>
-        public virtual string GetConfigurationPageUrl()
-        {
-            return null;
-        }
-
-        /// <summary>
         /// Gets or sets the plugin descriptor
         /// </summary>
         public virtual PluginDescriptor PluginDescriptor { get; set; }
@@ -33,5 +25,6 @@
         {
             PluginManager.MarkPluginAsUninstalled(this.PluginDescriptor.SystemName);
         }
+
     }
 }

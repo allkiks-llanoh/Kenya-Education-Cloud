@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Data.Entity.Core.Objects;
 using Nop.Core;
-using Nop.Core.Caching;
 
 namespace Nop.Data
 {
-    /// <summary>
-    /// Extensions
-    /// </summary>
     public static class Extensions
     {
         /// <summary>
@@ -23,13 +19,8 @@ namespace Nop.Data
         /// <returns></returns>
         public static Type GetUnproxiedEntityType(this BaseEntity entity)
         {
-            var type = entity is IEntityForCaching ? 
-               ((IEntityForCaching) entity).GetType().BaseType :
-               ObjectContext.GetObjectType(entity.GetType());
-            if (type == null)
-                throw new Exception("Original entity type cannot be loaded");
-
-            return type;
+            var userType = ObjectContext.GetObjectType(entity.GetType());
+            return userType;
         }
     }
 }

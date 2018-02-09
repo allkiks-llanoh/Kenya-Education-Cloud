@@ -248,7 +248,7 @@ namespace Nop.Services.Tests.Catalog
         [Test]
         public void Can_add_and_parse_productAttributes()
         {
-            var attributes = "";
+            string attributes = "";
             //color: green
             attributes = _productAttributeParser.AddProductAttribute(attributes, pam1_1, pav1_1.Id.ToString());
             //custom option: option 1, option 2
@@ -271,9 +271,23 @@ namespace Nop.Services.Tests.Catalog
         }
 
         [Test]
+        [Ignore("Ignoring until a solution to the IDbContext methods are found. -SRS")]
+        public void Can_add_and_parse_productAttributeValues_with_quantity()
+        {
+            var attributes = string.Empty;
+
+            //value with customer's entered quantity
+            attributes = _productAttributeParser.AddProductAttribute(attributes, pam4_1, pav4_1.Id.ToString(), 2);
+
+            var parsedValueWithQuantity = _productAttributeParser.ParseProductAttributeValues(attributes, pam4_1.Id).FirstOrDefault();
+            parsedValueWithQuantity.ShouldNotBeNull();
+            parsedValueWithQuantity.Quantity.ShouldEqual(2);
+        }
+
+        [Test]
         public void Can_add_and_remove_productAttributes()
         {
-            var attributes = "";
+            string attributes = "";
             //color: green
             attributes = _productAttributeParser.AddProductAttribute(attributes, pam1_1, pav1_1.Id.ToString());
             //custom option: option 1, option 2
@@ -299,7 +313,7 @@ namespace Nop.Services.Tests.Catalog
         [Test]
         public void Can_add_and_parse_giftCardAttributes()
         {
-            var attributes = "";
+            string attributes = "";
             attributes = _productAttributeParser.AddGiftCardAttribute(attributes,
                 "recipientName 1", "recipientEmail@gmail.com",
                 "senderName 1", "senderEmail@gmail.com", "custom message");
@@ -321,7 +335,7 @@ namespace Nop.Services.Tests.Catalog
         [Test]
         public void Can_render_virtual_gift_cart()
         {
-            var attributes = _productAttributeParser.AddGiftCardAttribute("",
+            string attributes = _productAttributeParser.AddGiftCardAttribute("",
                 "recipientName 1", "recipientEmail@gmail.com",
                 "senderName 1", "senderEmail@gmail.com", "custom message");
 
@@ -331,7 +345,7 @@ namespace Nop.Services.Tests.Catalog
                 GiftCardType = GiftCardType.Virtual,
             };
             var customer = new Customer();
-            var formattedAttributes = _productAttributeFormatter.FormatAttributes(product,
+            string formattedAttributes = _productAttributeFormatter.FormatAttributes(product,
                 attributes, customer, "<br />", false, false, true, true);
             formattedAttributes.ShouldEqual("From: senderName 1 <senderEmail@gmail.com><br />For: recipientName 1 <recipientEmail@gmail.com>");
         }
@@ -339,7 +353,7 @@ namespace Nop.Services.Tests.Catalog
         [Test]
         public void Can_render_physical_gift_cart()
         {
-            var attributes = _productAttributeParser.AddGiftCardAttribute("",
+            string attributes = _productAttributeParser.AddGiftCardAttribute("",
                 "recipientName 1", "recipientEmail@gmail.com",
                 "senderName 1", "senderEmail@gmail.com", "custom message");
 
@@ -349,7 +363,7 @@ namespace Nop.Services.Tests.Catalog
                 GiftCardType = GiftCardType.Physical,
             };
             var customer = new Customer();
-            var formattedAttributes = _productAttributeFormatter.FormatAttributes(product,
+            string formattedAttributes = _productAttributeFormatter.FormatAttributes(product,
                 attributes, customer, "<br />", false, false, true, true);
             formattedAttributes.ShouldEqual("From: senderName 1<br />For: recipientName 1");
         }
@@ -357,7 +371,7 @@ namespace Nop.Services.Tests.Catalog
         [Test]
         public void Can_render_attributes_withoutPrices()
         {
-            var attributes = "";
+            string attributes = "";
             //color: green
             attributes = _productAttributeParser.AddProductAttribute(attributes, pam1_1, pav1_1.Id.ToString());
             //custom option: option 1, option 2
@@ -377,7 +391,7 @@ namespace Nop.Services.Tests.Catalog
                 GiftCardType = GiftCardType.Virtual,
             };
             var customer = new Customer();
-            var formattedAttributes = _productAttributeFormatter.FormatAttributes(product,
+            string formattedAttributes = _productAttributeFormatter.FormatAttributes(product,
                 attributes, customer, "<br />", false, false, true, true);
             formattedAttributes.ShouldEqual("Color: Green<br />Some custom option: Option 1<br />Some custom option: Option 2<br />Color: Some custom text goes here<br />From: senderName 1 <senderEmail@gmail.com><br />For: recipientName 1 <recipientEmail@gmail.com>");
         }

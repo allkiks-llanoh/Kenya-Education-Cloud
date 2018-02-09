@@ -1,10 +1,8 @@
-﻿using Nop.Core.Configuration;
+﻿
+using Nop.Core.Configuration;
 
 namespace Nop.Services.Helpers
 {
-    /// <summary>
-    /// DateTime settings
-    /// </summary>
     public class DateTimeSettings : ISettings
     {
         /// <summary>

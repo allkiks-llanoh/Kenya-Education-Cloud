@@ -1,14 +1,15 @@
 ﻿@model CompareProductsModel
 @{
-    Layout = "_ColumnsTwo";
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
 
     //title
     Html.AddTitleParts(T("PageTitle.CompareProducts").Text);
     //page class
     Html.AppendPageCssClassParts("html-compare-products-page");
 }
+@using Nop.Web.Models.Catalog;
 @{
-    var columnWidth = "";
+    string columnWidth = "";
     if (Model.Products.Count > 0)
     {
         columnWidth = Math.Round((decimal)(90M / Model.Products.Count), 0).ToString() + "%";
@@ -105,7 +106,7 @@
                                     <td style="width: @columnWidth;">
                                         @if (foundProductSpec != null)
                                         {
-                                            if (string.IsNullOrEmpty(foundProductSpec.ColorSquaresRgb))
+                                            if (String.IsNullOrEmpty(foundProductSpec.ColorSquaresRgb))
                                             {
                                                 @Html.Raw(foundProductSpec.ValueRaw)
                                             }

@@ -1,6 +1,7 @@
 ﻿@model BoardsIndexModel
+@using Nop.Web.Models.Boards;
 @{
-    Layout = "_ColumnsOne";
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
 
     //title
     Html.AddTitleParts(T("Forum.PageTitle.Default").Text);
@@ -8,14 +9,14 @@
     Html.AppendPageCssClassParts("html-forums-main-page");
 }
 <div class="page forums-main-page">
-    @await Component.InvokeAsync("TopicBlock", new { systemName = "ForumWelcomeMessage" })
-    @await Html.PartialAsync("_ForumHeader")
-    @await Component.InvokeAsync("Widget", new { widgetZone = "boards_main_after_header" })
+    @Html.Action("TopicBlock", "Topic", new { systemName = "ForumWelcomeMessage" })
+    @Html.Partial("_ForumHeader")
+    @Html.Widget("boards_main_after_header")
     @foreach (var forumGroup in Model.ForumGroups)
     {
         Html.RenderPartial("_ForumGroup", forumGroup);
     }
-    @await Component.InvokeAsync("Widget", new { widgetZone = "boards_main_before_activediscussions" })
-    @await Component.InvokeAsync("ForumActiveDiscussionsSmall")
-    @await Component.InvokeAsync("Widget", new { widgetZone = "boards_main_after_activediscussions" })
+    @Html.Widget("boards_main_before_activediscussions")
+    @Html.Action("ActiveDiscussionsSmall")
+    @Html.Widget("boards_main_after_activediscussions")
 </div>

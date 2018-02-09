@@ -5,7 +5,6 @@ using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Infrastructure;
-using Nop.Services.Catalog;
 using Nop.Services.Localization;
 
 namespace Nop.Services.Orders
@@ -19,13 +18,13 @@ namespace Nop.Services.Orders
         /// Indicates whether the shopping cart requires shipping
         /// </summary>
         /// <param name="shoppingCart">Shopping cart</param>
-        /// <param name="productService">Product service</param>
-        /// <param name="productAttributeParser">Product attribute parser</param>
         /// <returns>True if the shopping cart requires shipping; otherwise, false.</returns>
-        public static bool RequiresShipping(this IList<ShoppingCartItem> shoppingCart,
-            IProductService productService = null, IProductAttributeParser productAttributeParser = null)
+        public static bool RequiresShipping(this IList<ShoppingCartItem> shoppingCart)
         {
-            return shoppingCart.Any(shoppingCartItem => shoppingCartItem.IsShipEnabled(productService, productAttributeParser));
+            foreach (var shoppingCartItem in shoppingCart)
+                if (shoppingCartItem.IsShipEnabled)
+                    return true;
+            return false;
         }
 
         /// <summary>
@@ -35,8 +34,8 @@ namespace Nop.Services.Orders
         /// <returns>Result</returns>
         public static int GetTotalProducts(this IList<ShoppingCartItem> shoppingCart)
         {
-            var result = 0;
-            foreach (var sci in shoppingCart)
+            int result = 0;
+            foreach (ShoppingCartItem sci in shoppingCart)
             {
                 result += sci.Quantity;
             }
@@ -50,7 +49,7 @@ namespace Nop.Services.Orders
         /// <returns>Result</returns>
         public static bool IsRecurring(this IList<ShoppingCartItem> shoppingCart)
         {
-            foreach (var sci in shoppingCart)
+            foreach (ShoppingCartItem sci in shoppingCart)
             {
                 var product = sci.Product;
                 if (product != null && product.IsRecurring)
@@ -85,12 +84,12 @@ namespace Nop.Services.Orders
                 var product= sci.Product;
                 if (product == null)
                 {
-                    throw new NopException($"Product (Id={sci.ProductId}) cannot be loaded");
+                    throw new NopException(string.Format("Product (Id={0}) cannot be loaded", sci.ProductId));
                 }
 
                 if (product.IsRecurring)
                 {
-                    var conflictError = localizationService.GetResource("ShoppingCart.ConflictingShipmentSchedules");
+                    string conflictError = localizationService.GetResource("ShoppingCart.ConflictingShipmentSchedules");
 
                     //cycle length
                     if (_cycleLength.HasValue && _cycleLength.Value != product.RecurringCycleLength)
@@ -132,12 +131,6 @@ namespace Nop.Services.Orders
             return shoppingCart[0].Customer;
         }
 
-        /// <summary>
-        /// Limit cart by store (if carts are not shared between stores)
-        /// </summary>
-        /// <param name="cart">Cart</param>
-        /// <param name="storeId">Store identifier</param>
-        /// <returns>Cart</returns>
         public static IEnumerable<ShoppingCartItem> LimitPerStore(this IEnumerable<ShoppingCartItem> cart, int storeId)
         {
             var shoppingCartSettings = EngineContext.Current.Resolve<ShoppingCartSettings>();

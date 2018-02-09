@@ -5,9 +5,6 @@ using Nop.Core.Configuration;
 
 namespace Nop.Services.Configuration
 {
-    /// <summary>
-    /// Setting extensions
-    /// </summary>
     public static class SettingExtensions
     {
         /// <summary>

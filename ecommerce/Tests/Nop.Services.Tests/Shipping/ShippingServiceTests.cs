@@ -43,10 +43,8 @@ namespace Nop.Services.Tests.Shipping
         [SetUp]
         public new void SetUp()
         {
-            _shippingSettings = new ShippingSettings
-            {
-                ActiveShippingRateComputationMethodSystemNames = new List<string>()
-            };
+            _shippingSettings = new ShippingSettings();
+            _shippingSettings.ActiveShippingRateComputationMethodSystemNames = new List<string>();
             _shippingSettings.ActiveShippingRateComputationMethodSystemNames.Add("FixedRateTestShippingRateComputationMethod");
 
             _shippingMethodRepository = MockRepository.GenerateMock<IRepository<ShippingMethod>>();

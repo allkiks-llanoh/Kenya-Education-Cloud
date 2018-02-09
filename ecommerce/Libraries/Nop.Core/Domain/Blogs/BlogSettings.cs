@@ -1,10 +1,8 @@
-﻿using Nop.Core.Configuration;
+﻿
+using Nop.Core.Configuration;
 
 namespace Nop.Core.Domain.Blogs
 {
-    /// <summary>
-    /// Blog settings
-    /// </summary>
     public class BlogSettings : ISettings
     {
         /// <summary>

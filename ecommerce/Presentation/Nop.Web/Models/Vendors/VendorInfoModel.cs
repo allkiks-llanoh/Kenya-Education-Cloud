@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Web.Mvc;
 using FluentValidation.Attributes;
-using Nop.Web.Framework.Mvc.ModelBinding;
-using Nop.Web.Framework.Mvc.Models;
+using Nop.Web.Framework;
+using Nop.Web.Framework.Mvc;
 using Nop.Web.Validators.Vendors;
 
 namespace Nop.Web.Models.Vendors
@@ -10,13 +10,15 @@ namespace Nop.Web.Models.Vendors
     public class VendorInfoModel : BaseNopModel
     {
         [NopResourceDisplayName("Account.VendorInfo.Name")]
+        [AllowHtml]
         public string Name { get; set; }
 
-        [DataType(DataType.EmailAddress)]
         [NopResourceDisplayName("Account.VendorInfo.Email")]
+        [AllowHtml]
         public string Email { get; set; }
 
         [NopResourceDisplayName("Account.VendorInfo.Description")]
+        [AllowHtml]
         public string Description { get; set; }
 
         [NopResourceDisplayName("Account.VendorInfo.Picture")]

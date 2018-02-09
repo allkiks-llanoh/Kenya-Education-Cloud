@@ -35,7 +35,7 @@ namespace Nop.Services.Tests.Seo
         [Test]
         public void Can_convert_non_western_chars()
         {
-            //German letters with diacritics
+            //german letters with diacritics
             SeoExtensions.GetSeName("testäöü", true, false).ShouldEqual("testaou");
             SeoExtensions.GetSeName("testäöü", false, false).ShouldEqual("test");
         }
@@ -43,7 +43,7 @@ namespace Nop.Services.Tests.Seo
         [Test]
         public void Can_allow_unicode_chars()
         {
-            //Russian letters
+            //russian letters
             SeoExtensions.GetSeName("testтест", false, true).ShouldEqual("testтест");
             SeoExtensions.GetSeName("testтест", false, false).ShouldEqual("test");
         }

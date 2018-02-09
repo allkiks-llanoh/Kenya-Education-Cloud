@@ -2,14 +2,8 @@ using Nop.Core.Domain.Messages;
 
 namespace Nop.Data.Mapping.Messages
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class EmailAccountMap : NopEntityTypeConfiguration<EmailAccount>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public EmailAccountMap()
         {
             this.ToTable("EmailAccount");

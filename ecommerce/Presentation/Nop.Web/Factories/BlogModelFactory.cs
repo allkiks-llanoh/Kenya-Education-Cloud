@@ -30,7 +30,7 @@ namespace Nop.Web.Factories
         private readonly IStoreContext _storeContext;
         private readonly IPictureService _pictureService;
         private readonly IDateTimeHelper _dateTimeHelper;
-        private readonly IStaticCacheManager _cacheManager;
+        private readonly ICacheManager _cacheManager;
 
         private readonly MediaSettings _mediaSettings;
         private readonly BlogSettings _blogSettings;
@@ -39,14 +39,14 @@ namespace Nop.Web.Factories
 
         #endregion
 
-        #region Ctor
+        #region Constructors
 
         public BlogModelFactory(IBlogService blogService,
             IWorkContext workContext,
             IStoreContext storeContext,
             IPictureService pictureService,
             IDateTimeHelper dateTimeHelper,
-            IStaticCacheManager cacheManager,
+            ICacheManager cacheManager,
             MediaSettings mediaSettings,
             BlogSettings blogSettings,
             CustomerSettings customerSettings,
@@ -76,7 +76,7 @@ namespace Nop.Web.Factories
         public virtual BlogCommentModel PrepareBlogPostCommentModel(BlogComment blogComment)
         {
             if (blogComment == null)
-                throw new ArgumentNullException(nameof(blogComment));
+                throw new ArgumentNullException("blogComment");
 
             var model = new BlogCommentModel
             {
@@ -108,10 +108,10 @@ namespace Nop.Web.Factories
         public virtual void PrepareBlogPostModel(BlogPostModel model, BlogPost blogPost, bool prepareComments)
         {
             if (model == null)
-                throw new ArgumentNullException(nameof(model));
+                throw new ArgumentNullException("model");
 
             if (blogPost == null)
-                throw new ArgumentNullException(nameof(blogPost));
+                throw new ArgumentNullException("blogPost");
 
             model.Id = blogPost.Id;
             model.MetaTitle = blogPost.MetaTitle;
@@ -153,7 +153,7 @@ namespace Nop.Web.Factories
         public virtual BlogPostListModel PrepareBlogPostListModel(BlogPagingFilteringModel command)
         {
             if (command == null)
-                throw new ArgumentNullException(nameof(command));
+                throw new ArgumentNullException("command");
 
             var model = new BlogPostListModel();
             model.PagingFilteringContext.Tag = command.Tag;
@@ -163,11 +163,11 @@ namespace Nop.Web.Factories
             if (command.PageSize <= 0) command.PageSize = _blogSettings.PostsPageSize;
             if (command.PageNumber <= 0) command.PageNumber = 1;
 
-            var dateFrom = command.GetFromMonth();
-            var dateTo = command.GetToMonth();
+            DateTime? dateFrom = command.GetFromMonth();
+            DateTime? dateTo = command.GetToMonth();
 
             IPagedList<BlogPost> blogPosts;
-            if (string.IsNullOrEmpty(command.Tag))
+            if (String.IsNullOrEmpty(command.Tag))
             {
                 blogPosts = _blogService.GetAllBlogPosts(_storeContext.CurrentStore.Id,
                     _workContext.WorkingLanguage.Id,
@@ -256,7 +256,7 @@ namespace Nop.Web.Factories
                     }
 
 
-                    var current = 0;
+                    int current = 0;
                     foreach (var kvp in months)
                     {
                         var date = kvp.Key;

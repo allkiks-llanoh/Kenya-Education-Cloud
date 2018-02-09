@@ -23,7 +23,7 @@ namespace Nop.Services.Catalog
         public static IList<Category> SortCategoriesForTree(this IList<Category> source, int parentId = 0, bool ignoreCategoriesWithoutExistingParent = false)
         {
             if (source == null)
-                throw new ArgumentNullException(nameof(source));
+                throw new ArgumentNullException("source");
 
             var result = new List<Category>();
 
@@ -72,15 +72,15 @@ namespace Nop.Services.Catalog
             ICategoryService categoryService,
             string separator = ">>", int languageId = 0)
         {
-            var result = string.Empty;
+            string result = string.Empty;
 
             var breadcrumb = GetCategoryBreadCrumb(category, categoryService, null, null, true);
-            for (var i = 0; i <= breadcrumb.Count - 1; i++)
+            for (int i = 0; i <= breadcrumb.Count - 1; i++)
             {
                 var categoryName = breadcrumb[i].GetLocalized(x => x.Name, languageId);
-                result = string.IsNullOrEmpty(result)
+                result = String.IsNullOrEmpty(result)
                     ? categoryName
-                    : $"{result} {separator} {categoryName}";
+                    : string.Format("{0} {1} {2}", result, separator, categoryName);
             }
 
             return result;
@@ -99,15 +99,15 @@ namespace Nop.Services.Catalog
             IList<Category> allCategories,
             string separator = ">>", int languageId = 0)
         {
-            var result = string.Empty;
+            string result = string.Empty;
 
             var breadcrumb = GetCategoryBreadCrumb(category, allCategories, null, null, true);
-            for (var i = 0; i <= breadcrumb.Count - 1; i++)
+            for (int i = 0; i <= breadcrumb.Count - 1; i++)
             {
                 var categoryName = breadcrumb[i].GetLocalized(x => x.Name, languageId);
-                result = string.IsNullOrEmpty(result)
+                result = String.IsNullOrEmpty(result)
                     ? categoryName
-                    : $"{result} {separator} {categoryName}";
+                    : string.Format("{0} {1} {2}", result, separator, categoryName);
             }
 
             return result;
@@ -129,7 +129,7 @@ namespace Nop.Services.Catalog
             bool showHidden = false)
         {
             if (category == null)
-                throw new ArgumentNullException(nameof(category));
+                throw new ArgumentNullException("category");
 
             var result = new List<Category>();
 
@@ -169,7 +169,7 @@ namespace Nop.Services.Catalog
             bool showHidden = false)
         {
             if (category == null)
-                throw new ArgumentNullException(nameof(category));
+                throw new ArgumentNullException("category");
 
             var result = new List<Category>();
 

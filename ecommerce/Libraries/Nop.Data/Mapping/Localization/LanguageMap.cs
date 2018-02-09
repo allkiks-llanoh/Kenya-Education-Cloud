@@ -2,14 +2,8 @@ using Nop.Core.Domain.Localization;
 
 namespace Nop.Data.Mapping.Localization
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class LanguageMap : NopEntityTypeConfiguration<Language>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public LanguageMap()
         {
             this.ToTable("Language");
@@ -18,6 +12,7 @@ namespace Nop.Data.Mapping.Localization
             this.Property(l => l.LanguageCulture).IsRequired().HasMaxLength(20);
             this.Property(l => l.UniqueSeoCode).HasMaxLength(2);
             this.Property(l => l.FlagImageFileName).HasMaxLength(50);
+        
         }
     }
 }

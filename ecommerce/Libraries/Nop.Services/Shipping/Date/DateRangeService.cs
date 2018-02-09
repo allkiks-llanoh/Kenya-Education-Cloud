@@ -76,7 +76,7 @@ namespace Nop.Services.Shipping.Date
         public virtual void InsertDeliveryDate(DeliveryDate deliveryDate)
         {
             if (deliveryDate == null)
-                throw new ArgumentNullException(nameof(deliveryDate));
+                throw new ArgumentNullException("deliveryDate");
 
             _deliveryDateRepository.Insert(deliveryDate);
 
@@ -91,7 +91,7 @@ namespace Nop.Services.Shipping.Date
         public virtual void UpdateDeliveryDate(DeliveryDate deliveryDate)
         {
             if (deliveryDate == null)
-                throw new ArgumentNullException(nameof(deliveryDate));
+                throw new ArgumentNullException("deliveryDate");
 
             _deliveryDateRepository.Update(deliveryDate);
 
@@ -106,7 +106,7 @@ namespace Nop.Services.Shipping.Date
         public virtual void DeleteDeliveryDate(DeliveryDate deliveryDate)
         {
             if (deliveryDate == null)
-                throw new ArgumentNullException(nameof(deliveryDate));
+                throw new ArgumentNullException("deliveryDate");
 
             _deliveryDateRepository.Delete(deliveryDate);
 
@@ -147,7 +147,7 @@ namespace Nop.Services.Shipping.Date
         public virtual void InsertProductAvailabilityRange(ProductAvailabilityRange productAvailabilityRange)
         {
             if (productAvailabilityRange == null)
-                throw new ArgumentNullException(nameof(productAvailabilityRange));
+                throw new ArgumentNullException("productAvailabilityRange");
 
             _productAvailabilityRangeRepository.Insert(productAvailabilityRange);
 
@@ -162,7 +162,7 @@ namespace Nop.Services.Shipping.Date
         public virtual void UpdateProductAvailabilityRange(ProductAvailabilityRange productAvailabilityRange)
         {
             if (productAvailabilityRange == null)
-                throw new ArgumentNullException(nameof(productAvailabilityRange));
+                throw new ArgumentNullException("productAvailabilityRange");
 
             _productAvailabilityRangeRepository.Update(productAvailabilityRange);
 
@@ -177,7 +177,7 @@ namespace Nop.Services.Shipping.Date
         public virtual void DeleteProductAvailabilityRange(ProductAvailabilityRange productAvailabilityRange)
         {
             if (productAvailabilityRange == null)
-                throw new ArgumentNullException(nameof(productAvailabilityRange));
+                throw new ArgumentNullException("productAvailabilityRange");
 
             _productAvailabilityRangeRepository.Delete(productAvailabilityRange);
 

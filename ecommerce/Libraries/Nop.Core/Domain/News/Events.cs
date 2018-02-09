@@ -5,10 +5,6 @@ namespace Nop.Core.Domain.News
     /// </summary>
     public class NewsCommentApprovedEvent
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="newsComment">News comment</param>
         public NewsCommentApprovedEvent(NewsComment newsComment)
         {
             this.NewsComment = newsComment;
@@ -17,6 +13,6 @@ namespace Nop.Core.Domain.News
         /// <summary>
         /// News comment
         /// </summary>
-        public NewsComment NewsComment { get; }
+        public NewsComment NewsComment { get; private set; }
     }
 }

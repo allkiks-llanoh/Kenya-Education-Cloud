@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -9,14 +10,12 @@ namespace Nop.Core.Html
     public partial class ResolveLinksHelper
     {
         #region Fields
-
         /// <summary>
         /// The regular expression used to parse links.
         /// </summary>
         private static readonly Regex regex = new Regex("((http://|https://|www\\.)([A-Z0-9.\\-]{1,})\\.[0-9A-Z?;~&\\(\\)#,=\\-_\\./\\+]{2,})", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private const string link = "<a href=\"{0}{1}\" rel=\"nofollow\">{2}</a>";
         private const int MAX_LENGTH = 50;
-
         #endregion
 
         #region Utilities
@@ -30,7 +29,7 @@ namespace Nop.Core.Html
                 return url;
 
             // Remove the protocal
-            var startIndex = url.IndexOf("://");
+            int startIndex = url.IndexOf("://");
             if (startIndex > -1)
                 url = url.Substring(startIndex + 3);
 
@@ -38,8 +37,8 @@ namespace Nop.Core.Html
                 return url;
 
             // Compress folder structure
-            var firstIndex = url.IndexOf("/") + 1;
-            var lastIndex = url.LastIndexOf("/");
+            int firstIndex = url.IndexOf("/") + 1;
+            int lastIndex = url.LastIndexOf("/");
             if (firstIndex < lastIndex)
             {
                 url = url.Remove(firstIndex, lastIndex - firstIndex);
@@ -50,7 +49,7 @@ namespace Nop.Core.Html
                 return url;
 
             // Remove URL parameters
-            var queryIndex = url.IndexOf("?");
+            int queryIndex = url.IndexOf("?");
             if (queryIndex > -1)
                 url = url.Substring(0, queryIndex);
 
@@ -58,7 +57,7 @@ namespace Nop.Core.Html
                 return url;
 
             // Remove URL fragment
-            var fragmentIndex = url.IndexOf("#");
+            int fragmentIndex = url.IndexOf("#");
             if (fragmentIndex > -1)
                 url = url.Substring(0, fragmentIndex);
 
@@ -70,19 +69,17 @@ namespace Nop.Core.Html
             lastIndex = url.LastIndexOf(".");
             if (lastIndex - firstIndex > 10)
             {
-                var page = url.Substring(firstIndex, lastIndex - firstIndex);
-                var length = url.Length - max + 3;
+                string page = url.Substring(firstIndex, lastIndex - firstIndex);
+                int length = url.Length - max + 3;
                 if (page.Length > length)
                     url = url.Replace(page, "..." + page.Substring(length));
             }
 
             return url;
         }
-
         #endregion
 
         #region Methods
-
         /// <summary>
         /// Formats the text
         /// </summary>
@@ -90,7 +87,7 @@ namespace Nop.Core.Html
         /// <returns>Formatted text</returns>
         public static string FormatText(string text)
         {
-            if (string.IsNullOrEmpty(text))
+            if (String.IsNullOrEmpty(text))
                 return string.Empty;
 
             var info = CultureInfo.InvariantCulture;
@@ -108,7 +105,6 @@ namespace Nop.Core.Html
 
             return text;
         }
-
         #endregion
     }
 }

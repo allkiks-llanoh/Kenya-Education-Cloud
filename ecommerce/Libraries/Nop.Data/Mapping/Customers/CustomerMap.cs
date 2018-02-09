@@ -2,14 +2,8 @@ using Nop.Core.Domain.Customers;
 
 namespace Nop.Data.Mapping.Customers
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class CustomerMap : NopEntityTypeConfiguration<Customer>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public CustomerMap()
         {
             this.ToTable("Customer");

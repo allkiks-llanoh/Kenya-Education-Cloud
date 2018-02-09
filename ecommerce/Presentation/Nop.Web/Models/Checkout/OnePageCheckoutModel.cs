@@ -1,4 +1,4 @@
-﻿using Nop.Web.Framework.Mvc.Models;
+﻿using Nop.Web.Framework.Mvc;
 
 namespace Nop.Web.Models.Checkout
 {
@@ -6,7 +6,5 @@ namespace Nop.Web.Models.Checkout
     {
         public bool ShippingRequired { get; set; }
         public bool DisableBillingAddressCheckoutStep { get; set; }
-
-        public CheckoutBillingAddressModel BillingAddress { get; set; }
     }
 }

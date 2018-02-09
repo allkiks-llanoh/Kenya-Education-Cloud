@@ -1,27 +1,28 @@
 ﻿@model CategoryModel
-@using Nop.Core.Domain.Common
-@using Nop.Core.Domain.Seo
-@inject SeoSettings seoSettings
-@inject CommonSettings commonSettings
 @{
-    Layout = "_ColumnsTwo";
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
 
     //title
-    Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
     //meta
     Html.AddMetaDescriptionParts(Model.MetaDescription);
     Html.AddMetaKeywordParts(Model.MetaKeywords);
     //page class
     Html.AppendPageCssClassParts("html-category-page");
 
-    if (seoSettings.CanonicalUrlsEnabled)
+    var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
+    if (canonicalUrlsEnabled)
     {
-        var categoryUrl = Url.RouteUrl("Category", new { SeName = Model.SeName }, this.Url.ActionContext.HttpContext.Request.Scheme);
-        Html.AddCanonicalUrlParts(categoryUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+        var categoryUrl = Url.RouteUrl("Category", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+        Html.AddCanonicalUrlParts(categoryUrl);
     }
 
-    var breadcrumbDelimiter = commonSettings.BreadcrumbDelimiter;
+    var breadcrumbDelimiter = EngineContext.Current.Resolve<CommonSettings>().BreadcrumbDelimiter;
 }
+@using Nop.Core.Domain.Common;
+@using Nop.Core.Domain.Seo;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Models.Catalog;
 @*category breadcrumb*@
 @section Breadcrumb
 {
@@ -50,7 +51,7 @@
                 }
             </ul>
         </div>
-        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_after_breadcrumb", additionalData = Model.Id })
+        @Html.Widget("categorydetails_after_breadcrumb", Model.Id)
     }
 }
 <div class="page category-page">
@@ -58,15 +59,15 @@
         <h1>@Model.Name</h1>
     </div>
     <div class="page-body">
-        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_top", additionalData = Model.Id })
+        @Html.Widget("categorydetails_top", Model.Id)
         @*description*@
-        @if (!string.IsNullOrWhiteSpace(Model.Description))
+        @if (!String.IsNullOrWhiteSpace(Model.Description))
         {
             <div class="category-description">
                 @Html.Raw(Model.Description)
             </div>
         }
-        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_before_subcategories", additionalData = Model.Id })
+        @Html.Widget("categorydetails_before_subcategories", Model.Id)
         @*subcategories*@
         @if (Model.SubCategories.Count > 0)
         {
@@ -92,7 +93,7 @@
                 </div>
             </div>
         }
-        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_before_featured_products", additionalData = Model.Id })
+        @Html.Widget("categorydetails_before_featured_products", Model.Id)
         @*featured products*@
         @if (Model.FeaturedProducts.Count > 0)
         {
@@ -104,31 +105,31 @@
                     @foreach (var item in Model.FeaturedProducts)
                     {
                         <div class="item-box">
-                            @await Html.PartialAsync("_ProductBox", item)
+                            @Html.Partial("_ProductBox", item)
                         </div>
                     }
                 </div>
             </div>
         }
-        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_after_featured_products", additionalData = Model.Id })
+        @Html.Widget("categorydetails_after_featured_products", Model.Id)
         @if (Model.Products.Count > 0)
         {
-            @await Html.PartialAsync("_CatalogSelectors", Model.PagingFilteringContext)
+            @Html.Partial("_CatalogSelectors", Model.PagingFilteringContext, new ViewDataDictionary())
         }
-        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_before_filters", additionalData = Model.Id })
+        @Html.Widget("categorydetails_before_filters", Model.Id)
         <div class="product-filters">
             @*filtering*@
             @if (Model.PagingFilteringContext.PriceRangeFilter.Enabled)
             {
-                @await Html.PartialAsync("_FilterPriceBox", Model.PagingFilteringContext.PriceRangeFilter)
+                @Html.Partial("_FilterPriceBox", Model.PagingFilteringContext.PriceRangeFilter, new ViewDataDictionary())
             }
             @*filtering*@
             @if (Model.PagingFilteringContext.SpecificationFilter.Enabled)
             {
-                @await Html.PartialAsync("_FilterSpecsBox", Model.PagingFilteringContext.SpecificationFilter)
+                @Html.Partial("_FilterSpecsBox", Model.PagingFilteringContext.SpecificationFilter, new ViewDataDictionary())
             }
         </div>
-        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_before_product_list", additionalData = Model.Id })
+        @Html.Widget("categorydetails_before_product_list", Model.Id)
 
         @if (Model.Products.Count > 0)
         {
@@ -137,7 +138,7 @@
                     @foreach (var product in Model.Products)
                     {
                         <div class="item-box">
-                            @await Html.PartialAsync("_ProductBox", product)
+                            @Html.Partial("_ProductBox", product)
                         </div>
                     }
                 </div>
@@ -152,6 +153,6 @@
                 @pager
             </div>
         }
-        @await Component.InvokeAsync("Widget", new { widgetZone = "categorydetails_bottom", additionalData = Model.Id })
+        @Html.Widget("categorydetails_bottom", Model.Id)
     </div>
 </div>

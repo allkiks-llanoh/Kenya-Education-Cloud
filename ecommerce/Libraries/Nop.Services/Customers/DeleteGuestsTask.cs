@@ -7,18 +7,12 @@ namespace Nop.Services.Customers
     /// <summary>
     /// Represents a task for deleting guest customers
     /// </summary>
-    public partial class DeleteGuestsTask : IScheduleTask
+    public partial class DeleteGuestsTask : ITask
     {
         private readonly ICustomerService _customerService;
         private readonly CustomerSettings _customerSettings;
 
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="customerService">Customer service</param>
-        /// <param name="customerSettings">Customer settings</param>
-        public DeleteGuestsTask(ICustomerService customerService,
-            CustomerSettings customerSettings)
+        public DeleteGuestsTask(ICustomerService customerService, CustomerSettings customerSettings)
         {
             this._customerService = customerService;
             this._customerSettings = customerSettings;

@@ -92,7 +92,7 @@ namespace Nop.Services.Catalog
         #region Gift card attributes
 
         /// <summary>
-        /// Add gift card attributes
+        /// Add gift card attrbibutes
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <param name="recipientName">Recipient name</param>
@@ -105,7 +105,7 @@ namespace Nop.Services.Catalog
             string recipientEmail, string senderName, string senderEmail, string giftCardMessage);
 
         /// <summary>
-        /// Get gift card attributes
+        /// Get gift card attrbibutes
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <param name="recipientName">Recipient name</param>

@@ -1,6 +1,7 @@
 ﻿@model NewsItemListModel
+@using Nop.Web.Models.News;
 @{
-    Layout = "_ColumnsTwo";
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
 
     //title
     Html.AddTitleParts(T("PageTitle.NewsArchive").Text);
@@ -13,7 +14,7 @@
         <h1>@T("News")</h1>
     </div>
     <div class="page-body">
-        @await Component.InvokeAsync("Widget", new { widgetZone = "newslist_page_before_items" })
+        @Html.Widget("newslist_page_before_items")
         <div class="news-items">
             @foreach (var item in Model.NewsItems)
             {
@@ -28,7 +29,7 @@
                     <div class="buttons">
                         <a href="@Url.RouteUrl("NewsItem", new { SeName = item.SeName })" class="read-more">@T("News.MoreInfo")</a>
                     </div>
-                    @await Component.InvokeAsync("Widget", new { widgetZone = "newslist_page_inside_item", additionalData = item.Id })
+                    @Html.Widget("newslist_page_inside_item", item.Id)
                 </div>
             }
         </div>
@@ -41,6 +42,6 @@
                 @pager
             </div>
         }
-        @await Component.InvokeAsync("Widget", new { widgetZone = "newslist_page_after_items" })
+        @Html.Widget("newslist_page_after_items")
     </div>
 </div>

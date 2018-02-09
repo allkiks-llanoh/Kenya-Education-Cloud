@@ -44,7 +44,7 @@ namespace Nop.Services.Catalog
         public virtual void DeleteManufacturerTemplate(ManufacturerTemplate manufacturerTemplate)
         {
             if (manufacturerTemplate == null)
-                throw new ArgumentNullException(nameof(manufacturerTemplate));
+                throw new ArgumentNullException("manufacturerTemplate");
 
             _manufacturerTemplateRepository.Delete(manufacturerTemplate);
 
@@ -86,7 +86,7 @@ namespace Nop.Services.Catalog
         public virtual void InsertManufacturerTemplate(ManufacturerTemplate manufacturerTemplate)
         {
             if (manufacturerTemplate == null)
-                throw new ArgumentNullException(nameof(manufacturerTemplate));
+                throw new ArgumentNullException("manufacturerTemplate");
 
             _manufacturerTemplateRepository.Insert(manufacturerTemplate);
 
@@ -101,7 +101,7 @@ namespace Nop.Services.Catalog
         public virtual void UpdateManufacturerTemplate(ManufacturerTemplate manufacturerTemplate)
         {
             if (manufacturerTemplate == null)
-                throw new ArgumentNullException(nameof(manufacturerTemplate));
+                throw new ArgumentNullException("manufacturerTemplate");
 
             _manufacturerTemplateRepository.Update(manufacturerTemplate);
 

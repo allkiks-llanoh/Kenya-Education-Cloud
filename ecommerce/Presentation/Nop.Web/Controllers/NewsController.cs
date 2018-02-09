@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+using System.ServiceModel.Syndication;
+using System.Web.Mvc;
 using Nop.Core;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Localization;
@@ -16,16 +17,13 @@ using Nop.Services.Stores;
 using Nop.Web.Factories;
 using Nop.Web.Framework;
 using Nop.Web.Framework.Controllers;
-using Nop.Web.Framework.Mvc;
-using Nop.Web.Framework.Mvc.Filters;
-using Nop.Web.Framework.Mvc.Rss;
 using Nop.Web.Framework.Security;
 using Nop.Web.Framework.Security.Captcha;
 using Nop.Web.Models.News;
 
 namespace Nop.Web.Controllers
 {
-    [HttpsRequirement(SslRequirement.No)]
+    [NopHttpsRequirement(SslRequirement.No)]
     public partial class NewsController : BasePublicController
     {
         #region Fields
@@ -45,9 +43,9 @@ namespace Nop.Web.Controllers
         private readonly NewsSettings _newsSettings;
         private readonly LocalizationSettings _localizationSettings;
         private readonly CaptchaSettings _captchaSettings;
-        
+
         #endregion
-        
+
         #region Ctor
 
         public NewsController(INewsModelFactory newsModelFactory,
@@ -81,12 +79,21 @@ namespace Nop.Web.Controllers
             this._localizationSettings = localizationSettings;
             this._captchaSettings = captchaSettings;
         }
-        
+
         #endregion
         
         #region Methods
 
-        public virtual IActionResult List(NewsPagingFilteringModel command)
+        public virtual ActionResult HomePageNews()
+        {
+            if (!_newsSettings.Enabled || !_newsSettings.ShowNewsOnMainPage)
+                return Content("");
+
+            var model = _newsModelFactory.PrepareHomePageNewsItemsModel();
+            return PartialView(model);
+        }
+
+        public virtual ActionResult List(NewsPagingFilteringModel command)
         {
             if (!_newsSettings.Enabled)
                 return RedirectToRoute("HomePage");
@@ -95,29 +102,30 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        public virtual IActionResult ListRss(int languageId)
+        public virtual ActionResult ListRss(int languageId)
         {
-            var feed = new RssFeed(
-                $"{_storeContext.CurrentStore.GetLocalized(x => x.Name)}: News",
+            var feed = new SyndicationFeed(
+                string.Format("{0}: News", _storeContext.CurrentStore.GetLocalized(x => x.Name)),
                 "News",
-                new Uri(_webHelper.GetStoreLocation()),
+                new Uri(_webHelper.GetStoreLocation(false)),
+                string.Format("urn:store:{0}:news", _storeContext.CurrentStore.Id),
                 DateTime.UtcNow);
 
             if (!_newsSettings.Enabled)
                 return new RssActionResult(feed, _webHelper.GetThisPageUrl(false));
 
-            var items = new List<RssItem>();
+            var items = new List<SyndicationItem>();
             var newsItems = _newsService.GetAllNews(languageId, _storeContext.CurrentStore.Id);
             foreach (var n in newsItems)
             {
-                var newsUrl = Url.RouteUrl("NewsItem", new { SeName = n.GetSeName(n.LanguageId, ensureTwoPublishedLanguages: false) }, _webHelper.IsCurrentConnectionSecured() ? "https" : "http");
-                items.Add(new RssItem(n.Title, n.Short, new Uri(newsUrl), $"urn:store:{_storeContext.CurrentStore.Id}:news:blog:{n.Id}", n.CreatedOnUtc));
+                string newsUrl = Url.RouteUrl("NewsItem", new { SeName = n.GetSeName(n.LanguageId, ensureTwoPublishedLanguages: false) }, _webHelper.IsCurrentConnectionSecured() ? "https" : "http");
+                items.Add(new SyndicationItem(n.Title, n.Short, new Uri(newsUrl), String.Format("urn:store:{0}:news:blog:{1}", _storeContext.CurrentStore.Id, n.Id), n.CreatedOnUtc));
             }
             feed.Items = items;
             return new RssActionResult(feed, _webHelper.GetThisPageUrl(false));
         }
 
-        public virtual IActionResult NewsItem(int newsItemId)
+        public virtual ActionResult NewsItem(int newsItemId)
         {
             if (!_newsSettings.Enabled)
                 return RedirectToRoute("HomePage");
@@ -136,7 +144,7 @@ namespace Nop.Web.Controllers
 
             //display "edit" (manage) link
             if (_permissionService.Authorize(StandardPermissionProvider.AccessAdminPanel) && _permissionService.Authorize(StandardPermissionProvider.ManageNews))
-                DisplayEditLink(Url.Action("Edit", "News", new { id = newsItem.Id, area = AreaNames.Admin }));
+                DisplayEditLink(Url.Action("Edit", "News", new { id = newsItem.Id, area = "Admin" }));
 
             return View(model);
         }
@@ -144,8 +152,8 @@ namespace Nop.Web.Controllers
         [HttpPost, ActionName("NewsItem")]
         [PublicAntiForgery]
         [FormValueRequired("add-comment")]
-        [ValidateCaptcha]
-        public virtual IActionResult NewsCommentAdd(int newsItemId, NewsItemModel model, bool captchaValid)
+        [CaptchaValidator]
+        public virtual ActionResult NewsCommentAdd(int newsItemId, NewsItemModel model, bool captchaValid)
         {
             if (!_newsSettings.Enabled)
                 return RedirectToRoute("HomePage");
@@ -200,11 +208,24 @@ namespace Nop.Web.Controllers
                 return RedirectToRoute("NewsItem", new { SeName = newsItem.GetSeName(newsItem.LanguageId, ensureTwoPublishedLanguages: false) });
             }
 
+
             //If we got this far, something failed, redisplay form
             model = _newsModelFactory.PrepareNewsItemModel(model, newsItem, true);
             return View(model);
         }
-        
+
+        [ChildActionOnly]
+        public virtual ActionResult RssHeaderLink()
+        {
+            if (!_newsSettings.Enabled || !_newsSettings.ShowHeaderRssUrl)
+                return Content("");
+
+            string link = string.Format("<link href=\"{0}\" rel=\"alternate\" type=\"{1}\" title=\"{2}: News\" />",
+                Url.RouteUrl("NewsRSS", new { languageId = _workContext.WorkingLanguage.Id }, _webHelper.IsCurrentConnectionSecured() ? "https" : "http"), MimeTypes.ApplicationRssXml, _storeContext.CurrentStore.GetLocalized(x => x.Name));
+
+            return Content(link);
+        }
+
         #endregion
     }
 }

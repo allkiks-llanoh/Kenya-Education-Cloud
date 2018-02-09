@@ -1,3 +1,4 @@
+using System;
 using System.Text.RegularExpressions;
 using Nop.Core.Domain.Common;
 using Nop.Core.Html.CodeFormatter;
@@ -11,7 +12,6 @@ namespace Nop.Core.Html
     public partial class BBCodeHelper
     {
         #region Fields
-
         private static readonly Regex regexBold = new Regex(@"\[b\](.+?)\[/b\]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static readonly Regex regexItalic = new Regex(@"\[i\](.+?)\[/i\]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static readonly Regex regexUnderLine = new Regex(@"\[u\](.+?)\[/u\]", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -23,7 +23,6 @@ namespace Nop.Core.Html
         #endregion
 
         #region Methods
-
         /// <summary>
         /// Formats the text
         /// </summary>
@@ -39,7 +38,7 @@ namespace Nop.Core.Html
         public static string FormatText(string text, bool replaceBold, bool replaceItalic,
             bool replaceUnderline, bool replaceUrl, bool replaceCode, bool replaceQuote, bool replaceImg)
         {
-            if (string.IsNullOrEmpty(text))
+            if (String.IsNullOrEmpty(text))
                 return string.Empty;
 
             if (replaceBold)
@@ -66,13 +65,13 @@ namespace Nop.Core.Html
             if (replaceUrl)
             {
                 var newWindow = EngineContext.Current.Resolve<CommonSettings>().BbcodeEditorOpenLinksInNewWindow;
-                // format the URL tags: [url=http://www.nopCommerce.com]my site[/url]
+                // format the url tags: [url=http://www.nopCommerce.com]my site[/url]
                 // becomes: <a href="http://www.nopCommerce.com">my site</a>
-                text = regexUrl1.Replace(text, $"<a href=\"$1\" rel=\"nofollow\"{(newWindow ? " target=_blank" : "")}>$2</a>");
+                text = regexUrl1.Replace(text, string.Format("<a href=\"$1\" rel=\"nofollow\"{0}>$2</a>", newWindow ? " target=_blank" : ""));
 
-                // format the URL tags: [url]http://www.nopCommerce.com[/url]
+                // format the url tags: [url]http://www.nopCommerce.com[/url]
                 // becomes: <a href="http://www.nopCommerce.com">http://www.nopCommerce.com</a>
-                text = regexUrl2.Replace(text, $"<a href=\"$1\" rel=\"nofollow\"{(newWindow ? " target=_blank" : "")}>$1</a>");
+                text = regexUrl2.Replace(text, string.Format("<a href=\"$1\" rel=\"nofollow\"{0}>$1</a>", newWindow ? " target=_blank" : ""));
             }
 
             if (replaceQuote)
@@ -102,8 +101,8 @@ namespace Nop.Core.Html
         /// <returns>string</returns>
         public static string RemoveQuotes(string str)
         {
-            str = Regex.Replace(str, @"\[quote=(.+?)\]", string.Empty, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            str = Regex.Replace(str, @"\[/quote\]", string.Empty, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, @"\[quote=(.+?)\]", String.Empty, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            str = Regex.Replace(str, @"\[/quote\]", String.Empty, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             return str;
         }
 

@@ -40,6 +40,12 @@ namespace Nop.Services.Orders
             int orderItemId = 0, string customNumber = "", ReturnRequestStatus? rs = null, DateTime? createdFromUtc = null,
             DateTime? createdToUtc = null, int pageIndex = 0, int pageSize = int.MaxValue);
 
+
+
+
+
+
+
         /// <summary>
         /// Delete a return request action
         /// </summary>
@@ -71,35 +77,38 @@ namespace Nop.Services.Orders
         /// <param name="returnRequestAction">Return request action</param>
         void UpdateReturnRequestAction(ReturnRequestAction returnRequestAction);
 
+
+
+
         /// <summary>
-        /// Delete a return request reason
+        /// Delete a return request reaspn
         /// </summary>
         /// <param name="returnRequestReason">Return request reason</param>
         void DeleteReturnRequestReason(ReturnRequestReason returnRequestReason);
 
         /// <summary>
-        /// Gets all return request reasons
+        /// Gets all return request reaspns
         /// </summary>
-        /// <returns>Return request reasons</returns>
+        /// <returns>Return request reaspns</returns>
         IList<ReturnRequestReason> GetAllReturnRequestReasons();
 
         /// <summary>
-        /// Gets a return request reason
+        /// Gets a return request reaspn
         /// </summary>
-        /// <param name="returnRequestReasonId">Return request reason identifier</param>
-        /// <returns>Return request reason</returns>
+        /// <param name="returnRequestReasonId">Return request reaspn identifier</param>
+        /// <returns>Return request reaspn</returns>
         ReturnRequestReason GetReturnRequestReasonById(int returnRequestReasonId);
 
         /// <summary>
-        /// Inserts a return request reason
+        /// Inserts a return request reaspn
         /// </summary>
-        /// <param name="returnRequestReason">Return request reason</param>
+        /// <param name="returnRequestReason">Return request reaspn</param>
         void InsertReturnRequestReason(ReturnRequestReason returnRequestReason);
 
         /// <summary>
-        /// Updates the  return request reason
+        /// Updates the  return request reaspn
         /// </summary>
-        /// <param name="returnRequestReason">Return request reason</param>
+        /// <param name="returnRequestReason">Return request reaspn</param>
         void UpdateReturnRequestReason(ReturnRequestReason returnRequestReason);
     }
 }

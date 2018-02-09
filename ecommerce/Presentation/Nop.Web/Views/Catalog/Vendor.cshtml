@@ -1,31 +1,33 @@
 ﻿@model VendorModel
-@using Nop.Core.Domain.Seo
-@inject SeoSettings seoSettings
 @{
-    Layout = "_ColumnsTwo";
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
 
     //title
-    Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
+    Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Name);
     //meta
     Html.AddMetaDescriptionParts(Model.MetaDescription);
     Html.AddMetaKeywordParts(Model.MetaKeywords);
     //page class
     Html.AppendPageCssClassParts("html-vendor-page");
 
-    if (seoSettings.CanonicalUrlsEnabled)
+    var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
+    if (canonicalUrlsEnabled)
     {
-        var vendorUrl = Url.RouteUrl("Vendor", new { SeName = Model.SeName }, this.Url.ActionContext.HttpContext.Request.Scheme);
-        Html.AddCanonicalUrlParts(vendorUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+        var vendorUrl = Url.RouteUrl("Vendor", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+        Html.AddCanonicalUrlParts(vendorUrl);
     }
 }
+@using Nop.Core.Domain.Seo;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Models.Catalog;
 <div class="page vendor-page">
     <div class="page-title">
         <h1>@Model.Name</h1>
     </div>
     <div class="page-body">
-        @await Component.InvokeAsync("Widget", new { widgetZone = "vendordetails_top", additionalData = Model.Id })
+        @Html.Widget("vendordetails_top", Model.Id)
         @*description*@
-        @if (!string.IsNullOrWhiteSpace(Model.Description))
+        @if (!String.IsNullOrWhiteSpace(Model.Description))
         {
             <div class="vendor-description">
                 @Html.Raw(Model.Description)
@@ -40,7 +42,7 @@
         }
         @if (Model.Products.Count > 0)
         {
-            @await Html.PartialAsync("_CatalogSelectors", Model.PagingFilteringContext)
+            @Html.Partial("_CatalogSelectors", Model.PagingFilteringContext, new ViewDataDictionary())
         }
         @*product list*@
         @if (Model.Products.Count > 0)
@@ -50,7 +52,7 @@
                     @foreach (var product in Model.Products)
                     {
                         <div class="item-box">
-                            @await Html.PartialAsync("_ProductBox", product)
+                            @Html.Partial("_ProductBox", product)
                         </div>
                     }
                 </div>
@@ -65,6 +67,6 @@
                 @pager
             </div>
         }
-        @await Component.InvokeAsync("Widget", new { widgetZone = "vendordetails_bottom", additionalData = Model.Id })
+        @Html.Widget("vendordetails_bottom", Model.Id)
     </div>
 </div>

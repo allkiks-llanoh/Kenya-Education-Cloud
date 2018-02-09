@@ -76,7 +76,7 @@ namespace Nop.Services.Media
         public virtual void DeleteDownload(Download download)
         {
             if (download == null)
-                throw new ArgumentNullException(nameof(download));
+                throw new ArgumentNullException("download");
 
             _downloadRepository.Delete(download);
 
@@ -90,7 +90,7 @@ namespace Nop.Services.Media
         public virtual void InsertDownload(Download download)
         {
             if (download == null)
-                throw new ArgumentNullException(nameof(download));
+                throw new ArgumentNullException("download");
 
             _downloadRepository.Insert(download);
 
@@ -104,7 +104,7 @@ namespace Nop.Services.Media
         public virtual void UpdateDownload(Download download)
         {
             if (download == null)
-                throw new ArgumentNullException(nameof(download));
+                throw new ArgumentNullException("download");
 
             _downloadRepository.Update(download);
 

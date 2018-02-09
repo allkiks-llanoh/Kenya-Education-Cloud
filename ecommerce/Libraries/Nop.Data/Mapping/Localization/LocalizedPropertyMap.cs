@@ -2,14 +2,8 @@ using Nop.Core.Domain.Localization;
 
 namespace Nop.Data.Mapping.Localization
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class LocalizedPropertyMap : NopEntityTypeConfiguration<LocalizedProperty>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public LocalizedPropertyMap()
         {
             this.ToTable("LocalizedProperty");

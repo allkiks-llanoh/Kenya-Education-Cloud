@@ -34,11 +34,11 @@ namespace Nop.Web.Factories
         private readonly IDateTimeHelper _dateTimeHelper;
         private readonly IDownloadService _downloadService;
         private readonly OrderSettings _orderSettings;
-        private readonly IStaticCacheManager _cacheManager;
+        private readonly ICacheManager _cacheManager;
 
         #endregion
 
-        #region Ctor
+        #region Constructors
 
         public ReturnRequestModelFactory(IReturnRequestService returnRequestService,
             IOrderService orderService, 
@@ -50,7 +50,7 @@ namespace Nop.Web.Factories
             IDateTimeHelper dateTimeHelper,
             IDownloadService downloadService, 
             OrderSettings orderSettings,
-            IStaticCacheManager cacheManager)
+            ICacheManager cacheManager)
         {
             this._returnRequestService = returnRequestService;
             this._orderService = orderService;
@@ -77,7 +77,7 @@ namespace Nop.Web.Factories
         public virtual SubmitReturnRequestModel.OrderItemModel PrepareSubmitReturnRequestOrderItemModel(OrderItem orderItem)
         {
             if (orderItem == null)
-                throw new ArgumentNullException(nameof(orderItem));
+                throw new ArgumentNullException("orderItem");
 
             var order = orderItem.Order;
 
@@ -117,10 +117,10 @@ namespace Nop.Web.Factories
         public virtual SubmitReturnRequestModel PrepareSubmitReturnRequestModel(SubmitReturnRequestModel model, Order order)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             if (model == null)
-                throw new ArgumentNullException(nameof(model));
+                throw new ArgumentNullException("model");
 
             model.OrderId = order.Id;
             model.AllowFiles = _orderSettings.ReturnRequestsAllowFiles;

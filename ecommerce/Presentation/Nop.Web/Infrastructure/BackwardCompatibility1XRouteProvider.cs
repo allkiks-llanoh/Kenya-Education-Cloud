@@ -1,83 +1,79 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Routing;
+﻿using System.Web.Mvc;
+using System.Web.Routing;
 using Nop.Core.Configuration;
 using Nop.Core.Infrastructure;
-using Nop.Web.Framework.Mvc.Routing;
+using Nop.Web.Framework.Mvc.Routes;
 
 namespace Nop.Web.Infrastructure
 {
-    /// <summary>
-    /// Represents provider that provided routes used for backward compatibility with 1.x versions of nopCommerce
-    /// </summary>
+    //Routes used for backward compatibility with 1.x versions of nopCommerce
     public partial class BackwardCompatibility1XRouteProvider : IRouteProvider
     {
-        #region Methods
-
-        /// <summary>
-        /// Register routes
-        /// </summary>
-        /// <param name="routeBuilder">Route builder</param>
-        public void RegisterRoutes(IRouteBuilder routeBuilder)
+        public void RegisterRoutes(RouteCollection routes)
         {
-            if (!EngineContext.Current.Resolve<NopConfig>().SupportPreviousNopcommerceVersions)
+            var config = EngineContext.Current.Resolve<NopConfig>();
+            if (!config.SupportPreviousNopcommerceVersions)
                 return;
 
             //all old aspx URLs
-            routeBuilder.MapRoute("", "{oldfilename}.aspx",
-                new { controller = "BackwardCompatibility1X", action = "GeneralRedirect" });
-
+            routes.MapRoute("", "{oldfilename}.aspx",
+                            new { controller = "BackwardCompatibility1X", action = "GeneralRedirect" },
+                            new[] { "Nop.Web.Controllers" });
+            
             //products
-            routeBuilder.MapRoute("", "products/{id}.aspx",
-                new { controller = "BackwardCompatibility1X", action = "RedirectProduct" });
-
+            routes.MapRoute("", "products/{id}.aspx",
+                            new { controller = "BackwardCompatibility1X", action = "RedirectProduct"},
+                            new[] { "Nop.Web.Controllers" });
+            
             //categories
-            routeBuilder.MapRoute("", "category/{id}.aspx", 
-                new { controller = "BackwardCompatibility1X", action = "RedirectCategory" });
+            routes.MapRoute("", "category/{id}.aspx",
+                            new { controller = "BackwardCompatibility1X", action = "RedirectCategory" },
+                            new[] { "Nop.Web.Controllers" });
 
             //manufacturers
-            routeBuilder.MapRoute("", "manufacturer/{id}.aspx", 
-                new { controller = "BackwardCompatibility1X", action = "RedirectManufacturer" });
+            routes.MapRoute("", "manufacturer/{id}.aspx",
+                            new { controller = "BackwardCompatibility1X", action = "RedirectManufacturer" },
+                            new[] { "Nop.Web.Controllers" });
 
             //product tags
-            routeBuilder.MapRoute("", "producttag/{id}.aspx", 
-                new { controller = "BackwardCompatibility1X", action = "RedirectProductTag" });
+            routes.MapRoute("", "producttag/{id}.aspx",
+                            new { controller = "BackwardCompatibility1X", action = "RedirectProductTag" },
+                            new[] { "Nop.Web.Controllers" });
 
             //news
-            routeBuilder.MapRoute("", "news/{id}.aspx", 
-                new { controller = "BackwardCompatibility1X", action = "RedirectNewsItem" });
+            routes.MapRoute("", "news/{id}.aspx",
+                            new { controller = "BackwardCompatibility1X", action = "RedirectNewsItem" },
+                            new[] { "Nop.Web.Controllers" });
 
             //blog posts
-            routeBuilder.MapRoute("", "blog/{id}.aspx", 
-                new { controller = "BackwardCompatibility1X", action = "RedirectBlogPost" });
+            routes.MapRoute("", "blog/{id}.aspx",
+                            new { controller = "BackwardCompatibility1X", action = "RedirectBlogPost" },
+                            new[] { "Nop.Web.Controllers" });
 
             //topics
-            routeBuilder.MapRoute("", "topic/{id}.aspx",
-                new { controller = "BackwardCompatibility1X", action = "RedirectTopic" });
+            routes.MapRoute("", "topic/{id}.aspx",
+                            new { controller = "BackwardCompatibility1X", action = "RedirectTopic" },
+                            new[] { "Nop.Web.Controllers" });
 
             //forums
-            routeBuilder.MapRoute("", "boards/fg/{id}.aspx",
-                new { controller = "BackwardCompatibility1X", action = "RedirectForumGroup" });
-
-            routeBuilder.MapRoute("", "boards/f/{id}.aspx",
-                new { controller = "BackwardCompatibility1X", action = "RedirectForum" });
-
-            routeBuilder.MapRoute("", "boards/t/{id}.aspx",
-                new { controller = "BackwardCompatibility1X", action = "RedirectForumTopic" });
+            routes.MapRoute("", "boards/fg/{id}.aspx",
+                            new { controller = "BackwardCompatibility1X", action = "RedirectForumGroup" },
+                            new[] { "Nop.Web.Controllers" });
+            routes.MapRoute("", "boards/f/{id}.aspx",
+                            new { controller = "BackwardCompatibility1X", action = "RedirectForum" },
+                            new[] { "Nop.Web.Controllers" });
+            routes.MapRoute("", "boards/t/{id}.aspx",
+                            new { controller = "BackwardCompatibility1X", action = "RedirectForumTopic" },
+                            new[] { "Nop.Web.Controllers" });
         }
 
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets a priority of route provider
-        /// </summary>
         public int Priority
         {
-            //register it after all other IRouteProvider are processed
-            get { return -1000; }
+            get
+            {
+                //register it after all other IRouteProvider are processed
+                return -1000;
+            }
         }
-
-        #endregion
     }
 }
