@@ -1,66 +1,49 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Nop.Core;
 using Nop.Plugin.Payments.CheckMoneyOrder.Models;
 using Nop.Services.Configuration;
 using Nop.Services.Localization;
-using Nop.Services.Security;
+using Nop.Services.Payments;
 using Nop.Services.Stores;
-using Nop.Web.Framework;
 using Nop.Web.Framework.Controllers;
-using Nop.Web.Framework.Mvc.Filters;
 
 namespace Nop.Plugin.Payments.CheckMoneyOrder.Controllers
 {
-    [AuthorizeAdmin]
-    [Area(AreaNames.Admin)]
     public class PaymentCheckMoneyOrderController : BasePaymentController
     {
-        #region Fields
-
-        private readonly ILanguageService _languageService;
-        private readonly ILocalizationService _localizationService;
-        private readonly IPermissionService _permissionService;
-        private readonly ISettingService _settingService;
-        private readonly IStoreService _storeService;
         private readonly IWorkContext _workContext;
+        private readonly IStoreService _storeService;
+        private readonly IStoreContext _storeContext;
+        private readonly ISettingService _settingService;
+        private readonly ILocalizationService _localizationService;
+        private readonly ILanguageService _languageService;
 
-        #endregion
-
-        #region Ctor
-
-        public PaymentCheckMoneyOrderController(ILanguageService languageService,
-            ILocalizationService localizationService,
-            IPermissionService permissionService,
-            ISettingService settingService,
+        public PaymentCheckMoneyOrderController(IWorkContext workContext,
             IStoreService storeService,
-            IWorkContext workContext)
+            ISettingService settingService,
+            IStoreContext storeContext,
+            ILocalizationService localizationService,
+            ILanguageService languageService)
         {
-            this._languageService = languageService;
-            this._localizationService = localizationService;
-            this._permissionService = permissionService;
-            this._settingService = settingService;
-            this._storeService = storeService;
             this._workContext = workContext;
+            this._storeService = storeService;
+            this._settingService = settingService;
+            this._storeContext = storeContext;
+            this._localizationService = localizationService;
+            this._languageService = languageService;
         }
-
-        #endregion
-
-        #region Methods
-
-        public IActionResult Configure()
+        
+        [AdminAuthorize]
+        [ChildActionOnly]
+        public ActionResult Configure()
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePaymentMethods))
-                return AccessDeniedView();
-
             //load settings for a chosen store scope
             var storeScope = this.GetActiveStoreScopeConfiguration(_storeService, _workContext);
             var checkMoneyOrderPaymentSettings = _settingService.LoadSetting<CheckMoneyOrderPaymentSettings>(storeScope);
 
-            var model = new ConfigurationModel
-            {
-                DescriptionText = checkMoneyOrderPaymentSettings.DescriptionText
-            };
-
+            var model = new ConfigurationModel();
+            model.DescriptionText = checkMoneyOrderPaymentSettings.DescriptionText;
             //locales
             AddLocales(_languageService, model.Locales, (locale, languageId) =>
             {
@@ -83,12 +66,10 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder.Controllers
         }
 
         [HttpPost]
-        [AdminAntiForgery]
-        public IActionResult Configure(ConfigurationModel model)
+        [AdminAuthorize]
+        [ChildActionOnly]
+        public ActionResult Configure(ConfigurationModel model)
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePaymentMethods))
-                return AccessDeniedView();
-
             if (!ModelState.IsValid)
                 return Configure();
 
@@ -116,7 +97,9 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder.Controllers
             //localization. no multi-store support for localization yet.
             foreach (var localized in model.Locales)
             {
-                checkMoneyOrderPaymentSettings.SaveLocalizedSetting(x => x.DescriptionText, localized.LanguageId, localized.DescriptionText);
+                checkMoneyOrderPaymentSettings.SaveLocalizedSetting(x => x.DescriptionText,
+                    localized.LanguageId,
+                    localized.DescriptionText);
             }
 
             SuccessNotification(_localizationService.GetResource("Admin.Plugins.Saved"));
@@ -124,6 +107,31 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder.Controllers
             return Configure();
         }
 
-        #endregion
+        [ChildActionOnly]
+        public ActionResult PaymentInfo()
+        {
+            var checkMoneyOrderPaymentSettings = _settingService.LoadSetting<CheckMoneyOrderPaymentSettings>(_storeContext.CurrentStore.Id);
+
+            var model = new PaymentInfoModel
+            {
+                DescriptionText = checkMoneyOrderPaymentSettings.GetLocalizedSetting(x => x.DescriptionText, _workContext.WorkingLanguage.Id, _storeContext.CurrentStore.Id)
+            };
+
+            return View("~/Plugins/Payments.CheckMoneyOrder/Views/PaymentInfo.cshtml", model);
+        }
+
+        [NonAction]
+        public override IList<string> ValidatePaymentForm(FormCollection form)
+        {
+            var warnings = new List<string>();
+            return warnings;
+        }
+
+        [NonAction]
+        public override ProcessPaymentRequest GetPaymentInfo(FormCollection form)
+        {
+            var paymentInfo = new ProcessPaymentRequest();
+            return paymentInfo;
+        }
     }
 }

@@ -1,12 +1,13 @@
 ﻿@model PopularProductTagsModel
 @{
-    Layout = "_ColumnsTwo";
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
 
     //title
     Html.AddTitleParts(T("PageTitle.AllProductTags").Text);
     //page class
     Html.AppendPageCssClassParts("html-product-tags-all-page");
 }
+@using Nop.Web.Models.Catalog;
 <div class="page product-tags-all-page">
     <div class="page-title">
         <h1>@T("Products.Tags.All")</h1>

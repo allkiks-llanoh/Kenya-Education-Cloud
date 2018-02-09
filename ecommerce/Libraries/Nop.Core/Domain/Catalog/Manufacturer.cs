@@ -69,10 +69,11 @@ namespace Nop.Core.Domain.Catalog
         /// Gets or sets the available price ranges
         /// </summary>
         public string PriceRanges { get; set; }
+        
 
         /// <summary>
         /// Gets or sets a value indicating whether the entity is subject to ACL
-        /// </summary>
+ 	    /// </summary>
         public bool SubjectToAcl { get; set; }
 
         /// <summary>

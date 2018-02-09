@@ -22,7 +22,7 @@ namespace Nop.Services.Orders
         /// </summary>
         public bool Success
         {
-            get { return (!Errors.Any()); }
+            get { return (!this.Errors.Any()); }
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Nop.Services.Orders
         /// <param name="error">Error</param>
         public void AddError(string error)
         {
-            Errors.Add(error);
+            this.Errors.Add(error);
         }
 
         /// <summary>

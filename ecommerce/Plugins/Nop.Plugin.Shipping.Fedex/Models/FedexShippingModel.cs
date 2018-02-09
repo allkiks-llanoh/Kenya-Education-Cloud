@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Nop.Web.Framework.Mvc.ModelBinding;
-using Nop.Web.Framework.Mvc.Models;
+using System.Web.Mvc;
+using Nop.Web.Framework;
 
 namespace Nop.Plugin.Shipping.Fedex.Models
 {
-    public class FedexShippingModel : BaseNopModel
+    public class FedexShippingModel
     {
         public FedexShippingModel()
         {

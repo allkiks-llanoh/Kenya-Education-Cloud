@@ -2,14 +2,8 @@ using Nop.Core.Domain.Messages;
 
 namespace Nop.Data.Mapping.Messages
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class NewsLetterSubscriptionMap : NopEntityTypeConfiguration<NewsLetterSubscription>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public NewsLetterSubscriptionMap()
         {
             this.ToTable("NewsLetterSubscription");

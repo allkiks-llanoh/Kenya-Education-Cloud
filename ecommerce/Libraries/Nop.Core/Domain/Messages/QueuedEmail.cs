@@ -48,7 +48,7 @@ namespace Nop.Core.Domain.Messages
         public string CC { get; set; }
 
         /// <summary>
-        /// Gets or sets the BCC
+        /// Gets or sets the Bcc
         /// </summary>
         public string Bcc { get; set; }
 
@@ -107,6 +107,7 @@ namespace Nop.Core.Domain.Messages
         /// </summary>
         public virtual EmailAccount EmailAccount { get; set; }
 
+
         /// <summary>
         /// Gets or sets the priority
         /// </summary>
@@ -121,5 +122,6 @@ namespace Nop.Core.Domain.Messages
                 this.PriorityId = (int)value;
             }
         }
+
     }
 }

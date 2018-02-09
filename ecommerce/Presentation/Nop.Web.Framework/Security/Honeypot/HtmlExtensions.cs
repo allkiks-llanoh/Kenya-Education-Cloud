@@ -1,23 +1,15 @@
 ﻿using System;
 using System.Text;
-using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using Nop.Core.Domain.Security;
 using Nop.Core.Infrastructure;
 
 namespace Nop.Web.Framework.Security.Honeypot
 {
-    /// <summary>
-    /// HTML extensions
-    /// </summary>
     public static class HtmlExtensions
     {
-        /// <summary>
-        /// Generate honeypot input
-        /// </summary>
-        /// <param name="helper">HTML helper</param>
-        /// <returns>Result</returns>
-        public static IHtmlContent GenerateHoneypotInput(this IHtmlHelper helper)
+        public static MvcHtmlString GenerateHoneypotInput(this HtmlHelper helper)
         {
             var sb = new StringBuilder();
 
@@ -25,12 +17,17 @@ namespace Nop.Web.Framework.Security.Honeypot
             sb.Append(Environment.NewLine);
 
             var securitySettings = EngineContext.Current.Resolve<SecuritySettings>();
-            sb.AppendFormat("<input id=\"{0}\" name=\"{0}\" type=\"text\">", securitySettings.HoneypotInputName);
+            var hpInput = helper.TextBox(securitySettings.HoneypotInputName);
+            sb.Append(hpInput.ToString());
 
             sb.Append(Environment.NewLine);
             sb.Append("</div>");
 
-            return new HtmlString(sb.ToString());
+            return MvcHtmlString.Create(sb.ToString());
+
+            //var hpInput = helper.TextBox(securitySettings.HoneypotInputName, "", new { @class = "hp" });
+            //var hpInput = helper.Hidden(securitySettings.HoneypotInputName);
+            //return hpInput;
         }
     }
 }

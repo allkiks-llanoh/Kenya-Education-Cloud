@@ -1,3 +1,4 @@
+
 using Nop.Core.Domain.Localization;
 
 namespace Nop.Core.Domain.Orders
@@ -47,4 +48,5 @@ namespace Nop.Core.Domain.Orders
         /// </summary>
         public virtual CheckoutAttribute CheckoutAttribute { get; set; }
     }
+
 }

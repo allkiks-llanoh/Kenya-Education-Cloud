@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
+using System.Web.Mvc;
 using Nop.Core.Domain.Catalog;
 using Nop.Services.Common;
 
@@ -12,27 +11,27 @@ namespace Nop.Web.Extensions
     /// </summary>
     public static class AttributeParserHelper
     {
-        public static string ParseCustomAddressAttributes(this IFormCollection form,
+        public static string ParseCustomAddressAttributes(this FormCollection form,
             IAddressAttributeParser addressAttributeParser,
             IAddressAttributeService addressAttributeService)
         {
             if (form == null)
-                throw new ArgumentNullException(nameof(form));
+                throw new ArgumentNullException("form");
 
-            var attributesXml = "";
+            string attributesXml = "";
             var attributes = addressAttributeService.GetAllAddressAttributes();
             foreach (var attribute in attributes)
             {
-                var controlId = $"address_attribute_{attribute.Id}";
+                string controlId = string.Format("address_attribute_{0}", attribute.Id);
                 switch (attribute.AttributeControlType)
                 {
                     case AttributeControlType.DropdownList:
                     case AttributeControlType.RadioList:
                         {
                             var ctrlAttributes = form[controlId];
-                            if (!StringValues.IsNullOrEmpty(ctrlAttributes))
+                            if (!String.IsNullOrEmpty(ctrlAttributes))
                             {
-                                var selectedAttributeId = int.Parse(ctrlAttributes);
+                                int selectedAttributeId = int.Parse(ctrlAttributes);
                                 if (selectedAttributeId > 0)
                                     attributesXml = addressAttributeParser.AddAddressAttribute(attributesXml,
                                         attribute, selectedAttributeId.ToString());
@@ -42,11 +41,11 @@ namespace Nop.Web.Extensions
                     case AttributeControlType.Checkboxes:
                         {
                             var cblAttributes = form[controlId];
-                            if (!StringValues.IsNullOrEmpty(cblAttributes))
+                            if (!String.IsNullOrEmpty(cblAttributes))
                             {
-                                foreach (var item in cblAttributes.ToString().Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                                foreach (var item in cblAttributes.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                                 {
-                                    var selectedAttributeId = int.Parse(item);
+                                    int selectedAttributeId = int.Parse(item);
                                     if (selectedAttributeId > 0)
                                         attributesXml = addressAttributeParser.AddAddressAttribute(attributesXml,
                                             attribute, selectedAttributeId.ToString());
@@ -72,9 +71,9 @@ namespace Nop.Web.Extensions
                     case AttributeControlType.MultilineTextbox:
                         {
                             var ctrlAttributes = form[controlId];
-                            if (!StringValues.IsNullOrEmpty(ctrlAttributes))
+                            if (!String.IsNullOrEmpty(ctrlAttributes))
                             {
-                                var enteredText = ctrlAttributes.ToString().Trim();
+                                string enteredText = ctrlAttributes.Trim();
                                 attributesXml = addressAttributeParser.AddAddressAttribute(attributesXml,
                                     attribute, enteredText);
                             }
@@ -94,3 +93,4 @@ namespace Nop.Web.Extensions
         }
     }
 }
+

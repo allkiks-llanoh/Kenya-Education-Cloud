@@ -9,9 +9,6 @@ using Nop.Services.Events;
 
 namespace Nop.Services.Messages
 {
-    /// <summary>
-    /// Campaign service
-    /// </summary>
     public partial class CampaignService : ICampaignService
     {
         private readonly IRepository<Campaign> _campaignRepository;
@@ -57,7 +54,7 @@ namespace Nop.Services.Messages
         public virtual void InsertCampaign(Campaign campaign)
         {
             if (campaign == null)
-                throw new ArgumentNullException(nameof(campaign));
+                throw new ArgumentNullException("campaign");
 
             _campaignRepository.Insert(campaign);
 
@@ -72,7 +69,7 @@ namespace Nop.Services.Messages
         public virtual void UpdateCampaign(Campaign campaign)
         {
             if (campaign == null)
-                throw new ArgumentNullException(nameof(campaign));
+                throw new ArgumentNullException("campaign");
 
             _campaignRepository.Update(campaign);
 
@@ -87,7 +84,7 @@ namespace Nop.Services.Messages
         public virtual void DeleteCampaign(Campaign campaign)
         {
             if (campaign == null)
-                throw new ArgumentNullException(nameof(campaign));
+                throw new ArgumentNullException("campaign");
 
             _campaignRepository.Delete(campaign);
 
@@ -142,12 +139,12 @@ namespace Nop.Services.Messages
             IEnumerable<NewsLetterSubscription> subscriptions)
         {
             if (campaign == null)
-                throw new ArgumentNullException(nameof(campaign));
+                throw new ArgumentNullException("campaign");
 
             if (emailAccount == null)
-                throw new ArgumentNullException(nameof(emailAccount));
+                throw new ArgumentNullException("emailAccount");
 
-            var totalEmailsSent = 0;
+            int totalEmailsSent = 0;
 
             foreach (var subscription in subscriptions)
             {
@@ -162,8 +159,8 @@ namespace Nop.Services.Messages
                 if (customer != null)
                     _messageTokenProvider.AddCustomerTokens(tokens, customer);
 
-                var subject = _tokenizer.Replace(campaign.Subject, tokens, false);
-                var body = _tokenizer.Replace(campaign.Body, tokens, true);
+                string subject = _tokenizer.Replace(campaign.Subject, tokens, false);
+                string body = _tokenizer.Replace(campaign.Body, tokens, true);
 
                 var email = new QueuedEmail
                 {
@@ -192,10 +189,10 @@ namespace Nop.Services.Messages
         public virtual void SendCampaign(Campaign campaign, EmailAccount emailAccount, string email)
         {
             if (campaign == null)
-                throw new ArgumentNullException(nameof(campaign));
+                throw new ArgumentNullException("campaign");
 
             if (emailAccount == null)
-                throw new ArgumentNullException(nameof(emailAccount));
+                throw new ArgumentNullException("emailAccount");
 
             var tokens = new List<Token>();
             _messageTokenProvider.AddStoreTokens(tokens, _storeContext.CurrentStore, emailAccount);
@@ -203,8 +200,8 @@ namespace Nop.Services.Messages
             if (customer != null)
                 _messageTokenProvider.AddCustomerTokens(tokens, customer);
             
-            var subject = _tokenizer.Replace(campaign.Subject, tokens, false);
-            var body = _tokenizer.Replace(campaign.Body, tokens, true);
+            string subject = _tokenizer.Replace(campaign.Subject, tokens, false);
+            string body = _tokenizer.Replace(campaign.Body, tokens, true);
 
             _emailSender.SendEmail(emailAccount, subject, body, emailAccount.Email, emailAccount.DisplayName, email, null);
         }

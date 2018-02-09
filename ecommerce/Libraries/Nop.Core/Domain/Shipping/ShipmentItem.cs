@@ -1,3 +1,4 @@
+
 namespace Nop.Core.Domain.Shipping
 {
     /// <summary>

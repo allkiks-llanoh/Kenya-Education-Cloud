@@ -1,11 +1,12 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
+using System.Web.Mvc;
 using Nop.Core;
+using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Messages;
 using Nop.Services.Localization;
 using Nop.Services.Messages;
 using Nop.Web.Factories;
-using Nop.Web.Framework.Mvc.Filters;
+using Nop.Web.Framework;
 
 namespace Nop.Web.Controllers
 {
@@ -18,12 +19,15 @@ namespace Nop.Web.Controllers
         private readonly IWorkflowMessageService _workflowMessageService;
         private readonly IStoreContext _storeContext;
 
+        private readonly CustomerSettings _customerSettings;
+
         public NewsletterController(INewsletterModelFactory newsletterModelFactory,
             ILocalizationService localizationService,
             IWorkContext workContext,
             INewsLetterSubscriptionService newsLetterSubscriptionService,
             IWorkflowMessageService workflowMessageService,
-            IStoreContext storeContext)
+            IStoreContext storeContext,
+            CustomerSettings customerSettings)
         {
             this._newsletterModelFactory = newsletterModelFactory;
             this._localizationService = localizationService;
@@ -31,15 +35,27 @@ namespace Nop.Web.Controllers
             this._newsLetterSubscriptionService = newsLetterSubscriptionService;
             this._workflowMessageService = workflowMessageService;
             this._storeContext = storeContext;
+            this._customerSettings = customerSettings;
+        }
+
+        [ChildActionOnly]
+        public virtual ActionResult NewsletterBox()
+        {
+            if (_customerSettings.HideNewsletterBlock)
+                return Content("");
+
+            var model = _newsletterModelFactory.PrepareNewsletterBoxModel();
+            return PartialView(model);
         }
 
         //available even when a store is closed
-        [CheckAccessClosedStore(true)]
+        [StoreClosed(true)]
         [HttpPost]
-        public virtual IActionResult SubscribeNewsletter(string email, bool subscribe)
+        [ValidateInput(false)]
+        public virtual ActionResult SubscribeNewsletter(string email, bool subscribe)
         {
             string result;
-            var success = false;
+            bool success = false;
 
             if (!CommonHelper.IsValidEmail(email))
             {
@@ -99,8 +115,8 @@ namespace Nop.Web.Controllers
         }
 
         //available even when a store is closed
-        [CheckAccessClosedStore(true)]
-        public virtual IActionResult SubscriptionActivation(Guid token, bool active)
+        [StoreClosed(true)]
+        public virtual ActionResult SubscriptionActivation(Guid token, bool active)
         {
             var subscription = _newsLetterSubscriptionService.GetNewsLetterSubscriptionByGuid(token);
             if (subscription == null)

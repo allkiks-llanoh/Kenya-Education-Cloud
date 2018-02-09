@@ -1,4 +1,4 @@
-﻿using Nop.Web.Framework.Mvc.ModelBinding;
+﻿using Nop.Web.Framework;
 
 namespace Nop.Plugin.Tax.FixedOrByCountryStateZip.Models
 {

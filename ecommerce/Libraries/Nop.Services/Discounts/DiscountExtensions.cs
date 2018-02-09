@@ -5,9 +5,6 @@ using Nop.Core.Domain.Discounts;
 
 namespace Nop.Services.Discounts
 {
-    /// <summary>
-    /// Discount extensions
-    /// </summary>
     public static class DiscountExtensions
     {
         /// <summary>
@@ -19,7 +16,7 @@ namespace Nop.Services.Discounts
         public static decimal GetDiscountAmount(this DiscountForCaching discount, decimal amount)
         {
             if (discount == null)
-                throw new ArgumentNullException(nameof(discount));
+                throw new ArgumentNullException("discount");
 
             //calculate discount amount
             decimal result;
@@ -28,7 +25,7 @@ namespace Nop.Services.Discounts
             else
                 result = discount.DiscountAmount;
 
-            //validate maximum discount amount
+            //validate maximum disocunt amount
             if (discount.UsePercentage && 
                 discount.MaximumDiscountAmount.HasValue &&
                 result > discount.MaximumDiscountAmount.Value)
@@ -51,7 +48,7 @@ namespace Nop.Services.Discounts
             decimal amount, out decimal discountAmount)
         {
             if (discounts == null)
-                throw new ArgumentNullException(nameof(discounts));
+                throw new ArgumentNullException("discounts");
 
             var result = new List<DiscountForCaching>();
             discountAmount = decimal.Zero;
@@ -61,7 +58,7 @@ namespace Nop.Services.Discounts
             //first we check simple discounts
             foreach (var discount in discounts)
             {
-                var currentDiscountValue = discount.GetDiscountAmount(amount);
+                decimal currentDiscountValue = discount.GetDiscountAmount(amount);
                 if (currentDiscountValue > discountAmount)
                 {
                     discountAmount = currentDiscountValue;
@@ -99,10 +96,10 @@ namespace Nop.Services.Discounts
             DiscountForCaching discount)
         {
             if (discounts == null)
-                throw new ArgumentNullException(nameof(discounts));
+                throw new ArgumentNullException("discounts");
 
             if (discount == null)
-                throw new ArgumentNullException(nameof(discount));
+                throw new ArgumentNullException("discount");
 
             foreach (var dis1 in discounts)
                 if (discount.Id == dis1.Id)
@@ -119,7 +116,7 @@ namespace Nop.Services.Discounts
         public static DiscountForCaching MapDiscount(this Discount discount)
         {
             if (discount == null)
-                throw new ArgumentNullException(nameof(discount));
+                throw new ArgumentNullException("discount");
 
             return new DiscountForCaching
             {

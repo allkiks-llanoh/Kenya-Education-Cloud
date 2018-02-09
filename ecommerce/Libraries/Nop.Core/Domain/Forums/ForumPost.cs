@@ -52,5 +52,6 @@ namespace Nop.Core.Domain.Forums
         /// Gets the customer
         /// </summary>
         public virtual Customer Customer { get; set; }
+
     }
 }

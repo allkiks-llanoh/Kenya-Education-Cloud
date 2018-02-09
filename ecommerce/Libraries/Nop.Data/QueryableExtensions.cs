@@ -21,9 +21,9 @@ namespace Nop.Data
             params Expression<Func<T, object>>[] includeProperties)
         {
             if (queryable == null)
-                throw new ArgumentNullException(nameof(queryable));
+                throw new ArgumentNullException("queryable");
 
-            foreach (var includeProperty in includeProperties)
+            foreach (Expression<Func<T, object>> includeProperty in includeProperties)
                 queryable = queryable.Include(includeProperty);
 
             return queryable;

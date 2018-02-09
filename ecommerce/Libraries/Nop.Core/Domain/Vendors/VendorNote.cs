@@ -27,4 +27,5 @@ namespace Nop.Core.Domain.Vendors
         /// </summary>
         public virtual Vendor Vendor { get; set; }
     }
+
 }

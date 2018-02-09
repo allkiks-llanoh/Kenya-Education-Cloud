@@ -40,7 +40,7 @@ namespace Nop.Services.Shipping
         {
             get 
             { 
-                return !Errors.Any(); 
+                return !this.Errors.Any(); 
             }
         }
 
@@ -50,7 +50,7 @@ namespace Nop.Services.Shipping
         /// <param name="error">Error</param>
         public void AddError(string error)
         {
-            Errors.Add(error);
+            this.Errors.Add(error);
         }
     }
 }

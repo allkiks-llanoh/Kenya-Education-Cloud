@@ -19,10 +19,8 @@ namespace Nop.Web.MVC.Tests.Public.Validators.PrivateMessages
         [Test]
         public void Should_have_error_when_subject_is_null_or_empty()
         {
-            var model = new SendPrivateMessageModel
-            {
-                Subject = null
-            };
+            var model = new SendPrivateMessageModel();
+            model.Subject = null;
             _validator.ShouldHaveValidationErrorFor(x => x.Subject, model);
             model.Subject = "";
             _validator.ShouldHaveValidationErrorFor(x => x.Subject, model);
@@ -31,20 +29,16 @@ namespace Nop.Web.MVC.Tests.Public.Validators.PrivateMessages
         [Test]
         public void Should_not_have_error_when_subject_is_specified()
         {
-            var model = new SendPrivateMessageModel
-            {
-                Subject = "some comment"
-            };
+            var model = new SendPrivateMessageModel();
+            model.Subject = "some comment";
             _validator.ShouldNotHaveValidationErrorFor(x => x.Subject, model);
         }
 
         [Test]
         public void Should_have_error_when_message_is_null_or_empty()
         {
-            var model = new SendPrivateMessageModel
-            {
-                Message = null
-            };
+            var model = new SendPrivateMessageModel();
+            model.Message = null;
             _validator.ShouldHaveValidationErrorFor(x => x.Message, model);
             model.Message = "";
             _validator.ShouldHaveValidationErrorFor(x => x.Message, model);
@@ -53,10 +47,8 @@ namespace Nop.Web.MVC.Tests.Public.Validators.PrivateMessages
         [Test]
         public void Should_not_have_error_when_message_is_specified()
         {
-            var model = new SendPrivateMessageModel
-            {
-                Message = "some comment"
-            };
+            var model = new SendPrivateMessageModel();
+            model.Message = "some comment";
             _validator.ShouldNotHaveValidationErrorFor(x => x.Message, model);
         }
     }

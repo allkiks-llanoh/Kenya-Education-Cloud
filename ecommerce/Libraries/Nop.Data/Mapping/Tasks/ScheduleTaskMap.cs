@@ -2,14 +2,8 @@ using Nop.Core.Domain.Tasks;
 
 namespace Nop.Data.Mapping.Tasks
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class ScheduleTaskMap : NopEntityTypeConfiguration<ScheduleTask>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public ScheduleTaskMap()
         {
             this.ToTable("ScheduleTask");

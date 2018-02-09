@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Routing;
 using Nop.Core.Domain.Shipping;
 using Nop.Core.Plugins;
 using Nop.Services.Shipping;
@@ -10,7 +11,7 @@ namespace Nop.Services.Tests.Shipping
     {
         private decimal GetRate()
         {
-            var rate = 10M;
+            decimal rate = 10M;
             return rate;
         }
 
@@ -22,7 +23,7 @@ namespace Nop.Services.Tests.Shipping
         public GetShippingOptionResponse GetShippingOptions(GetShippingOptionRequest getShippingOptionRequest)
         {
             if (getShippingOptionRequest == null)
-                throw new ArgumentNullException(nameof(getShippingOptionRequest));
+                throw new ArgumentNullException("getShippingOptionRequest");
 
             var response = new GetShippingOptionResponse();
             response.ShippingOptions.Add(new ShippingOption
@@ -49,13 +50,13 @@ namespace Nop.Services.Tests.Shipping
         public decimal? GetFixedRate(GetShippingOptionRequest getShippingOptionRequest)
         {
             if (getShippingOptionRequest == null)
-                throw new ArgumentNullException(nameof(getShippingOptionRequest));
+                throw new ArgumentNullException("getShippingOptionRequest");
 
             return GetRate();
         }
 
         #region Properties
-
+        
 
         /// <summary>
         /// Gets a shipping rate computation method type
@@ -66,6 +67,19 @@ namespace Nop.Services.Tests.Shipping
             {
                 return ShippingRateComputationMethodType.Offline;
             }
+        }
+
+        /// <summary>
+        /// Gets a route for provider configuration
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller name</param>
+        /// <param name="routeValues">Route values</param>
+        public void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
+        {
+            actionName = null;
+            controllerName = null;
+            routeValues = null;
         }
 
         /// <summary>

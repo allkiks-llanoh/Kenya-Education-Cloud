@@ -21,7 +21,7 @@ namespace Nop.Data.Initializers
         {
             if (context == null)
             {
-                throw new ArgumentNullException(nameof(context));
+                throw new ArgumentNullException("context");
             }
             var replacedContext = ReplaceSqlCeConnection(context);
 

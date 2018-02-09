@@ -5,9 +5,6 @@ using Nop.Core.Domain.Messages;
 
 namespace Nop.Services.Messages
 {
-    /// <summary>
-    /// Queued email service
-    /// </summary>
     public partial interface IQueuedEmailService
     {
         /// <summary>

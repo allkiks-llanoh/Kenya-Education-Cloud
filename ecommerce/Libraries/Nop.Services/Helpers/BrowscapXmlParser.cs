@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using Nop.Core;
 
 namespace Nop.Services.Helpers
 {
@@ -14,12 +15,7 @@ namespace Nop.Services.Helpers
     public class BrowscapXmlHelper
     {
         private readonly List<string> _crawlerUserAgentsRegexp;
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="userAgentStringsPath">User agent file path</param>
-        /// <param name="crawlerOnlyUserAgentStringsPath">User agent with crawlers only file path</param>
+       
         public BrowscapXmlHelper(string userAgentStringsPath, string crawlerOnlyUserAgentStringsPath)
         {
             _crawlerUserAgentsRegexp = new List<string>();
@@ -36,7 +32,7 @@ namespace Nop.Services.Helpers
                 //try to load crawler list from crawlers only file
                 using (var sr = new StreamReader(crawlerOnlyUserAgentStringsPath))
                 {
-                    crawlerItems = XDocument.Load(sr).Root?.Elements("browscapitem").ToList();
+                    crawlerItems = XDocument.Load(sr).Root.Return(x => x.Elements("browscapitem").ToList(), null);
                 }
             }
 
@@ -45,9 +41,9 @@ namespace Nop.Services.Helpers
                 //try to load crawler list from full user agents file
                 using (var sr = new StreamReader(userAgentStringsPath))
                 {
-                    crawlerItems = XDocument.Load(sr).Root?.Elements("browscapitem")
+                    crawlerItems = XDocument.Load(sr).Root.Return(x => x.Element("browsercapitems"), null)
                         //only crawlers
-                        .Where(IsBrowscapItemIsCrawler).ToList();
+                        .Return(x => x.Elements("browscapitem").Where(IsBrowscapItemIsCrawler).ToList(), null);
                 }
             }
 
@@ -73,7 +69,7 @@ namespace Nop.Services.Helpers
                 {
                     foreach (var element in crawler.Elements().ToList())
                     {
-                        if ((element.Attribute("name")?.Value.ToLower() ?? string.Empty) == "crawler")
+                        if (element.Attribute("name").Return(x => x.Value.ToLower(), string.Empty) == "crawler")
                             continue;
                         element.Remove();
                     }
@@ -86,16 +82,16 @@ namespace Nop.Services.Helpers
 
         private static bool IsBrowscapItemIsCrawler(XElement browscapItem)
         {
-            var el = browscapItem.Elements("item").FirstOrDefault(e => e.Attribute("name")?.Value == "Crawler");
+            var el = browscapItem.Elements("item").FirstOrDefault(e => e.Attribute("name").Return(a => a.Value, "") == "Crawler");
 
-            return el != null && el.Attribute("value")?.Value.ToLower() == "true";
+            return el != null && el.Attribute("value").Return(a => a.Value.ToLower() == "true", false);
         }
 
         private static string ToRegexp(string str)
         {
             var sb = new StringBuilder(Regex.Escape(str));
             sb.Replace("&amp;", "&").Replace("\\?", ".").Replace("\\*", ".*?");
-            return $"^{sb}$";
+            return string.Format("^{0}$", sb);
         }
 
         /// <summary>

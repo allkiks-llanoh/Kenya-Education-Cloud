@@ -1,4 +1,5 @@
-﻿using Nop.Core.Configuration;
+﻿
+using Nop.Core.Configuration;
 
 namespace Nop.Plugin.Widgets.NivoSlider
 {
@@ -23,5 +24,6 @@ namespace Nop.Plugin.Widgets.NivoSlider
         public int Picture5Id { get; set; }
         public string Text5 { get; set; }
         public string Link5 { get; set; }
+
     }
 }

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Web.Mvc;
 using Nop.Core;
 using Nop.Core.Caching;
 using Nop.Core.Domain.Catalog;
 using Nop.Services.Catalog;
 using Nop.Services.Localization;
-using Nop.Web.Framework.Mvc.Models;
+using Nop.Web.Framework.Mvc;
 using Nop.Web.Framework.UI.Paging;
 using Nop.Web.Infrastructure.Cache;
 
@@ -29,7 +29,6 @@ namespace Nop.Web.Models.Catalog
             this.AvailableSortOptions = new List<SelectListItem>();
             this.AvailableViewModes = new List<SelectListItem>();
             this.PageSizeOptions = new List<SelectListItem>();
-
             this.PriceRangeFilter = new PriceRangeFilterModel();
             this.SpecificationFilter = new SpecificationFilterModel();
         }
@@ -42,7 +41,6 @@ namespace Nop.Web.Models.Catalog
         /// Price range filter model
         /// </summary>
         public PriceRangeFilterModel PriceRangeFilter { get; set; }
-
         /// <summary>
         /// Specification filter model
         /// </summary>
@@ -52,7 +50,6 @@ namespace Nop.Web.Models.Catalog
         /// A value indicating whether product sorting is allowed
         /// </summary>
         public bool AllowProductSorting { get; set; }
-
         /// <summary>
         /// Available sort options
         /// </summary>
@@ -104,7 +101,7 @@ namespace Nop.Web.Models.Catalog
             #region Ctor
 
             /// <summary>
-            /// Ctor
+            /// Constuctor
             /// </summary>
             public PriceRangeFilterModel()
             {
@@ -125,17 +122,17 @@ namespace Nop.Web.Models.Catalog
                 var priceRanges = new List<PriceRange>();
                 if (string.IsNullOrWhiteSpace(priceRangesStr))
                     return priceRanges;
-                var rangeArray = priceRangesStr.Split(new [] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var str1 in rangeArray)
+                string[] rangeArray = priceRangesStr.Split(new [] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string str1 in rangeArray)
                 {
-                    var fromTo = str1.Trim().Split(new [] { '-' });
+                    string[] fromTo = str1.Trim().Split(new [] { '-' });
 
                     decimal? from = null;
-                    if (!string.IsNullOrEmpty(fromTo[0]) && !string.IsNullOrEmpty(fromTo[0].Trim()))
+                    if (!String.IsNullOrEmpty(fromTo[0]) && !String.IsNullOrEmpty(fromTo[0].Trim()))
                         from = decimal.Parse(fromTo[0].Trim(), new CultureInfo("en-US"));
 
                     decimal? to = null;
-                    if (!string.IsNullOrEmpty(fromTo[1]) && !string.IsNullOrEmpty(fromTo[1].Trim()))
+                    if (!String.IsNullOrEmpty(fromTo[1]) && !String.IsNullOrEmpty(fromTo[1].Trim()))
                         to = decimal.Parse(fromTo[1].Trim(), new CultureInfo("en-US"));
 
                     priceRanges.Add(new PriceRange { From = from, To = to });
@@ -154,7 +151,7 @@ namespace Nop.Web.Models.Catalog
                 //comma separated list of parameters to exclude
                 const string excludedQueryStringParams = "pagenumber";
                 var excludedQueryStringParamsSplitted = excludedQueryStringParams.Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var exclude in excludedQueryStringParamsSplitted)
+                foreach (string exclude in excludedQueryStringParamsSplitted)
                     url = webHelper.RemoveQueryString(url, exclude);
                 return url;
             }
@@ -172,16 +169,16 @@ namespace Nop.Web.Models.Catalog
             public virtual PriceRange GetSelectedPriceRange(IWebHelper webHelper, string priceRangesStr)
             {
                 var range = webHelper.QueryString<string>(QUERYSTRINGPARAM);
-                if (string.IsNullOrEmpty(range))
+                if (String.IsNullOrEmpty(range))
                     return null;
-                var fromTo = range.Trim().Split(new [] { '-' });
+                string[] fromTo = range.Trim().Split(new [] { '-' });
                 if (fromTo.Length == 2)
                 {
                     decimal? from = null;
-                    if (!string.IsNullOrEmpty(fromTo[0]) && !string.IsNullOrEmpty(fromTo[0].Trim()))
+                    if (!String.IsNullOrEmpty(fromTo[0]) && !String.IsNullOrEmpty(fromTo[0].Trim()))
                         from = decimal.Parse(fromTo[0].Trim(), new CultureInfo("en-US"));
                     decimal? to = null;
-                    if (!string.IsNullOrEmpty(fromTo[1]) && !string.IsNullOrEmpty(fromTo[1].Trim()))
+                    if (!String.IsNullOrEmpty(fromTo[1]) && !String.IsNullOrEmpty(fromTo[1].Trim()))
                         to = decimal.Parse(fromTo[1].Trim(), new CultureInfo("en-US"));
 
                     var priceRangeList = GetPriceRangeList(priceRangesStr);
@@ -217,10 +214,10 @@ namespace Nop.Web.Models.Catalog
                             item.From = priceFormatter.FormatPrice(x.From.Value, true, false);
                         if (x.To.HasValue)
                             item.To = priceFormatter.FormatPrice(x.To.Value, true, false);
-                        var fromQuery = string.Empty;
+                        string fromQuery = string.Empty;
                         if (x.From.HasValue)
                             fromQuery = x.From.Value.ToString(new CultureInfo("en-US"));
-                        var toQuery = string.Empty;
+                        string toQuery = string.Empty;
                         if (x.To.HasValue)
                             toQuery = x.To.Value.ToString(new CultureInfo("en-US"));
 
@@ -231,9 +228,10 @@ namespace Nop.Web.Models.Catalog
                             item.Selected = true;
 
                         //filter URL
-                        var url = webHelper.ModifyQueryString(webHelper.GetThisPageUrl(true), QUERYSTRINGPARAM + "=" + fromQuery + "-" + toQuery, null);
+                        string url = webHelper.ModifyQueryString(webHelper.GetThisPageUrl(true), QUERYSTRINGPARAM + "=" + fromQuery + "-" + toQuery, null);
                         url = ExcludeQueryStringParams(url, webHelper);
                         item.FilterUrl = url;
+
 
                         return item;
                     }).ToList();
@@ -241,7 +239,7 @@ namespace Nop.Web.Models.Catalog
                     if (selectedPriceRange != null)
                     {
                         //remove filter URL
-                        var url = webHelper.RemoveQueryString(webHelper.GetThisPageUrl(true), QUERYSTRINGPARAM);
+                        string url = webHelper.RemoveQueryString(webHelper.GetThisPageUrl(true), QUERYSTRINGPARAM);
                         url = ExcludeQueryStringParams(url, webHelper);
                         this.RemoveFilterUrl = url;
                     }
@@ -332,11 +330,11 @@ namespace Nop.Web.Models.Catalog
                 //comma separated list of parameters to exclude
                 const string excludedQueryStringParams = "pagenumber";
                 var excludedQueryStringParamsSplitted = excludedQueryStringParams.Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var exclude in excludedQueryStringParamsSplitted)
+                foreach (string exclude in excludedQueryStringParamsSplitted)
                     url = webHelper.RemoveQueryString(url, exclude);
                 return url;
             }
-
+            
             /// <summary>
             /// Generate URL of already filtered items
             /// </summary>
@@ -347,7 +345,7 @@ namespace Nop.Web.Models.Catalog
                 if (optionIds == null)
                     return "";
 
-                var result = string.Join(",", optionIds.OrderBy(id => id));
+                string result = string.Join(",", optionIds);
                 return result;
             }
 
@@ -365,12 +363,13 @@ namespace Nop.Web.Models.Catalog
                 var result = new List<int>();
 
                 var alreadyFilteredSpecsStr = webHelper.QueryString<string>(QUERYSTRINGPARAM);
-                if (string.IsNullOrWhiteSpace(alreadyFilteredSpecsStr))
+                if (String.IsNullOrWhiteSpace(alreadyFilteredSpecsStr))
                     return result;
 
                 foreach (var spec in alreadyFilteredSpecsStr.Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    int.TryParse(spec.Trim(), out int specId);
+                    int specId;
+                    int.TryParse(spec.Trim(), out specId);
                     if (!result.Contains(specId))
                         result.Add(specId);
                 }
@@ -438,7 +437,7 @@ namespace Nop.Web.Models.Catalog
                 {
                     //filter URL
                     var alreadyFiltered = alreadyFilteredSpecOptionIds.Concat(new List<int> { x.SpecificationAttributeOptionId });
-                    var queryString = $"{QUERYSTRINGPARAM}={GenerateFilteredSpecQueryParam(alreadyFiltered.ToList())}";
+                    var queryString = string.Format("{0}={1}", QUERYSTRINGPARAM, GenerateFilteredSpecQueryParam(alreadyFiltered.ToList()));
                     var filterUrl = webHelper.ModifyQueryString(webHelper.GetThisPageUrl(true), queryString, null);
 
                     return new SpecificationFilterItem()
@@ -454,7 +453,6 @@ namespace Nop.Web.Models.Catalog
             #endregion
 
             #region Properties
-
             /// <summary>
             /// Gets or sets a value indicating whether filtering is enabled
             /// </summary>

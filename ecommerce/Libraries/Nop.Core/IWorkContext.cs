@@ -7,7 +7,7 @@ using Nop.Core.Domain.Vendors;
 namespace Nop.Core
 {
     /// <summary>
-    /// Represents work context
+    /// Work context
     /// </summary>
     public interface IWorkContext
     {
@@ -15,34 +15,30 @@ namespace Nop.Core
         /// Gets or sets the current customer
         /// </summary>
         Customer CurrentCustomer { get; set; }
-
         /// <summary>
-        /// Gets the original customer (in case the current one is impersonated)
+        /// Gets or sets the original customer (in case the current one is impersonated)
         /// </summary>
         Customer OriginalCustomerIfImpersonated { get; }
-
         /// <summary>
-        /// Gets the current vendor (logged-in manager)
+        /// Gets or sets the current vendor (logged-in manager)
         /// </summary>
         Vendor CurrentVendor { get; }
 
         /// <summary>
-        /// Gets or sets current user working language
+        /// Get or set current user working language
         /// </summary>
         Language WorkingLanguage { get; set; }
-
         /// <summary>
-        /// Gets or sets current user working currency
+        /// Get or set current user working currency
         /// </summary>
         Currency WorkingCurrency { get; set; }
-
         /// <summary>
-        /// Gets or sets current tax display type
+        /// Get or set current tax display type
         /// </summary>
         TaxDisplayType TaxDisplayType { get; set; }
 
         /// <summary>
-        /// Gets or sets value indicating whether we're in admin area
+        /// Get or set value indicating whether we're in admin area
         /// </summary>
         bool IsAdmin { get; set; }
     }

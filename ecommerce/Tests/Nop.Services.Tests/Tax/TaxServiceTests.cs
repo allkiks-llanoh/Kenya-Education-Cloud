@@ -31,7 +31,6 @@ namespace Nop.Services.Tests.Tax
         private ICountryService _countryService;
         private IStateProvinceService _stateProvinceService;
         private ILogger _logger;
-        private IWebHelper _webHelper;
         private CustomerSettings _customerSettings;
         private ShippingSettings _shippingSettings;
         private AddressSettings _addressSettings;
@@ -39,10 +38,8 @@ namespace Nop.Services.Tests.Tax
         [SetUp]
         public new void SetUp()
         {
-            _taxSettings = new TaxSettings
-            {
-                DefaultTaxAddressId = 10
-            };
+            _taxSettings = new TaxSettings();
+            _taxSettings.DefaultTaxAddressId = 10;
 
             _workContext = null;
             _storeContext = null;
@@ -60,14 +57,12 @@ namespace Nop.Services.Tests.Tax
             _countryService = MockRepository.GenerateMock<ICountryService>();
             _stateProvinceService = MockRepository.GenerateMock<IStateProvinceService>();
             _logger = MockRepository.GenerateMock<ILogger>();
-            _webHelper = MockRepository.GenerateMock<IWebHelper>();
-
             _customerSettings = new CustomerSettings();
             _shippingSettings = new ShippingSettings();
             _addressSettings = new AddressSettings();
 
             _taxService = new TaxService(_addressService, _workContext, _storeContext, _taxSettings,
-                pluginFinder, _geoLookupService, _countryService, _stateProvinceService, _logger, _webHelper,
+                pluginFinder, _geoLookupService, _countryService, _stateProvinceService, _logger,
                 _customerSettings, _shippingSettings, _addressSettings);
         }
 
@@ -96,10 +91,8 @@ namespace Nop.Services.Tests.Tax
         [Test]
         public void Can_check_taxExempt_product()
         {
-            var product = new Product
-            {
-                IsTaxExempt = true
-            };
+            var product = new Product();
+            product.IsTaxExempt = true;
             _taxService.IsTaxExempt(product, null).ShouldEqual(true);
             product.IsTaxExempt = false;
             _taxService.IsTaxExempt(product, null).ShouldEqual(false);
@@ -108,10 +101,8 @@ namespace Nop.Services.Tests.Tax
         [Test]
         public void Can_check_taxExempt_customer()
         {
-            var customer = new Customer
-            {
-                IsTaxExempt = true
-            };
+            var customer = new Customer();
+            customer.IsTaxExempt = true;
             _taxService.IsTaxExempt(null, customer).ShouldEqual(true);
             customer.IsTaxExempt = false;
             _taxService.IsTaxExempt(null, customer).ShouldEqual(false);
@@ -120,10 +111,8 @@ namespace Nop.Services.Tests.Tax
         [Test]
         public void Can_check_taxExempt_customer_in_taxExemptCustomerRole()
         {
-            var customer = new Customer
-            {
-                IsTaxExempt = false
-            };
+            var customer = new Customer();
+            customer.IsTaxExempt = false;
             _taxService.IsTaxExempt(null, customer).ShouldEqual(false);
 
             var customerRole = new CustomerRole
@@ -153,7 +142,8 @@ namespace Nop.Services.Tests.Tax
             var customer = new Customer();
             var product = new Product();
 
-            _taxService.GetProductPrice(product, 0, 1000M, true, customer, true, out decimal taxRate).ShouldEqual(1000);
+            decimal taxRate;
+            _taxService.GetProductPrice(product, 0, 1000M, true, customer, true, out taxRate).ShouldEqual(1000);
             _taxService.GetProductPrice(product, 0, 1000M, true, customer, false, out taxRate).ShouldEqual(1100);
             _taxService.GetProductPrice(product, 0, 1000M, false, customer, true, out taxRate).ShouldEqual(909.0909090909090909090909091M);
             _taxService.GetProductPrice(product, 0, 1000M, false, customer, false, out taxRate).ShouldEqual(1000);
@@ -168,7 +158,8 @@ namespace Nop.Services.Tests.Tax
             //not taxable
             customer.IsTaxExempt = true;
 
-            _taxService.GetProductPrice(product, 0, 1000M, true, customer, true, out decimal taxRate).ShouldEqual(909.0909090909090909090909091M);
+            decimal taxRate;
+            _taxService.GetProductPrice(product, 0, 1000M, true, customer, true, out taxRate).ShouldEqual(909.0909090909090909090909091M);
             _taxService.GetProductPrice(product, 0, 1000M, true, customer, false, out taxRate).ShouldEqual(1000);
             _taxService.GetProductPrice(product, 0, 1000M, false, customer, true, out taxRate).ShouldEqual(909.0909090909090909090909091M);
             _taxService.GetProductPrice(product, 0, 1000M, false, customer, false, out taxRate).ShouldEqual(1000);
@@ -178,13 +169,16 @@ namespace Nop.Services.Tests.Tax
         public void Can_do_VAT_check()
         {
             //remove? this method requires Internet access
-            
-            var vatNumberStatus1 = _taxService.DoVatCheck("GB", "523 2392 69",
-                out string name, out string address, out Exception exception);
+
+            string name, address;
+            Exception exception;
+
+            VatNumberStatus vatNumberStatus1 = _taxService.DoVatCheck("GB", "523 2392 69",
+                out name, out address, out exception);
             vatNumberStatus1.ShouldEqual(VatNumberStatus.Valid);
             exception.ShouldBeNull();
 
-            var vatNumberStatus2 = _taxService.DoVatCheck("GB", "000 0000 00",
+            VatNumberStatus vatNumberStatus2 = _taxService.DoVatCheck("GB", "000 0000 00",
                 out name, out address, out exception);
             vatNumberStatus2.ShouldEqual(VatNumberStatus.Invalid);
             exception.ShouldBeNull();
@@ -194,8 +188,10 @@ namespace Nop.Services.Tests.Tax
         public void Should_assume_valid_VAT_number_if_EuVatAssumeValid_setting_is_true()
         {
             _taxSettings.EuVatAssumeValid = true;
+            string name, address;
 
-            var vatNumberStatus = _taxService.GetVatNumberStatus("GB", "000 0000 00", out string _, out string _);
+            VatNumberStatus vatNumberStatus = _taxService.GetVatNumberStatus("GB", "000 0000 00",
+                out name, out address);
             vatNumberStatus.ShouldEqual(VatNumberStatus.Valid);
         }
     }

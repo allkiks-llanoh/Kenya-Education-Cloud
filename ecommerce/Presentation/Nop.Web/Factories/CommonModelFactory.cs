@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Microsoft.AspNetCore.Hosting;
+using System.Web;
+using System.Web.Mvc;
 using Nop.Core;
 using Nop.Core.Caching;
 using Nop.Core.Domain;
@@ -26,7 +27,6 @@ using Nop.Services.Media;
 using Nop.Services.Orders;
 using Nop.Services.Security;
 using Nop.Services.Seo;
-using Nop.Services.Themes;
 using Nop.Services.Topics;
 using Nop.Web.Framework.Security.Captcha;
 using Nop.Web.Framework.Themes;
@@ -61,11 +61,10 @@ namespace Nop.Web.Factories
         private readonly IGenericAttributeService _genericAttributeService;
         private readonly IWebHelper _webHelper;
         private readonly IPermissionService _permissionService;
-        private readonly IStaticCacheManager _cacheManager;
+        private readonly ICacheManager _cacheManager;
         private readonly IPageHeadBuilder _pageHeadBuilder;
         private readonly IPictureService _pictureService;
-        private readonly IHostingEnvironment _hostingEnvironment;
-        private readonly IProductTagService _productTagService;
+        private readonly HttpContextBase _httpContext;
 
         private readonly CatalogSettings _catalogSettings;
         private readonly StoreInformationSettings _storeInformationSettings;
@@ -79,7 +78,7 @@ namespace Nop.Web.Factories
 
         #endregion
 
-        #region Ctor
+        #region Constructors
 
         public CommonModelFactory(ICategoryService categoryService,
             IProductService productService,
@@ -97,10 +96,10 @@ namespace Nop.Web.Factories
             IGenericAttributeService genericAttributeService,
             IWebHelper webHelper,
             IPermissionService permissionService,
-            IStaticCacheManager cacheManager,
+            ICacheManager cacheManager,
             IPageHeadBuilder pageHeadBuilder,
             IPictureService pictureService,
-            IHostingEnvironment hostingEnvironment,
+            HttpContextBase httpContext,
             CatalogSettings catalogSettings,
             StoreInformationSettings storeInformationSettings,
             CommonSettings commonSettings,
@@ -109,8 +108,7 @@ namespace Nop.Web.Factories
             ForumSettings forumSettings,
             LocalizationSettings localizationSettings,
             CaptchaSettings captchaSettings,
-            VendorSettings vendorSettings,
-            IProductTagService productTagService)
+            VendorSettings vendorSettings)
         {
             this._categoryService = categoryService;
             this._productService = productService;
@@ -131,7 +129,8 @@ namespace Nop.Web.Factories
             this._cacheManager = cacheManager;
             this._pageHeadBuilder = pageHeadBuilder;
             this._pictureService = pictureService;
-            this._hostingEnvironment = hostingEnvironment;
+            this._httpContext = httpContext;
+
             this._catalogSettings = catalogSettings;
             this._storeInformationSettings = storeInformationSettings;
             this._commonSettings = commonSettings;
@@ -141,7 +140,6 @@ namespace Nop.Web.Factories
             this._localizationSettings = localizationSettings;
             this._captchaSettings = captchaSettings;
             this._vendorSettings = vendorSettings;
-            this._productTagService = productTagService;
         }
 
         #endregion
@@ -194,10 +192,10 @@ namespace Nop.Web.Factories
                 {
                     logo = _pictureService.GetPictureUrl(logoPictureId, showDefaultPicture: false);
                 }
-                if (string.IsNullOrEmpty(logo))
+                if (String.IsNullOrEmpty(logo))
                 {
                     //use default logo
-                    logo = $"{_webHelper.GetStoreLocation()}Themes/{_themeContext.WorkingThemeName}/Content/images/logo.png";
+                    logo = string.Format("{0}Themes/{1}/Content/images/logo.png", _webHelper.GetStoreLocation(), _themeContext.WorkingThemeName);
                 }
                 return logo;
             });
@@ -386,7 +384,7 @@ namespace Nop.Web.Factories
         public virtual FooterModel PrepareFooterModel()
         {
             //footer topics
-            var topicCacheKey = string.Format(ModelCacheEventConsumer.TOPIC_FOOTER_MODEL_KEY,
+            string topicCacheKey = string.Format(ModelCacheEventConsumer.TOPIC_FOOTER_MODEL_KEY,
                 _workContext.WorkingLanguage.Id,
                 _storeContext.CurrentStore.Id,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()));
@@ -437,7 +435,7 @@ namespace Nop.Web.Factories
         public virtual ContactUsModel PrepareContactUsModel(ContactUsModel model, bool excludeProperties)
         {
             if (model == null)
-                throw new ArgumentNullException(nameof(model));
+                throw new ArgumentNullException("model");
 
             if (!excludeProperties)
             {
@@ -460,10 +458,10 @@ namespace Nop.Web.Factories
         public virtual ContactVendorModel PrepareContactVendorModel(ContactVendorModel model, Vendor vendor, bool excludeProperties)
         {
             if (model == null)
-                throw new ArgumentNullException(nameof(model));
+                throw new ArgumentNullException("model");
 
             if (vendor == null)
-                throw new ArgumentNullException(nameof(vendor));
+                throw new ArgumentNullException("vendor");
 
             if (!excludeProperties)
             {
@@ -485,7 +483,7 @@ namespace Nop.Web.Factories
         /// <returns>Sitemap model</returns>
         public virtual SitemapModel PrepareSitemapModel()
         {
-            var cacheKey = string.Format(ModelCacheEventConsumer.SITEMAP_PAGE_MODEL_KEY,
+            string cacheKey = string.Format(ModelCacheEventConsumer.SITEMAP_PAGE_MODEL_KEY,
                 _workContext.WorkingLanguage.Id,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
                 _storeContext.CurrentStore.Id);
@@ -535,16 +533,6 @@ namespace Nop.Web.Factories
                         SeName = product.GetSeName(),
                     }).ToList();
                 }
-                //product tags
-                if (_commonSettings.SitemapIncludeProductTags)
-                {
-                    model.ProductTags = _productTagService.GetAllProductTags().Select(pt => new ProductTagModel
-                    {
-                        Id = pt.Id,
-                        Name = pt.GetLocalized(x => x.Name),
-                        SeName = pt.GetSeName()
-                    }).ToList();
-                }
 
                 //topics
                 var topics = _topicService.GetAllTopics(_storeContext.CurrentStore.Id)
@@ -568,15 +556,16 @@ namespace Nop.Web.Factories
         /// <summary>
         /// Get the sitemap in XML format
         /// </summary>
+        /// <param name="url">URL helper</param>
         /// <param name="id">Sitemap identifier; pass null to load the first sitemap or sitemap index file</param>
         /// <returns>Sitemap as string in XML format</returns>
-        public virtual string PrepareSitemapXml(int? id)
+        public virtual string PrepareSitemapXml(UrlHelper url, int? id)
         {
-            var cacheKey = string.Format(ModelCacheEventConsumer.SITEMAP_SEO_MODEL_KEY, id,
+            string cacheKey = string.Format(ModelCacheEventConsumer.SITEMAP_SEO_MODEL_KEY, id,
                 _workContext.WorkingLanguage.Id,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
                 _storeContext.CurrentStore.Id);
-            var siteMap = _cacheManager.Get(cacheKey, () => _sitemapGenerator.Generate(id));
+            var siteMap = _cacheManager.Get(cacheKey, () => _sitemapGenerator.Generate(url, id));
             return siteMap;
         }
 
@@ -587,20 +576,19 @@ namespace Nop.Web.Factories
         public virtual StoreThemeSelectorModel PrepareStoreThemeSelectorModel()
         {
             var model = new StoreThemeSelectorModel();
-
-            var currentTheme = _themeProvider.GetThemeBySystemName(_themeContext.WorkingThemeName);
+            var currentTheme = _themeProvider.GetThemeConfiguration(_themeContext.WorkingThemeName);
             model.CurrentStoreTheme = new StoreThemeModel
             {
-                Name = currentTheme?.SystemName,
-                Title = currentTheme?.FriendlyName
+                Name = currentTheme.ThemeName,
+                Title = currentTheme.ThemeTitle
             };
-
-            model.AvailableStoreThemes = _themeProvider.GetThemes().Select(x => new StoreThemeModel
-            {
-                Name = x.SystemName,
-                Title = x.FriendlyName
-            }).ToList();
-
+            model.AvailableStoreThemes = _themeProvider.GetThemeConfigurations()
+                .Select(x => new StoreThemeModel
+                {
+                    Name = x.ThemeName,
+                    Title = x.ThemeTitle
+                })
+                .ToList();
             return model;
         }
 
@@ -613,14 +601,13 @@ namespace Nop.Web.Factories
             var model = new FaviconModel();
 
             //try loading a store specific favicon
-
-            var faviconFileName = $"favicon-{_storeContext.CurrentStore.Id}.ico";
-            var localFaviconPath = System.IO.Path.Combine(_hostingEnvironment.WebRootPath, faviconFileName);
+            var faviconFileName = string.Format("favicon-{0}.ico", _storeContext.CurrentStore.Id);
+            var localFaviconPath = System.IO.Path.Combine(_httpContext.Request.PhysicalApplicationPath, faviconFileName);
             if (!System.IO.File.Exists(localFaviconPath))
             {
                 //try loading a generic favicon
                 faviconFileName = "favicon.ico";
-                localFaviconPath = System.IO.Path.Combine(_hostingEnvironment.WebRootPath, faviconFileName);
+                localFaviconPath = System.IO.Path.Combine(_httpContext.Request.PhysicalApplicationPath, faviconFileName);
                 if (!System.IO.File.Exists(localFaviconPath))
                 {
                     return model;
@@ -640,11 +627,11 @@ namespace Nop.Web.Factories
             var sb = new StringBuilder();
 
             //if robots.custom.txt exists, let's use it instead of hard-coded data below
-            var robotsFilePath = System.IO.Path.Combine(CommonHelper.MapPath("~/"), "robots.custom.txt");
+            string robotsFilePath = System.IO.Path.Combine(CommonHelper.MapPath("~/"), "robots.custom.txt");
             if (System.IO.File.Exists(robotsFilePath))
             {
                 //the robots.txt file exists
-                var robotsFileContent = System.IO.File.ReadAllText(robotsFilePath);
+                string robotsFileContent = System.IO.File.ReadAllText(robotsFilePath);
                 sb.Append(robotsFileContent);
             }
             else
@@ -655,8 +642,8 @@ namespace Nop.Web.Factories
                 {
                     "/admin",
                     "/bin/",
-                    "/files/",
-                    "/files/exportimport/",
+                    "/content/files/",
+                    "/content/files/exportimport/",
                     "/country/getstatesbycountryid",
                     "/install",
                     "/setproductreviewhelpfulness",
@@ -721,6 +708,7 @@ namespace Nop.Web.Factories
                     "/wishlist",
                 };
 
+
                 const string newLine = "\r\n"; //Environment.NewLine
                 sb.Append("User-agent: *");
                 sb.Append(newLine);
@@ -767,10 +755,10 @@ namespace Nop.Web.Factories
                 }
 
                 //load and add robots.txt additions to the end of file.
-                var robotsAdditionsFile = System.IO.Path.Combine(CommonHelper.MapPath("~/"), "robots.additions.txt");
+                string robotsAdditionsFile = System.IO.Path.Combine(CommonHelper.MapPath("~/"), "robots.additions.txt");
                 if (System.IO.File.Exists(robotsAdditionsFile))
                 {
-                    var robotsFileContent = System.IO.File.ReadAllText(robotsAdditionsFile);
+                    string robotsFileContent = System.IO.File.ReadAllText(robotsAdditionsFile);
                     sb.Append(robotsFileContent);
                 }
             }

@@ -3,7 +3,7 @@
 namespace Nop.Services.Customers
 {
     /// <summary>
-    /// Change password request
+    /// Change password requst
     /// </summary>
     public class ChangePasswordRequest
     {
@@ -11,22 +11,18 @@ namespace Nop.Services.Customers
         /// Email
         /// </summary>
         public string Email { get; set; }
-
         /// <summary>
         /// A value indicating whether we should validate request
         /// </summary>
         public bool ValidateRequest { get; set; }
-
         /// <summary>
         /// Password format
         /// </summary>
         public PasswordFormat NewPasswordFormat { get; set; }
-
         /// <summary>
         /// New password
         /// </summary>
         public string NewPassword { get; set; }
-
         /// <summary>
         /// Old password
         /// </summary>

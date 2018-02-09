@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
-using Nop.Core;
+using System.Web.Routing;
 using Nop.Core.Domain.Orders;
+using Nop.Core.Domain.Payments;
 using Nop.Core.Plugins;
+using Nop.Plugin.Payments.CheckMoneyOrder.Controllers;
 using Nop.Services.Configuration;
 using Nop.Services.Localization;
 using Nop.Services.Orders;
@@ -22,8 +23,7 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder
         private readonly ILocalizationService _localizationService;
         private readonly IOrderTotalCalculationService _orderTotalCalculationService;
         private readonly ISettingService _settingService;
-        private readonly IWebHelper _webHelper;
-
+        
         #endregion
 
         #region Ctor
@@ -31,14 +31,12 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder
         public CheckMoneyOrderPaymentProcessor(CheckMoneyOrderPaymentSettings checkMoneyOrderPaymentSettings,
             ILocalizationService localizationService,
             IOrderTotalCalculationService orderTotalCalculationService,
-            ISettingService settingService,
-            IWebHelper webHelper)
+            ISettingService settingService)
         {
             this._checkMoneyOrderPaymentSettings = checkMoneyOrderPaymentSettings;
             this._localizationService = localizationService;
             this._orderTotalCalculationService = orderTotalCalculationService;
             this._settingService = settingService;
-            this._webHelper = webHelper;
         }
 
         #endregion
@@ -52,7 +50,9 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder
         /// <returns>Process payment result</returns>
         public ProcessPaymentResult ProcessPayment(ProcessPaymentRequest processPaymentRequest)
         {
-            return new ProcessPaymentResult();
+            var result = new ProcessPaymentResult();
+            result.NewPaymentStatus = PaymentStatus.Pending;
+            return result;
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder
         /// <summary>
         /// Returns a value indicating whether payment method should be hidden during checkout
         /// </summary>
-        /// <param name="cart">Shopping cart</param>
+        /// <param name="cart">Shoping cart</param>
         /// <returns>true - hide; false - display.</returns>
         public bool HidePaymentMethod(IList<ShoppingCartItem> cart)
         {
@@ -84,12 +84,13 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder
         /// <summary>
         /// Gets additional handling fee
         /// </summary>
-        /// <param name="cart">Shopping cart</param>
+        /// <param name="cart">Shoping cart</param>
         /// <returns>Additional handling fee</returns>
         public decimal GetAdditionalHandlingFee(IList<ShoppingCartItem> cart)
         {
-            return this.CalculateAdditionalFee(_orderTotalCalculationService, cart,
+            var result = this.CalculateAdditionalFee(_orderTotalCalculationService, cart,
                 _checkMoneyOrderPaymentSettings.AdditionalFee, _checkMoneyOrderPaymentSettings.AdditionalFeePercentage);
+            return result;
         }
 
         /// <summary>
@@ -99,7 +100,9 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder
         /// <returns>Capture payment result</returns>
         public CapturePaymentResult Capture(CapturePaymentRequest capturePaymentRequest)
         {
-            return new CapturePaymentResult { Errors = new[] { "Capture method not supported" } };
+            var result = new CapturePaymentResult();
+            result.AddError("Capture method not supported");
+            return result;
         }
 
         /// <summary>
@@ -109,7 +112,9 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder
         /// <returns>Result</returns>
         public RefundPaymentResult Refund(RefundPaymentRequest refundPaymentRequest)
         {
-            return new RefundPaymentResult { Errors = new[] { "Refund method not supported" } };
+            var result = new RefundPaymentResult();
+            result.AddError("Refund method not supported");
+            return result;
         }
 
         /// <summary>
@@ -119,7 +124,9 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder
         /// <returns>Result</returns>
         public VoidPaymentResult Void(VoidPaymentRequest voidPaymentRequest)
         {
-            return new VoidPaymentResult { Errors = new[] { "Void method not supported" } };
+            var result = new VoidPaymentResult();
+            result.AddError("Void method not supported");
+            return result;
         }
 
         /// <summary>
@@ -129,7 +136,9 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder
         /// <returns>Process payment result</returns>
         public ProcessPaymentResult ProcessRecurringPayment(ProcessPaymentRequest processPaymentRequest)
         {
-            return new ProcessPaymentResult { Errors = new[] { "Recurring payment not supported" } };
+            var result = new ProcessPaymentResult();
+            result.AddError("Recurring payment not supported");
+            return result;
         }
 
         /// <summary>
@@ -139,7 +148,9 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder
         /// <returns>Result</returns>
         public CancelRecurringPaymentResult CancelRecurringPayment(CancelRecurringPaymentRequest cancelPaymentRequest)
         {
-            return new CancelRecurringPaymentResult { Errors = new[] { "Recurring payment not supported" } };
+            var result = new CancelRecurringPaymentResult();
+            result.AddError("Recurring payment not supported");
+            return result;
         }
 
         /// <summary>
@@ -150,47 +161,45 @@ namespace Nop.Plugin.Payments.CheckMoneyOrder
         public bool CanRePostProcessPayment(Order order)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             //it's not a redirection payment method. So we always return false
             return false;
         }
 
         /// <summary>
-        /// Validate payment form
+        /// Gets a route for provider configuration
         /// </summary>
-        /// <param name="form">The parsed form values</param>
-        /// <returns>List of validating errors</returns>
-        public IList<string> ValidatePaymentForm(IFormCollection form)
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller name</param>
+        /// <param name="routeValues">Route values</param>
+        public void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
         {
-            return new List<string>();
+            actionName = "Configure";
+            controllerName = "PaymentCheckMoneyOrder";
+            routeValues = new RouteValueDictionary { { "Namespaces", "Nop.Plugin.Payments.CheckMoneyOrder.Controllers" }, { "area", null } };
         }
 
         /// <summary>
-        /// Get payment information
+        /// Gets a route for payment info
         /// </summary>
-        /// <param name="form">The parsed form values</param>
-        /// <returns>Payment info holder</returns>
-        public ProcessPaymentRequest GetPaymentInfo(IFormCollection form)
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller name</param>
+        /// <param name="routeValues">Route values</param>
+        public void GetPaymentInfoRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
         {
-            return new ProcessPaymentRequest();
+            actionName = "PaymentInfo";
+            controllerName = "PaymentCheckMoneyOrder";
+            routeValues = new RouteValueDictionary { { "Namespaces", "Nop.Plugin.Payments.CheckMoneyOrder.Controllers" }, { "area", null } };
         }
 
         /// <summary>
-        /// Gets a configuration page URL
+        /// Get the type of controller
         /// </summary>
-        public override string GetConfigurationPageUrl()
+        /// <returns>Type</returns>
+        public Type GetControllerType()
         {
-            return $"{_webHelper.GetStoreLocation()}Admin/PaymentCheckMoneyOrder/Configure";
-        }
-
-        /// <summary>
-        /// Gets a view component for displaying plugin in public store ("payment info" checkout step)
-        /// </summary>
-        /// <param name="viewComponentName">View component name</param>
-        public void GetPublicViewComponent(out string viewComponentName)
-        {
-            viewComponentName = "CheckMoneyOrder";
+            return typeof(PaymentCheckMoneyOrderController);
         }
 
         /// <summary>

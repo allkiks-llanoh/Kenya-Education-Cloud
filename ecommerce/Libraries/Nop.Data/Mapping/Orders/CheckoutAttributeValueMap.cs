@@ -2,14 +2,8 @@ using Nop.Core.Domain.Orders;
 
 namespace Nop.Data.Mapping.Orders
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class CheckoutAttributeValueMap : NopEntityTypeConfiguration<CheckoutAttributeValue>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public CheckoutAttributeValueMap()
         {
             this.ToTable("CheckoutAttributeValue");

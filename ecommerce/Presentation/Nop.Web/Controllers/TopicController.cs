@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Web.Mvc;
 using Nop.Services.Localization;
 using Nop.Services.Security;
 using Nop.Services.Stores;
 using Nop.Services.Topics;
 using Nop.Web.Factories;
-using Nop.Web.Framework;
-using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework.Security;
 
 namespace Nop.Web.Controllers
@@ -23,7 +21,7 @@ namespace Nop.Web.Controllers
 
         #endregion
 
-        #region Ctor
+        #region Constructors
 
         public TopicController(ITopicModelFactory topicModelFactory,
             ITopicService topicService,
@@ -41,11 +39,11 @@ namespace Nop.Web.Controllers
         }
 
         #endregion
-        
+
         #region Methods
-        
-        [HttpsRequirement(SslRequirement.No)]
-        public virtual IActionResult TopicDetails(int topicId)
+
+        [NopHttpsRequirement(SslRequirement.No)]
+        public virtual ActionResult TopicDetails(int topicId)
         {
             var model = _topicModelFactory.PrepareTopicModelById(topicId);
             if (model == null)
@@ -53,14 +51,14 @@ namespace Nop.Web.Controllers
 
             //display "edit" (manage) link
             if (_permissionService.Authorize(StandardPermissionProvider.AccessAdminPanel) && _permissionService.Authorize(StandardPermissionProvider.ManageTopics))
-                DisplayEditLink(Url.Action("Edit", "Topic", new { id = model.Id, area = AreaNames.Admin }));
+                DisplayEditLink(Url.Action("Edit", "Topic", new { id = model.Id, area = "Admin" }));
 
             //template
             var templateViewPath = _topicModelFactory.PrepareTemplateViewPath(model.TopicTemplateId);
             return View(templateViewPath, model);
         }
 
-        public virtual IActionResult TopicDetailsPopup(string systemName)
+        public virtual ActionResult TopicDetailsPopup(string systemName)
         {
             var model = _topicModelFactory.PrepareTopicModelBySystemName(systemName);
             if (model == null)
@@ -73,9 +71,19 @@ namespace Nop.Web.Controllers
             return PartialView(templateViewPath, model);
         }
 
-        [HttpPost]
+        [ChildActionOnly]
+        public virtual ActionResult TopicBlock(string systemName)
+        {
+            var model = _topicModelFactory.PrepareTopicModelBySystemName(systemName);
+            if (model == null)
+                return Content("");
+
+            return PartialView(model);
+        }
+
+        [HttpPost, ValidateInput(false)]
         [PublicAntiForgery]
-        public virtual IActionResult Authenticate(int id, string password)
+        public virtual ActionResult Authenticate(int id, string password)
         {
             var authResult = false;
             var title = string.Empty;
@@ -105,7 +113,7 @@ namespace Nop.Web.Controllers
             }
             return Json(new { Authenticated = authResult, Title = title, Body = body, Error = error });
         }
-        
+
         #endregion
     }
 }

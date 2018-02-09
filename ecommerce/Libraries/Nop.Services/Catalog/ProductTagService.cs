@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Nop.Core.Caching;
 using Nop.Core.Data;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Stores;
-using Nop.Core.Extensions;
 using Nop.Data;
 using Nop.Services.Events;
 
@@ -42,7 +42,7 @@ namespace Nop.Services.Catalog
         private readonly IDbContext _dbContext;
         private readonly CommonSettings _commonSettings;
         private readonly CatalogSettings _catalogSettings;
-        private readonly IStaticCacheManager _cacheManager;
+        private readonly ICacheManager _cacheManager;
         private readonly IEventPublisher _eventPublisher;
         private readonly IProductService _productService;
 
@@ -57,7 +57,7 @@ namespace Nop.Services.Catalog
         /// <param name="dataProvider">Data provider</param>
         /// <param name="dbContext">Database Context</param>
         /// <param name="commonSettings">Common settings</param>
-        /// <param name="cacheManager">Static cache manager</param>
+        /// <param name="cacheManager">Cache manager</param>
         /// <param name="eventPublisher">Event published</param>
         /// <param name="storeMappingRepository">Store mapping repository</param>
         /// <param name="catalogSettings">Catalog settings</param>
@@ -68,7 +68,7 @@ namespace Nop.Services.Catalog
             IDbContext dbContext,
             CommonSettings commonSettings,
             CatalogSettings catalogSettings,
-            IStaticCacheManager cacheManager,
+            ICacheManager cacheManager,
             IEventPublisher eventPublisher,
             IProductService productService)
         {
@@ -104,39 +104,60 @@ namespace Nop.Services.Catalog
         /// <returns>Dictionary of "product tag ID : product count"</returns>
         private Dictionary<int, int> GetProductCount(int storeId)
         {
-            var key = string.Format(PRODUCTTAG_COUNT_KEY, storeId);
+            string key = string.Format(PRODUCTTAG_COUNT_KEY, storeId);
             return _cacheManager.Get(key, () =>
             {
-                //stored procedures are enabled and supported by the database. 
-                //It's much faster than the LINQ implementation below 
+
                 if (_commonSettings.UseStoredProceduresIfSupported && _dataProvider.StoredProceduredSupported)
                 {
+                    //stored procedures are enabled and supported by the database. 
+                    //It's much faster than the LINQ implementation below 
+
+                    #region Use stored procedure
+
                     //prepare parameters
-                    var pStoreId = _dataProvider.GetInt32Parameter("StoreId", storeId);
+                    var pStoreId = _dataProvider.GetParameter();
+                    pStoreId.ParameterName = "StoreId";
+                    pStoreId.Value = storeId;
+                    pStoreId.DbType = DbType.Int32;
+
 
                     //invoke stored procedure
-                    var result = _dbContext.SqlQuery<ProductTagWithCount>("Exec ProductTagCountLoadAll @StoreId", pStoreId);
+                    var result = _dbContext.SqlQuery<ProductTagWithCount>(
+                        "Exec ProductTagCountLoadAll @StoreId",
+                        pStoreId);
 
-                    return result.ToDictionary(item => item.ProductTagId, item => item.ProductCount);
+                    var dictionary = new Dictionary<int, int>();
+                    foreach (var item in result)
+                        dictionary.Add(item.ProductTagId, item.ProductCount);
+                    return dictionary;
+
+                    #endregion
                 }
-
-                //stored procedures aren't supported. Use LINQ
-                var query = _productTagRepository.Table.Select(pt => new
+                else
                 {
-                    pt.Id,
-                    ProductCount = (storeId == 0 || _catalogSettings.IgnoreStoreLimitations) ?
-                        pt.Products.Count(p => !p.Deleted && p.Published)
-                        : (from p in pt.Products
-                            join sm in _storeMappingRepository.Table
-                                on new { p1 = p.Id, p2 = "Product" } equals new { p1 = sm.EntityId, p2 = sm.EntityName } into p_sm
-                            from sm in p_sm.DefaultIfEmpty()
-                            where (!p.LimitedToStores || storeId == sm.StoreId) && !p.Deleted && p.Published
-                            select p).Count()
-                });
-                var dictionary = new Dictionary<int, int>();
-                foreach (var item in query)
-                    dictionary.Add(item.Id, item.ProductCount);
-                return dictionary;
+                    //stored procedures aren't supported. Use LINQ
+                    #region Search products
+                    var query = _productTagRepository.Table.Select(pt => new
+                    {
+                        Id = pt.Id,
+                        ProductCount = (storeId == 0 || _catalogSettings.IgnoreStoreLimitations) ?
+                            pt.Products.Count(p => !p.Deleted && p.Published)
+                            : (from p in pt.Products
+                               join sm in _storeMappingRepository.Table
+                               on new { p1 = p.Id, p2 = "Product" } equals new { p1 = sm.EntityId, p2 = sm.EntityName } into p_sm
+                               from sm in p_sm.DefaultIfEmpty()
+                               where (!p.LimitedToStores || storeId == sm.StoreId) && !p.Deleted && p.Published
+                               select p).Count()
+                    });
+                    var dictionary = new Dictionary<int, int>();
+                    foreach (var item in query)
+                        dictionary.Add(item.Id, item.ProductCount);
+                    return dictionary;
+
+                    #endregion
+
+                }
             });
         }
 
@@ -151,7 +172,7 @@ namespace Nop.Services.Catalog
         public virtual void DeleteProductTag(ProductTag productTag)
         {
             if (productTag == null)
-                throw new ArgumentNullException(nameof(productTag));
+                throw new ArgumentNullException("productTag");
 
             _productTagRepository.Delete(productTag);
 
@@ -208,7 +229,7 @@ namespace Nop.Services.Catalog
         public virtual void InsertProductTag(ProductTag productTag)
         {
             if (productTag == null)
-                throw new ArgumentNullException(nameof(productTag));
+                throw new ArgumentNullException("productTag");
 
             _productTagRepository.Insert(productTag);
 
@@ -226,7 +247,7 @@ namespace Nop.Services.Catalog
         public virtual void UpdateProductTag(ProductTag productTag)
         {
             if (productTag == null)
-                throw new ArgumentNullException(nameof(productTag));
+                throw new ArgumentNullException("productTag");
 
             _productTagRepository.Update(productTag);
 
@@ -260,7 +281,7 @@ namespace Nop.Services.Catalog
         public virtual void UpdateProductTags(Product product, string[] productTags)
         {
             if (product == null)
-                throw new ArgumentNullException(nameof(product));
+                throw new ArgumentNullException("product");
 
             //product tags
             var existingProductTags = product.ProductTags.ToList();
@@ -310,7 +331,6 @@ namespace Nop.Services.Catalog
                 }
             }
         }
-
         #endregion
     }
 }

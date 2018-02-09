@@ -49,12 +49,10 @@ namespace Nop.Web.Factories
         /// <returns>Subscription activation model</returns>
         public virtual SubscriptionActivationModel PrepareSubscriptionActivationModel(bool active)
         {
-            var model = new SubscriptionActivationModel
-            {
-                Result = active
+            var model = new SubscriptionActivationModel();
+            model.Result = active
                 ? _localizationService.GetResource("Newsletter.ResultActivated")
-                : _localizationService.GetResource("Newsletter.ResultDeactivated")
-            };
+                : _localizationService.GetResource("Newsletter.ResultDeactivated");
 
             return model;
         }

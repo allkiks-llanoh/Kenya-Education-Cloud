@@ -15,7 +15,6 @@ namespace Nop.Services.Catalog
     public partial class ProductAttributeService : IProductAttributeService
     {
         #region Constants
-
         /// <summary>
         /// Key for caching
         /// </summary>
@@ -95,6 +94,7 @@ namespace Nop.Services.Catalog
         private readonly IEventPublisher _eventPublisher;
         private readonly ICacheManager _cacheManager;
 
+
         #endregion
 
         #region Ctor
@@ -139,7 +139,7 @@ namespace Nop.Services.Catalog
         public virtual void DeleteProductAttribute(ProductAttribute productAttribute)
         {
             if (productAttribute == null)
-                throw new ArgumentNullException(nameof(productAttribute));
+                throw new ArgumentNullException("productAttribute");
 
             _productAttributeRepository.Delete(productAttribute);
 
@@ -161,7 +161,7 @@ namespace Nop.Services.Catalog
         /// <returns>Product attributes</returns>
         public virtual IPagedList<ProductAttribute> GetAllProductAttributes(int pageIndex = 0, int pageSize = int.MaxValue)
         {
-            var key = string.Format(PRODUCTATTRIBUTES_ALL_KEY, pageIndex, pageSize);
+            string key = string.Format(PRODUCTATTRIBUTES_ALL_KEY, pageIndex, pageSize);
             return _cacheManager.Get(key, () =>
             {
                 var query = from pa in _productAttributeRepository.Table
@@ -182,7 +182,7 @@ namespace Nop.Services.Catalog
             if (productAttributeId == 0)
                 return null;
 
-            var key = string.Format(PRODUCTATTRIBUTES_BY_ID_KEY, productAttributeId);
+            string key = string.Format(PRODUCTATTRIBUTES_BY_ID_KEY, productAttributeId);
             return _cacheManager.Get(key, () => _productAttributeRepository.GetById(productAttributeId));
         }
 
@@ -193,7 +193,7 @@ namespace Nop.Services.Catalog
         public virtual void InsertProductAttribute(ProductAttribute productAttribute)
         {
             if (productAttribute == null)
-                throw new ArgumentNullException(nameof(productAttribute));
+                throw new ArgumentNullException("productAttribute");
 
             _productAttributeRepository.Insert(productAttribute);
 
@@ -214,7 +214,7 @@ namespace Nop.Services.Catalog
         public virtual void UpdateProductAttribute(ProductAttribute productAttribute)
         {
             if (productAttribute == null)
-                throw new ArgumentNullException(nameof(productAttribute));
+                throw new ArgumentNullException("productAttribute");
 
             _productAttributeRepository.Update(productAttribute);
 
@@ -236,7 +236,7 @@ namespace Nop.Services.Catalog
         public virtual int[] GetNotExistingAttributes(int[] attributeId)
         {
             if (attributeId == null)
-                throw new ArgumentNullException(nameof(attributeId));
+                throw new ArgumentNullException("attributeId");
 
             var query = _productAttributeRepository.Table;
             var queryFilter = attributeId.Distinct().ToArray();
@@ -255,7 +255,7 @@ namespace Nop.Services.Catalog
         public virtual void DeleteProductAttributeMapping(ProductAttributeMapping productAttributeMapping)
         {
             if (productAttributeMapping == null)
-                throw new ArgumentNullException(nameof(productAttributeMapping));
+                throw new ArgumentNullException("productAttributeMapping");
 
             _productAttributeMappingRepository.Delete(productAttributeMapping);
 
@@ -276,7 +276,7 @@ namespace Nop.Services.Catalog
         /// <returns>Product attribute mapping collection</returns>
         public virtual IList<ProductAttributeMapping> GetProductAttributeMappingsByProductId(int productId)
         {
-            var key = string.Format(PRODUCTATTRIBUTEMAPPINGS_ALL_KEY, productId);
+            string key = string.Format(PRODUCTATTRIBUTEMAPPINGS_ALL_KEY, productId);
 
             return _cacheManager.Get(key, () =>
             {
@@ -299,7 +299,7 @@ namespace Nop.Services.Catalog
             if (productAttributeMappingId == 0)
                 return null;
 
-            var key = string.Format(PRODUCTATTRIBUTEMAPPINGS_BY_ID_KEY, productAttributeMappingId);
+            string key = string.Format(PRODUCTATTRIBUTEMAPPINGS_BY_ID_KEY, productAttributeMappingId);
             return _cacheManager.Get(key, () => _productAttributeMappingRepository.GetById(productAttributeMappingId));
         }
 
@@ -310,7 +310,7 @@ namespace Nop.Services.Catalog
         public virtual void InsertProductAttributeMapping(ProductAttributeMapping productAttributeMapping)
         {
             if (productAttributeMapping == null)
-                throw new ArgumentNullException(nameof(productAttributeMapping));
+                throw new ArgumentNullException("productAttributeMapping");
 
             _productAttributeMappingRepository.Insert(productAttributeMapping);
 
@@ -331,7 +331,7 @@ namespace Nop.Services.Catalog
         public virtual void UpdateProductAttributeMapping(ProductAttributeMapping productAttributeMapping)
         {
             if (productAttributeMapping == null)
-                throw new ArgumentNullException(nameof(productAttributeMapping));
+                throw new ArgumentNullException("productAttributeMapping");
 
             _productAttributeMappingRepository.Update(productAttributeMapping);
 
@@ -356,7 +356,7 @@ namespace Nop.Services.Catalog
         public virtual void DeleteProductAttributeValue(ProductAttributeValue productAttributeValue)
         {
             if (productAttributeValue == null)
-                throw new ArgumentNullException(nameof(productAttributeValue));
+                throw new ArgumentNullException("productAttributeValue");
 
             _productAttributeValueRepository.Delete(productAttributeValue);
 
@@ -377,7 +377,7 @@ namespace Nop.Services.Catalog
         /// <returns>Product attribute mapping collection</returns>
         public virtual IList<ProductAttributeValue> GetProductAttributeValues(int productAttributeMappingId)
         {
-            var key = string.Format(PRODUCTATTRIBUTEVALUES_ALL_KEY, productAttributeMappingId);
+            string key = string.Format(PRODUCTATTRIBUTEVALUES_ALL_KEY, productAttributeMappingId);
             return _cacheManager.Get(key, () =>
             {
                 var query = from pav in _productAttributeValueRepository.Table
@@ -399,7 +399,7 @@ namespace Nop.Services.Catalog
             if (productAttributeValueId == 0)
                 return null;
             
-           var key = string.Format(PRODUCTATTRIBUTEVALUES_BY_ID_KEY, productAttributeValueId);
+           string key = string.Format(PRODUCTATTRIBUTEVALUES_BY_ID_KEY, productAttributeValueId);
            return _cacheManager.Get(key, () => _productAttributeValueRepository.GetById(productAttributeValueId));
         }
 
@@ -410,7 +410,7 @@ namespace Nop.Services.Catalog
         public virtual void InsertProductAttributeValue(ProductAttributeValue productAttributeValue)
         {
             if (productAttributeValue == null)
-                throw new ArgumentNullException(nameof(productAttributeValue));
+                throw new ArgumentNullException("productAttributeValue");
 
             _productAttributeValueRepository.Insert(productAttributeValue);
 
@@ -431,7 +431,7 @@ namespace Nop.Services.Catalog
         public virtual void UpdateProductAttributeValue(ProductAttributeValue productAttributeValue)
         {
             if (productAttributeValue == null)
-                throw new ArgumentNullException(nameof(productAttributeValue));
+                throw new ArgumentNullException("productAttributeValue");
 
             _productAttributeValueRepository.Update(productAttributeValue);
 
@@ -456,7 +456,7 @@ namespace Nop.Services.Catalog
         public virtual void DeletePredefinedProductAttributeValue(PredefinedProductAttributeValue ppav)
         {
             if (ppav == null)
-                throw new ArgumentNullException(nameof(ppav));
+                throw new ArgumentNullException("ppav");
 
             _predefinedProductAttributeValueRepository.Delete(ppav);
 
@@ -505,7 +505,7 @@ namespace Nop.Services.Catalog
         public virtual void InsertPredefinedProductAttributeValue(PredefinedProductAttributeValue ppav)
         {
             if (ppav == null)
-                throw new ArgumentNullException(nameof(ppav));
+                throw new ArgumentNullException("ppav");
 
             _predefinedProductAttributeValueRepository.Insert(ppav);
 
@@ -526,7 +526,7 @@ namespace Nop.Services.Catalog
         public virtual void UpdatePredefinedProductAttributeValue(PredefinedProductAttributeValue ppav)
         {
             if (ppav == null)
-                throw new ArgumentNullException(nameof(ppav));
+                throw new ArgumentNullException("ppav");
 
             _predefinedProductAttributeValueRepository.Update(ppav);
 
@@ -551,7 +551,7 @@ namespace Nop.Services.Catalog
         public virtual void DeleteProductAttributeCombination(ProductAttributeCombination combination)
         {
             if (combination == null)
-                throw new ArgumentNullException(nameof(combination));
+                throw new ArgumentNullException("combination");
 
             _productAttributeCombinationRepository.Delete(combination);
 
@@ -575,7 +575,7 @@ namespace Nop.Services.Catalog
             if (productId == 0)
                 return new List<ProductAttributeCombination>();
 
-            var key = string.Format(PRODUCTATTRIBUTECOMBINATIONS_ALL_KEY, productId);
+            string key = string.Format(PRODUCTATTRIBUTECOMBINATIONS_ALL_KEY, productId);
 
             return _cacheManager.Get(key, () =>
             {
@@ -608,7 +608,7 @@ namespace Nop.Services.Catalog
         /// <returns>Product attribute combination</returns>
         public virtual ProductAttributeCombination GetProductAttributeCombinationBySku(string sku)
         {
-            if (string.IsNullOrEmpty(sku))
+            if (String.IsNullOrEmpty(sku))
                 return null;
 
             sku = sku.Trim();
@@ -628,7 +628,7 @@ namespace Nop.Services.Catalog
         public virtual void InsertProductAttributeCombination(ProductAttributeCombination combination)
         {
             if (combination == null)
-                throw new ArgumentNullException(nameof(combination));
+                throw new ArgumentNullException("combination");
 
             _productAttributeCombinationRepository.Insert(combination);
 
@@ -649,7 +649,7 @@ namespace Nop.Services.Catalog
         public virtual void UpdateProductAttributeCombination(ProductAttributeCombination combination)
         {
             if (combination == null)
-                throw new ArgumentNullException(nameof(combination));
+                throw new ArgumentNullException("combination");
 
             _productAttributeCombinationRepository.Update(combination);
 

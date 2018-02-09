@@ -1,15 +1,19 @@
 ﻿@model UserAgreementModel
+@using Nop.Web.Models.Customer;
 @{
-    Layout = "_ColumnsOne";
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
 
     //page class
     Html.AppendPageCssClassParts("html-user-agreement-page");
 }
- <script type="text/javascript" asp-location="Footer">
+<script type="text/javascript">
     $(document).ready(function () {
+
         $("#agreement-agree").click(toggleContinueButton);
+
         toggleContinueButton();
     });
+
     function toggleContinueButton() {
         if ($('#agreement-agree').is(':checked')) {
             $('#continue-downloading').removeAttr('disabled');

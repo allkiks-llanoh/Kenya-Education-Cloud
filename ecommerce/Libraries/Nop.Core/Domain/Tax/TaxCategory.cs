@@ -1,3 +1,4 @@
+
 namespace Nop.Core.Domain.Tax
 {
     /// <summary>
@@ -15,4 +16,5 @@ namespace Nop.Core.Domain.Tax
         /// </summary>
         public int DisplayOrder { get; set; }
     }
+
 }

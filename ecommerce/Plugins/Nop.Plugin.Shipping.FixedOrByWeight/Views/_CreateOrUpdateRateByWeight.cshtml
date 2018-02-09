@@ -1,13 +1,13 @@
 ﻿@model Nop.Plugin.Shipping.FixedOrByWeight.Models.ShippingByWeightModel
-@using Nop.Web.Framework.Extensions
+@using Nop.Web.Framework;
 
-<div asp-validation-summary="All"></div>
-<input asp-for="Id" type="hidden" />
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
 
 @if (ViewBag.RefreshPage == true)
 {
     <script type="text/javascript">
-        try {window.opener.document.forms['@(Context.Request.Query["formId"])'].@(Context.Request.Query["btnId"]).click();}
+        try {window.opener.document.forms['@(ViewBag.formId)'].@(ViewBag.btnId).click();}
         catch (e){}
         window.close();
     </script>
@@ -15,13 +15,13 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#@Html.IdFor(model => model.CountryId)").change(function () {
+        $("#@Html.FieldIdFor(model => model.CountryId)").change(function () {
             var selectedItem = $(this).val();
-            var ddlStates = $("#@Html.IdFor(model => model.StateProvinceId)");
+            var ddlStates = $("#@Html.FieldIdFor(model => model.StateProvinceId)");
             $.ajax({
                 cache: false,
                 type: "GET",
-                url: "@(Url.Action("GetStatesByCountryId", "Country"))",
+                url: "@(Url.Action("GetStatesByCountryId", "Country", new RouteValueDictionary { { "area", "Admin" } }))",
                 data: { "countryId": selectedItem, "addAsterisk": "true" },
                 success: function (data) {
                     ddlStates.html('');
@@ -42,110 +42,110 @@
         <div class="panel-body">
             <div class="form-group" @(Model.AvailableStores.SelectionIsNotPossible() ? Html.Raw("style=\"display:none\"") : null)>
                 <div class="col-sm-3">
-                    <nop-label asp-for="StoreId" />
+                    @Html.NopLabelFor(model => model.StoreId)
                 </div>
                 <div class="col-sm-9">
-                    <nop-select asp-for="StoreId" asp-items="Model.AvailableStores" />
-                    <span asp-validation-for="StoreId"></span>
+                    @Html.NopDropDownListFor(model => model.StoreId, Model.AvailableStores)
+                    @Html.ValidationMessageFor(model => model.StoreId)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-3">
-                    <nop-label asp-for="WarehouseId" />
+                    @Html.NopLabelFor(model => model.WarehouseId)
                 </div>
                 <div class="col-sm-9">
-                    <nop-select asp-for="WarehouseId" asp-items="Model.AvailableWarehouses" />
-                    <span asp-validation-for="WarehouseId"></span>
+                    @Html.NopDropDownListFor(model => model.WarehouseId, Model.AvailableWarehouses)
+                    @Html.ValidationMessageFor(model => model.WarehouseId)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-3">
-                    <nop-label asp-for="CountryId" />
+                    @Html.NopLabelFor(model => model.CountryId)
                 </div>
                 <div class="col-sm-9">
-                    <nop-select asp-for="CountryId" asp-items="Model.AvailableCountries" />
-                    <span asp-validation-for="CountryId"></span>
+                    @Html.NopDropDownListFor(model => model.CountryId, Model.AvailableCountries)
+                    @Html.ValidationMessageFor(model => model.CountryId)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-3">
-                    <nop-label asp-for="StateProvinceId" />
+                    @Html.NopLabelFor(model => model.StateProvinceId)
                 </div>
                 <div class="col-sm-9">
-                    <nop-select asp-for="StateProvinceId" asp-items="Model.AvailableStates" />
-                    <span asp-validation-for="StateProvinceId"></span>
+                    @Html.NopDropDownListFor(model => model.StateProvinceId, Model.AvailableStates)
+                    @Html.ValidationMessageFor(model => model.StateProvinceId)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-3">
-                    <nop-label asp-for="Zip" />
+                    @Html.NopLabelFor(model => model.Zip)
                 </div>
                 <div class="col-sm-9">
-                    <nop-editor asp-for="Zip" />
-                    <span asp-validation-for="Zip"></span>
+                    @Html.NopEditorFor(model => model.Zip)
+                    @Html.ValidationMessageFor(model => model.Zip)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-3">
-                    <nop-label asp-for="ShippingMethodId" />
+                    @Html.NopLabelFor(model => model.ShippingMethodId)
                 </div>
                 <div class="col-sm-9">
-                    <nop-select asp-for="ShippingMethodId" asp-items="Model.AvailableShippingMethods" />
-                    <span asp-validation-for="ShippingMethodId"></span>
+                    @Html.NopDropDownListFor(model => model.ShippingMethodId, Model.AvailableShippingMethods)
+                    @Html.ValidationMessageFor(model => model.ShippingMethodId)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-3">
-                    <nop-label asp-for="From" />
+                    @Html.NopLabelFor(model => model.From)
                 </div>
                 <div class="col-sm-9">
-                    <nop-editor asp-for="From" asp-postfix="@Model.BaseWeightIn" />
-                    <span asp-validation-for="From"></span>
+                    @Html.NopEditorFor(model => model.From, Model.BaseWeightIn)
+                    @Html.ValidationMessageFor(model => model.From)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-3">
-                    <nop-label asp-for="To" />
+                    @Html.NopLabelFor(model => model.To)
                 </div>
                 <div class="col-sm-9">
-                    <nop-editor asp-for="To" asp-postfix="@Model.BaseWeightIn" />
-                    <span asp-validation-for="To"></span>
+                    @Html.NopEditorFor(model => model.To, Model.BaseWeightIn)
+                    @Html.ValidationMessageFor(model => model.To)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-3">
-                    <nop-label asp-for="AdditionalFixedCost" />
+                    @Html.NopLabelFor(model => model.AdditionalFixedCost)
                 </div>
                 <div class="col-sm-9">
-                    <nop-editor asp-for="AdditionalFixedCost" asp-postfix="@Model.PrimaryStoreCurrencyCode" />
-                    <span asp-validation-for="AdditionalFixedCost"></span>
+                    @Html.NopEditorFor(model => model.AdditionalFixedCost, Model.PrimaryStoreCurrencyCode)
+                    @Html.ValidationMessageFor(model => model.AdditionalFixedCost)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-3">
-                    <nop-label asp-for="LowerWeightLimit" />
+                    @Html.NopLabelFor(model => model.LowerWeightLimit)
                 </div>
                 <div class="col-sm-9">
-                    <nop-editor asp-for="LowerWeightLimit" />
-                    <span asp-validation-for="LowerWeightLimit"></span>
+                    @Html.NopEditorFor(model => model.LowerWeightLimit)
+                    @Html.ValidationMessageFor(model => model.LowerWeightLimit)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-3">
-                    <nop-label asp-for="RatePerWeightUnit" />
+                    @Html.NopLabelFor(model => model.RatePerWeightUnit)
                 </div>
                 <div class="col-sm-9">
-                    <nop-editor asp-for="RatePerWeightUnit" asp-postfix="@Model.PrimaryStoreCurrencyCode" />
-                    <span asp-validation-for="RatePerWeightUnit"></span>
+                    @Html.NopEditorFor(model => model.RatePerWeightUnit, Model.PrimaryStoreCurrencyCode)
+                    @Html.ValidationMessageFor(model => model.RatePerWeightUnit)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-3">
-                    <nop-label asp-for="PercentageRateOfSubtotal" />
+                    @Html.NopLabelFor(model => model.PercentageRateOfSubtotal)
                 </div>
                 <div class="col-sm-9">
-                    <nop-editor asp-for="PercentageRateOfSubtotal" />
-                    <span asp-validation-for="PercentageRateOfSubtotal"></span>
+                    @Html.NopEditorFor(model => model.PercentageRateOfSubtotal)
+                    @Html.ValidationMessageFor(model => model.PercentageRateOfSubtotal)
                 </div>
             </div>
         </div>

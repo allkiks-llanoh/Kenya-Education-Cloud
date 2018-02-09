@@ -2,14 +2,8 @@ using Nop.Core.Domain.Media;
 
 namespace Nop.Data.Mapping.Media
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class PictureMap : NopEntityTypeConfiguration<Picture>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public PictureMap()
         {
             this.ToTable("Picture");

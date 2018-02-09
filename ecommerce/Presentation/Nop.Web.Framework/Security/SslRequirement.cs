@@ -1,8 +1,5 @@
 ﻿namespace Nop.Web.Framework.Security
 {
-    /// <summary>
-    /// SSL requirement
-    /// </summary>
     public enum SslRequirement
     {
         /// <summary>

@@ -7,11 +7,6 @@
     public interface IPlugin
     {
         /// <summary>
-        /// Gets a configuration page URL
-        /// </summary>
-        string GetConfigurationPageUrl();
-
-        /// <summary>
         /// Gets or sets the plugin descriptor
         /// </summary>
         PluginDescriptor PluginDescriptor { get; set; }

@@ -40,6 +40,10 @@ namespace Nop.Services.Orders
             out decimal subTotalWithoutDiscount, out decimal subTotalWithDiscount,
             out SortedDictionary<decimal, decimal> taxRates);
 
+
+
+
+
         /// <summary>
         /// Adjust shipping rate (free shipping, additional charges, discounts)
         /// </summary>
@@ -101,6 +105,11 @@ namespace Nop.Services.Orders
         decimal? GetShoppingCartShippingTotal(IList<ShoppingCartItem> cart, bool includingTax,
             out decimal taxRate, out List<DiscountForCaching> appliedDiscounts);
 
+
+
+
+
+
         /// <summary>
         /// Gets tax
         /// </summary>
@@ -118,6 +127,10 @@ namespace Nop.Services.Orders
         /// <returns>Tax total</returns>
         decimal GetTaxTotal(IList<ShoppingCartItem> cart, out SortedDictionary<decimal, decimal> taxRates, 
             bool usePaymentMethodAdditionalFee = true);
+
+
+
+
 
         /// <summary>
         /// Gets shopping cart total
@@ -146,6 +159,9 @@ namespace Nop.Services.Orders
             out List<AppliedGiftCard> appliedGiftCards,
             out int redeemedRewardPoints, out decimal redeemedRewardPointsAmount,
             bool? useRewardPoints = null, bool usePaymentMethodAdditionalFee = true);
+
+
+
 
         /// <summary>
         /// Update order totals
@@ -182,7 +198,6 @@ namespace Nop.Services.Orders
         /// <param name="orderTotal">Order total</param>
         /// <returns>Applicable order total</returns>
         decimal CalculateApplicableOrderTotalForRewardPoints(decimal orderShippingInclTax, decimal orderTotal);
-
         /// <summary>
         /// Calculate how much reward points will be earned/reduced based on certain amount spent
         /// </summary>

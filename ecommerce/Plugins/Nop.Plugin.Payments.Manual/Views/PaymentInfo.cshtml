@@ -5,47 +5,47 @@
 <table width="100%" cellspacing="2" cellpadding="1" border="0">
     <tr>
         <td>
-            <label asp-for="CreditCardTypes">@T("Payment.SelectCreditCard"):</label>
+            @Html.LabelFor(model => model.CreditCardTypes, false):
         </td>
         <td>
-            <select asp-for="CreditCardType" asp-items="Model.CreditCardTypes" class="dropdownlists"></select>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label asp-for="CardholderName">@T("Payment.CardholderName"):</label>
-        </td>
-        <td>
-            <input type="text" asp-for="CardholderName" style="width:165px;" autocomplete="off" />
-            <span asp-validation-for="CardholderName"></span>
+            @Html.DropDownListFor(model => model.CreditCardType, Model.CreditCardTypes, new { @class = "dropdownlists" })
         </td>
     </tr>
     <tr>
         <td>
-            <label asp-for="CardNumber">@T("Payment.CardNumber"):</label>
+            @Html.LabelFor(model => model.CardholderName, false):
         </td>
         <td>
-            <input type="text" asp-for="CardNumber" style="width:165px;" autocomplete="off" maxlength="22" />
-            <span asp-validation-for="CardNumber"></span>
+            @Html.TextBoxFor(model => model.CardholderName, new { style = "Width: 165px;", autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.CardholderName)
         </td>
     </tr>
     <tr>
         <td>
-            <label asp-for="ExpireMonth">@T("Payment.ExpirationDate"):</label>
+            @Html.LabelFor(model => model.CardNumber, false):
         </td>
         <td>
-            <select asp-for="ExpireMonth" asp-items="Model.ExpireMonths"></select>
+            @Html.TextBoxFor(model => model.CardNumber, new { style = "Width: 165px;", autocomplete = "off", maxlength = 22 })
+            @Html.ValidationMessageFor(model => model.CardNumber)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.ExpireMonth, false):
+        </td>
+        <td>
+            @Html.DropDownListFor(model => model.ExpireMonth, Model.ExpireMonths)
             /
-            <select asp-for="ExpireYear" asp-items="Model.ExpireYears"></select>
+            @Html.DropDownListFor(model => model.ExpireYear, Model.ExpireYears)
         </td>
     </tr>
     <tr>
         <td>
-            <label asp-for="CardCode">@T("Payment.CardCode"):</label>
+            @Html.LabelFor(model => model.CardCode, false):
         </td>
         <td>
-            <input type="text" asp-for="CardCode" style="width:60px;" autocomplete="off" maxlength="4" />
-            <span asp-validation-for="CardCode"></span>
+            @Html.TextBoxFor(model => model.CardCode, new { style = "Width: 60px;", autocomplete = "off", maxlength = 4 })
+            @Html.ValidationMessageFor(model => model.CardCode)
         </td>
     </tr>
 </table>

@@ -2,9 +2,6 @@
 
 namespace Nop.Core.Domain.Customers
 {
-    /// <summary>
-    /// Reward points settings
-    /// </summary>
     public class RewardPointsSettings : ISettings
     {
         /// <summary>

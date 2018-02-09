@@ -1,6 +1,7 @@
 ﻿@model SendPrivateMessageModel
+@using Nop.Web.Models.PrivateMessages;
 @{    
-    Layout = "_ColumnsOne";
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
 
     //title
     Html.AddTitleParts(T("PageTitle.SendPM").Text);
@@ -8,22 +9,30 @@
     Html.AppendPageCssClassParts("html-private-messages");
     Html.AppendPageCssClassParts("html-private-message-send-page");
 }
-<form asp-route="SendPM" method="post">
-    <div asp-validation-summary="ModelOnly" class="message-error"></div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
     <div class="page private-messages private-message-send-page">
         <div class="page-title">
             <h1>@T("PrivateMessages.Send.PostMessage")</h1>
         </div>
         <div class="page-body">
-            <input type="hidden" asp-for="ToCustomerId" />
-            <input type="hidden" asp-for="ReplyToMessageId"/>
+            @{
+                var validationSummary = Html.ValidationSummary(true);
+            }
+            @if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+            {
+                <div class="message-error">@validationSummary</div>
+            }
+            @Html.HiddenFor(model => model.ToCustomerId)
+            @Html.HiddenFor(model => model.ReplyToMessageId)
             <div class="fieldset">
                 <div class="form-fields">
                     <div class="inputs">
                         <label>@T("PrivateMessages.Send.To")</label>
                         @if (Model.AllowViewingToProfile)
                         {
-                            <a href="@Url.RouteUrl("CustomerProfile", new {id = Model.ToCustomerId})">@(Model.CustomerToName)</a>
+                            <a href="@Url.RouteUrl("CustomerProfile", new { id = Model.ToCustomerId })">@(Model.CustomerToName)</a>
                         }
                         else
                         {
@@ -32,21 +41,21 @@
                     </div>
                     <div class="inputs">
                         <label>@T("PrivateMessages.Send.Subject")</label>
-                        <input asp-for="Subject" class="pm-title-text" />
-                        <span asp-validation-for="Subject"></span>
+                        @Html.TextBoxFor(model => model.Subject, new { @class = "pm-title-text" })
+                        @Html.ValidationMessageFor(model => model.Subject)
                     </div>
                     <div class="inputs message">
                         <label>@T("PrivateMessages.Send.Message")</label>
-                        <nop-bb-code-editor asp-for="Message" />
-                        <textarea asp-for="Message" class="bb-editor-text" ></textarea>
-                        <span asp-validation-for="Message"></span>
+                        @Html.BBCodeEditor("Message")
+                        @Html.TextAreaFor(model => model.Message, new { @class = "bb-editor-text", TextMode = "MultiLine" })
+                        @Html.ValidationMessageFor(model => model.Message)
                     </div>
                 </div>
             </div>
             <div class="buttons">
-                <input type="submit" class="button-1 send-pm-button" value="@T("PrivateMessages.Send.SendButton")"/>
-                <input type="button" class="button-2 cancel-pm-button" value="@T("PrivateMessages.Send.CancelButton")" onclick="setLocation('@Url.RouteUrl("PrivateMessages")')"/>
+                <input type="submit" class="button-1 send-pm-button" value="@T("PrivateMessages.Send.SendButton")" />
+                <input type="button" class="button-2 cancel-pm-button" value="@T("PrivateMessages.Send.CancelButton")" onclick="setLocation('@Url.RouteUrl("PrivateMessages")')" />
             </div>
         </div>
     </div>
-</form>
+}

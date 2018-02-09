@@ -1,21 +1,22 @@
 ﻿@{
-    Layout = "_Root.Head";
+    Layout = "~/Views/Shared/_Root.Head.cshtml";
 }
-@await Component.InvokeAsync("Widget", new { widgetZone = "body_start_html_tag_after" })
-@await Html.PartialAsync("_Notifications")
-@await Html.PartialAsync("_JavaScriptDisabledWarning")
-@await Html.PartialAsync("_OldInternetExplorerWarning")
+@Html.Widget("body_start_html_tag_after")
+@Html.Partial("_Notifications")
+@Html.Action("JavaScriptDisabledWarning", "Common")
+@Html.Partial("OldInternetExplorerWarning")
+
 <div class="master-wrapper-page">
-    @await Component.InvokeAsync("AdminHeaderLinks")
-    @await Html.PartialAsync("_Header")
-    <script type="text/javascript" asp-location="Footer">
+    @Html.Action("AdminHeaderLinks", "Common")
+    @Html.Partial("Header")
+    <script type="text/javascript">
         AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart');
     </script>
     <div class="header-menu">
-        @await Component.InvokeAsync("TopMenu")
+        @Html.Action("TopMenu", "Catalog")
     </div>
     <div class="master-wrapper-content">
-        @await Component.InvokeAsync("Widget", new { widgetZone = "content_before" })
+        @Html.Widget("content_before")
 
         @if (IsSectionDefined("Breadcrumb"))
         {
@@ -24,9 +25,9 @@
         <div class="master-column-wrapper">
             @RenderBody()
         </div>
-        @await Component.InvokeAsync("Widget", new { widgetZone = "content_after" })
+        @Html.Widget("content_after")
     </div>
-    @await Component.InvokeAsync("Footer")
+    @Html.Action("Footer", "Common")
 </div>
-@await Component.InvokeAsync("EuCookieLaw")
-@await Component.InvokeAsync("Widget", new { widgetZone = "body_end_html_tag_before" })
+@Html.Action("EuCookieLaw", "Common")
+@Html.Widget("body_end_html_tag_before")

@@ -1,3 +1,4 @@
+
 namespace Nop.Services.Common
 {
     /// <summary>

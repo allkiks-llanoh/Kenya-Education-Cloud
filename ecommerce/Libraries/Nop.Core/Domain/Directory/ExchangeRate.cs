@@ -27,9 +27,10 @@ namespace Nop.Core.Domain.Directory
         public decimal Rate { get; set; }
 
         /// <summary>
-        /// When was this exchange rate updated from the data source (the data XML feed)
+        /// When was this exchange rate updated from the data source (the internet data xml feed)
         /// </summary>
         public DateTime UpdatedOn { get; set; }
+
         
         /// <summary>
         /// Format the rate into a string with the currency code, e.g. "USD 0.72543"
@@ -37,7 +38,8 @@ namespace Nop.Core.Domain.Directory
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{this.CurrencyCode} {this.Rate}";
+            return string.Format("{0} {1}", this.CurrencyCode, this.Rate);
         }
     }
+
 }

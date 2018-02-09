@@ -2,9 +2,6 @@
 
 namespace Nop.Core.Domain.Localization
 {
-    /// <summary>
-    /// Localization settings
-    /// </summary>
     public class LocalizationSettings : ISettings
     {
         /// <summary>

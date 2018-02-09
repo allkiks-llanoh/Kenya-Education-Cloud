@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Web.Mvc;
+using Nop.Core;
 using Nop.Plugin.Tax.FixedOrByCountryStateZip.Domain;
 using Nop.Plugin.Tax.FixedOrByCountryStateZip.Models;
 using Nop.Plugin.Tax.FixedOrByCountryStateZip.Services;
@@ -9,61 +9,56 @@ using Nop.Services.Directory;
 using Nop.Services.Security;
 using Nop.Services.Stores;
 using Nop.Services.Tax;
-using Nop.Web.Framework;
 using Nop.Web.Framework.Controllers;
 using Nop.Web.Framework.Kendoui;
 using Nop.Web.Framework.Mvc;
-using Nop.Web.Framework.Mvc.Filters;
+using Nop.Web.Framework.Security;
 
 namespace Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers
 {
-    [AuthorizeAdmin]
-    [Area(AreaNames.Admin)]
+    [AdminAuthorize]
     public class FixedOrByCountryStateZipController : BasePluginController
     {
-        #region Fields
-
-        private readonly FixedOrByCountryStateZipTaxSettings _countryStateZipSettings;
+        private readonly ITaxCategoryService _taxCategoryService;
         private readonly ICountryService _countryService;
+        private readonly IStateProvinceService _stateProvinceService;
         private readonly ICountryStateZipService _taxRateService;
         private readonly IPermissionService _permissionService;
-        private readonly ISettingService _settingService;
-        private readonly IStateProvinceService _stateProvinceService;
         private readonly IStoreService _storeService;
-        private readonly ITaxCategoryService _taxCategoryService;
+        private readonly ISettingService _settingService;
+        private readonly FixedOrByCountryStateZipTaxSettings _countryStateZipSettings;
 
-        #endregion
-
-        #region Ctor
-
-        public FixedOrByCountryStateZipController(FixedOrByCountryStateZipTaxSettings countryStateZipSettings,
-            ICountryService countryService,
+        public FixedOrByCountryStateZipController(ITaxCategoryService taxCategoryService,
+            ICountryService countryService, 
+            IStateProvinceService stateProvinceService,
             ICountryStateZipService taxRateService,
             IPermissionService permissionService,
-            ISettingService settingService,
-            IStateProvinceService stateProvinceService,
             IStoreService storeService,
-            ITaxCategoryService taxCategoryService)
+            ISettingService settingService,
+            FixedOrByCountryStateZipTaxSettings countryStateZipSettings)
         {
-            this._countryStateZipSettings = countryStateZipSettings;
+            this._taxCategoryService = taxCategoryService;
             this._countryService = countryService;
+            this._stateProvinceService = stateProvinceService;
             this._taxRateService = taxRateService;
             this._permissionService = permissionService;
-            this._settingService = settingService;
-            this._stateProvinceService = stateProvinceService;
             this._storeService = storeService;
-            this._taxCategoryService = taxCategoryService;
+            this._settingService = settingService;
+            this._countryStateZipSettings = countryStateZipSettings;
         }
 
-        #endregion
-
-        #region Methods
-
-        public IActionResult Configure()
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
-            if (!_permissionService.Authorize(StandardPermissionProvider.ManageTaxSettings))
-                return AccessDeniedView();
+            //little hack here
+            //always set culture to 'en-US' (Telerik has a bug related to editing decimal values in other cultures). Like currently it's done for admin area in Global.asax.cs
+            CommonHelper.SetTelerikCulture();
 
+            base.Initialize(requestContext);
+        }
+
+        [ChildActionOnly]
+        public ActionResult Configure()
+        {
             var taxCategories = _taxCategoryService.GetAllTaxCategories();
             if (!taxCategories.Any())
                 return Content("No tax categories can be loaded");
@@ -95,7 +90,7 @@ namespace Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveMode(bool value)
+        public ActionResult SaveMode(bool value)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageTaxSettings))
                 return Content("Access denied");
@@ -104,22 +99,32 @@ namespace Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers
             _countryStateZipSettings.CountryStateZipEnabled = value;
             _settingService.SaveSetting(_countryStateZipSettings);
 
-            return Json(new { Result = true });
+            return Json(new
+            {
+                Result = true
+            }, JsonRequestBehavior.AllowGet);
         }
 
         #region Fixed tax
 
+        [NonAction]
+        protected decimal GetFixedTaxRateValue(int taxCategoryId)
+        {
+            var rate = _settingService.GetSettingByKey<decimal>(string.Format("Tax.TaxProvider.FixedOrByCountryStateZip.TaxCategoryId{0}", taxCategoryId));
+            return rate;
+        }
+
         [HttpPost]
-        public IActionResult FixedRatesList(DataSourceRequest command)
+        public ActionResult FixedRatesList(DataSourceRequest command)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageTaxSettings))
-                return AccessDeniedKendoGridJson();
+                return ErrorForKendoGridJson("Access denied");
 
             var taxRateModels = _taxCategoryService.GetAllTaxCategories().Select(taxCategory => new FixedTaxRateModel
             {
                 TaxCategoryId = taxCategory.Id,
                 TaxCategoryName = taxCategory.Name,
-                Rate = _settingService.GetSettingByKey<decimal>(string.Format(FixedOrByCountryStateZipDefaults.FixedRateSettingsKey, taxCategory.Id))
+                Rate = GetFixedTaxRateValue(taxCategory.Id)
             }).ToList();
 
             var gridModel = new DataSourceResult
@@ -132,12 +137,15 @@ namespace Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers
         }
 
         [HttpPost]
-        public IActionResult FixedRateUpdate(FixedTaxRateModel model)
+        public ActionResult FixedRateUpdate(FixedTaxRateModel model)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageTaxSettings))
                 return Content("Access denied");
-            
-            _settingService.SetSetting(string.Format(FixedOrByCountryStateZipDefaults.FixedRateSettingsKey, model.TaxCategoryId), model.Rate);
+
+            var taxCategoryId = model.TaxCategoryId;
+            var rate = model.Rate;
+
+            _settingService.SetSetting(string.Format("Tax.TaxProvider.FixedOrByCountryStateZip.TaxCategoryId{0}", taxCategoryId), rate);
 
             return new NullJsonResult();
         }
@@ -148,26 +156,41 @@ namespace Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers
 
         [HttpPost]
         [AdminAntiForgery]
-        public IActionResult RatesByCountryStateZipList(DataSourceRequest command)
+        public ActionResult RatesByCountryStateZipList(DataSourceRequest command)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageTaxSettings))
-                return AccessDeniedKendoGridJson();
+                return ErrorForKendoGridJson("Access denied");
 
             var records = _taxRateService.GetAllTaxRates(command.Page - 1, command.PageSize);
-            var taxRatesModel = records.Select(record => new CountryStateZipModel
-            {
-                Id = record.Id,
-                StoreId = record.StoreId,
-                StoreName = _storeService.GetStoreById(record.StoreId)?.Name ?? "*",
-                TaxCategoryId = record.TaxCategoryId,
-                TaxCategoryName = _taxCategoryService.GetTaxCategoryById(record.TaxCategoryId)?.Name ?? string.Empty,
-                CountryId = record.CountryId,
-                CountryName = _countryService.GetCountryById(record.CountryId)?.Name ?? "Unavailable",
-                StateProvinceId = record.StateProvinceId,
-                StateProvinceName = _stateProvinceService.GetStateProvinceById(record.StateProvinceId)?.Name ?? "*",
-                Zip = !string.IsNullOrEmpty(record.Zip) ? record.Zip : "*",
-                Percentage = record.Percentage,
-            }).ToList();
+            var taxRatesModel = records
+                .Select(x =>
+                {
+                    var m = new CountryStateZipModel
+                    {
+                        Id = x.Id,
+                        StoreId = x.StoreId,
+                        TaxCategoryId = x.TaxCategoryId,
+                        CountryId = x.CountryId,
+                        StateProvinceId = x.StateProvinceId,
+                        Zip = x.Zip,
+                        Percentage = x.Percentage,
+                    };
+                    //store
+                    var store = _storeService.GetStoreById(x.StoreId);
+                    m.StoreName = store != null ? store.Name : "*";
+                    //tax category
+                    var tc = _taxCategoryService.GetTaxCategoryById(x.TaxCategoryId);
+                    m.TaxCategoryName = tc != null ? tc.Name : "";
+                    //country
+                    var c = _countryService.GetCountryById(x.CountryId);
+                    m.CountryName = c != null ? c.Name : "Unavailable";
+                    //state
+                    var s = _stateProvinceService.GetStateProvinceById(x.StateProvinceId);
+                    m.StateProvinceName = s != null ? s.Name : "*";
+                    //zip
+                    m.Zip = !string.IsNullOrEmpty(x.Zip) ? x.Zip : "*";
+                    return m;
+                }).ToList();
 
             var gridModel = new DataSourceResult
             {
@@ -180,12 +203,12 @@ namespace Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers
 
         [HttpPost]
         [AdminAntiForgery]
-        public IActionResult AddRateByCountryStateZip(ConfigurationModel model)
+        public ActionResult AddRateByCountryStateZip(ConfigurationModel model)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageTaxSettings))
                 return Content("Access denied");
-            
-            _taxRateService.InsertTaxRate(new TaxRate
+
+            var taxRate = new TaxRate
             {
                 StoreId = model.AddStoreId,
                 TaxCategoryId = model.AddTaxCategoryId,
@@ -193,14 +216,15 @@ namespace Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers
                 StateProvinceId = model.AddStateProvinceId,
                 Zip = model.AddZip,
                 Percentage = model.AddPercentage
-            });
+            };
+            _taxRateService.InsertTaxRate(taxRate);
 
             return Json(new { Result = true });
         }
 
         [HttpPost]
         [AdminAntiForgery]
-        public IActionResult UpdateRateByCountryStateZip(CountryStateZipModel model)
+        public ActionResult UpdateRateByCountryStateZip(CountryStateZipModel model)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageTaxSettings))
                 return Content("Access denied");
@@ -215,7 +239,7 @@ namespace Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers
 
         [HttpPost]
         [AdminAntiForgery]
-        public IActionResult DeleteRateByCountryStateZip(int id)
+        public ActionResult DeleteRateByCountryStateZip(int id)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageTaxSettings))
                 return Content("Access denied");
@@ -226,9 +250,7 @@ namespace Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers
 
             return new NullJsonResult();
         }
-
-        #endregion
-
+        
         #endregion
     }
 }
