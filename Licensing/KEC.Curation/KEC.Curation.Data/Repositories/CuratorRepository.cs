@@ -16,8 +16,8 @@ namespace KEC.Curation.Data.Repositories
         public void AddFromCSV(CuratorCreation curatorCreation)
         {
             var retrievedCurator = _curationDBContext.CuratorCreations
-                                 .FirstOrDefault(p => p.FirstName.Equals(curatorCreation.FirstName)
-                                 && p.LastName.Equals(curatorCreation.LastName));
+                                 .FirstOrDefault(p => p.SirName.Equals(curatorCreation.SirName)
+                                 && p.EmailAddress.Equals(curatorCreation.EmailAddress));
             if (retrievedCurator ==null)
             {
                 Add(curatorCreation);

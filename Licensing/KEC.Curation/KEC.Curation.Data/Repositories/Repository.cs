@@ -1,4 +1,5 @@
-﻿using KEC.Curation.Data.Repositories.Core;
+﻿using KEC.Curation.Data.Models;
+using KEC.Curation.Data.Repositories.Core;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,18 @@ namespace KEC.Curation.Data.Repositories
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected readonly DbContext _context;
+        private CuratorType context;
 
         public Repository(DbContext context)
         {
             _context = context;
         }
+
+        public Repository(CuratorType context)
+        {
+            this.context = context;
+        }
+
         public void Add(TEntity entity)
         {
             _context.Set<TEntity>().Add(entity);
@@ -38,6 +46,7 @@ namespace KEC.Curation.Data.Repositories
         {
            return _context.Set<TEntity>().ToList();
         }
+       
 
         public void Remove(TEntity entity)
         {
@@ -48,5 +57,6 @@ namespace KEC.Curation.Data.Repositories
         {
             _context.Set<TEntity>().RemoveRange(entities);
         }
+        
     }
 }

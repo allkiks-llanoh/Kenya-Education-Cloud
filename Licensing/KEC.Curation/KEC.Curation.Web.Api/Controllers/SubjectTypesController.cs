@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
@@ -42,7 +41,7 @@ namespace KEC.Curation.Web.Api.Controllers
         
         // POST: api/SubjectTypes
         [HttpPost]
-        public IActionResult CreateSubjectType([FromBody] SubjectTypeUploadSerializer model)
+        public IActionResult CreateSubjectType(SubjectTypeUploadSerializer model)
         {
             if (!ModelState.IsValid)
             {
@@ -55,10 +54,7 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             var subjectType = new SubjectType
             {
-                Name = model.Name,
-                CreatedAtUtc = DateTime.Now.ToUniversalTime(),
-                UpdatedAtUtc = DateTime.Now.ToUniversalTime()
-
+                Name = model.Name
             };
             _uow.SubjectTypeRepository.Add(subjectType);
             _uow.Complete();
@@ -67,19 +63,18 @@ namespace KEC.Curation.Web.Api.Controllers
         
         // PUT: api/SubjectTypes/5
         [HttpPut("{id}")]
-        public IActionResult EditSubjectType(int Id,[FromBody]SubjectTypeUploadSerializer model)
+        public IActionResult EditSubjectType(SubjectTypeUploadSerializer model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(modelState: ModelState);
             }
-            var subjectType = _uow.SubjectTypeRepository.Get(Id);
+            var subjectType = _uow.SubjectTypeRepository.Get(model.Id.GetValueOrDefault());
             if (subjectType == null)
             {
                return BadRequest(error: "Subject type record could not be retrieved for updating");
             }
             subjectType.Name = model.Name;
-            subjectType.UpdatedAtUtc = DateTime.Now.ToUniversalTime();
             _uow.Complete();
             return Ok("Subject type updated successfully");
         }

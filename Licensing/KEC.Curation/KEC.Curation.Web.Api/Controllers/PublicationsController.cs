@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,28 @@ namespace KEC.Curation.Web.Api.Controllers
             _uow = uow;
             _env = env;
         }
+        //View Approved Publication
+        [HttpGet, Route("ViewApproved")]
+        public IActionResult ViewAproved()
+        {
+            var stage = (int)PublicationStage.Approved;
+            var publications = _uow.PublicationRepository.Find(p =>
+                                p.PublicationStageLogs.Equals(stage));
+            if (publications.Any())
+            {
+                return Ok(value: publications.ToList());
+            }
+            else
+            {
+                return NotFound("No Publications Have been Approved At This Time");
+            }
+        }
+        //Get All Curator Types
+        [HttpGet, Route("ViewRejected")]
+        public IActionResult ViewRejected(PublicationStage stage)
+        {
+            return Ok();  
+        }
         [HttpPost("submit")]
         public async Task<IActionResult> Submit([FromForm]PublicationUploadSerilizer model)
         {
@@ -49,6 +72,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     Url = filePath,
                     KICDNumber = _uow.PublicationRepository
                                       .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
+
                     CreatedTimeUtc = DateTime.UtcNow,
                     ModifiedTimeUtc = DateTime.UtcNow
 
@@ -77,28 +101,5 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpGet("{subjectId:int}/{stage}")]
-        public IActionResult PublicationsByStage(PublicationStage stage,int subjectId)
-        {
-            try
-            {
-                var stageLevel = (int)stage;
-                var publicationIds = _uow.PublicationRepository
-                                         .Find(p => p.PublicationStageLogs.Count == stageLevel
-                                               && !p.PublicationStageLogs.Any(l => l.Stage > stage)
-                                               && p.Subject.Id.Equals(subjectId))
-                                         .Select(p => p.Id);
-                var publications = _uow.PublicationRepository.Find(p => publicationIds.Contains(p.Id));
-                var publicationList = publications.Any() ?
-                            publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
-                return Ok(value: publicationList);
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
-            }
-        }
-
     }
 }

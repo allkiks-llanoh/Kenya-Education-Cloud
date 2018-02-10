@@ -659,6 +659,29 @@
     <Content Include="Scripts\selectivizr.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Themes\BookStore\Content\css\animate.min.css" />
+    <Content Include="Themes\BookStore\Content\css\bootstrap-select.min.css" />
+    <Content Include="Themes\BookStore\Content\css\bootstrap.min.css" />
+    <Content Include="Themes\BookStore\Content\css\elegant-fonts.css" />
+    <Content Include="Themes\BookStore\Content\css\font-awesome.min.css" />
+    <Content Include="Themes\BookStore\Content\css\green.css" />
+    <Content Include="Themes\BookStore\Content\css\ie8.css" />
+    <Content Include="Themes\BookStore\Content\css\jquery-ui.min.css" />
+    <Content Include="Themes\BookStore\Content\css\owl.carousel.css" />
+    <Content Include="Themes\BookStore\Content\css\owl.transitions.css" />
+    <Content Include="Themes\BookStore\Content\css\print.css" />
+    <Content Include="Themes\BookStore\Content\css\styles.css" />
+    <Content Include="Themes\BookStore\Content\css\styles.rtl.css" />
+    <Content Include="Themes\BookStore\Content\js\bootstrap-hover-dropdown.min.js" />
+    <Content Include="Themes\BookStore\Content\js\bootstrap-select.min.js" />
+    <Content Include="Themes\BookStore\Content\js\bootstrap.min.js" />
+    <Content Include="Themes\BookStore\Content\js\echo.min.js" />
+    <Content Include="Themes\BookStore\Content\js\jquery-1.12.0.min.js" />
+    <Content Include="Themes\BookStore\Content\js\jquery-ui.min.js" />
+    <Content Include="Themes\BookStore\Content\js\jquery.easing.min.js" />
+    <Content Include="Themes\BookStore\Content\js\owl.carousel.min.js" />
+    <Content Include="Themes\BookStore\Content\js\scripts.js" />
+    <Content Include="Themes\BookStore\Content\js\wow.min.js" />
     <Content Include="Themes\DefaultClean\Content\css\ie8.css" />
     <Content Include="Themes\DefaultClean\Content\css\styles.css" />
     <Content Include="Themes\DefaultClean\Content\css\styles.rtl.css" />
@@ -1234,9 +1257,15 @@
     <Content Include="Themes\StrivingTealTheme\Views\Web.config" />
     <Content Include="Themes\KECBookStore\theme.config" />
     <Content Include="Themes\StrivingTealTheme\theme.config" />
+    <Content Include="Themes\BookStore\theme.config" />
+    <Content Include="Themes\BookStore\Views\Common\Footer.cshtml" />
+    <Content Include="Themes\BookStore\Views\shared\Head.cshtml" />
+    <Content Include="Themes\BookStore\Views\shared\_Root.cshtml" />
+    <Content Include="Themes\BookStore\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\bin\" />
+    <Folder Include="Themes\BookStore\Content\images\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Nop.Core\Nop.Core.csproj">

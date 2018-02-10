@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="ConfigarationManagers\" />
     <Folder Include="Publications\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
@@ -20,6 +21,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KEC.Curation.Data\KEC.Curation.Data.csproj" />
+    <ProjectReference Include="..\SendSMS\KEC.Curation.SMSService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web.Extensions">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Web.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

@@ -76,6 +76,6 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.LevelId;
             }
         }
-       
+
     }
 }

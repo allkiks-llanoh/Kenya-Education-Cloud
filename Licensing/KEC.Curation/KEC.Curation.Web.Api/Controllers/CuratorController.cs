@@ -87,6 +87,8 @@ namespace KEC.Curation.Web.Api.Controllers
                         var curatorCreation = new CuratorCreation
                         {
                             PhoneNumber = csvReader.GetField<string>("PhoneNumber"),
+                            EmailAddress = csvReader.GetField<string>("EmailAddress"),
+                            SirName = csvReader.GetField<string>("SirName"),
                             FirstName = csvReader.GetField<string>("FirstName"),
                             LastName = csvReader.GetField<string>("LastName"),
                             CreatedAt = DateTime.Now,

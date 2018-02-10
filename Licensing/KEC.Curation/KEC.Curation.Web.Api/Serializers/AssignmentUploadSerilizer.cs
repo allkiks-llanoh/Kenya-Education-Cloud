@@ -10,7 +10,7 @@ namespace KEC.Curation.Web.Api.Serializers
     {
         public int? Id { get; set; }
         public int PublicationSectionId { get; set; }
-        [Required(ErrorMessage = "You Must Select A Curator To Assign To")]
+        [Required(ErrorMessage = "You Must Select A Curator To Be Assigned")]
         public int Assignee { get; set; }
         public int AssignedBy { get; set; }
         [Required(ErrorMessage = "Cannot Submit Without Comments")]

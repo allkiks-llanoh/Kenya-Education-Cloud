@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.Curation.Data", "KEC.Curation.Data\KEC.Curation.Data.csproj", "{0BAD42D1-8373-475C-973B-A8B0381DF37A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.Curation.Web.Api", "KEC.Curation.Web.Api\KEC.Curation.Web.Api.csproj", "{37905EE3-18C0-4D32-8C49-3CA98A2E3F3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEC.Curation.Services", "KEC.Curation.Services\KEC.Curation.Services.csproj", "{7D75F711-BB16-4ED3-865F-DED152A61C27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.Curation.Services", "KEC.Curation.Services\KEC.Curation.Services.csproj", "{7D75F711-BB16-4ED3-865F-DED152A61C27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEC.Curation.SMSService", "SendSMS\KEC.Curation.SMSService.csproj", "{1C401721-C1FA-4497-BE36-2E98E5FF42BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{7D75F711-BB16-4ED3-865F-DED152A61C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D75F711-BB16-4ED3-865F-DED152A61C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D75F711-BB16-4ED3-865F-DED152A61C27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C401721-C1FA-4497-BE36-2E98E5FF42BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C401721-C1FA-4497-BE36-2E98E5FF42BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C401721-C1FA-4497-BE36-2E98E5FF42BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C401721-C1FA-4497-BE36-2E98E5FF42BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
