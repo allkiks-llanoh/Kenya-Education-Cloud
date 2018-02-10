@@ -16,13 +16,6 @@ namespace KEC.Curation.Web.Api.Serializers
             _uow = uow;
             _subject = subject;
         }
-        public int Id
-        {
-            get
-            {
-                return _subject.Id;
-            }
-        }
         public string Name
         {
             get
@@ -42,20 +35,6 @@ namespace KEC.Curation.Web.Api.Serializers
             get
             {
                 return _uow.SubjectTypeRepository.Get(_subject.SubjectTypeId).Name;
-            }
-        }
-        public DateTime CreatedAtUtc
-        {
-            get
-            {
-                return _subject.CreatedAtUtc;
-            }
-        }
-        public DateTime UpdatedAtUtc
-        {
-            get
-            {
-                return _subject.UpdatedAtUtc;
             }
         }
 

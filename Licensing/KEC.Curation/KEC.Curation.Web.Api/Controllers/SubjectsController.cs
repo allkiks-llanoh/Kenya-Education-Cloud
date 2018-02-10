@@ -43,7 +43,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
         // POST: api/Subjects
         [HttpPost]
-        public IActionResult CreateSubject([FromBody]SubjectUploadSerializer model)
+        public IActionResult CreateSubject(string Name,SubjectUploadSerializer model)
         {
             if (!ModelState.IsValid)
             {
@@ -60,9 +60,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 var subject = new Subject
                 {
                     Name = model.Name,
-                    SubjectTypeId = model.SubjectTypeId.Value,
-                    CreatedAtUtc = DateTime.Now.ToUniversalTime(),
-                    UpdatedAtUtc = DateTime.Now.ToUniversalTime()
+                    SubjectTypeId = model.SubjectTypeId
                 };
                 _uow.SubjectRepository.Add(subject);
                 _uow.Complete();
@@ -77,37 +75,28 @@ namespace KEC.Curation.Web.Api.Controllers
 
         // PUT: api/Subjects/5
         [HttpPut("{id}")]
-        public IActionResult EditSubject(int Id,[FromBody]SubjectUploadSerializer model)
+        public IActionResult EditSubject([FromBody]SubjectUploadSerializer model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            try
+            var subject = _uow.SubjectRepository.Get(model.Id.GetValueOrDefault());
+            if (subject == null)
             {
-                var subject = _uow.SubjectRepository.Get(Id);
-                if (subject == null)
-                {
-                    return NotFound("Subject could not retrieved for updating");
-                }
-                var exist = _uow.SubjectRepository.Find(p => p.Name.Equals(model.Name)
-                                                      && p.SubjectTypeId.Equals(model.SubjectTypeId.GetValueOrDefault())
-                                                      && !p.Id.Equals(Id)).Any();
-                if (exist)
-                {
-                    return BadRequest("A different subject with the same properties exists");
-                }
-                subject.Name = model.Name;
-                subject.UpdatedAtUtc = DateTime.Now.ToUniversalTime();
-                subject.SubjectTypeId = model.SubjectTypeId.Value;
-                _uow.Complete();
-                return Ok("Subject updated successfully");
+                return NotFound("Subject could not retrieved for updating");
             }
-            catch (Exception)
+            var exist = _uow.SubjectRepository.Find(p => p.Name.Equals(model.Name)
+                                                  && p.SubjectTypeId.Equals(model.SubjectTypeId)
+                                                  && p.Id != model.Id).Any();
+            if (exist)
             {
-
-                return StatusCode(StatusCodes.Status500InternalServerError,"Something went wrong while processing your request");
+                return BadRequest("A different subject with the same properties exists");
             }
+            subject.Name = model.Name;
+            subject.SubjectTypeId = model.SubjectTypeId;
+            _uow.Complete();
+            return Ok("Subject updated successfully");
 
         }
 

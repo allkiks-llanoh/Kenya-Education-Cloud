@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using KEC.Curation.Data.UnitOfWork;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using KEC.Curation.Data;
 using KEC.Curation.Data.Models;
 using KEC.Curation.Web.Api.Serializers;
 

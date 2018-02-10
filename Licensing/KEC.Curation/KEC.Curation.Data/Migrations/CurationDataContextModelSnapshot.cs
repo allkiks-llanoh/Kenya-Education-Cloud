@@ -44,6 +44,48 @@ namespace KEC.Curation.Data.Migrations
                     b.ToTable("CuratorAssignments");
                 });
 
+            modelBuilder.Entity("KEC.Curation.Data.Models.CuratorCreation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("EmailAddress");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("GUID");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("SirName");
+
+                    b.Property<int?>("SubjectId");
+
+                    b.Property<int>("TypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("CuratorCreations");
+                });
+
+            modelBuilder.Entity("KEC.Curation.Data.Models.CuratorType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("TypeName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CuratorTypes");
+                });
+
             modelBuilder.Entity("KEC.Curation.Data.Models.Level", b =>
                 {
                     b.Property<int>("Id")
@@ -153,13 +195,9 @@ namespace KEC.Curation.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("CreatedAtUtc");
-
                     b.Property<string>("Name");
 
                     b.Property<int>("SubjectTypeId");
-
-                    b.Property<DateTime>("UpdatedAtUtc");
 
                     b.HasKey("Id");
 
@@ -168,16 +206,24 @@ namespace KEC.Curation.Data.Migrations
                     b.ToTable("Subjects");
                 });
 
+            modelBuilder.Entity("KEC.Curation.Data.Models.SubjectCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubjectCategories");
+                });
+
             modelBuilder.Entity("KEC.Curation.Data.Models.SubjectType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("CreatedAtUtc");
-
                     b.Property<string>("Name");
-
-                    b.Property<DateTime>("UpdatedAtUtc");
 
                     b.HasKey("Id");
 
@@ -190,6 +236,13 @@ namespace KEC.Curation.Data.Migrations
                         .WithOne("CuratorAssignment")
                         .HasForeignKey("KEC.Curation.Data.Models.CuratorAssignment", "PublicationSectionId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("KEC.Curation.Data.Models.CuratorCreation", b =>
+                {
+                    b.HasOne("KEC.Curation.Data.Models.Subject", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId");
                 });
 
             modelBuilder.Entity("KEC.Curation.Data.Models.Publication", b =>

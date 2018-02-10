@@ -2,6 +2,7 @@
 using KEC.Curation.Data.Models;
 using KEC.Curation.Services.Helpers;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,5 +25,9 @@ namespace KEC.Curation.Data.Repositories
             return kicdNumber;
         }
 
+        public int Add(PublicationSection publicationSection)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
