@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEC.Curation.Web.UI", "Inspinia_MVC5_SeedProject\KEC.Curation.Web.UI.csproj", "{86CADB26-5817-46B6-88C7-76D5753722C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEC.Curation.Web.UI", "KEC.Curatiom.Web.UI\KEC.Curation.Web.UI.csproj", "{86CADB26-5817-46B6-88C7-76D5753722C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
