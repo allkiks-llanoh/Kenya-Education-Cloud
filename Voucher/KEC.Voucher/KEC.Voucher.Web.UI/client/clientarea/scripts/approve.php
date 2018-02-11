@@ -20,9 +20,9 @@
             headers : {
                 'Accept' : 'application/json',
                 'Content-Type' : 'application/json',
-                'Access-Control-Allow-Origin': 'http://localhost:60823/api/'
+                'Access-Control-Allow-Origin': 'http://voucherapi-d.kec.ac.ke/api/'
             } ,
-        url: "http://localhost:60823/api/vouchers/selected/accept",
+        url: "http://voucherapi-d.kec.ac.ke/api/vouchers/selected/accept",
         type: "PATCH",
         data: ajaxDatas() ,
         success: function(data,status,jxhr) {

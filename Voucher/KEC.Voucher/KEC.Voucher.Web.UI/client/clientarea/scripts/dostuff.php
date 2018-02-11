@@ -13,7 +13,7 @@
     var countyName  = $('#county').val();
     var schoolId  = $('#schooltype').val();
         $.ajax({
-        url: "http://localhost:60823/api/vouchers",
+        url: "http://voucherapi-d.kec.ac.ke/api/vouchers",
         type: "GET",
         dataType: "json",    
         success: function(data) {
