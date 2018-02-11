@@ -23,7 +23,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet]
         public IActionResult AllLevels()
         {
-            var levels = _uow.levelRepository.GetAll().ToList();
+            var levels = _uow.LevelRepository.GetAll().ToList();
             var LevelsList = levels.Any()?
                 levels.Select (p=> new LevelsDownloadSerilizer(p, _uow)) : new List<LevelsDownloadSerilizer>();
             return Ok(value: LevelsList.ToList());
@@ -33,27 +33,27 @@ namespace KEC.Curation.Web.Api.Controllers
         
         // POST: api/Levels
         [HttpPost]
-        public IActionResult CreateLevel(string Name, LevelsUploadSerilizer model)
+        public IActionResult CreateLevel([FromBody] LevelsUploadSerilizer model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(modelState: ModelState);
             }
-            var exist = _uow.levelRepository.Find(p => p.Name.Equals(model.Name)).Any();
+            var exist = _uow.LevelRepository.Find(p => p.Name.Equals(model.Name)).Any();
             try
             {
-                if (exist)
+                if (exist) 
                 {
-                    return BadRequest("Level Grade already exists");
+                    return BadRequest("Level already exists");
                 }
                 var level = new Level
                 {
                     Name = model.Name,
                     
                 };
-                _uow.levelRepository.Add(level);
+                _uow.LevelRepository.Add(level);
                 _uow.Complete();
-                return Ok("Level Grade Created Successfully");
+                return Ok("Level Created Successfully");
             }
             catch (Exception)
             {
@@ -62,30 +62,32 @@ namespace KEC.Curation.Web.Api.Controllers
             }
         }
         
-        // PUT: api/Levels/5
-        [HttpPut("{id}")]
+        // Patch: api/Levels/5
+        [HttpPatch("{id}")]
         public IActionResult UpdateLevel(int Id, LevelsUploadSerilizer model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var level = _uow.levelRepository.Get(model.Id.GetValueOrDefault());
+            var level = _uow.LevelRepository.Get(model.Id.GetValueOrDefault());
             if (level == null)
             {
-                return NotFound("Level Grade could not retrieved for updating or is missing ");
+                return NotFound("Level could not be retrieved for updating or is missing ");
             }
-            var exist = _uow.levelRepository.Find(p => p.Name.Equals(model.Name)).Any();
+            var exist = _uow.LevelRepository.Find(p => p.Name.Equals(model.Name)).Any();
             if (exist)
             {
-                return BadRequest("A different Level Grade with the same properties exists");
+                return BadRequest("A different Level with the same properties exists");
             }
-            level.Name = model.Name;
+            else
+            {
+                level.Name = model.Name;
+            }
+          
            
             _uow.Complete();
             return Ok("Level Grade updated successfully");
         }
-        
-       
     }
 }

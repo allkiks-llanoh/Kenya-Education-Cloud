@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace KEC.Curation.Web.Api.Serializers
 {
-    public class SubjectTypeUploadSerializer
+    public class CurationUploadSerializer
     {
-        [Required(ErrorMessage = "Subject type name cannot be blank")]
-        public string Name { get; set; }
+        [Required(ErrorMessage ="Notes cannot be blank")]
+        public string Notes { get; set; }
+        public bool Submitted { get; set; }
     }
 }

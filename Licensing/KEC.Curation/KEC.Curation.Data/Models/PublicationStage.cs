@@ -1,31 +1,24 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace KEC.Curation.Data.Models
 {
     public enum PublicationStage
-    {   
+    {
         [Description("Newly submitted document")]
-        NewPublication = 0,
+        NewPublication=1,
         [Description("Legal Verification")]
-        LegalVerification = 1,
+        LegalVerification=2,
         [Description("Payment verification")]
-        PaymentVerification = 2,
-        [Description("Principal Curator Level")]
-        PrincipalCuratorLevel = 3,
-        [Description("Chief Curator Level")]
-        ChiefCurator_New = 4,
-        [Description("Under Curation")]
+        PaymentVerification = 3,
+        [Description("Principal curator passes to chief curators")]
+        PrincipalCurator = 4,
+        [Description("Chief curator assigns to curators")]
         Curation = 5,
-        [Description("Sent To Chief Curator")]
-        Curated = 6,
-        [Description("Cheif Curator Approval")]
-        ChiefCurator_Approved = 7,
-        [Description("Approved")]
-        Approved = 8,
-        [Description("Rejected")]
-        Rejected = 9,
-        [Description("Certificate_Generated")]
-        Certificate_Generated = 10
+        [Description("Publication approval by principal curator")]
+        PublicationApproval=6,
+        [Description("Issue of certificate")]
+        IssueOfCertificate = 7
+
+
     }
 }

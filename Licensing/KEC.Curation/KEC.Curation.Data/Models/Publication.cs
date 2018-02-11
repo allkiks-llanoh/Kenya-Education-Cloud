@@ -27,6 +27,7 @@ namespace KEC.Curation.Data.Models
         public DateTime ModifiedTimeUtc { get; set; }
         public string CertificateNumber { get; set; }
         public string CertificateUrl { get; set; }
+        public bool FullyAssigned { get; set; }
         public string Owner { get; set; }
         public virtual Subject Subject { get; set; }
         public virtual Level Level { get; set; }

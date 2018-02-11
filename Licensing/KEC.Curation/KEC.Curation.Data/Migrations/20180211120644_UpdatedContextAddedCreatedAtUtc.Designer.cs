@@ -12,9 +12,10 @@ using System;
 namespace KEC.Curation.Data.Migrations
 {
     [DbContext(typeof(CurationDataContext))]
-    partial class CurationDataContextModelSnapshot : ModelSnapshot
+    [Migration("20180211120644_UpdatedContextAddedCreatedAtUtc")]
+    partial class UpdatedContextAddedCreatedAtUtc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

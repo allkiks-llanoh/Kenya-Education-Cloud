@@ -15,9 +15,9 @@ namespace KEC.Curation.Data.UnitOfWork
                 .AddJsonFile("Database.json").Build();
             var connectionString = configuration.GetConnectionString("CurationDatabase");
             optionsBuilder.UseSqlServer(connectionString);
-            _context = new CurationDataContext(optionsBuilder.Options);
+            _context = new Database.CurationDataContext(optionsBuilder.Options);
         }
-        public PublicationRepository PublicationRepository =>  new PublicationRepository(_context);
+        public PublicationRepository PublicationRepository => new PublicationRepository(_context);
 
         public PublicationSectionRepository PublicationSectionRepository => new PublicationSectionRepository(_context);
 
@@ -27,17 +27,11 @@ namespace KEC.Curation.Data.UnitOfWork
 
         public CuratorAssignmentRepository CuratorAssignmentRepository => new CuratorAssignmentRepository(_context);
 
-//public PublicationStageRepository PublicationStageRepository => new PublicationStageRepository(_context);
+        public LevelRepository LevelRepository => new LevelRepository(_context);
 
-        PublicationStageLogRepository IUnitOfWork.PublicationStageLogRepository => new PublicationStageLogRepository(_context);
-        public CuratorRepository CuratorRepository => new CuratorRepository(_context);
+        public PublicationStageLogRepository PublicationStageLogRepository => new PublicationStageLogRepository(_context);
 
-        public CuratorTypeRepository CuratorTypeRepository => new CuratorTypeRepository(_context);
-        public LevelRepository levelRepository => new LevelRepository(_context);
-        public GetCuratorsRepository GetCuratorsRepository => new GetCuratorsRepository(_context);
-        public SubjectCategoryRepository SubjectCategoryRepository => new SubjectCategoryRepository(_context);
-        
-        public  int Complete()
+        public int Complete()
         {
             return _context.SaveChanges();
         }
@@ -45,10 +39,6 @@ namespace KEC.Curation.Data.UnitOfWork
         public void Dispose()
         {
             _context.Dispose();
-        }
-        public void Edit()
-        {
-            _context.UpdateRange();
         }
     }
 }

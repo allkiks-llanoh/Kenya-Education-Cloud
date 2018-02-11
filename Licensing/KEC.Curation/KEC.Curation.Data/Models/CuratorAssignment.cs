@@ -8,10 +8,11 @@ namespace KEC.Curation.Data.Models
     {
         public int Id { get; set; }
         public int PublicationSectionId { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedUtc { get; set; }
         public string Assignee { get; set; }
         public string AssignedBy { get; set; }
         public string Notes { get; set; }
+        public bool Submitted { get; set; }
         public virtual PublicationSection PublicationSection { get; set; }
     }
 }

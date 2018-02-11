@@ -24,11 +24,8 @@ namespace KEC.Curation.Web.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                    .AddJsonOptions(o => o.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
-
+            services.AddMvc();
             services.AddTransient<IUnitOfWork>(m=>new EFUnitOfWork());
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +40,5 @@ namespace KEC.Curation.Web.Api
 
             app.UseMvc();
         }
-
     }
 }

@@ -19,14 +19,15 @@ namespace KEC.Curation.Web.Api.Serializers
         [Required(ErrorMessage = "Publication completion Date cannot be blank")]
         [DisplayName("Completion Date")]
         public DateTime? CompletionDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please provide brief descriptio (200 words)")]
+        [StringLength(200,ErrorMessage ="A maximum of 2oo words is required")]
         public string Description { get; set; }
-        [Required(ErrorMessage = "Please specified the publication subject")]
+        [Required(ErrorMessage ="Please specified the publication subject")]
         [DisplayName("Subject")]
-        public int? SubjectId { get; set; }
+        public int SubjectId { get; set; }
         [DisplayName("Level")]
         [Required(ErrorMessage = "Please specified the publication level")]
-        public int? LevelId { get; set; }
+        public int LevelId { get; set; }
         [Required(ErrorMessage = "Please upload the publication file")]
         public IFormFile PublicationFile { get; set; }
         [Required]
