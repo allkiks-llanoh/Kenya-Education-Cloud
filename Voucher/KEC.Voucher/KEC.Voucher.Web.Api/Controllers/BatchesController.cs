@@ -12,7 +12,8 @@ using System.Web.Http;
 
 namespace KEC.Voucher.Web.Api.Controllers
 { 
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     [RoutePrefix("api/batches")]
     public class BatchesController : ApiController
     {
