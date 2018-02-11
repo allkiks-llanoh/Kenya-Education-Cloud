@@ -13,6 +13,13 @@ namespace KEC.Curation.Data.Repositories
         public PublicationRepository(CurationDataContext context) : base(context)
         {
         }
+        public CurationDataContext Context
+        {
+            get
+            {
+                return _context as CurationDataContext;
+            }
+        }
         public string GetKICDNUmber(List<Publication> publications)
         {
             var kicdNumber = string.Empty;
@@ -24,10 +31,36 @@ namespace KEC.Curation.Data.Repositories
 
             return kicdNumber;
         }
-
-        public int Add(PublicationSection publicationSection)
+        public bool CanProcessCurationPublication(Publication publication)
         {
-            throw new NotImplementedException();
+            var canProcess = publication.FullyAssigned
+                      && Context.CuratorAssignments.All(p => p.Submitted);
+            return canProcess;
+
+        }
+        public void ProcessToTheNextStage(Publication publication)
+        {
+            var maxStage = Context.PublicationStageLogs
+                               .Where(p => p.PublicationId.Equals(publication.Id))
+                               .Max(p => p.Stage);
+            var currentStage = (int)Context.PublicationStageLogs
+                                           .First(p => p.PublicationId.Equals(publication.Id)
+                                           && p.Stage == maxStage
+                                           && p.ActionTaken != null
+                                           && p.Owner != null).Stage;
+            var nextStage = currentStage + 1;
+            if (Enum.IsDefined(typeof(PublicationStage), nextStage))
+            {
+                var publicationStage = new PublicationStageLog
+                {
+                    PublicationId = publication.Id,
+                    Stage = (PublicationStage)nextStage,
+                    CreatedAtUtc = DateTime.UtcNow
+                };
+                Context.PublicationStageLogs.Add(publicationStage);
+                Context.SaveChanges();
+            }
+
         }
     }
 }

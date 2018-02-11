@@ -1,0 +1,59 @@
+﻿using KEC.Curation.Data.Models;
+using KEC.Curation.Data.UnitOfWork;
+using System;
+
+namespace KEC.Curation.Web.Api.Serializers
+{
+    public class CurationDownloadSerializer
+    {
+        private readonly CuratorAssignment _assignment;
+
+        private readonly IUnitOfWork _uow;
+
+        public CurationDownloadSerializer(CuratorAssignment assignment, IUnitOfWork uow)
+        {
+            _assignment = assignment;
+            _uow = uow;
+        }
+        public DateTime AssignmentDateUtc
+        {
+            get
+            {
+                return _assignment.CreatedUtc;
+            }
+        }
+        public string Publication
+        {
+            get
+            {
+                var publicationId = _uow.PublicationSectionRepository.Get(_assignment.PublicationSectionId)?.PublicationId;
+                var publicationRecord = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
+                var subject = _uow.SubjectRepository.Get(publicationRecord.SubjectId).Name;
+                var recordinfo = $"Title: {publicationRecord.Title} Subject: {subject} KICD Number: {publicationRecord.KICDNumber}";
+                return recordinfo;
+            }
+        }
+        public string SectionToCurate
+        {
+            get
+            {
+                var section = _uow.PublicationSectionRepository.Get(_assignment.PublicationSectionId)?.SectionDescription;
+                return section;
+            }
+        }
+        public int AssignmentId
+        {
+            get
+            {
+                return _assignment.Id;
+            }
+        }
+        public string Status
+        {
+            get
+            {
+                return _assignment.Submitted ? "Submitted" : "Pending";
+            }
+        }
+    }
+}

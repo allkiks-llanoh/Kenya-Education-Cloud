@@ -34,20 +34,14 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.ISBNNumber;
             }
         }
-        public string PublisherName
+        public string KICDNumber
         {
             get
             {
-                return _publication.PublisherName;
+                return _publication.KICDNumber;
             }
         }
-        public string AuthorName
-        {
-            get
-            {
-                return _publication.AuthorName;
-            }
-        }
+       
         public decimal Price
         {
             get

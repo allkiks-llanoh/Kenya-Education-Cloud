@@ -10,14 +10,8 @@ namespace KEC.Curation.Data.UnitOfWork
         SubjectRepository SubjectRepository { get; }
         SubjectTypeRepository SubjectTypeRepository { get; }
         CuratorAssignmentRepository CuratorAssignmentRepository { get; }
-       // PublicationStageRepository PublicationStageRepository { get; }
         PublicationStageLogRepository PublicationStageLogRepository  { get;}
-        LevelRepository levelRepository { get; }
-        CuratorRepository CuratorRepository { get; }
-        CuratorTypeRepository CuratorTypeRepository { get; }
-        GetCuratorsRepository GetCuratorsRepository { get; }
-        SubjectCategoryRepository SubjectCategoryRepository { get; }
+        LevelRepository LevelRepository { get; }
         int Complete();
-
     }
 }

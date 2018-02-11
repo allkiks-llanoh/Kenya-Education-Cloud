@@ -12,9 +12,10 @@ using System;
 namespace KEC.Curation.Data.Migrations
 {
     [DbContext(typeof(CurationDataContext))]
-    partial class CurationDataContextModelSnapshot : ModelSnapshot
+    [Migration("20180210103103_ActionTakenToAcceptNull")]
+    partial class ActionTakenToAcceptNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,13 +31,11 @@ namespace KEC.Curation.Data.Migrations
 
                     b.Property<string>("Assignee");
 
-                    b.Property<DateTime>("CreatedUtc");
+                    b.Property<DateTime>("CreatedAt");
 
                     b.Property<string>("Notes");
 
                     b.Property<int>("PublicationSectionId");
-
-                    b.Property<bool>("Submitted");
 
                     b.HasKey("Id");
 
@@ -74,8 +73,6 @@ namespace KEC.Curation.Data.Migrations
                     b.Property<DateTime>("CreatedTimeUtc");
 
                     b.Property<string>("Description");
-
-                    b.Property<bool>("FullyAssigned");
 
                     b.Property<string>("ISBNNumber");
 
