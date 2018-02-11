@@ -1,4 +1,6 @@
-
+<?php
+require '.../config.php';
+?>
 <script type="text/JavaScript">
    
 $('#btn-postFile').click(function(e){
@@ -6,7 +8,7 @@ $('#btn-postFile').click(function(e){
   var form_data = new FormData($('#uploadform')[0]);
   $.ajax({
       type:'POST',
-      url:'http://voucherapi-d.kec.ac.ke/api/schools',
+      url:{$baseurl}'api/schools',
       processData: false,
       contentType: false,
       async: true,

@@ -1,4 +1,6 @@
-
+<?php
+require '.../config.php';
+?>
 <script>
         $(document).ready(function() {
 
@@ -13,7 +15,7 @@
 $(document).ready(function(){
         var batchId     =  $('#batchId').attr('data-batch');
         $.ajax({
-        url: `http://localhost:60823/api/vouchers/created?batchId= ${batchId}`,
+        url: {$baseurl}'api/vouchers/created?batchId=' ${batchId},
         type: "GET",
         headers : {
                   'Accept' : 'application/json',
@@ -73,9 +75,9 @@ function tableRows(data) {
             headers : {
                 'Accept' : 'application/json',
                 'Content-Type' : 'application/json',
-                'Access-Control-Allow-Origin': 'http://localhost:60823/api/'
+                'Access-Control-Allow-Origin': 'http://voucherapi-d.kec.ac.ke/api/'
             } ,
-        url: "http://localhost:60823/api/Vouchers/selected/reject",
+        url: "http://voucherapi-d.kec.ac.ke/api/Vouchers/selected/reject",
         type: "PATCH",
         data: ajaxData() ,
         success: function(data,status,jxhr) {
@@ -117,9 +119,9 @@ function tableRows(data) {
             headers : {
                 'Accept' : 'application/json',
                 'Content-Type' : 'application/json',
-                'Access-Control-Allow-Origin': 'http://localhost:60823/api/'
+                'Access-Control-Allow-Origin': 'http://voucherapi-d.kec.ac.ke/api/'
             } ,
-        url: "http://localhost:60823/api/vouchers/selected/accept",
+        url: "http://voucherapi-d.kec.ac.ke/api/vouchers/selected/accept",
         type: "PATCH",
         data: ajaxDatas() ,
         success: function(data,status,jxhr) {
