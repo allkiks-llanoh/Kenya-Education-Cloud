@@ -27,7 +27,7 @@
        }
        function reloadSchoolTypes(){
         $.ajax({
-            url: `http://localhost:60823/api/batches/${id}/pendingschooltypes`,
+            url: `http://voucherapi-d.kec.ac.ke/api/batches/${id}/pendingschooltypes`,
             type: "GET",
             dataType: "json",   
             success: function(data,status,jqhxr){
@@ -58,7 +58,7 @@
                 $('div.alert-success').toggleClass('hidden');
               }
           },
-          url: "http://localhost:60823/api/Batches",
+          url: "http://voucherapi-d.kec.ac.ke/api/Batches",
           type: "POST",
           data: JSON.stringify({CountyCode: countycodes,SchoolTypeId: schooltypeid }),
           success: function(response,status,jxhr) {

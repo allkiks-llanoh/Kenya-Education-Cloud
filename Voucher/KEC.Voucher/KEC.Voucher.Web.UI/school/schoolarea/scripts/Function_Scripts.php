@@ -6,7 +6,7 @@ $('#btn-postFile').click(function(e){
   var form_data = new FormData($('#uploadform')[0]);
   $.ajax({
       type:'POST',
-      url:'http://localhost:60823/api/schools',
+      url:'http://voucherapi-d.kec.ac.ke/api/schools',
       processData: false,
       contentType: false,
       async: true,

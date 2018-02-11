@@ -20,7 +20,7 @@ $(document).ready(function(){
         var id     =  $('#voucher').attr('data-fund');
         console.log(id);
         $.ajax({
-        url: `http://localhost:60823/api/transactions/Voucher/${id}`,
+        url: `http://voucherapi-d.kec.ac.ke/api/transactions/Voucher/${id}`,
 
         type: "GET",
         headers : {
@@ -37,7 +37,7 @@ $(document).ready(function(){
 
 //Ajax GET Voucher Information Starts Here
         $.ajax({
-        url: `http://localhost:60823/api/vouchers/info/${id}`,
+        url: `http://voucherapi-d.kec.ac.ke/api/vouchers/info/${id}`,
 
         type: "GET",
         headers : {
