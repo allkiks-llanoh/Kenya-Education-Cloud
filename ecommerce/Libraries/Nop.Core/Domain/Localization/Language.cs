@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Nop.Core.Domain.Stores;
 
 namespace Nop.Core.Domain.Localization
@@ -7,6 +8,8 @@ namespace Nop.Core.Domain.Localization
     /// </summary>
     public partial class Language : BaseEntity, IStoreMappingSupported
     {
+        private ICollection<LocaleStringResource> _localeStringResources;
+
         /// <summary>
         /// Gets or sets the name
         /// </summary>
@@ -51,5 +54,14 @@ namespace Nop.Core.Domain.Localization
         /// Gets or sets the display order
         /// </summary>
         public int DisplayOrder { get; set; }
+        
+        /// <summary>
+        /// Gets or sets locale string resources
+        /// </summary>
+        public virtual ICollection<LocaleStringResource> LocaleStringResources
+        {
+            get { return _localeStringResources ?? (_localeStringResources = new List<LocaleStringResource>()); }
+            protected set { _localeStringResources = value; }
+        }
     }
 }

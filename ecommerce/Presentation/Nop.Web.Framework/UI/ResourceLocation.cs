@@ -1,9 +1,6 @@
 ﻿
 namespace Nop.Web.Framework.UI
 {
-    /// <summary>
-    /// Resource location
-    /// </summary>
     public enum ResourceLocation
     {
         /// <summary>
@@ -13,6 +10,6 @@ namespace Nop.Web.Framework.UI
         /// <summary>
         /// Footer
         /// </summary>
-        Footer,
+        Foot,
     }
 }

@@ -1,3 +1,5 @@
+
+
 using Nop.Core.Domain.Common;
 
 namespace Nop.Services.Common

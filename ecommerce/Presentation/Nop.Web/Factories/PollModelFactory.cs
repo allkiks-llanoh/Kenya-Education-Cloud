@@ -19,15 +19,15 @@ namespace Nop.Web.Factories
 
         private readonly IWorkContext _workContext;
         private readonly IPollService _pollService;
-        private readonly IStaticCacheManager _cacheManager;
+        private readonly ICacheManager _cacheManager;
 
         #endregion
 
-        #region Ctor
+        #region Constructors
 
         public PollModelFactory(IWorkContext workContext,
             IPollService pollService,
-            IStaticCacheManager cacheManager)
+            ICacheManager cacheManager)
         {
             this._workContext = workContext;
             this._pollService = pollService;
@@ -47,7 +47,7 @@ namespace Nop.Web.Factories
         public virtual PollModel PreparePollModel(Poll poll, bool setAlreadyVotedProperty)
         {
             if (poll == null)
-                throw new ArgumentNullException(nameof(poll));
+                throw new ArgumentNullException("poll");
 
             var model = new PollModel
             {
@@ -79,13 +79,13 @@ namespace Nop.Web.Factories
         /// <returns>Poll model</returns>
         public virtual PollModel PreparePollModelBySystemName(string systemKeyword)
         {
-            if (string.IsNullOrWhiteSpace(systemKeyword))
+            if (String.IsNullOrWhiteSpace(systemKeyword))
                 return null;
 
             var cacheKey = string.Format(ModelCacheEventConsumer.POLL_BY_SYSTEMNAME_MODEL_KEY, systemKeyword, _workContext.WorkingLanguage.Id);
             var cachedModel = _cacheManager.Get(cacheKey, () =>
             {
-                var poll = _pollService.GetPolls(languageId: _workContext.WorkingLanguage.Id, systemKeyword: systemKeyword).FirstOrDefault();
+                Poll poll = _pollService.GetPolls(languageId: _workContext.WorkingLanguage.Id, systemKeyword: systemKeyword).FirstOrDefault();
                 if (poll == null)
                     //we do not cache nulls. that's why let's return an empty record (ID = 0)
                     return new PollModel { Id = 0};

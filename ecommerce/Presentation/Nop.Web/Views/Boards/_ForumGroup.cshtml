@@ -1,4 +1,5 @@
 ﻿@model ForumGroupModel
+@using Nop.Web.Models.Boards;
 <div class="forums-table-section forum-group">
     <div class="forums-table-section-title">
         @Html.RouteLink(Model.Name, "ForumGroupSlug", new { id = Model.Id, slug = Model.SeName })
@@ -47,7 +48,7 @@
                             <td class="topics">@forum.NumTopics</td>
                             <td class="posts">@forum.NumPosts</td>
                             <td class="latest-post">
-                                @await Component.InvokeAsync("ForumLastPost", new {forumPostId = forum.LastPostId, showTopic = true})
+                                @Html.Action("LastPost", new { forumPostId = forum.LastPostId, showTopic = true })
                             </td>
                         </tr>            
                     }

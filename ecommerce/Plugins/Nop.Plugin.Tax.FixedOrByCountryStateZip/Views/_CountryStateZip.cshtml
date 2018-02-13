@@ -1,19 +1,18 @@
-﻿@using Nop.Core.Domain.Common
-@model Nop.Plugin.Tax.FixedOrByCountryStateZip.Models.ConfigurationModel
-@inject AdminAreaSettings adminAreaSettings
-
-@{
+﻿@{
     Layout = "";
 
-    var defaultGridPageSize = adminAreaSettings.DefaultGridPageSize;
-    var gridPageSizes = adminAreaSettings.GridPageSizes;
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
 }
+@model Nop.Plugin.Tax.FixedOrByCountryStateZip.Models.ConfigurationModel
+@using Nop.Web.Framework;
+@using Nop.Core.Infrastructure;
 
 <div class="panel-group advanced-setting">
     <div class="panel panel-default">
         <div class="panel-body">
             <div id="tax-countrystatezip-grid"></div>
-            <script type="text/javascript">
+            <script>
                 $(document)
                     .ready(function() {
                         $("#tax-countrystatezip-grid")
@@ -23,21 +22,21 @@
                                     transport: {
                                         read: {
                                             url:
-                                                "@Html.Raw(Url.Action("RatesByCountryStateZipList", "FixedOrByCountryStateZip"))",
+                                                "@Html.Raw(Url.Action("RatesByCountryStateZipList", "FixedOrByCountryStateZip", new RouteValueDictionary {{"Namespaces", "Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers"}, {"area", ""}}))",
                                             type: "POST",
                                             dataType: "json",
                                             data: addAntiForgeryToken
                                         },
                                         update: {
                                             url:
-                                                "@Html.Raw(Url.Action("UpdateRateByCountryStateZip", "FixedOrByCountryStateZip"))",
+                                                "@Html.Raw(Url.Action("UpdateRateByCountryStateZip", "FixedOrByCountryStateZip", new RouteValueDictionary {{"Namespaces", "Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers"}, {"area", ""}}))",
                                             type: "POST",
                                             dataType: "json",
                                             data: addAntiForgeryToken
                                         },
                                         destroy: {
                                             url:
-                                                "@Html.Raw(Url.Action("DeleteRateByCountryStateZip", "FixedOrByCountryStateZip"))",
+                                                "@Html.Raw(Url.Action("DeleteRateByCountryStateZip", "FixedOrByCountryStateZip", new RouteValueDictionary {{"Namespaces", "Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers"}, {"area", ""}}))",
                                             type: "POST",
                                             dataType: "json",
                                             data: addAntiForgeryToken
@@ -78,7 +77,7 @@
                                 pageable: {
                                     refresh: true,
                                     pageSizes: [@(gridPageSizes)],
-                                    @await Html.PartialAsync("~/Areas/Admin/Views/Shared/_GridPagerMessages.cshtml")
+                                    @Html.Partial("~/Administration/Views/Shared/_GridPagerMessages.cshtml")
                                 },
                                 editable: {
                                     confirmation: "@T("Admin.Common.DeleteConfirmation")",
@@ -142,8 +141,9 @@
     </div>
 </div>
 <div class="panel-group advanced-setting">
-    
-    <form asp-controller="FixedOrByCountryStateZip" asp-action="Configure" method="post">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
         <div class="panel panel-default">
             <div class="panel-heading">
                 @T("Plugins.Tax.FixedOrByCountryStateZip.AddRecordTitle")
@@ -152,23 +152,22 @@
                 <script type="text/javascript">
                     $(document)
                         .ready(function() {
-                            $("#@Html.IdFor(model => model.AddCountryId)")
+                            $("#@Html.FieldIdFor(model => model.AddCountryId)")
                                 .change(function() {
                                     var selectedItem = $(this).val();
-                                    var ddlStates = $("#@Html.IdFor(model => model.AddStateProvinceId)");
+                                    var ddlStates = $("#@Html.FieldIdFor(model => model.AddStateProvinceId)");
                                     $.ajax({
                                         cache: false,
                                         type: "GET",
                                         url:
-                                            "@(Url.Action("GetStatesByCountryId", "Country"))",
+                                            "@(Url.Action("GetStatesByCountryId", "Country", new RouteValueDictionary {{"area", "Admin"}}))",
                                         data: { "countryId": selectedItem, "addAsterisk": "true" },
                                         success: function(data) {
                                             ddlStates.html('');
                                             $.each(data,
                                                 function(id, option) {
                                                     ddlStates
-                                                        .append($('<option></option>').val(option.id)
-                                                            .html(option.name));
+                                                        .append($('<option></option>').val(option.id).html(option.name));
                                                 });
                                         },
                                         error: function(xhr, ajaxOptions, thrownError) {
@@ -180,56 +179,56 @@
                 </script>
                 <div class="form-group" @(Model.AvailableStores.SelectionIsNotPossible() ? Html.Raw("style=\"display:none\"") : null)>
                     <div class="col-md-3">
-                        <nop-label asp-for="AddStoreId" />
+                        @Html.NopLabelFor(model => model.AddStoreId)
                     </div>
                     <div class="col-md-9">
-                        <nop-select asp-for="AddStoreId" asp-items="Model.AvailableStores" />
-                        <span asp-validation-for="AddStoreId"></span>
+                        @Html.NopDropDownListFor(model => model.AddStoreId, Model.AvailableStores)
+                        @Html.ValidationMessageFor(model => model.AddStoreId)
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-                        <nop-label asp-for="AddCountryId" />
+                        @Html.NopLabelFor(model => model.AddCountryId)
                     </div>
                     <div class="col-md-9">
-                        <nop-select asp-for="AddCountryId" asp-items="Model.AvailableCountries" />
-                        <span asp-validation-for="AddCountryId"></span>
+                        @Html.NopDropDownListFor(model => model.AddCountryId, Model.AvailableCountries)
+                        @Html.ValidationMessageFor(model => model.AddCountryId)
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-                        <nop-label asp-for="AddStateProvinceId" />
+                        @Html.NopLabelFor(model => model.AddStateProvinceId)
                     </div>
                     <div class="col-md-9">
-                        <nop-select asp-for="AddStateProvinceId" asp-items="Model.AvailableStates" />
-                        <span asp-validation-for="AddStateProvinceId"></span>
+                        @Html.NopDropDownListFor(model => model.AddStateProvinceId, Model.AvailableStates)
+                        @Html.ValidationMessageFor(model => model.AddStateProvinceId)
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-                        <nop-label asp-for="AddZip" />
+                        @Html.NopLabelFor(model => model.AddZip)
                     </div>
                     <div class="col-md-9">
-                        <nop-editor asp-for="AddZip" />
-                        <span asp-validation-for="AddZip"></span>
+                        @Html.NopEditorFor(model => model.AddZip)
+                        @Html.ValidationMessageFor(model => model.AddZip)
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-                        <nop-label asp-for="AddTaxCategoryId" />
+                        @Html.NopLabelFor(model => model.AddTaxCategoryId)
                     </div>
                     <div class="col-md-9">
-                        <nop-select asp-for="AddTaxCategoryId" asp-items="Model.AvailableTaxCategories" />
-                        <span asp-validation-for="AddTaxCategoryId"></span>
+                        @Html.NopDropDownListFor(model => model.AddTaxCategoryId, Model.AvailableTaxCategories)
+                        @Html.ValidationMessageFor(model => model.AddTaxCategoryId)
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-                        <nop-label asp-for="AddPercentage" />
+                        @Html.NopLabelFor(model => model.AddPercentage)
                     </div>
                     <div class="col-md-9">
-                        <nop-editor asp-for="AddPercentage" />
-                        <span asp-validation-for="AddPercentage"></span>
+                        @Html.NopEditorFor(model => model.AddPercentage)
+                        @Html.ValidationMessageFor(model => model.AddPercentage)
                     </div>
                 </div>
                 <div class="form-group">
@@ -237,7 +236,7 @@
                         &nbsp;
                     </div>
                     <div class="col-md-9">
-                        <input type="button" id="addtaxrate" class="btn btn-primary" value="@T("Plugins.Tax.FixedOrByCountryStateZip.AddRecord")"/>
+                        <input type="button" id="addtaxrate" class="btn btn-primary" value="@T("Plugins.Tax.FixedOrByCountryStateZip.AddRecord")" />
                         <script type="text/javascript">
                             $(document)
                                 .ready(function() {
@@ -250,8 +249,7 @@
                                             $.ajax({
                                                 cache: false,
                                                 type: 'POST',
-                                                url:
-                                                    '@Url.Action("AddRateByCountryStateZip", "FixedOrByCountryStateZip")',
+                                                url: '@Url.RouteUrl("Plugin.Tax.FixedOrByCountryStateZip.AddRateByCountryStateZip")',
                                                 data: postData,
                                                 dataType: 'json',
                                                 success: function(data) {
@@ -270,5 +268,5 @@
                 </div>
             </div>
         </div>
-    </form>
+    }
 </div>

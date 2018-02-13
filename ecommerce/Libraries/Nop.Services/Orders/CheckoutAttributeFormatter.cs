@@ -1,6 +1,6 @@
 using System;
-using System.Net;
 using System.Text;
+using System.Web;
 using Nop.Core;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Customers;
@@ -27,17 +27,6 @@ namespace Nop.Services.Orders
         private readonly IDownloadService _downloadService;
         private readonly IWebHelper _webHelper;
 
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="workContext">Work context</param>
-        /// <param name="checkoutAttributeService">Checkout attribute service</param>
-        /// <param name="checkoutAttributeParser">Checkout attribute parser</param>
-        /// <param name="currencyService">Currency service</param>
-        /// <param name="taxService">Tax service</param>
-        /// <param name="priceFormatter">Price formatter</param>
-        /// <param name="downloadService">Download service</param>
-        /// <param name="webHelper">Web helper</param>
         public CheckoutAttributeFormatter(IWorkContext workContext,
             ICheckoutAttributeService checkoutAttributeService,
             ICheckoutAttributeParser checkoutAttributeParser,
@@ -73,14 +62,14 @@ namespace Nop.Services.Orders
         /// </summary>
         /// <param name="attributesXml">Attributes in XML format</param>
         /// <param name="customer">Customer</param>
-        /// <param name="separator">Separator</param>
+        /// <param name="serapator">Serapator</param>
         /// <param name="htmlEncode">A value indicating whether to encode (HTML) values</param>
         /// <param name="renderPrices">A value indicating whether to render prices</param>
         /// <param name="allowHyperlinks">A value indicating whether to HTML hyperink tags could be rendered (if required)</param>
         /// <returns>Attributes</returns>
         public virtual string FormatAttributes(string attributesXml,
             Customer customer, 
-            string separator = "<br />", 
+            string serapator = "<br />", 
             bool htmlEncode = true, 
             bool renderPrices = true,
             bool allowHyperlinks = true)
@@ -88,14 +77,14 @@ namespace Nop.Services.Orders
             var result = new StringBuilder();
 
             var attributes = _checkoutAttributeParser.ParseCheckoutAttributes(attributesXml);
-            for (var i = 0; i < attributes.Count; i++)
+            for (int i = 0; i < attributes.Count; i++)
             {
                 var attribute = attributes[i];
                 var valuesStr = _checkoutAttributeParser.ParseValues(attributesXml, attribute.Id);
-                for (var j = 0; j < valuesStr.Count; j++)
+                for (int j = 0; j < valuesStr.Count; j++)
                 {
-                    var valueStr = valuesStr[j];
-                    var formattedAttribute = "";
+                    string valueStr = valuesStr[j];
+                    string formattedAttribute = "";
                     if (!attribute.ShouldHaveValues())
                     {
                         //no values
@@ -105,28 +94,31 @@ namespace Nop.Services.Orders
                             var attributeName = attribute.GetLocalized(a => a.Name, _workContext.WorkingLanguage.Id);
                             //encode (if required)
                             if (htmlEncode)
-                                attributeName = WebUtility.HtmlEncode(attributeName);
-                            formattedAttribute = $"{attributeName}: {HtmlHelper.FormatText(valueStr, false, true, false, false, false, false)}";
+                                attributeName = HttpUtility.HtmlEncode(attributeName);
+                            formattedAttribute = string.Format("{0}: {1}", attributeName, HtmlHelper.FormatText(valueStr, false, true, false, false, false, false));
                             //we never encode multiline textbox input
                         }
                         else if (attribute.AttributeControlType == AttributeControlType.FileUpload)
                         {
                             //file upload
-                            Guid.TryParse(valueStr, out Guid downloadGuid);
+                            Guid downloadGuid;
+                            Guid.TryParse(valueStr, out downloadGuid);
                             var download = _downloadService.GetDownloadByGuid(downloadGuid);
                             if (download != null)
                             {
                                 //TODO add a method for getting URL (use routing because it handles all SEO friendly URLs)
                                 string attributeText;
-                                var fileName = $"{download.Filename ?? download.DownloadGuid.ToString()}{download.Extension}";
+                                var fileName = string.Format("{0}{1}",
+                                    download.Filename ?? download.DownloadGuid.ToString(),
+                                    download.Extension);
                                 //encode (if required)
                                 if (htmlEncode)
-                                    fileName = WebUtility.HtmlEncode(fileName);
+                                    fileName = HttpUtility.HtmlEncode(fileName);
                                 if (allowHyperlinks)
                                 {
                                     //hyperlinks are allowed
-                                    var downloadLink = $"{_webHelper.GetStoreLocation(false)}download/getfileupload/?downloadId={download.DownloadGuid}";
-                                    attributeText = $"<a href=\"{downloadLink}\" class=\"fileuploadattribute\">{fileName}</a>";
+                                    var downloadLink = string.Format("{0}download/getfileupload/?downloadId={1}", _webHelper.GetStoreLocation(false), download.DownloadGuid);
+                                    attributeText = string.Format("<a href=\"{0}\" class=\"fileuploadattribute\">{1}</a>", downloadLink, fileName);
                                 }
                                 else
                                 {
@@ -136,48 +128,49 @@ namespace Nop.Services.Orders
                                 var attributeName = attribute.GetLocalized(a => a.Name, _workContext.WorkingLanguage.Id);
                                 //encode (if required)
                                 if (htmlEncode)
-                                    attributeName = WebUtility.HtmlEncode(attributeName);
-                                formattedAttribute = $"{attributeName}: {attributeText}";
+                                    attributeName = HttpUtility.HtmlEncode(attributeName);
+                                formattedAttribute = string.Format("{0}: {1}", attributeName, attributeText);
                             }
                         }
                         else
                         {
                             //other attributes (textbox, datepicker)
-                            formattedAttribute = $"{attribute.GetLocalized(a => a.Name, _workContext.WorkingLanguage.Id)}: {valueStr}";
+                            formattedAttribute = string.Format("{0}: {1}", attribute.GetLocalized(a => a.Name, _workContext.WorkingLanguage.Id), valueStr);
                             //encode (if required)
                             if (htmlEncode)
-                                formattedAttribute = WebUtility.HtmlEncode(formattedAttribute);
+                                formattedAttribute = HttpUtility.HtmlEncode(formattedAttribute);
                         }
                     }
                     else
                     {
-                        if (int.TryParse(valueStr, out int attributeValueId))
+                        int attributeValueId;
+                        if (int.TryParse(valueStr, out attributeValueId))
                         {
                             var attributeValue = _checkoutAttributeService.GetCheckoutAttributeValueById(attributeValueId);
                             if (attributeValue != null)
                             {
-                                formattedAttribute = $"{attribute.GetLocalized(a => a.Name, _workContext.WorkingLanguage.Id)}: {attributeValue.GetLocalized(a => a.Name, _workContext.WorkingLanguage.Id)}";
+                                formattedAttribute = string.Format("{0}: {1}", attribute.GetLocalized(a => a.Name, _workContext.WorkingLanguage.Id), attributeValue.GetLocalized(a => a.Name, _workContext.WorkingLanguage.Id));
                                 if (renderPrices)
                                 {
-                                    var priceAdjustmentBase = _taxService.GetCheckoutAttributePrice(attributeValue, customer);
-                                    var priceAdjustment = _currencyService.ConvertFromPrimaryStoreCurrency(priceAdjustmentBase, _workContext.WorkingCurrency);
+                                    decimal priceAdjustmentBase = _taxService.GetCheckoutAttributePrice(attributeValue, customer);
+                                    decimal priceAdjustment = _currencyService.ConvertFromPrimaryStoreCurrency(priceAdjustmentBase, _workContext.WorkingCurrency);
                                     if (priceAdjustmentBase > 0)
                                     {
-                                        var priceAdjustmentStr = _priceFormatter.FormatPrice(priceAdjustment);
-                                        formattedAttribute += $" [+{priceAdjustmentStr}]";
+                                        string priceAdjustmentStr = _priceFormatter.FormatPrice(priceAdjustment);
+                                        formattedAttribute += string.Format(" [+{0}]", priceAdjustmentStr);
                                     }
                                 }
                             }
                             //encode (if required)
                             if (htmlEncode)
-                                formattedAttribute = WebUtility.HtmlEncode(formattedAttribute);
+                                formattedAttribute = HttpUtility.HtmlEncode(formattedAttribute);
                         }
                     }
 
-                    if (!string.IsNullOrEmpty(formattedAttribute))
+                    if (!String.IsNullOrEmpty(formattedAttribute))
                     {
                         if (i != 0 || j != 0)
-                            result.Append(separator);
+                            result.Append(serapator);
                         result.Append(formattedAttribute);
                     }
                 }

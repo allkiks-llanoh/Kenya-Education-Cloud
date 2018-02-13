@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Web.Mvc;
 using Nop.Core;
 using Nop.Core.Infrastructure;
 using Nop.Services.Localization;
@@ -13,15 +13,6 @@ namespace Nop.Services
     /// </summary>
     public static class Extensions
     {
-        /// <summary>
-        /// Convert to select list
-        /// </summary>
-        /// <typeparam name="TEnum">Enum type</typeparam>
-        /// <param name="enumObj">Enum</param>
-        /// <param name="markCurrentAsSelected">Mark current value as selected</param>
-        /// <param name="valuesToExclude">Values to exclude</param>
-        /// <param name="useLocalization">Localize</param>
-        /// <returns>SelectList</returns>
         public static SelectList ToSelectList<TEnum>(this TEnum enumObj,
            bool markCurrentAsSelected = true, int[] valuesToExclude = null, bool useLocalization = true) where TEnum : struct
         {
@@ -39,13 +30,6 @@ namespace Nop.Services
             return new SelectList(values, "ID", "Name", selectedValue);
         }
 
-        /// <summary>
-        /// Convert to select list
-        /// </summary>
-        /// <typeparam name="T">Type</typeparam>
-        /// <param name="objList">List of objects</param>
-        /// <param name="selector">Selector for name</param>
-        /// <returns>SelectList</returns>
         public static SelectList ToSelectList<T>(this T objList, Func<BaseEntity, string> selector) where T : IEnumerable<BaseEntity>
         {
             return new SelectList(objList.Select(p => new { ID = p.Id, Name = selector(p) }), "ID", "Name");

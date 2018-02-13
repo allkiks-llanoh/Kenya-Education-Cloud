@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
+using System.Web.Routing;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Domain.Payments;
 using Nop.Core.Plugins;
@@ -19,10 +19,8 @@ namespace Nop.Services.Tests.Payments
         /// <returns>Process payment result</returns>
         public ProcessPaymentResult ProcessPayment(ProcessPaymentRequest processPaymentRequest)
         {
-            var result = new ProcessPaymentResult
-            {
-                NewPaymentStatus = PaymentStatus.Paid
-            };
+            var result = new ProcessPaymentResult();
+            result.NewPaymentStatus = PaymentStatus.Paid;
             return result;
         }
 
@@ -38,7 +36,7 @@ namespace Nop.Services.Tests.Payments
         /// <summary>
         /// Returns a value indicating whether payment method should be hidden during checkout
         /// </summary>
-        /// <param name="cart">Shopping cart</param>
+        /// <param name="cart">Shoping cart</param>
         /// <returns>true - hide; false - display.</returns>
         public bool HidePaymentMethod(IList<ShoppingCartItem> cart)
         {
@@ -51,7 +49,7 @@ namespace Nop.Services.Tests.Payments
         /// <summary>
         /// Gets additional handling fee
         /// </summary>
-        /// <param name="cart">Shopping cart</param>
+        /// <param name="cart">Shoping cart</param>
         /// <returns>Additional handling fee</returns>
         public decimal GetAdditionalHandlingFee(IList<ShoppingCartItem> cart)
         {
@@ -126,41 +124,46 @@ namespace Nop.Services.Tests.Payments
         public bool CanRePostProcessPayment(Order order)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             //it's not a redirection payment method. So we always return false
             return false;
         }
 
         /// <summary>
-        /// Validate payment form
+        /// Gets a route for provider configuration
         /// </summary>
-        /// <param name="form">The parsed form values</param>
-        /// <returns>List of validating errors</returns>
-        public IList<string> ValidatePaymentForm(IFormCollection form)
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller name</param>
+        /// <param name="routeValues">Route values</param>
+        public void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
         {
-            return new List<string>();
+            actionName = null;
+            controllerName = null;
+            routeValues = null;
         }
 
         /// <summary>
-        /// Get payment information
+        /// Gets a route for payment info
         /// </summary>
-        /// <param name="form">The parsed form values</param>
-        /// <returns>Payment info holder</returns>
-        public ProcessPaymentRequest GetPaymentInfo(IFormCollection form)
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller name</param>
+        /// <param name="routeValues">Route values</param>
+        public void GetPaymentInfoRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
         {
-            return new ProcessPaymentRequest();
+            actionName = null;
+            controllerName = null;
+            routeValues = null;
         }
 
         /// <summary>
-        /// Gets a view component for displaying plugin in public store ("payment info" checkout step)
+        /// Get type of controller
         /// </summary>
-        /// <param name="viewComponentName">View component name</param>
-        public void GetPublicViewComponent(out string viewComponentName)
+        /// <returns>Type</returns>
+        public Type GetControllerType()
         {
-            viewComponentName = null;
+            return typeof(TestPaymentMethod);
         }
-
 
         #endregion
 

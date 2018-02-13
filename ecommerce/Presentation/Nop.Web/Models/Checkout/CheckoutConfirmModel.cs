@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Nop.Web.Framework.Mvc.Models;
+using Nop.Web.Framework.Mvc;
 
 namespace Nop.Web.Models.Checkout
 {
@@ -11,7 +11,6 @@ namespace Nop.Web.Models.Checkout
         }
 
         public bool TermsOfServiceOnOrderConfirmPage { get; set; }
-        public bool TermsOfServicePopup { get; set; }
         public string MinOrderTotalWarning { get; set; }
 
         public IList<string> Warnings { get; set; }

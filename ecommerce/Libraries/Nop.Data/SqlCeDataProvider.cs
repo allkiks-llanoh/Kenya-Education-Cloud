@@ -7,9 +7,6 @@ using Nop.Data.Initializers;
 
 namespace Nop.Data
 {
-    /// <summary>
-    /// SQL Serevr Compact provider
-    /// </summary>
     public class SqlCeDataProvider : IDataProvider
     {
         /// <summary>

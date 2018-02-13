@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using FluentValidation;
+using FluentValidation.Results;
 using Nop.Core.Domain.Common;
 using Nop.Services.Directory;
 using Nop.Services.Localization;
@@ -37,7 +38,7 @@ namespace Nop.Web.Validators.Common
             }
             if (addressSettings.CountryEnabled && addressSettings.StateProvinceEnabled)
             {
-                RuleFor(x => x.StateProvinceId).Must((x, context) =>
+                Custom(x =>
                 {
                     //does selected country has states?
                     var countryId = x.CountryId.HasValue ? x.CountryId.Value : 0;
@@ -47,11 +48,12 @@ namespace Nop.Web.Validators.Common
                     {
                         //if yes, then ensure that state is selected
                         if (!x.StateProvinceId.HasValue || x.StateProvinceId.Value == 0)
-                           return false;
+                        {
+                            return new ValidationFailure("StateProvinceId", localizationService.GetResource("Address.Fields.StateProvince.Required"));
+                        }
                     }
-
-                    return true;
-                }).WithMessage(localizationService.GetResource("Address.Fields.StateProvince.Required"));
+                    return null;
+                });
             }
             if (addressSettings.CompanyRequired && addressSettings.CompanyEnabled)
             {

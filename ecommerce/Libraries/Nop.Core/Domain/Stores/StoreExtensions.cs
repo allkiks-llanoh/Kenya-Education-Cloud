@@ -4,9 +4,6 @@ using System.Linq;
 
 namespace Nop.Core.Domain.Stores
 {
-    /// <summary>
-    /// Store extensions
-    /// </summary>
     public static class StoreExtensions
     {
         /// <summary>
@@ -17,16 +14,16 @@ namespace Nop.Core.Domain.Stores
         public static string[] ParseHostValues(this Store store)
         {
             if (store == null)
-                throw new ArgumentNullException(nameof(store));
+                throw new ArgumentNullException("store");
 
             var parsedValues = new List<string>();
-            if (!string.IsNullOrEmpty(store.Hosts))
+            if (!String.IsNullOrEmpty(store.Hosts))
             {
-                var hosts = store.Hosts.Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var host in hosts)
+                string[] hosts = store.Hosts.Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string host in hosts)
                 {
                     var tmp = host.Trim();
-                    if (!string.IsNullOrEmpty(tmp))
+                    if (!String.IsNullOrEmpty(tmp))
                         parsedValues.Add(tmp);
                 }
             }
@@ -42,9 +39,9 @@ namespace Nop.Core.Domain.Stores
         public static bool ContainsHostValue(this Store store, string host)
         {
             if (store == null)
-                throw new ArgumentNullException(nameof(store));
+                throw new ArgumentNullException("store");
 
-            if (string.IsNullOrEmpty(host))
+            if (String.IsNullOrEmpty(host))
                 return false;
 
             var contains = store.ParseHostValues()

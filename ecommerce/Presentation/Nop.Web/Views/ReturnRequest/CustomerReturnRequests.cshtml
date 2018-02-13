@@ -1,6 +1,8 @@
 ﻿@model CustomerReturnRequestsModel
+@using Nop.Web.Models.Customer
+@using Nop.Web.Models.Order
 @{
-    Layout = "_ColumnsTwo";
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
 
     //title
     Html.AddTitleParts(T("PageTitle.Account").Text);
@@ -10,7 +12,7 @@
 }
 @section left
 {
-    @await Component.InvokeAsync("CustomerNavigation", new { selectedTabId = CustomerNavigationEnum.ReturnRequests })
+    @Html.Action("CustomerNavigation", "Customer", new { selectedTabId = CustomerNavigationEnum.ReturnRequests })
 }
 <div class="page account-page return-request-list-page">
     <div class="page-title">
@@ -52,7 +54,7 @@
                             </span>
                         </li>
                     }
-                    @if (!string.IsNullOrEmpty(item.Comments))
+                    @if (!String.IsNullOrEmpty(item.Comments))
                     {
                         <li class="comments">
                             <label>@T("Account.CustomerReturnRequests.Comments")</label>

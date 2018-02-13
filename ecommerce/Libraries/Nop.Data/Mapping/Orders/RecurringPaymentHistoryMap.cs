@@ -2,14 +2,8 @@ using Nop.Core.Domain.Orders;
 
 namespace Nop.Data.Mapping.Orders
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class RecurringPaymentHistoryMap : NopEntityTypeConfiguration<RecurringPaymentHistory>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public RecurringPaymentHistoryMap()
         {
             this.ToTable("RecurringPaymentHistory");

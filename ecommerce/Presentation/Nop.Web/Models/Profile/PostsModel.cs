@@ -1,8 +1,7 @@
-﻿using Nop.Web.Framework.Mvc.Models;
-
+﻿
 namespace Nop.Web.Models.Profile
 {
-    public partial class PostsModel : BaseNopModel
+    public partial class PostsModel
     {
         public int ForumTopicId { get; set; }
         public string ForumTopicTitle { get; set; }

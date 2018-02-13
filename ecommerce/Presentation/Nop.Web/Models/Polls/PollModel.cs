@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nop.Web.Framework.Mvc.Models;
+using Nop.Web.Framework.Mvc;
 
 namespace Nop.Web.Models.Polls
 {
@@ -22,7 +22,7 @@ namespace Nop.Web.Models.Polls
         public object Clone()
         {
             //we use a shallow copy (deep clone is not required here)
-            return MemberwiseClone();
+            return this.MemberwiseClone();
         }
     }
 

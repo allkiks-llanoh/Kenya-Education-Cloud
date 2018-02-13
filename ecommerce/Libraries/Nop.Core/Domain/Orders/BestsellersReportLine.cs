@@ -22,5 +22,6 @@ namespace Nop.Core.Domain.Orders
         /// Gets or sets the total quantity
         /// </summary>
         public int TotalQuantity { get; set; }
+
     }
 }

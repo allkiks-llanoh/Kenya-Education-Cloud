@@ -1,8 +1,7 @@
-﻿using Nop.Web.Framework.Mvc.Models;
-
+﻿
 namespace Nop.Web.Models.Profile
 {
-    public partial class ProfileInfoModel : BaseNopModel
+    public partial class ProfileInfoModel
     {
         public int CustomerProfileId { get; set; }
 

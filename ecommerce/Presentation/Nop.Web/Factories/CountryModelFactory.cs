@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Nop.Core;
 using Nop.Core.Caching;
 using Nop.Services.Directory;
 using Nop.Services.Localization;
 using Nop.Web.Infrastructure.Cache;
-using Nop.Web.Models.Directory;
 
 namespace Nop.Web.Factories
 {
@@ -21,17 +19,17 @@ namespace Nop.Web.Factories
         private readonly IStateProvinceService _stateProvinceService;
         private readonly ILocalizationService _localizationService;
         private readonly IWorkContext _workContext;
-        private readonly IStaticCacheManager _cacheManager;
+        private readonly ICacheManager _cacheManager;
 
 	    #endregion
 
-		#region Ctor
+		#region Constructors
 
         public CountryModelFactory(ICountryService countryService, 
             IStateProvinceService stateProvinceService, 
             ILocalizationService localizationService, 
             IWorkContext workContext,
-            IStaticCacheManager cacheManager)
+            ICacheManager cacheManager)
 		{
             this._countryService = countryService;
             this._stateProvinceService = stateProvinceService;
@@ -50,42 +48,31 @@ namespace Nop.Web.Factories
         /// <param name="countryId">Country identifier</param>
         /// <param name="addSelectStateItem">Whether to add "Select state" item to list of states</param>
         /// <returns>List of identifiers and names of states and provinces</returns>
-        public virtual IList<StateProvinceModel> GetStatesByCountryId(string countryId, bool addSelectStateItem)
+        public virtual dynamic GetStatesByCountryId(string countryId, bool addSelectStateItem)
         {
-            if (string.IsNullOrEmpty(countryId))
-                throw new ArgumentNullException(nameof(countryId));
+            if (String.IsNullOrEmpty(countryId))
+                throw new ArgumentNullException("countryId");
 
-            var cacheKey = string.Format(ModelCacheEventConsumer.STATEPROVINCES_BY_COUNTRY_MODEL_KEY, countryId, addSelectStateItem, _workContext.WorkingLanguage.Id);
+            string cacheKey = string.Format(ModelCacheEventConsumer.STATEPROVINCES_BY_COUNTRY_MODEL_KEY, countryId, addSelectStateItem, _workContext.WorkingLanguage.Id);
             var cachedModel = _cacheManager.Get(cacheKey, () =>
             {
                 var country = _countryService.GetCountryById(Convert.ToInt32(countryId));
                 var states = _stateProvinceService.GetStateProvincesByCountryId(country != null ? country.Id : 0, _workContext.WorkingLanguage.Id).ToList();
-                var result = new List<StateProvinceModel>();
-                foreach (var state in states)
-                    result.Add(new StateProvinceModel
-                    {
-                        id = state.Id,
-                        name = state.GetLocalized(x => x.Name)
-                    });
+                var result = (from s in states
+                              select new { id = s.Id, name = s.GetLocalized(x => x.Name) })
+                              .ToList();
+
 
                 if (country == null)
                 {
                     //country is not selected ("choose country" item)
                     if (addSelectStateItem)
                     {
-                        result.Insert(0, new StateProvinceModel
-                        {
-                            id = 0,
-                            name = _localizationService.GetResource("Address.SelectState")
-                        });
+                        result.Insert(0, new { id = 0, name = _localizationService.GetResource("Address.SelectState") });
                     }
                     else
                     {
-                        result.Insert(0, new StateProvinceModel
-                        {
-                            id = 0,
-                            name = _localizationService.GetResource("Address.OtherNonUS")
-                        });
+                        result.Insert(0, new { id = 0, name = _localizationService.GetResource("Address.OtherNonUS") });
                     }
                 }
                 else
@@ -94,22 +81,14 @@ namespace Nop.Web.Factories
                     if (!result.Any())
                     {
                         //country does not have states
-                        result.Insert(0, new StateProvinceModel
-                        {
-                            id = 0,
-                            name = _localizationService.GetResource("Address.OtherNonUS")
-                        });
+                        result.Insert(0, new { id = 0, name = _localizationService.GetResource("Address.OtherNonUS") });
                     }
                     else
                     {
                         //country has some states
                         if (addSelectStateItem)
                         {
-                            result.Insert(0, new StateProvinceModel
-                            {
-                                id = 0,
-                                name = _localizationService.GetResource("Address.SelectState")
-                            });
+                            result.Insert(0, new { id = 0, name = _localizationService.GetResource("Address.SelectState") });
                         }
                     }
                 }

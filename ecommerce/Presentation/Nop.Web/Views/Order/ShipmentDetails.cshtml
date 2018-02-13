@@ -1,6 +1,7 @@
 ﻿@model ShipmentDetailsModel
+@using Nop.Web.Models.Order;
 @{
-    Layout = "_ColumnsOne";
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
 
     //title
     Html.AddTitleParts(T("PageTitle.ShipmentDetails").Text);
@@ -44,7 +45,7 @@
                                 @T("Order.Shipments.DeliveryDate.NotYet")
                             }
                         </li>
-                        @if (!string.IsNullOrEmpty(Model.TrackingNumber))
+                        @if (!String.IsNullOrEmpty(Model.TrackingNumber))
                         {
                             <li class="tracking-number">
                                 @T("Order.Shipments.TrackingNumber"):
@@ -81,7 +82,7 @@
                             <li class="fax">
                                 @T("Order.Shipments.Fax"): @Model.Order.ShippingAddress.FaxNumber
                             </li>
-                            @if (!string.IsNullOrEmpty(Model.Order.ShippingAddress.Company))
+                            @if (!String.IsNullOrEmpty(Model.Order.ShippingAddress.Company))
                             {
                                 <li class="company">
                                     @Model.Order.ShippingAddress.Company
@@ -90,7 +91,7 @@
                             <li class="address1">
                                 @Model.Order.ShippingAddress.Address1
                             </li>
-                            @if (!string.IsNullOrEmpty(Model.Order.ShippingAddress.Address2))
+                            @if (!String.IsNullOrEmpty(Model.Order.ShippingAddress.Address2))
                             {
                                 <li class="address2">
                                     @Model.Order.ShippingAddress.Address2
@@ -100,7 +101,7 @@
                                 @Model.Order.ShippingAddress.City, @Model.Order.ShippingAddress.StateProvinceName
                                 @Model.Order.ShippingAddress.ZipPostalCode
                             </li>
-                            @if (!string.IsNullOrEmpty(Model.Order.ShippingAddress.CountryName))
+                            @if (!String.IsNullOrEmpty(Model.Order.ShippingAddress.CountryName))
                             {
                                 <li class="country">
                                     @Model.Order.ShippingAddress.CountryName
@@ -177,13 +178,13 @@
                                     }
                                     <td class="name">
                                         <em><a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })">@item.ProductName</a></em>
-                                        @if (!string.IsNullOrEmpty(item.AttributeInfo))
+                                        @if (!String.IsNullOrEmpty(item.AttributeInfo))
                                         {
                                             <div class="attributes">
                                                 @Html.Raw(item.AttributeInfo)
                                             </div>
                                         }
-                                        @if (!string.IsNullOrEmpty(item.RentalInfo))
+                                        @if (!String.IsNullOrEmpty(item.RentalInfo))
                                         {
                                             <div class="rental-info">
                                                 @Html.Raw(item.RentalInfo)

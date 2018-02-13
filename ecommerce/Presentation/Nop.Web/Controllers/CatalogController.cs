@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
 using Nop.Core;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Customers;
@@ -13,8 +14,6 @@ using Nop.Services.Security;
 using Nop.Services.Stores;
 using Nop.Services.Vendors;
 using Nop.Web.Factories;
-using Nop.Web.Framework;
-using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework.Security;
 using Nop.Web.Models.Catalog;
 
@@ -46,7 +45,7 @@ namespace Nop.Web.Controllers
 
         #endregion
 
-        #region Ctor
+        #region Constructors
 
         public CatalogController(ICatalogModelFactory catalogModelFactory,
             IProductModelFactory productModelFactory,
@@ -90,11 +89,11 @@ namespace Nop.Web.Controllers
         }
 
         #endregion
-        
+
         #region Categories
         
-        [HttpsRequirement(SslRequirement.No)]
-        public virtual IActionResult Category(int categoryId, CatalogPagingFilteringModel command)
+        [NopHttpsRequirement(SslRequirement.No)]
+        public virtual ActionResult Category(int categoryId, CatalogPagingFilteringModel command)
         {
             var category = _categoryService.GetCategoryById(categoryId);
             if (category == null || category.Deleted)
@@ -120,7 +119,7 @@ namespace Nop.Web.Controllers
 
             //display "edit" (manage) link
             if (_permissionService.Authorize(StandardPermissionProvider.AccessAdminPanel) && _permissionService.Authorize(StandardPermissionProvider.ManageCategories))
-                DisplayEditLink(Url.Action("Edit", "Category", new { id = category.Id, area = AreaNames.Admin }));
+                DisplayEditLink(Url.Action("Edit", "Category", new { id = category.Id, area = "Admin" }));
 
             //activity log
             _customerActivityService.InsertActivity("PublicStore.ViewCategory", _localizationService.GetResource("ActivityLog.PublicStore.ViewCategory"), category.Name);
@@ -133,12 +132,36 @@ namespace Nop.Web.Controllers
             return View(templateViewPath, model);
         }
 
+        [ChildActionOnly]
+        public virtual ActionResult CategoryNavigation(int currentCategoryId, int currentProductId)
+        {
+            var model = _catalogModelFactory.PrepareCategoryNavigationModel(currentCategoryId, currentProductId);
+            return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public virtual ActionResult TopMenu()
+        {
+            var model = _catalogModelFactory.PrepareTopMenuModel();
+            return PartialView(model);
+        }
+        
+        [ChildActionOnly]
+        public virtual ActionResult HomepageCategories()
+        {
+            var model = _catalogModelFactory.PrepareHomepageCategoryModels();
+            if (!model.Any())
+                return Content("");
+
+            return PartialView(model);
+        }
+
         #endregion
 
         #region Manufacturers
 
-        [HttpsRequirement(SslRequirement.No)]
-        public virtual IActionResult Manufacturer(int manufacturerId, CatalogPagingFilteringModel command)
+        [NopHttpsRequirement(SslRequirement.No)]
+        public virtual ActionResult Manufacturer(int manufacturerId, CatalogPagingFilteringModel command)
         {
             var manufacturer = _manufacturerService.GetManufacturerById(manufacturerId);
             if (manufacturer == null || manufacturer.Deleted)
@@ -164,7 +187,7 @@ namespace Nop.Web.Controllers
             
             //display "edit" (manage) link
             if (_permissionService.Authorize(StandardPermissionProvider.AccessAdminPanel) && _permissionService.Authorize(StandardPermissionProvider.ManageManufacturers))
-                DisplayEditLink(Url.Action("Edit", "Manufacturer", new { id = manufacturer.Id, area = AreaNames.Admin }));
+                DisplayEditLink(Url.Action("Edit", "Manufacturer", new { id = manufacturer.Id, area = "Admin" }));
 
             //activity log
             _customerActivityService.InsertActivity("PublicStore.ViewManufacturer", _localizationService.GetResource("ActivityLog.PublicStore.ViewManufacturer"), manufacturer.Name);
@@ -177,19 +200,33 @@ namespace Nop.Web.Controllers
             return View(templateViewPath, model);
         }
 
-        [HttpsRequirement(SslRequirement.No)]
-        public virtual IActionResult ManufacturerAll()
+        [NopHttpsRequirement(SslRequirement.No)]
+        public virtual ActionResult ManufacturerAll()
         {
             var model = _catalogModelFactory.PrepareManufacturerAllModels();
             return View(model);
         }
-        
+
+        [ChildActionOnly]
+        public virtual ActionResult ManufacturerNavigation(int currentManufacturerId)
+        {
+            if (_catalogSettings.ManufacturersBlockItemsToDisplay == 0)
+                return Content("");
+
+            var model = _catalogModelFactory.PrepareManufacturerNavigationModel(currentManufacturerId);
+
+            if (!model.Manufacturers.Any())
+                return Content("");
+            
+            return PartialView(model);
+        }
+
         #endregion
 
         #region Vendors
 
-        [HttpsRequirement(SslRequirement.No)]
-        public virtual IActionResult Vendor(int vendorId, CatalogPagingFilteringModel command)
+        [NopHttpsRequirement(SslRequirement.No)]
+        public virtual ActionResult Vendor(int vendorId, CatalogPagingFilteringModel command)
         {
             var vendor = _vendorService.GetVendorById(vendorId);
             if (vendor == null || vendor.Deleted || !vendor.Active)
@@ -203,7 +240,7 @@ namespace Nop.Web.Controllers
             
             //display "edit" (manage) link
             if (_permissionService.Authorize(StandardPermissionProvider.AccessAdminPanel) && _permissionService.Authorize(StandardPermissionProvider.ManageVendors))
-                DisplayEditLink(Url.Action("Edit", "Vendor", new { id = vendor.Id, area = AreaNames.Admin }));
+                DisplayEditLink(Url.Action("Edit", "Vendor", new { id = vendor.Id, area = "Admin" }));
 
             //model
             var model = _catalogModelFactory.PrepareVendorModel(vendor, command);
@@ -211,8 +248,8 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        [HttpsRequirement(SslRequirement.No)]
-        public virtual IActionResult VendorAll()
+        [NopHttpsRequirement(SslRequirement.No)]
+        public virtual ActionResult VendorAll()
         {
             //we don't allow viewing of vendors if "vendors" block is hidden
             if (_vendorSettings.VendorsBlockItemsToDisplay == 0)
@@ -222,12 +259,36 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
+        [ChildActionOnly]
+        public virtual ActionResult VendorNavigation()
+        {
+            if (_vendorSettings.VendorsBlockItemsToDisplay == 0)
+                return Content("");
+
+            var model = _catalogModelFactory.PrepareVendorNavigationModel();
+            if (!model.Vendors.Any())
+                return Content("");
+            
+            return PartialView(model);
+        }
+
         #endregion
 
         #region Product tags
         
-        [HttpsRequirement(SslRequirement.No)]
-        public virtual IActionResult ProductsByTag(int productTagId, CatalogPagingFilteringModel command)
+        [ChildActionOnly]
+        public virtual ActionResult PopularProductTags()
+        {
+            var model = _catalogModelFactory.PreparePopularProductTagsModel();
+
+            if (!model.Tags.Any())
+                return Content("");
+            
+            return PartialView(model);
+        }
+
+        [NopHttpsRequirement(SslRequirement.No)]
+        public virtual ActionResult ProductsByTag(int productTagId, CatalogPagingFilteringModel command)
         {
             var productTag = _productTagService.GetProductTagById(productTagId);
             if (productTag == null)
@@ -237,8 +298,8 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        [HttpsRequirement(SslRequirement.No)]
-        public virtual IActionResult ProductTagsAll()
+        [NopHttpsRequirement(SslRequirement.No)]
+        public virtual ActionResult ProductTagsAll()
         {
             var model = _catalogModelFactory.PrepareProductTagsAllModel();
             return View(model);
@@ -248,8 +309,9 @@ namespace Nop.Web.Controllers
 
         #region Searching
 
-        [HttpsRequirement(SslRequirement.No)]
-        public virtual IActionResult Search(SearchModel model, CatalogPagingFilteringModel command)
+        [NopHttpsRequirement(SslRequirement.No)]
+        [ValidateInput(false)]
+        public virtual ActionResult Search(SearchModel model, CatalogPagingFilteringModel command)
         {
             //'Continue shopping' URL
             _genericAttributeService.SaveAttribute(_workContext.CurrentCustomer,
@@ -264,9 +326,17 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        public virtual IActionResult SearchTermAutoComplete(string term)
+        [ChildActionOnly]
+        public virtual ActionResult SearchBox()
         {
-            if (string.IsNullOrWhiteSpace(term) || term.Length < _catalogSettings.ProductSearchTermMinimumLength)
+            var model = _catalogModelFactory.PrepareSearchBoxModel();
+            return PartialView(model);
+        }
+
+        [ValidateInput(false)]
+        public virtual ActionResult SearchTermAutoComplete(string term)
+        {
+            if (String.IsNullOrWhiteSpace(term) || term.Length < _catalogSettings.ProductSearchTermMinimumLength)
                 return Content("");
 
             //products
@@ -282,16 +352,16 @@ namespace Nop.Web.Controllers
 
             var models =  _productModelFactory.PrepareProductOverviewModels(products, false, _catalogSettings.ShowProductImagesInSearchAutoComplete, _mediaSettings.AutoCompleteSearchThumbPictureSize).ToList();
             var result = (from p in models
-                    select new
-                    {
-                        label = p.Name,
-                        producturl = Url.RouteUrl("Product", new {SeName = p.SeName}),
-                        productpictureurl = p.DefaultPictureModel.ImageUrl
-                    })
-                .ToList();
-            return Json(result);
+                          select new
+                          {
+                              label = p.Name,
+                              producturl = Url.RouteUrl("Product", new { SeName = p.SeName }),
+                              productpictureurl = p.DefaultPictureModel.ImageUrl
+                          })
+                          .ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
-        
+
         #endregion
     }
 }

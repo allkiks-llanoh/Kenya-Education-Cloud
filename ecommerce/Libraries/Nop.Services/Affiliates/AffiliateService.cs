@@ -54,15 +54,15 @@ namespace Nop.Services.Affiliates
             
             return _affiliateRepository.GetById(affiliateId);
         }
-
+        
         /// <summary>
-        /// Gets an affiliate by friendly URL name
+        /// Gets an affiliate by friendly url name
         /// </summary>
-        /// <param name="friendlyUrlName">Friendly URL name</param>
+        /// <param name="friendlyUrlName">Friendly url name</param>
         /// <returns>Affiliate</returns>
         public virtual Affiliate GetAffiliateByFriendlyUrlName(string friendlyUrlName)
         {
-            if (string.IsNullOrWhiteSpace(friendlyUrlName))
+            if (String.IsNullOrWhiteSpace(friendlyUrlName))
                 return null;
 
             var query = from a in _affiliateRepository.Table
@@ -80,7 +80,7 @@ namespace Nop.Services.Affiliates
         public virtual void DeleteAffiliate(Affiliate affiliate)
         {
             if (affiliate == null)
-                throw new ArgumentNullException(nameof(affiliate));
+                throw new ArgumentNullException("affiliate");
 
             affiliate.Deleted = true;
             UpdateAffiliate(affiliate);
@@ -110,11 +110,11 @@ namespace Nop.Services.Affiliates
             bool showHidden = false)
         {
             var query = _affiliateRepository.Table;
-            if (!string.IsNullOrWhiteSpace(friendlyUrlName))
+            if (!String.IsNullOrWhiteSpace(friendlyUrlName))
                 query = query.Where(a => a.FriendlyUrlName.Contains(friendlyUrlName));
-            if (!string.IsNullOrWhiteSpace(firstName))
+            if (!String.IsNullOrWhiteSpace(firstName))
                 query = query.Where(a => a.Address.FirstName.Contains(firstName));
-            if (!string.IsNullOrWhiteSpace(lastName))
+            if (!String.IsNullOrWhiteSpace(lastName))
                 query = query.Where(a => a.Address.LastName.Contains(lastName));
             if (!showHidden)
                 query = query.Where(a => a.Active);
@@ -148,7 +148,7 @@ namespace Nop.Services.Affiliates
         public virtual void InsertAffiliate(Affiliate affiliate)
         {
             if (affiliate == null)
-                throw new ArgumentNullException(nameof(affiliate));
+                throw new ArgumentNullException("affiliate");
 
             _affiliateRepository.Insert(affiliate);
 
@@ -163,7 +163,7 @@ namespace Nop.Services.Affiliates
         public virtual void UpdateAffiliate(Affiliate affiliate)
         {
             if (affiliate == null)
-                throw new ArgumentNullException(nameof(affiliate));
+                throw new ArgumentNullException("affiliate");
 
             _affiliateRepository.Update(affiliate);
 

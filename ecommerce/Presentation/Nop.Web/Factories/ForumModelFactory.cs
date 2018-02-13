@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Web.Mvc;
 using Nop.Core;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Forums;
@@ -15,7 +15,7 @@ using Nop.Services.Helpers;
 using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Services.Seo;
-using Nop.Web.Framework.Extensions;
+using Nop.Web.Framework;
 using Nop.Web.Models.Boards;
 using Nop.Web.Models.Common;
 
@@ -40,7 +40,7 @@ namespace Nop.Web.Factories
 
         #endregion
 
-        #region Ctor
+        #region Constructors
 
         public ForumModelFactory(IForumService forumService,
             ILocalizationService localizationService,
@@ -66,7 +66,7 @@ namespace Nop.Web.Factories
         #endregion
 
         #region Utilities
-        
+
         /// <summary>
         /// Get the list of forum topic types
         /// </summary>
@@ -114,13 +114,13 @@ namespace Nop.Web.Factories
                 var forums = _forumService.GetAllForumsByGroupId(fg.Id);
                 foreach (var f in forums)
                 {
-                    forumsList.Add(new SelectListItem { Text = $"{separator}{f.Name}", Value = f.Id.ToString() });
+                    forumsList.Add(new SelectListItem { Text = string.Format("{0}{1}", separator, f.Name), Value = f.Id.ToString() });
                 }
             }
 
             return forumsList;
         }
-        
+
         #endregion
 
         #region Methods
@@ -133,7 +133,7 @@ namespace Nop.Web.Factories
         public virtual ForumTopicRowModel PrepareForumTopicRowModel(ForumTopic topic)
         {
             if (topic == null)
-                throw new ArgumentNullException(nameof(topic));
+                throw new ArgumentNullException("topic");
 
             var topicModel = new ForumTopicRowModel
             {
@@ -166,7 +166,7 @@ namespace Nop.Web.Factories
         public virtual ForumRowModel PrepareForumRowModel(Forum forum)
         {
             if (forum == null)
-                throw new ArgumentNullException(nameof(forum));
+                throw new ArgumentNullException("forum");
 
             var forumModel = new ForumRowModel
             {
@@ -189,7 +189,7 @@ namespace Nop.Web.Factories
         public virtual ForumGroupModel PrepareForumGroupModel(ForumGroup forumGroup)
         {
             if (forumGroup == null)
-                throw new ArgumentNullException(nameof(forumGroup));
+                throw new ArgumentNullException("forumGroup");
 
             var forumGroupModel = new ForumGroupModel
             {
@@ -263,7 +263,7 @@ namespace Nop.Web.Factories
                 AllowPostVoting = _forumSettings.AllowPostVoting
             };
 
-            var pageSize = _forumSettings.ActiveDiscussionsPageSize > 0 ? _forumSettings.ActiveDiscussionsPageSize : 50;
+            int pageSize = _forumSettings.ActiveDiscussionsPageSize > 0 ? _forumSettings.ActiveDiscussionsPageSize : 50;
 
             var topics = _forumService.GetActiveTopics(forumId, (page - 1), pageSize);
             model.TopicPageSize = topics.PageSize;
@@ -287,17 +287,15 @@ namespace Nop.Web.Factories
         public virtual ForumPageModel PrepareForumPageModel(Forum forum, int page)
         {
             if (forum == null)
-                throw new ArgumentNullException(nameof(forum));
+                throw new ArgumentNullException("forum");
 
-            var model = new ForumPageModel
-            {
-                Id = forum.Id,
-                Name = forum.Name,
-                SeName = forum.GetSeName(),
-                Description = forum.Description
-            };
+            var model = new ForumPageModel();
+            model.Id = forum.Id;
+            model.Name = forum.Name;
+            model.SeName = forum.GetSeName();
+            model.Description = forum.Description;
 
-            var pageSize = _forumSettings.TopicsPageSize > 0 ? _forumSettings.TopicsPageSize : 10;
+            int pageSize = _forumSettings.TopicsPageSize > 0 ? _forumSettings.TopicsPageSize : 10;
 
             model.AllowPostVoting = _forumSettings.AllowPostVoting;
 
@@ -337,24 +335,22 @@ namespace Nop.Web.Factories
         public virtual ForumTopicPageModel PrepareForumTopicPageModel(ForumTopic forumTopic, int page)
         {
             if (forumTopic == null)
-                throw new ArgumentNullException(nameof(forumTopic));
+                throw new ArgumentNullException("forumTopic");
 
             //load posts
             var posts = _forumService.GetAllPosts(forumTopic.Id, 0, string.Empty,
                 page - 1, _forumSettings.PostsPageSize);
-
+            
             //prepare model
-            var model = new ForumTopicPageModel
-            {
-                Id = forumTopic.Id,
-                Subject = forumTopic.Subject,
-                SeName = forumTopic.GetSeName(),
+            var model = new ForumTopicPageModel();
+            model.Id = forumTopic.Id;
+            model.Subject = forumTopic.Subject;
+            model.SeName = forumTopic.GetSeName();
 
-                IsCustomerAllowedToEditTopic = _forumService.IsCustomerAllowedToEditTopic(_workContext.CurrentCustomer, forumTopic),
-                IsCustomerAllowedToDeleteTopic = _forumService.IsCustomerAllowedToDeleteTopic(_workContext.CurrentCustomer, forumTopic),
-                IsCustomerAllowedToMoveTopic = _forumService.IsCustomerAllowedToMoveTopic(_workContext.CurrentCustomer, forumTopic),
-                IsCustomerAllowedToSubscribe = _forumService.IsCustomerAllowedToSubscribe(_workContext.CurrentCustomer)
-            };
+            model.IsCustomerAllowedToEditTopic = _forumService.IsCustomerAllowedToEditTopic(_workContext.CurrentCustomer, forumTopic);
+            model.IsCustomerAllowedToDeleteTopic = _forumService.IsCustomerAllowedToDeleteTopic(_workContext.CurrentCustomer, forumTopic);
+            model.IsCustomerAllowedToMoveTopic = _forumService.IsCustomerAllowedToMoveTopic(_workContext.CurrentCustomer, forumTopic);
+            model.IsCustomerAllowedToSubscribe = _forumService.IsCustomerAllowedToSubscribe(_workContext.CurrentCustomer);
 
             if (model.IsCustomerAllowedToSubscribe)
             {
@@ -441,7 +437,7 @@ namespace Nop.Web.Factories
         public virtual TopicMoveModel PrepareTopicMove(ForumTopic forumTopic)
         {
             if (forumTopic == null)
-                throw new ArgumentNullException(nameof(forumTopic));
+                throw new ArgumentNullException("forumTopic");
 
             var model = new TopicMoveModel
             {
@@ -462,10 +458,10 @@ namespace Nop.Web.Factories
         public virtual void PrepareTopicCreateModel(Forum forum, EditForumTopicModel model)
         {
             if (forum == null)
-                throw new ArgumentNullException(nameof(forum));
+                throw new ArgumentNullException("forum");
 
             if (model == null)
-                throw new ArgumentNullException(nameof(model));
+                throw new ArgumentNullException("model");
 
             model.IsEdit = false;
             model.ForumId = forum.Id;
@@ -486,14 +482,15 @@ namespace Nop.Web.Factories
         public virtual void PrepareTopicEditModel(ForumTopic forumTopic, EditForumTopicModel model, bool excludeProperties)
         {
             if (forumTopic == null)
-                throw new ArgumentNullException(nameof(forumTopic));
+                throw new ArgumentNullException("forumTopic");
 
             if (model == null)
-                throw new ArgumentNullException(nameof(model));
+                throw new ArgumentNullException("model");
 
             var forum = forumTopic.Forum;
             if (forum == null)
                 throw new ArgumentException("forum cannot be loaded");
+            
 
             model.IsEdit = true;
             model.Id = forumTopic.Id;
@@ -531,7 +528,7 @@ namespace Nop.Web.Factories
         public virtual EditForumPostModel PreparePostCreateModel(ForumTopic forumTopic, int? quote, bool excludeProperties)
         {
             if (forumTopic == null)
-                throw new ArgumentNullException(nameof(forumTopic));
+                throw new ArgumentNullException("forumTopic");
 
             var forum = forumTopic.Forum;
             if (forum == null)
@@ -559,7 +556,7 @@ namespace Nop.Web.Factories
                 }
 
                 // Insert the quoted text
-                var text = string.Empty;
+                string text = string.Empty;
                 if (quote.HasValue)
                 {
                     var quotePost = _forumService.GetPostById(quote.Value);
@@ -570,10 +567,10 @@ namespace Nop.Web.Factories
                         switch (_forumSettings.ForumEditor)
                         {
                             case EditorType.SimpleTextBox:
-                                text = $"{quotePost.Customer.FormatUserName()}:\n{quotePostText}\n";
+                                text = String.Format("{0}:\n{1}\n", quotePost.Customer.FormatUserName(), quotePostText);
                                 break;
                             case EditorType.BBCodeEditor:
-                                text = $"[quote={quotePost.Customer.FormatUserName()}]{BBCodeHelper.RemoveQuotes(quotePostText)}[/quote]";
+                                text = String.Format("[quote={0}]{1}[/quote]", quotePost.Customer.FormatUserName(), BBCodeHelper.RemoveQuotes(quotePostText));
                                 break;
                         }
                         model.Text = text;
@@ -593,7 +590,7 @@ namespace Nop.Web.Factories
         public virtual EditForumPostModel PreparePostEditModel(ForumPost forumPost, bool excludeProperties)
         {
             if (forumPost == null)
-                throw new ArgumentNullException(nameof(forumPost));
+                throw new ArgumentNullException("forumPost");
 
             var forumTopic = forumPost.ForumTopic;
             if (forumTopic == null)
@@ -644,8 +641,8 @@ namespace Nop.Web.Factories
         {
             var model = new SearchModel();
 
-            var pageSize = 10;
-            
+            int pageSize = 10;
+
             // Create the values for the "Limit results to previous" select list
             var limitList = new List<SelectListItem>
             {
@@ -714,7 +711,7 @@ namespace Nop.Web.Factories
                     forumsSelectList.Add(
                         new SelectListItem
                         {
-                            Text = $"{separator}{f.Name}",
+                            Text = string.Format("{0}{1}", separator, f.Name),
                             Value = f.Id.ToString()
                         });
                 }
@@ -742,16 +739,19 @@ namespace Nop.Web.Factories
             };
             model.WithinList = withinList;
 
-            int.TryParse(forumId, out int forumIdSelected);
+            int forumIdSelected;
+            int.TryParse(forumId, out forumIdSelected);
             model.ForumIdSelected = forumIdSelected;
 
-            int.TryParse(within, out int withinSelected);
+            int withinSelected;
+            int.TryParse(within, out withinSelected);
             model.WithinSelected = withinSelected;
 
-            int.TryParse(limitDays, out int limitDaysSelected);
+            int limitDaysSelected;
+            int.TryParse(limitDays, out limitDaysSelected);
             model.LimitDaysSelected = limitDaysSelected;
 
-            var searchTermMinimumLength = _forumSettings.ForumSearchTermMinimumLength;
+            int searchTermMinimumLength = _forumSettings.ForumSearchTermMinimumLength;
 
             model.ShowAdvancedSearch = adv.GetValueOrDefault();
             model.SearchResultsVisible = false;
@@ -762,7 +762,7 @@ namespace Nop.Web.Factories
 
             try
             {
-                if (!string.IsNullOrWhiteSpace(searchterms))
+                if (!String.IsNullOrWhiteSpace(searchterms))
                 {
                     searchterms = searchterms.Trim();
                     model.SearchTerms = searchterms;
@@ -774,7 +774,7 @@ namespace Nop.Web.Factories
                     }
 
                     ForumSearchType searchWithin = 0;
-                    var limitResultsToPrevious = 0;
+                    int limitResultsToPrevious = 0;
                     if (adv.GetValueOrDefault())
                     {
                         searchWithin = (ForumSearchType)withinSelected;
@@ -825,10 +825,8 @@ namespace Nop.Web.Factories
         /// <returns>Last post model</returns>
         public virtual LastPostModel PrepareLastPostModel(ForumPost forumPost, bool showTopic)
         {
-            var model = new LastPostModel
-            {
-                ShowTopic = showTopic
-            };
+            var model = new LastPostModel();
+            model.ShowTopic = showTopic;
 
             //do not throw an exception here
             if (forumPost == null)
@@ -873,7 +871,7 @@ namespace Nop.Web.Factories
                 }
             }
 
-            var forum = _forumService.GetForumById(forumTopic != null ? forumTopic.ForumId : (forumId.HasValue ? forumId.Value : 0));
+            Forum forum = _forumService.GetForumById(forumTopic != null ? forumTopic.ForumId : (forumId.HasValue ? forumId.Value : 0));
             if (forum != null)
             {
                 model.ForumId = forum.Id;
@@ -899,7 +897,7 @@ namespace Nop.Web.Factories
         /// <returns>customer forum subscriptions model</returns>
         public virtual CustomerForumSubscriptionsModel PrepareCustomerForumSubscriptionsModel(int? page)
         {
-            var pageIndex = 0;
+            int pageIndex = 0;
             if (page > 0)
             {
                 pageIndex = page.Value - 1;
@@ -917,7 +915,7 @@ namespace Nop.Web.Factories
             {
                 var forumTopicId = forumSubscription.TopicId;
                 var forumId = forumSubscription.ForumId;
-                var topicSubscription = false;
+                bool topicSubscription = false;
                 var title = string.Empty;
                 var slug = string.Empty;
 
@@ -960,11 +958,12 @@ namespace Nop.Web.Factories
                 ShowTotalSummary = false,
                 RouteActionName = "CustomerForumSubscriptionsPaged",
                 UseRouteLinks = true,
-                RouteValues = new ForumSubscriptionsRouteValues { pageNumber = pageIndex }
+                RouteValues = new ForumSubscriptionsRouteValues { page = pageIndex }
             };
 
             return model;
         }
+
 
         #endregion
     }

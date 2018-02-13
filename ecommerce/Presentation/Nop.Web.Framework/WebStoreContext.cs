@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Net.Http.Headers;
 using Nop.Core;
 using Nop.Core.Domain.Stores;
 using Nop.Services.Stores;
@@ -13,21 +11,15 @@ namespace Nop.Web.Framework
     /// </summary>
     public partial class WebStoreContext : IStoreContext
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IStoreService _storeService;
+        private readonly IWebHelper _webHelper;
 
         private Store _cachedStore;
 
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="httpContextAccessor">HTTP context accessor</param>
-        /// <param name="storeService">Store service</param>
-        public WebStoreContext(IHttpContextAccessor httpContextAccessor,
-            IStoreService storeService)
+        public WebStoreContext(IStoreService storeService, IWebHelper webHelper)
         {
-            this._httpContextAccessor = httpContextAccessor;
             this._storeService = storeService;
+            this._webHelper = webHelper;
         }
 
         /// <summary>
@@ -40,9 +32,8 @@ namespace Nop.Web.Framework
                 if (_cachedStore != null)
                     return _cachedStore;
 
-                //try to determine the current store by HOST header
-                string host = _httpContextAccessor.HttpContext?.Request?.Headers[HeaderNames.Host];
-
+                //ty to determine the current store by HTTP_HOST
+                var host = _webHelper.ServerVariables("HTTP_HOST");
                 var allStores = _storeService.GetAllStores();
                 var store = allStores.FirstOrDefault(s => s.ContainsHostValue(host));
 
@@ -51,9 +42,10 @@ namespace Nop.Web.Framework
                     //load the first found store
                     store = allStores.FirstOrDefault();
                 }
+                if (store == null)
+                    throw new Exception("No store could be loaded");
 
-                _cachedStore = store ?? throw new Exception("No store could be loaded");
-
+                _cachedStore = store;
                 return _cachedStore;
             }
         }

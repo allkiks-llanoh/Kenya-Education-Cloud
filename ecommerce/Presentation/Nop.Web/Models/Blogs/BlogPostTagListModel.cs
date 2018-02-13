@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nop.Web.Framework.Mvc.Models;
+using Nop.Web.Framework.Mvc;
 
 namespace Nop.Web.Models.Blogs
 {
@@ -14,19 +14,20 @@ namespace Nop.Web.Models.Blogs
         public int GetFontSize(BlogPostTagModel blogPostTag)
         {
             if (blogPostTag == null)
-                throw new ArgumentNullException(nameof(blogPostTag));
+                throw new ArgumentNullException("blogPostTag");
 
             var itemWeights = new List<double>();
             foreach (var tag in Tags)
                 itemWeights.Add(tag.BlogPostCount);
 
-            var stdDev = StdDev(itemWeights, out double mean);
+            double mean;
+            double stdDev = StdDev(itemWeights, out mean);
             return GetFontSize(blogPostTag.BlogPostCount, mean, stdDev);
         }
 
         protected int GetFontSize(double weight, double mean, double stdDev)
         {
-            var factor = (weight - mean);
+            double factor = (weight - mean);
 
             if (factor != 0 && stdDev != 0)
                 factor /= stdDev;
@@ -43,12 +44,12 @@ namespace Nop.Web.Models.Blogs
         protected double Mean(IEnumerable<double> values)
         {
             if (values == null)
-                throw new ArgumentNullException(nameof(values));
+                throw new ArgumentNullException("values");
             
             double sum = 0;
-            var count = 0;
+            int count = 0;
 
-            foreach (var d in values)
+            foreach (double d in values)
             {
                 sum += d;
                 count++;
@@ -62,16 +63,16 @@ namespace Nop.Web.Models.Blogs
         protected double StdDev(IEnumerable<double> values, out double mean)
         {
             if (values == null)
-                throw new ArgumentNullException(nameof(values));
+                throw new ArgumentNullException("values");
 
             mean = Mean(values);
 
             double sumOfDiffSquares = 0;
-            var count = 0;
+            int count = 0;
 
-            foreach (var d in values)
+            foreach (double d in values)
             {
-                var diff = (d - mean);
+                double diff = (d - mean);
                 sumOfDiffSquares += diff * diff;
                 count++;
             }

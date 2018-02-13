@@ -31,6 +31,9 @@ namespace Nop.Core.Domain.Customers
         /// </summary>
         public int DisplayOrder { get; set; }
 
+
+
+
         /// <summary>
         /// Gets the attribute control type
         /// </summary>
@@ -38,11 +41,11 @@ namespace Nop.Core.Domain.Customers
         {
             get
             {
-                return (AttributeControlType)AttributeControlTypeId;
+                return (AttributeControlType)this.AttributeControlTypeId;
             }
             set
             {
-                AttributeControlTypeId = (int)value;
+                this.AttributeControlTypeId = (int)value;
             }
         }
         /// <summary>

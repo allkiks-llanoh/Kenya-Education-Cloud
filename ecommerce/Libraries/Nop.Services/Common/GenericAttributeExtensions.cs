@@ -6,9 +6,6 @@ using Nop.Data;
 
 namespace Nop.Services.Common
 {
-    /// <summary>
-    /// Generic attribute extensions
-    /// </summary>
     public static class GenericAttributeExtensions
     {
         /// <summary>
@@ -38,12 +35,12 @@ namespace Nop.Services.Common
             string key, IGenericAttributeService genericAttributeService, int storeId = 0)
         {
             if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
+                throw new ArgumentNullException("entity");
 
-            var keyGroup = entity.GetUnproxiedEntityType().Name;
+            string keyGroup = entity.GetUnproxiedEntityType().Name;
 
             var props = genericAttributeService.GetAttributesForEntity(entity.Id, keyGroup);
-            //little hack here (only for unit testing). we should write expect-return rules in unit tests for such cases
+            //little hack here (only for unit testing). we should write ecpect-return rules in unit tests for such cases
             if (props == null)
                 return default(TPropType);
             props = props.Where(x => x.StoreId == storeId).ToList();

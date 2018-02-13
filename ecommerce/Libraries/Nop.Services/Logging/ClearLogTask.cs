@@ -5,14 +5,10 @@ namespace Nop.Services.Logging
     /// <summary>
     /// Represents a task to clear [Log] table
     /// </summary>
-    public partial class ClearLogTask : IScheduleTask
+    public partial class ClearLogTask : ITask
     {
         private readonly ILogger _logger;
 
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="logger">Logger</param>
         public ClearLogTask(ILogger logger)
         {
             this._logger = logger;

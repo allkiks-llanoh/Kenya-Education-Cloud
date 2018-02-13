@@ -1,9 +1,8 @@
 ﻿using Nop.Core.Domain.Forums;
-using Nop.Web.Framework.Mvc.Models;
 
 namespace Nop.Web.Models.Boards
 {
-    public partial class ForumTopicRowModel : BaseNopModel
+    public partial class ForumTopicRowModel
     {
         public int Id { get; set; }
         public string Subject { get; set; }

@@ -1,8 +1,6 @@
 ﻿@model ProductsByTagModel
-@using Nop.Core.Domain.Seo
-@inject SeoSettings seoSettings
 @{
-    Layout = "_ColumnsTwo";
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
 
     //title
     Html.AddTitleParts(string.Format(T("PageTitle.ProductsByTag").Text, Model.TagName));
@@ -10,23 +8,27 @@
     Html.AppendPageCssClassParts("html-product-tag-page");
 
     //canonical URL
-    if (seoSettings.CanonicalUrlsEnabled)
+    var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
+    if (canonicalUrlsEnabled)
     {
-        var productsByTagUrl = Url.RouteUrl("ProductsByTag", new { productTagId = Model.Id, SeName = Model.TagSeName }, this.Url.ActionContext.HttpContext.Request.Scheme);
-        Html.AddCanonicalUrlParts(productsByTagUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+        var productsByTagUrl = Url.RouteUrl("ProductsByTag", new { productTagId = Model.Id, SeName = Model.TagSeName }, this.Request.Url.Scheme);
+        Html.AddCanonicalUrlParts(productsByTagUrl);
     }
 }
+@using Nop.Core.Domain.Seo
+@using Nop.Core.Infrastructure
+@using Nop.Web.Models.Catalog;
 <div class="page product-tag-page">
     <div class="page-title">
-        <h1>@string.Format(T("Products.Tags.ProductsTaggedWith").Text, Model.TagName)</h1>
+        <h1>@String.Format(T("Products.Tags.ProductsTaggedWith").Text, Model.TagName)</h1>
     </div>
     <div class="page-body">
-        @await Component.InvokeAsync("Widget", new { widgetZone = "productsbytag_top", additionalData = Model.Id })
+        @Html.Widget("productsbytag_top", Model.Id)
         @if (Model.Products.Count > 0)
         {
-            @await Html.PartialAsync("_CatalogSelectors", Model.PagingFilteringContext)
+            @Html.Partial("_CatalogSelectors", Model.PagingFilteringContext, new ViewDataDictionary())
         }
-        @await Component.InvokeAsync("Widget", new { widgetZone = "productsbytag_before_product_list", additionalData = Model.Id })
+        @Html.Widget("productsbytag_before_product_list", Model.Id)
         @if (Model.Products.Count > 0)
         {
             <div class="@(Model.PagingFilteringContext.ViewMode == "list" ? "product-list" : "product-grid")">
@@ -34,7 +36,7 @@
                     @foreach (var product in Model.Products)
                     {
                         <div class="item-box">
-                            @await Html.PartialAsync("_ProductBox", product)
+                            @Html.Partial("_ProductBox", product)
                         </div>
                     }
                 </div>
@@ -49,6 +51,6 @@
                 @pager
             </div>
         }
-        @await Component.InvokeAsync("Widget", new { widgetZone = "productsbytag_bottom", additionalData = Model.Id })
+        @Html.Widget("productsbytag_bottom", Model.Id)
     </div>
 </div>

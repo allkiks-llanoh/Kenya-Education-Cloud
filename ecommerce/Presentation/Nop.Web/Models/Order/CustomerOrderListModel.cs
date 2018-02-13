@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nop.Core.Domain.Orders;
-using Nop.Web.Framework.Mvc.Models;
+using Nop.Web.Framework.Mvc;
 
 namespace Nop.Web.Models.Order
 {
@@ -17,6 +17,7 @@ namespace Nop.Web.Models.Order
         public IList<OrderDetailsModel> Orders { get; set; }
         public IList<RecurringOrderModel> RecurringOrders { get; set; }
         public IList<string> RecurringPaymentErrors { get; set; }
+
 
         #region Nested classes
 

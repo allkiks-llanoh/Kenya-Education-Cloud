@@ -2,14 +2,8 @@
 
 namespace Nop.Data.Mapping.Common
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class AddressMap : NopEntityTypeConfiguration<Address>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public AddressMap()
         {
             this.ToTable("Address");

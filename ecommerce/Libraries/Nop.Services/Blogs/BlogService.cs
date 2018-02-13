@@ -27,14 +27,6 @@ namespace Nop.Services.Blogs
 
         #region Ctor
 
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="blogPostRepository">Blog post repository</param>
-        /// <param name="blogCommentRepository">Blog comment repository</param>
-        /// <param name="storeMappingRepository">Store mapping repository</param>
-        /// <param name="catalogSettings">Catalog settings</param>
-        /// <param name="eventPublisher">Event publisher</param>
         public BlogService(IRepository<BlogPost> blogPostRepository,
             IRepository<BlogComment> blogCommentRepository,
             IRepository<StoreMapping> storeMappingRepository,
@@ -61,7 +53,7 @@ namespace Nop.Services.Blogs
         public virtual void DeleteBlogPost(BlogPost blogPost)
         {
             if (blogPost == null)
-                throw new ArgumentNullException(nameof(blogPost));
+                throw new ArgumentNullException("blogPost");
 
             _blogPostRepository.Delete(blogPost);
 
@@ -170,7 +162,7 @@ namespace Nop.Services.Blogs
             foreach (var blogPost in blogPostsAll)
             {
                 var tags = blogPost.ParseTags();
-                if (!string.IsNullOrEmpty(tags.FirstOrDefault(t => t.Equals(tag, StringComparison.InvariantCultureIgnoreCase))))
+                if (!String.IsNullOrEmpty(tags.FirstOrDefault(t => t.Equals(tag, StringComparison.InvariantCultureIgnoreCase))))
                     taggedBlogPosts.Add(blogPost);
             }
 
@@ -194,7 +186,7 @@ namespace Nop.Services.Blogs
             foreach (var blogPost in blogPosts)
             {
                 var tags = blogPost.ParseTags();
-                foreach (var tag in tags)
+                foreach (string tag in tags)
                 {
                     var foundBlogPostTag = blogPostTags.Find(bpt => bpt.Name.Equals(tag, StringComparison.InvariantCultureIgnoreCase));
                     if (foundBlogPostTag == null)
@@ -221,7 +213,7 @@ namespace Nop.Services.Blogs
         public virtual void InsertBlogPost(BlogPost blogPost)
         {
             if (blogPost == null)
-                throw new ArgumentNullException(nameof(blogPost));
+                throw new ArgumentNullException("blogPost");
 
             _blogPostRepository.Insert(blogPost);
 
@@ -236,7 +228,7 @@ namespace Nop.Services.Blogs
         public virtual void UpdateBlogPost(BlogPost blogPost)
         {
             if (blogPost == null)
-                throw new ArgumentNullException(nameof(blogPost));
+                throw new ArgumentNullException("blogPost");
 
             _blogPostRepository.Update(blogPost);
 
@@ -319,7 +311,7 @@ namespace Nop.Services.Blogs
             var comments = query.ToList();
             //sort by passed identifiers
             var sortedComments = new List<BlogComment>();
-            foreach (var id in commentIds)
+            foreach (int id in commentIds)
             {
                 var comment = comments.Find(x => x.Id == id);
                 if (comment != null)
@@ -355,7 +347,7 @@ namespace Nop.Services.Blogs
         public virtual void DeleteBlogComment(BlogComment blogComment)
         {
             if (blogComment == null)
-                throw new ArgumentNullException(nameof(blogComment));
+                throw new ArgumentNullException("blogComment");
 
             _blogCommentRepository.Delete(blogComment);
 
@@ -370,7 +362,7 @@ namespace Nop.Services.Blogs
         public virtual void DeleteBlogComments(IList<BlogComment> blogComments)
         {
             if (blogComments == null)
-                throw new ArgumentNullException(nameof(blogComments));
+                throw new ArgumentNullException("blogComments");
 
             foreach (var blogComment in blogComments)
             {

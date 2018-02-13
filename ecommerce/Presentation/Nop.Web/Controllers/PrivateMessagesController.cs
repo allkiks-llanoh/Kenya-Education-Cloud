@@ -1,6 +1,5 @@
 ﻿using System;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using System.Web.Mvc;
 using Nop.Core;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Forums;
@@ -10,13 +9,12 @@ using Nop.Services.Localization;
 using Nop.Services.Logging;
 using Nop.Web.Factories;
 using Nop.Web.Framework.Controllers;
-using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework.Security;
 using Nop.Web.Models.PrivateMessages;
 
 namespace Nop.Web.Controllers
 {
-    [HttpsRequirement(SslRequirement.Yes)]
+    [NopHttpsRequirement(SslRequirement.Yes)]
     public partial class PrivateMessagesController : BasePublicController
     {
         #region Fields
@@ -32,7 +30,7 @@ namespace Nop.Web.Controllers
 
         #endregion
 
-        #region Ctor
+        #region Constructors
 
         public PrivateMessagesController(IPrivateMessagesModelFactory privateMessagesModelFactory,
             IForumService forumService,
@@ -57,7 +55,7 @@ namespace Nop.Web.Controllers
         
         #region Methods
 
-        public virtual IActionResult Index(int? pageNumber, string tab)
+        public virtual ActionResult Index(int? page, string tab)
         {
             if (!_forumSettings.AllowPrivateMessages)
             {
@@ -66,25 +64,42 @@ namespace Nop.Web.Controllers
 
             if (_workContext.CurrentCustomer.IsGuest())
             {
-                return Challenge();
+                return new HttpUnauthorizedResult();
             }
 
-            var model = _privateMessagesModelFactory.PreparePrivateMessageIndexModel(pageNumber, tab);
+            var model = _privateMessagesModelFactory.PreparePrivateMessageIndexModel(page, tab);
             return View(model);
         }
-        
+
+        //inbox tab
+        [ChildActionOnly]
+        public virtual ActionResult Inbox(int page, string tab)
+        {
+            var model = _privateMessagesModelFactory.PrepareInboxModel(page, tab);
+            return PartialView(model);
+        }
+
+        //sent items tab
+        [ChildActionOnly]
+        public virtual ActionResult SentItems(int page, string tab)
+        {
+            var model = _privateMessagesModelFactory.PrepareSentModel(page, tab);
+            return PartialView(model);
+        }
+
         [HttpPost, FormValueRequired("delete-inbox"), ActionName("InboxUpdate")]
         [PublicAntiForgery]
-        public virtual IActionResult DeleteInboxPM(IFormCollection formCollection)
+        public virtual ActionResult DeleteInboxPM(FormCollection formCollection)
         {
-            foreach (var key in formCollection.Keys)
+            foreach (var key in formCollection.AllKeys)
             {
                 var value = formCollection[key];
 
                 if (value.Equals("on") && key.StartsWith("pm", StringComparison.InvariantCultureIgnoreCase))
                 {
                     var id = key.Replace("pm", "").Trim();
-                    if (int.TryParse(id, out int privateMessageId))
+                    int privateMessageId;
+                    if (Int32.TryParse(id, out privateMessageId))
                     {
                         var pm = _forumService.GetPrivateMessageById(privateMessageId);
                         if (pm != null)
@@ -103,16 +118,17 @@ namespace Nop.Web.Controllers
 
         [HttpPost, FormValueRequired("mark-unread"), ActionName("InboxUpdate")]
         [PublicAntiForgery]
-        public virtual IActionResult MarkUnread(IFormCollection formCollection)
+        public virtual ActionResult MarkUnread(FormCollection formCollection)
         {
-            foreach (var key in formCollection.Keys)
+            foreach (var key in formCollection.AllKeys)
             {
                 var value = formCollection[key];
 
                 if (value.Equals("on") && key.StartsWith("pm", StringComparison.InvariantCultureIgnoreCase))
                 {
                     var id = key.Replace("pm", "").Trim();
-                    if (int.TryParse(id, out int privateMessageId))
+                    int privateMessageId;
+                    if (Int32.TryParse(id, out privateMessageId))
                     {
                         var pm = _forumService.GetPrivateMessageById(privateMessageId);
                         if (pm != null)
@@ -132,18 +148,19 @@ namespace Nop.Web.Controllers
         //updates sent items (deletes PrivateMessages)
         [HttpPost, FormValueRequired("delete-sent"), ActionName("SentUpdate")]
         [PublicAntiForgery]
-        public virtual IActionResult DeleteSentPM(IFormCollection formCollection)
+        public virtual ActionResult DeleteSentPM(FormCollection formCollection)
         {
-            foreach (var key in formCollection.Keys)
+            foreach (var key in formCollection.AllKeys)
             {
                 var value = formCollection[key];
 
                 if (value.Equals("on") && key.StartsWith("si", StringComparison.InvariantCultureIgnoreCase))
                 {
                     var id = key.Replace("si", "").Trim();
-                    if (int.TryParse(id, out int privateMessageId))
+                    int privateMessageId;
+                    if (Int32.TryParse(id, out privateMessageId))
                     {
-                        var pm = _forumService.GetPrivateMessageById(privateMessageId);
+                        PrivateMessage pm = _forumService.GetPrivateMessageById(privateMessageId);
                         if (pm != null)
                         {
                             if (pm.FromCustomerId == _workContext.CurrentCustomer.Id)
@@ -154,17 +171,18 @@ namespace Nop.Web.Controllers
                         }
                     }
                 }
+
             }
             return RedirectToRoute("PrivateMessages", new {tab = "sent"});
         }
 
-        public virtual IActionResult SendPM(int toCustomerId, int? replyToMessageId)
+        public virtual ActionResult SendPM(int toCustomerId, int? replyToMessageId)
         {
             if (!_forumSettings.AllowPrivateMessages)
                 return RedirectToRoute("HomePage");
 
             if (_workContext.CurrentCustomer.IsGuest())
-                return Challenge();
+                return new HttpUnauthorizedResult();
 
             var customerTo = _customerService.GetCustomerById(toCustomerId);
             if (customerTo == null || customerTo.IsGuest())
@@ -183,7 +201,7 @@ namespace Nop.Web.Controllers
 
         [HttpPost]
         [PublicAntiForgery]
-        public virtual IActionResult SendPM(SendPrivateMessageModel model)
+        public virtual ActionResult SendPM(SendPrivateMessageModel model)
         {
             if (!_forumSettings.AllowPrivateMessages)
             {
@@ -192,10 +210,10 @@ namespace Nop.Web.Controllers
 
             if (_workContext.CurrentCustomer.IsGuest())
             {
-                return Challenge();
+                return new HttpUnauthorizedResult();
             }
 
-            Customer toCustomer;
+            Customer toCustomer = null;
             var replyToPM = _forumService.GetPrivateMessageById(model.ReplyToMessageId);
             if (replyToPM != null)
             {
@@ -227,7 +245,7 @@ namespace Nop.Web.Controllers
             {
                 try
                 {
-                    var subject = model.Subject;
+                    string subject = model.Subject;
                     if (_forumSettings.PMSubjectMaxLength > 0 && subject.Length > _forumSettings.PMSubjectMaxLength)
                     {
                         subject = subject.Substring(0, _forumSettings.PMSubjectMaxLength);
@@ -271,7 +289,7 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        public virtual IActionResult ViewPM(int privateMessageId)
+        public virtual ActionResult ViewPM(int privateMessageId)
         {
             if (!_forumSettings.AllowPrivateMessages)
             {
@@ -280,7 +298,7 @@ namespace Nop.Web.Controllers
 
             if (_workContext.CurrentCustomer.IsGuest())
             {
-                return Challenge();
+                return new HttpUnauthorizedResult();
             }
 
             var pm = _forumService.GetPrivateMessageById(privateMessageId);
@@ -306,7 +324,7 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        public virtual IActionResult DeletePM(int privateMessageId)
+        public virtual ActionResult DeletePM(int privateMessageId)
         {
             if (!_forumSettings.AllowPrivateMessages)
             {
@@ -315,7 +333,7 @@ namespace Nop.Web.Controllers
 
             if (_workContext.CurrentCustomer.IsGuest())
             {
-                return Challenge();
+                return new HttpUnauthorizedResult();
             }
 
             var pm = _forumService.GetPrivateMessageById(privateMessageId);

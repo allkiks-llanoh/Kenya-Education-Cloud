@@ -2,14 +2,8 @@ using Nop.Core.Domain.Seo;
 
 namespace Nop.Data.Mapping.Seo
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class UrlRecordMap : NopEntityTypeConfiguration<UrlRecord>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public UrlRecordMap()
         {
             this.ToTable("UrlRecord");

@@ -1,36 +1,37 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Web.Mvc;
 using Nop.Web.Factories;
-using Nop.Web.Framework.Mvc.Filters;
+using Nop.Web.Framework;
 
 namespace Nop.Web.Controllers
 {
     public partial class CountryController : BasePublicController
 	{
-        #region Fields
+		#region Fields
 
         private readonly ICountryModelFactory _countryModelFactory;
-        
-        #endregion
-        
-        #region Ctor
+
+	    #endregion
+
+		#region Constructors
 
         public CountryController(ICountryModelFactory countryModelFactory)
 		{
             this._countryModelFactory = countryModelFactory;
 		}
-        
+
         #endregion
-        
+
         #region States / provinces
 
         //available even when navigation is not allowed
-        [CheckAccessPublicStore(true)]
-        public virtual IActionResult GetStatesByCountryId(string countryId, bool addSelectStateItem)
+        [PublicStoreAllowNavigation(true)]
+        [AcceptVerbs(HttpVerbs.Get)]
+        public virtual ActionResult GetStatesByCountryId(string countryId, bool addSelectStateItem)
         {
             var model = _countryModelFactory.GetStatesByCountryId(countryId, addSelectStateItem);
-            return Json(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
+
         #endregion
     }
 }

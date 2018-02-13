@@ -1,8 +1,7 @@
-﻿
-namespace Nop.Web.Framework.Themes
+﻿namespace Nop.Web.Framework.Themes
 {
     /// <summary>
-    /// Represents a theme context
+    /// Work context
     /// </summary>
     public interface IThemeContext
     {

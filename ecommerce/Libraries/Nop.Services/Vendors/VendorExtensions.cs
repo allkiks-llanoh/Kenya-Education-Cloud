@@ -4,9 +4,6 @@ using Nop.Core.Html;
 
 namespace Nop.Services.Vendors
 {
-    /// <summary>
-    /// Vendor extensions
-    /// </summary>
     public static class VendorExtensions
     {
         /// <summary>
@@ -17,11 +14,11 @@ namespace Nop.Services.Vendors
         public static string FormatVendorNoteText(this VendorNote vendorNote)
         {
             if (vendorNote == null)
-                throw new ArgumentNullException(nameof(vendorNote));
+                throw new ArgumentNullException("vendorNote");
 
-            var text = vendorNote.Note;
+            string text = vendorNote.Note;
 
-            if (string.IsNullOrEmpty(text))
+            if (String.IsNullOrEmpty(text))
                 return string.Empty;
 
             text = HtmlHelper.FormatText(text, false, true, false, false, false, false);

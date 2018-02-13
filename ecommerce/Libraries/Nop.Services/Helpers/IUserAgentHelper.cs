@@ -1,3 +1,4 @@
+
 namespace Nop.Services.Helpers
 {
     /// <summary>
@@ -10,17 +11,5 @@ namespace Nop.Services.Helpers
         /// </summary>
         /// <returns>Result</returns>
         bool IsSearchEngine();
-
-        /// <summary>
-        /// Get a value indicating whether the request is made by mobile device
-        /// </summary>
-        /// <returns></returns>
-        bool IsMobileDevice();
-
-        /// <summary>
-        /// Get a value indicating whether the request is made by IE8 browser
-        /// </summary>
-        /// <returns></returns>
-        bool IsIe8();
     }
 }

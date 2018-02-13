@@ -26,5 +26,6 @@ namespace Nop.Core.Domain.Orders
         /// Gets the recurring payment
         /// </summary>
         public virtual RecurringPayment RecurringPayment { get; set; }
+
     }
 }

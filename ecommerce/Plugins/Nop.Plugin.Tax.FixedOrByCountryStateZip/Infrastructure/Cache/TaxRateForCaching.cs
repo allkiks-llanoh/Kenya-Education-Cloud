@@ -1,7 +1,7 @@
 namespace Nop.Plugin.Tax.FixedOrByCountryStateZip.Infrastructure.Cache
 {
     /// <summary>
-    /// Represents a tax rate for caching
+    /// Represents a tax rate
     /// </summary>
     public partial class TaxRateForCaching
     {

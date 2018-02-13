@@ -2,14 +2,8 @@ using Nop.Core.Domain.Common;
 
 namespace Nop.Data.Mapping.Common
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class AddressAttributeMap : NopEntityTypeConfiguration<AddressAttribute>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public AddressAttributeMap()
         {
             this.ToTable("AddressAttribute");

@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div id="tax-categories-grid"></div>
-            <script type="text/javascript">
+            <script>
                 $(document)
                     .ready(function() {
                         $("#tax-categories-grid")
@@ -12,14 +12,14 @@
                                     transport: {
                                         read: {
                                             url:
-                                                "@Html.Raw(Url.Action("FixedRatesList", "FixedOrByCountryStateZip"))",
+                                                "@Html.Raw(Url.Action("FixedRatesList", "FixedOrByCountryStateZip", new RouteValueDictionary {{"Namespaces", "Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers" }, {"area", ""}}))",
                                             type: "POST",
                                             dataType: "json",
                                             data: addAntiForgeryToken
                                         },
                                         update: {
                                             url:
-                                                "@Html.Raw(Url.Action("FixedRateUpdate", "FixedOrByCountryStateZip"))",
+                                                "@Html.Raw(Url.Action("FixedRateUpdate", "FixedOrByCountryStateZip", new RouteValueDictionary {{"Namespaces", "Nop.Plugin.Tax.FixedOrByCountryStateZip.Controllers" }, {"area", ""}}))",
                                             type: "POST",
                                             dataType: "json",
                                             data: addAntiForgeryToken
@@ -57,7 +57,7 @@
                                     numeric: false,
                                     previousNext: false,
                                     info: false,
-                                    @await Html.PartialAsync("~/Areas/Admin/Views/Shared/_GridPagerMessages.cshtml")
+                                    @Html.Partial("~/Administration/Views/Shared/_GridPagerMessages.cshtml")
                                 },
                                 editable: {
                                     confirmation: "@T("Admin.Common.DeleteConfirmation")",

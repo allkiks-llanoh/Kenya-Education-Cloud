@@ -5,10 +5,6 @@ namespace Nop.Core.Domain.Orders
     /// </summary>
     public class OrderPaidEvent
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="order">Order</param>
         public OrderPaidEvent(Order order)
         {
             this.Order = order;
@@ -17,7 +13,7 @@ namespace Nop.Core.Domain.Orders
         /// <summary>
         /// Order
         /// </summary>
-        public Order Order { get; }
+        public Order Order { get; private set; }
     }
 
     /// <summary>
@@ -25,10 +21,6 @@ namespace Nop.Core.Domain.Orders
     /// </summary>
     public class OrderPlacedEvent
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="order">Order</param>
         public OrderPlacedEvent(Order order)
         {
             this.Order = order;
@@ -37,7 +29,7 @@ namespace Nop.Core.Domain.Orders
         /// <summary>
         /// Order
         /// </summary>
-        public Order Order { get; }
+        public Order Order { get; private set; }
     }
 
     /// <summary>
@@ -45,10 +37,6 @@ namespace Nop.Core.Domain.Orders
     /// </summary>
     public class OrderCancelledEvent
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="order">Order</param>
         public OrderCancelledEvent(Order order)
         {
             this.Order = order;
@@ -57,7 +45,7 @@ namespace Nop.Core.Domain.Orders
         /// <summary>
         /// Order
         /// </summary>
-        public Order Order { get; }
+        public Order Order { get; private set; }
     }
 
     /// <summary>
@@ -65,11 +53,6 @@ namespace Nop.Core.Domain.Orders
     /// </summary>
     public class OrderRefundedEvent
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="order">Order</param>
-        /// <param name="amount">Amount</param>
         public OrderRefundedEvent(Order order, decimal amount)
         {
             this.Order = order;
@@ -79,12 +62,12 @@ namespace Nop.Core.Domain.Orders
         /// <summary>
         /// Order
         /// </summary>
-        public Order Order { get; }
+        public Order Order { get; private set; }
 
         /// <summary>
         /// Amount
         /// </summary>
-        public decimal Amount { get; }
+        public decimal Amount { get; private set; }
     }
 
 }

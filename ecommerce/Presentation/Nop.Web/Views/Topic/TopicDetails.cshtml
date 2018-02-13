@@ -1,26 +1,28 @@
 ﻿@model TopicModel
 @using Nop.Core.Domain.Seo
-@inject SeoSettings seoSettings
+@using Nop.Core.Infrastructure
+@using Nop.Web.Models.Topics;
 @{
     var isPopup = ViewBag.IsPopup;
     if (isPopup == null || isPopup == false)
     {
-        Layout = "_ColumnsOne";
+        Layout = "~/Views/Shared/_ColumnsOne.cshtml";
     }
 
     if (!Model.IsPasswordProtected)
     {
         //title
-        Html.AddTitleParts(!string.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Title);
+        Html.AddTitleParts(!String.IsNullOrEmpty(Model.MetaTitle) ? Model.MetaTitle : Model.Title);
         //meta
         Html.AddMetaDescriptionParts(Model.MetaDescription);
         Html.AddMetaKeywordParts(Model.MetaKeywords);
     }
 
-    if (seoSettings.CanonicalUrlsEnabled)
+    var canonicalUrlsEnabled = EngineContext.Current.Resolve<SeoSettings>().CanonicalUrlsEnabled;
+    if (canonicalUrlsEnabled)
     {
-        var topicUrl = Url.RouteUrl("Topic", new { SeName = Model.SeName }, this.Url.ActionContext.HttpContext.Request.Scheme);
-        Html.AddCanonicalUrlParts(topicUrl, seoSettings.QueryStringInCanonicalUrlsEnabled);
+        var topicUrl = Url.RouteUrl("Topic", new { SeName = Model.SeName }, this.Request.Url.Scheme);
+        Html.AddCanonicalUrlParts(topicUrl);
     }
 
     //page class
@@ -28,11 +30,11 @@
 }
 @if (Model.IsPasswordProtected)
 {
-    <script type="text/javascript" asp-location="Footer">
+    <script type="text/javascript">
         $(document).ready(function () {
             $('#button-password').click(function () {
                 var postData = {
-                    id: $("#topic-@Model.Id").val(),
+                    id: $("#@Html.FieldIdFor(model => model.Id)").val(),
                     password: $('#password').val()
                 };
                 addAntiForgeryToken(postData);
@@ -72,17 +74,19 @@
         });
     </script>
     <div class="topic-password" id="ph-password">
-        <form asp-route="TopicAuthenticate" method="post">
-            <input asp-for="Id" id="topic-@Model.Id" type="hidden" />
+        @using (Html.BeginRouteForm("TopicAuthenticate"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
             <div class="enter-password-title">
                 @T("Topic.EnterPassword")
             </div>
             <div class="enter-password-form">
-                <input name="password" id="password" type="password"/>
-                <input type="submit" id="button-password" value="@T("Topic.Button")" class="button-1 topic-password-button"/>
+                @Html.Password("password")
+                <input type="submit" id="button-password" value="@T("Topic.Button")" class="button-1 topic-password-button" />
             </div>
             <div class="password-error" id="password-error" style="display: none;"></div>
-        </form>
+        }
     </div>
 }
 <div class="page topic-page" id="ph-topic">

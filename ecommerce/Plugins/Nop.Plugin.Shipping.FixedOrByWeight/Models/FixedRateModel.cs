@@ -1,9 +1,8 @@
-﻿using Nop.Web.Framework.Mvc.ModelBinding;
-using Nop.Web.Framework.Mvc.Models;
+﻿using Nop.Web.Framework;
 
 namespace Nop.Plugin.Shipping.FixedOrByWeight.Models
 {
-    public class FixedRateModel : BaseNopModel
+    public class FixedRateModel
     {
         public int ShippingMethodId { get; set; }
 

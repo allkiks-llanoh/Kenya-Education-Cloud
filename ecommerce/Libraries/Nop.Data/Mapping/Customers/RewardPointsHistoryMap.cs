@@ -2,14 +2,8 @@ using Nop.Core.Domain.Customers;
 
 namespace Nop.Data.Mapping.Customers
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class RewardPointsHistoryMap : NopEntityTypeConfiguration<RewardPointsHistory>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public RewardPointsHistoryMap()
         {
             this.ToTable("RewardPointsHistory");

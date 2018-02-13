@@ -13,13 +13,7 @@ namespace Nop.Core.ComponentModel
     /// <typeparam name="V">Value type (simple)</typeparam>
     public class GenericDictionaryTypeConverter<K, V> : TypeConverter
     {
-        /// <summary>
-        /// Type converter
-        /// </summary>
         protected readonly TypeConverter typeConverterKey;
-        /// <summary>
-        /// Type converter
-        /// </summary>
         protected readonly TypeConverter typeConverterValue;
 
         /// <summary>
@@ -62,13 +56,13 @@ namespace Nop.Core.ComponentModel
         {
             if (value is string)
             {
-                var input = (string)value;
-                var items = string.IsNullOrEmpty(input) ? new string[0] : input.Split(';').Select(x => x.Trim()).ToArray();
+                string input = (string)value;
+                string[] items = string.IsNullOrEmpty(input) ? new string[0] : input.Split(';').Select(x => x.Trim()).ToArray();
 
                 var result = new Dictionary<K,V>();
                 Array.ForEach(items, s =>
                 {
-                    var keyValueStr = string.IsNullOrEmpty(s) ? new string[0] : s.Split(',').Select(x => x.Trim()).ToArray();
+                    string[] keyValueStr = string.IsNullOrEmpty(s) ? new string[0] : s.Split(',').Select(x => x.Trim()).ToArray();
                     if (keyValueStr.Length == 2)
                     {
                         object dictionaryKey = (K)typeConverterKey.ConvertFromInvariantString(keyValueStr[0]);
@@ -98,15 +92,15 @@ namespace Nop.Core.ComponentModel
         {
             if (destinationType == typeof(string))
             {
-                var result = string.Empty;
+                string result = string.Empty;
                 if (value != null)
                 {
                     //we don't use string.Join() because it doesn't support invariant culture
-                    var counter = 0;
+                    int counter = 0;
                     var dictionary = (IDictionary<K, V>)value;
                     foreach (var keyValue in dictionary)
                     {
-                        result += $"{Convert.ToString(keyValue.Key, CultureInfo.InvariantCulture)}, {Convert.ToString(keyValue.Value, CultureInfo.InvariantCulture)}";
+                        result += string.Format("{0}, {1}", Convert.ToString(keyValue.Key, CultureInfo.InvariantCulture), Convert.ToString(keyValue.Value, CultureInfo.InvariantCulture));
                         //don't add ; after the last element
                         if (counter != dictionary.Count - 1)
                             result += ";";

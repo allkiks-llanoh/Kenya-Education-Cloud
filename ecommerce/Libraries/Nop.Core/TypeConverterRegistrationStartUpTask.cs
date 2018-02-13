@@ -33,9 +33,6 @@ namespace Nop.Core
             TypeDescriptor.AddAttributes(typeof(PickupPoint), new TypeConverterAttribute(typeof(PickupPointTypeConverter)));
         }
 
-        /// <summary>
-        /// Gets order of this startup task implementation
-        /// </summary>
         public int Order
         {
             get { return 1; }

@@ -1,3 +1,4 @@
+
 namespace Nop.Core.Domain.Orders
 {
     /// <summary>
@@ -11,7 +12,7 @@ namespace Nop.Core.Domain.Orders
         /// <returns>Gift card remaining amount</returns>
         public static decimal GetGiftCardRemainingAmount(this GiftCard giftCard)
         {
-            var result = giftCard.Amount;
+            decimal result = giftCard.Amount;
 
             foreach (var gcuh in giftCard.GiftCardUsageHistory)
                 result -= gcuh.UsedValue;
@@ -32,7 +33,7 @@ namespace Nop.Core.Domain.Orders
             if (!giftCard.IsGiftCardActivated)
                 return false;
 
-            var remainingAmount = giftCard.GetGiftCardRemainingAmount();
+            decimal remainingAmount = giftCard.GetGiftCardRemainingAmount();
             if (remainingAmount > decimal.Zero)
                 return true;
 
