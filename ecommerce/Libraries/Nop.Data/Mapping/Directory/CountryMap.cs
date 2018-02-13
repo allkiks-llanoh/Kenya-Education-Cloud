@@ -2,14 +2,8 @@ using Nop.Core.Domain.Directory;
 
 namespace Nop.Data.Mapping.Directory
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class CountryMap : NopEntityTypeConfiguration<Country>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public CountryMap()
         {
             this.ToTable("Country");

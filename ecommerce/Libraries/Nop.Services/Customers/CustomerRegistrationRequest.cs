@@ -7,6 +7,7 @@ namespace Nop.Services.Customers
     /// </summary>
     public class CustomerRegistrationRequest
     {
+
         /// <summary>
         /// Ctor
         /// </summary>
@@ -36,32 +37,26 @@ namespace Nop.Services.Customers
         /// Customer
         /// </summary>
         public Customer Customer { get; set; }
-
         /// <summary>
         /// Email
         /// </summary>
         public string Email { get; set; }
-
         /// <summary>
         /// Username
         /// </summary>
         public string Username { get; set; }
-
         /// <summary>
         /// Password
         /// </summary>
         public string Password { get; set; }
-
         /// <summary>
         /// Password format
         /// </summary>
         public PasswordFormat PasswordFormat { get; set; }
-
         /// <summary>
         /// Store identifier
         /// </summary>
         public int StoreId { get; set; }
-
         /// <summary>
         /// Is approved
         /// </summary>

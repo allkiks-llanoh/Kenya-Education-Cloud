@@ -1,3 +1,4 @@
+
 using Nop.Core.Domain.Localization;
 
 namespace Nop.Core.Domain.Customers
@@ -32,4 +33,5 @@ namespace Nop.Core.Domain.Customers
         /// </summary>
         public virtual CustomerAttribute CustomerAttribute { get; set; }
     }
+
 }

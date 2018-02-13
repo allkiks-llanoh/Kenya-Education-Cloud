@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Web.Routing;
 using Nop.Core;
 using Nop.Services.Authentication.External;
 using Nop.Web.Models.Customer;
@@ -11,9 +11,9 @@ namespace Nop.Web.Factories
     /// </summary>
     public partial class ExternalAuthenticationModelFactory : IExternalAuthenticationModelFactory
     {
-        #region Fields
+		#region Fields
 
-        private readonly IExternalAuthenticationService _externalAuthenticationService;
+        private readonly IOpenAuthenticationService _openAuthenticationService;
         private readonly IStoreContext _storeContext;
         private readonly IWorkContext _workContext;
 
@@ -21,11 +21,11 @@ namespace Nop.Web.Factories
 
         #region Ctor
 
-        public ExternalAuthenticationModelFactory(IExternalAuthenticationService externalAuthenticationService,
+        public ExternalAuthenticationModelFactory(IOpenAuthenticationService openAuthenticationService,
             IStoreContext storeContext,
             IWorkContext workContext)
         {
-            this._externalAuthenticationService = externalAuthenticationService;
+            this._openAuthenticationService = openAuthenticationService;
             this._storeContext = storeContext;
             this._workContext = workContext;
         }
@@ -40,19 +40,25 @@ namespace Nop.Web.Factories
         /// <returns>List of the external authentication method model</returns>
         public virtual List<ExternalAuthenticationMethodModel> PrepareExternalMethodsModel()
         {
-            var models = _externalAuthenticationService
-                .LoadActiveExternalAuthenticationMethods(_workContext.CurrentCustomer, _storeContext.CurrentStore.Id)
-                .Select(authenticationMethod =>
-                {
-                    authenticationMethod.GetPublicViewComponent(out string viewComponentName);
+            var model = new List<ExternalAuthenticationMethodModel>();
 
-                    return new ExternalAuthenticationMethodModel
-                    {
-                        ViewComponentName = viewComponentName
-                    };
-                }).ToList();
+            foreach (var eam in _openAuthenticationService
+                .LoadActiveExternalAuthenticationMethods(_workContext.CurrentCustomer, _storeContext.CurrentStore.Id))
+            {
+                var eamModel = new ExternalAuthenticationMethodModel();
 
-            return models;
+                string actionName;
+                string controllerName;
+                RouteValueDictionary routeValues;
+                eam.GetPublicInfoRoute(out actionName, out controllerName, out routeValues);
+                eamModel.ActionName = actionName;
+                eamModel.ControllerName = controllerName;
+                eamModel.RouteValues = routeValues;
+
+                model.Add(eamModel);
+            }
+
+            return model;
         }
 
         #endregion

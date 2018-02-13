@@ -209,9 +209,9 @@ namespace Nop.Data.Tests
                 NotApprovedTotalReviews = 5,
                 SubjectToAcl = true,
                 LimitedToStores = true,
-                Sku = "SKU 1",
+                Sku = "sku 1",
                 ManufacturerPartNumber = "manufacturerPartNumber",
-                Gtin = "GTIN 1",
+                Gtin = "gtin 1",
                 IsGiftCard = true,
                 GiftCardTypeId = 1,
                 OverriddenGiftCardAmount = 1,
@@ -605,10 +605,7 @@ namespace Nop.Data.Tests
                 TaxExempt = true,
                 Active = true,
                 IsSystemRole = true,
-                SystemName = "Administrators",
-                OverrideTaxDisplayType = true,
-                DefaultTaxDisplayTypeId = 2,
-                EnablePasswordLifetime = true
+                SystemName = "Administrators"
             };
         }
 
@@ -969,7 +966,7 @@ namespace Nop.Data.Tests
             return new MessageTemplate
             {
                 Name = "Template1",
-                BccEmailAddresses = "BCC",
+                BccEmailAddresses = "Bcc",
                 Subject = "Subj",
                 Body = "Some text",
                 IsActive = true,
@@ -993,7 +990,7 @@ namespace Nop.Data.Tests
             };
         }
 
-        public static QueuedEmail GetTestQueuedEmail(this PersistenceTest test)
+        public static QueuedEmail GettestQueuedEmail(this PersistenceTest test)
         {
             return new QueuedEmail
             {
@@ -1005,7 +1002,7 @@ namespace Nop.Data.Tests
                 ReplyTo = "ReplyTo",
                 ReplyToName = "ReplyToName",
                 CC = "CC",
-                Bcc = "BCC",
+                Bcc = "Bcc",
                 Subject = "Subject",
                 Body = "Body",
                 AttachmentFilePath = "some file path",
@@ -1466,6 +1463,8 @@ namespace Nop.Data.Tests
                 Type = "some type 1",
                 Enabled = true,
                 StopOnError = true,
+                LeasedByMachineName = "LeasedByMachineName 1",
+                LeasedUntilUtc = new DateTime(2009, 01, 01),
                 LastStartUtc = new DateTime(2010, 01, 01),
                 LastEndUtc = new DateTime(2010, 01, 02),
                 LastSuccessUtc = new DateTime(2010, 01, 03)

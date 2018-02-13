@@ -11,7 +11,7 @@ using Nop.Services.Helpers;
 using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Services.Seo;
-using Nop.Web.Framework.Extensions;
+using Nop.Web.Framework;
 using Nop.Web.Models.Common;
 using Nop.Web.Models.Profile;
 
@@ -69,10 +69,10 @@ namespace Nop.Web.Factories
         public virtual ProfileIndexModel PrepareProfileIndexModel(Customer customer, int? page)
         {
             if (customer == null)
-                throw  new ArgumentNullException(nameof(customer));
+                throw  new ArgumentNullException("customer");
 
-            var pagingPosts = false;
-            var postsPage = 0;
+            bool pagingPosts = false;
+            int postsPage = 0;
 
             if (page.HasValue)
             {
@@ -102,7 +102,7 @@ namespace Nop.Web.Factories
         public virtual ProfileInfoModel PrepareProfileInfoModel(Customer customer)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             //avatar
             var avatarUrl = "";
@@ -116,8 +116,8 @@ namespace Nop.Web.Factories
             }
 
             //location
-            var locationEnabled = false;
-            var location = string.Empty;
+            bool locationEnabled = false;
+            string location = string.Empty;
             if (_customerSettings.ShowCustomersLocation)
             {
                 locationEnabled = true;
@@ -135,11 +135,11 @@ namespace Nop.Web.Factories
             }
 
             //private message
-            var pmEnabled = _forumSettings.AllowPrivateMessages && !customer.IsGuest();
+            bool pmEnabled = _forumSettings.AllowPrivateMessages && !customer.IsGuest();
 
             //total forum posts
-            var totalPostsEnabled = false;
-            var totalPosts = 0;
+            bool totalPostsEnabled = false;
+            int totalPosts = 0;
             if (_forumSettings.ForumsEnabled && _forumSettings.ShowCustomersPostCount)
             {
                 totalPostsEnabled = true;
@@ -147,8 +147,8 @@ namespace Nop.Web.Factories
             }
 
             //registration date
-            var joinDateEnabled = false;
-            var joinDate = string.Empty;
+            bool joinDateEnabled = false;
+            string joinDate = string.Empty;
 
             if (_customerSettings.ShowCustomersJoinDate)
             {
@@ -157,8 +157,8 @@ namespace Nop.Web.Factories
             }
 
             //birth date
-            var dateOfBirthEnabled = false;
-            var dateOfBirth = string.Empty;
+            bool dateOfBirthEnabled = false;
+            string dateOfBirth = string.Empty;
             if (_customerSettings.DateOfBirthEnabled)
             {
                 var dob = customer.GetAttribute<DateTime?>(SystemCustomerAttributeNames.DateOfBirth);
@@ -196,7 +196,7 @@ namespace Nop.Web.Factories
         public virtual ProfilePostsModel PrepareProfilePostsModel(Customer customer, int page)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             if (page > 0)
             {
@@ -239,7 +239,7 @@ namespace Nop.Web.Factories
                 ShowTotalSummary = false,
                 RouteActionName = "CustomerProfilePaged",
                 UseRouteLinks = true,
-                RouteValues = new RouteValues { pageNumber = page, id = customer.Id }
+                RouteValues = new RouteValues { page = page, id = customer.Id }
             };
 
             var model = new ProfilePostsModel

@@ -1,12 +1,13 @@
+using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
+using System.Web.Routing;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Plugins;
 
 namespace Nop.Services.Payments
 {
     /// <summary>
-    /// Provides an interface for creating payment gateways and methods
+    /// Provides an interface for creating payment gateways & methods
     /// </summary>
     public partial interface IPaymentMethod : IPlugin
     {
@@ -18,7 +19,7 @@ namespace Nop.Services.Payments
         /// <param name="processPaymentRequest">Payment info required for an order processing</param>
         /// <returns>Process payment result</returns>
         ProcessPaymentResult ProcessPayment(ProcessPaymentRequest processPaymentRequest);
-
+        
         /// <summary>
         /// Post process payment (used by payment gateways that require redirecting to a third-party URL)
         /// </summary>
@@ -28,14 +29,14 @@ namespace Nop.Services.Payments
         /// <summary>
         /// Returns a value indicating whether payment method should be hidden during checkout
         /// </summary>
-        /// <param name="cart">Shopping cart</param>
+        /// <param name="cart">Shoping cart</param>
         /// <returns>true - hide; false - display.</returns>
         bool HidePaymentMethod(IList<ShoppingCartItem> cart);
 
         /// <summary>
         /// Gets additional handling fee
         /// </summary>
-        /// <param name="cart">Shopping cart</param>
+        /// <param name="cart">Shoping cart</param>
         /// <returns>Additional handling fee</returns>
         decimal GetAdditionalHandlingFee(IList<ShoppingCartItem> cart);
 
@@ -82,24 +83,22 @@ namespace Nop.Services.Payments
         bool CanRePostProcessPayment(Order order);
 
         /// <summary>
-        /// Validate payment form
+        /// Gets a route for provider configuration
         /// </summary>
-        /// <param name="form">The parsed form values</param>
-        /// <returns>List of validating errors</returns>
-        IList<string> ValidatePaymentForm(IFormCollection form);
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller name</param>
+        /// <param name="routeValues">Route values</param>
+        void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues);
 
         /// <summary>
-        /// Get payment information
+        /// Gets a route for payment info
         /// </summary>
-        /// <param name="form">The parsed form values</param>
-        /// <returns>Payment info holder</returns>
-        ProcessPaymentRequest GetPaymentInfo(IFormCollection form);
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller name</param>
+        /// <param name="routeValues">Route values</param>
+        void GetPaymentInfoRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues);
 
-        /// <summary>
-        /// Gets a view component for displaying plugin in public store ("payment info" checkout step)
-        /// </summary>
-        /// <param name="viewComponentName">View component name</param>
-        void GetPublicViewComponent(out string viewComponentName);
+        Type GetControllerType();
 
         #endregion
 
@@ -129,7 +128,7 @@ namespace Nop.Services.Payments
         /// Gets a recurring payment type of payment method
         /// </summary>
         RecurringPaymentType RecurringPaymentType { get; }
-
+        
         /// <summary>
         /// Gets a payment method type
         /// </summary>

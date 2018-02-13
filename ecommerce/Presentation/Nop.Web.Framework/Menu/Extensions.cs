@@ -3,23 +3,20 @@ using System.Linq;
 
 namespace Nop.Web.Framework.Menu
 {
-    /// <summary>
-    /// Extensions
-    /// </summary>
     public static class Extensions
     {
         /// <summary>
         /// Checks whether this node or child ones has a specified system name
         /// </summary>
-        /// <param name="node">Node</param>
-        /// <param name="systemName">System name</param>
-        /// <returns>Result</returns>
+        /// <param name="node"></param>
+        /// <param name="systemName"></param>
+        /// <returns></returns>
         public static bool ContainsSystemName(this SiteMapNode node, string systemName)
         {
             if (node == null)
-                throw new ArgumentNullException(nameof(node));
+                throw new ArgumentNullException("node");
 
-            if (string.IsNullOrWhiteSpace(systemName))
+            if (String.IsNullOrWhiteSpace(systemName))
                 return false;
 
             if (systemName.Equals(node.SystemName, StringComparison.InvariantCultureIgnoreCase))

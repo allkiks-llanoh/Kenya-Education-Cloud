@@ -19,10 +19,10 @@ namespace Nop.Services.Shipping.Tracking
         bool IsMatch(string trackingNumber);
 
         /// <summary>
-        /// Gets an URL for a page to show tracking info (third party tracking page).
+        /// Gets a url for a page to show tracking info (third party tracking page).
         /// </summary>
         /// <param name="trackingNumber">The tracking number to track.</param>
-        /// <returns>URL of a tracking page.</returns>
+        /// <returns>A url to a tracking page.</returns>
         string GetUrl(string trackingNumber);
 
         /// <summary>

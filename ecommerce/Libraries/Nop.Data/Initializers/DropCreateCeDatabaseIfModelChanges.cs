@@ -4,6 +4,7 @@ using System.Transactions;
 
 namespace Nop.Data.Initializers
 {
+
     /// <summary>
     /// An implementation of IDatabaseInitializer that will <b>DELETE</b>, recreate, and optionally re-seed the
     /// database only if the model has changed since the database was created.  This is achieved by writing a
@@ -23,7 +24,7 @@ namespace Nop.Data.Initializers
         {
             if (context == null)
             {
-                throw new ArgumentNullException(nameof(context));
+                throw new ArgumentNullException("context");
             }
 
             var replacedContext = ReplaceSqlCeConnection(context);

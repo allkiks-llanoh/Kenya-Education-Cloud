@@ -3,9 +3,6 @@ using Nop.Core.Domain.Directory;
 
 namespace Nop.Core.Domain.Common
 {
-    /// <summary>
-    /// Address
-    /// </summary>
     public partial class Address : BaseEntity, ICloneable
     {
         /// <summary>
@@ -88,10 +85,7 @@ namespace Nop.Core.Domain.Common
         /// </summary>
         public virtual StateProvince StateProvince { get; set; }
 
-        /// <summary>
-        /// Clone
-        /// </summary>
-        /// <returns></returns>
+
         public object Clone()
         {
             var addr = new Address

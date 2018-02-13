@@ -6,7 +6,7 @@ namespace Nop.Core.Plugins
     public enum LoadPluginsMode
     {
         /// <summary>
-        /// All (Installed and Not installed)
+        /// All (Installed & Not installed)
         /// </summary>
         All = 0,
         /// <summary>

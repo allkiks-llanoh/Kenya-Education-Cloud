@@ -50,7 +50,7 @@ namespace Nop.Services.Logging
 
         #endregion
 
-        #region Utilities
+        #region Utitilities
 
         /// <summary>
         /// Gets a value indicating whether this message should not be logged
@@ -62,7 +62,7 @@ namespace Nop.Services.Logging
             if (!_commonSettings.IgnoreLogWordlist.Any())
                 return false;
 
-            if (string.IsNullOrWhiteSpace(message))
+            if (String.IsNullOrWhiteSpace(message))
                 return false;
 
             return _commonSettings
@@ -97,7 +97,7 @@ namespace Nop.Services.Logging
         public virtual void DeleteLog(Log log)
         {
             if (log == null)
-                throw new ArgumentNullException(nameof(log));
+                throw new ArgumentNullException("log");
 
             _logRepository.Delete(log);
         }
@@ -109,7 +109,7 @@ namespace Nop.Services.Logging
         public virtual void DeleteLogs(IList<Log> logs)
         {
             if (logs == null)
-                throw new ArgumentNullException(nameof(logs));
+                throw new ArgumentNullException("logs");
 
             _logRepository.Delete(logs);
         }
@@ -126,8 +126,8 @@ namespace Nop.Services.Logging
 
 
                 //do all databases support "Truncate command"?
-                var logTableName = _dbContext.GetTableName<Log>();
-                _dbContext.ExecuteSqlCommand($"TRUNCATE TABLE [{logTableName}]");
+                string logTableName = _dbContext.GetTableName<Log>();
+                _dbContext.ExecuteSqlCommand(String.Format("TRUNCATE TABLE [{0}]", logTableName));
             }
             else
             {
@@ -161,7 +161,7 @@ namespace Nop.Services.Logging
                 var logLevelId = (int)logLevel.Value;
                 query = query.Where(l => logLevelId == l.LogLevelId);
             }
-             if (!string.IsNullOrEmpty(message))
+             if (!String.IsNullOrEmpty(message))
                 query = query.Where(l => l.ShortMessage.Contains(message) || l.FullMessage.Contains(message));
             query = query.OrderByDescending(l => l.CreatedOnUtc);
 
@@ -198,7 +198,7 @@ namespace Nop.Services.Logging
             var logItems = query.ToList();
             //sort by passed identifiers
             var sortedLogItems = new List<Log>();
-            foreach (var id in logIds)
+            foreach (int id in logIds)
             {
                 var log = logItems.Find(x => x.Id == id);
                 if (log != null)

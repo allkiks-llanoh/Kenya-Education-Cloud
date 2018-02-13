@@ -5,7 +5,7 @@ namespace Nop.Web.Models.Common
 {
     public partial class PagerModel
     {
-        #region Ctor
+        #region Constructors
 
         public PagerModel()
             : this(EngineContext.Current.Resolve<ILocalizationService>())
@@ -224,7 +224,7 @@ namespace Nop.Web.Models.Common
                 {
                     return 0;
                 }
-                var num = this.TotalRecords / this.PageSize;
+                int num = this.TotalRecords / this.PageSize;
                 if ((this.TotalRecords % this.PageSize) > 0)
                 {
                     num++;
@@ -349,16 +349,16 @@ namespace Nop.Web.Models.Common
         /// <returns>Page index</returns>
         public int GetFirstIndividualPageIndex()
         {
-            if ((TotalPages < IndividualPagesDisplayedCount) ||
-                ((PageIndex - (IndividualPagesDisplayedCount / 2)) < 0))
+            if ((this.TotalPages < this.IndividualPagesDisplayedCount) ||
+                ((this.PageIndex - (this.IndividualPagesDisplayedCount / 2)) < 0))
             {
                 return 0;
             }
-            if ((PageIndex + (IndividualPagesDisplayedCount / 2)) >= TotalPages)
+            if ((this.PageIndex + (this.IndividualPagesDisplayedCount / 2)) >= this.TotalPages)
             {
-                return (TotalPages - IndividualPagesDisplayedCount);
+                return (this.TotalPages - this.IndividualPagesDisplayedCount);
             }
-            return (PageIndex - (IndividualPagesDisplayedCount / 2));
+            return (this.PageIndex - (this.IndividualPagesDisplayedCount / 2));
         }
 
         /// <summary>
@@ -367,21 +367,21 @@ namespace Nop.Web.Models.Common
         /// <returns>Page index</returns>
         public int GetLastIndividualPageIndex()
         {
-            var num = IndividualPagesDisplayedCount / 2;
-            if ((IndividualPagesDisplayedCount % 2) == 0)
+            int num = this.IndividualPagesDisplayedCount / 2;
+            if ((this.IndividualPagesDisplayedCount % 2) == 0)
             {
                 num--;
             }
-            if ((TotalPages < IndividualPagesDisplayedCount) ||
-                ((PageIndex + num) >= TotalPages))
+            if ((this.TotalPages < this.IndividualPagesDisplayedCount) ||
+                ((this.PageIndex + num) >= this.TotalPages))
             {
-                return (TotalPages - 1);
+                return (this.TotalPages - 1);
             }
-            if ((PageIndex - (IndividualPagesDisplayedCount / 2)) < 0)
+            if ((this.PageIndex - (this.IndividualPagesDisplayedCount / 2)) < 0)
             {
-                return (IndividualPagesDisplayedCount - 1);
+                return (this.IndividualPagesDisplayedCount - 1);
             }
-            return (PageIndex + num);
+            return (this.PageIndex + num);
         }
 
         #endregion Methods
@@ -394,7 +394,7 @@ namespace Nop.Web.Models.Common
     /// </summary>
     public interface IRouteValues
     {
-        int pageNumber { get; set; }
+        int page { get; set; }
     }
 
     /// <summary>
@@ -405,7 +405,7 @@ namespace Nop.Web.Models.Common
     {
         public int id { get; set; }
         public string slug { get; set; }
-        public int pageNumber { get; set; }
+        public int page { get; set; }
     }
 
     /// <summary>
@@ -418,7 +418,7 @@ namespace Nop.Web.Models.Common
         public string forumId { get; set; }
         public string within { get; set; }
         public string limitDays { get; set; }
-        public int pageNumber { get; set; }
+        public int page { get; set; }
     }
 
     /// <summary>
@@ -427,7 +427,7 @@ namespace Nop.Web.Models.Common
     public partial class PrivateMessageRouteValues : IRouteValues
     {
         public string tab { get; set; }
-        public int pageNumber { get; set; }
+        public int page { get; set; }
     }
 
     /// <summary>
@@ -435,7 +435,7 @@ namespace Nop.Web.Models.Common
     /// </summary>
     public partial class ForumActiveDiscussionsRouteValues : IRouteValues
     {
-        public int pageNumber { get; set; }
+        public int page { get; set; }
     }
 
     /// <summary>
@@ -443,7 +443,7 @@ namespace Nop.Web.Models.Common
     /// </summary>
     public partial class ForumSubscriptionsRouteValues : IRouteValues
     {        
-        public int pageNumber { get; set; }
+        public int page { get; set; }
     }
 
     /// <summary>
@@ -451,7 +451,7 @@ namespace Nop.Web.Models.Common
     /// </summary>
     public partial class BackInStockSubscriptionsRouteValues : IRouteValues
     {
-        public int pageNumber { get; set; }
+        public int page { get; set; }
     }
 
     /// <summary>
@@ -459,7 +459,7 @@ namespace Nop.Web.Models.Common
     /// </summary>
     public partial class RewardPointsRouteValues : IRouteValues
     {
-        public int pageNumber { get; set; }
+        public int page { get; set; }
     }
 
     #endregion Classes

@@ -2,14 +2,8 @@ using Nop.Core.Domain.Vendors;
 
 namespace Nop.Data.Mapping.Vendors
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class VendorMap : NopEntityTypeConfiguration<Vendor>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public VendorMap()
         {
             this.ToTable("Vendor");

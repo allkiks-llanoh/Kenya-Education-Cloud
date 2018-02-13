@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Web.Mvc;
 using Nop.Core;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
@@ -30,7 +30,7 @@ namespace Nop.Web.Factories
 
         #endregion
 
-        #region Ctor
+        #region Constructors
 
         public AddressModelFactory(IAddressAttributeService addressAttributeService,
             IAddressAttributeParser addressAttributeParser,
@@ -86,7 +86,7 @@ namespace Nop.Web.Factories
                 }
 
                 //set already selected attributes
-                var selectedAddressAttributes = !string.IsNullOrEmpty(overrideAttributesXml) ?
+                var selectedAddressAttributes = !String.IsNullOrEmpty(overrideAttributesXml) ?
                     overrideAttributesXml :
                     (address != null ? address.CustomAttributes : null);
                 switch (attribute.AttributeControlType)
@@ -95,7 +95,7 @@ namespace Nop.Web.Factories
                     case AttributeControlType.RadioList:
                     case AttributeControlType.Checkboxes:
                         {
-                            if (!string.IsNullOrEmpty(selectedAddressAttributes))
+                            if (!String.IsNullOrEmpty(selectedAddressAttributes))
                             {
                                 //clear default selection
                                 foreach (var item in attributeModel.Values)
@@ -119,7 +119,7 @@ namespace Nop.Web.Factories
                     case AttributeControlType.TextBox:
                     case AttributeControlType.MultilineTextbox:
                         {
-                            if (!string.IsNullOrEmpty(selectedAddressAttributes))
+                            if (!String.IsNullOrEmpty(selectedAddressAttributes))
                             {
                                 var enteredText = _addressAttributeParser.ParseValues(selectedAddressAttributes, attribute.Id);
                                 if (enteredText.Any())
@@ -139,7 +139,6 @@ namespace Nop.Web.Factories
                 model.CustomAddressAttributes.Add(attributeModel);
             }
         }
-
         #endregion
 
         #region Methods
@@ -164,10 +163,10 @@ namespace Nop.Web.Factories
             string overrideAttributesXml = "")
         {
             if (model == null)
-                throw new ArgumentNullException(nameof(model));
+                throw new ArgumentNullException("model");
 
             if (addressSettings == null)
-                throw new ArgumentNullException(nameof(addressSettings));
+                throw new ArgumentNullException("addressSettings");
 
             if (!excludeProperties && address != null)
             {
@@ -247,7 +246,7 @@ namespace Nop.Web.Factories
                     }
                     else
                     {
-                        var anyCountrySelected = model.AvailableCountries.Any(x => x.Selected);
+                        bool anyCountrySelected = model.AvailableCountries.Any(x => x.Selected);
                         model.AvailableStates.Add(new SelectListItem
                         {
                             Text = _localizationService.GetResource(anyCountrySelected ? "Address.OtherNonUS" : "Address.SelectState"),

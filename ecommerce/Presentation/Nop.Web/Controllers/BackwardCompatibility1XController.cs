@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Mvc;
-using Nop.Core;
+using System.Web.Mvc;
 using Nop.Services.Blogs;
 using Nop.Services.Catalog;
 using Nop.Services.Customers;
@@ -25,20 +24,16 @@ namespace Nop.Web.Controllers
         private readonly ITopicService _topicService;
         private readonly IForumService _forumService;
         private readonly ICustomerService _customerService;
-        private readonly IWebHelper _webHelper;
-
         #endregion
 
-        #region Ctor
+		#region Constructors
 
-        public BackwardCompatibility1XController(IWebHelper webHelper,
-            IProductService productService,
+        public BackwardCompatibility1XController(IProductService productService,
             ICategoryService categoryService, IManufacturerService manufacturerService,
             IProductTagService productTagService, INewsService newsService,
             IBlogService blogService, ITopicService topicService,
             IForumService forumService, ICustomerService customerService)
         {
-            this._webHelper = webHelper;
             this._productService = productService;
             this._categoryService = categoryService;
             this._manufacturerService = manufacturerService;
@@ -54,48 +49,49 @@ namespace Nop.Web.Controllers
         
         #region Methods
 
-        public virtual IActionResult GeneralRedirect()
+        public virtual ActionResult GeneralRedirect()
         {
+            
             // use Request.RawUrl, for instance to parse out what was invoked
             // this regex will extract anything between a "/" and a ".aspx"
             var regex = new Regex(@"(?<=/).+(?=\.aspx)", RegexOptions.Compiled);
-            var rawUrl = _webHelper.GetRawUrl(this.HttpContext.Request);
-            var aspxfileName = regex.Match(rawUrl).Value.ToLowerInvariant();
+            var aspxfileName = regex.Match(Request.RawUrl).Value.ToLowerInvariant();
+
 
             switch (aspxfileName)
             {
                 //URL without rewriting
                 case "product":
                     {
-                        return RedirectProduct(_webHelper.QueryString<string>("productid"), false);
+                        return RedirectProduct(Request.QueryString["productid"], false);
                     }
                 case "category":
                     {
-                        return RedirectCategory(_webHelper.QueryString<string>("categoryid"), false);
+                        return RedirectCategory(Request.QueryString["categoryid"], false);
                     }
                 case "manufacturer":
                     {
-                        return RedirectManufacturer(_webHelper.QueryString<string>("manufacturerid"), false);
+                        return RedirectManufacturer(Request.QueryString["manufacturerid"], false);
                     }
                 case "producttag":
                     {
-                        return RedirectProductTag(_webHelper.QueryString<string>("tagid"), false);
+                        return RedirectProductTag(Request.QueryString["tagid"], false);
                     }
                 case "news":
                     {
-                        return RedirectNewsItem(_webHelper.QueryString<string>("newsid"), false);
+                        return RedirectNewsItem(Request.QueryString["newsid"], false);
                     }
                 case "blog":
                     {
-                        return RedirectBlogPost(_webHelper.QueryString<string>("blogpostid"), false);
+                        return RedirectBlogPost(Request.QueryString["blogpostid"], false);
                     }
                 case "topic":
                     {
-                        return RedirectTopic(_webHelper.QueryString<string>("topicid"), false);
+                        return RedirectTopic(Request.QueryString["topicid"], false);
                     }
                 case "profile":
                     {
-                        return RedirectUserProfile(_webHelper.QueryString<string>("UserId"));
+                        return RedirectUserProfile(Request.QueryString["UserId"]);
                     }
                 case "compareproducts":
                     {
@@ -149,7 +145,7 @@ namespace Nop.Web.Controllers
             return RedirectToRoute("HomePage");
         }
 
-        public virtual IActionResult RedirectProduct(string id, bool idIncludesSename = true)
+        public virtual ActionResult RedirectProduct(string id, bool idIncludesSename = true)
         {
             //we can't use dash in MVC
             var productId = idIncludesSename ? Convert.ToInt32(id.Split(new [] { '-' })[0]) : Convert.ToInt32(id);
@@ -160,7 +156,7 @@ namespace Nop.Web.Controllers
             return RedirectToRoutePermanent("Product", new { SeName = product.GetSeName() });
         }
 
-        public virtual IActionResult RedirectCategory(string id, bool idIncludesSename = true)
+        public virtual ActionResult RedirectCategory(string id, bool idIncludesSename = true)
         {
             //we can't use dash in MVC
             var categoryid = idIncludesSename ? Convert.ToInt32(id.Split(new [] { '-' })[0]) : Convert.ToInt32(id);
@@ -171,7 +167,7 @@ namespace Nop.Web.Controllers
             return RedirectToRoutePermanent("Category", new { SeName = category.GetSeName() });
         }
 
-        public virtual IActionResult RedirectManufacturer(string id, bool idIncludesSename = true)
+        public virtual ActionResult RedirectManufacturer(string id, bool idIncludesSename = true)
         {
             //we can't use dash in MVC
             var manufacturerId = idIncludesSename ? Convert.ToInt32(id.Split(new [] { '-' })[0]) : Convert.ToInt32(id);
@@ -182,7 +178,7 @@ namespace Nop.Web.Controllers
             return RedirectToRoutePermanent("Manufacturer", new { SeName = manufacturer.GetSeName() });
         }
 
-        public virtual IActionResult RedirectProductTag(string id, bool idIncludesSename = true)
+        public virtual ActionResult RedirectProductTag(string id, bool idIncludesSename = true)
         {
             //we can't use dash in MVC
             var tagId = idIncludesSename ? Convert.ToInt32(id.Split(new [] { '-' })[0]) : Convert.ToInt32(id);
@@ -193,7 +189,7 @@ namespace Nop.Web.Controllers
             return RedirectToRoutePermanent("ProductsByTag", new { productTagId = tag.Id });
         }
 
-        public virtual IActionResult RedirectNewsItem(string id, bool idIncludesSename = true)
+        public virtual ActionResult RedirectNewsItem(string id, bool idIncludesSename = true)
         {
             //we can't use dash in MVC
             var newsId = idIncludesSename ? Convert.ToInt32(id.Split(new [] { '-' })[0]) : Convert.ToInt32(id);
@@ -204,7 +200,7 @@ namespace Nop.Web.Controllers
             return RedirectToRoutePermanent("NewsItem", new { newsItemId = newsItem.Id, SeName = newsItem.GetSeName(newsItem.LanguageId, ensureTwoPublishedLanguages: false) });
         }
 
-        public virtual IActionResult RedirectBlogPost(string id, bool idIncludesSename = true)
+        public virtual ActionResult RedirectBlogPost(string id, bool idIncludesSename = true)
         {
             //we can't use dash in MVC
             var blogPostId = idIncludesSename ? Convert.ToInt32(id.Split(new [] { '-' })[0]) : Convert.ToInt32(id);
@@ -215,7 +211,7 @@ namespace Nop.Web.Controllers
             return RedirectToRoutePermanent("BlogPost", new { blogPostId = blogPost.Id, SeName = blogPost.GetSeName(blogPost.LanguageId, ensureTwoPublishedLanguages: false) });
         }
 
-        public virtual IActionResult RedirectTopic(string id, bool idIncludesSename = true)
+        public virtual ActionResult RedirectTopic(string id, bool idIncludesSename = true)
         {
             //we can't use dash in MVC
             var topicid = idIncludesSename ? Convert.ToInt32(id.Split(new [] { '-' })[0]) : Convert.ToInt32(id);
@@ -226,7 +222,7 @@ namespace Nop.Web.Controllers
             return RedirectToRoutePermanent("Topic", new { SeName = topic.GetSeName() });
         }
 
-        public virtual IActionResult RedirectForumGroup(string id, bool idIncludesSename = true)
+        public virtual ActionResult RedirectForumGroup(string id, bool idIncludesSename = true)
         {
             //we can't use dash in MVC
             var forumGroupId = idIncludesSename ? Convert.ToInt32(id.Split(new [] { '-' })[0]) : Convert.ToInt32(id);
@@ -237,7 +233,7 @@ namespace Nop.Web.Controllers
             return RedirectToRoutePermanent("ForumGroupSlug", new { id = forumGroup.Id, slug = forumGroup.GetSeName() });
         }
 
-        public virtual IActionResult RedirectForum(string id, bool idIncludesSename = true)
+        public virtual ActionResult RedirectForum(string id, bool idIncludesSename = true)
         {
             //we can't use dash in MVC
             var forumId = idIncludesSename ? Convert.ToInt32(id.Split(new [] { '-' })[0]) : Convert.ToInt32(id);
@@ -248,7 +244,7 @@ namespace Nop.Web.Controllers
             return RedirectToRoutePermanent("ForumSlug", new { id = forum.Id, slug = forum.GetSeName() });
         }
 
-        public virtual IActionResult RedirectForumTopic(string id, bool idIncludesSename = true)
+        public virtual ActionResult RedirectForumTopic(string id, bool idIncludesSename = true)
         {
             //we can't use dash in MVC
             var forumTopicId = idIncludesSename ? Convert.ToInt32(id.Split(new [] { '-' })[0]) : Convert.ToInt32(id);
@@ -259,7 +255,7 @@ namespace Nop.Web.Controllers
             return RedirectToRoutePermanent("TopicSlug", new { id = topic.Id, slug = topic.GetSeName() });
         }
 
-        public virtual IActionResult RedirectUserProfile(string id)
+        public virtual ActionResult RedirectUserProfile(string id)
         {
             //we can't use dash in MVC
             var userId = Convert.ToInt32(id);

@@ -55,7 +55,7 @@ namespace Nop.Services.Security
         /// Find customer role identifiers with granted access
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
-        /// <param name="entity">Entity</param>
+        /// <param name="entity">Wntity</param>
         /// <returns>Customer role identifiers</returns>
         int[] GetCustomerRoleIdsWithAccess<T>(T entity) where T : BaseEntity, IAclSupported;
 
@@ -63,7 +63,7 @@ namespace Nop.Services.Security
         /// Authorize ACL permission
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
-        /// <param name="entity">Entity</param>
+        /// <param name="entity">Wntity</param>
         /// <returns>true - authorized; otherwise, false</returns>
         bool Authorize<T>(T entity) where T : BaseEntity, IAclSupported;
 
@@ -71,7 +71,7 @@ namespace Nop.Services.Security
         /// Authorize ACL permission
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
-        /// <param name="entity">Entity</param>
+        /// <param name="entity">Wntity</param>
         /// <param name="customer">Customer</param>
         /// <returns>true - authorized; otherwise, false</returns>
         bool Authorize<T>(T entity, Customer customer) where T : BaseEntity, IAclSupported;

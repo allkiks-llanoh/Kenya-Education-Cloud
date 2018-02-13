@@ -67,7 +67,7 @@ namespace Nop.Services.Directory
         public virtual void DeleteStateProvince(StateProvince stateProvince)
         {
             if (stateProvince == null)
-                throw new ArgumentNullException(nameof(stateProvince));
+                throw new ArgumentNullException("stateProvince");
             
             _stateProvinceRepository.Delete(stateProvince);
 
@@ -91,22 +91,15 @@ namespace Nop.Services.Directory
         }
 
         /// <summary>
-        /// Gets a state/province by abbreviation
+        /// Gets a state/province 
         /// </summary>
         /// <param name="abbreviation">The state/province abbreviation</param>
-        /// <param name="countryId">Country identifier; pass null to load the state regardless of a country</param>
         /// <returns>State/province</returns>
-        public virtual StateProvince GetStateProvinceByAbbreviation(string abbreviation, int? countryId = null)
+        public virtual StateProvince GetStateProvinceByAbbreviation(string abbreviation)
         {
-            if (string.IsNullOrEmpty(abbreviation))
-                return null;
-
-            var query = _stateProvinceRepository.Table.Where(state => state.Abbreviation == abbreviation);
-
-            //filter by country
-            if (countryId.HasValue)
-                query = query.Where(state => state.CountryId == countryId);
-
+            var query = from sp in _stateProvinceRepository.Table
+                        where sp.Abbreviation == abbreviation
+                        select sp;
             var stateProvince = query.FirstOrDefault();
             return stateProvince;
         }
@@ -120,7 +113,7 @@ namespace Nop.Services.Directory
         /// <returns>States</returns>
         public virtual IList<StateProvince> GetStateProvincesByCountryId(int countryId, int languageId = 0, bool showHidden = false)
         {
-            var key = string.Format(STATEPROVINCES_ALL_KEY, countryId, languageId, showHidden);
+            string key = string.Format(STATEPROVINCES_ALL_KEY, countryId, languageId, showHidden);
             return _cacheManager.Get(key, () =>
             {
                 var query = from sp in _stateProvinceRepository.Table
@@ -164,7 +157,7 @@ namespace Nop.Services.Directory
         public virtual void InsertStateProvince(StateProvince stateProvince)
         {
             if (stateProvince == null)
-                throw new ArgumentNullException(nameof(stateProvince));
+                throw new ArgumentNullException("stateProvince");
 
             _stateProvinceRepository.Insert(stateProvince);
 
@@ -181,7 +174,7 @@ namespace Nop.Services.Directory
         public virtual void UpdateStateProvince(StateProvince stateProvince)
         {
             if (stateProvince == null)
-                throw new ArgumentNullException(nameof(stateProvince));
+                throw new ArgumentNullException("stateProvince");
 
             _stateProvinceRepository.Update(stateProvince);
 

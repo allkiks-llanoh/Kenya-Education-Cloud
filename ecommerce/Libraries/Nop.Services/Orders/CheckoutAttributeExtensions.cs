@@ -60,7 +60,7 @@ namespace Nop.Services.Orders
         public static IList<CheckoutAttribute> RemoveShippableAttributes(this IList<CheckoutAttribute> checkoutAttributes)
         {
             if (checkoutAttributes == null)
-                throw new ArgumentNullException(nameof(checkoutAttributes));
+                throw new ArgumentNullException("checkoutAttributes");
 
             return checkoutAttributes.Where(x => !x.ShippableProductRequired).ToList();
         }

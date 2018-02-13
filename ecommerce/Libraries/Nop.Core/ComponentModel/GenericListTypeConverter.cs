@@ -12,9 +12,6 @@ namespace Nop.Core.ComponentModel
     /// <typeparam name="T">Type</typeparam>
     public class GenericListTypeConverter<T> : TypeConverter
     {
-        /// <summary>
-        /// Type converter
-        /// </summary>
         protected readonly TypeConverter typeConverter;
 
         /// <summary>
@@ -49,7 +46,7 @@ namespace Nop.Core.ComponentModel
         {
             if (sourceType == typeof(string))
             {
-                var items = GetStringArray(sourceType.ToString());
+                string[] items = GetStringArray(sourceType.ToString());
                 return items.Any();
             }
 
@@ -67,11 +64,11 @@ namespace Nop.Core.ComponentModel
         {
             if (value is string)
             {
-                var items = GetStringArray((string)value);
+                string[] items = GetStringArray((string)value);
                 var result = new List<T>();
                 Array.ForEach(items, s =>
                 {
-                    var item = typeConverter.ConvertFromInvariantString(s);
+                    object item = typeConverter.ConvertFromInvariantString(s);
                     if (item != null)
                     {
                         result.Add((T)item);
@@ -95,11 +92,11 @@ namespace Nop.Core.ComponentModel
         {
             if (destinationType == typeof(string))
             {
-                var result = string.Empty;
+                string result = string.Empty;
                 if (value != null)
                 {
                     //we don't use string.Join() because it doesn't support invariant culture
-                    for (var i = 0; i < ((IList<T>)value).Count; i++)
+                    for (int i = 0; i < ((IList<T>)value).Count; i++)
                     {
                         var str1 = Convert.ToString(((IList<T>)value)[i], CultureInfo.InvariantCulture);
                         result += str1;

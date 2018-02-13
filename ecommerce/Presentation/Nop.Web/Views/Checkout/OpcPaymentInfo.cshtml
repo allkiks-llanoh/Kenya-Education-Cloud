@@ -1,17 +1,24 @@
 ﻿@model CheckoutPaymentInfoModel
+@using Nop.Web.Models.Checkout;
 <div class="checkout-data">
-    @await Component.InvokeAsync("Widget", new { widgetZone = "op_checkout_payment_info_top" })
+    @Html.Widget("op_checkout_payment_info_top")
     <div class="section payment-info">
         <div class="info">
-            @await Component.InvokeAsync(Model.PaymentViewComponentName)
+            @Html.Action(Model.PaymentInfoActionName, Model.PaymentInfoControllerName, Model.PaymentInfoRouteValues)
         </div>
-        <div asp-validation-summary="ModelOnly" class="message-error"></div>
+        @{
+            var validationSummary = Html.ValidationSummary(false);
+        }
+        @if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+        {
+            <div class="message-error">@validationSummary</div>
+        }
     </div>
-    @await Component.InvokeAsync("Widget", new { widgetZone = "op_checkout_payment_info_bottom" })
+    @Html.Widget("op_checkout_payment_info_bottom")
     @if (Model.DisplayOrderTotals)
     {
         <div class="section order-summary">
-            @await Component.InvokeAsync("OrderSummary")
+            @Html.Action("OrderSummary", "ShoppingCart")
         </div>
     }
 </div>

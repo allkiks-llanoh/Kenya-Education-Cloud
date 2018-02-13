@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Routing;
+using System.Web.Routing;
 
 //code from Telerik MVC Extensions
 namespace Nop.Web.Framework.Menu
 {
-    /// <summary>
-    /// Sitemap node
-    /// </summary>
     public class SiteMapNode
     {
         /// <summary>

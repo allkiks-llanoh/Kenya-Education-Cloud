@@ -11,38 +11,20 @@ namespace Nop.Services.Tasks
     /// </summary>
     public partial class TaskManager
     {
-        #region Consts
-
-        /// <summary>
-        /// Schedule task path
-        /// </summary>
-        public const string ScheduleTaskPath = "scheduletask/runtask";
-        private const int _notRunTasksInterval = 60 * 30; //30 minutes
-
-        #endregion
-
-        #region Fields
-
+        private static readonly TaskManager _taskManager = new TaskManager();
         private readonly List<TaskThread> _taskThreads = new List<TaskThread>();
-
-        #endregion
-
-        #region Ctor
+        private const int _notRunTasksInterval = 60 * 30; //30 minutes
 
         private TaskManager()
         {
         }
-
-        #endregion
-
-        #region Methods
-
+        
         /// <summary>
         /// Initializes the task manager
         /// </summary>
         public void Initialize()
         {
-            _taskThreads.Clear();
+            this._taskThreads.Clear();
 
             var taskService = EngineContext.Current.Resolve<IScheduleTaskService>();
             var scheduleTasks = taskService
@@ -60,9 +42,10 @@ namespace Nop.Services.Tasks
                 };
                 foreach (var scheduleTask in scheduleTaskGrouped)
                 {
-                    taskThread.AddTask(scheduleTask);
+                    var task = new Task(scheduleTask);
+                    taskThread.AddTask(task);
                 }
-                _taskThreads.Add(taskThread);
+                this._taskThreads.Add(taskThread);
             }
 
             //sometimes a task period could be set to several hours (or even days).
@@ -83,9 +66,10 @@ namespace Nop.Services.Tasks
                 };
                 foreach (var scheduleTask in notRunTasks)
                 {
-                    taskThread.AddTask(scheduleTask);
+                    var task = new Task(scheduleTask);
+                    taskThread.AddTask(task);
                 }
-                _taskThreads.Add(taskThread);
+                this._taskThreads.Add(taskThread);
             }
         }
 
@@ -94,7 +78,7 @@ namespace Nop.Services.Tasks
         /// </summary>
         public void Start()
         {
-            foreach (var taskThread in _taskThreads)
+            foreach (var taskThread in this._taskThreads)
             {
                 taskThread.InitTimer();
             }
@@ -105,26 +89,32 @@ namespace Nop.Services.Tasks
         /// </summary>
         public void Stop()
         {
-            foreach (var taskThread in _taskThreads)
+            foreach (var taskThread in this._taskThreads)
             {
                 taskThread.Dispose();
             }
         }
 
-        #endregion
-
-        #region Properties
-
         /// <summary>
         /// Gets the task mamanger instance
         /// </summary>
-        public static TaskManager Instance { get; } = new TaskManager();
+        public static TaskManager Instance
+        {
+            get
+            {
+                return _taskManager;
+            }
+        }
 
         /// <summary>
         /// Gets a list of task threads of this task manager
         /// </summary>
-        public IList<TaskThread> TaskThreads => new ReadOnlyCollection<TaskThread>(_taskThreads);
-
-        #endregion
+        public IList<TaskThread> TaskThreads
+        {
+            get
+            {
+                return new ReadOnlyCollection<TaskThread>(this._taskThreads);
+            }
+        }
     }
 }

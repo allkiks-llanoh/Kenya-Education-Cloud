@@ -5,11 +5,9 @@ using System.Linq;
 
 namespace Nop.Core.Plugins
 {
-    /// <summary>
-    /// Plugin extensions
-    /// </summary>
     public static class PluginExtensions
     {
+
         private static readonly List<string> SupportedLogoImageExtensions = new List<string>
         {
             "jpg",
@@ -17,19 +15,13 @@ namespace Nop.Core.Plugins
             "gif"
         };
 
-        /// <summary>
-        /// Get logo URL
-        /// </summary>
-        /// <param name="pluginDescriptor">Plugin descriptor</param>
-        /// <param name="webHelper">Web helper</param>
-        /// <returns>Logo URL</returns>
         public static string GetLogoUrl(this PluginDescriptor pluginDescriptor, IWebHelper webHelper)
         {
             if (pluginDescriptor == null)
-                throw new ArgumentNullException(nameof(pluginDescriptor));
+                throw new ArgumentNullException("pluginDescriptor");
 
             if (webHelper == null)
-                throw new ArgumentNullException(nameof(webHelper));
+                throw new ArgumentNullException("webHelper");
 
             if (pluginDescriptor.OriginalAssemblyFile == null || pluginDescriptor.OriginalAssemblyFile.Directory == null)
             {
@@ -42,8 +34,9 @@ namespace Nop.Core.Plugins
 
             if (string.IsNullOrWhiteSpace(logoExtension)) return null; //No logo file was found with any of the supported extensions.
 
-            var logoUrl = $"{webHelper.GetStoreLocation()}plugins/{pluginDirectory.Name}/logo.{logoExtension}";
+            string logoUrl = string.Format("{0}plugins/{1}/logo.{2}", webHelper.GetStoreLocation(), pluginDirectory.Name, logoExtension);
             return logoUrl;
         }
+
     }
 }

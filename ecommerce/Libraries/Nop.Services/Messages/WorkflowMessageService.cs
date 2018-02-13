@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
+using System.Web;
 using Nop.Core;
 using Nop.Core.Domain.Blogs;
 using Nop.Core.Domain.Catalog;
@@ -20,9 +20,6 @@ using Nop.Services.Stores;
 
 namespace Nop.Services.Messages
 {
-    /// <summary>
-    /// Workflow message service
-    /// </summary>
     public partial class WorkflowMessageService : IWorkflowMessageService
     {
         #region Fields
@@ -38,25 +35,12 @@ namespace Nop.Services.Messages
         private readonly CommonSettings _commonSettings;
         private readonly EmailAccountSettings _emailAccountSettings;
         private readonly IEventPublisher _eventPublisher;
+        private readonly HttpContextBase _httpContext;
 
         #endregion
 
         #region Ctor
 
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="messageTemplateService">Message template service</param>
-        /// <param name="queuedEmailService">Queued email service</param>
-        /// <param name="languageService">Language service</param>
-        /// <param name="tokenizer">Tokenizer</param>
-        /// <param name="emailAccountService">Email account service</param>
-        /// <param name="messageTokenProvider">Message token provider</param>
-        /// <param name="storeService">Store service</param>
-        /// <param name="storeContext">Store context</param>
-        /// <param name="commonSettings">Common settings</param>
-        /// <param name="emailAccountSettings">Email account settings</param>
-        /// <param name="eventPublisher">Event publisher</param>
         public WorkflowMessageService(IMessageTemplateService messageTemplateService,
             IQueuedEmailService queuedEmailService,
             ILanguageService languageService,
@@ -67,7 +51,8 @@ namespace Nop.Services.Messages
             IStoreContext storeContext,
             CommonSettings commonSettings,
             EmailAccountSettings emailAccountSettings,
-            IEventPublisher eventPublisher)
+            IEventPublisher eventPublisher,
+            HttpContextBase httpContext)
         {
             this._messageTemplateService = messageTemplateService;
             this._queuedEmailService = queuedEmailService;
@@ -80,18 +65,13 @@ namespace Nop.Services.Messages
             this._commonSettings = commonSettings;
             this._emailAccountSettings = emailAccountSettings;
             this._eventPublisher = eventPublisher;
+            this._httpContext = httpContext;
         }
 
         #endregion
 
         #region Utilities
-
-        /// <summary>
-        /// Get message template
-        /// </summary>
-        /// <param name="messageTemplateName">Message template name</param>
-        /// <param name="storeId">Store identifier</param>
-        /// <returns>Message template</returns>
+        
         protected virtual MessageTemplate GetActiveMessageTemplate(string messageTemplateName, int storeId)
         {
             var messageTemplate = _messageTemplateService.GetMessageTemplateByName(messageTemplateName, storeId);
@@ -108,12 +88,6 @@ namespace Nop.Services.Messages
             return messageTemplate;
         }
 
-        /// <summary>
-        /// Get EmailAccount to use with a message templates
-        /// </summary>
-        /// <param name="messageTemplate">Message template</param>
-        /// <param name="languageId">Language identifier</param>
-        /// <returns>EmailAccount</returns>
         protected virtual EmailAccount GetEmailAccountOfMessageTemplate(MessageTemplate messageTemplate, int languageId)
         {
             var emailAccountId = messageTemplate.GetLocalized(mt => mt.EmailAccountId, languageId);
@@ -127,14 +101,9 @@ namespace Nop.Services.Messages
             if (emailAccount == null)
                 emailAccount = _emailAccountService.GetAllEmailAccounts().FirstOrDefault();
             return emailAccount;
+
         }
 
-        /// <summary>
-        /// Ensure language is active
-        /// </summary>
-        /// <param name="languageId">Language identifier</param>
-        /// <param name="storeId">Store identifier</param>
-        /// <returns>Return a value language identifier</returns>
         protected virtual int EnsureLanguageIsActive(int languageId, int storeId)
         {
             //load language by specified ID
@@ -171,7 +140,7 @@ namespace Nop.Services.Messages
         public virtual int SendCustomerRegisteredNotificationMessage(Customer customer, int languageId)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -206,7 +175,7 @@ namespace Nop.Services.Messages
         public virtual int SendCustomerWelcomeMessage(Customer customer, int languageId)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -241,7 +210,7 @@ namespace Nop.Services.Messages
         public virtual int SendCustomerEmailValidationMessage(Customer customer, int languageId)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -277,7 +246,7 @@ namespace Nop.Services.Messages
         public virtual int SendCustomerEmailRevalidationMessage(Customer customer, int languageId)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -293,6 +262,7 @@ namespace Nop.Services.Messages
             var tokens = new List<Token>();
             _messageTokenProvider.AddStoreTokens(tokens, store, emailAccount);
             _messageTokenProvider.AddCustomerTokens(tokens, customer);
+
 
             //event notification
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
@@ -313,7 +283,7 @@ namespace Nop.Services.Messages
         public virtual int SendCustomerPasswordRecoveryMessage(Customer customer, int languageId)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -329,6 +299,7 @@ namespace Nop.Services.Messages
             var tokens = new List<Token>();
             _messageTokenProvider.AddStoreTokens(tokens, store, emailAccount);
             _messageTokenProvider.AddCustomerTokens(tokens, customer);
+
 
             //event notification
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
@@ -353,10 +324,10 @@ namespace Nop.Services.Messages
         public virtual int SendOrderPlacedVendorNotification(Order order, Vendor vendor, int languageId)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             if (vendor == null)
-                throw new ArgumentNullException(nameof(vendor));
+                throw new ArgumentNullException("vendor");
 
             var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -392,7 +363,7 @@ namespace Nop.Services.Messages
         public virtual int SendOrderPlacedStoreOwnerNotification(Order order, int languageId)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -428,7 +399,7 @@ namespace Nop.Services.Messages
         public virtual int SendOrderPaidStoreOwnerNotification(Order order, int languageId)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -467,7 +438,7 @@ namespace Nop.Services.Messages
             string attachmentFilePath = null, string attachmentFileName = null)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -489,7 +460,7 @@ namespace Nop.Services.Messages
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
 
             var toEmail = order.BillingAddress.Email;
-            var toName = $"{order.BillingAddress.FirstName} {order.BillingAddress.LastName}";
+            var toName = string.Format("{0} {1}", order.BillingAddress.FirstName, order.BillingAddress.LastName);
 
             return SendNotification(messageTemplate, emailAccount, languageId, tokens, toEmail, toName,
                 attachmentFilePath, attachmentFileName);
@@ -505,10 +476,10 @@ namespace Nop.Services.Messages
         public virtual int SendOrderPaidVendorNotification(Order order, Vendor vendor, int languageId)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             if (vendor == null)
-                throw new ArgumentNullException(nameof(vendor));
+                throw new ArgumentNullException("vendor");
 
             var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -547,7 +518,7 @@ namespace Nop.Services.Messages
             string attachmentFilePath = null, string attachmentFileName = null)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -569,7 +540,7 @@ namespace Nop.Services.Messages
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
 
             var toEmail = order.BillingAddress.Email;
-            var toName = $"{order.BillingAddress.FirstName} {order.BillingAddress.LastName}";
+            var toName = string.Format("{0} {1}", order.BillingAddress.FirstName, order.BillingAddress.LastName);
 
             return SendNotification(messageTemplate, emailAccount, languageId, tokens, toEmail, toName, 
                 attachmentFilePath, attachmentFileName);
@@ -584,7 +555,7 @@ namespace Nop.Services.Messages
         public virtual int SendShipmentSentCustomerNotification(Shipment shipment, int languageId)
         {
             if (shipment == null)
-                throw new ArgumentNullException(nameof(shipment));
+                throw new ArgumentNullException("shipment");
 
             var order = shipment.Order;
             if (order == null)
@@ -611,7 +582,7 @@ namespace Nop.Services.Messages
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
 
             var toEmail = order.BillingAddress.Email;
-            var toName = $"{order.BillingAddress.FirstName} {order.BillingAddress.LastName}";
+            var toName = string.Format("{0} {1}", order.BillingAddress.FirstName, order.BillingAddress.LastName);
 
             return SendNotification(messageTemplate, emailAccount, languageId, tokens, toEmail, toName);
         }
@@ -625,7 +596,7 @@ namespace Nop.Services.Messages
         public virtual int SendShipmentDeliveredCustomerNotification(Shipment shipment, int languageId)
         {
             if (shipment == null)
-                throw new ArgumentNullException(nameof(shipment));
+                throw new ArgumentNullException("shipment");
 
             var order = shipment.Order;
             if (order == null)
@@ -652,7 +623,7 @@ namespace Nop.Services.Messages
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
 
             var toEmail = order.BillingAddress.Email;
-            var toName = $"{order.BillingAddress.FirstName} {order.BillingAddress.LastName}";
+            var toName = string.Format("{0} {1}", order.BillingAddress.FirstName, order.BillingAddress.LastName);
 
             return SendNotification(messageTemplate, emailAccount, languageId, tokens, toEmail, toName);
         }
@@ -669,7 +640,7 @@ namespace Nop.Services.Messages
             string attachmentFilePath = null, string attachmentFileName = null)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -691,7 +662,7 @@ namespace Nop.Services.Messages
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
 
             var toEmail = order.BillingAddress.Email;
-            var toName = $"{order.BillingAddress.FirstName} {order.BillingAddress.LastName}";
+            var toName = string.Format("{0} {1}", order.BillingAddress.FirstName, order.BillingAddress.LastName);
 
             return SendNotification(messageTemplate, emailAccount, languageId, tokens, toEmail, toName,
                 attachmentFilePath, attachmentFileName);
@@ -706,7 +677,7 @@ namespace Nop.Services.Messages
         public virtual int SendOrderCancelledCustomerNotification(Order order, int languageId)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -728,7 +699,7 @@ namespace Nop.Services.Messages
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
 
             var toEmail = order.BillingAddress.Email;
-            var toName = $"{order.BillingAddress.FirstName} {order.BillingAddress.LastName}";
+            var toName = string.Format("{0} {1}", order.BillingAddress.FirstName, order.BillingAddress.LastName);
 
             return SendNotification(messageTemplate, emailAccount, languageId, tokens, toEmail, toName);
         }
@@ -743,7 +714,7 @@ namespace Nop.Services.Messages
         public virtual int SendOrderRefundedStoreOwnerNotification(Order order, decimal refundedAmount, int languageId)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -781,7 +752,7 @@ namespace Nop.Services.Messages
         public virtual int SendOrderRefundedCustomerNotification(Order order, decimal refundedAmount, int languageId)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             var store = _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -804,7 +775,7 @@ namespace Nop.Services.Messages
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
 
             var toEmail = order.BillingAddress.Email;
-            var toName = $"{order.BillingAddress.FirstName} {order.BillingAddress.LastName}";
+            var toName = string.Format("{0} {1}", order.BillingAddress.FirstName, order.BillingAddress.LastName);
 
             return SendNotification(messageTemplate, emailAccount, languageId, tokens, toEmail, toName);
         }
@@ -818,7 +789,7 @@ namespace Nop.Services.Messages
         public virtual int SendNewOrderNoteAddedCustomerNotification(OrderNote orderNote, int languageId)
         {
             if (orderNote == null)
-                throw new ArgumentNullException(nameof(orderNote));
+                throw new ArgumentNullException("orderNote");
            
             var order = orderNote.Order;
 
@@ -843,7 +814,7 @@ namespace Nop.Services.Messages
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
 
             var toEmail = order.BillingAddress.Email;
-            var toName = $"{order.BillingAddress.FirstName} {order.BillingAddress.LastName}";
+            var toName = string.Format("{0} {1}", order.BillingAddress.FirstName, order.BillingAddress.LastName);
 
             return SendNotification(messageTemplate, emailAccount, languageId, tokens, toEmail, toName);
         }
@@ -857,7 +828,7 @@ namespace Nop.Services.Messages
         public virtual int SendRecurringPaymentCancelledStoreOwnerNotification(RecurringPayment recurringPayment, int languageId)
         {
             if (recurringPayment == null)
-                throw new ArgumentNullException(nameof(recurringPayment));
+                throw new ArgumentNullException("recurringPayment");
 
             var store = _storeService.GetStoreById(recurringPayment.InitialOrder.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -894,7 +865,7 @@ namespace Nop.Services.Messages
         public virtual int SendRecurringPaymentCancelledCustomerNotification(RecurringPayment recurringPayment, int languageId)
         {
             if (recurringPayment == null)
-                throw new ArgumentNullException(nameof(recurringPayment));
+                throw new ArgumentNullException("recurringPayment");
 
             var store = _storeService.GetStoreById(recurringPayment.InitialOrder.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -917,7 +888,8 @@ namespace Nop.Services.Messages
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
 
             var toEmail = recurringPayment.InitialOrder.BillingAddress.Email;
-            var toName = $"{recurringPayment.InitialOrder.BillingAddress.FirstName} {recurringPayment.InitialOrder.BillingAddress.LastName}";
+            var toName = string.Format("{0} {1}", 
+                recurringPayment.InitialOrder.BillingAddress.FirstName, recurringPayment.InitialOrder.BillingAddress.LastName);
 
             return SendNotification(messageTemplate, emailAccount, languageId, tokens, toEmail, toName);
         }
@@ -931,7 +903,7 @@ namespace Nop.Services.Messages
         public virtual int SendRecurringPaymentFailedCustomerNotification(RecurringPayment recurringPayment, int languageId)
         {
             if (recurringPayment == null)
-                throw new ArgumentNullException(nameof(recurringPayment));
+                throw new ArgumentNullException("recurringPayment");
 
             var store = _storeService.GetStoreById(recurringPayment.InitialOrder.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -954,7 +926,8 @@ namespace Nop.Services.Messages
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
 
             var toEmail = recurringPayment.InitialOrder.BillingAddress.Email;
-            var toName = $"{recurringPayment.InitialOrder.BillingAddress.FirstName} {recurringPayment.InitialOrder.BillingAddress.LastName}";
+            var toName = string.Format("{0} {1}",
+                recurringPayment.InitialOrder.BillingAddress.FirstName, recurringPayment.InitialOrder.BillingAddress.LastName);
 
             return SendNotification(messageTemplate, emailAccount, languageId, tokens, toEmail, toName);
         }
@@ -972,7 +945,7 @@ namespace Nop.Services.Messages
         public virtual int SendNewsLetterSubscriptionActivationMessage(NewsLetterSubscription subscription, int languageId)
         {
             if (subscription == null)
-                throw new ArgumentNullException(nameof(subscription));
+                throw new ArgumentNullException("subscription");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1004,7 +977,7 @@ namespace Nop.Services.Messages
         public virtual int SendNewsLetterSubscriptionDeactivationMessage(NewsLetterSubscription subscription, int languageId)
         {
             if (subscription == null)
-                throw new ArgumentNullException(nameof(subscription));
+                throw new ArgumentNullException("subscription");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1045,10 +1018,10 @@ namespace Nop.Services.Messages
             Product product, string customerEmail, string friendsEmail, string personalMessage)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             if (product == null)
-                throw new ArgumentNullException(nameof(product));
+                throw new ArgumentNullException("product");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1087,7 +1060,7 @@ namespace Nop.Services.Messages
              string customerEmail, string friendsEmail, string personalMessage)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1126,7 +1099,7 @@ namespace Nop.Services.Messages
         public virtual int SendNewReturnRequestStoreOwnerNotification(ReturnRequest returnRequest, OrderItem orderItem, int languageId)
         {
             if (returnRequest == null)
-                throw new ArgumentNullException(nameof(returnRequest));
+                throw new ArgumentNullException("returnRequest");
 
             var store = _storeService.GetStoreById(orderItem.Order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1163,7 +1136,7 @@ namespace Nop.Services.Messages
         public virtual int SendNewReturnRequestCustomerNotification(ReturnRequest returnRequest, OrderItem orderItem, int languageId)
         {
             if (returnRequest == null)
-                throw new ArgumentNullException(nameof(returnRequest));
+                throw new ArgumentNullException("returnRequest");
 
             var store = _storeService.GetStoreById(orderItem.Order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1204,7 +1177,7 @@ namespace Nop.Services.Messages
         public virtual int SendReturnRequestStatusChangedCustomerNotification(ReturnRequest returnRequest, OrderItem orderItem, int languageId)
         {
             if (returnRequest == null)
-                throw new ArgumentNullException(nameof(returnRequest));
+                throw new ArgumentNullException("returnRequest");
 
             var store = _storeService.GetStoreById(orderItem.Order.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1225,7 +1198,7 @@ namespace Nop.Services.Messages
             //event notification
             _eventPublisher.MessageTokensAdded(messageTemplate, tokens);
 
-            var toEmail = returnRequest.Customer.IsGuest() ? 
+            string toEmail = returnRequest.Customer.IsGuest() ? 
                 orderItem.Order.BillingAddress.Email :
                 returnRequest.Customer.Email;
             var toName = returnRequest.Customer.IsGuest() ? 
@@ -1250,7 +1223,7 @@ namespace Nop.Services.Messages
         public int SendNewForumTopicMessage(Customer customer, ForumTopic forumTopic, Forum forum, int languageId)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             var store = _storeContext.CurrentStore;
 
@@ -1291,7 +1264,7 @@ namespace Nop.Services.Messages
             Forum forum, int friendlyForumTopicPageIndex, int languageId)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             var store = _storeContext.CurrentStore;
 
@@ -1328,7 +1301,7 @@ namespace Nop.Services.Messages
         public int SendPrivateMessageNotification(PrivateMessage privateMessage, int languageId)
         {
             if (privateMessage == null)
-                throw new ArgumentNullException(nameof(privateMessage));
+                throw new ArgumentNullException("privateMessage");
 
             var store = _storeService.GetStoreById(privateMessage.StoreId) ?? _storeContext.CurrentStore;
 
@@ -1368,10 +1341,10 @@ namespace Nop.Services.Messages
         public virtual int SendNewVendorAccountApplyStoreOwnerNotification(Customer customer, Vendor vendor, int languageId)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             if (vendor == null)
-                throw new ArgumentNullException(nameof(vendor));
+                throw new ArgumentNullException("vendor");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1407,7 +1380,7 @@ namespace Nop.Services.Messages
         public virtual int SendVendorInformationChangeNotification(Vendor vendor, int languageId)
         {
             if (vendor == null)
-                throw new ArgumentNullException(nameof(vendor));
+                throw new ArgumentNullException("vendor");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1442,7 +1415,7 @@ namespace Nop.Services.Messages
         public virtual int SendGiftCardNotification(GiftCard giftCard, int languageId)
         {
             if (giftCard == null)
-                throw new ArgumentNullException(nameof(giftCard));
+                throw new ArgumentNullException("giftCard");
 
             var order = giftCard.PurchasedWithOrderItem != null ? giftCard.PurchasedWithOrderItem.Order : null;
             var store = order != null ? _storeService.GetStoreById(order.StoreId) ?? _storeContext.CurrentStore : _storeContext.CurrentStore;
@@ -1479,7 +1452,7 @@ namespace Nop.Services.Messages
         public virtual int SendProductReviewNotificationMessage(ProductReview productReview, int languageId)
         {
             if (productReview == null)
-                throw new ArgumentNullException(nameof(productReview));
+                throw new ArgumentNullException("productReview");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1515,7 +1488,7 @@ namespace Nop.Services.Messages
         public virtual int SendQuantityBelowStoreOwnerNotification(Product product,  int languageId)
         {
             if (product== null)
-                throw new ArgumentNullException(nameof(product));
+                throw new ArgumentNullException("product");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1549,7 +1522,7 @@ namespace Nop.Services.Messages
         public virtual int SendQuantityBelowStoreOwnerNotification(ProductAttributeCombination combination, int languageId)
         {
             if (combination == null)
-                throw new ArgumentNullException(nameof(combination));
+                throw new ArgumentNullException("combination");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1589,7 +1562,7 @@ namespace Nop.Services.Messages
             string vatName, string vatAddress, int languageId)
         {
             if (customer == null)
-                throw new ArgumentNullException(nameof(customer));
+                throw new ArgumentNullException("customer");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1626,7 +1599,7 @@ namespace Nop.Services.Messages
         public virtual int SendBlogCommentNotificationMessage(BlogComment blogComment, int languageId)
         {
             if (blogComment == null)
-                throw new ArgumentNullException(nameof(blogComment));
+                throw new ArgumentNullException("blogComment");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1662,7 +1635,7 @@ namespace Nop.Services.Messages
         public virtual int SendNewsCommentNotificationMessage(NewsComment newsComment, int languageId)
         {
             if (newsComment == null)
-                throw new ArgumentNullException(nameof(newsComment));
+                throw new ArgumentNullException("newsComment");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1698,7 +1671,7 @@ namespace Nop.Services.Messages
         public virtual int SendBackInStockNotification(BackInStockSubscription subscription, int languageId)
         {
             if (subscription == null)
-                throw new ArgumentNullException(nameof(subscription));
+                throw new ArgumentNullException("subscription");
 
             var store = _storeService.GetStoreById(subscription.StoreId) ?? _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1755,7 +1728,8 @@ namespace Nop.Services.Messages
             {
                 fromEmail = emailAccount.Email;
                 fromName = emailAccount.DisplayName;
-                body = $"<strong>From</strong>: {WebUtility.HtmlEncode(senderName)} - {WebUtility.HtmlEncode(senderEmail)}<br /><br />{body}";
+                body = string.Format("<strong>From</strong>: {0} - {1}<br /><br />{2}",
+                    _httpContext.Server.HtmlEncode(senderName), _httpContext.Server.HtmlEncode(senderEmail), body);
             }
             else
             {
@@ -1798,7 +1772,7 @@ namespace Nop.Services.Messages
             string senderName, string subject, string body)
         {
             if (vendor == null)
-                throw new ArgumentNullException(nameof(vendor));
+                throw new ArgumentNullException("vendor");
 
             var store = _storeContext.CurrentStore;
             languageId = EnsureLanguageIsActive(languageId, store.Id);
@@ -1817,7 +1791,8 @@ namespace Nop.Services.Messages
             {
                 fromEmail = emailAccount.Email;
                 fromName = emailAccount.DisplayName;
-                body = $"<strong>From</strong>: {WebUtility.HtmlEncode(senderName)} - {WebUtility.HtmlEncode(senderEmail)}<br /><br />{body}";
+                body = string.Format("<strong>From</strong>: {0} - {1}<br /><br />{2}",
+                    _httpContext.Server.HtmlEncode(senderName), _httpContext.Server.HtmlEncode(senderEmail), body);
             }
             else
             {
@@ -1894,14 +1869,14 @@ namespace Nop.Services.Messages
             string fromEmail = null, string fromName = null, string subject = null)
         {
             if (messageTemplate == null)
-                throw new ArgumentNullException(nameof(messageTemplate));
+                throw new ArgumentNullException("messageTemplate");
 
             if (emailAccount == null)
-                throw new ArgumentNullException(nameof(emailAccount));
+                throw new ArgumentNullException("emailAccount");
 
             //retrieve localized message template data
             var bcc = messageTemplate.GetLocalized(mt => mt.BccEmailAddresses, languageId);
-            if (string.IsNullOrEmpty(subject))
+            if (String.IsNullOrEmpty(subject))
                 subject = messageTemplate.GetLocalized(mt => mt.Subject, languageId);
             var body = messageTemplate.GetLocalized(mt => mt.Body, languageId);
 

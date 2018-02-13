@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Xml;
 using Nop.Core.Domain.Orders;
-using Nop.Services.Catalog;
 
 namespace Nop.Services.Orders
 {
@@ -13,34 +12,12 @@ namespace Nop.Services.Orders
     /// </summary>
     public partial class CheckoutAttributeParser : ICheckoutAttributeParser
     {
-        #region Fields
-
         private readonly ICheckoutAttributeService _checkoutAttributeService;
-        private readonly IProductAttributeParser _productAttributeParser;
-        private readonly IProductService _productService;
 
-        #endregion
-
-        #region Ctor
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="checkoutAttributeService">Checkout attribute service</param>
-        /// <param name="productAttributeParser">Product attribute parser</param>
-        /// <param name="productService">Product service</param>
-        public CheckoutAttributeParser(ICheckoutAttributeService checkoutAttributeService,
-            IProductAttributeParser productAttributeParser,
-            IProductService productService)
+        public CheckoutAttributeParser(ICheckoutAttributeService checkoutAttributeService)
         {
             this._checkoutAttributeService = checkoutAttributeService;
-            this._productAttributeParser = productAttributeParser;
-            this._productService = productService;
         }
-
-        #endregion
-
-        #region Utilities
 
         /// <summary>
         /// Gets selected checkout attribute identifiers
@@ -50,7 +27,7 @@ namespace Nop.Services.Orders
         protected virtual IList<int> ParseCheckoutAttributeIds(string attributesXml)
         {
             var ids = new List<int>();
-            if (string.IsNullOrEmpty(attributesXml))
+            if (String.IsNullOrEmpty(attributesXml))
                 return ids;
 
             try
@@ -62,8 +39,9 @@ namespace Nop.Services.Orders
                 {
                     if (node.Attributes != null && node.Attributes["ID"] != null)
                     {
-                        var str1 = node.Attributes["ID"].InnerText.Trim();
-                        if (int.TryParse(str1, out int id))
+                        string str1 = node.Attributes["ID"].InnerText.Trim();
+                        int id;
+                        if (int.TryParse(str1, out id))
                         {
                             ids.Add(id);
                         }
@@ -77,10 +55,6 @@ namespace Nop.Services.Orders
             return ids;
         }
 
-        #endregion
-
-        #region Methods
-
         /// <summary>
         /// Gets selected checkout attributes
         /// </summary>
@@ -89,11 +63,11 @@ namespace Nop.Services.Orders
         public virtual IList<CheckoutAttribute> ParseCheckoutAttributes(string attributesXml)
         {
             var result = new List<CheckoutAttribute>();
-            if (string.IsNullOrEmpty(attributesXml))
+            if (String.IsNullOrEmpty(attributesXml))
                 return result;
 
             var ids = ParseCheckoutAttributeIds(attributesXml);
-            foreach (var id in ids)
+            foreach (int id in ids)
             {
                 var attribute = _checkoutAttributeService.GetCheckoutAttributeById(id);
                 if (attribute != null)
@@ -112,7 +86,7 @@ namespace Nop.Services.Orders
         public virtual IList<CheckoutAttributeValue> ParseCheckoutAttributeValues(string attributesXml)
         {
             var values = new List<CheckoutAttributeValue>();
-            if (string.IsNullOrEmpty(attributesXml))
+            if (String.IsNullOrEmpty(attributesXml))
                 return values;
 
             var attributes = ParseCheckoutAttributes(attributesXml);
@@ -122,11 +96,12 @@ namespace Nop.Services.Orders
                     continue;
 
                 var valuesStr = ParseValues(attributesXml, attribute.Id);
-                foreach (var valueStr in valuesStr)
+                foreach (string valueStr in valuesStr)
                 {
-                    if (!string.IsNullOrEmpty(valueStr))
+                    if (!String.IsNullOrEmpty(valueStr))
                     {
-                        if (int.TryParse(valueStr, out int id))
+                        int id;
+                        if (int.TryParse(valueStr, out id))
                         {
                             var value = _checkoutAttributeService.GetCheckoutAttributeValueById(id);
                             if (value != null)
@@ -147,7 +122,7 @@ namespace Nop.Services.Orders
         public virtual IList<string> ParseValues(string attributesXml, int checkoutAttributeId)
         {
             var selectedCheckoutAttributeValues = new List<string>();
-            if (string.IsNullOrEmpty(attributesXml))
+            if (String.IsNullOrEmpty(attributesXml))
                 return selectedCheckoutAttributeValues;
 
             try
@@ -160,15 +135,16 @@ namespace Nop.Services.Orders
                 {
                     if (node1.Attributes != null && node1.Attributes["ID"] != null)
                     {
-                        var str1 = node1.Attributes["ID"].InnerText.Trim();
-                        if (int.TryParse(str1, out int id))
+                        string str1 = node1.Attributes["ID"].InnerText.Trim();
+                        int id;
+                        if (int.TryParse(str1, out id))
                         {
                             if (id == checkoutAttributeId)
                             {
                                 var nodeList2 = node1.SelectNodes(@"CheckoutAttributeValue/Value");
                                 foreach (XmlNode node2 in nodeList2)
                                 {
-                                    var value = node2.InnerText.Trim();
+                                    string value = node2.InnerText.Trim();
                                     selectedCheckoutAttributeValues.Add(value);
                                 }
                             }
@@ -192,11 +168,11 @@ namespace Nop.Services.Orders
         /// <returns>Attributes</returns>
         public virtual string AddCheckoutAttribute(string attributesXml, CheckoutAttribute ca, string value)
         {
-            var result = string.Empty;
+            string result = string.Empty;
             try
             {
                 var xmlDoc = new XmlDocument();
-                if (string.IsNullOrEmpty(attributesXml))
+                if (String.IsNullOrEmpty(attributesXml))
                 {
                     var element1 = xmlDoc.CreateElement("Attributes");
                     xmlDoc.AppendChild(element1);
@@ -214,8 +190,9 @@ namespace Nop.Services.Orders
                 {
                     if (node1.Attributes != null && node1.Attributes["ID"] != null)
                     {
-                        var str1 = node1.Attributes["ID"].InnerText.Trim();
-                        if (int.TryParse(str1, out int id))
+                        string str1 = node1.Attributes["ID"].InnerText.Trim();
+                        int id;
+                        if (int.TryParse(str1, out id))
                         {
                             if (id == ca.Id)
                             {
@@ -258,13 +235,13 @@ namespace Nop.Services.Orders
         /// <returns>Updated attributes in XML format</returns>
         public virtual string EnsureOnlyActiveAttributes(string attributesXml, IList<ShoppingCartItem> cart)
         {
-            if (string.IsNullOrEmpty(attributesXml))
+            if (String.IsNullOrEmpty(attributesXml))
                 return attributesXml;
 
             var result = attributesXml;
 
             //removing "shippable" checkout attributes if there's no any shippable products in the cart
-            if (!cart.RequiresShipping(_productService, _productAttributeParser))
+            if (!cart.RequiresShipping())
             {
                 //find attribute IDs to remove
                 var checkoutAttributeIdsToRemove = new List<int>();
@@ -283,8 +260,9 @@ namespace Nop.Services.Orders
                     {
                         if (node.Attributes != null && node.Attributes["ID"] != null)
                         {
-                            var str1 = node.Attributes["ID"].InnerText.Trim();
-                            if (int.TryParse(str1, out int id))
+                            string str1 = node.Attributes["ID"].InnerText.Trim();
+                            int id;
+                            if (int.TryParse(str1, out id))
                             {
                                 if (checkoutAttributeIdsToRemove.Contains(id))
                                 {
@@ -316,10 +294,10 @@ namespace Nop.Services.Orders
         public virtual bool? IsConditionMet(CheckoutAttribute attribute, string selectedAttributesXml)
         {
             if (attribute == null)
-                throw new ArgumentNullException(nameof(attribute));
+                throw new ArgumentNullException("attribute");
 
             var conditionAttributeXml = attribute.ConditionAttributeXml;
-            if (string.IsNullOrEmpty(conditionAttributeXml))
+            if (String.IsNullOrEmpty(conditionAttributeXml))
                 //no condition
                 return null;
 
@@ -333,7 +311,7 @@ namespace Nop.Services.Orders
                 //ConditionAttributeXml can contain "empty" values (nothing is selected)
                 //but in other cases (like below) we do not store empty values
                 //that's why we remove empty values here
-                .Where(x => !string.IsNullOrEmpty(x))
+                .Where(x => !String.IsNullOrEmpty(x))
                 .ToList();
             var selectedValues = ParseValues(selectedAttributesXml, dependOnAttribute.Id);
             if (valuesThatShouldBeSelected.Count != selectedValues.Count)
@@ -343,7 +321,7 @@ namespace Nop.Services.Orders
             var allFound = true;
             foreach (var t1 in valuesThatShouldBeSelected)
             {
-                var found = false;
+                bool found = false;
                 foreach (var t2 in selectedValues)
                     if (t1 == t2)
                         found = true;
@@ -362,11 +340,11 @@ namespace Nop.Services.Orders
         /// <returns>Updated result (XML format)</returns>
         public virtual string RemoveCheckoutAttribute(string attributesXml, CheckoutAttribute attribute)
         {
-            var result = string.Empty;
+            string result = string.Empty;
             try
             {
                 var xmlDoc = new XmlDocument();
-                if (string.IsNullOrEmpty(attributesXml))
+                if (String.IsNullOrEmpty(attributesXml))
                 {
                     var element1 = xmlDoc.CreateElement("Attributes");
                     xmlDoc.AppendChild(element1);
@@ -384,8 +362,9 @@ namespace Nop.Services.Orders
                 {
                     if (node1.Attributes != null && node1.Attributes["ID"] != null)
                     {
-                        var str1 = node1.Attributes["ID"].InnerText.Trim();
-                        if (int.TryParse(str1, out int id))
+                        string str1 = node1.Attributes["ID"].InnerText.Trim();
+                        int id;
+                        if (int.TryParse(str1, out id))
                         {
                             if (id == attribute.Id)
                             {
@@ -410,7 +389,5 @@ namespace Nop.Services.Orders
             }
             return result;
         }
-
-        #endregion
     }
 }

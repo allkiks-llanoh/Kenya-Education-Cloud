@@ -14,7 +14,6 @@ namespace Nop.Web.Extensions
             var entity = new Address();
             return ToEntity(model, entity, trimFields);
         }
-
         public static Address ToEntity(this AddressModel model, Address destination, bool trimFields = true)
         {
             if (model == null)

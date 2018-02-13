@@ -11,7 +11,7 @@ namespace Nop.Services.Tests.Discounts
         public static decimal GetDiscountAmount(this Discount discount, decimal amount)
         {
             if (discount == null)
-                throw new ArgumentNullException(nameof(discount));
+                throw new ArgumentNullException("discount");
 
             return discount.MapDiscount().GetDiscountAmount(amount);
         }

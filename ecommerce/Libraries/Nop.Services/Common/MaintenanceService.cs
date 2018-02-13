@@ -5,7 +5,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using Microsoft.AspNetCore.Hosting;
+using System.Web;
 using Nop.Core;
 using Nop.Core.Data;
 using Nop.Core.Domain.Common;
@@ -23,8 +23,7 @@ namespace Nop.Services.Common
         private readonly IDataProvider _dataProvider;
         private readonly IDbContext _dbContext;
         private readonly CommonSettings _commonSettings;
-        private readonly IHostingEnvironment _hostingEnvironment;
-
+        private readonly HttpContextBase _httpContext;
         #endregion
 
         #region Ctor
@@ -35,45 +34,34 @@ namespace Nop.Services.Common
         /// <param name="dataProvider">Data provider</param>
         /// <param name="dbContext">Database Context</param>
         /// <param name="commonSettings">Common settings</param>
-        /// <param name="hostingEnvironment">Hosting environment</param>
+        /// <param name="httpContext">HTTP context</param>
         public MaintenanceService(IDataProvider dataProvider, IDbContext dbContext,
-            CommonSettings commonSettings, IHostingEnvironment hostingEnvironment)
+            CommonSettings commonSettings, HttpContextBase httpContext)
         {
             this._dataProvider = dataProvider;
             this._dbContext = dbContext;
             this._commonSettings = commonSettings;
-            this._hostingEnvironment = hostingEnvironment;
+            this._httpContext = httpContext;
         }
 
         #endregion
 
         #region Utilities
 
-        /// <summary>
-        /// Get directory path for backs
-        /// </summary>
-        /// <param name="ensureFolderCreated">A value indicating whether a directory should be created if it doesn't exist</param>
-        /// <returns></returns>
-        protected virtual string GetBackupDirectoryPath(bool ensureFolderCreated = true)
+        protected virtual string GetBackupDirectoryPath()
         {
-            var path = Path.Combine(_hostingEnvironment.WebRootPath, "db_backups\\");
-            if (ensureFolderCreated)
-                System.IO.Directory.CreateDirectory(path);
-            return path;
+            return string.Format("{0}Administration\\db_backups\\", _httpContext.Request.PhysicalApplicationPath);
         }
 
-        /// <summary>
-        /// Check whether backups are supported
-        /// </summary>
         protected virtual void CheckBackupSupported()
         {
             if(_dataProvider.BackupSupported) return;
 
             throw new DataException("This database does not support backup");
         }
-        
+
         #endregion
-        
+
         #region Methods
 
         /// <summary>
@@ -87,8 +75,8 @@ namespace Nop.Services.Common
             {
                 //stored procedures are enabled and supported by the database
                 var tableName = _dbContext.GetTableName<T>();
-                var result = _dbContext.SqlQuery<decimal?>($"SELECT IDENT_CURRENT('[{tableName}]')").FirstOrDefault();
-                return result.HasValue ? Convert.ToInt32(result) : 1;
+                var result = _dbContext.SqlQuery<decimal>(string.Format("SELECT IDENT_CURRENT('[{0}]')", tableName));
+                return Convert.ToInt32(result.FirstOrDefault());
             }
             
             //stored procedures aren't supported
@@ -110,7 +98,7 @@ namespace Nop.Services.Common
                 if (currentIdent.HasValue && ident > currentIdent.Value)
                 {
                     var tableName = _dbContext.GetTableName<T>();
-                    _dbContext.ExecuteSqlCommand($"DBCC CHECKIDENT([{tableName}], RESEED, {ident})");
+                    _dbContext.ExecuteSqlCommand(string.Format("DBCC CHECKIDENT([{0}], RESEED, {1})", tableName, ident));
                 }
             }
             else
@@ -208,7 +196,7 @@ namespace Nop.Services.Common
         {
             return Path.Combine(GetBackupDirectoryPath(), backupFileName);
         }
-        
+
         #endregion
     }
 }

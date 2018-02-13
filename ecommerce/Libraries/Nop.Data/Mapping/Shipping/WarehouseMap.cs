@@ -2,14 +2,8 @@
 
 namespace Nop.Data.Mapping.Shipping
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public class WarehouseMap : NopEntityTypeConfiguration<Warehouse>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public WarehouseMap()
         {
             this.ToTable("Warehouse");

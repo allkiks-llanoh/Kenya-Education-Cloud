@@ -3,6 +3,7 @@ using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Configuration;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Events;
+using Nop.Core.Infrastructure;
 using Nop.Services.Events;
 
 namespace Nop.Services.Catalog.Cache
@@ -79,15 +80,12 @@ namespace Nop.Services.Catalog.Cache
         public const string PRODUCT_MANUFACTURER_IDS_MODEL_KEY = "Nop.totals.product.manufacturerids-{0}-{1}-{2}";
         public const string PRODUCT_MANUFACTURER_IDS_PATTERN_KEY = "Nop.totals.product.manufacturerids";
 
-        private readonly IStaticCacheManager _cacheManager;
+        private readonly ICacheManager _cacheManager;
 
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="cacheManager">Cache manager</param>
-        public PriceCacheEventConsumer(IStaticCacheManager cacheManager)
+        public PriceCacheEventConsumer()
         {
-            this._cacheManager = cacheManager;
+            //TODO inject static cache manager using constructor
+            this._cacheManager = EngineContext.Current.ContainerManager.Resolve<ICacheManager>("nop_cache_static");
         }
 
         //settings

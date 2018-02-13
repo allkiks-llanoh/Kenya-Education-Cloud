@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace Nop.Core
 {
     /// <summary>
-    /// XML helper class
+    /// Xml helper class
     /// </summary>
     public partial class XmlHelper
     {
@@ -104,7 +104,7 @@ namespace Nop.Core
             var xmlS = new XmlSerializer(typeof(DateTime));
             using (var sr = new StringReader(dateTime))
             {
-                var test = xmlS.Deserialize(sr);
+                object test = xmlS.Deserialize(sr);
                 return (DateTime)test;
             }
         }

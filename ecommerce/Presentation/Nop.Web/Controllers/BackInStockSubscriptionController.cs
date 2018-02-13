@@ -1,6 +1,5 @@
 ﻿using System;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using System.Web.Mvc;
 using Nop.Core;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Customers;
@@ -26,7 +25,7 @@ namespace Nop.Web.Controllers
         
         #endregion
 
-		#region Ctor
+		#region Constructors
 
         public BackInStockSubscriptionController(IProductService productService,
             IWorkContext workContext, 
@@ -50,23 +49,21 @@ namespace Nop.Web.Controllers
         #region Methods
 
         // Product details page > back in stock subscribe
-        public virtual IActionResult SubscribePopup(int productId)
+        public virtual ActionResult SubscribePopup(int productId)
         {
             var product = _productService.GetProductById(productId);
             if (product == null || product.Deleted)
                 throw new ArgumentException("No product found with the specified id");
 
-            var model = new BackInStockSubscribeModel
-            {
-                ProductId = product.Id,
-                ProductName = product.GetLocalized(x => x.Name),
-                ProductSeName = product.GetSeName(),
-                IsCurrentCustomerRegistered = _workContext.CurrentCustomer.IsRegistered(),
-                MaximumBackInStockSubscriptions = _catalogSettings.MaximumBackInStockSubscriptions,
-                CurrentNumberOfBackInStockSubscriptions = _backInStockSubscriptionService
+            var model = new BackInStockSubscribeModel();
+            model.ProductId = product.Id;
+            model.ProductName = product.GetLocalized(x => x.Name);
+            model.ProductSeName = product.GetSeName();
+            model.IsCurrentCustomerRegistered = _workContext.CurrentCustomer.IsRegistered();
+            model.MaximumBackInStockSubscriptions = _catalogSettings.MaximumBackInStockSubscriptions;
+            model.CurrentNumberOfBackInStockSubscriptions = _backInStockSubscriptionService
                 .GetAllSubscriptionsByCustomerId(_workContext.CurrentCustomer.Id, _storeContext.CurrentStore.Id, 0, 1)
-                .TotalCount
-            };
+                .TotalCount;
             if (product.ManageInventoryMethod == ManageInventoryMethod.ManageStock &&
                 product.BackorderMode == BackorderMode.NoBackorders &&
                 product.AllowBackInStockSubscriptions &&
@@ -79,9 +76,8 @@ namespace Nop.Web.Controllers
             }
             return PartialView(model);
         }
-
         [HttpPost]
-        public virtual IActionResult SubscribePopupPOST(int productId)
+        public virtual ActionResult SubscribePopupPOST(int productId)
         {
             var product = _productService.GetProductById(productId);
             if (product == null || product.Deleted)
@@ -140,18 +136,19 @@ namespace Nop.Web.Controllers
             return Content(_localizationService.GetResource("BackInStockSubscriptions.NotAllowed"));
         }
 
+
         // My account / Back in stock subscriptions
-        public virtual IActionResult CustomerSubscriptions(int? pageNumber)
+        public virtual ActionResult CustomerSubscriptions(int? page)
         {
             if (_customerSettings.HideBackInStockSubscriptionsTab)
             {
                 return RedirectToRoute("CustomerInfo");
             }
 
-            var pageIndex = 0;
-            if (pageNumber > 0)
+            int pageIndex = 0;
+            if (page > 0)
             {
-                pageIndex = pageNumber.Value - 1;
+                pageIndex = page.Value - 1;
             }
             var pageSize = 10;
 
@@ -186,23 +183,23 @@ namespace Nop.Web.Controllers
                 ShowTotalSummary = false,
                 RouteActionName = "CustomerBackInStockSubscriptionsPaged",
                 UseRouteLinks = true,
-                RouteValues = new BackInStockSubscriptionsRouteValues { pageNumber = pageIndex }
+                RouteValues = new BackInStockSubscriptionsRouteValues { page = pageIndex }
             };
 
             return View(model);
         }
-
         [HttpPost, ActionName("CustomerSubscriptions")]
-        public virtual IActionResult CustomerSubscriptionsPOST(IFormCollection formCollection)
+        public virtual ActionResult CustomerSubscriptionsPOST(FormCollection formCollection)
         {
-            foreach (var key in formCollection.Keys)
+            foreach (var key in formCollection.AllKeys)
             {
                 var value = formCollection[key];
 
                 if (value.Equals("on") && key.StartsWith("biss", StringComparison.InvariantCultureIgnoreCase))
                 {
                     var id = key.Replace("biss", "").Trim();
-                    if (int.TryParse(id, out int subscriptionId))
+                    int subscriptionId;
+                    if (Int32.TryParse(id, out subscriptionId))
                     {
                         var subscription = _backInStockSubscriptionService.GetSubscriptionById(subscriptionId);
                         if (subscription != null && subscription.CustomerId == _workContext.CurrentCustomer.Id)

@@ -2,9 +2,6 @@
 
 namespace Nop.Core.Domain.Forums
 {
-    /// <summary>
-    /// Forum settings
-    /// </summary>
     public class ForumSettings : ISettings
     {
         /// <summary>

@@ -44,7 +44,7 @@ namespace Nop.Services.Catalog
         public virtual void DeleteCategoryTemplate(CategoryTemplate categoryTemplate)
         {
             if (categoryTemplate == null)
-                throw new ArgumentNullException(nameof(categoryTemplate));
+                throw new ArgumentNullException("categoryTemplate");
 
             _categoryTemplateRepository.Delete(categoryTemplate);
 
@@ -86,7 +86,7 @@ namespace Nop.Services.Catalog
         public virtual void InsertCategoryTemplate(CategoryTemplate categoryTemplate)
         {
             if (categoryTemplate == null)
-                throw new ArgumentNullException(nameof(categoryTemplate));
+                throw new ArgumentNullException("categoryTemplate");
 
             _categoryTemplateRepository.Insert(categoryTemplate);
 
@@ -101,7 +101,7 @@ namespace Nop.Services.Catalog
         public virtual void UpdateCategoryTemplate(CategoryTemplate categoryTemplate)
         {
             if (categoryTemplate == null)
-                throw new ArgumentNullException(nameof(categoryTemplate));
+                throw new ArgumentNullException("categoryTemplate");
 
             _categoryTemplateRepository.Update(categoryTemplate);
 

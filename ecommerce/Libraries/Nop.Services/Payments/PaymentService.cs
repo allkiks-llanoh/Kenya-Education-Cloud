@@ -111,16 +111,16 @@ namespace Nop.Services.Payments
         #region Restrictions
 
         /// <summary>
-        /// Gets a list of country identifiers in which a certain payment method is now allowed
+        /// Gets a list of coutnry identifiers in which a certain payment method is now allowed
         /// </summary>
         /// <param name="paymentMethod">Payment method</param>
         /// <returns>A list of country identifiers</returns>
         public virtual IList<int> GetRestictedCountryIds(IPaymentMethod paymentMethod)
         {
             if (paymentMethod == null)
-                throw new ArgumentNullException(nameof(paymentMethod));
+                throw new ArgumentNullException("paymentMethod");
 
-            var settingKey = $"PaymentMethodRestictions.{paymentMethod.PluginDescriptor.SystemName}";
+            var settingKey = string.Format("PaymentMethodRestictions.{0}", paymentMethod.PluginDescriptor.SystemName);
             var restictedCountryIds = _settingService.GetSettingByKey<List<int>>(settingKey);
             if (restictedCountryIds == null)
                 restictedCountryIds = new List<int>();
@@ -128,17 +128,17 @@ namespace Nop.Services.Payments
         }
 
         /// <summary>
-        /// Saves a list of country identifiers in which a certain payment method is now allowed
+        /// Saves a list of coutnry identifiers in which a certain payment method is now allowed
         /// </summary>
         /// <param name="paymentMethod">Payment method</param>
         /// <param name="countryIds">A list of country identifiers</param>
         public virtual void SaveRestictedCountryIds(IPaymentMethod paymentMethod, List<int> countryIds)
         {
             if (paymentMethod == null)
-                throw new ArgumentNullException(nameof(paymentMethod));
+                throw new ArgumentNullException("paymentMethod");
 
             //we should be sure that countryIds is of type List<int> (not IList<int>)
-            var settingKey = $"PaymentMethodRestictions.{paymentMethod.PluginDescriptor.SystemName}";
+            var settingKey = string.Format("PaymentMethodRestictions.{0}", paymentMethod.PluginDescriptor.SystemName);
             _settingService.SetSetting(settingKey, countryIds);
         }
 
@@ -163,7 +163,7 @@ namespace Nop.Services.Payments
             }
 
             //We should strip out any white space or dash in the CC number entered.
-            if (!string.IsNullOrWhiteSpace(processPaymentRequest.CreditCardNumber))
+            if (!String.IsNullOrWhiteSpace(processPaymentRequest.CreditCardNumber))
             {
                 processPaymentRequest.CreditCardNumber = processPaymentRequest.CreditCardNumber.Replace(" ", "");
                 processPaymentRequest.CreditCardNumber = processPaymentRequest.CreditCardNumber.Replace("-", "");
@@ -198,7 +198,7 @@ namespace Nop.Services.Payments
         public virtual bool CanRePostProcessPayment(Order order)
         {
             if (order == null)
-                throw new ArgumentNullException(nameof(order));
+                throw new ArgumentNullException("order");
 
             if (!_paymentSettings.AllowRePostingPayments)
                 return false;
@@ -225,19 +225,19 @@ namespace Nop.Services.Payments
         /// <summary>
         /// Gets an additional handling fee of a payment method
         /// </summary>
-        /// <param name="cart">Shopping cart</param>
+        /// <param name="cart">Shoping cart</param>
         /// <param name="paymentMethodSystemName">Payment method system name</param>
         /// <returns>Additional handling fee</returns>
         public virtual decimal GetAdditionalHandlingFee(IList<ShoppingCartItem> cart, string paymentMethodSystemName)
         {
-            if (string.IsNullOrEmpty(paymentMethodSystemName))
+            if (String.IsNullOrEmpty(paymentMethodSystemName))
                 return decimal.Zero;
 
             var paymentMethod = LoadPaymentMethodBySystemName(paymentMethodSystemName);
             if (paymentMethod == null)
                 return decimal.Zero;
 
-            var result = paymentMethod.GetAdditionalHandlingFee(cart);
+            decimal result = paymentMethod.GetAdditionalHandlingFee(cart);
             if (result < decimal.Zero)
                 result = decimal.Zero;
             if (_shoppingCartSettings.RoundPricesDuringCalculation)
@@ -396,15 +396,15 @@ namespace Nop.Services.Payments
         /// <returns>Masked credit card number</returns>
         public virtual string GetMaskedCreditCardNumber(string creditCardNumber)
         {
-            if (string.IsNullOrEmpty(creditCardNumber))
+            if (String.IsNullOrEmpty(creditCardNumber))
                 return string.Empty;
 
             if (creditCardNumber.Length <= 4)
                 return creditCardNumber;
 
-            var last4 = creditCardNumber.Substring(creditCardNumber.Length - 4, 4);
-            var maskedChars = string.Empty;
-            for (var i = 0; i < creditCardNumber.Length - 4; i++)
+            string last4 = creditCardNumber.Substring(creditCardNumber.Length - 4, 4);
+            string maskedChars = string.Empty;
+            for (int i = 0; i < creditCardNumber.Length - 4; i++)
             {
                 maskedChars += "*";
             }

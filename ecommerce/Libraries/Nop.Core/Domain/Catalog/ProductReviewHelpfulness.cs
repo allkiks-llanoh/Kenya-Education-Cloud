@@ -1,3 +1,5 @@
+
+
 namespace Nop.Core.Domain.Catalog
 {
     /// <summary>

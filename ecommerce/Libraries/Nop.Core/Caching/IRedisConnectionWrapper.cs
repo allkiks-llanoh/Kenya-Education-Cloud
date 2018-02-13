@@ -5,12 +5,12 @@ using StackExchange.Redis;
 namespace Nop.Core.Caching
 {
     /// <summary>
-    /// Represents Redis connection wrapper
+    /// Redis connection wrapper interface
     /// </summary>
     public interface IRedisConnectionWrapper : IDisposable
     {
         /// <summary>
-        /// Obtain an interactive connection to a database inside Redis
+        /// Obtain an interactive connection to a database inside redis
         /// </summary>
         /// <param name="db">Database number; pass null to use the default value</param>
         /// <returns>Redis cache database</returns>
@@ -32,7 +32,7 @@ namespace Nop.Core.Caching
         /// <summary>
         /// Delete all the keys of the database
         /// </summary>
-        /// <param name="db">Database number; pass null to use the default value</param>
+        /// <param name="db">Database number; pass null to use the default value<</param>
         void FlushDatabase(int? db = null);
 
         /// <summary>

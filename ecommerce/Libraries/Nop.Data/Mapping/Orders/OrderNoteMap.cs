@@ -2,14 +2,8 @@ using Nop.Core.Domain.Orders;
 
 namespace Nop.Data.Mapping.Orders
 {
-    /// <summary>
-    /// Mapping class
-    /// </summary>
     public partial class OrderNoteMap : NopEntityTypeConfiguration<OrderNote>
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public OrderNoteMap()
         {
             this.ToTable("OrderNote");

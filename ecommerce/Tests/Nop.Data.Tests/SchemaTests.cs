@@ -12,7 +12,7 @@ namespace Nop.Data.Tests
         {
             Database.SetInitializer<NopObjectContext>(null);
             var ctx = new NopObjectContext("Test");
-            var result = ctx.CreateDatabaseScript();
+            string result = ctx.CreateDatabaseScript();
             result.ShouldNotBeNull();
         }
     }

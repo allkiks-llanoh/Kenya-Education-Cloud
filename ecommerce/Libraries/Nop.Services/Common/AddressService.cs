@@ -14,7 +14,6 @@ namespace Nop.Services.Common
     public partial class AddressService : IAddressService
     {
         #region Constants
-
         /// <summary>
         /// Key for caching
         /// </summary>
@@ -81,7 +80,7 @@ namespace Nop.Services.Common
         public virtual void DeleteAddress(Address address)
         {
             if (address == null)
-                throw new ArgumentNullException(nameof(address));
+                throw new ArgumentNullException("address");
 
             _addressRepository.Delete(address);
 
@@ -134,7 +133,7 @@ namespace Nop.Services.Common
             if (addressId == 0)
                 return null;
 
-            var key = string.Format(ADDRESSES_BY_ID_KEY, addressId);
+            string key = string.Format(ADDRESSES_BY_ID_KEY, addressId);
             return _cacheManager.Get(key, () => _addressRepository.GetById(addressId));
         }
 
@@ -145,7 +144,7 @@ namespace Nop.Services.Common
         public virtual void InsertAddress(Address address)
         {
             if (address == null)
-                throw new ArgumentNullException(nameof(address));
+                throw new ArgumentNullException("address");
             
             address.CreatedOnUtc = DateTime.UtcNow;
 
@@ -171,7 +170,7 @@ namespace Nop.Services.Common
         public virtual void UpdateAddress(Address address)
         {
             if (address == null)
-                throw new ArgumentNullException(nameof(address));
+                throw new ArgumentNullException("address");
 
             //some validation
             if (address.CountryId == 0)
@@ -196,36 +195,37 @@ namespace Nop.Services.Common
         public virtual bool IsAddressValid(Address address)
         {
             if (address == null)
-                throw new ArgumentNullException(nameof(address));
+                throw new ArgumentNullException("address");
 
-            if (string.IsNullOrWhiteSpace(address.FirstName))
+            if (String.IsNullOrWhiteSpace(address.FirstName))
                 return false;
 
-            if (string.IsNullOrWhiteSpace(address.LastName))
+            if (String.IsNullOrWhiteSpace(address.LastName))
                 return false;
 
-            if (string.IsNullOrWhiteSpace(address.Email))
+            if (String.IsNullOrWhiteSpace(address.Email))
                 return false;
 
             if (_addressSettings.CompanyEnabled &&
                 _addressSettings.CompanyRequired &&
-                string.IsNullOrWhiteSpace(address.Company))
+                String.IsNullOrWhiteSpace(address.Company))
                 return false;
 
             if (_addressSettings.StreetAddressEnabled &&
                 _addressSettings.StreetAddressRequired &&
-                string.IsNullOrWhiteSpace(address.Address1))
+                String.IsNullOrWhiteSpace(address.Address1))
                 return false;
 
             if (_addressSettings.StreetAddress2Enabled &&
                 _addressSettings.StreetAddress2Required &&
-                string.IsNullOrWhiteSpace(address.Address2))
+                String.IsNullOrWhiteSpace(address.Address2))
                 return false;
 
             if (_addressSettings.ZipPostalCodeEnabled &&
                 _addressSettings.ZipPostalCodeRequired &&
-                string.IsNullOrWhiteSpace(address.ZipPostalCode))
+                String.IsNullOrWhiteSpace(address.ZipPostalCode))
                 return false;
+
 
             if (_addressSettings.CountryEnabled)
             {
@@ -253,17 +253,17 @@ namespace Nop.Services.Common
 
             if (_addressSettings.CityEnabled &&
                 _addressSettings.CityRequired &&
-                string.IsNullOrWhiteSpace(address.City))
+                String.IsNullOrWhiteSpace(address.City))
                 return false;
 
             if (_addressSettings.PhoneEnabled &&
                 _addressSettings.PhoneRequired &&
-                string.IsNullOrWhiteSpace(address.PhoneNumber))
+                String.IsNullOrWhiteSpace(address.PhoneNumber))
                 return false;
 
             if (_addressSettings.FaxEnabled &&
                 _addressSettings.FaxRequired &&
-                string.IsNullOrWhiteSpace(address.FaxNumber))
+                String.IsNullOrWhiteSpace(address.FaxNumber))
                 return false;
 
             var attributes = _addressAttributeService.GetAllAddressAttributes();
