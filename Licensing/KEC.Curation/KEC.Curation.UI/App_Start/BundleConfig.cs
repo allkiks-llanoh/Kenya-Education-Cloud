@@ -462,6 +462,12 @@ namespace Inspinia_MVC5_SeedProject
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(
                       "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+            // Chief curator js
+            bundles.Add(new ScriptBundle("~/js/chiefCurator").Include(
+                     "~/js/chiefCurator.js"));
+            // Chief curator js
+            bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
+                     "~/js/globalConstants.js"));
 
         }
     }
