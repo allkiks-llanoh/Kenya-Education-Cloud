@@ -1,0 +1,170 @@
+﻿
+@{
+    ViewBag.Title = "Legal";
+    Layout = "~/Views/Shared/_LayoutStages.cshtml";
+}
+@{
+    var Title = Request.Params["Title"];
+    var Stage = Request.Params["Stage"];
+    var Publication = Request.Params["Publication"];
+    var KICDNumber = Request.Params["Publication"];
+
+}
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center m-t-lg">
+                <h1>
+                    @ViewData["SubTitle"]
+                </h1>
+                <small>@ViewData["Message"]</small>
+                <br>
+                <br>
+                <div class="alert alert-success hidden">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <p id="message"></p>
+                </div>
+                <div class="alert alert-danger hidden">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <p id="error"></p>
+                </div>
+                <!--Uploding code starts here-->
+                <div class="form-group">
+                    <div class="panel panel-info text-justify">
+                        <div class="panel-heading">PUBLICATION INFORMATION</div>
+                        <div class="panel-body">
+
+                            <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
+                            <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
+                            <span><strong>Publication:&nbsp;</strong></span>@Publication
+
+                        </div>
+
+
+                        <a class="button btn btn-w-m btn-primary pull-right" href="/Stages/Legal">BACK TO PUBLICATIONS</a>
+
+                    </div>
+                    <!--Uploding code ends here-->
+                    <div class="form-group" style="text-align:left;">
+                        <label for="comment">Comment:</label>
+                        <textarea class="form-control" rows="5" id="notes" data-notess></textarea>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="form-group col-md-10">
+                            <button type="button" name="LegalReject" id="LegalReject" class="btn btn-w-m btn-danger pull-right">REJECT</button>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <button type="button" name="LegalApprove" id="LegalApprove" class="btn btn-w-m btn-primary">APPROVE</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('#LegalApprove').click(function()
+          {
+                $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+
+                var kicdnumber = $('#kicd').attr('data-kicdNumber');
+                var notes = $('#notes').val();
+                var action = "PublicationMoveToNextStage";
+                var stages = "LegalVerification";
+                var guid = "123e4567-e89b-12d3-a456-426655440000";
+                console.log(`${kicdnumber}`);
+                console.log(` ${notes} `);
+            $.ajax({
+              headers : {
+                  'Accept' : 'application/json',
+                  'Content-Type' : 'application/json'
+              } ,
+              url: 'http://curationapi-d.kec.ac.ke/api/Publications/process',
+          type: "PATCH",
+          data: JSON.stringify({KICDNumber:kicdnumber,Notes:notes,ActionTaken:action,Stage:stages,UserGuid:guid}),
+          
+          success: function (response, status, jxhr) {
+             console.log(response);
+             console.log(status);
+             $('#message').html(` ${response}.`)
+             $('div.alert-success').toggleClass('hidden');
+             $('#LegalApprove').html('APPROVE');
+
+             },
+          error: function (request, status, error) {
+             
+             console.log(request);
+             console.log(status);
+
+             console.log(request.responseText);
+             $('#error').html(responseText)
+             $('div.alert-danger').toggleClass('hidden');
+             $('#LegalApprove').html('APPROVE');
+           
+
+             }
+          });
+
+
+          });
+        },
+
+        );
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#LegalReject').click(function () {
+            $('#LegalReject').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+
+            var kicdnumber = $('#kicd').attr('data-kicdNumber');
+            var notes = $('#notes').val();
+            var action = "PublicationRejected";
+            var stages = "LegalVerification";
+            var guid = "123e4567-e89b-12d3-a456-426655440000";
+            console.log(`${kicdnumber}`);
+            console.log(` ${notes} `);
+            $.ajax({
+                headers :  {
+                    'Accept' :  'application/json',
+                    'Content-Type' :  'application/json'
+                },
+                url: 'http://curationapi-d.kec.ac.ke/api/Publications/reject',
+                type: "PATCH",
+                data: JSON.stringify({ KICDNumber: kicdnumber, Notes: notes, ActionTaken: action, Stage: stages, UserGuid: guid }),
+
+                success: function (response, status, jxhr) {
+                    console.log(response);
+                    console.log(status);
+                    $('#message').html(` ${response}.`)
+                    $('div.alert-success').toggleClass('hidden');
+                    $('#LegalReject').html('REJECT');
+
+                },
+                error: function (response, request, status, jxhr) {
+
+                    console.log(request);
+                    console.log(status);
+
+                    console.log(request.responseText);
+                    $('#error').html(`${request.responseText}`)
+                    $('div.alert-danger').toggleClass('hidden');
+                    $('#LegalReject').html('REJECT');
+
+
+                }
+            });
+
+
+        });
+    },
+
+    );
+</script>

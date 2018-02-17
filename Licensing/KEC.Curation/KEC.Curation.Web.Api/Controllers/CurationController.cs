@@ -19,6 +19,17 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             _uow = uow;
         }
+        [HttpGet("Principal")]
+        public IActionResult Principal()
+        {
+
+            var assignments = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals(PublicationStage.PrincipalCurator));
+            var assignmentList = assignments.Any() ?
+                assignments.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+            return Ok(assignmentList);
+
+            
+        }
         [HttpGet("{subjectId:int}/unassigned")]
         public IActionResult UnAssigned(int subjectId)
         {
@@ -31,12 +42,13 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: publicationList);
         }
         [HttpGet("{subjectId:int}/assigned")]
-        public IActionResult Assigned(int subjectId)
+        public IActionResult Assigned(int subjectId, string guid)
         {
+           
             var publications = _uow.PublicationRepository.Find(p => p.FullyAssigned
                                                          && p.PublicationStageLogs
                                                          .Max(l => l.Stage) == PublicationStage.Curation
-                                                         && p.SubjectId.Equals(subjectId));
+                                                         &&  p.SubjectId.Equals(subjectId));
             var publicationList = publications.Any() ?
                 publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
             return Ok(value: publicationList);
@@ -59,6 +71,7 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             try
             {
+                
                 publication.FullyAssigned = model.FullyAssigned;
                 var section = new PublicationSection
                 {
@@ -66,6 +79,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     Owner = model.AssignedBy,
                     SectionDescription = model.Section==null? "Whole content": model.Section,
                     CreatedAtUtc = DateTime.UtcNow
+                    
                 };
                 _uow.PublicationSectionRepository.Add(section);
                 var assignment = new CuratorAssignment
@@ -74,7 +88,9 @@ namespace KEC.Curation.Web.Api.Controllers
                     CreatedUtc = DateTime.UtcNow,
                     Assignee = model.Assignee,
                     AssignedBy = model.AssignedBy
+                    
                 };
+                
                 _uow.CuratorAssignmentRepository.Add(assignment);
                 _uow.Complete();
                 return Ok(value: "Content assigned successfully");

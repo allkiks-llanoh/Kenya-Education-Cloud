@@ -20,6 +20,13 @@ namespace KEC.Curation.Web.Api.Serializers
 
         }
 
+        public string Url
+        {
+            get
+            {
+                return _publication.Url;
+            }
+        }
         public string Title
         {
             get
@@ -70,6 +77,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.LevelId;
             }
         }
-
+       
+        
     }
 }

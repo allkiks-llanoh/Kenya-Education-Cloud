@@ -23,6 +23,7 @@ namespace KEC.Curation.Data.Models
         public string MimeType { get; set; }
         public int SubjectId { get; set; }
         public int LevelId { get; set; }
+        public int? ChiefCuratorAssignmentId { get; set; }
         public DateTime CreatedTimeUtc { get; set; }
         public DateTime ModifiedTimeUtc { get; set; }
         public string CertificateNumber { get; set; }
@@ -31,6 +32,7 @@ namespace KEC.Curation.Data.Models
         public string Owner { get; set; }
         public virtual Subject Subject { get; set; }
         public virtual Level Level { get; set; }
+        public virtual ChiefCuratorAssignment ChiefCuratorAssignment { get; set; }
         public virtual ICollection<PublicationStageLog> PublicationStageLogs { get; set; }
     }
 }

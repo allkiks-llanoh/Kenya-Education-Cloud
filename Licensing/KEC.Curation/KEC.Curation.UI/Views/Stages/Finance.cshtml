@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Legal";
+    Layout = "~/Views/Shared/_LayoutStages.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center m-t-lg">
+                <h1>
+                    @ViewData["SubTitle"]
+                </h1>
+                <small>@ViewData["Message"]</small>
+                <br>
+                <br>
+                <div class="ibox-content" style="text-align:left;">
+
+                    <table id="LegalList" class="footable table table-stripped" data-page-size="20" data-filter=#filter>
+                        <tr class="footable-sortable">
+                            <th class="hidden"> ID</th>
+                            <th> TITLE </th>
+                            <th> PUBLICATION</th>
+                            <th class="pull-right"> ACTIONS</th>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <ul class="pagination pull-right"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script type="text/JavaScript">
+    function tableRows(data) {
+        var tableRows= [];
+        for (var i = 0; i < data.length; i++) {
+            tableRows.push(drawRow(data[i]));
+        }
+        return tableRows;
+        };
+        var d = new Date();
+        var n = d.getFullYear();
+    //Start by getting voucher list based on batch Id
+        $.ajax({
+            url:  `http://curationapi-d.kec.ac.ke/api/Publications/1/PaymentVerification`,
+            type: "GET",
+            dataType: "json",
+            success: function(data,status,jqhxr){
+                console.log(data);
+
+                //This code snipet prepares to append Json Data
+                $('#LegalList').append(tableRows(data));
+            }
+        });
+          
+//This functionpopulates the tbody inner HTML with json data on call
+    function drawRow(rowData) {
+        var row = $("<tr />")
+        row.append($(`<td  class="hidden"> + rowData.id + </td>`));
+        row.append($("<td>" + rowData.title  + "</td>"));
+        row.append($("<td>" + rowData.url + "</td>"));
+        row.append($(`<td class="pull-right"> <a href="/Stages/FinanceVerify/?Title=${rowData.title}&Publication=${rowData.kicdNumber}&Stage=PaymentVerification" class="btn btn-w-m btn-info" role="button">Review</a>`));
+
+      
+        return row[0];
+       }
+
+
+</script>

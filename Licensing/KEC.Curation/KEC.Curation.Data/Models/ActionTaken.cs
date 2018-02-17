@@ -11,8 +11,12 @@ namespace KEC.Curation.Data.Models
         PublicationSubmitted=0,
         [Description("Publication rejected")]
         PublicationRejected=1,
+        [Description("Publication approved")]
+        PublicationApproved = 2,
         [Description("Publication passed to the next stage")]
-        PublicationMoveToNextStage=3
+        PublicationMoveToNextStage=3,
+        [Description("Publication conditional approval")]
+        PublicationConditionalApproval = 4,
 
     }
 }

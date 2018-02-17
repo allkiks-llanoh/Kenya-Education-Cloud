@@ -31,6 +31,8 @@ namespace KEC.Curation.Data.UnitOfWork
 
         public PublicationStageLogRepository PublicationStageLogRepository => new PublicationStageLogRepository(_context);
 
+        public ChiefCuratorAssignmentRepository ChiefCuratorAssignmentRepository => new ChiefCuratorAssignmentRepository(_context);
+
         public int Complete()
         {
             return _context.SaveChanges();

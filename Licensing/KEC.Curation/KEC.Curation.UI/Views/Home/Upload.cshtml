@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center;">KENYA EDUCATION CLOUD</h2>
+<body>
+    <form method="post" action="http://localhost:60823/api/schools" style="text-align:center;">
+        <fieldset>
+            <legend>UPLOAD CSV TO REGISTER SCHOOLS </legend>
+
+            <input type="text" name="Name" id="Name" />
+
+            <input type="submit" class="btn btn-info" name="Submit" id="Submit" value="Creat Level" />
+        
+        </fieldset>
+    </form>
+</body>
+

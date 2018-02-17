@@ -1,0 +1,32 @@
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\Database.json
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Web.Api.deps.json
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Web.Api.runtimeconfig.json
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Web.Api.runtimeconfig.dev.json
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Web.Api.dll
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Web.Api.pdb
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Data.dll
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Services.dll
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Data.pdb
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Services.pdb
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.csprojResolveAssemblyReference.cache
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.csproj.CoreCompileInputs.cache
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.AssemblyInfoInputs.cache
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.AssemblyInfo.cs
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.dll
+C:\Users\MiyabiLLC\Desktop\curation backup\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.pdb
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\Database.json
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Web.Api.deps.json
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Web.Api.runtimeconfig.json
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Web.Api.runtimeconfig.dev.json
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Web.Api.dll
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Web.Api.pdb
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Data.dll
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Services.dll
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Data.pdb
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\bin\Debug\netcoreapp2.0\KEC.Curation.Services.pdb
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.csprojResolveAssemblyReference.cache
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.csproj.CoreCompileInputs.cache
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.AssemblyInfoInputs.cache
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.AssemblyInfo.cs
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.dll
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.pdb

@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Approved";
+    Layout = "~/Views/Shared/_LayoutPublisher.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center m-t-lg">
+                <h1>
+                    @ViewData["SubTitle"]
+                </h1>
+                <small>@ViewData["Message"]</small>
+                <br>
+                <br>
+                <div class="ibox-content" style="text-align:left;">
+                    <table id="LegalList" class="footable table table-stripped" data-page-size="20" data-filter=#filter>
+                        <tr class="footable-sortable">
+
+                            <th> TITLE </th>
+                            <th> VIEW</th>
+                            <th> COMMENTS</th>
+                        </tr>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <ul class="pagination pull-right"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script type="text/JavaScript">
+    function tableRows(data) {
+        var tableRows= [];
+        for (var i = 0; i < data.length; i++) {
+            tableRows.push(drawRow(data[i]));
+        }
+        return tableRows;
+        };
+        var d = new Date();
+        var n = d.getFullYear();
+    //Start by getting voucher list based on batch Id
+        $.ajax({
+            url:  `http://localhost:62210/api/Publishers/approved`,
+            type: "GET",
+            dataType: "json",
+            success: function(data,status,jqhxr){
+                console.log(data);
+
+                //This code snipet prepares to append Json Data
+                $('#LegalList').append(tableRows(data));
+            }
+        });
+          
+//This functionpopulates the tbody inner HTML with json data on call
+    function drawRow(rowData) {
+        var row = $("<tr />")
+        row.append($("<td>" + rowData.title + "</td>"));
+        row.append($("<td>" + rowData.url  + "</td>"));
+        row.append($("<td>" + rowData.notes + "</td>"));
+       
+        return row[0];
+       }
+
+
+</script>

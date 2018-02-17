@@ -1,0 +1,255 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_LayoutPublisher.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center m-t-lg">
+                <h1>
+                    @ViewData["SubTitle"]
+                </h1>
+                <small>@ViewData["Message"]</small>
+                <br>
+                <br>
+                <div class="alert alert-success hidden">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <p id="message"></p>
+                </div>
+                <div class="form-group" align="center" id="spinner">
+                    <div class="loader"></div>
+
+                </div>
+                <form method="post" enctype="multipart/form-data" id="uploadform">
+                    <div class="row align-left">
+                        <div class="col-sm-2">
+                            <label for="Title">Title</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" name="Title" id="Title" class="form-control" placeholder="Enter Title" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="Title">ISBN Number</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" name="ISBNNumber" id="ISBNNumber" class="form-control" placeholder="Enter ISBN Number">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="Title">Publisher Name</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" name="PublisherName" id="PublisherName" class="form-control" placeholder="Enter Publishers Name">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="Title">Author Name</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" name="AuthorName" id="AuthorName" class="form-control" placeholder=" Enter Author's' Name" >
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="Title">Price</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" name="Price" id="Price" class="form-control" placeholder="Give Publication Price" >
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="Title">Completion Date</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="date" name="CompletionDate" id="CompletionDate" class="form-control" placeholder="elect Completion Date" >
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="Title">Description</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" name="Description" id="Description" class="form-control" placeholder="Give Brief Description (200 words)" >
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="Title">Category</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <select name="Category" id="Category" class="form-control"></select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="Title">Level</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <select name="LevelId" id="LevelId" class="form-control"></select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="Title">Subject</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <select name="SubjectId" id="SubjectId" class="form-control"></select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="Title">Description</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" name="UserGuid" id="UserGuid" class="form-control" placeholder="User Guid">
+                        </div>
+                    </div>
+                    <br>
+                  
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="Title">Publication File</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="file" name="PublicationFile" id="PublicationFile" class="form-control">
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <button type="submit" id="btn-postFile" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>
+                    </div>
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+
+<script type="text/JavaScript">
+    //get a reference to the select element
+    $subjectId = $('#SubjectId');
+    //request the JSON data and parse into the select element
+    $.ajax({
+        type: 'GET',
+        url: "http://curationapi-d.kec.ac.ke/api/Subjects",
+        dataType: 'JSON',
+        success: function (data) {
+            //clear the current content of the select
+            $subjectId.html('');
+            //iterate over the data and append a select option
+            $.each(data, function (index, val) {
+                $subjectId.append(`<option id=${val.id}  value='${val.id}'+ >${val.name}</option>`);
+            })
+        },
+        error: function () {
+            //if there is an error append a 'none available' option
+            $subjectId.html('<option id="-1">none available</option>');
+        }
+    });
+
+</script>
+
+
+<script type="text/JavaScript">
+    //get a reference to the select element
+    $levelId = $('#LevelId');
+    //request the JSON data and parse into the select element
+    $.ajax({
+        type: 'GET',
+        url: "http://curationapi-d.kec.ac.ke/api/Levels",
+        dataType: 'JSON',
+        success: function (data) {
+            //clear the current content of the select
+            $levelId.html('');
+            //iterate over the data and append a select option
+            $.each(data, function (index, val) {
+                $levelId.append(`<option id=${val.id}  value='${val.id}'+ >${val.name}</option>`);
+            })
+        },
+        error: function () {
+            //if there is an error append a 'none available' option
+            $levelId.html('<option id="-1">none available</option>');
+        }
+    });
+
+</script>
+
+<script type="text/JavaScript">
+    //get a reference to the select element
+    $category = $('#Category');
+    //request the JSON data and parse into the select element
+    $.ajax({
+        type: 'GET',
+        url: 'http://curationapi-d.kec.ac.ke/api/SubjectTypes',
+        dataType: 'JSON',
+        success: function (data) {
+            //clear the current content of the select
+            $category.html('');
+            //iterate over the data and append a select option
+            $.each(data, function (index, val) {
+                $category.append(`<option id=${val.id}  value='${val.id}'+ >${val.name}</option>`);
+            })
+        },
+        error: function () {
+            //if there is an error append a 'none available' option
+            $category.html('<option id="-1">none available</option>');
+        }
+    });
+
+</script>
+
+<script type="text/JavaScript">
+
+    $('#btn-postFile').click(function (e) {
+        e.preventDefault();
+        var form_data = new FormData($('#uploadform')[0]);
+        $.ajax({
+            type: 'POST',
+            url: 'http://curationapi-d.kec.ac.ke/api/Publishers/submit',
+            processData: false,
+            contentType: false,
+            async: true,
+            cache: false,
+            data: form_data,  
+            beforeSend: function ()  {
+                        $('#spinner').show();
+            },
+            success: function (response, status, jxhr) {
+                console.log(response);
+                $('#message').html(response);
+                $('div.alert-success').toggleClass('hidden');
+            },
+
+            complete: function (xhr,  status)  {
+                        $('#spinner').hide();
+                $('#postedFile').val('');
+                }
+        });
+    });
+
+    $(document).ready(function () {
+
+                $('#spinner').hide();
+
+    });
+</script>

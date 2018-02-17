@@ -4,6 +4,7 @@ using System.Linq;
 using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
 using KEC.Curation.Web.Api.Serializers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KEC.Curation.Web.Api.Controllers
@@ -19,6 +20,7 @@ namespace KEC.Curation.Web.Api.Controllers
             _uow = uow;
         }
         // GET: api/SubjectTypes
+     
         [HttpGet]
         public IActionResult AllSubjectTypes()
         {
@@ -39,8 +41,9 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             return Ok(value: new SubjectTypeDownloadSerializer(subjectType));
         }
-        
+
         // POST: api/SubjectTypes
+        [Authorize]
         [HttpPost]
         public IActionResult CreateSubjectType([FromBody] SubjectTypeUploadSerializer model)
         {

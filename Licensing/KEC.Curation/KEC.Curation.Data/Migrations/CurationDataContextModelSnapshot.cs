@@ -21,6 +21,24 @@ namespace KEC.Curation.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("KEC.Curation.Data.Models.ChiefCuratorAssignment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("AssignmetDateUtc");
+
+                    b.Property<string>("ChiefCuratorGuid");
+
+                    b.Property<string>("PrincipalCuratorGuid");
+
+                    b.Property<int?>("PublicationId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChiefCuratorAssignments");
+                });
+
             modelBuilder.Entity("KEC.Curation.Data.Models.CuratorAssignment", b =>
                 {
                     b.Property<int>("Id")
@@ -69,6 +87,8 @@ namespace KEC.Curation.Data.Migrations
 
                     b.Property<string>("CertificateUrl");
 
+                    b.Property<int?>("ChiefCuratorAssignmentId");
+
                     b.Property<DateTime>("CompletionDate");
 
                     b.Property<DateTime>("CreatedTimeUtc");
@@ -100,6 +120,10 @@ namespace KEC.Curation.Data.Migrations
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ChiefCuratorAssignmentId")
+                        .IsUnique()
+                        .HasFilter("[ChiefCuratorAssignmentId] IS NOT NULL");
 
                     b.HasIndex("LevelId");
 
@@ -198,6 +222,10 @@ namespace KEC.Curation.Data.Migrations
 
             modelBuilder.Entity("KEC.Curation.Data.Models.Publication", b =>
                 {
+                    b.HasOne("KEC.Curation.Data.Models.ChiefCuratorAssignment", "ChiefCuratorAssignment")
+                        .WithOne("Publication")
+                        .HasForeignKey("KEC.Curation.Data.Models.Publication", "ChiefCuratorAssignmentId");
+
                     b.HasOne("KEC.Curation.Data.Models.Level", "Level")
                         .WithMany("Publications")
                         .HasForeignKey("LevelId")
