@@ -15,3 +15,12 @@ F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC
 F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.AssemblyInfo.cs
 F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.dll
 F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.pdb
+C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\bin\Debug\netcoreapp2.0\KEC.Curation.Services.deps.json
+C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\bin\Debug\netcoreapp2.0\KEC.Curation.Services.dll
+C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\bin\Debug\netcoreapp2.0\KEC.Curation.Services.pdb
+C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.csprojResolveAssemblyReference.cache
+C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.csproj.CoreCompileInputs.cache
+C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.AssemblyInfoInputs.cache
+C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.AssemblyInfo.cs
+C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.dll
+C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.pdb
