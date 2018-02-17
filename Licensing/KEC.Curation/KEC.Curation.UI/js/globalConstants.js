@@ -1,0 +1,1 @@
+﻿var apiBaseUrl = "http://curationapi-d.kec.ac.ke/api";

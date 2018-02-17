@@ -336,6 +336,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="js\chiefCurator.js" />
+    <Content Include="js\globalConstants.js" />
     <Content Include="js\jquery-3.1.1.min.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -449,11 +451,11 @@
     <Content Include="Views\Publisher\Approved.cshtml" />
     <Content Include="Views\Publisher\Rejected.cshtml" />
     <Content Include="Views\Publisher\Conditional.cshtml" />
+    <Content Include="Views\ChiefCurator\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\ChiefCurator\" />
     <Folder Include="Views\Curation\" />
     <Folder Include="Views\Upload\" />
   </ItemGroup>
