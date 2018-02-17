@@ -44,8 +44,8 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
 
-                var filePath = $"{_env.ContentRootPath}\\Publications\\{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
-                
+                var filePath = new System.Uri( $"{_env.ContentRootPath}\\Publications\\{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}");
+                var converted = filePath.AbsolutePath;
                 var publication = new Publication
                 {
                     AuthorName = model.AuthorName,
@@ -58,7 +58,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     Price = model.Price.GetValueOrDefault(),
                     Title = model.Title,
                     MimeType = model.PublicationFile.ContentType,
-                    Url = filePath,
+                    Url = converted,
                     KICDNumber = _uow.PublicationRepository
                                       .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
                     CreatedTimeUtc = DateTime.UtcNow,
@@ -79,7 +79,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 using (var memoryStream = new MemoryStream())
                 {
                     await model.PublicationFile.CopyToAsync(memoryStream);
-                    var fileStream = new FileStream(filePath, FileMode.CreateNew, FileAccess.ReadWrite);
+                    var fileStream = new FileStream(converted, FileMode.CreateNew, FileAccess.ReadWrite);
                     memoryStream.WriteTo(fileStream);
                 }
                 return Ok(value: "Publication submitted successfully");
@@ -141,6 +141,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 return BadRequest(modelState: ModelState);
             }
             var publication = _uow.PublicationRepository.Find(p => p.KICDNumber.Equals(model.KICDNumber)).FirstOrDefault();
+
             if (publication == null)
             {
                 return NotFound(value: $"Publication {model.KICDNumber} could not be located");
