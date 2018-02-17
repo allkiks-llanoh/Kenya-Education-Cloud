@@ -10,45 +10,37 @@ using Microsoft.AspNetCore.Mvc;
 namespace KEC.Curation.Web.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Curation")]
-    public class CurationController : Controller
+    [Route(template: "api/chiefcurator")]
+    public class ChiefCuratorController : Controller
     {
         private IUnitOfWork _uow;
 
-        public CurationController(IUnitOfWork uow)
+        public ChiefCuratorController(IUnitOfWork uow)
         {
             _uow = uow;
         }
-        [HttpGet("Principal")]
-        public IActionResult Principal()
-        {
-
-            var assignments = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals(PublicationStage.PrincipalCurator));
-            var assignmentList = assignments.Any() ?
-                assignments.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
-            return Ok(assignmentList);
-
-            
-        }
+        
         [HttpGet("{subjectId:int}/unassigned")]
-        public IActionResult UnAssigned(int subjectId)
+        public IActionResult UnAssigned(int subjectId,string chiefCuratorGuid)
         {
             var publications = _uow.PublicationRepository.Find(p => !p.FullyAssigned
                                                          && p.PublicationStageLogs
                                                          .Max(l => l.Stage) == PublicationStage.Curation
-                                                         && p.SubjectId.Equals(subjectId));
+                                                         && p.SubjectId.Equals(subjectId)
+                                                         && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid));
             var publicationList = publications.Any() ?
                 publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
             return Ok(value: publicationList);
         }
         [HttpGet("{subjectId:int}/assigned")]
-        public IActionResult Assigned(int subjectId, string guid)
+        public IActionResult Assigned(int subjectId, string guid,string chiefCuratorGuid)
         {
            
             var publications = _uow.PublicationRepository.Find(p => p.FullyAssigned
                                                          && p.PublicationStageLogs
                                                          .Max(l => l.Stage) == PublicationStage.Curation
-                                                         &&  p.SubjectId.Equals(subjectId));
+                                                         &&  p.SubjectId.Equals(subjectId)
+                                                          && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid));
             var publicationList = publications.Any() ?
                 publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
             return Ok(value: publicationList);
@@ -60,7 +52,10 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(modelState: ModelState);
             }
-            var publication = _uow.PublicationRepository.Get(publicationId);
+            var publication = _uow.PublicationRepository
+                                  .Find(p=> p.Id.Equals(publicationId) 
+                                  && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(model.AssignedBy))
+                                  .FirstOrDefault();
             if (publication == null)
             {
                 return NotFound("Publication could not be retrieved for assignment.");
@@ -102,20 +97,21 @@ namespace KEC.Curation.Web.Api.Controllers
             }
         }
         [HttpGet("{publicationId:int}/assignments")]
-        public IActionResult Assignments(int publicationId)
+        public IActionResult Assignments(int publicationId, string chiefCuratorGuid)
         {
-            var assignments = _uow.CuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId));
+            var assignments = _uow.CuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId)
+            && p.PublicationSection.Publication.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid));
             var assignmentList = assignments.Any() ?
                 assignments.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
             return Ok(assignmentList);
         }
-        [HttpGet("tocurate")]
+        [HttpGet("~api/curator/tocurate")]
         public IActionResult ToCurate(string userGuid)
         {
             var assignmentList = CurationAssignments(userGuid, _uow);
             return Ok(value: assignmentList);
         }
-        [HttpPatch("curate/{AssignmentId:int}")]
+        [HttpPatch("~api/curator/curate/{AssignmentId:int}")]
         public IActionResult SubmitCuration(string userGuid, int AssignmentId, [FromBody]CurationUploadSerializer model)
         {
             var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted
@@ -139,7 +135,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpGet("curate/{Id:int}")]
+        [HttpGet("~api/curator/curate/{Id:int}")]
         public IActionResult GetCuration(string userGuid, int Id)
         {
             var assigment = _uow.CuratorAssignmentRepository.Find(p => p.Id.Equals(Id) && !p.Submitted
