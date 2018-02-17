@@ -468,7 +468,12 @@ namespace Inspinia_MVC5_SeedProject
             // Chief curator js
             bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
                      "~/js/globalConstants.js"));
-
+            // datatables.min.js
+            bundles.Add(new ScriptBundle("~/plugins/datatables").Include(
+                    "~/scripts/plugins/datatables.min.js"));
+            // typeahead.min.js
+            bundles.Add(new ScriptBundle("~/plugins/bootstrap3-typeahead").Include(
+                    "~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"));
         }
     }
 }

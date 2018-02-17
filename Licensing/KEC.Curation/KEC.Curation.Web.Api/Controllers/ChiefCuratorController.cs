@@ -19,7 +19,18 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             _uow = uow;
         }
-        
+        [HttpGet("subjects")]
+        public IActionResult Subjects(string chiefCuratorGuid)
+        {
+            var subjectIds = _uow.PublicationRepository.Find(p => !p.FullyAssigned
+                                                        && p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.Curation
+                                                        && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid)).Select(p=> p.SubjectId);
+            var subjects = _uow.SubjectRepository.Find(p => subjectIds.Contains(p.Id));
+            var subjectList = subjects.Any() ?
+               subjects.Select(p => new SubjectDownloadSerializer(p, _uow)) : new List<SubjectDownloadSerializer>();
+            return Ok(value: subjectList);
+        }
         [HttpGet("{subjectId:int}/unassigned")]
         public IActionResult UnAssigned(int subjectId,string chiefCuratorGuid)
         {
