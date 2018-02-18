@@ -473,7 +473,7 @@ namespace Inspinia_MVC5_SeedProject
                     "~/scripts/plugins/datatables.min.js"));
             // typeahead.min.js
             bundles.Add(new ScriptBundle("~/plugins/bootstrap3-typeahead").Include(
-                    "~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"));
+                    "~/scripts/plugins/bootstrap3-typeahead.min.js"));
         }
     }
 }

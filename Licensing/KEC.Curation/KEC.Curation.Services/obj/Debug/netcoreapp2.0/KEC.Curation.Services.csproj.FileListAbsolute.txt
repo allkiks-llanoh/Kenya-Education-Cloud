@@ -24,3 +24,4 @@ C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC
 C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.AssemblyInfo.cs
 C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.dll
 C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.pdb
+F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.csprojResolveAssemblyReference.cache

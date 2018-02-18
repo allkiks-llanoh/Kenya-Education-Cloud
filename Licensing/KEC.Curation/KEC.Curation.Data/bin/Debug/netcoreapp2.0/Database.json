@@ -1,5 +1,5 @@
 ﻿{
   "ConnectionStrings": {
-    "CurationDatabase": "Data Source=DESKTOP-C9UC49M\\SQLEXPRESS;Initial Catalog=Curation;Integrated Security=True;"
+    "CurationDatabase": "Data Source=localhost;Initial Catalog=Curation;Integrated Security=True;"
   }
 }

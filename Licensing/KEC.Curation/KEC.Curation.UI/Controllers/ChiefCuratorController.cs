@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Inspinia_MVC5_SeedProject.Controllers
 {
+    [RoutePrefix("chiefcurator")]
     public class ChiefCuratorController : Controller
     {
         // GET: ChiefCurator
@@ -13,5 +14,6 @@ namespace Inspinia_MVC5_SeedProject.Controllers
         {
             return View();
         }
+       
     }
 }
