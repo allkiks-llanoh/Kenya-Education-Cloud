@@ -10,5 +10,9 @@ function ShowAlert(message, type) {
     } else if (type === "success") {
         $(".alert-success").removeClass('hidden');
         $("p#success-message").text(message);
+
+    } else if (type === "info") {
+        $(".alert-info").removeClass('hidden');
+        $("p#info-message").text(message);
     }
 }

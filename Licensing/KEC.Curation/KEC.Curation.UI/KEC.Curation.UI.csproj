@@ -336,7 +336,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="js\chiefCurator.js" />
+    <Content Include="js\chiefCuratorAssignPublication.js" />
+    <Content Include="js\chiefCuratorPublications.js" />
+    <Content Include="js\chiefCuratorViewPublication.js" />
     <Content Include="js\globalConstants.js" />
     <Content Include="js\jquery-3.1.1.min.js" />
     <Content Include="Scripts\app\inspinia.js" />
@@ -453,7 +455,9 @@
     <Content Include="Views\Publisher\Approved.cshtml" />
     <Content Include="Views\Publisher\Rejected.cshtml" />
     <Content Include="Views\Publisher\Conditional.cshtml" />
-    <Content Include="Views\ChiefCurator\Index.cshtml" />
+    <Content Include="Views\ChiefCurator\Publications.cshtml" />
+    <Content Include="Views\ChiefCurator\ViewPublication.cshtml" />
+    <Content Include="Views\ChiefCurator\AssignPublication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

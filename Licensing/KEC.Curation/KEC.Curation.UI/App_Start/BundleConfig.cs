@@ -191,12 +191,7 @@ namespace Inspinia_MVC5_SeedProject
             bundles.Add(new ScriptBundle("~/plugins/dropZone").Include(
                       "~/Scripts/plugins/dropzone/dropzone.js"));
 
-            // summernote styles
-            bundles.Add(new StyleBundle("~/plugins/summernoteStyles").Include(
-                      "~/Content/plugins/summernote/summernote.css",
-                      "~/Content/plugins/summernote/summernote-bs3.css"));
-
-            // summernote 
+           
             bundles.Add(new ScriptBundle("~/plugins/summernote").Include(
                       "~/Scripts/plugins/summernote/summernote.min.js"));
 
@@ -457,14 +452,21 @@ namespace Inspinia_MVC5_SeedProject
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/animate.css",
+                       "~/Content/plugins/summernote/summernote.css",
+                      "~/Content/plugins/summernote/summernote-bs3.css",
                       "~/Content/style.css"));
 
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(
-                      "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+                   "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+          
             // Chief curator js
-            bundles.Add(new ScriptBundle("~/js/chiefCurator").Include(
-                     "~/js/chiefCurator.js"));
+            bundles.Add(new ScriptBundle("~/js/chiefCuratorPublications").Include(
+                     "~/js/chiefCuratorPublications.js"));
+            bundles.Add(new ScriptBundle("~/js/chiefCuratorViewPublication").Include(
+                     "~/js/chiefCuratorViewPublication.js"));
+            bundles.Add(new ScriptBundle("~/js/chiefCuratorAssignPublication").Include(
+                     "~/js/chiefCuratorAssignPublication.js"));
             // Chief curator js
             bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
                      "~/js/globalConstants.js"));
