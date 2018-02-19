@@ -7,7 +7,8 @@ $(document).ready(function () {
         var name = $('#Name').val();
 
         $.ajax({
-            headers :  {
+            headers : {
+                'Access-Control-Allow-Origin' : '*',
                 'Accept' :  'application/json',
                 'Content-Type' :  'application/json'
             },
