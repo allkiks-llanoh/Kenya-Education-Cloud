@@ -1,5 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Minor";
+    ViewBag.Title = "Subject Types";
+}
+@section Scripts
+{
+    <script src="@Url.Content("~/js/globalConstants.js")"></script>
+    <script src="@Url.Content("~/js/SubjectTypes.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
 }
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -11,14 +17,7 @@
                 <small>@ViewData["Message"]</small>
                 <br>
                 <br>
-                <div class="alert alert-success hidden">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <p id="alert"></p>
-                </div>
-                <div class="alert alert-danger hidden">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <p id="error"></p>
-                </div>
+
                 <div class="row align-left">
                     <div class="col-sm-2">
                         <label for="Name">Name</label>
@@ -34,49 +33,3 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-        $(document).ready(function()
-        {
-            $('#btn-postFile').click(function()
-          {
-                $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
-
-                var name = $('#Name').val();
-
-            $.ajax({
-              headers : {
-                  'Accept' : 'application/json',
-                  'Content-Type' : 'application/json'
-              } ,
-              url: "http://curationapi-d.kec.ac.ke/api/SubjectTypes",
-          type: "POST",
-          data: JSON.stringify({Name:name}),
-          success: function(response,status,jxhr) {
-             console.log(response);
-             console.log(status);
-             $('#alert').html(`${response}.`)
-             $('div.alert-success').toggleClass('hidden');
-             $('#btn-postFile').html('CREATE CATEGORY');
-
-          },
-          error: function (request, status, error) {
-
-              console.log(request);
-              console.log(status);
-
-              console.log(request.responseText);
-              $('#error').html(request.responseText)
-              $('div.alert-danger').toggleClass('hidden');
-              $('#btn-postFile').html('CREATE CATEGORY');
-
-
-          }
-          });
-
-
-          });
-        },
-
-        );
-</script>

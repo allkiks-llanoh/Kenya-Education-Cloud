@@ -342,6 +342,7 @@
     <Content Include="js\globalConstants.js" />
     <Content Include="js\jquery-3.1.1.min.js" />
     <Content Include="js\PrincipalCurator.js" />
+    <Content Include="js\SubjectTypes.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

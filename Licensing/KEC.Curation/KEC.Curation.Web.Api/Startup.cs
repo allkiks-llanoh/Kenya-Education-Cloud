@@ -34,7 +34,12 @@ namespace KEC.Curation.Web.Api
                 options.InputFormatters.Add(new XmlSerializerInputFormatter());
                 options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
             });
-
+            services.AddCors(o => o.AddPolicy("CurationCORS", builder =>
+                            {
+                              builder.AllowAnyHeader()
+                                     .AllowAnyMethod()
+                                     .AllowAnyOrigin();
+                            }));
             services.AddTransient<IUnitOfWork>(m=>new EFUnitOfWork());
         }
 
@@ -46,8 +51,7 @@ namespace KEC.Curation.Web.Api
                 app.UseDeveloperExceptionPage();
             }
             
-           app.UseCors(builder =>
-           builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+           app.UseCors("CurationCORS");
 
             app.UseMvc();
 

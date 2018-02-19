@@ -5,6 +5,7 @@ using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
 using KEC.Curation.Web.Api.Serializers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KEC.Curation.Web.Api.Controllers
@@ -20,7 +21,7 @@ namespace KEC.Curation.Web.Api.Controllers
             _uow = uow;
         }
         // GET: api/SubjectTypes
-     
+        [EnableCors("CurationCORS")]
         [HttpGet]
         public IActionResult AllSubjectTypes()
         {
@@ -29,7 +30,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 subjectTypes.Select(p => new SubjectTypeDownloadSerializer(p)).ToList() : new List<SubjectTypeDownloadSerializer>();
             return Ok(value: subjectTypesList);
         }
-
+        [EnableCors("CurationCORS")]
         // GET: api/SubjectTypes/5
         [HttpGet("{id}", Name = "SubjectTypeById")]
         public IActionResult SubjectTypeById(int id)
@@ -43,7 +44,7 @@ namespace KEC.Curation.Web.Api.Controllers
         }
 
         // POST: api/SubjectTypes
-        [Authorize]
+        [EnableCors ("CurationCORS")]
         [HttpPost]
         public IActionResult CreateSubjectType([FromBody] SubjectTypeUploadSerializer model)
         {
@@ -67,7 +68,7 @@ namespace KEC.Curation.Web.Api.Controllers
             _uow.Complete();
             return Ok("Subject type created successfully");
         }
-        
+        [EnableCors("CurationCORS")]
         // PUT: api/SubjectTypes/5
         [HttpPut("{id}")]
         public IActionResult EditSubjectType(int Id,[FromBody]SubjectTypeUploadSerializer model)
