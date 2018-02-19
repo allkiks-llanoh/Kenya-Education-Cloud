@@ -1,13 +1,17 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>INSPINIA | @ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/summernote/css")
+
+
+
 </head>
 <body>
 
@@ -24,12 +28,29 @@
             @Html.Partial("_TopNavbar")
 
             <!-- Main view  -->
-            @RenderBody()
+            <!--Alert-->
+        
+            <div class="alert alert-success alert-dismissable m-t hidden">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p class="font-bold" id="success-message">Success</p>
+            </div>
+                <div class="alert alert-danger alert-dismissable m-t hidden">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p class="font-bold" id="error-message">Error</p>
+                </div>
+                <div class="alert alert-warning alert-dismissable m-t hidden">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <p class="font-bold" id="warning-message">Warning</p>
+                </div>
 
-            <!-- Footer -->
-            @Html.Partial("_Footer")
 
-        </div>
+                <!--Alert-->
+                @RenderBody()
+
+                <!-- Footer -->
+                @Html.Partial("_Footer")
+
+            </div>
         <!-- End page wrapper-->
 
     </div>
@@ -40,8 +61,6 @@
     @Scripts.Render("~/plugins/metsiMenu")
     @Scripts.Render("~/plugins/pace")
     @Scripts.Render("~/plugins/slimScroll")
-    @Scripts.Render("~/plugins/dataTables")
-    @Scripts.Render("~/plugins/bootstrap3-typeahead")
     @Scripts.Render("~/bundles/inspinia")
     @Scripts.Render("~/js/globalConstants")
     @RenderSection("scripts", required: false)

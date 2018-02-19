@@ -6,11 +6,25 @@ using System.Web.Mvc;
 
 namespace Inspinia_MVC5_SeedProject.Controllers
 {
+    [RoutePrefix("{controller}")]
     public class ChiefCuratorController : Controller
     {
+       
         // GET: ChiefCurator
-        public ActionResult Index()
+        public ActionResult Publications()
         {
+            return View();
+        }
+        [HttpGet,Route("ViewPublication/{Id:int}")]
+        public ActionResult ViewPublication(int Id)
+        {
+            ViewBag.PublicationId = Id;
+            return View();
+        }
+        [HttpGet, Route("AssignPublication/{id:int}")]
+        public ActionResult AssignPublication(int Id)
+        {
+            ViewBag.PublicationId = Id;
             return View();
         }
     }
