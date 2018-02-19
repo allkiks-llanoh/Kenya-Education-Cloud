@@ -38,12 +38,20 @@ namespace KEC.Curation.Web.Api.Controllers
                               (PublicationStage.PrincipalCurator));
             var publicationList = publicatons.Any() ?
                 publicatons.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
-            return Ok(publicationList);
+            return Ok(value:publicationList);
 
 
         }
+        [HttpGet("Assigned")]
+        public IActionResult Assigned()
+        {
+
+            var publicatons = _uow.ChiefCuratorAssignmentRepository.GetAll().ToList();
+          
+            return Ok(value: publicatons);
 
 
+        }
 
         // POST: api/PrincipalCurator/publicationId/assign
         [HttpPost("{id}/assign")]

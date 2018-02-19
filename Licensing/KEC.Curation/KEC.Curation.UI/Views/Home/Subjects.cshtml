@@ -1,7 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Main";
+    ViewBag.Title = "Subjects";
 }
-
+@section Scripts
+{
+    <script src="@Url.Content("~/js/globalConstants.js")"></script>
+    <script src="@Url.Content("~/js/Subjects.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
+}
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -12,14 +17,7 @@
                 <small>@ViewData["Message"]</small>
                 <br>
                 <br>
-                <div class="alert alert-success hidden">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <p id="alert"></p>
-                </div>
-                <div class="alert alert-danger hidden">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <p id="error"></p>
-                </div>
+
                 <div class="row">
                     <div class="col-sm-2">
                         <label for="Title">Category</label>
@@ -44,75 +42,3 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
-
-<script type="text/JavaScript">
-    //get a reference to the select element
-    $select = $('#SubjectTypeId');
-    //request the JSON data and parse into the select element
-    $.ajax({
-        type: 'GET',
-        url: 'http://curationapi-d.kec.ac.ke/api/SubjectTypes',
-        dataType: 'JSON',
-        success: function (data) {
-            //clear the current content of the select
-            $select.html('');
-            //iterate over the data and append a select option
-            $.each(data, function (index, val) {
-                $select.append(`<option id=${val.id}  value='${val.id}'+ >${val.name}</option>`);
-            })
-        },
-        error: function () {
-            //if there is an error append a 'none available' option
-            $select.html('<option id="-1">none available</option>');
-        }
-    });
-
-</script>
-
-<script type="text/javascript">
-        $(document).ready(function()
-        {
-            $('#btn-postFile').click(function()
-          {
-                $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
-
-                var name = $('#Name').val();
-                var sid = $('#SubjectTypeId').val();
-
-            $.ajax({
-              headers : {
-                  'Accept' : 'application/json',
-                  'Content-Type' : 'application/json'
-              } ,
-              url: "http://curationapi-d.kec.ac.ke/api/Subjects",
-          type: "POST",
-          data: JSON.stringify({ Name: name, SubjectTypeId:sid}),
-          success: function(response,status,jxhr) {
-             console.log(response);
-             console.log(status);
-             $('#alert').html(`${response}.`)
-             $('div.alert-success').toggleClass('hidden');
-             $('#btn-postFile').html('CREATE SUBJECT');
-
-          },
-          error: function (request, status, error) {
-
-              console.log(request);
-              console.log(status);
-
-              console.log(request.responseText);
-              $('#error').html(request.responseText)
-              $('div.alert-danger').toggleClass('hidden');
-              $('#btn-postFile').html('CREATE SUBJECT');
-
-
-          }
-          });
-
-
-          });
-        },
-
-        );
-</script>
