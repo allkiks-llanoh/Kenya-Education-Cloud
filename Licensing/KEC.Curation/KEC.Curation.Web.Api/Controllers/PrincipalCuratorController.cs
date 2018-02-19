@@ -52,6 +52,32 @@ namespace KEC.Curation.Web.Api.Controllers
 
 
         }
+        [HttpGet("{stage}")]
+        public IActionResult PublicationsByStage(PublicationStage stage)
+        {
+            try
+            {
+
+                var stageLevel = (int)stage;
+                var publicationIds = _uow.PublicationRepository
+                                         .Find(p => p.PublicationStageLogs.Count == stageLevel
+                                               && !p.PublicationStageLogs.Any(l => l.Stage > stage)
+
+                                               && !p.PublicationStageLogs
+
+                                                   .Any(l => l.ActionTaken == ActionTaken.PublicationRejected))
+                                               .Select(p => p.Id);
+
+                var publications = _uow.PublicationRepository.Find(p => publicationIds.Contains(p.Id));
+                var publicationList = publications.Any() ?
+                            publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                return Ok(value: publicationList);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+
 
         // POST: api/PrincipalCurator/publicationId/assign
         [HttpPost("{id}/assign")]
