@@ -30,6 +30,7 @@ namespace KEC.Curation.Web.Api
             services.AddMvc(options =>
             {
                 options.ReturnHttpNotAcceptable = true;
+                options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
                 options.InputFormatters.Add(new XmlSerializerInputFormatter());
                 options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
             });

@@ -456,14 +456,9 @@
     <Content Include="Views\Publisher\Approved.cshtml" />
     <Content Include="Views\Publisher\Rejected.cshtml" />
     <Content Include="Views\Publisher\Conditional.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\ChiefCurator\Index.cshtml" />
-    <Content Include="Views\Stages\Test.cshtml" />
-=======
     <Content Include="Views\ChiefCurator\Publications.cshtml" />
     <Content Include="Views\ChiefCurator\ViewPublication.cshtml" />
     <Content Include="Views\ChiefCurator\AssignPublication.cshtml" />
->>>>>>> f054e30fce8ab10f05a0fa0ffae474c580ea30aa
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
