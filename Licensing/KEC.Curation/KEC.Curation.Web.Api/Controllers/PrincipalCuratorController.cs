@@ -78,7 +78,8 @@ namespace KEC.Curation.Web.Api.Controllers
 
                 return StatusCode(StatusCodes.Status500InternalServerError);
 
-
+            }
+        }
         // POST: api/PrincipalCurator/publicationId/assign
         [HttpPost("{id}/assign")]
         public IActionResult Assign(int publicationId, [FromBody]ChiefCuratorAssignmentSerializer model)
