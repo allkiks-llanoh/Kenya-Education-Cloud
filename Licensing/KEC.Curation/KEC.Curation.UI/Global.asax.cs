@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-
-namespace Inspinia_MVC5_SeedProject
+namespace KEC.Curatiom.Web.UI
 {
     public class MvcApplication : System.Web.HttpApplication
     {

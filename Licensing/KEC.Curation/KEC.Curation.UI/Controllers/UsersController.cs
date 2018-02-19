@@ -2,11 +2,7 @@
 using KEC.Curatiom.Web.UI.Models;
 using Microsoft.Graph;
 using Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace KEC.Curatiom.Web.UI.Controllers

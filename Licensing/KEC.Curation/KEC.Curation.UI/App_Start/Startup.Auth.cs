@@ -15,7 +15,7 @@ using System.IdentityModel.Claims;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Inspinia_MVC5_SeedProject
+namespace KEC.Curatiom.Web.UI
 {
     public partial class Startup
     {

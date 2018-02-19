@@ -16,7 +16,7 @@
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44364</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -205,8 +205,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ChiefCuratorController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PrincipalCuratorController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
@@ -463,6 +465,7 @@
     <Content Include="Views\ChiefCurator\Publications.cshtml" />
     <Content Include="Views\ChiefCurator\ViewPublication.cshtml" />
     <Content Include="Views\ChiefCurator\AssignPublication.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

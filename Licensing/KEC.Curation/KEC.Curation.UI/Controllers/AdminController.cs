@@ -1,20 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using System.Web;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using KEC.Curatiom.Web.UI.TokenStorage;
+using KEC.Curatiom.Web.UI.Utils;
+using Microsoft.Identity.Client;
 
-namespace Inspinia_MVC5_SeedProject.Controllers
+
+namespace KEC.Curatiom.Web.UI.Controllers
 {
     public class AdminController : Controller
     {
+        public static string clientId = ConfigurationManager.AppSettings["ida:AppId"];
+        private static string appKey = ConfigurationManager.AppSettings["ida:AppSecret"];
+        private static string redirectUri = ConfigurationManager.AppSettings["ida:RedirectUri"];
+        private static string adminScopes = ConfigurationManager.AppSettings["ida:AdminScopes"];
         // GET: Admin
-        public ActionResult Schooltypes()
+        public async Task<ActionResult> Index()
         {
-            ViewData["SubTitle"] = "Kenya Education Cloud";
-            ViewData["Message"] = "Create School Types";
+            // try to get token silently
+            string signedInUserID = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
+            TokenCache theCache = new SessionTokenCache(signedInUserID, this.HttpContext).GetMsalCacheInstance();
 
-            return View();
+            ConfidentialClientApplication cca = new ConfidentialClientApplication(clientId, redirectUri,
+                new ClientCredential(appKey), theCache, null);
+            string[] scopes = adminScopes.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            try
+            {
+                AuthenticationResult result = await cca.AcquireTokenSilentAsync(scopes, cca.Users.First());
+            }
+            catch (Exception)
+            {
+                try
+                {// when failing, manufacture the URL and assign it
+                    string authReqUrl = await OAuth2RequestManager.GenerateAuthorizationRequestUrl(scopes, cca, this.HttpContext, Url);
+                    ViewBag.AuthorizationRequest = authReqUrl;
+                }
+                catch (Exception ee)
+                {
+
+                }
+            }
+            return View("Admin");
+
         }
+
     }
 }

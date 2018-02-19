@@ -4,11 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Inspinia_MVC5_SeedProject.Controllers
+namespace KEC.Curatiom.Web.UI.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-       
+        
+        public ActionResult Index()
+        {
+            return View();
+        }
         public ActionResult SubjectTypes()
         {
             ViewData["SubTitle"] = "Kenya Education Cloud";
