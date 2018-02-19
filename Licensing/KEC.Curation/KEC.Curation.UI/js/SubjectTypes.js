@@ -8,12 +8,14 @@ $(document).ready(function () {
 
         $.ajax({
             headers : {
-                'Access-Control-Allow-Origin' : '*',
+                
                 'Accept' :  'application/json',
                 'Content-Type' :  'application/json'
             },
             url: subjectTypesUrl,
             type: "POST",
+            async: false,
+            crossDomain: true,
             data: JSON.stringify({ Name: name }),
             success: function (response, status, jxhr) {
                 console.log(response);
