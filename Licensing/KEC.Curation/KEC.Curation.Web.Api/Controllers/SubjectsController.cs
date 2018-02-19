@@ -28,7 +28,6 @@ namespace KEC.Curation.Web.Api.Controllers
                 subjects.Select(p => new SubjectDownloadSerializer(p,_uow)): new List<SubjectDownloadSerializer>();
             return Ok(value: subjectList.ToList());
         }
-
         // GET: api/Subjects/5
         [HttpGet("{id}", Name = "SubjectById")]
         public IActionResult SubjectById(int id)

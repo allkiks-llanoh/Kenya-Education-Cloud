@@ -43,9 +43,9 @@ namespace KEC.Curation.Web.Api.Controllers
 
         }
 
-       
-        
-        // POST: api/publicationId/assign
+
+
+        // POST: api/PrincipalCurator/publicationId/assign
         [HttpPost("{id}/assign")]
         public IActionResult Assign(int publicationId, [FromBody]ChiefCuratorAssignmentSerializer model)
         {

@@ -19,7 +19,13 @@ namespace KEC.Curation.Web.Api.Serializers
             _uow = uow;
 
         }
-
+        public int Id
+        {
+            get
+            {
+                return _publication.Id;
+            }
+        }
         public string Url
         {
             get
@@ -48,7 +54,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.KICDNumber;
             }
         }
-       
+
         public decimal Price
         {
             get
@@ -77,7 +83,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.LevelId;
             }
         }
-       
-        
+
+
     }
 }

@@ -339,6 +339,7 @@
     <Content Include="js\chiefCurator.js" />
     <Content Include="js\globalConstants.js" />
     <Content Include="js\jquery-3.1.1.min.js" />
+    <Content Include="js\PrincipalCurator.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -398,6 +399,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\plugins\typeahead\bootstrap3-typeahead.min.js" />
+    <Content Include="Scripts\plugins\datatables.min.js" />
     <Content Include="Scripts\plugins\metisMenu\metisMenu.min.js" />
     <Content Include="Scripts\plugins\pace\pace.min.js" />
     <Content Include="Scripts\plugins\slimscroll\jquery.slimscroll.min.js" />
@@ -452,6 +455,7 @@
     <Content Include="Views\Publisher\Rejected.cshtml" />
     <Content Include="Views\Publisher\Conditional.cshtml" />
     <Content Include="Views\ChiefCurator\Index.cshtml" />
+    <Content Include="Views\Stages\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

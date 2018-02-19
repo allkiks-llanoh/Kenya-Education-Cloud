@@ -3,8 +3,16 @@
     ViewBag.Title = "Legal";
     Layout = "~/Views/Shared/_LayoutPrincipalCurator.cshtml";
 }
+@section Scripts
+{
+
+    <script src="@Url.Content("~/js/globalConstants.js")"></script>
+    <script src="@Url.Content("~/js/PrincipalCurator.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
+}
 @{
     var Title = Request.Params["Title"];
+    var ID = Request.Params["Id"];
     var Stage = Request.Params["Stage"];
     var Publication = Request.Params["Publication"];
     var KICDNumber = Request.Params["Publication"];
@@ -37,7 +45,7 @@
                     <div class="panel panel-info text-justify">
                         <div class="panel-heading">PUBLICATION INFORMATION</div>
                         <div class="panel-body">
-
+                            <h1 id="identity" data-identity=@ID></h1>
                             <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
                             <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
                             <span><strong>Publication:&nbsp;</strong></span>@Publication
@@ -80,77 +88,9 @@
 
 
 <script type="text/JavaScript">
-    //get a reference to the select element
-    $userGuid = $('#UserGuids');
-    //request the JSON data and parse into the select element
-    $.ajax({
-        type: 'GET',
-        url: "http://curationapi-d.kec.ac.ke/api/Subjects",
-        dataType: 'JSON',
-        success: function (data) {
-            //clear the current content of the select
-            $userGuid.html('');
-            //iterate over the data and append a select option
-            $.each(data, function (index, val) {
-                $userGuid.append(`<option id=${val.id}  value='${val.id}'+ >${val.name}</option>`);
-            })
-        },
-        error: function () {
-            //if there is an error append a 'none available' option
-            $userGuid.html('<option id="-1">none available</option>');
-        }
-    });
-
+   
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#LegalApprove').click(function () {
-            $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
 
-            var kicdnumber = $('#kicd').attr('data-kicdNumber');
-            var notes = $('#notes').val();
-            var action = "PublicationMoveToNextStage";
-            var stages = "LegalVerification";
-            var guid = "123e4567-e89b-12d3-a456-426655440000";
-            var guid2 = "123e4567-e89b-12d3-a456-426655440001";
-            var section = "";
-            console.log(`${kicdnumber}`);
-            console.log(` ${notes} `);
-            $.ajax({
-                headers :  {
-                    'Accept' :  'application/json',
-                    'Content-Type' :  'application/json'
-                },
-                url: "http://curationapi-d.kec.ac.ke/api/Curation/1/assign",
-                type: "POST",
-                data: JSON.stringify({AssignedBy: guid, Assignee: guid2, FullyAssigned: true }),
-
-                success: function (response, status, jxhr) {
-                    console.log(response);
-                    console.log(status);
-                    $('#message').html(` ${response}.`)
-                    $('div.alert-success').toggleClass('hidden');
-                    $('#LegalApprove').html('APPROVE');
-
-                },
-                error: function (request, status, error) {
-
-                    console.log(request);
-                    console.log(status);
-
-                    console.log(request.responseText);
-                    $('#error').html(request.responseText)
-                    $('div.alert-danger').toggleClass('hidden');
-                    $('#LegalApprove').html('APPROVE');
-
-
-                }
-            });
-
-
-        });
-    },
-
-    );
 </script>

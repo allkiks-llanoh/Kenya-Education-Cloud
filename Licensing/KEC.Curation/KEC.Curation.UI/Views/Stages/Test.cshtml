@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Legal";
+    Layout = "~/Views/Shared/_LayoutStages.cshtml";
+}
+
+<body ng-app="adalDemo" ng-controller="homeController" ng-init="hmCtl.init()">
+    <a href="#">Home</a>
+    <a href="#/todoList">ToDo List</a>
+
+
+    <!--These links are added to manage login/logout-->
+    <div data-ng-model="userInfo">
+        <span data-ng-hide="!userInfo.isAuthenticated">Welcome {{userInfo.userName}} </span>
+        <button data-ng-hide="!userInfo.isAuthenticated" data-ng-click="logout()">Logout</button>
+        <button data-ng-hide="userInfo.isAuthenticated" data-ng-click="login()">Login</button>
+
+        <div>
+            {{userInfo.loginError}}
+        </div>
+        <div>
+            {{testMessage}}
+        </div>
+    </div>
+    <div ng-view>
+        Your view will appear here.
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.0/js/adal.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            "use strict";
+            // Some samples will use the tenant name here like "tenant.onmicrosoft.com"
+            // I prefer to user the subscription Id
+            var subscriptionId = "8eaca2a2-dc2f-4e58-8ae2-28580934830b";
+            // Copy the client ID of your AAD app here once you have registered one, configured the required permissions, and
+            // allowed implicit flow https://msdn.microsoft.com/en-us/office/office365/howto/get-started-with-office-365-unified-api
+            var clientId = "2801d4a3-ccf1-42aa-8666-bb1cc38da8c9";
+
+            window.config = {
+                subscriptionId: subscriptionId,
+                clientId: clientId,
+                postLogoutRedirectUri: window.location.origin,
+                endpoints: {
+                    graphApiUri: 'https://graph.microsoft.com'
+                },
+                cacheLocation: 'localStorage' // enable this for IE, as sessionStorage does not work for localhost.
+            };
+            var authContext = new AuthenticationContext(config);
+            // Check For & Handle Redirect From AAD After Login
+            var isCallback = authContext.isCallback(window.location.hash);
+            authContext.handleWindowCallback();
+            if (isCallback && !authContext.getLoginError()) {
+                window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
+            }
+            // If not logged in force login
+            var user = authContext.getCachedUser();
+            if (user) {
+                // Logged in already
+            }
+            else {
+                // NOTE: you may want to render the page for anonymous users and render
+                // a login button which runs the login function upon click.
+                authContext.login();
+            }
+            // Acquire token for Files resource.
+            authContext.acquireToken(config.endpoints.graphApiUri, function (error, token) {
+                // Handle ADAL Errors.
+                if (error || !token) {
+                    console.log('ADAL error occurred: ' + error);
+                    return;
+                }
+                // Execute GET request to Files API.
+                //var currentUserApiBaseUri = graphApiUri + "/beta/" + config.subscriptionId + "/users/" + user.userName;
+                //var filesUri = currentUserApiBaseUri + "/files";
+                var filesUri = config.endpoints.graphApiUri + "/beta/me/files";
+                $.ajax({
+                    type: "GET",
+                    url: filesUri,
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                    }
+                }).done(function (response) {
+                    console.log('Successfully fetched files from OneDrive.');
+                    console.log(response);
+                }).fail(function () {
+                    console.log('Fetching files from OneDrive failed.');
+                });
+            });
+        })();
+    </script>

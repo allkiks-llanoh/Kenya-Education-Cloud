@@ -36,6 +36,14 @@ namespace Inspinia_MVC5_SeedProject.Controllers
             ViewData["Message"] = "Verify Payment Has Been Made Against Publication";
 
             return View();
+
+        }
+        public ActionResult Test()
+        {
+            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["Message"] = "Verify Payment Has Been Made Against Publication";
+
+            return View();
         }
     }
 }

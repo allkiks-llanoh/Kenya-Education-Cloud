@@ -13171,11 +13171,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\MiyabiLLC\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\Kec.Publishers.Web.Api\\KEC.Curation.Publishers.Web.Api.csproj",
+      "projectUniqueName": "C:\\Users\\MiyabiLLC\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\Kec.Publishers.Web.Api\\KEC.Curation.Publishers.Web.Api.csproj",
       "projectName": "KEC.Curation.Publishers.Web.Api",
-      "projectPath": "C:\\Users\\MiyabiLLC\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\Kec.Publishers.Web.Api\\KEC.Curation.Publishers.Web.Api.csproj",
+      "projectPath": "C:\\Users\\MiyabiLLC\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\Kec.Publishers.Web.Api\\KEC.Curation.Publishers.Web.Api.csproj",
       "packagesPath": "C:\\Users\\MiyabiLLC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MiyabiLLC\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\Kec.Publishers.Web.Api\\obj\\",
+      "outputPath": "C:\\Users\\MiyabiLLC\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\Kec.Publishers.Web.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13194,8 +13194,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\MiyabiLLC\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj": {
-              "projectPath": "C:\\Users\\MiyabiLLC\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj"
+            "C:\\Users\\MiyabiLLC\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj": {
+              "projectPath": "C:\\Users\\MiyabiLLC\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj"
             }
           }
         }

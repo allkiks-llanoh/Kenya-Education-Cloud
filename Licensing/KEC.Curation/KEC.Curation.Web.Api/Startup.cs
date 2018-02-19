@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KEC.Curation.Data.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -17,6 +18,8 @@ namespace KEC.Curation.Web.Api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+         
+           
         }
 
         public IConfiguration Configuration { get; }
@@ -24,7 +27,13 @@ namespace KEC.Curation.Web.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.ReturnHttpNotAcceptable = true;
+                options.InputFormatters.Add(new XmlSerializerInputFormatter());
+                options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+            });
+
             services.AddTransient<IUnitOfWork>(m=>new EFUnitOfWork());
         }
 
@@ -35,10 +44,12 @@ namespace KEC.Curation.Web.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            
            app.UseCors(builder =>
            builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
             app.UseMvc();
+
         }
     }
 }
