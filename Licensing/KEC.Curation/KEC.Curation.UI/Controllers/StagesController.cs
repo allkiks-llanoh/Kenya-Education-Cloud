@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace KEC.Curatiom.Web.UI.Controllers
+namespace KEC.Curation.UI.Controllers
 {
     public class StagesController : Controller
     {

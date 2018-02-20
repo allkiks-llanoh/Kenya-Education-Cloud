@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace KEC.Curatiom.Web.UI
+namespace KEC.Curation.UI
 {
     public class BundleConfig
     {

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace KEC.Curatiom.Web.UI
+namespace KEC.Curation.UI
 {
     public class RouteConfig
     {

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using KEC.Curatiom.Web.UI.TokenStorage;
-using KEC.Curatiom.Web.UI.Utils;
+using KEC.Curation.UI.TokenStorage;
+using KEC.Curation.UI.Utils;
 using Microsoft.Identity.Client;
 
 
-namespace KEC.Curatiom.Web.UI.Controllers
+namespace KEC.Curation.UI.Controllers
 {
     public class AdminController : Controller
     {

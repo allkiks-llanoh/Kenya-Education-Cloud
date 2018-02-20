@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace KEC.Curatiom.Web.UI.Models
+namespace KEC.Curation.UI.Models
 {
     public class UsersService
     {

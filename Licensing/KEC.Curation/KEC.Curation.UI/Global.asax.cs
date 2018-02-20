@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-namespace KEC.Curatiom.Web.UI
+namespace KEC.Curation.UI
 {
     public class MvcApplication : System.Web.HttpApplication
     {

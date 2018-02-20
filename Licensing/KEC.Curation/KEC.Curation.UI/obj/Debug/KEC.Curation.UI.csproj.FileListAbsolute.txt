@@ -1,248 +1,73 @@
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Inspinia_MVC5_SeedProject.dll.config
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Inspinia_MVC5_SeedProject.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Inspinia_MVC5_SeedProject.pdb
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Antlr3.Runtime.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\EntityFramework.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\EntityFramework.SqlServer.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.AspNet.Identity.Core.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.AspNet.Identity.EntityFramework.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.AspNet.Identity.Owin.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Host.SystemWeb.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.Cookies.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.Facebook.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.Google.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.OAuth.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.Twitter.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Web.Infrastructure.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Newtonsoft.Json.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Owin.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.Helpers.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.Mvc.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.Optimization.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.Razor.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.WebPages.Deployment.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.WebPages.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.WebPages.Razor.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\WebGrease.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\EntityFramework.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\EntityFramework.SqlServer.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.AspNet.Identity.Core.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.AspNet.Identity.Owin.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.Cookies.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.OAuth.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Newtonsoft.Json.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.Helpers.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.Mvc.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.Optimization.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.Razor.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.WebPages.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.WebPages.Deployment.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Web.WebPages.Razor.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Antlr3.Runtime.pdb
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Host.SystemWeb.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.Facebook.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.Google.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.Twitter.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\obj\Debug\KEC.Curation.UI.csprojResolveAssemblyReference.cache
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\obj\Debug\KEC.Curation.UI.csproj.CoreCompileInputs.cache
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\obj\Debug\Inspinia_MVC5_SeedProject.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\obj\Debug\Inspinia_MVC5_SeedProject.pdb
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Graph.Core.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Graph.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Identity.Client.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Logging.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Protocols.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Tokens.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.OpenIdConnect.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.IdentityModel.Tokens.Jwt.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.Net.Http.dll
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Graph.pdb
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Graph.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Graph.Core.pdb
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Graph.Core.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Logging.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Protocols.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Protocols.OpenIdConnect.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.IdentityModel.Tokens.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\Microsoft.Owin.Security.OpenIdConnect.xml
-D:\PROJECTS\inspinia_v2.7.1\inspinia_v2.7.1\ASPNET_MVC5_Seed_Project\Inspinia_MVC5_SeedProject\bin\System.IdentityModel.Tokens.Jwt.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.dll.config
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.dll
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.pdb
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Web.Infrastructure.dll
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Owin.dll
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.IO.dll
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Runtime.dll
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Security.Cryptography.Algorithms.dll
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Security.Cryptography.Encoding.dll
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Security.Cryptography.Primitives.dll
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Security.Cryptography.X509Certificates.dll
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\KEC.Curation.UI.csproj.CoreCompileInputs.cache
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\Inspinia_MVC5_SeedProject.dll
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\Inspinia_MVC5_SeedProject.pdb
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\KEC.Curation.UI.csprojResolveAssemblyReference.cache
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.dll.config
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.pdb
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Antlr3.Runtime.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Core.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Owin.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.Core.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Identity.Client.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Logging.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Tokens.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Host.SystemWeb.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Cookies.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Facebook.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Google.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OAuth.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OpenIdConnect.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Twitter.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Newtonsoft.Json.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Owin.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Net.Http.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Helpers.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Mvc.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Optimization.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Razor.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Deployment.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Razor.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\WebGrease.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Antlr3.Runtime.pdb
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Core.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Owin.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.pdb
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.Core.pdb
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.Core.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Logging.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.OpenIdConnect.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Tokens.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Host.SystemWeb.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Cookies.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Facebook.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Google.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OAuth.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OpenIdConnect.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Twitter.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Newtonsoft.Json.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.IdentityModel.Tokens.Jwt.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Helpers.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Mvc.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Optimization.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Razor.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Deployment.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Razor.xml
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\KEC.Curation.UI.csprojResolveAssemblyReference.cache
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\KEC.Curation.UI.csproj.CoreCompileInputs.cache
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\Inspinia_MVC5_SeedProject.dll
-C:\Users\MiyabiLLC\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\Inspinia_MVC5_SeedProject.pdb
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Antlr3.Runtime.pdb
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Core.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Owin.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.pdb
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.Core.pdb
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.Core.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Logging.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.OpenIdConnect.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Tokens.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Host.SystemWeb.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Cookies.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Facebook.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Google.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OAuth.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OpenIdConnect.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Twitter.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Newtonsoft.Json.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.IdentityModel.Tokens.Jwt.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Helpers.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Mvc.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Optimization.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Razor.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Deployment.xml
-F:\Projects\Miyabi\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Razor.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.dll.config
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.dll
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.pdb
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Owin.dll
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.IO.dll
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Runtime.dll
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Security.Cryptography.Algorithms.dll
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Security.Cryptography.Encoding.dll
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Security.Cryptography.Primitives.dll
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Security.Cryptography.X509Certificates.dll
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Antlr3.Runtime.pdb
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Core.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Owin.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.pdb
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.Core.pdb
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.Core.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Logging.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.OpenIdConnect.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Tokens.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Host.SystemWeb.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Cookies.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Facebook.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Google.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OAuth.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OpenIdConnect.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Twitter.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Newtonsoft.Json.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.IdentityModel.Tokens.Jwt.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Helpers.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Mvc.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Optimization.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Razor.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Deployment.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Razor.xml
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\KEC.Curation.UI.csprojResolveAssemblyReference.cache
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\KEC.Curation.UI.csproj.CoreCompileInputs.cache
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\Inspinia_MVC5_SeedProject.dll
-C:\Users\collo\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\Inspinia_MVC5_SeedProject.pdb
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.dll.config
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Inspinia_MVC5_SeedProject.pdb
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Antlr3.Runtime.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.Core.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Identity.Client.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OpenIdConnect.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Newtonsoft.Json.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Owin.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Net.Http.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Helpers.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Mvc.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Optimization.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Razor.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Razor.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\WebGrease.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Antlr3.Runtime.pdb
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.pdb
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.Core.pdb
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Graph.Core.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Protocols.OpenIdConnect.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.OpenIdConnect.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\Newtonsoft.Json.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Helpers.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Mvc.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Optimization.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.Razor.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\bin\System.Web.WebPages.Razor.xml
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\KEC.Curation.UI.csproj.CoreCompileInputs.cache
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\Inspinia_MVC5_SeedProject.dll
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\Inspinia_MVC5_SeedProject.pdb

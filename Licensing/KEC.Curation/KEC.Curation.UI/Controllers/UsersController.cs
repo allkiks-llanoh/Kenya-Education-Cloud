@@ -1,11 +1,11 @@
-﻿using KEC.Curatiom.Web.UI.Helpers;
-using KEC.Curatiom.Web.UI.Models;
+﻿using KEC.Curation.UI.Helpers;
+using KEC.Curation.UI.Models;
 using Microsoft.Graph;
 using Resources;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace KEC.Curatiom.Web.UI.Controllers
+namespace KEC.Curation.UI.Controllers
 {
     public class UsersController : Controller
     {

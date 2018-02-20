@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Web.Mvc;
 
-namespace KEC.Curatiom.Web.UI.Controllers
+namespace KEC.Curation.UI.Controllers
 {
     public class ErrorController : Controller
     {

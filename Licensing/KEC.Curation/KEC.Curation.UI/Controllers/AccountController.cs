@@ -4,9 +4,9 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
 using System.Security.Claims;
-using KEC.Curatiom.Web.UI.TokenStorage;
+using KEC.Curation.UI.TokenStorage;
 
-namespace KEC.Curatiom.Web.UI.Controllers
+namespace KEC.Curation.UI.Controllers
 {
     public class AccountController : Controller
     {

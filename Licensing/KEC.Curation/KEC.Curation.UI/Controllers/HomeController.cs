@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace KEC.Curatiom.Web.UI.Controllers
+namespace KEC.Curation.UI.Controllers
 {
     [Authorize]
     public class HomeController : Controller

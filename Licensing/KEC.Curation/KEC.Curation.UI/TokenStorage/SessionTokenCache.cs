@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 
-namespace KEC.Curatiom.Web.UI.TokenStorage
+namespace KEC.Curation.UI.TokenStorage
 {
     // Store the user's token information.
     public class SessionTokenCache

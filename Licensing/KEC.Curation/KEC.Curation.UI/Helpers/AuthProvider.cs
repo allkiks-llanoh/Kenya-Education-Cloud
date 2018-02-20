@@ -1,4 +1,4 @@
-﻿using KEC.Curatiom.Web.UI.TokenStorage;
+﻿using KEC.Curation.UI.TokenStorage;
 using Microsoft.Identity.Client;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OpenIdConnect;
@@ -11,7 +11,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace KEC.Curatiom.Web.UI.Helpers
+namespace KEC.Curation.UI.Helpers
 {
     public sealed class AuthProvider : IAuthProvider
     {

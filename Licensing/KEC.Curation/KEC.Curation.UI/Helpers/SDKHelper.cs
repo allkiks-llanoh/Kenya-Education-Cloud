@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Web;
 
-namespace KEC.Curatiom.Web.UI.Helpers
+namespace KEC.Curation.UI.Helpers
 {
     public class SDKHelper
     {

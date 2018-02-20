@@ -1,5 +1,5 @@
-﻿using KEC.Curatiom.Web.UI.TokenStorage;
-using KEC.Curatiom.Web.UI.Utils;
+﻿using KEC.Curation.UI.TokenStorage;
+using KEC.Curation.UI.Utils;
 using Microsoft.AspNet.Identity;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
@@ -15,7 +15,7 @@ using System.IdentityModel.Claims;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace KEC.Curatiom.Web.UI
+namespace KEC.Curation.UI
 {
     public partial class Startup
     {

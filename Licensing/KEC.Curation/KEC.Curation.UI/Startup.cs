@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(KEC.Curatiom.Web.UI.Startup))]
-namespace KEC.Curatiom.Web.UI
+[assembly: OwinStartupAttribute(typeof(KEC.Curation.UI.Startup))]
+namespace KEC.Curation.UI
 {
     public partial class Startup
     {

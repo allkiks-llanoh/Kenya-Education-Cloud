@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace KEC.Curatiom.Web.UI.Models
+namespace KEC.Curation.UI.Models
 {
     // An entity, such as a user, group, or message.
     public class ResultsItem

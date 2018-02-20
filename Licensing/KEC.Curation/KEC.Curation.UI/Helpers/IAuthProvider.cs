@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace KEC.Curatiom.Web.UI.Helpers
+namespace KEC.Curation.UI.Helpers
 {
     public interface IAuthProvider
     {

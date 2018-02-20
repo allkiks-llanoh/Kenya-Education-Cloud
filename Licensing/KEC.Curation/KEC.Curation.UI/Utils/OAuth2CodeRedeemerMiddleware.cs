@@ -1,4 +1,4 @@
-﻿using KEC.Curatiom.Web.UI.TokenStorage;
+﻿using KEC.Curation.UI.TokenStorage;
 using Microsoft.Identity.Client;
 using Microsoft.Owin;
 using Owin;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace KEC.Curatiom.Web.UI.Utils
+namespace KEC.Curation.UI.Utils
 {
     public sealed class OAuth2CodeRedeemerMiddleware : OwinMiddleware
     {
