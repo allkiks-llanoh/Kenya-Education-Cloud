@@ -341,6 +341,7 @@
     <Content Include="js\chiefCuratorAssignPublication.js" />
     <Content Include="js\chiefCuratorPublications.js" />
     <Content Include="js\chiefCuratorViewPublication.js" />
+    <Content Include="js\GetChiefCurators.js" />
     <Content Include="Scripts\globalConstants.js" />
     <Content Include="js\jquery-3.1.1.min.js" />
     <Content Include="js\Levels.js" />

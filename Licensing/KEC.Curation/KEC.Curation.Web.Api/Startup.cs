@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using KEC.Curation.Data.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+
 
 namespace KEC.Curation.Web.Api
 {
@@ -31,8 +27,7 @@ namespace KEC.Curation.Web.Api
             {
                 options.ReturnHttpNotAcceptable = true;
                 options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
-                options.InputFormatters.Add(new XmlSerializerInputFormatter());
-                options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+               
             });
             services.AddCors(o => o.AddPolicy("CurationCORS", builder =>
                             {

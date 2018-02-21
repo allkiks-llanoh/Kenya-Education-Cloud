@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>KEC CURATION | @ViewBag.Title</title>
-    @Styles.Render("~/font-awesome/css")
+  
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
+
+    <!-- Add jQuery Style direct - used for jQGrid plugin -->
+    <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+
+    <!-- Primary Inspinia style -->
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/summernote/css")
-
-
+    @Styles.Render("~/font-awesome/css")
 
 </head>
 <body>

@@ -17,10 +17,7 @@ namespace KEC.Curation.UI
 {
     public partial class Startup
     {
-        // The appId is used by the application to uniquely identify itself to Azure AD.
-        // The appSecret is the application's password.
-        // The aadInstance is the instance of Azure, for example public Azure or Azure China.
-        // The redirectUri is where users are redirected after sign in and consent.
+       
         private static string appId = ConfigurationManager.AppSettings["ida:AppId"];
         private static string appSecret = ConfigurationManager.AppSettings["ida:AppSecret"];
         private static string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];

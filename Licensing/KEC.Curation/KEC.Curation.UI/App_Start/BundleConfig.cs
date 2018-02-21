@@ -191,7 +191,13 @@ namespace KEC.Curation.UI
             bundles.Add(new ScriptBundle("~/plugins/dropZone").Include(
                       "~/Scripts/plugins/dropzone/dropzone.js"));
 
-           
+
+            // summernote styles
+            bundles.Add(new StyleBundle("~/plugins/summernoteStyles").Include(
+                      "~/Content/plugins/summernote/summernote.css",
+                      "~/Content/plugins/summernote/summernote-bs3.css"));
+
+            // summernote 
             bundles.Add(new ScriptBundle("~/plugins/summernote").Include(
                       "~/Scripts/plugins/summernote/summernote.min.js"));
 
