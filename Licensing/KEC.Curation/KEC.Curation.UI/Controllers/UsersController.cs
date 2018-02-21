@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         UsersService usersService = new UsersService();
