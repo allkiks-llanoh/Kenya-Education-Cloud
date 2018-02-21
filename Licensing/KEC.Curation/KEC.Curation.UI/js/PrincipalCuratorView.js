@@ -2,11 +2,15 @@
 
 $(document).ready(function () {
     $.ajax({
+        headers: {
+            contentType: 'application/json',
+            accepts: 'application/json',
+        },
         url: principalCuratorGetUrl,
         type: "GET",
-        dataType: "jsonp",
-        contentType: 'application/json',
-        accepts: 'application/json',
+        dataType: 'JSON',
+        async: false,
+        crossDomain: true,
         success: function (response) {
             var trHTML = '';
             $.each(response, function (key, value) {
