@@ -12,21 +12,21 @@ namespace KEC.Curation.UI.Controllers
         // GET: Stages
         public ActionResult Legal()
         {
-            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Verify Legal Requirements";
 
             return View();
         }
         public ActionResult Finance()
         {
-            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Verify Payment";
 
             return View();
         }
         public ActionResult LegalVerify()
         {
-            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Verify Legality of Publication";
 
             return View();

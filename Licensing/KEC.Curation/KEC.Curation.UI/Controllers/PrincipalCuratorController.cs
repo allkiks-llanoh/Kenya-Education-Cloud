@@ -12,21 +12,21 @@ namespace KEC.Curation.UI.Controllers
         // GET: PrincipalCurator
         public ActionResult PrincipalCurator()
         {
-            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
 
             return View();
         }
         public ActionResult PrincipalCuratorReview()
         {
-            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
 
             return View();
         }
         public ActionResult get()
         {
-            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
 
             return View();

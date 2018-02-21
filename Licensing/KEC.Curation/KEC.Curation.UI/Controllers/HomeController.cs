@@ -12,7 +12,7 @@ namespace KEC.Curation.UI.Controllers
         }
         public ActionResult SubjectTypes()
         {
-            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Create Subject Type / Category";
 
             return View();
@@ -20,7 +20,7 @@ namespace KEC.Curation.UI.Controllers
 
         public ActionResult Subjects()
         {
-            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Create Subject";
 
             return View();
@@ -28,7 +28,7 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult Levels()
         {
 
-            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Create Level";
 
             return View();
