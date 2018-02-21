@@ -1,4 +1,4 @@
-﻿//const apiBaseUrl = "https://curationapi-d.kec.ac.ke/api";
+﻿const apiBaseUrl = "https://curationapi-d.kec.ac.ke/api";
 function ShowAlert(message, type) {
     $(".alert").addClass('hidden');
     if (type === "error") {
