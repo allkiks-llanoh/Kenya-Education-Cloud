@@ -1,7 +1,7 @@
-﻿
-using KEC.Curation.Data.UnitOfWork;
+﻿using KEC.Curation.Data.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,18 +23,19 @@ namespace KEC.Curation.Web.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options =>
-            {
-                options.ReturnHttpNotAcceptable = true;
-                options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
-               
-            });
             services.AddCors(o => o.AddPolicy("CurationCORS", builder =>
-                            {
-                              builder.AllowAnyHeader()
-                                     .AllowAnyMethod()
-                                     .AllowAnyOrigin();
-                            }));
+                                                                        {
+                                                                          builder.AllowAnyHeader()
+                                                                                 .AllowAnyMethod()
+                                                                                 .AllowAnyOrigin();
+                                                                        }));
+
+            services.Configure<MvcOptions>(option =>
+                                            {
+                                                option.OutputFormatters.RemoveType
+                                                <XmlDataContractSerializerOutputFormatter>();
+                                            });
+
             services.AddTransient<IUnitOfWork>(m=>new EFUnitOfWork());
         }
 

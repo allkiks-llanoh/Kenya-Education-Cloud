@@ -1,4 +1,4 @@
-﻿let levelsPOSTUrl = apiBaseUrl.concat(`/levels`);
+﻿//let levelsPOSTUrl = apiBaseUrl.concat(`/levels`);
 
 $(document).ready(function () {
     $('#btn-postFile').click(function () {
@@ -11,7 +11,7 @@ $(document).ready(function () {
                 'Accept' :  'application/json',
                 'Content-Type' :  'application/json'
             },
-            url: levelsPOSTUrl,
+            url: 'https://curationapi-d.kec.ac.ke/api/Home/Levels',
             type: "POST",
             async: false,
             crossDomain: true,
