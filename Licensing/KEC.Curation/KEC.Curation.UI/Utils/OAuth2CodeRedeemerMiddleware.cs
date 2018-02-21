@@ -25,11 +25,8 @@ namespace KEC.Curation.UI.Utils
             {
                 throw new ArgumentNullException("options");
             }
-
-
-            this.options = options;
+            this.options = options; 
         }
-
 
         public async override Task Invoke(IOwinContext context)
         {
@@ -40,11 +37,17 @@ namespace KEC.Curation.UI.Utils
                 string state = context.Request.Query["state"];
                 string session_state = context.Request.Query["session_state"];
 
-                string signedInUserID = context.Authentication.User.FindFirst(System.IdentityModel.Claims.ClaimTypes.NameIdentifier).Value;
-                HttpContextBase hcb = context.Environment["System.Web.HttpContextBase"] as HttpContextBase;
-                TokenCache theCache = new SessionTokenCache(signedInUserID, hcb).GetMsalCacheInstance();
-                ConfidentialClientApplication cca = new ConfidentialClientApplication(options.ClientId, options.RedirectUri,
-   new ClientCredential(options.ClientSecret), theCache, null);
+                string signedInUserID = context.Authentication.User.
+                                        FindFirst(System.IdentityModel.Claims
+                                        .ClaimTypes.NameIdentifier).Value;
+                HttpContextBase hcb = context.Environment["System.Web.HttpContextBase"] 
+                                      as HttpContextBase;
+                TokenCache theCache = new SessionTokenCache(signedInUserID, hcb)
+                                     .GetMsalCacheInstance();
+                ConfidentialClientApplication cca = new ConfidentialClientApplication
+                                                    (options.ClientId, options.RedirectUri,
+                                                    new ClientCredential(options.ClientSecret), 
+                                                    theCache, null);
 
                 //validate state
                 CodeRedemptionData crd = OAuth2RequestManager.ValidateState(state, hcb);
@@ -138,14 +141,16 @@ namespace KEC.Curation.UI.Utils
         // save the state in the session for the current user
         private static void SaveUserStateValue(string stateGuid, HttpContextBase httpcontext)
         {
-            string signedInUserID = ClaimsPrincipal.Current.FindFirst(System.IdentityModel.Claims.ClaimTypes.NameIdentifier).Value;
+            string signedInUserID = ClaimsPrincipal.Current.FindFirst
+                                   (System.IdentityModel.Claims.ClaimTypes.NameIdentifier).Value;
             SessionLock.EnterWriteLock();
             httpcontext.Session[signedInUserID + "_state"] = stateGuid;
             SessionLock.ExitWriteLock();
         }
         private static string ReadUserStateValue(HttpContextBase httpcontext)
         {
-            string signedInUserID = ClaimsPrincipal.Current.FindFirst(System.IdentityModel.Claims.ClaimTypes.NameIdentifier).Value;
+            string signedInUserID = ClaimsPrincipal.Current.FindFirst
+                                   (System.IdentityModel.Claims.ClaimTypes.NameIdentifier).Value;
             string stateGuid = string.Empty;
             SessionLock.EnterReadLock();
             stateGuid = (string)httpcontext.Session[signedInUserID + "_state"];

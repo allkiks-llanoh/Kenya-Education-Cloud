@@ -71,3 +71,4 @@ C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC
 C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\KEC.Curation.UI.csproj.CoreCompileInputs.cache
 C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\Inspinia_MVC5_SeedProject.dll
 C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\Inspinia_MVC5_SeedProject.pdb
+C:\Users\MiyabiLLC\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.UI\obj\Debug\KEC.Curation.UI.csprojResolveAssemblyReference.cache

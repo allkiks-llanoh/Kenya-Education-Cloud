@@ -468,8 +468,8 @@ namespace KEC.Curation.UI
             bundles.Add(new ScriptBundle("~/js/chiefCuratorAssignPublication").Include(
                      "~/js/chiefCuratorAssignPublication.js"));
             // Chief curator js
-            bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
-                     "~/js/globalConstants.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/globalConstants").Include(
+                     "~/Scripts/globalConstants.js"));
             // datatables.min.js
             bundles.Add(new ScriptBundle("~/plugins/datatables").Include(
                     "~/scripts/plugins/datatables.min.js"));

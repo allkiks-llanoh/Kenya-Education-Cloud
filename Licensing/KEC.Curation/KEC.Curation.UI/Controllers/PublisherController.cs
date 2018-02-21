@@ -8,6 +8,7 @@ namespace KEC.Curation.UI.Controllers
 {
     public class PublisherController : Controller
     {
+       [Authorize]
         // GET: Publisher
         public ActionResult Upload()
         {

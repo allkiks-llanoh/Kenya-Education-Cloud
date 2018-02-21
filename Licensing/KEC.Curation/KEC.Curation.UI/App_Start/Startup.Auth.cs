@@ -1,9 +1,7 @@
 ﻿using KEC.Curation.UI.TokenStorage;
 using KEC.Curation.UI.Utils;
-using Microsoft.AspNet.Identity;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;

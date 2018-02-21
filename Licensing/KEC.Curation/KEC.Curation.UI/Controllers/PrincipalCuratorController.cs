@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
+   [Authorize]
     public class PrincipalCuratorController : Controller
     {
         // GET: PrincipalCurator

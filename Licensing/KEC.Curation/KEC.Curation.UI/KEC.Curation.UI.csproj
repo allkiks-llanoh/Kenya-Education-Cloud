@@ -341,7 +341,7 @@
     <Content Include="js\chiefCuratorAssignPublication.js" />
     <Content Include="js\chiefCuratorPublications.js" />
     <Content Include="js\chiefCuratorViewPublication.js" />
-    <Content Include="js\globalConstants.js" />
+    <Content Include="Scripts\globalConstants.js" />
     <Content Include="js\jquery-3.1.1.min.js" />
     <Content Include="js\Levels.js" />
     <Content Include="js\PrincipalCurator.js" />
@@ -397,6 +397,8 @@
     <Content Include="Content\plugins\summernote\font\summernote.woff" />
     <None Include="Properties\PublishProfiles\HostDemo.pubxml" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <None Include="Properties\PublishProfiles\keccurationui-dev - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\keccurationui-dev - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

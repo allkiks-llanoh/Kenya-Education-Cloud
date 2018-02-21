@@ -1,5 +1,4 @@
-﻿
-let subjectTypesUrl = apiBaseUrl.concat(`/SubjectTypes`)
+﻿let subjectTypesUrl = apiBaseUrl.concat(`/SubjectTypes`)
 $(document).ready(function () {
     $('#btn-postFile').click(function () {
         $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
@@ -10,7 +9,9 @@ $(document).ready(function () {
             headers : {
                 
                 'Accept' :  'application/json',
-                'Content-Type' :  'application/json'
+                'Content-Type' : 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Method': '*'
             },
             url: subjectTypesUrl,
             type: "POST",
