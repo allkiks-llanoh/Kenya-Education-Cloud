@@ -1,12 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
-{
-    {
-        <div class="hidden" id="guid" data-guid="@(System.Security.Claims.ClaimsPrincipal.Current.FindFirst("id").Value)">
-
-        </div>
-    }
-}
+﻿
 
 @{
     ViewBag.Title = "Finance";
