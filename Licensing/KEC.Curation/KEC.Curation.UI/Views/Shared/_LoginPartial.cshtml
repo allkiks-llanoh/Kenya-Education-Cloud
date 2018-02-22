@@ -3,14 +3,17 @@
 {
     using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    
 
-    <ul class="nav navbar-top-links navbar-right">
-        <li>
-            Hello, @(System.Security.Claims.ClaimsPrincipal.Current.FindFirst("preferred_username").Value)
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                Hello, @(System.Security.Claims.ClaimsPrincipal.Current.FindFirst("preferred_username").Value)
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+        <div id="guid" data-guid="@(System.Security.Claims.ClaimsPrincipal.Current.FindFirst("id").Value)">
+
+        </div>
     }
 }
 else
