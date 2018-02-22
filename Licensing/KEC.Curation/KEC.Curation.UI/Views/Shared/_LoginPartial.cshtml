@@ -7,11 +7,11 @@
 
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                Hello, @(System.Security.Claims.ClaimsPrincipal.Current.FindFirst("preferred_username").Value)
+                Hello, @(System.Security.Claims.ClaimsPrincipal.Current.FindFirst("id").Value)
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
-        <div id="guid" data-guid=" @(System.Security.Claims.ClaimsPrincipal.Current.FindFirst("preferred_username").Value)">
+        <div id="guid" data-guid=" @(System.Security.Claims.ClaimsPrincipal.Current.FindFirst("id").Value)">
 
         </div>
     }

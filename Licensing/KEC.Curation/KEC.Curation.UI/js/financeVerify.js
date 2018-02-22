@@ -13,6 +13,7 @@
                 var guid = $('#guid').attr('data-guid');
                 console.log(`${kicdnumber}`);
                 console.log(` ${notes} `);
+                console.log(` ${guid} `);
                 $.ajax({
                     headers :  {
                         'Accept' :  'application/json',

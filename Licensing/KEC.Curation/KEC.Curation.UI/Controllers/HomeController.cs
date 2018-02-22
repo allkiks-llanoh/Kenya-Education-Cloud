@@ -2,7 +2,7 @@
 
 namespace KEC.Curation.UI.Controllers
 {
-  [Authorize]
+  //[Authorize]
     public class HomeController : Controller
     {
         
