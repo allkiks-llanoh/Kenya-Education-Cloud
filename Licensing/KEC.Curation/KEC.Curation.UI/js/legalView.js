@@ -1,23 +1,25 @@
-﻿let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurator`);
-    function tableRows(data) {
+﻿
+
+var publicationID = $('#identity').attr('data-identity');
+let legalGETUrl = apiBaseUrl.concat(`/Publications/${publicationID}/LegalVerification`)
+        function tableRows(data) {
         var tableRows = [];
         for (var i = 0; i < data.length; i++) {
-        tableRows.push(drawRow(data[i]));
-    }
+            tableRows.push(drawRow(data[i]));
+        }
         return tableRows;
     };
-    var d = new Date();
-    var n = d.getFullYear();
+
     //Start by getting voucher list based on batch Id
     $.ajax({
-        url: principalCuratorGetUrl,
+        url: legalGETUrl,
         type: "GET",
-        dataType: "json",
+        dataType: 'json',
         success: function (data, status, jqhxr) {
-        console.log(data);
+            console.log(data);
 
-    //This code snipet prepares to append Json Data
-        $('#unassigned-publications').append(tableRows(data));
+        //This code snipet prepares to append Json Data
+        $('#LegalList').append(tableRows(data));
         }
     });
 
@@ -28,7 +30,8 @@
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.description + "</td>"));
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
-        row.append($(`<td> <a href="/PrincipalCurator/PrincipalCuratorReview/?Title=${rowData.title}&KICDN=${rowData.kicdNumber}&Publication=${rowData.url}&Stage=PrincipalCurator" class="btn btn-w-m btn-info" role="button">Review</a>`));
+        row.append($(`<td> <a href="/Stages/LegalVerify/?Title=${rowData.title}&KICDN=${rowData.kicdNumber}&Publication=${rowData.url}&Stage=LegalVerification" class="btn btn-w-m btn-info" role="button">Review</a>`));
 
         return row[0];
     }
+

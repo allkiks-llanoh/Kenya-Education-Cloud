@@ -1,4 +1,7 @@
-﻿let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurator`);
+﻿
+var publicationID = $('#identity').attr('data-identity');
+let financeGETUrl = apiBaseUrl.concat(`/Publications/${publicationID}/PaymentVerification`)
+
     function tableRows(data) {
         var tableRows = [];
         for (var i = 0; i < data.length; i++) {
@@ -10,14 +13,14 @@
     var n = d.getFullYear();
     //Start by getting voucher list based on batch Id
     $.ajax({
-        url: principalCuratorGetUrl,
+        url: financeGETUrl,
         type: "GET",
         dataType: "json",
         success: function (data, status, jqhxr) {
         console.log(data);
 
     //This code snipet prepares to append Json Data
-        $('#unassigned-publications').append(tableRows(data));
+    $('#FinanceList').append(tableRows(data));
         }
     });
 
@@ -26,9 +29,9 @@
         var row = $("<tr />")
         row.append($("<td>" + rowData.id + "</td>"));
         row.append($("<td>" + rowData.title + "</td>"));
-        row.append($("<td>" + rowData.description + "</td>"));
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
-        row.append($(`<td> <a href="/PrincipalCurator/PrincipalCuratorReview/?Title=${rowData.title}&KICDN=${rowData.kicdNumber}&Publication=${rowData.url}&Stage=PrincipalCurator" class="btn btn-w-m btn-info" role="button">Review</a>`));
+        row.append($(`<td class="pull-right"> <a href="/Stages/FinanceVerify/?Title=${rowData.title}&Publication=${rowData.kicdNumber}&Stage=PaymentVerification" class="btn btn-w-m btn-info" role="button">Review</a>`));
+
 
         return row[0];
     }

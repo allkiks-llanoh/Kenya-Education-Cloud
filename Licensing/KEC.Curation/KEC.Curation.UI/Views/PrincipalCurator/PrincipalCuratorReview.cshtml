@@ -11,6 +11,7 @@
 
     <script src="@Url.Content("~/Scripts/globalConstants.js")"></script>
     <script src="@Url.Content("~/js/PrincipalCurator.js")"></script>
+    <script src="@Url.Content("~/js/GetChiefCurators.js")"></script>
     <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
     @Scripts.Render("~/plugins/summernote")
     @Styles.Render("~/plugins/summernoteStyles")
@@ -21,7 +22,7 @@
     var ID = Request.Params["Id"];
     var Stage = Request.Params["Stage"];
     var Publication = Request.Params["Publication"];
-    var KICDNumber = Request.Params["Publication"];
+    var KICDNumber = Request.Params["KICDN"];
 
 }
 
@@ -135,9 +136,6 @@
 </script>
 
 
-<script type="text/JavaScript">
-   
-</script>
 
 
 
