@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KEC.Curation.Web.Api.Controllers
 {
-    [EnableCors ("*")]
+    [EnableCors ("CurationCORS")]
     [Produces("application/json")]
     [Route("api/Publications")]
     public class PublicationsController : Controller

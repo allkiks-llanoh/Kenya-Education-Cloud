@@ -8,7 +8,7 @@ namespace KEC.Curation.UI.Controllers
 {
     public class StagesController : Controller
     {
-       [Authorize]
+       //[Authorize]
         // GET: Stages
         public ActionResult Legal()
         {

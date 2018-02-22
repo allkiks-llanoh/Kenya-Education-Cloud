@@ -226,7 +226,7 @@
     <Compile Include="Models\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="TokenStorage\SessionTokenCache.cs" />
+    <Compile Include="Scripts\TokenStorage\SessionTokenCache.cs" />
     <Compile Include="Utils\OAuth2CodeRedeemerMiddleware.cs" />
   </ItemGroup>
   <ItemGroup>

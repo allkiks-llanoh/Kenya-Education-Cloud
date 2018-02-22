@@ -52,7 +52,7 @@
         var n = d.getFullYear();
     //Start by getting voucher list based on batch Id
         $.ajax({
-            url:  "http://curationapi-d.kec.ac.ke/api/Publications/1/LegalVerification",
+            url:  "https://curationapi-d.kec.ac.ke/api/Publications/1/LegalVerification",
             type: "GET",
             dataType: 'json',
             success: function (data,status,jqhxr){
@@ -73,6 +73,4 @@
         
         return row[0];
        }
-
-
 </script>
