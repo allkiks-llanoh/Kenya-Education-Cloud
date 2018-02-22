@@ -10,7 +10,12 @@
     <script src="@Url.Content("~/js/legalView.js")"></script>
     <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
 }
-
+    <div class="text-center m-t-lg">
+        <h1>
+            @ViewData["SubTitle"]
+        </h1>
+        <small>@ViewData["Message"]</small>
+    </div>
 <div class="tabs-container">
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#tab-unassigned" aria-expanded="true">Legal Verification Stage</a></li>

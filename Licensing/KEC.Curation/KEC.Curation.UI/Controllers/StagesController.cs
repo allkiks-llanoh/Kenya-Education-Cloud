@@ -8,7 +8,7 @@ namespace KEC.Curation.UI.Controllers
 {
     public class StagesController : Controller
     {
-       //[Authorize]
+       [Authorize]
         // GET: Stages
         public ActionResult Legal()
         {
@@ -33,7 +33,7 @@ namespace KEC.Curation.UI.Controllers
         }
         public ActionResult FinanceVerify()
         {
-            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Verify Payment Has Been Made Against Publication";
 
             return View();
@@ -41,7 +41,7 @@ namespace KEC.Curation.UI.Controllers
         }
         public ActionResult Test()
         {
-            ViewData["SubTitle"] = "Kenya Education Cloud";
+            ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Verify Payment Has Been Made Against Publication";
 
             return View();

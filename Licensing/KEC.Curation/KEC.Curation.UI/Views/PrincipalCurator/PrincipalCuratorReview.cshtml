@@ -25,7 +25,12 @@
     var KICDNumber = Request.Params["KICDN"];
 
 }
-
+    <div class="text-center m-t-lg">
+        <h1>
+            @ViewData["SubTitle"]
+        </h1>
+        <small>@ViewData["Message"]</small>
+    </div>
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="row">
         <div class="col-lg-12">
