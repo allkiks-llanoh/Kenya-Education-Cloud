@@ -11,7 +11,7 @@
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
-        <div id="guid" data-guid="@(System.Security.Claims.ClaimsPrincipal.Current.FindFirst("preferred_id").Value)">
+        <div id="guid" data-guid="@(System.Security.Claims.ClaimsPrincipal.Current.FindFirst("preferred_objectId").Value)">
 
         </div>
     }

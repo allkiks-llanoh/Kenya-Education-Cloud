@@ -1,4 +1,5 @@
 ﻿using KEC.Curation.UI.TokenStorage;
+using Microsoft.Graph;
 using Microsoft.Identity.Client;
 using Microsoft.Owin;
 using Owin;
@@ -193,7 +194,8 @@ namespace KEC.Curation.UI.Utils
         {
             string signedInUserID = ClaimsPrincipal.Current.FindFirst(System.IdentityModel.Claims.ClaimTypes.NameIdentifier).Value;
             string preferredUsername = ClaimsPrincipal.Current.FindFirst("preferred_username").Value;
-            string id = ClaimsPrincipal.Current.FindFirst("preferred_id").Value;
+            string signedInUserGUID = ClaimsPrincipal.Current.FindFirst(System.IdentityModel.Claims.ClaimTypes.PPID).Value;
+            string objectID = ClaimsPrincipal.Current.FindFirst("preferred_objectID").Value;
             Uri oauthCodeProcessingPath = new Uri(httpcontext.Request.Url.GetLeftPart(UriPartial.Authority).ToString());
             string state = GenerateState(httpcontext.Request.Url.ToString(), httpcontext, url, scopes);
             string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
