@@ -200,7 +200,7 @@ namespace KEC.Curation.UI.Utils
             string domain_hint = (tenantID == "9188040d-6c67-4c5b-b112-36a304b66dad") ? "consumers" : "organizations";
             Uri authzMessageUri = await cca.GetAuthorizationRequestUrlAsync(scopes,
                 oauthCodeProcessingPath.ToString(),
-                 preferredID,,
+                 preferredID,
                
                 state == null ? null : "&state=" + state + "&domain_hint=" + domain_hint,
                 null,
