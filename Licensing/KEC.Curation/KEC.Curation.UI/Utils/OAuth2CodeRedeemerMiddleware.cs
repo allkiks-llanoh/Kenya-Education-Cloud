@@ -193,6 +193,7 @@ namespace KEC.Curation.UI.Utils
         {
             string signedInUserID = ClaimsPrincipal.Current.FindFirst(System.IdentityModel.Claims.ClaimTypes.NameIdentifier).Value;
             string preferredUsername = ClaimsPrincipal.Current.FindFirst("preferred_username").Value;
+            string id = ClaimsPrincipal.Current.FindFirst("preferred_id").Value;
             Uri oauthCodeProcessingPath = new Uri(httpcontext.Request.Url.GetLeftPart(UriPartial.Authority).ToString());
             string state = GenerateState(httpcontext.Request.Url.ToString(), httpcontext, url, scopes);
             string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
