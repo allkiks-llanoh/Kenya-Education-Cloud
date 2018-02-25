@@ -44,7 +44,7 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
 
-                var filePath = new System.Uri( $"{_env.ContentRootPath}\\Publications\\{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}");
+                var filePath = new System.Uri( $"{_env.ContentRootPath}/Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}");
                 var converted = filePath.AbsolutePath;
                 var publication = new Publication
                 {

@@ -145,7 +145,7 @@
 
     //Start by getting voucher list based on batch Id
         $.ajax({
-            url: 'http://curationapi-d.kec.ac.ke/api/Publishers/approved/',
+            url: `http://curationapi-d.kec.ac.ke/api/Publishers/approved`,
             type: "GET",
             dataType: "json",
             data: JSON.stringify({ guid: UguidApproved }),
@@ -200,8 +200,6 @@
 
         return row[0];
     }
-
-
 </script>
 
 <script type="text/JavaScript">
@@ -237,6 +235,4 @@
 
         return row[0];
     }
-
-
 </script>
