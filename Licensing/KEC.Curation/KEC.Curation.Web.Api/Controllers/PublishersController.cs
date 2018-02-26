@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
+using KEC.Curation.Web.Api.Cors;
 using KEC.Curation.Web.Api.Serializers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KEC.Curation.Publishers.Web.Api.Controllers
 {
+    [AllowCrossSiteJson]
     [Produces("application/json")]
     [Route("api/Publishers")]
     public class PublishersController : Controller

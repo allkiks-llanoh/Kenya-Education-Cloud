@@ -48,7 +48,7 @@ namespace KEC.Curation.Web.Api
                 app.UseDeveloperExceptionPage();
             }
             
-           app.UseCors("CurationCORS");
+           app.UseCors("AllowCrossSiteJson");
 
             app.UseMvc();
 

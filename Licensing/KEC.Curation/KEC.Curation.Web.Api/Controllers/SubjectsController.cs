@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
+using KEC.Curation.Web.Api.Cors;
 using KEC.Curation.Web.Api.Serializers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KEC.Curation.Web.Api.Controllers
 {
+    [AllowCrossSiteJson]
     [Produces("application/json")]
     [Route("api/Subjects")]
     public class SubjectsController : Controller

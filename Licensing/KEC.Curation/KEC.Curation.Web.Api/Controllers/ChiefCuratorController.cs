@@ -7,6 +7,7 @@ using KEC.Curation.Web.Api.Cors;
 using KEC.Curation.Web.Api.Serializers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using KEC.Curation.Services.Extensions;
 
 namespace KEC.Curation.Web.Api.Controllers
 {

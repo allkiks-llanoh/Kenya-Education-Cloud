@@ -1,4 +1,5 @@
-﻿using KEC.Curation.PublishersUI.Models;
+﻿using KEC.Curation.PublishersUI.Cors;
+using KEC.Curation.PublishersUI.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.PublishersUI.Controllers
 {
+    [AllowCrossSiteJson]
     public class HomeController : Controller
     {
 

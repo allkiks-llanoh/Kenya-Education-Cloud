@@ -1,12 +1,14 @@
 ﻿using KEC.Curation.PublishersUI.Models;
+using KEC.Curation.PublishersUI.Cors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace KEC.Curation.UI.Controllers
+namespace KEC.Curation.PublishersUI.Controllers
 {
+    [AllowCrossSiteJson]
     [Authorize]
     public class PublisherController : Controller
     {

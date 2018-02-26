@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Transactions;
 using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
+using KEC.Curation.Web.Api.Cors;
 using KEC.Curation.Web.Api.Serializers;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
@@ -15,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace KEC.Curation.Web.Api.Controllers
 {
 
-    [EnableCors("CurationCORS")]
+    [AllowCrossSiteJson]
     [Produces("application/json")]
     [Route("api/PrincipalCurator")]
     public class PrincipalCuratorController : Controller

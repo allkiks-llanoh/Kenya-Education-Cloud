@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
+using KEC.Curation.Web.Api.Cors;
 using KEC.Curation.Web.Api.Serializers;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KEC.Curation.Web.Api.Controllers
 {
+    [AllowCrossSiteJson]
     [Produces("application/json")]
     [Route("api/Levels")]
     public class LevelsController : Controller
@@ -22,7 +24,7 @@ namespace KEC.Curation.Web.Api.Controllers
         }
         // GET: api/Levels
         [HttpGet]
-        [EnableCors("CurationCORS")]
+      
         public IActionResult AllLevels()
         {
             var levels = _uow.LevelRepository.GetAll().ToList();
@@ -35,7 +37,7 @@ namespace KEC.Curation.Web.Api.Controllers
         
         // POST: api/Levels
         [HttpPost]
-        [EnableCors("CurationCORS")]
+       
         public IActionResult CreateLevel([FromBody] LevelsUploadSerilizer model)
         {
             if (!ModelState.IsValid)
@@ -67,7 +69,7 @@ namespace KEC.Curation.Web.Api.Controllers
         
         // Patch: api/Levels/5
         [HttpPatch("{id}")]
-        [EnableCors("CurationCORS")]
+
         public IActionResult UpdateLevel(int Id, LevelsUploadSerilizer model)
         {
             if (!ModelState.IsValid)

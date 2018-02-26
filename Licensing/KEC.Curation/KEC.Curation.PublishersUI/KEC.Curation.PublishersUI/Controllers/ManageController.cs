@@ -7,9 +7,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using KEC.Curation.PublishersUI.Models;
+using KEC.Curation.PublishersUI.Cors;
 
 namespace KEC.Curation.PublishersUI.Controllers
 {
+    [AllowCrossSiteJson]
     [Authorize]
     public class ManageController : Controller
     {

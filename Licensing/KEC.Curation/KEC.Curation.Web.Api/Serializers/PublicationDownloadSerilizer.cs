@@ -2,6 +2,7 @@
 using KEC.Curation.Data.UnitOfWork;
 using System;
 using System.Linq;
+using KEC.Curation.Services.Extensions;
 
 namespace KEC.Curation.Web.Api.Serializers
 {
