@@ -1,6 +1,5 @@
 ﻿using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
-using KEC.Curation.Services.Extensions;
 using System;
 using System.Linq;
 
