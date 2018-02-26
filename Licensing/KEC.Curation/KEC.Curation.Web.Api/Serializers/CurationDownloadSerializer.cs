@@ -55,5 +55,28 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _assignment.Submitted ? "Submitted" : "Pending";
             }
         }
+        public string Notes
+        {
+            get
+            {
+                return _assignment.Notes;
+            }
+        }
+        public string PublicationUrl
+        {
+            get
+            {
+                var publicationId = _uow.PublicationSectionRepository.Get(_assignment.PublicationSectionId)?.PublicationId;
+                var publication = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
+                if (publication == null)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    return publication.Url;
+                }
+            }
+        }
     }
 }
