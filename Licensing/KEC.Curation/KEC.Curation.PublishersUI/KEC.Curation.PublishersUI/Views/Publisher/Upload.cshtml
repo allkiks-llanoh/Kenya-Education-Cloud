@@ -213,13 +213,15 @@
 
 </script>
 <script type="text/JavaScript">
-
+    const apiBaseUrl = "https://curationapi-d.kec.ac.ke/api";
+    let publicationSubmitUrl = apiBaseUrl.concat(`/Publishers/submit`);
     $('#btn-postFile').click(function (e) {
         e.preventDefault();
+        $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         var form_data = new FormData($('#uploadform')[0]);
         $.ajax({
             type: 'POST',
-            url: 'https://curationapi-d.kec.ac.ke/api/Publishers/submit',
+            url: publicationSubmitUrl,
             processData: false,
             contentType: false,
             async: true,
@@ -232,12 +234,28 @@
                 console.log(response);
                 $('#message').html(response);
                 $('div.alert-success').toggleClass('hidden');
+                $('#btn-postFile').html('SUBMIT PUBLICATION');
+                $('#Title').html(' ');
+                $('#ISBNNumber').html(' ');
+                $('#AuthorName').html(' ');
+                $('#Price').html(' ');
+                $('#CompletionDate').html(' ');
+                $('#PublicationFile').html(' No Publication Selected');
             },
+            error: function (request, status, error) {
 
-            complete: function (xhr, status) {
-                $('#spinner').hide();
-                $('#postedFile').val('');
+                console.log(request);
+                console.log(status);
+
+                console.log(request.responseText);
+                $('#error').html(request.responseText)
+                $('div.alert-danger').toggleClass('hidden');
+                $('#btn-postFile').html('SUBMIT PUBLICATION');
+
+
             }
+
+            
         });
     });
 

@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.Curation.Services", "KE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.Curation.Publishers.Web.Api", "Kec.Publishers.Web.Api\KEC.Curation.Publishers.Web.Api.csproj", "{7822ADA8-4DC8-4A71-94E7-350796CDE83E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEC.Curation.UI", "KEC.Curation.UI\KEC.Curation.UI.csproj", "{86CADB26-5817-46B6-88C7-76D5753722C3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.Curation.Web.Api", "KEC.Curation.Web.Api\KEC.Curation.Web.Api.csproj", "{19BA6835-A2ED-4BA0-AA26-EE4BEF65685D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEC.Curation.UI", "KEC.Curation.UI\KEC.Curation.UI\KEC.Curation.UI.csproj", "{BD3658CC-F990-44DA-BCAB-7D9BA1C52955}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEC.Curation.PublishersUI", "KEC.Curation.PublishersUI\KEC.Curation.PublishersUI\KEC.Curation.PublishersUI.csproj", "{EEDA859E-ACEC-40C6-94D4-B17FB695CCEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +33,18 @@ Global
 		{7822ADA8-4DC8-4A71-94E7-350796CDE83E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7822ADA8-4DC8-4A71-94E7-350796CDE83E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7822ADA8-4DC8-4A71-94E7-350796CDE83E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{86CADB26-5817-46B6-88C7-76D5753722C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86CADB26-5817-46B6-88C7-76D5753722C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86CADB26-5817-46B6-88C7-76D5753722C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{86CADB26-5817-46B6-88C7-76D5753722C3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19BA6835-A2ED-4BA0-AA26-EE4BEF65685D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19BA6835-A2ED-4BA0-AA26-EE4BEF65685D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19BA6835-A2ED-4BA0-AA26-EE4BEF65685D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19BA6835-A2ED-4BA0-AA26-EE4BEF65685D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD3658CC-F990-44DA-BCAB-7D9BA1C52955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD3658CC-F990-44DA-BCAB-7D9BA1C52955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD3658CC-F990-44DA-BCAB-7D9BA1C52955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD3658CC-F990-44DA-BCAB-7D9BA1C52955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDA859E-ACEC-40C6-94D4-B17FB695CCEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDA859E-ACEC-40C6-94D4-B17FB695CCEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDA859E-ACEC-40C6-94D4-B17FB695CCEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDA859E-ACEC-40C6-94D4-B17FB695CCEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

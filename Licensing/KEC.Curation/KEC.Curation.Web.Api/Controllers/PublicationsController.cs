@@ -44,7 +44,7 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
 
-                var filePath =$"{_env.ContentRootPath}//Publications//{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
+                var filePath = $"{_env.ContentRootPath}//Publications//{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
                 
                 var publication = new Publication
                 {
@@ -79,7 +79,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 using (var memoryStream = new MemoryStream())
                 {
                     await model.PublicationFile.CopyToAsync(memoryStream);
-                    var fileStream = new FileStream(converted, FileMode.CreateNew, FileAccess.ReadWrite);
+                    var fileStream = new FileStream(filePath, FileMode.CreateNew, FileAccess.ReadWrite);
                     memoryStream.WriteTo(fileStream);
                 }
                 return Ok(value: "Publication submitted successfully");
@@ -88,6 +88,38 @@ namespace KEC.Curation.Web.Api.Controllers
             {
 
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+        }
+        [HttpGet("{stage}/Legal")]
+        public IActionResult PublicationLegal(PublicationStage stage)
+        {
+            try
+            {
+
+                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
+                             (PublicationStage.LegalVerification)).ToList();
+                return Ok(value: publication);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpGet("{stage}/Finance")]
+        public IActionResult PublicationFinance(PublicationStage stage)
+        {
+            try
+            {
+
+                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
+                             (PublicationStage.PaymentVerification)).ToList();
+                return Ok(value: publication);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
         [HttpGet("{subjectId:int}/{stage}/get")]

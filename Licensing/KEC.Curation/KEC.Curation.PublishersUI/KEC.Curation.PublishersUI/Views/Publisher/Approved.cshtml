@@ -148,7 +148,7 @@
             url: `http://curationapi-d.kec.ac.ke/api/Publishers/approved`,
             type: "GET",
             dataType: "json",
-            data: JSON.stringify({ guid: UguidApproved }),
+            data:{ guid: UguidApproved },
             success: function (data, status, jqhxr) {
             console.log(data);
 
@@ -182,7 +182,7 @@
         url: `http://curationapi-d.kec.ac.ke/api/Publishers/conditional`,
         type: "GET",
         dataType: "json",
-        data: JSON.stringify({ guid: UguidConditional }),
+        data:{ guid: UguidConditional },
         success: function (data, status, jqhxr) {
             console.log(data);
 
@@ -217,7 +217,7 @@
         url: `http://lcurationapi-d.kec.ac.ke/api/Publishers/rejected`,
         type: "GET",
         dataType: "json",
-        data: JSON.stringify({ guid: UguidRejected }),
+        data:{ guid: UguidRejected },
         success: function (data, status, jqhxr) {
             console.log(data);
 

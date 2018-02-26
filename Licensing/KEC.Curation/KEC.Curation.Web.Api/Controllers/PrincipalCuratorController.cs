@@ -108,8 +108,8 @@ namespace KEC.Curation.Web.Api.Controllers
                 var assignment = new ChiefCuratorAssignment
                 {
                     PublicationId = publication.Id,
-                    PrincipalCuratorGuid = "TODO",
-                    ChiefCuratorGuid = "TODO",
+                    PrincipalCuratorGuid = model.PrincipalCuratorGuid,
+                    ChiefCuratorGuid = model.ChiefCuratorGuid,
                     AssignmetDateUtc = DateTime.UtcNow
 
 
