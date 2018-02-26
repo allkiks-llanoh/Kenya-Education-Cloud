@@ -1,4 +1,5 @@
 ﻿using KEC.Curation.UI.Models;
+using Microsoft.Azure.ActiveDirectory.GraphClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-  // [Authorize]
+    // [Authorize]
     public class PrincipalCuratorController : Controller
     {
         // GET: PrincipalCurator
@@ -23,9 +24,12 @@ namespace KEC.Curation.UI.Controllers
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
+          
+            
+                //var result = new UserProfileController().GetTokenForApplication();
+                
 
-          // var result = new UserProfileController().GetTokenForApplication();
-           
+
             return View();
         }
         public ActionResult get()

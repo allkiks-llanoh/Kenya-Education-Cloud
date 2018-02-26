@@ -15,6 +15,7 @@ using KEC.Curation.UI.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
 
 namespace KEC.Curation.UI.Controllers
 {
@@ -33,6 +34,7 @@ namespace KEC.Curation.UI.Controllers
         {
             string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
             string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+
             try
             {
                 Uri servicePointUri = new Uri(graphResourceID);
@@ -60,7 +62,36 @@ namespace KEC.Curation.UI.Controllers
                 return View("Relogin");
             }
         }
+        public async Task<ActionResult> GetChiefCurators()
+        {
 
+            string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
+            string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+
+            Uri servicePointUri = new Uri(graphResourceID);
+            Uri serviceRoot = new Uri(servicePointUri, tenantID);
+            var curatorsList = new List<User>();
+            ActiveDirectoryClient activeDirectoryClient = new ActiveDirectoryClient(serviceRoot,
+                                                         async () => await GetTokenForApplication());
+
+            IPagedCollection<IUser> pagedCollection = await activeDirectoryClient.Users.OrderBy
+                                                      (u => u.DisplayName).ExecuteAsync();
+            if (pagedCollection != null)
+            {
+                do
+                {
+                    List<IUser> curatorList = pagedCollection.CurrentPage.ToList();
+                    foreach (IUser user in curatorList)
+                    {
+                        curatorList.Add((User)user);
+                    }
+                    pagedCollection = await pagedCollection.GetNextPageAsync();
+
+                }
+                while (pagedCollection != null);
+            }
+            return View(curatorsList);
+        }
         public void RefreshSession()
         {
             HttpContext.GetOwinContext().Authentication.Challenge(
@@ -87,8 +118,9 @@ namespace KEC.Curation.UI.Controllers
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
-            
+
             return (result);
-         }
-     }
+        }
+       
+    }
 }
