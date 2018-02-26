@@ -10,7 +10,7 @@ namespace KEC.Curation.UI.Cors
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            filterContext.RequestContext.HttpContext.Response.AddHeader("Access-Controll-Allow-Origin", "http://localhost:15176");
+            filterContext.RequestContext.HttpContext.Response.AddHeader("Access-Controll-Allow-Origin", "https://curationapi-d/api");
             base.OnActionExecuting(filterContext);
         }
     }
