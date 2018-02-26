@@ -5,6 +5,7 @@ namespace KEC.Curatiom.Web.UI.Controllers
 {
     [AllowCrossSiteJson]
     [RoutePrefix("{controller}")]
+    [Authorize]
     public class ChiefCuratorController : Controller
     {
        
