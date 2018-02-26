@@ -1,7 +1,7 @@
 ﻿
 $(function () {
 
-    AjaxCall('https://curation-d/api/userprofile/GetTokenForApplication', null).done(function (response) {
+    AjaxCall('https://curation-d.kec.ac.ke/api/userprofile/GetTokenForApplication', null).done(function (response) {
         if (response.length > 0) {
 
             $('#UserGuid').html('');
