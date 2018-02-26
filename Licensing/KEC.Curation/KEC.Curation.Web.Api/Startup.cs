@@ -24,11 +24,11 @@ namespace KEC.Curation.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddCors(o => o.AddPolicy("CurationCORS", builder =>
+            services.AddCors(o => o.AddPolicy("AllowCrossSiteJson", builder =>
                                                                         {
-                                                                          builder.AllowAnyHeader()
-                                                                                 .AllowAnyMethod()
-                                                                                 .AllowAnyOrigin();
+                                                                            builder.AllowAnyHeader()
+                                                                                   .AllowAnyMethod()
+                                                                                   .AllowAnyOrigin();
                                                                         }));
 
             services.Configure<MvcOptions>(option =>
