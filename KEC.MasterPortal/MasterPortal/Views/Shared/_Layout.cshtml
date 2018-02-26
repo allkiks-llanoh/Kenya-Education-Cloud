@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] KEC Master Portal</title>
+
+		<link rel="icon" href="~/favicon.ico" type="image/x-icon" />
+        		
+		<!-- Google Font -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:200,300,300i,400,400i,500,600,700|Oswald:300,400,500,600">
+		
+		<!--- owl carousel Css-->
+		<link rel="stylesheet" href="~/owlcarousel/css/owl.carousel.css">
+		<link rel="stylesheet" href="~/owlcarousel/css/owl.theme.css">		
+		<!-- MAGNIFIC CSS -->
+		<link rel="stylesheet" href="~/css/magnific-popup.css">	
+	    <!--Flex slider-->
+        <link rel="stylesheet" href="~/css/flexslider.css">	
+		<!-- animate CSS -->		
+		<link rel="stylesheet" href="~/css/animate.css"> 		
+		<!-- Style CSS -->
+		<link rel="stylesheet" href="~/css/style.css">		
+					
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+        <!-- Font Awesome CSS -->
+		<link rel="stylesheet" href="~/fonts/font-awesome.min.css">
+</head>
+<body>
+    	
+		<!-- START NAVBAR -->
+		<div class="navbar navbar-default navbar-fixed-top menu-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="#home" class="navbar-brand"><img src="~/img/logo.png" style="margin-top:-20px;"  alt="logo"></a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<nav>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a class="page-scroll" href="#home">Home</a></li>
+							<li><a class="page-scroll" href="#feature">CMS</a></li>
+							<li><a class="page-scroll" href="#about">Licence Mgt</a></li>
+							<li><a class="page-scroll" href="#ecommerce">E-Commerce</a></li>
+							<li><a class="page-scroll" href="#voucher">Voucher Mgt</a></li>
+							<li><a class="page-scroll" href="#digital">Digital Content</a></li>
+							<li><a class="page-scroll" href="#content">Content Fulfillment</a></li>
+							<li><a class="page-scroll" href="#distribution">Book Distribution</a></li>
+						</ul>
+					</nav>
+				</div> 
+			</div><!--- END CONTAINER -->
+		</div> 
+		<!-- END NAVBAR -->
+
+        @RenderBody()
+
+        <!-- START FOOTER BOTTOM -->
+		<footer class="footer">
+			<div class="container">
+				<div class="row wow bounceInUp" data-wow-delay=".4s">
+					<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+						<img src="~/img/logo.png" alt="logo">
+						<p class="footer_copyright">&copy; 2018 <a href="#">KEC</a> All Rights Reserved.</p>	
+					</div><!--- END COL -->
+				</div><!--- END ROW -->
+			</div><!--- END CONTAINER -->
+		</footer>
+		<!-- END FOOTER BOTTOM-->
+    </div>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/stellar-base/0.7.7/stellar-base.min.js"></script>
+            <!-- Latest jQuery -->
+			<script src="~/js/jquery-1.12.4.min.js"></script>
+            <script src="~/js/jquery.mixitup.js"></script>		
+		<!-- scrolltopcontrol js -->
+			<script src="~/js/scrolltopcontrol.js"></script>	
+		
+		<!-- switcher js -->
+			<script src="~/js/switcher.js"></script>
+			<!-- stellar js -->
+			<script src="~/js/jquery.stellar.min.js"></script>				
+		
+            
+		<!-- Latest compiled and minified Bootstrap -->
+			<script src="~/bootstrap/js/bootstrap.min.js"></script>
+        <!-- WOW - Reveal Animations When You Scroll -->
+			<script src="~/js/wow.min.js"></script>	
+			<!-- scripts js -->
+		     <script src="~/js/scripts.js"></script>
+		<!-- modernizer JS -->		
+			<script src="~/js/modernizr-2.8.3.min.js"></script>	
+		<!-- owl-carousel min js  -->
+			<script src="~/owlcarousel/js/owl.carousel.min.js"></script>			
+			
+		<!-- jquery inview js -->
+			<script src="~/js/jquery.inview.min.js"></script>	
+		<!-- jquery flexslider min js -->
+			<script src="~/js/jquery.flexslider-min.js"></script>	
+		<!-- MAGNIFICANT JS -->
+			<script src="~/js/jquery.magnific-popup.min.js"></script>
+		
+    
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

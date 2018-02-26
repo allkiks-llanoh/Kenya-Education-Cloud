@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kecportal", "MasterPortal\kecportal.csproj", "{FEB2B4F7-5C23-40E6-8596-D68524986158}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEB2B4F7-5C23-40E6-8596-D68524986158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEB2B4F7-5C23-40E6-8596-D68524986158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEB2B4F7-5C23-40E6-8596-D68524986158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEB2B4F7-5C23-40E6-8596-D68524986158}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1AB4C8A8-C13C-4432-BBEF-14C8EF84D641}
+	EndGlobalSection
+EndGlobal
