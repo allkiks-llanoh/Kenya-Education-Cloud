@@ -1,0 +1,1802 @@
+/*
+Author       : Theme_ocean.
+Template Name: Yuafa - Easy Startup Landing Page
+Version      : 1.0
+*/
+/*=============================================================
+    CSS INDEX
+    =============================
+    01. GENERAL STYLE (body, link color, section-title, preloader btn, overlay, section-padding etc)
+    02. START BOOTSTRAP NAVIGATION OVERRIDES
+    03. START HOME DESIGN
+    04. START FEATTURE DESIGN
+    05. START OFFER DESIGN
+    06. START ABOUT US DESIGN
+    07. START COMPANY DETAILS DESIGN
+    08. START COUNTER DESIGN
+    09. START TEAM DESIGN
+    10. START PROMOTION DESIGN
+    11. START RESPONSIVE PROMOTION DESIGN
+    12. START NEWSLETTER DESIGN
+    13. START WORK CSS DESIGN
+    14. START TESTIMONIAL DESIGN
+    15. START COMPANY PARTNER LOGO
+    16. START PRICING DESIGN
+    17. START BLOG DESIGN
+    18. START PROMOTION INVITE DESIGN
+    19. START FAQ DESIGN
+    20. START CONTACT FORM DESIGN
+    21. START ADDRESS DESIGN
+    22. START FOOTER DESIGN
+  =============================================================*/
+/*
+* ----------------------------------------------------------------------------------------
+* 01.GENERAL STYLE
+* ----------------------------------------------------------------------------------------
+*/
+body {
+width: 100%;
+height: 100%;
+font-family: 'Raleway', sans-serif;
+color: #636363;
+font-size: 15px;
+letter-spacing: 1px;
+background: #fff;
+}
+html,
+body { height: 100% }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+color: #333;
+font-weight: 300;
+letter-spacing: 0;
+margin: 0;
+font-family: oswald,sans-serif;
+}
+a {
+font-family: oswald,sans-serif;
+text-decoration: none;
+transition: all 0.2s ease 0s;
+}
+a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+a:focus {
+    outline: none;
+    text-decoration: none;
+}
+p {
+    margin-bottom: 0;
+}
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+fieldset {
+    border: 0 none;
+    margin: 0 auto;
+    padding: 0;
+}
+/*START PRELOADER DESIGN*/
+.preloader {
+    background:#fff;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 9999;
+}
+.status,
+.status-mes {
+    background-image: url(img/status.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 200px;
+    left: 50%;
+    margin: -100px 0 0 -100px;
+    position: absolute;
+    top: 50%;
+    width: 200px;
+}
+.status-mes {
+    background: none;
+    left: 0;
+    margin: 0;
+    text-align: center;
+    top: 65%;
+}
+.status-mes h4 {
+    color: #333;
+    margin-top: 30px;
+	font-weight:600px;
+	text-transform: uppercase;
+	font-family: "Montserrat",sans-serif;
+}
+.no-padding { padding: 0 }
+/*END PRELOADER DESIGN*/
+.section-padding { padding: 60px 0 }
+/*START SECTION TITLE DESIGN*/
+.section-title { margin-bottom: 60px }
+.section-title  h2 {
+color: #333;
+font-family: oswald,sans-serif;
+font-size: 40px;
+font-weight: 500;
+margin-bottom: 10px;
+margin-top: 0;
+position: relative;
+text-transform: capitalize;
+}
+.section-title p{width:70%;margin:auto;position:relative;}
+@media only screen and (max-width:480px) { 
+.section-title p{width:90%;margin:auto;}
+}
+.section-title-white { margin-bottom: 60px }
+.section-title-white  {
+margin-top: 0;
+text-transform: capitalize;
+position:relative;
+color:#fff;
+}
+.section-title-white{position:relative;color:#fff!important;}
+/*END SECTION TITLE DESIGN*/
+/*START SCROLL TO TOP*/
+.topcontrol {
+background: #d9262e none repeat scroll 0 0;
+border-radius: 5px;
+bottom: 5px;
+box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+color: #fff;
+cursor: pointer;
+font-size: 22px;
+height: 35px;
+line-height: 33px;
+opacity: 1;
+position: fixed;
+right: 5px;
+text-align: center;
+transition: all 0.2s ease 0s;
+width: 35px;
+}
+.topcontrol:hover {
+    background: #222;
+    color: #fff;
+}
+/*END SCROLL TO TOP*/
+
+.btn-light-bg-two {
+background: #d9262e none repeat scroll 0 0;
+border: 2px solid #d9262e;
+border-radius: 30px;
+color: #fff;
+font-family: oswald,sans-serif;
+font-size: 18px;
+padding: 10px 50px;
+text-transform: capitalize;
+transition: all 0.3s ease 0s;
+}
+.btn-light-bg-two:hover, .btn-light-bg-two :focus{background:#333;border: 2px solid #333;color:#fff;}
+/*
+* ----------------------------------------------------------------------------------------
+* 01.END GENERAL STYLE
+* ----------------------------------------------------------------------------------------
+*/
+
+/*
+* ----------------------------------------------------------------------------------------
+* 02.START BOOTSTRAP NAVIGATION OVERRIDES
+* ----------------------------------------------------------------------------------------
+*/
+.navbar-default {
+background: #fff none repeat scroll 0 0;
+border: medium none;
+border-radius: 0;
+margin-bottom: 0;
+padding: 10px 0;
+transition: all 0.4s ease-in-out 0s;
+width: 100%;
+}
+@media only screen and (max-width:480px) { 
+.navbar-default {background: #fff;}
+}
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+    color: #d9262e !important;
+    background-color: transparent;
+}
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.open>a:focus {
+    color: #171717 !important;
+    background-color: transparent;
+}
+.navbar-default .navbar-form { border-color: #fff }
+.navbar-brand { padding: 0px }
+.navbar-brand img {
+    width: 150px;
+	transition: all 0.3s ease 0s;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form { border-color: #fff }
+.menu-top li a {
+color: #333!important;
+font-family: "Oswald",sans-serif;
+font-size: 16px;
+letter-spacing: 0.05em;
+position: relative;
+text-transform: uppercase;
+transition: color 0.25s ease 0s;
+}
+.menu-top li a:hover { color: #d9262e!important }
+@media only screen and (max-width:480px) { 
+.menu-top li a {
+color: #333!important;}
+}
+.navbar-default.menu-shrink {
+background:#fff;
+padding: 10px 0;
+width: 100%;
+ margin-top:0px
+}
+.navbar-default.menu-shrink li a {color:#333 !important; }
+.navbar-default.menu-shrink li a:hover { color: #d9262e !important }
+.navbar-default .navbar-toggle { background: #fff none repeat scroll 0 0 }
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus { background-color: #fff }
+.navbar-default .navbar-toggle .icon-bar { background-color: #d9262e }
+/*
+* ----------------------------------------------------------------------------------------
+* 02.END BOOTSTRAP NAVIGATION OVERRIDES
+* ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 03.START HOME DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+.home-parallax {position: relative;height:750px;}
+@media only screen and (max-width:768px) { 
+.home-parallax {height: 1048px;}
+}
+
+@media only screen and (max-width:480px) { 
+.home-parallax {height: 1150px;}
+}
+@media only screen and (max-width:414px) { 
+.home-parallax {height: 1150px;}
+}
+@media only screen and (max-width:375px) { 
+.home-parallax {height: 1150px;}
+}
+
+@media only screen and (max-width:360px) { 
+.home-parallax {height: 1300px;}
+}
+@media only screen and (max-width:320px) { 
+.home-parallax {height: 1300px;}
+}
+.home-parallax:before {
+    background: rgba(0, 0, 0, 0) url("img/pattern.png") repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+.pt250{padding-top:250px;}
+@media only screen and (max-width:480px) { 
+.pt250{padding-top:200px;}
+}
+.hero-text h2 {
+color: #fff;
+font-family: oswald,sans-serif;
+font-size: 62px;
+font-weight: 400;
+line-height: 72px;
+margin: 0;
+text-transform: capitalize;
+}
+@media only screen and (max-width:768px) { 
+    .hero-text h2 {
+        font-size: 40px;
+        line-height: 54px;
+    }
+}
+@media only screen and (max-width:480px) { 
+    .hero-text h2 {
+        font-size: 34px;
+        line-height: 45px;
+    }
+}
+@media only screen and (max-width:360px) { 
+    .hero-text h2 {
+        font-size: 26px;
+        line-height: 36px;
+    }
+}
+.hero-text p {
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+    padding-bottom: 30px;
+    padding-top: 15px;
+}
+
+.register{
+background: rgba(255, 255, 255, 0.2) none repeat scroll 0 0;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+margin-top: 200px;
+overflow: hidden;
+padding: 30px;
+}
+@media only screen and (max-width:768px) { 
+.register{margin-top:70px;}
+}
+@media only screen and (max-width:768px) { 
+.register{margin-top:100px;}
+}
+.login_register_title{
+color: #fff;
+margin-bottom: 20px;
+margin-top: 0;
+text-align: center;
+text-transform: uppercase;
+font-weight: 600;
+}
+.register input {
+  height: 48px;
+  box-shadow: none;
+  border: 1px solid #fff;
+  color: #333;
+}
+.register input:focus{
+box-shadow: none;
+border: 1px solid #d9262e;
+}
+.home_btn {
+  margin-left: -10px;
+}
+.home_btn a {
+background: transparent none repeat scroll 0 0;
+border: 2px solid #fff;
+border-radius: 5px;
+color: #fff;
+display: inline-block;
+font-weight: 600;
+letter-spacing: 0;
+margin: 0 10px 15px;
+padding: 12px 35px;
+text-transform: uppercase;
+transition: all 0.3s ease 0s;
+}
+.home_btn a:hover{
+background:#fff;color:#333;
+}
+.home_btn a i{
+font-size: 20px;
+margin-right: 5px;
+vertical-align: middle;
+}
+.btn-register-bg{
+background: #d9262e none repeat scroll 0 0;
+color: #fff;
+font-family: oswald,sans-serif;
+font-size: 14px;
+font-weight: 600;
+padding: 12px 35px;
+text-transform: uppercase;
+transition: all 0.3s ease 0s;
+}
+.btn-register-bg:hover{
+background: #fff none repeat scroll 0 0;
+color: #333;
+}
+
+
+.flexslider .slides > li:first-child {
+	display: block; 
+}
+.flexslider.loading .slides > li:first-child {
+	opacity: 1 !important;
+} 
+.flexslider{
+	position: relative;	
+	margin: 0;
+	padding: 0;
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+	overflow: hidden;
+	background: none;
+}
+#home-slider .slides li{
+	height: 700px;
+	background-size: cover!important;
+	 position: relative;
+}
+#home-slider .slides li:after {
+    position: absolute;
+    background:rgba(0, 0, 0, 0.2);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    z-index: -1;
+}
+.flex-control-nav {
+  width: 20px;
+  bottom: auto;
+  z-index: 20;
+  top: 40%;
+  right: 20px; 
+ }
+
+.flex-control-nav li {
+  display: block;
+  margin: 0 0 6px 0; 
+ }
+
+.flex-control-paging li a {
+  background: transparent;
+  border: 2px solid #FFF;
+  border-radius: 100%;
+  box-shadow: none; 
+ }
+.flex-control-paging li a.flex-active,
+.flex-control-paging li a:hover {
+  background: #FFF;
+  border-color: #FFF; 
+}
+#home-slider.flexslider.loading {
+  position: relative; 
+}
+#home-slider.flexslider.loading:after {
+    content: ' ';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 20px;
+    top: 40%;
+    margin: 0 0 0 -15px;
+    border: 4px solid #3cd2ad;
+    border-right-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    -ms-animation: spin 1s linear infinite;
+    -o-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite; 
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+/*
+* ----------------------------------------------------------------------------------------
+* 03.END HOME DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+/*
+ * ----------------------------------------------------------------------------------------
+ * 04.START FEATTURE DESIGN
+ * ----------------------------------------------------------------------------------------
+ */
+.feature-content{padding-top:60px;padding-bottom:20px;}
+.single_feature{margin-bottom:40px}
+@media only screen and (max-width:480px) { 
+.single_feature{padding:0px 10px;}
+}
+
+.single_feature i{
+border: 1px solid #e8e8e9;
+border-radius: 100px;
+box-shadow: 0 0 0 7px #f8f8f8;
+color: #d9262e;
+font-size: 30px;
+height: 100px;
+line-height: 100px;
+margin-bottom: 25px;
+text-align: center;
+transition: all 0.3s ease 0s;
+width: 100px;
+}
+.single_feature h4{
+font-size: 20px;
+font-weight: 400;
+margin-bottom: 15px;
+margin-top: 0;
+text-transform: capitalize;
+}
+/*
+ * ----------------------------------------------------------------------------------------
+ * 04.END ABOUT FEATTURE DESIGN
+ * ----------------------------------------------------------------------------------------
+ */
+ /*
+ * ----------------------------------------------------------------------------------------
+ * 05.START OFFER DESIGN
+ * ----------------------------------------------------------------------------------------
+ */
+.our_offer{background:#f7f7f7;}
+.single_offer {
+background: #fff none repeat scroll 0 0;
+box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+padding: 20px;
+border-radius: 5px;
+}
+@media only screen and (max-width:480px) { 
+    .single_offer { margin-bottom: 20px }
+}
+.single_offer_img { overflow: hidden }
+.single_offer_img img {
+    display: block;
+    position: relative;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+.single_offer:hover .single_offer_img img {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+}
+.single_offer h4 {
+font-family: oswald,sans-serif;
+font-size: 22px;
+font-weight: 400;
+margin-bottom: 15px;
+margin-top: 20px;
+text-transform: capitalize;
+transition: all 0.4s ease 0s;
+}
+.single_offer:hover { box-shadow: none }
+.single_offer:hover h4 { color: #d9262e }
+/*
+ * ----------------------------------------------------------------------------------------
+ * 05.END OFFER DESIGN
+ * ----------------------------------------------------------------------------------------
+*/
+/*
+ * ----------------------------------------------------------------------------------------
+ *  06.START ABOUT US DESIGN
+ * ----------------------------------------------------------------------------------------
+*/
+@media only screen and (max-width:768px) { 
+.about_video{margin-top:60px}
+}
+@media only screen and (max-width:768px) { 
+    .about-us-content { margin-top: 0px }
+}
+.about-us-content h2 {
+font-size: 19px;
+font-weight: 600;
+margin: 0 0 15px;
+text-transform: uppercase;
+ }
+@media only screen and (max-width:768px) { 
+    .about-us-content h2 { font-size: 24px }
+}
+.about-us-content p { margin-bottom: 30px }
+.about_img {
+    margin: auto;
+    width: 400px;
+}
+@media only screen and (max-width:768px) { 
+    .about_img { width: 100% }
+}
+@media only screen and (max-width:480px) { 
+    .about_img { margin-top: 60px }
+}
+
+ .panel-default .panel-heading {
+background-color: #fff;
+border-color: #eee;
+color: #333;
+font-size: 16px;
+padding: 16px;
+}
+.panel-group .panel + .panel {
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid #EEEEEE;
+}
+.panel-body {
+    border-radius: 0;
+    padding: 30px;
+}
+.panel-heading { border-radius: 0px }
+.panel-title a {
+color: #333;
+display: block;
+font-family: oswald,sans-serif;
+font-size: 20px;
+font-weight: 400;
+}
+.panel-title a::after {
+    content: "\f067";
+    font: 18px fontAwesome;
+    float: left;
+    margin-right: 25px;
+    margin-top: 2px;
+}
+.panel-title a::after {
+background: #fff none repeat scroll 0 0;
+color: #d9262e;
+content: "";
+float: left;
+font: 18px/55px fontAwesome;
+height: 49px;
+margin-left: -16px;
+margin-right: 25px;
+margin-top: -16px;
+text-align: center;
+width: 49px;
+}
+.panel-title a.collapsed::after {
+background: #fff none repeat scroll 0 0;
+color: #d9262e;
+content: "";
+float: left;
+font: 18px/55px fontAwesome;
+height: 49px;
+margin-left: -16px;
+margin-right: 25px;
+margin-top: -16px;
+text-align: center;
+width: 49px;
+}
+.about_video{}
+.about_video iframe{
+border: medium none;
+height: 420px;
+width: 100%;
+}
+/*
+ * ----------------------------------------------------------------------------------------
+ *  06.END ABOUT US DESIGN
+ * ----------------------------------------------------------------------------------------
+*/
+/*
+ * ----------------------------------------------------------------------------------------
+ *  07.START COMPANY DETAILS DESIGN
+ * ----------------------------------------------------------------------------------------
+*/
+.company_details{background:#f7f7f7;}
+@media only screen and (max-width:768px) { 
+.company_quality{margin-top:60px}
+}
+
+.company_quality h4{
+border-bottom: 1px solid #ddd;
+color: #333;
+margin-top: 0;
+padding: 0 0 10px;
+text-transform: uppercase;
+margin-bottom: 15px;
+font-weight: 600;
+}
+.company_quality p {margin-bottom: 10px; }
+.company_quality ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.company_quality ul li i {
+    border-radius: 100px;
+    color: #333;
+    font-size: 22px;
+    margin: 10px 20px 10px 0;
+}
+
+
+.carousel .slide-control {
+background: #d9262e none repeat scroll 0 0;
+border-radius: 30px;
+color: #fff;
+font-size: 30px;
+height: 45px;
+line-height: 44px;
+margin-top: -25px;
+position: absolute;
+text-align: center;
+top: 50%;
+width: 45px;
+}
+.carousel .slide-control.right { left: auto }
+.carousel .left.slide-control {
+    left: 100px;
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+.carousel .right.slide-control {
+    right: 100px;
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+.carousel:hover .left.slide-control {
+    left: 30px;
+    opacity: .9;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=9)";
+}
+.carousel:hover .right.slide-control {
+    right: 30px;
+    opacity: .9;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=9)";
+}
+.carousel.slide-control:focus {
+    color: #fff;
+    opacity: .25;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
+}
+
+/*
+ * ----------------------------------------------------------------------------------------
+ * 07.END COMPANY DETAILS DESIGN
+ * ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 08. START COUNTER DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+.complete-project-area {
+padding: 100px 0;
+position: relative;
+}
+.complete-project-area:before {
+    background: rgba(0, 0, 0, 0) url("img/pattern.png") repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    left: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.single-project-complete{
+    text-align: center;
+    
+}
+@media only screen and (max-width:768px) { 
+.single-project-complete {margin-bottom:30px;}
+}
+.single-project-complete i {
+color: #fff;
+font-size: 30px;
+margin-bottom: 10px;
+    
+}
+.single-project-complete h2 {
+color: #fff;
+font-size: 60px;
+font-weight: 900;
+margin-bottom: 15px;
+}
+.single-project-complete h3 {
+color: #fff;
+font-size: 14px;
+font-weight: 600;
+letter-spacing: 1px;
+margin-top: 0;
+text-transform: uppercase;
+}
+/*
+* ----------------------------------------------------------------------------------------
+* 08.END COUNTER DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+/*
+ * ----------------------------------------------------------------------------------------
+ * 09.START TEAM DESIGN
+ * ----------------------------------------------------------------------------------------
+ */
+.single_team {
+    margin: 0 auto;
+    list-style: none;
+    text-align: center;
+}
+@media only screen and (max-width:768px) { 
+    .single_team {
+        margin-bottom: 30px;
+        : ;
+    }
+}
+.single_team li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    text-align: left;
+    width: 100%;
+}
+.single_team figure {
+    margin: 0;
+    position: relative;
+}
+.single_team figure img {
+    max-width: 100%;
+    display: block;
+    position: relative;
+}
+.single_team figcaption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    background: rgba(0,0,0,0.6);
+    color: #ed4e6e;
+}
+.single_team figcaption h4 {
+color: #fff;
+margin-bottom: 5px;
+text-align: right;
+text-transform: uppercase;
+font-weight: 600;
+}
+.single_team figcaption p {
+    color: #fff;
+    text-align: right;
+    text-transform: uppercase;
+    font-size: 13px;
+	font-weight: 600;
+}
+.portfolio_project li {
+    -webkit-perspective: 1700px;
+    perspective: 1700px;
+    -webkit-perspective-origin: 0 50%;
+    perspective-origin: 0 50%;
+}
+.portfolio_project figure {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.portfolio_project figure > div { overflow: hidden }
+.portfolio_project figure img {
+    -webkit-transition: -webkit-transform 0.4s;
+    transition: transform 0.4s;
+}
+.no-touch .portfolio_project figure:hover img,
+.portfolio_project figure.cs-hover img {
+    -webkit-transform: translateX(25%);
+    -ms-transform: translateX(25%);
+    transform: translateX(25%);
+}
+.portfolio_project figcaption {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: rotateY(-90deg);
+    transform: rotateY(-90deg);
+    -webkit-transition: -webkit-transform 0.4s, opacity 0.1s 0.3s;
+    transition: transform 0.4s, opacity 0.1s 0.3s;
+}
+.no-touch .portfolio_project figure:hover figcaption,
+.portfolio_project figure.cs-hover figcaption {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    -webkit-transition: -webkit-transform 0.4s, opacity 0.1s;
+    transition: transform 0.4s, opacity 0.1s;
+}
+.team_social { }
+.team_social ul { list-style: outside none none }
+.team_social ul li { float: left }
+.team_social ul li a {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #fff;
+    border-radius: 30px;
+    color: #333;
+    display: block;
+    font-size: 16px;
+    height: 45px;
+    line-height: 45px;
+    margin: 4px;
+    text-align: center;
+    transition: all 0.2s ease 0s;
+    width: 45px;
+}
+@media only screen and (max-width:768px) { 
+    .team_social ul li a { font-size: 12px }
+}
+@media only screen and (max-width:360px) { 
+    .team_social ul li a { font-size: 14px }
+}
+.team_social ul li a:hover { color: #d9262e }
+/*
+ * ----------------------------------------------------------------------------------------
+ * 09.END TEAM DESIGN
+ * ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 10.START PROMOTION DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+.buy_now {
+    background: #d9262e none repeat scroll 0 0;
+    padding: 30px 0;
+}
+.buy_now_title {
+color: #fff;
+font-weight: 600;
+margin: 0;
+text-transform: uppercase;
+}
+@media only screen and (max-width:768px) { 
+    .buy_now_title { font-size: 22px }
+}
+@media only screen and (max-width:360px) { 
+    .buy_now_title { font-size: 15px }
+}
+.btn-promotion-bg {
+background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+border: 2px solid #fff;
+border-radius: 5px;
+color: #fff;
+font-family: oswald,sans-serif;
+font-size: 18px;
+font-weight: 600;
+margin-left: 100px;
+padding: 12px 45px;
+transition: all 0.2s ease 0s;
+}
+@media only screen and (max-width:480px) { 
+    .btn-promotion-bg {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+}
+.btn-promotion-bg:hover,
+.btn-promotion-bg:focus {
+    background: #fff;
+    border: 2px solid #fff;
+    color: #333;
+}
+/*
+* ----------------------------------------------------------------------------------------
+* 10.END PROMOTION DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+/*
+ * ----------------------------------------------------------------------------------------
+ * 11.START RESPONSIVE PROMOTION DESIGN
+ * ----------------------------------------------------------------------------------------
+ */
+ @media only screen and (max-width:768px) { 
+.device_responsive { margin-bottom: 40px }
+}
+.device_img { text-align: center }
+.device_img img { display: inline-block }
+.device_responsive h3 {
+border-bottom: 1px solid #e8e8e9;
+color: #333;
+line-height: 34px;
+margin-bottom: 20px;
+margin-top: 0;
+padding-bottom: 10px;
+text-transform: uppercase;
+}
+@media only screen and (max-width:480px) { 
+    .device_responsive h2 { font-size: 22px }
+}
+.device_responsive p { margin-bottom: 30px }
+/*
+ * ----------------------------------------------------------------------------------------
+ * 11.END RESPONSIVE PROMOTION DESIGN
+ * ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 12.START NEWSLETTER DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+.newsletter {
+  background: #d9262e none repeat scroll 0 0;
+}
+.signup_form h3 {
+color:#fff;
+font-size: 36px;
+font-weight: 400;
+margin-bottom: 30px;
+margin-top: 0;
+text-transform: capitalize;
+}
+.signup_form input {
+background: #fff none repeat scroll 0 0;
+border: 2px solid #eee;
+border-radius: 100px;
+box-shadow: none;
+color: #333;
+height: 50px;
+margin-bottom: 30px;
+}
+.signup_form input:focus{
+box-shadow: none;
+border:2px solid #d9262e;
+border-radius:100px;
+}
+.btn-light-bg-three {
+background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+border: 2px solid #fff;
+border-radius: 30px;
+color: #fff;
+padding: 10px 50px;
+transition: all 0.3s ease 0s;
+font-family: oswald,sans-serif;
+font-size: 18px;
+}
+.btn-light-bg-three:hover, .btn-light-bg-three :focus{background:#fff;border: 2px solid #fff;color:#333;}
+/*
+* ----------------------------------------------------------------------------------------
+* 12.END NEWSLETTER DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 13.START WORK CSS DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+.work-inner .mix {
+    display: none;
+}
+.grid figure {
+	position: relative;
+	float: left;
+	overflow: hidden;
+	margin: 10px 1%;
+	min-width: 320px;
+	max-width: 480px;
+	max-height: 360px;
+	width: 48%;
+	height: auto;
+	text-align: center;
+	cursor: pointer;
+}
+.grid figure img {
+	position: relative;
+	display: block;
+	min-height: 100%;
+	max-width: 100%;
+}
+.grid figure figcaption {
+	padding: 2em;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 1.25em;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+.grid figure figcaption::before,
+.grid figure figcaption::after {
+	pointer-events: none;
+}
+.grid figure figcaption,
+.grid figure figcaption > a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+/* Anchor will cover the whole item by default */
+/* For some effects it will show as a button */
+.grid figure figcaption > a {
+	z-index: 1000;
+	text-indent: 200%;
+	white-space: nowrap;
+	font-size: 0;
+	opacity: 0;
+}
+.grid figure h2 {
+	word-spacing: -0.15em;
+	font-weight: 300;
+}
+.grid figure h2 span {
+	font-weight: 800;
+}
+.grid figure h2,
+.grid figure p {
+	margin: 0;
+}
+
+.grid figure p {
+	letter-spacing: 1px;
+	font-size: 68.5%;
+}
+ul.work {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+ul.work li {
+-moz-border-bottom-colors: none;
+-moz-border-left-colors: none;
+-moz-border-right-colors: none;
+-moz-border-top-colors: none;
+border-color: currentcolor currentcolor transparent;
+border-image: none;
+border-style: none none solid;
+border-width: medium medium 2px;
+color: #938d8d;
+cursor: pointer;
+display: inline-block;
+font-family: oswald,sans-serif;
+font-size: 15px;
+font-weight: 400;
+letter-spacing: 1px;
+margin: 0 8px;
+padding-bottom: 4px;
+text-transform: uppercase;
+}
+
+ul.work li:hover {
+    color: #000;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+ul.work li.active {
+    color: #000;
+}
+
+.work .item {
+    padding: 0;
+    margin: 0;
+}
+
+.work .col-md-4 {
+    padding: 0;
+    margin: 0;
+}
+
+.work figure.effect-ruby img {
+    height: auto;
+    width: 100%;
+}
+
+.work .grid figure {
+    position: relative;
+    float: left;
+    overflow: hidden;
+    min-width: 320px;
+    max-width: 480px;
+    max-height: 360px;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.work .grid figure:hover {
+    background:#fff;
+	
+}
+
+.work figure.effect-ruby h2 {
+    margin-top: 20%;
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    font-size: 24px;
+    text-transform: capitalize;
+    font-weight: 600;
+    -webkit-transition: .3s;
+    transition: .3s;
+    display: inline-block;
+    color: #d9262e;
+}
+
+.work figure.effect-ruby p {
+    font-size: 16px;
+    text-transform: capitalize;
+    border: none;
+    padding: 0;
+    margin: 5px 0px;
+    color: #000;
+}
+
+.work figure.effect-ruby p strong {
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-right: 5px;
+}
+
+.work .item:hover figure.effect-ruby h2 {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+figure.effect-ruby {
+	background-color: #000;
+}
+
+figure.effect-ruby img {
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+	-webkit-transform: scale(1.15);
+	transform: scale(1.15);
+}
+
+figure.effect-ruby:hover img {
+	opacity: 0.1;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+figure.effect-ruby h2 {
+	margin-top: 20%;
+	-webkit-transition: -webkit-transform 0.35s;
+	transition: transform 0.35s;
+	-webkit-transform: translate3d(0,20px,0);
+	transform: translate3d(0,20px,0);
+}
+
+figure.effect-ruby p {
+	margin: 1em 0 0;
+	padding: 3em;
+	border: 1px solid #fff;
+	opacity: 0;
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+	-webkit-transform: translate3d(0,20px,0) scale(1.1);
+	transform: translate3d(0,20px,0) scale(1.1);
+} 
+
+figure.effect-ruby:hover h2 {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+figure.effect-ruby:hover p {
+	opacity: 1;
+	-webkit-transform: translate3d(0,0,0) scale(1);
+	transform: translate3d(0,0,0) scale(1);
+}
+.portfolio_btn{padding-top:30px;text-align:center}
+/*
+* ----------------------------------------------------------------------------------------
+* 13.END WORK CSS DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+/*
+ * ----------------------------------------------------------------------------------------
+ * 14.START TESTIMONIAL DESIGN
+ * ----------------------------------------------------------------------------------------
+*/
+.testimonials{
+position:relative;
+height: auto;
+z-index: 1;
+}
+.testimonials:before{
+background: rgba(0, 0, 0, 0) url("img/pattern.png") repeat scroll 0 0;
+content: "";
+height: 100%;
+left: 0;
+opacity: 0.8;
+position: absolute;
+top: 0;
+width: 100%;
+}
+.testimonials .flexslider {
+    background-color: #fff;
+    border: 0 none;
+    box-shadow: 0 7px 33px 0 rgba(0, 0, 0, 0.12);
+    margin: 0;
+}
+.testimonials .flexslider .testi-slider-item {
+    padding: 30px 60px;
+    text-align: center;
+}
+.testimonials .flexslider .testi-slider-item img {
+border: 3px solid #d9262e;
+border-radius: 50%;
+height: 100px;
+margin: 20px auto;
+width: 100px;
+}
+.testimonials .flexslider .testi-slider-item h6 {
+color: #333;
+font-size: 16px;
+font-weight: 400;
+letter-spacing: 1px;
+margin-bottom: 0;
+text-transform: uppercase;
+}
+.testimonials .flexslider .testi-slider-item p {
+font-size: 14px;
+}
+@media only screen and (max-width:360px) { 
+.testimonials .flexslider .testi-slider-item p  {line-height: 24px;font-size: 16px; }
+}
+.testimonials .flex-direction-nav a {
+    background: #d9262e none repeat scroll 0 0;
+    border-radius: 100px;
+    box-shadow: 0 10px 11px 0 rgba(0, 0, 0, 0.2);
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    height: 45px;
+    line-height: 50px;
+    margin: -20px 0 0;
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: none !important;
+    top: 50%;
+    -webkit-transition: all 0.3s ease 0s;
+            transition: all 0.3s ease 0s;
+    width: 45px;
+    z-index: 10;
+}
+.testimonials .flex-direction-nav a i {
+    display: inline-block;
+    font-size: 22px;
+}
+.testimonials .flex-direction-nav a:before { display: none }
+.testimonials .flex-direction-nav a.flex-next:before { display: none }
+.testimonials .flex-control-paging li a {
+    background: #222 none repeat scroll 0 0;
+    border: 1px solid #222;
+    border-radius: 20px;
+    cursor: pointer;
+    display: block;
+    height: 6px;
+    text-indent: -9999px;
+    width: 6px;
+}
+.testimonials .flex-control-paging li a:hover {
+    background: #00bcd4 none repeat scroll 0 0;
+    border-color: #00bcd4;
+}
+.testimonials .flex-control-paging li a.flex-active {
+    background: #00bcd4 none repeat scroll 0 0;
+    border-color: #00bcd4;
+    cursor: default;
+}
+.flex-control-nav {display: none;}
+/*
+ * ----------------------------------------------------------------------------------------
+ * 14.END TESTIMONIAL DESIGN
+ * ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 15.START COMPANY PARTNER LOGO
+* ----------------------------------------------------------------------------------------
+*/
+.partner-logo {background: #f7f7f7 none repeat scroll 0 0; }
+.partner { text-align: center }
+/*
+* ----------------------------------------------------------------------------------------
+* 15.END COMPANY PARTNER LOGO
+* ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 16.START PRICING DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+.single-pricing{
+background: #fff none repeat scroll 0 0;
+border-radius: 5px;
+box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
+padding-top: 20px;
+transition: all 0.3s ease 0s;
+}
+.single-pricing-bg{
+background: #d9262e none repeat scroll 0 0;
+}
+.single-pricing:hover{
+box-shadow:0px 50px 50px rgba(0,0,0,0.1);
+z-index:100;
+transform: translate(0, -10px);
+}
+@media only screen and (max-width:768px) { 
+.single-pricing{margin-bottom: 30px;}
+}
+.single-pricing > h4 {
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+font-size: 20px;
+font-weight: 300;
+margin: auto auto 30px;
+padding: 10px 0;
+text-align: center;
+text-transform: capitalize;
+width: 150px;
+}
+.single-pricing-bg > h4 {
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+font-size: 20px;
+font-weight: 300;
+margin: auto auto 30px;
+padding: 10px 0;
+text-align: center;
+text-transform: capitalize;
+width: 150px;
+color:#fff;
+}
+
+.pricing-price{
+background: #fff none repeat scroll 0 0;
+border-radius: 500px;
+box-shadow: 0 5px 18px rgba(0, 0, 0, 0.11);
+height: 110px;
+line-height: 27px;
+margin: 0 auto 15px;
+padding: 30px 16px 16px;
+text-align: center;
+width: 110px;
+}
+.value{
+display: block;
+font-family: oswald,sans-serif;
+font-size: 28px;
+font-weight: 400;
+}
+.vylist{
+display: block;
+font-size: 14px;
+}
+.pricing-price-bg .value{color:#fff;}
+.pricing-price-bg .vylist{color:#fff;}
+.pricing-price-bg{
+background: #d9262e none repeat scroll 0 0;
+}
+.pricing-price-bg h4 {
+color:#fff;
+  margin-bottom: 5px;
+text-transform: uppercase;
+}
+.pricing-price-bg p {
+  color: #fff!important;
+  font-size: 22px;
+}
+.pricing-price h4 {
+  margin-bottom: 5px;
+text-transform: uppercase;
+}
+.pricing-price p {
+  color: #333;
+  font-size: 22px;
+}
+
+.pricing-price p span{font-size: 16px;}
+
+.pricing-features{padding: 10px 0;}
+.pricing-features p{
+border-bottom: 1px solid rgba(42, 42, 42, 0.03);
+margin: 0;
+padding: 10px 20px;
+text-align: center;
+}
+.pricing-features-white p{
+border-bottom: 1px solid rgba(42, 42, 42, 0.08);
+color:#fff;
+margin: 0;
+padding: 10px 20px;
+text-align: center;
+}
+.pricing_btn{
+padding: 30px 0;
+text-align: center;
+}
+.btn-light-bg-two-active {
+background: #fff none repeat scroll 0 0;
+border: 2px solid #fff;
+border-radius: 30px;
+color: #333;
+font-family: oswald,sans-serif;
+font-size: 18px;
+padding: 10px 50px;
+text-transform: capitalize;
+transition: all 0.3s ease 0s;
+}
+.btn-light-bg-two-active:hover, .btn-light-bg-two-active :focus{background:#333;border: 2px solid #333;color:#fff;}
+/*
+* ----------------------------------------------------------------------------------------
+* 16.END PRICING DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+/*
+ * ----------------------------------------------------------------------------------------
+ * 17.START BLOG DESIGN
+ * ----------------------------------------------------------------------------------------
+*/
+.single_blog {
+background: #fff none repeat scroll 0 0;
+border: 1px solid #eee;
+border-radius: 5px;
+box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+padding: 20px;
+}
+@media only screen and (max-width:480px) { 
+    .single_blog { margin-bottom: 20px }
+}
+.single_blog_img { overflow: hidden }
+.single_blog_img img {
+    display: block;
+    position: relative;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+.single_blog:hover .single_blog_img img {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+}
+.single_blog h4 {
+font-family: oswald,sans-serif;
+font-size: 22px;
+font-weight: 400;
+margin-bottom: 10px;
+margin-top: 10px;
+text-transform: capitalize;
+transition: all 0.4s ease 0s;
+}
+.single_blog:hover { box-shadow: none }
+.single_blog:hover h4 { color: #d9262e }
+.single_blog h5{
+font-size: 18px;
+text-transform: capitalize;
+margin-bottom: 10px;
+}
+.single_blog h6{
+font-size: 18px;
+margin-top: 15px;
+}
+.single_blog > p {
+  margin-bottom: 15px;
+}
+/*
+ * ----------------------------------------------------------------------------------------
+ * 17.END BLOG DESIGN
+ * ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 18.START PROMOTION INVITE DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+.promotion-invite{position:relative;}
+.promotion-invite:before{
+background: rgba(0, 0, 0, 0) url("img/pattern.png") repeat scroll 0 0;
+content: "";
+height: 100%;
+left: 0;
+position: absolute;
+top: 0;
+width: 100%;
+}
+.invite{}
+.invite h1{
+color: #fff;
+font-weight: 600;
+margin-bottom: 20px;
+font-size: 45px;
+}
+.invite p{
+color: #fff;
+margin: auto auto 20px;
+width: 70%;
+}
+/*
+* ----------------------------------------------------------------------------------------
+* 18.END PROMOTION INVITE DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 19.START FAQ DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+.template_faq{
+padding-top:60px;
+padding-bottom:40px;}
+
+.faq_desc{margin-bottom: 20px;}
+.question{
+font-family: oswald,sans-serif;
+font-size: 20px;
+font-weight: 400;
+margin-bottom: 20px;
+text-transform: capitalize;
+}
+/*
+* ----------------------------------------------------------------------------------------
+* 19.END FAQ DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 20.START CONTACT FORM DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+.contact input {
+background: #fff none repeat scroll 0 0;
+border: 1px solid #e8e8e9;
+border-radius: 0;
+box-shadow: none;
+color: #333;
+font-size: 16px;
+height: 50px;
+padding: 10px;
+width: 100%;
+}
+.contact textarea {
+background: #fff none repeat scroll 0 0;
+border: 1px solid #e8e8e9;
+border-radius: 0px;
+box-shadow: none;
+color: #333;
+padding: 10px;
+width: 100%;
+font-size:16px;
+}
+.contact input:focus {
+border: 1px solid #d9262e;
+    box-shadow: none;
+    outline: 0 none;
+}
+.contact textarea:focus {
+border: 1px solid #d9262e;
+    box-shadow: none;
+    outline: 0 none;
+}
+/*
+* ----------------------------------------------------------------------------------------
+* 20.END CONTACT FORM DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 21.START ADDRESS DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+.our-address{background:#f7f7f7;}
+.single_address {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background: #fff none repeat scroll 0 0;
+  border-bottom: 1px solid #eee;
+  border-image: none;
+  border-radius: 5px;
+  border-top: 1px solid #eee;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+@media only screen and (max-width:768px) { 
+    .single_address{margin-bottom:30px; }
+}
+
+.single_address i {
+color: #d9262e;
+font-size: 42px;
+margin-bottom: 10px;
+}
+.single_address h4{
+font-weight: 400;
+margin-bottom: 10px;
+text-transform: capitalize;
+}
+/*
+* ----------------------------------------------------------------------------------------
+* 21.END ADDRESS DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+/*
+* ----------------------------------------------------------------------------------------
+* 22.START FOOTER DESIGN
+* ----------------------------------------------------------------------------------------
+*/
+.footer {
+border-top:1px solid #eee;
+    padding:30px 0;
+}
+.footer img{width: 200px;
+margin-bottom: 10px;}
+.footer_social {}
+.footer_social ul {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+.footer_social ul li { display: inline-block }
+.footer_social ul li a {
+background: #fff none repeat scroll 0 0;
+border: 1px solid #eee;
+border-radius: 30px;
+color: #333;
+display: block;
+font-size: 16px;
+height: 45px;
+line-height: 45px;
+margin: 1px;
+text-align: center;
+transition: all 0.2s ease 0s;
+width: 45px;
+}
+@media only screen and (max-width:360px) { 
+.footer_social ul li a {
+  height: 40px;
+  line-height: 40px;
+  width: 40px;
+}
+}
+.footer_social ul li a:hover { color: #fff }
+.f_facebook:hover {
+    background: #5D82D1;
+    border: 1px solid #5D82D1;
+	box-shadow: 0 0 0 0px #5D82D1;
+}
+.f_twitter:hover {
+    background: #40BFF5;
+    box-shadow: 0 0 0 0px #40BFF5;
+    border: 1px solid #40BFF5;
+}
+.f_google:hover {
+    background: #EB5E4C;
+    box-shadow: 0 0 0 0px #EB5E4C;
+    border: 1px solid #EB5E4C;
+}
+.f_linkedin:hover {
+    background: #238CC8;
+    box-shadow: 0 0 0 0px #238CC8;
+    border: 1px solid #238CC8;
+}
+.f_youtube:hover {
+    background: #CC181E;
+    box-shadow: 0 0 0 0px #CC181E;
+    border: 1px solid #CC181E;
+}
+.f_skype:hover{
+    background: #00AFF0;
+    box-shadow: 0 0 0 0px #00AFF0;
+    border: 1px solid #00AFF0;
+}
+
+
+.footer_copyright {
+color: #252525;
+padding-top: 15px;
+text-transform: capitalize;
+}
+.footer_copyright a{color:#000;}
+.footer_copyright a:hover{color:#d9262e;}
+/*END FOOTER SOCIAL DESIGN*/
+/*
+* ----------------------------------------------------------------------------------------
+* 22.END FOOTER DESIGN
+* ----------------------------------------------------------------------------------------
+*/

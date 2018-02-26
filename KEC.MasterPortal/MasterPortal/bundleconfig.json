@@ -1,0 +1,42 @@
+﻿[
+  {
+    "outputFileName": "wwwroot/css/style.css",
+    "inputFiles": [
+      "wwwroot/css/animate.css",
+      "wwwroot/css/flexslider.css",
+      "wwwroot/css/magnific-popup.css",
+      "wwwroot/owlcarousel/css/owl.theme.css",
+      "wwwroot/owlcarousel/css/owl.carousel.css",
+      "wwwroot/bootstrap/css/bootstrap.min.css",
+      "wwwroot/fonts/font-awesome.min.css",
+      "wwwroot/fonts/fontawesome-webfont.woff2_v_4.7.0",
+      "wwwroot/fonts/fontawesome-webfont.eot",
+      "wwwroot/fonts/fontawesome-webfont.svg",
+      "wwwroot/fonts/fontawesome-webfont.ttf",
+      "wwwroot/fonts/fontawesome-webfont.woff",
+      "wwwroot/favicon.ico"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/scripts.js",
+    "inputFiles": [
+      "wwwroot/js/switcher.js",
+      "wwwroot/js/scrolltopcontrol.js",
+      "wwwroot/js/jquery.mixitup.js",
+      "wwwroot/js/jquery-1.12.4.min.js",
+      "wwwroot/bootstrap/js/bootstrap.min.js",
+      "wwwroot/js/wow.min.js",
+      "wwwroot/js/modernizr-2.8.3.min.js",
+      "wwwroot/owlcarousel/js/owl.carousel.min.js",
+      "wwwroot/js/jquery.stellar.min.js",
+      "wwwroot/js/jquery.inview.min.js",
+      "wwwroot/js/jquery.flexslider-min.js",
+      "wwwroot/js/jquery.magnific-popup.min.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]
