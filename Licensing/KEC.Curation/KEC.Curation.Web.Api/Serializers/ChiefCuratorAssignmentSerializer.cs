@@ -22,8 +22,5 @@ namespace KEC.Curation.Web.Api.Serializers
         [Required(ErrorMessage = "Action taken cannot be blank")]
         public ActionTaken ActionTaken { get; set; }
 
-
-
-
     }
 }
