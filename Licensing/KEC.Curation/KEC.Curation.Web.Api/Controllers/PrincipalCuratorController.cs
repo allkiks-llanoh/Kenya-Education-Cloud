@@ -110,13 +110,20 @@ namespace KEC.Curation.Web.Api.Controllers
                     PrincipalCuratorGuid = model.PrincipalCuratorGuid,
                     ChiefCuratorGuid = model.ChiefCuratorGuid,
                     AssignmetDateUtc = DateTime.UtcNow
+                   
+                };
+                _uow.ChiefCuratorAssignmentRepository.Add(assignment);
 
+                var nextStage = new PublicationStageLog
+                {
+               
+                  Stage = PublicationStage.Curation
                 };
 
-                 publicationLog.ActionTaken = model.ActionTaken;
-                _uow.ChiefCuratorAssignmentRepository.Add(assignment);
+                _uow.PublicationStageLogRepository.Add(nextStage);
+               
                 _uow.Complete();
-                _uow.PublicationRepository.ProcessToTheNextStage(publication);
+               
                 return Ok(value: $"Publication {model.KICDNumber} assigned to chief curator");
             }
             catch (Exception)
