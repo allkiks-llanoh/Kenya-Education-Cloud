@@ -83,9 +83,9 @@ namespace KEC.Curation.Web.Api.Controllers
         }
         // POST: api/PrincipalCurator/publicationId/assign
         [HttpPost("assign")]
-        public IActionResult Assign(int Id, [FromBody]ChiefCuratorAssignmentSerializer model)
+        public IActionResult Assign([FromBody]ChiefCuratorAssignmentSerializer model)
         {
-            var publicationId = Id;
+            var publicationId = model.PublicationId;
             if (!ModelState.IsValid)
             {
                 return BadRequest(modelState: ModelState);
