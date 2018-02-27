@@ -91,8 +91,8 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
-        [HttpGet("{stage}/Legal")]
-        public IActionResult PublicationLegal(PublicationStage stage)
+        [HttpGet("LegalVerification/Legal")]
+        public IActionResult PublicationLegal()
         {
             try
             {
@@ -107,8 +107,8 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpGet("{stage}/Finance")]
-        public IActionResult PublicationFinance(PublicationStage stage)
+        [HttpGet("PaymentVerification/Finance")]
+        public IActionResult PublicationFinance()
         {
             try
             {
