@@ -1,7 +1,7 @@
 ﻿
 $(document).ready(function () {
     var publicationID = $('#identity').attr('data-identity');
-    let principalCuratorPostUrl = apiBaseUrl.concat(`/PrincipalCurator/${publicationID}/assign`)
+    let principalCuratorPostUrl = apiBaseUrl.concat(`/PrincipalCurator/assign/${publicationID}`)
     $('#LegalApprove').click(function () {
         $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
 
