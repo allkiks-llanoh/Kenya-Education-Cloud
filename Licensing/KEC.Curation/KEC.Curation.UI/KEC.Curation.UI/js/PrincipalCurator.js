@@ -1,7 +1,8 @@
 ﻿
 $(document).ready(function () {
-    var publicationID = $('#identity').attr('data-identity');
-    let principalCuratorPostUrl = apiBaseUrl.concat(`/PrincipalCurator/assign/${publicationID}`)
+    var publicationID = parseInt($('#identity').attr('data-identity'));
+    let principalCuratorPostUrl = apiBaseUrl.concat(`/PrincipalCurator/assign/?Id=${publicationID}`)
+    
     $('#LegalApprove').click(function () {
         $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
 
@@ -17,7 +18,7 @@ $(document).ready(function () {
             },
             url: principalCuratorPostUrl,
             type: "POST",
-            data: JSON.stringify({ PrincipalCuratorGuid: principalCuratorGuid, ChiefCuratorGuid: chiefCuratorGuid, PublicationId: publicationID}),
+            data: JSON.stringify({ PrincipalCuratorGuid: principalCuratorGuid, ChiefCuratorGuid: chiefCuratorGuid}),
 
             success: function (response, status, jxhr) {
                 console.log(response);

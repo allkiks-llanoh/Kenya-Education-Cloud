@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-    [Authorize]
+   // [Authorize]
     [AllowCrossSiteJson]
     public class PrincipalCuratorController : Controller
     {

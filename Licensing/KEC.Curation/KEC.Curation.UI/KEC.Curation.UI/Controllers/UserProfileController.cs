@@ -19,7 +19,7 @@ using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
 
 namespace KEC.Curation.UI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class UserProfileController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -16,7 +16,10 @@ namespace KEC.Curation.Web.Api.Serializers
         public string ChiefCuratorGuid { get; set; }
         [Required(ErrorMessage = "A publication Is Required")]
         public int PublicationId { get; set; }
+       
+ 
+       
 
-        
+
     }
 }
