@@ -90,9 +90,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 return BadRequest(modelState: ModelState);
             }
             var publication = _uow.PublicationRepository
-                                  .Find(p => p.Id.Equals(publicationId)
-                                  && p.PublicationStageLogs.Equals(model.Stage))
-                                  .FirstOrDefault();
+                                  .Find(p => p.Id.Equals(publicationId)).FirstOrDefault();
             if (publication == null)
             {
                 return NotFound(value: new { message = "Publication could not be retrieved for assignment." });
@@ -108,6 +106,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     AssignmetDateUtc = DateTime.UtcNow
 
                 };
+
                 _uow.ChiefCuratorAssignmentRepository.Add(assignment);
                 var nextStage = new PublicationStageLog
                 {
@@ -116,11 +115,9 @@ namespace KEC.Curation.Web.Api.Controllers
                      Stage = PublicationStage.Curation,
                      Notes= model.Notes,
                      CreatedAtUtc = DateTime.UtcNow,
-                     ActionTaken = model.ActionTaken
+                };
+                _uow.PublicationStageLogRepository.Add(nextStage);
 
-    };
-
-               
                 _uow.Complete();
                 return Ok(value: new { message = "Content assigned successfully" });
             }
