@@ -5,7 +5,9 @@ $(document).ready(function () {
     
     $('#LegalApprove').click(function () {
         $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
-
+        var stage = "PrincipalCurator"
+        var actiontaken = "PublicationMoveToNextStage"
+        var kicdNumber = $('#kicd').attr('data - kicdNumber');
         var principalCuratorGuid = $('#UserGuid').val();
         var chiefCuratorGuid = $('#UserGuid').val();
         console.log(`${publicationID}`);
@@ -18,7 +20,7 @@ $(document).ready(function () {
             },
             url: principalCuratorPostUrl,
             type: "POST",
-            data: JSON.stringify({ PrincipalCuratorGuid: principalCuratorGuid, ChiefCuratorGuid: chiefCuratorGuid, PublicationID: publicationID}),
+            data: JSON.stringify({ PrincipalCuratorGuid: principalCuratorGuid, ChiefCuratorGuid: chiefCuratorGuid, KICDNumber: kicdNumber, Stage: stage, ActionTaken: actiontaken}),
 
             success: function (response, status, jxhr) {
                 console.log(response);

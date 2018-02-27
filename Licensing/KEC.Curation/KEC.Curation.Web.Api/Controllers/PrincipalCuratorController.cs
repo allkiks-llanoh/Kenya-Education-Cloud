@@ -85,27 +85,33 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpPost("assign")]
         public IActionResult Assign([FromBody]ChiefCuratorAssignmentSerializer model)
         {
-            var kicdNumber = model.KicdNumber;
             if (!ModelState.IsValid)
             {
                 return BadRequest(modelState: ModelState);
             }
-            var publication = _uow.PublicationRepository
-                                  .Find(p => p.KICDNumber.Equals(kicdNumber))
-                                  .FirstOrDefault();
+            var publication = _uow.PublicationRepository.Find(p => p.KICDNumber.Equals(model.KICDNumber)).FirstOrDefault();
 
             if (publication == null)
             {
-                return NotFound("Publication could not be retrieved for assignment.");
+                return NotFound(value: $"Publication {model.KICDNumber} could not be located");
             }
-            
-            var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage.Equals(PublicationStage.PrincipalCurator)
-                                                           
-                                                            && publication.Equals(publication.KICDNumber)).FirstOrDefault();
+            var maxStage = _uow.PublicationStageLogRepository.Find(p => p.PublicationId == publication.Id).Max(p => p.Stage);
+            var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == model.Stage
+                                                            && p.Stage == maxStage
+                                                            && p.PublicationId.Equals(publication.Id)
+                                                           ).FirstOrDefault();
 
+            if (publicationLog == null)
+            {
+                return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
+            }
+            if (model.Stage == PublicationStage.Curation &&
+                !_uow.PublicationRepository.CanProcessCurationPublication(publication))
+            {
+                return BadRequest(error: $"Publication {model.KICDNumber} has pending curation notes");
+            }
             try
             {
-
                 var assignment = new ChiefCuratorAssignment
                 {
                     PublicationId = publication.Id,
@@ -115,17 +121,22 @@ namespace KEC.Curation.Web.Api.Controllers
 
 
                 };
-                 publicationLog.ActionTaken = ActionTaken.PublicationMoveToNextStage;
+
+                
+                 publicationLog.ActionTaken = model.ActionTaken;
                 _uow.ChiefCuratorAssignmentRepository.Add(assignment);
-                _uow.PublicationRepository.ProcessToTheNextStage(publication);
                 _uow.Complete();
-                return Ok(value: "Content assigned to chief curator");
+                _uow.PublicationRepository.ProcessToTheNextStage(publication);
+                return Ok(value: $"Publication {model.KICDNumber} assigned to chief curator");
             }
             catch (Exception)
             {
 
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+
+
+           
         } 
         
         // PUT: api/PrincipalCurator/5
