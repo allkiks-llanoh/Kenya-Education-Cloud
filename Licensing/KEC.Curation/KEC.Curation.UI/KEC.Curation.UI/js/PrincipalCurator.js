@@ -17,8 +17,7 @@ $(document).ready(function () {
             },
             url: principalCuratorPostUrl,
             type: "POST",
-            data: {
-                "PrincipalCuratorGuid": "principalCuratorGuid", "ChiefCuratorGuid": "chiefCuratorGuid", "pId": publicationID},
+            data: JSON.stringify({PrincipalCuratorGuid: principalCuratorGuid, ChiefCuratorGuid: chiefCuratorGuid, pId: publicationID}),
 
             success: function (response, status, jxhr) {
                 console.log(response);
