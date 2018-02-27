@@ -36,7 +36,7 @@ $(document).ready(function () {
                 console.log(status);
 
                 console.log(request.responseText);
-                $('#error').html(request.responseText)
+                $('#error').html(request.statusText)
                 $('div.alert-danger').toggleClass('hidden');
                 $('#LegalApprove').html('APPROVE');
 

@@ -15,8 +15,9 @@ namespace KEC.Curation.Data.Models
         PublicationApproved = 2,
         [Description("Publication passed to the next stage")]
         PublicationMoveToNextStage=3,
+       
         [Description("Publication conditional approval")]
-        PublicationConditionalApproval = 5,
+        PublicationConditionalApproval = 5
       
     }
 }

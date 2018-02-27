@@ -89,7 +89,9 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(modelState: ModelState);
             }
-            var publication = _uow.PublicationRepository.Find(p => p.KICDNumber.Equals(model.KICDNumber)).FirstOrDefault();
+            var publication = _uow.PublicationRepository.Find(p => p.KICDNumber.Equals(model.KICDNumber) 
+                                                              && p.PublicationStageLogs.Equals(PublicationStage.PrincipalCurator)
+                                                              && ! p.PublicationStageLogs.Equals(PublicationStage.Curation)).FirstOrDefault();
 
             if (publication == null)
             {
@@ -100,16 +102,6 @@ namespace KEC.Curation.Web.Api.Controllers
                                                             && p.Stage == maxStage
                                                             && p.PublicationId.Equals(publication.Id)
                                                            ).FirstOrDefault();
-
-            //if (publicationLog == null)
-            //{
-            //    return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
-            //}
-            //if (model.Stage == PublicationStage.PrincipalCurator &&
-            //    !_uow.PublicationRepository.CanProcessCurationPublication(publication))
-            //{
-            //    return BadRequest(error: $"Publication {model.KICDNumber} has pending curation notes");
-            //}
             try
             {
                 var assignment = new ChiefCuratorAssignment
@@ -118,19 +110,13 @@ namespace KEC.Curation.Web.Api.Controllers
                     PrincipalCuratorGuid = model.PrincipalCuratorGuid,
                     ChiefCuratorGuid = model.ChiefCuratorGuid,
                     AssignmetDateUtc = DateTime.UtcNow
-                    
 
                 };
-                var next = new PublicationStageLog
-                {
-                   
-                   Stage = PublicationStage.Curation
-                };
 
-                publicationLog.ActionTaken = model.ActionTaken;
+                 publicationLog.ActionTaken = model.ActionTaken;
                 _uow.ChiefCuratorAssignmentRepository.Add(assignment);
                 _uow.Complete();
-               
+                _uow.PublicationRepository.ProcessToTheNextStage(publication);
                 return Ok(value: $"Publication {model.KICDNumber} assigned to chief curator");
             }
             catch (Exception)
