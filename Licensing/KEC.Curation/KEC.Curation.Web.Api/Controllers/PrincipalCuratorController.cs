@@ -120,7 +120,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
     };
 
-                _uow.CuratorAssignmentRepository.Add(assignment);
+               
                 _uow.Complete();
                 return Ok(value: new { message = "Content assigned successfully" });
             }
