@@ -101,11 +101,11 @@ namespace KEC.Curation.Web.Api.Controllers
                                                             && p.PublicationId.Equals(publication.Id)
                                                            ).FirstOrDefault();
 
-            if (publicationLog == null)
-            {
-                return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
-            }
-            if (model.Stage == PublicationStage.Curation &&
+            //if (publicationLog == null)
+            //{
+            //    return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
+            //}
+            if (model.Stage == PublicationStage.PrincipalCurator &&
                 !_uow.PublicationRepository.CanProcessCurationPublication(publication))
             {
                 return BadRequest(error: $"Publication {model.KICDNumber} has pending curation notes");
