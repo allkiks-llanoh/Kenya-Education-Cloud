@@ -19,16 +19,23 @@
 
         <!-- Page wraper -->
         <div id="page-wrapper" class="gray-bg">
-
             <!-- Top Navbar -->
             @Html.Partial("_TopNavbar")
-
-            <!-- Main view  -->
+            <div class="alert alert-success alert-dismissable m-t hidden">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p class="font-bold" id="success-message">Success</p>
+            </div>
+            <div class="alert alert-danger alert-dismissable m-t hidden">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p class="font-bold" id="error-message">Error</p>
+            </div>
+            <div class="alert alert-warning alert-dismissable m-t hidden">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p class="font-bold" id="warning-message">Warning</p>
+            </div><!-- Main view  -->
             @RenderBody()
-
             <!-- Footer -->
             @Html.Partial("_Footer")
-
         </div>
         <!-- End page wrapper-->
 

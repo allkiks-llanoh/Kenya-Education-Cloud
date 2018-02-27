@@ -5,9 +5,9 @@ $(document).ready(function () {
     $('#LegalApprove').click(function () {
         $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
 
-        var principalCuratorGuid = $('#pGUID').attr('data-pGUID');
+        var principalCuratorGuid = $('#UserGuid').val();
         var chiefCuratorGuid = $('#UserGuid').val();
-
+        console.log(`${publicationID}`);
         console.log(`${principalCuratorGuid}`);
         console.log(` ${chiefCuratorGuid} `);
         $.ajax({
