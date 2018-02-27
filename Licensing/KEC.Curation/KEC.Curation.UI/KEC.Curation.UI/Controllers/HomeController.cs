@@ -1,9 +1,11 @@
 ﻿
+using KEC.Curation.UI.Cors;
 using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
     [Authorize]
+    [AllowCrossSiteJson]
     public class HomeController : Controller
     {
 

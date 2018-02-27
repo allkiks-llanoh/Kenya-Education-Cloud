@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KEC.Curation.UI.Cors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace KEC.Curation.UI.Controllers
     public class PublisherController : Controller
     {
        [Authorize]
+        [AllowCrossSiteJson]
         // GET: Publisher
         public ActionResult Upload()
         {

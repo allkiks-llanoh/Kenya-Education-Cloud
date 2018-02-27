@@ -3,9 +3,10 @@ using System.Web.Mvc;
 
 namespace KEC.Curatiom.Web.UI.Controllers
 {
+    [Authorize]
     [AllowCrossSiteJson]
     [RoutePrefix("{controller}")]
-    [Authorize]
+   
     public class ChiefCuratorController : Controller
     {
        

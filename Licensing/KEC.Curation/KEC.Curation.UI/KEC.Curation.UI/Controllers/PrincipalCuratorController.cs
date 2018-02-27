@@ -1,4 +1,5 @@
-﻿using KEC.Curation.UI.Models;
+﻿using KEC.Curation.UI.Cors;
+using KEC.Curation.UI.Models;
 using Microsoft.Azure.ActiveDirectory.GraphClient;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,8 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-    // [Authorize]
+    [Authorize]
+    [AllowCrossSiteJson]
     public class PrincipalCuratorController : Controller
     {
         // GET: PrincipalCurator
