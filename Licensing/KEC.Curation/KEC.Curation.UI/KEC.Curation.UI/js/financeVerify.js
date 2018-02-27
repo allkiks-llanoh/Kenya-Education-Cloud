@@ -11,6 +11,7 @@
                 var action = "PublicationMoveToNextStage";
                 var stages = "PaymentVerification";
                 var guid = "TODOGUIDAUTOMATION";
+                var s = "GUIDPLACeHOLDeR"
                 console.log(`${kicdnumber}`);
                 console.log(` ${notes} `);
                 console.log(` ${guid} `);
@@ -21,7 +22,7 @@
                     },
                     url: financeVerifyUrl,
                     type: "PATCH",
-                    data: JSON.stringify({ KICDNumber: kicdnumber, Notes: notes, ActionTaken: action, Stage: stages, UserGuid: guid }),
+                    data: JSON.stringify({ KICDNumber: kicdnumber, Notes: notes, ActionTaken: action, Stage: stages, UserGuid: s }),
 
                     success: function (response, status, jxhr) {
                         console.log(response);
