@@ -9,7 +9,7 @@ let legalVerifyUrl = apiBaseUrl.concat(`/Publications/process`);
                 var notes = $('.note-editable').val();
                 var action = $('#actionTaken').val();
                 var stages = "LegalVerification";
-                var guid = $('#guid').attr('data-guid');;
+                var guid = $('#guid').attr('data-guid');
                 console.log(`${kicdnumber}`);
                 console.log(` ${notes} `);
                 console.log(` ${guid} `);
