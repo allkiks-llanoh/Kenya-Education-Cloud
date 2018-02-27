@@ -10,7 +10,7 @@
                 var notes = $('.note-editable').val();
                 var action = "PublicationMoveToNextStage";
                 var stages = "PaymentVerification";
-                var guid = $('#guid').attr('data-guid');
+                var guid = "TODOGUIDAUTOMATION";
                 console.log(`${kicdnumber}`);
                 console.log(` ${notes} `);
                 console.log(` ${guid} `);
