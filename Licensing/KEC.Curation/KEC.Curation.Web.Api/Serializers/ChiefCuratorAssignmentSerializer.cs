@@ -17,6 +17,8 @@ namespace KEC.Curation.Web.Api.Serializers
         public string ChiefCuratorGuid { get; set; }
         [Required(ErrorMessage = "Publication KICD Number Is Required")]
         public string KICDNumber { get; set; }
+        [Required(ErrorMessage = "Assignment Comments Are Required")]
+        public string Notes { get; set; }
         [Required(ErrorMessage = "Publication stage cannot be null")]
         public PublicationStage Stage { get; set; }
         [Required(ErrorMessage = "Action taken cannot be blank")]

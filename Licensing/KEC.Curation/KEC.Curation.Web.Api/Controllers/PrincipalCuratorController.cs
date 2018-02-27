@@ -82,26 +82,22 @@ namespace KEC.Curation.Web.Api.Controllers
             }
         }
         // POST: api/PrincipalCurator/publicationId/assign
-        [HttpPost("assign")]
-        public IActionResult Assign([FromBody]ChiefCuratorAssignmentSerializer model)
+        [HttpPost("publication/{publicationId:int}/assign")]
+        public IActionResult Assign(int publicationId,[FromBody]ChiefCuratorAssignmentSerializer model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(modelState: ModelState);
             }
-            var publication = _uow.PublicationRepository.Find(p => p.KICDNumber.Equals(model.KICDNumber) 
-                                                              && p.PublicationStageLogs.Equals(PublicationStage.PrincipalCurator)
-                                                              && ! p.PublicationStageLogs.Equals(PublicationStage.Curation)).FirstOrDefault();
-
+            var publication = _uow.PublicationRepository
+                                  .Find(p => p.Id.Equals(publicationId)
+                                  && p.PublicationStageLogs.Equals(model.Stage))
+                                  .FirstOrDefault();
             if (publication == null)
             {
-                return NotFound(value: $"Publication {model.KICDNumber} could not be located");
+                return NotFound(value: new { message = "Publication could not be retrieved for assignment." });
             }
-            var maxStage = _uow.PublicationStageLogRepository.Find(p => p.PublicationId == publication.Id).Max(p => p.Stage);
-            var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == model.Stage
-                                                            && p.Stage == maxStage
-                                                            && p.PublicationId.Equals(publication.Id)
-                                                           ).FirstOrDefault();
+           
             try
             {
                 var assignment = new ChiefCuratorAssignment
@@ -110,30 +106,29 @@ namespace KEC.Curation.Web.Api.Controllers
                     PrincipalCuratorGuid = model.PrincipalCuratorGuid,
                     ChiefCuratorGuid = model.ChiefCuratorGuid,
                     AssignmetDateUtc = DateTime.UtcNow
-                   
+
                 };
                 _uow.ChiefCuratorAssignmentRepository.Add(assignment);
-
                 var nextStage = new PublicationStageLog
                 {
-               
-                  Stage = PublicationStage.Curation
-                };
+                     Owner =publication.Owner,
+                     PublicationId= publication.Id,
+                     Stage = PublicationStage.Curation,
+                     Notes= model.Notes,
+                     CreatedAtUtc = DateTime.UtcNow,
+                     ActionTaken = model.ActionTaken
 
-                _uow.PublicationStageLogRepository.Add(nextStage);
-               
+    };
+
+                _uow.CuratorAssignmentRepository.Add(assignment);
                 _uow.Complete();
-               
-                return Ok(value: $"Publication {model.KICDNumber} assigned to chief curator");
+                return Ok(value: new { message = "Content assigned successfully" });
             }
             catch (Exception)
             {
 
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
-
-           
         } 
         
         // PUT: api/PrincipalCurator/5
