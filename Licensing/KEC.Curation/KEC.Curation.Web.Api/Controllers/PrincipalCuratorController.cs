@@ -85,23 +85,23 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpPost("assign")]
         public IActionResult Assign([FromBody]ChiefCuratorAssignmentSerializer model)
         {
-            var publicationId = model.PublicationId;
+            var kicdNumber = model.KicdNumber;
             if (!ModelState.IsValid)
             {
                 return BadRequest(modelState: ModelState);
             }
             var publication = _uow.PublicationRepository
-                                  .Find(p => p.Id.Equals(publicationId))
+                                  .Find(p => p.KICDNumber.Equals(kicdNumber))
                                   .FirstOrDefault();
 
             if (publication == null)
             {
                 return NotFound("Publication could not be retrieved for assignment.");
             }
-            var maxStage = _uow.PublicationStageLogRepository.Find(p => p.PublicationId == publication.Id).Max(p => p.Stage);
+            
             var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage.Equals(PublicationStage.PrincipalCurator)
-                                                            && p.Stage == maxStage
-                                                            && p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+                                                           
+                                                            && publication.Equals(publication.KICDNumber)).FirstOrDefault();
 
             try
             {
