@@ -41,7 +41,7 @@ namespace KEC.Curation.Web.Api.Serializers
             }
         }
 
-       
+
         public string Mail
         {
             get

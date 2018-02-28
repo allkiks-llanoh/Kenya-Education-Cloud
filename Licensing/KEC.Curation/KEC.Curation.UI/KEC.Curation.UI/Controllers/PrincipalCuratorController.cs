@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-   // [Authorize]
+    [Authorize]
     [AllowCrossSiteJson]
     public class PrincipalCuratorController : Controller
     {
@@ -28,11 +28,11 @@ namespace KEC.Curation.UI.Controllers
             ViewData["Message"] = "Assign To Chief Curators";
           
             
-                //var result = new UserProfileController().GetTokenForApplication();
+                var result = new UserProfileController().GetTokenForApplication();
                 
 
 
-            return View();
+            return View(result);
         }
         public ActionResult get()
         {
