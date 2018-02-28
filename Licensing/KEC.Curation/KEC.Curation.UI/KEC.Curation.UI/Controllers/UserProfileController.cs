@@ -19,7 +19,7 @@ using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
 
 namespace KEC.Curation.UI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class UserProfileController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -118,8 +118,9 @@ namespace KEC.Curation.UI.Controllers
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
+            var data = JsonConvert.DeserializeObject<ActiveDirectoryUser[]>(result).ToString();
 
-            return (result);
+            return (data);
         }
        
     }

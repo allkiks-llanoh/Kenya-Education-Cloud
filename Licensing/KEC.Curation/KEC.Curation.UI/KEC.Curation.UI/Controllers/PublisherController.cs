@@ -9,7 +9,7 @@ namespace KEC.Curation.UI.Controllers
 {
     public class PublisherController : Controller
     {
-       [Authorize]
+        [Authorize]
         [AllowCrossSiteJson]
         // GET: Publisher
         public ActionResult Upload()
