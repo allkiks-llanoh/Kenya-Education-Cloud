@@ -9,7 +9,7 @@ $(function () {
             
                 options += '<option value="Select">Select</option>';
                 for (var i = 0; i < response.length; i++) {
-                    options += '<option value="' + response.d.id + '">' + response.d.dispalyName + '</option>';
+                    options += '<option value="' + response.value.id + '">' + response.value.dispalyName + '</option>';
                 }
                 $('#UserGuid').append(options);
 
