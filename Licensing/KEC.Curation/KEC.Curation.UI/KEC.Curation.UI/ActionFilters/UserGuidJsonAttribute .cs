@@ -14,7 +14,7 @@ namespace KEC.Curation.UI.ActionFilters
         }
         public void SetUserGuid(ActionExecutingContext filterContext)
         {
-            var signedInUserID = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var signedInUserID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier")?.Value;
             filterContext.RequestContext.HttpContext.Response.Headers.Set("X-User-Guid", signedInUserID ?? string.Empty);
             
         }
