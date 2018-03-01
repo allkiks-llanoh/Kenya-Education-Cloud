@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>KEC CURATION | @ViewBag.Title</title>
-  
+
     @if (IsSectionDefined("Styles"))
     {@RenderSection("Styles", required: false)}
 
@@ -15,13 +15,17 @@
 
     <!-- Primary Inspinia style -->
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/font-awesome/css")
+    @Styles.Render("~/Content/font-awesome/css")
+    @Styles.Render("~/Content/font-awesome/fonts")
+    @Styles.Render("~/Content/font-awesome/less")
+    @Styles.Render("~/Content/font-awesome/scss")
 
 </head>
 <body>
 
     <!-- Wrapper-->
-    <div id="wrapper">
+    
+    <div id="wrapper" style="background-color:black;">
 
         <!-- Navigation -->
         @Html.Partial("_Navigation")
@@ -69,7 +73,7 @@
     @Scripts.Render("~/plugins/pace")
     @Scripts.Render("~/plugins/slimScroll")
     @Scripts.Render("~/bundles/inspinia")
-   
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
