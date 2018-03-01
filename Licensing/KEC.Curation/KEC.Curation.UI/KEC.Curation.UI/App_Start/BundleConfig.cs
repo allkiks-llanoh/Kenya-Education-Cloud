@@ -491,6 +491,10 @@ namespace KEC.Curation.UI
             //notify.min.js
             bundles.Add(new ScriptBundle("~/plugins/notify").Include(
                   "~/scripts/plugins/notify.min.js"));
+            //globalConstants
+            bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
+             "~/js/globalConstants.js"));
+            //globalConstants
 
         }
     }

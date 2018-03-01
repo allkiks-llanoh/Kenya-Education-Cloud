@@ -193,6 +193,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\UserGuidJsonAttribute .cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -204,7 +205,7 @@
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\StagesController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
-    <Compile Include="Cors\AllowCrossSiteJsonAttribute.cs" />
+    <Compile Include="ActionFilters\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

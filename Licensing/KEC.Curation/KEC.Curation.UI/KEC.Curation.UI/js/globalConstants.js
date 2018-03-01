@@ -1,10 +1,20 @@
 ﻿const apiBaseUrl = "https://curationapi-d/api";
+var userGuid;
 $(document).ready(function () {
 
     $('.summernote').summernote();
-
+    currentUserGuid = readHeader('x-user-guid');
+    console.log(userGuid);
+   
 });
 
+function readHeader(name) {
+    let req = new XMLHttpRequest();
+    req.open('GET', document.location, false);
+    req.send(null);
+    let header = req.getResponseHeader(name);
+    return header;
+}
 
 function ShowAlert(message, type) {
 

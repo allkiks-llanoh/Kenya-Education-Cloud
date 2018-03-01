@@ -29,7 +29,8 @@
                 404: () => { ShowAlert("Publication record could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
                 500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
-            }
+            },
+            data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
 
         }).done(function (publication, textStatus, jqXHR) {
             showChiefCuratorSubmissionSection(publication, "#publication-view");
@@ -68,7 +69,8 @@
                 404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to access curator submissions"); },
                 500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
-            }
+            },
+            data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
 
         }).done(function (submissions, textStatus, jqXHR) {
             let commentsHtml = "";
@@ -132,7 +134,7 @@
         let kicdNumber = $("#kicd-number").val();
         let stage = $('#publication-details').attr('data-stage');
         let url = apiBaseUrl.concat('/Publications');
-        let userGuid = "guid";
+        let userGuid = currentUserGuid;
         if (notes === null || notes === "") {
             return ShowAlert("Curation notes cannot be blank", "error");
         }

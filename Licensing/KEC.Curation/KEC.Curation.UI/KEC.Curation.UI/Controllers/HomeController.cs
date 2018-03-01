@@ -1,16 +1,16 @@
-﻿
-using KEC.Curation.UI.Cors;
+﻿using KEC.Curation.UI.ActionFilters;
 using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-   // [Authorize]
+    [UserGuidJson]
     [AllowCrossSiteJson]
     public class HomeController : Controller
     {
 
         public ActionResult Index()
         {
+           
             return View();
         }
         public ActionResult SubjectTypes()

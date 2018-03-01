@@ -5064,7 +5064,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MiyabiLLC\\.nuget\\packages\\": {},
+    "C:\\Users\\juma.d.o\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -5073,18 +5074,20 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\MiyabiLLC\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj",
+      "projectUniqueName": "F:\\Projects\\Miyabi\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj",
       "projectName": "KEC.Curation.Data",
-      "projectPath": "C:\\Users\\MiyabiLLC\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj",
-      "packagesPath": "C:\\Users\\MiyabiLLC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MiyabiLLC\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\obj\\",
+      "projectPath": "F:\\Projects\\Miyabi\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj",
+      "packagesPath": "C:\\Users\\juma.d.o\\.nuget\\packages\\",
+      "outputPath": "F:\\Projects\\Miyabi\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\MiyabiLLC\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\juma.d.o\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
@@ -5096,8 +5099,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\MiyabiLLC\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj": {
-              "projectPath": "C:\\Users\\MiyabiLLC\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj"
+            "F:\\Projects\\Miyabi\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj": {
+              "projectPath": "F:\\Projects\\Miyabi\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj"
             }
           }
         }
