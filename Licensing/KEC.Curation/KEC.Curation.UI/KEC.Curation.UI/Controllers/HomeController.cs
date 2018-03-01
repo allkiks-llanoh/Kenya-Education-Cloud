@@ -3,6 +3,7 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
+    [Authorize]
     [UserGuidJson]
     [AllowCrossSiteJson]
     public class HomeController : Controller
