@@ -26,8 +26,8 @@ function AjaxCall(url, data, type) {
         type: type ? type : 'GET',
         data: data,
         contentType: 'application/json',
-      
+        dataType: 'json',
         async: false,
-        crossDomain: true,
+        crossDomain: true
     });
 }  

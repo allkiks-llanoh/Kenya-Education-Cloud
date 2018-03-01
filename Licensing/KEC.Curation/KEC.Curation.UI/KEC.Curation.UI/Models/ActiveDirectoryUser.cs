@@ -7,6 +7,7 @@ namespace KEC.Curation.UI.Models
 {
     public class ActiveDirectoryUser
     {
+       
         public string Id { get; set; }
         public string UserPrincipalName { get; set; }
         public string DisplayName { get; set; }

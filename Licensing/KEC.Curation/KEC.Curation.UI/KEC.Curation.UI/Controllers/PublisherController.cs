@@ -5,7 +5,7 @@ namespace KEC.Curation.UI.Controllers
 {
     public class PublisherController : Controller
     {
-       [Authorize]
+        //[Authorize]
         [AllowCrossSiteJson]
         [UserGuidJson]
         // GET: Publisher
