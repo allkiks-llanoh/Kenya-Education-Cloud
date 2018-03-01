@@ -9,7 +9,7 @@ $(function () {
             
                 options += '<option value="Select">Select</option>';
                 for (var i = 0; i < response.length; i++) {
-                    options += '<option value="' + response.id + '">' + response.dispalyName + '</option>';
+                    options += '<option value="' + response.d.id + '">' + response.d.dispalyName + '</option>';
                 }
                 $('#UserGuid').append(options);
 
@@ -26,7 +26,7 @@ function AjaxCall(url, data, type) {
         type: type ? type : 'GET',
         data: data,
         contentType: 'application/json',
-      
+        dataType: 'json',
         async: false,
         crossDomain: true,
     });
