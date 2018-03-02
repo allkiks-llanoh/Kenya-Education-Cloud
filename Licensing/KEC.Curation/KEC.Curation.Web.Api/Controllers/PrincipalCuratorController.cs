@@ -108,15 +108,15 @@ namespace KEC.Curation.Web.Api.Controllers
                 };    
                 publication.PublicationStageLogs.Add(new PublicationStageLog
                 {
-                    Stage = PublicationStage.PrincipalCurator,
+                    Stage = PublicationStage.Curation,
                     Owner = publication.Owner,
                     CreatedAtUtc = DateTime.UtcNow,
                     Notes = model.Notes,
-                    ActionTaken = ActionTaken.PublicationMoveToNextStage
+                    
 
                 });
                 _uow.ChiefCuratorAssignmentRepository.Add(assignment);
-                _uow.PublicationRepository.ProcessToTheNextStage(publication);
+              
                 _uow.Complete();
                 return Ok(value: new { message = "Content assigned successfully" });
             }
