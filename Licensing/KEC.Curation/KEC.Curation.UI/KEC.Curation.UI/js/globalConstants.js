@@ -1,4 +1,4 @@
-﻿const apiBaseUrl = "https://curationapi-d/api";
+﻿const apiBaseUrl = "https://curationapi-d.kec.ac.ke/api";
 var currentUserGuid;
 $(document).ready(function () {
 
