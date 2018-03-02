@@ -89,42 +89,82 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(modelState: ModelState);
             }
-            var publication = _uow.PublicationRepository
-                                  .Find(p => p.Id.Equals(publicationId)).FirstOrDefault();
+            var publication = _uow.PublicationRepository.Find(p => p.KICDNumber.Equals(model.KICDNumber)).FirstOrDefault();
+
             if (publication == null)
             {
-                return NotFound(value: new { message = "Publication could not be retrieved for assignment." });
+                return NotFound(value: $"Publication {model.KICDNumber} could not be located");
             }
-           
+            var maxStage = _uow.PublicationStageLogRepository.Find(p => p.PublicationId == publication.Id).Max(p => p.Stage);
+            var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == model.Stage
+                                                            && p.Stage == maxStage
+                                                            && p.PublicationId.Equals(publication.Id)
+                                                            && p.Owner == null && p.ActionTaken == null).FirstOrDefault();
+
+            if (publicationLog == null)
+            {
+                return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
+            }
+            //if (model.Stage == PublicationStage.Curation &&
+            //    !_uow.PublicationRepository.CanProcessCurationPublication(publication))
+            //{
+            //    return BadRequest(error: $"Publication {model.KICDNumber} has pending curation notes");
+            //}
             try
             {
-                var assignment = new ChiefCuratorAssignment
-                {
-                    PublicationId = publication.Id,
-                    PrincipalCuratorGuid = model.PrincipalCuratorGuid,
-                    ChiefCuratorGuid = model.ChiefCuratorGuid,
-                    AssignmetDateUtc = DateTime.UtcNow
-
-                };
-                var nextStage = new PublicationStageLog
-                {
-                    Stage = PublicationStage.Curation,
-                    Owner = publication.Owner,
-                    CreatedAtUtc = DateTime.UtcNow,
-                    Notes = model.Notes,
-                    
-
-                };
-                _uow.ChiefCuratorAssignmentRepository.Add(assignment);
-                _uow.PublicationStageLogRepository.Add(nextStage);
+                publicationLog.Owner = model.PrincipalCuratorGuid;
+                publicationLog.ActionTaken = model.ActionTaken;
                 _uow.Complete();
-                return Ok(value: new { message = "Content assigned successfully" });
+                _uow.PublicationRepository.ProcessToTheNextStage(publication);
+                return Ok(value: $"Publication {model.KICDNumber} processed successfully");
             }
             catch (Exception)
             {
 
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(modelState: ModelState);
+            //}
+            //var publication = _uow.PublicationRepository
+            //                      .Find(p => p.Id.Equals(publicationId)).FirstOrDefault();
+            //if (publication == null)
+            //{
+            //    return NotFound(value: new { message = "Publication could not be retrieved for assignment." });
+            //}
+
+            //try
+            //{
+            //    var assignment = new ChiefCuratorAssignment
+            //    {
+            //        PublicationId = publication.Id,
+            //        PrincipalCuratorGuid = model.PrincipalCuratorGuid,
+            //        ChiefCuratorGuid = model.ChiefCuratorGuid,
+            //        AssignmetDateUtc = DateTime.UtcNow
+
+            //    };
+            //    var nextStage = new PublicationStageLog
+            //    {
+            //        Stage = PublicationStage.Curation,
+            //        Owner = publication.Owner,
+            //        CreatedAtUtc = DateTime.UtcNow,
+            //        Notes = model.Notes,
+
+
+            //    };
+            //    _uow.ChiefCuratorAssignmentRepository.Add(assignment);
+            //    _uow.PublicationStageLogRepository.Add(nextStage);
+            //    _uow.Complete();
+            //    return Ok(value: new { message = "Content assigned successfully" });
+            //}
+            //catch (Exception)
+            //{
+
+            //    return StatusCode(StatusCodes.Status500InternalServerError);
+            //}
         } 
         
         // PUT: api/PrincipalCurator/5
