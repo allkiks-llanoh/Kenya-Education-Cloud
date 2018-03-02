@@ -3,7 +3,8 @@ using System.Web.Mvc;
 
 namespace KEC.Curatiom.Web.UI.Controllers
 {
-    //[Authorize]
+    [Authorize]
+    [UserGuidJson]
     [AllowCrossSiteJson]
     [RoutePrefix("{controller}")]
    

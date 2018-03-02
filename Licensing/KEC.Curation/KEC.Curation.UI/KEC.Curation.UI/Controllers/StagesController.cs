@@ -5,7 +5,7 @@ namespace KEC.Curation.UI.Controllers
 {
     public class StagesController : Controller
     {
-        //[Authorize]
+        [Authorize]
         [AllowCrossSiteJson]
         [UserGuidJson]
         // GET: Stages
