@@ -90,8 +90,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 return BadRequest(modelState: ModelState);
             }
             var publication = _uow.PublicationRepository
-                                  .Find(p => p.Id.Equals(publicationId)
-                                  && p.PublicationStageLogs.Equals(PublicationStage.PrincipalCurator)).FirstOrDefault();
+                                  .Find(p => p.Id.Equals(publicationId)).FirstOrDefault();
             if (publication == null)
             {
                 return NotFound(value: new { message = "Publication could not be retrieved for assignment." });
