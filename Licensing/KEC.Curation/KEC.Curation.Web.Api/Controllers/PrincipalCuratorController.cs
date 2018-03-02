@@ -81,7 +81,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
             }
         }
-        // POST: api/PrincipalCurator/publicationId/assign
+        // POST: api/PrincipalCurator/publication/publicationId/assign
         [HttpPost("publication/{publicationId:int}/assign")]
         public IActionResult Assign(int publicationId,[FromBody]ChiefCuratorAssignmentSerializer model)
         {
@@ -105,19 +105,18 @@ namespace KEC.Curation.Web.Api.Controllers
                     ChiefCuratorGuid = model.ChiefCuratorGuid,
                     AssignmetDateUtc = DateTime.UtcNow
 
-                };
-
-                _uow.ChiefCuratorAssignmentRepository.Add(assignment);
-                var nextStage = new PublicationStageLog
+                };    
+                publication.PublicationStageLogs.Add(new PublicationStageLog
                 {
-                     Owner =publication.Owner,
-                     PublicationId= publication.Id,
-                     Stage = PublicationStage.Curation,
-                     Notes= model.Notes,
-                     CreatedAtUtc = DateTime.UtcNow,
-                };
-                _uow.PublicationStageLogRepository.Add(nextStage);
+                    Stage = PublicationStage.PrincipalCurator,
+                    Owner = publication.Owner,
+                    CreatedAtUtc = DateTime.UtcNow,
+                    Notes = model.Notes,
+                    ActionTaken = ActionTaken.PublicationMoveToNextStage
 
+                });
+                _uow.ChiefCuratorAssignmentRepository.Add(assignment);
+                _uow.PublicationRepository.ProcessToTheNextStage(publication);
                 _uow.Complete();
                 return Ok(value: new { message = "Content assigned successfully" });
             }
