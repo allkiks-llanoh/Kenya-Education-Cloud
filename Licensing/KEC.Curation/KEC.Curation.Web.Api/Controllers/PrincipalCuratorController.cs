@@ -103,20 +103,16 @@ namespace KEC.Curation.Web.Api.Controllers
 
             if (publicationLog == null)
             {
-                return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
+                return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for curation");
             }
-            //if (model.Stage == PublicationStage.Curation &&
-            //    !_uow.PublicationRepository.CanProcessCurationPublication(publication))
-            //{
-            //    return BadRequest(error: $"Publication {model.KICDNumber} has pending curation notes");
-            //}
+            
             try
             {
                 publicationLog.Owner = model.PrincipalCuratorGuid;
                 publicationLog.ActionTaken = model.ActionTaken;
                 _uow.Complete();
                 _uow.PublicationRepository.ProcessToTheNextStage(publication);
-                return Ok(value: $"Publication {model.KICDNumber} processed successfully");
+                return Ok(value: $"Publication {model.KICDNumber} moved to curation");
             }
             catch (Exception)
             {
@@ -124,47 +120,6 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(modelState: ModelState);
-            //}
-            //var publication = _uow.PublicationRepository
-            //                      .Find(p => p.Id.Equals(publicationId)).FirstOrDefault();
-            //if (publication == null)
-            //{
-            //    return NotFound(value: new { message = "Publication could not be retrieved for assignment." });
-            //}
-
-            //try
-            //{
-            //    var assignment = new ChiefCuratorAssignment
-            //    {
-            //        PublicationId = publication.Id,
-            //        PrincipalCuratorGuid = model.PrincipalCuratorGuid,
-            //        ChiefCuratorGuid = model.ChiefCuratorGuid,
-            //        AssignmetDateUtc = DateTime.UtcNow
-
-            //    };
-            //    var nextStage = new PublicationStageLog
-            //    {
-            //        Stage = PublicationStage.Curation,
-            //        Owner = publication.Owner,
-            //        CreatedAtUtc = DateTime.UtcNow,
-            //        Notes = model.Notes,
-
-
-            //    };
-            //    _uow.ChiefCuratorAssignmentRepository.Add(assignment);
-            //    _uow.PublicationStageLogRepository.Add(nextStage);
-            //    _uow.Complete();
-            //    return Ok(value: new { message = "Content assigned successfully" });
-            //}
-            //catch (Exception)
-            //{
-
-            //    return StatusCode(StatusCodes.Status500InternalServerError);
-            //}
         } 
         
         // PUT: api/PrincipalCurator/5
