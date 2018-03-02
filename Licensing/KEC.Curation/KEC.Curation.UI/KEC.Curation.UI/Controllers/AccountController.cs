@@ -7,7 +7,7 @@ using KEC.Curation.UI.ActionFilters;
 
 namespace KEC.Curation.UI.Controllers
 {
-    [UserGuidJson]
+  //  [UserGuidJson]
     public class AccountController : Controller
     {
         public void SignIn()
