@@ -20,7 +20,7 @@ using KEC.Curation.UI.ActionFilters;
 
 namespace KEC.Curation.UI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [UserGuidJson]
     public class UserProfileController : Controller
     {

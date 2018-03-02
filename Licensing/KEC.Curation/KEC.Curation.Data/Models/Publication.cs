@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace KEC.Curation.Data.Models
@@ -19,6 +20,7 @@ namespace KEC.Curation.Data.Models
         public decimal Price { get; set; }
         public DateTime CompletionDate { get; set; }
         public string Description { get; set; }
+        [DataType(DataType.Url)]
         public string Url { get; set; }
         public string MimeType { get; set; }
         public int SubjectId { get; set; }

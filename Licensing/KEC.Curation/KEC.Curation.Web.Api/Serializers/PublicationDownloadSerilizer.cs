@@ -3,6 +3,7 @@ using KEC.Curation.Data.UnitOfWork;
 using System;
 using System.Linq;
 using KEC.Curation.Services.Extensions;
+using System.ComponentModel.DataAnnotations;
 
 namespace KEC.Curation.Web.Api.Serializers
 {
@@ -24,6 +25,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.Id;
             }
         }
+        [DataType(DataType.Url)]
         public string Url
         {
             get
