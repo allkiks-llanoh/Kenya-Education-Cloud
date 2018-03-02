@@ -823,6 +823,7 @@
     <Content Include="Views\Shared\_NotesEditorPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutChiefCurator.cshtml" />
     <Content Include="Views\Shared\_NavigationChiefCurator.cshtml" />
+    <Content Include="Views\ChiefCurator\PublicationHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
