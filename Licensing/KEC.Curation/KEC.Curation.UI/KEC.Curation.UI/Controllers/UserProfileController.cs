@@ -16,10 +16,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
+using KEC.Curation.UI.ActionFilters;
 
 namespace KEC.Curation.UI.Controllers
 {
-    //Authorize]
+    //[Authorize]
+    [UserGuidJson]
     public class UserProfileController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -102,6 +104,7 @@ namespace KEC.Curation.UI.Controllers
 
         public async Task<string> GetTokenForApplication()
         {
+           
             string signedInUserID = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
             string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
             string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;

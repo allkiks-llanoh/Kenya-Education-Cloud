@@ -49,7 +49,8 @@
             },
             contentType: 'application/json',
             accepts: 'application/json',
-            type: 'GET'
+            type: 'GET',
+            data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
         }).done(function (data, textStatus, jqXHR) {
             let subjects = data;
             if (subjects.length === 0) {
@@ -82,7 +83,7 @@
                     ShowAlert("You are not authorized to access the specified resource", "warning");
                 }
                 ,
-                data: JSON.stringify({ chiefCuratorGuid: ""})
+                data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
             },
             contentType: 'application/json',
             accepts: 'application/json',

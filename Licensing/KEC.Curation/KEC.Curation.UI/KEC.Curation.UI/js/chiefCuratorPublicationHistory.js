@@ -29,7 +29,8 @@
                 404: () => { ShowAlert("Publication record could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
                 500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
-            }
+            },
+            data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
 
         }).done(function (publication, textStatus, jqXHR) {
             $('#publication-details').replaceWith(
@@ -70,7 +71,8 @@
                 403: () => { ShowAlert("You are not authorized to access curator submissions"); },
                 500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
             }
-
+            ,
+            data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
         }).done(function (submissions, textStatus, jqXHR) {
             let commentsHtml = "";
             submissions.forEach(function (submission) {
@@ -118,8 +120,8 @@
             ShowAlert("Something went wrong while loading actions", "error");
         });
     }
-    
-   
+
+
     //Functions Section
 
 

@@ -8,7 +8,7 @@
     function loadPublication() {
         let publicationId = $('#publication-view').attr('data-publicationId');
         let url = apiBaseUrl.concat(`/chiefcurator/UnAssignedPublication/${publicationId}`);
-        let chiefCuratorGuid = "";
+        let chiefCuratorGuid = currentUserGuid;
         $.ajax({
             url: url,
             crossDomain: true,
@@ -58,7 +58,7 @@
         section = section === null || section === null ? "Whole publication" : section;
         let publicationId = $('#publication-view').attr('data-publicationId');
         let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/assign`);
-        let userGuid = "";
+        let userGuid = currentUserGuid;
         $.ajax({
             url: url,
             crossDomain: true,
@@ -83,7 +83,7 @@
     function loadCurators() {
         let publicationId = $('#publication-view').attr('data-publicationId');
         let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/assignments`);
-        let chiefCuratorGuid = "";
+        let chiefCuratorGuid = currentUserGuid;
         $.ajax({
             url: url,
             crossDomain: true,
@@ -118,7 +118,7 @@
     function DeleteCuratorAssignment(e) {
         e.preventDefault();
         let publicationId = $(this).attr('data-publication');
-        let chiefCuratorGuid = "";
+        let chiefCuratorGuid = currentUserGuid;
         let url = apiBaseUrl.concat(`/chiefcurator/publication/assignment/${publicationId}`);
         $.ajax({
             url: url,

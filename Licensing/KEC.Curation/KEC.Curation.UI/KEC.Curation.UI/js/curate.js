@@ -8,7 +8,7 @@
     function getAssignment() {
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
         let assignmentUrl = apiBaseUrl.concat(`/curator/curate/${assignmentId}`);
-        let userGuid = "";
+        let userGuid = currentUserGuid;
         $.ajax({
             url: assignmentUrl,
             crossDomain: true,
@@ -44,7 +44,7 @@
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
         }
-        let userGuid = "";
+        let userGuid = currentUserGuid;
         $.ajax({
             url: url,
             crossDomain: true,
@@ -73,7 +73,7 @@
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
         }
-        let userGuid = "";
+        let userGuid = currentUserGuid;
         $.ajax({
             url: url,
             crossDomain: true,

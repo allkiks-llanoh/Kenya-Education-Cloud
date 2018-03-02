@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace KEC.Curation.UI.Cors
+namespace KEC.Curation.UI.ActionFilters
 {
     public class AllowCrossSiteJsonAttribute: ActionFilterAttribute
     {
+        
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+          
             filterContext.RequestContext.HttpContext.Response.AddHeader("Access-Controll-Allow-Origin", "https://curationapi-d/api");
             base.OnActionExecuting(filterContext);
         }

@@ -26,8 +26,11 @@ namespace KEC.Curation.UI
                       "~/Content/style.css", "~/Content/CustomStyles/ChiefCurator.css"));
 
             // Font Awesome icons
-            bundles.Add(new StyleBundle("~/font-awesome/css").Include(
-                      "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+            bundles.Add(new StyleBundle("~/Content/font-awesome/css").Include(
+                      "~/Content/font-awesome/css/font-awesome.min.css",
+                      "~/Content/font-awesome/css/font-awesome.css"
+                    ));
+                      
 
             // jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -491,6 +494,10 @@ namespace KEC.Curation.UI
             //notify.min.js
             bundles.Add(new ScriptBundle("~/plugins/notify").Include(
                   "~/scripts/plugins/notify.min.js"));
+            //globalConstants
+            bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
+             "~/js/globalConstants.js"));
+            //globalConstants
 
         }
     }

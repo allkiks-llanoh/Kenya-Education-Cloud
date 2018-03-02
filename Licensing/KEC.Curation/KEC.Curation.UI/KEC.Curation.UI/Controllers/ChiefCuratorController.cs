@@ -1,4 +1,4 @@
-﻿using KEC.Curation.UI.Cors;
+﻿using KEC.Curation.UI.ActionFilters;
 using System.Web.Mvc;
 
 namespace KEC.Curatiom.Web.UI.Controllers
@@ -13,7 +13,6 @@ namespace KEC.Curatiom.Web.UI.Controllers
         // GET: ChiefCurator
         public ActionResult Publications()
         {
-           
             ViewBag.ViewPublicationUrl = Url.Action("ViewPublication");
             ViewBag.AssignPublicationUrl = Url.Action("AssignPublication");
             return View();
