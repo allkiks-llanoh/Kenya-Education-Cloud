@@ -1,9 +1,10 @@
 ﻿@{
     ViewBag.Title = "Subjects";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Scripts
 {
- 
+   
     <script src="@Url.Content("~/js/Subjects.js")"></script>
     <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
 }
@@ -35,7 +36,7 @@
                         <input type="text" name="Name" id="Name" class="form-control" placeholder="Enter Name">
                     </div>
                     <div class="col-sm-4">
-                        <button type="submit" id="btn-postFile"  style="background-color:#00b95f;" class="btn btn-w-m btn-primary pull-right">CREATE SUBJECT</button>
+                        <button type="submit" id="btn-postFile" style="background-color:#00b95f;" class="btn btn-w-m btn-primary pull-right">CREATE SUBJECT</button>
                     </div>
                 </div>
             </div>
