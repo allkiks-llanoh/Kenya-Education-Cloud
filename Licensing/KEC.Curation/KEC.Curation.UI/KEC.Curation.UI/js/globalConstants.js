@@ -5,8 +5,7 @@ $(document).ready(function () {
     $('.summernote').summernote();
     fetchUserHeader((userGuid) => {
         currentUserGuid = userGuid;
-        console.log(currentUserGuid);
-    })
+    });
    
 });
 

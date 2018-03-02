@@ -810,7 +810,6 @@
     <Content Include="Views\Shared\_NavigationStages.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
     <Content Include="Views\ChiefCurator\AssignPublication.cshtml" />
-    <Content Include="Views\ChiefCurator\Index.cshtml" />
     <Content Include="Views\ChiefCurator\Publications.cshtml" />
     <Content Include="Views\ChiefCurator\ViewPublication.cshtml" />
     <Content Include="Views\PrincipalCurator\PrincipalCurator.cshtml" />
