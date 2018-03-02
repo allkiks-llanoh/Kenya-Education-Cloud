@@ -1,13 +1,10 @@
-﻿using KEC.Curation.UI.Cors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using KEC.Curation.UI.ActionFilters;
 using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
     [AllowCrossSiteJson]
+    [UserGuidJson]
     [RoutePrefix("{controller}")]
     public class CuratorController : Controller
     {
