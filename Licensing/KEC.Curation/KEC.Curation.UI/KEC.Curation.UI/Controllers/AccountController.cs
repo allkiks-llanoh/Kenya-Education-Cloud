@@ -7,6 +7,9 @@ using KEC.Curation.UI.ActionFilters;
 
 namespace KEC.Curation.UI.Controllers
 {
+
+
+    [AllowCrossSiteJson]
     [UserGuidJson]
     public class AccountController : Controller
     {
