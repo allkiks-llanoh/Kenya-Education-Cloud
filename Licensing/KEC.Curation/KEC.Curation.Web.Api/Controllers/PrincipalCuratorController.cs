@@ -44,14 +44,15 @@ namespace KEC.Curation.Web.Api.Controllers
 
         }
         [HttpGet("Assigned")]
-        public IActionResult Assigned()
+        public IActionResult Assigned(string guid)
         {
-
-            var publicatons = _uow.ChiefCuratorAssignmentRepository.GetAll().ToList();
-          
-            return Ok(value: publicatons);
-
-
+           
+            var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(guid)
+                                                        && p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.Curation);
+            var publicationList = publications.Any() ?
+                publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+            return Ok(value: publicationList);
         }
         [HttpGet("{stage}")]
         public IActionResult PublicationsByStage(PublicationStage stage)
@@ -120,18 +121,28 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-        } 
-        
-        // PUT: api/PrincipalCurator/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
         }
-        
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+       
+
+        [HttpDelete("publication/assignment/{id}")]
+        public IActionResult DeleteUnAssignedPublication(int Id, [FromBody]string principalCuratorGuid)
         {
+            try
+            {
+                var assignment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PrincipalCuratorGuid.Equals(principalCuratorGuid) && p.Id.Equals(Id)).FirstOrDefault();
+                if (assignment == null)
+                {
+                    return BadRequest(error: new { message = "Chief Curator assigment cannot be deleted" });
+                }
+                _uow.ChiefCuratorAssignmentRepository.Remove(assignment);
+                _uow.Complete();
+                return Ok(value: new { message = "Chief Curator assignment deleted successfully" });
+            }
+            catch (Exception)
+            {
+                return StatusCode(statusCode: StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }
