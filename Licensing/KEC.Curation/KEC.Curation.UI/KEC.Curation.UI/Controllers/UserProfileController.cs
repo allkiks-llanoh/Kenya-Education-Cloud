@@ -124,7 +124,11 @@ namespace KEC.Curation.UI.Controllers
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
             var Rarray = JObject.Parse(result);
-            return (result);
+            var r = Rarray.Value<JObject>("ActiveDirectoryUser").Properties();
+            var adUser = r.ToDictionary( k => k.Name, v => v.Value.ToString()).ToString();
+
+
+            return (adUser);
         }
        
     }
