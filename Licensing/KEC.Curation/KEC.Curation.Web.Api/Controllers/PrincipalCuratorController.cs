@@ -131,13 +131,18 @@ namespace KEC.Curation.Web.Api.Controllers
                     AssignmetDateUtc = DateTime.UtcNow
 
                 };
-
+                var nextStage = new PublicationStageLog
+                {
+                    PublicationId = publication.Id,
+                    Owner = publication.Owner,
+                    Notes = model.Notes,
+                    Stage= PublicationStage.Curation,
+                    ActionTaken=model.ActionTaken
+                };
                 _uow.ChiefCuratorAssignmentRepository.Add(asignment);
-                publicationLog.Owner = model.PrincipalCuratorGuid;
-                publicationLog.Notes = model.Notes;
-                publicationLog.ActionTaken = model.ActionTaken;
+                _uow.PublicationStageLogRepository.Add(nextStage);
                 _uow.Complete();
-                _uow.PublicationRepository.ProcessToTheNextStage(publication);
+               
                 return Ok(value: $"Publication {model.KICDNumber} moved to curation");
             }
             catch (Exception)
