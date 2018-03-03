@@ -205,6 +205,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlobsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
@@ -761,6 +762,7 @@
     <Content Include="Scripts\plugins\wow\wow.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Blobs\BlobJS.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -810,6 +812,9 @@
     <Content Include="Views\Publisher\Conditional.cshtml" />
     <Content Include="Views\Publisher\Rejected.cshtml" />
     <Content Include="Views\Publisher\Upload.cshtml" />
+    <Content Include="Views\Blobs\CreateBlobContainer.cshtml" />
+    <Content Include="Views\Blobs\ListBlobs.cshtml" />
+    <Content Include="Views\Blobs\DownloadBlob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

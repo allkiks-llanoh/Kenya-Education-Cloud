@@ -17,6 +17,12 @@
             <li>
                 <a href="@Url.Action("Approved", "Publisher")"><i class="fa fa-info-circle"></i> <span class="nav-label">Status</span></a>
             </li>
+            <li>
+                @Html.ActionLink("Create blob container", "CreateBlobContainer", "Blobs")
+            </li>
+            <li>@Html.ActionLink("Upload blob", "UploadBlob", "Blobs")</li>
+            <li>@Html.ActionLink("List blobs", "ListBlobs", "Blobs")</li>
+            <li>@Html.ActionLink("Download blob", "DownloadBlob", "Blobs")</li>
             @* <li>
             <a href="@Url.Action("Conditional", "Publisher")"><i class="fa fa-laptop"></i> <span class="nav-label">Conditional</span> </a>
         </li>
