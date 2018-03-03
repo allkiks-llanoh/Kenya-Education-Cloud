@@ -123,10 +123,8 @@ namespace KEC.Curation.UI.Controllers
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
-            var Rarray = JObject.Parse(result);
-            var r = Rarray.Value<JObject>("value").Properties();
-            var adUser = r.ToDictionary( k => k.Name, v => v.Value.ToString()).ToString();
-            var mwisho = JsonConvert.DeserializeObject<ActiveDirectoryUser>(adUser).ToString();
+            
+            var mwisho = JsonConvert.DeserializeObject<ActiveDirectoryUser>(result).ToString();
 
             return (mwisho);
         }
