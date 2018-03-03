@@ -126,9 +126,9 @@ namespace KEC.Curation.UI.Controllers
             var Rarray = JObject.Parse(result);
             var r = Rarray.Value<JObject>("value").Properties();
             var adUser = r.ToDictionary( k => k.Name, v => v.Value.ToString()).ToString();
+            var mwisho = JsonConvert.DeserializeObject<ActiveDirectoryUser>(adUser).ToString();
 
-
-            return (adUser);
+            return (mwisho);
         }
        
     }
