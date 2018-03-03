@@ -18,7 +18,7 @@ namespace KEC.Curation.UI
     {
         private static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
         private string appKey = ConfigurationManager.AppSettings["ida:ClientSecret"];
-        private string graphResourceID = "https://graph.windows.net";
+        private string graphResourceID = "https://graph.microsoft.com";
         private static string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
         private string authority = aadInstance + "common";
         private ApplicationDbContext db = new ApplicationDbContext();

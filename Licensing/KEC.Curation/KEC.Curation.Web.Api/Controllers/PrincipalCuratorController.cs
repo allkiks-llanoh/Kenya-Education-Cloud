@@ -43,6 +43,18 @@ namespace KEC.Curation.Web.Api.Controllers
 
 
         }
+        [HttpGet("publications/assignedtochiefs")]
+        public IActionResult ToCuration()
+        {
+
+            var publicatons = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
+                              (PublicationStage.Curation));
+            var publicationList = publicatons.Any() ?
+                publicatons.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
+            return Ok(value: publicationList);
+
+
+        }
         [HttpGet("Assigned")]
         public IActionResult Assigned(string principalCuratorGuid)
         {
