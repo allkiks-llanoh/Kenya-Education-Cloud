@@ -87,51 +87,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpPost("publication/{publicationId:int}/assign")]
         public IActionResult Assign(int publicationId,[FromBody]ChiefCuratorAssignmentSerializer model)
         {
-            //    if (!ModelState.IsValid)
-            //    {
-            //        return BadRequest(modelState: ModelState);
-            //    }
-            //    var publication = _uow.PublicationRepository
-            //                          .Find(p => p.KICDNumber.Equals(model.KICDNumber))
-            //                          .FirstOrDefault();
-            //    if (publication == null)
-            //    {
-            //        return NotFound(value: new { message = "Publication could not be retrieved for assignment or has been moved to curation." });
-            //    }
-
-            //    try
-            //    {
-            //        var asignment = new ChiefCuratorAssignment
-            //        {
-            //            PublicationId = publication.Id,
-            //            PrincipalCuratorGuid = model.PrincipalCuratorGuid,
-            //            ChiefCuratorGuid = "TODOChiefCuratorGUID",
-            //            AssignmetDateUtc = DateTime.UtcNow
-
-            //        };
-            //        _uow.ChiefCuratorAssignmentRepository.Add(asignment);
-
-            //        var nextStage = new PublicationStageLog
-            //        {
-            //            PublicationId = publication.Id,
-            //            Owner = publication.Owner,
-            //            Stage = PublicationStage.PrincipalCurator,
-            //            Notes = model.Notes,
-            //            CreatedAtUtc = DateTime.UtcNow,
-            //            ActionTaken = model.ActionTaken
-
-            //    };
-
-            //        _uow.PublicationStageLogRepository.Add(nextStage);
-            //        _uow.PublicationRepository.ProcessToTheNextStage(publication);
-            //        _uow.Complete();
-            //        return Ok(value: new { message = "Content assigned successfully" });
-            //    }
-            //    catch (Exception)
-            //    {
-
-            //        return StatusCode(StatusCodes.Status500InternalServerError);
-            //    }
+           
             if (!ModelState.IsValid)
             {
                 return BadRequest(modelState: ModelState);

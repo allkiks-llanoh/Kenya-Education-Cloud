@@ -25,7 +25,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.Id;
             }
         }
-        [DataType(DataType.Url)]
+       
         public string Url
         {
             get
