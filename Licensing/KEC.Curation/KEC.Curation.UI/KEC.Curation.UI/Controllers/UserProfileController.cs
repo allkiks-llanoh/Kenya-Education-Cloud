@@ -17,6 +17,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
 using KEC.Curation.UI.ActionFilters;
+using Newtonsoft.Json.Linq;
 
 namespace KEC.Curation.UI.Controllers
 {
@@ -122,8 +123,8 @@ namespace KEC.Curation.UI.Controllers
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
-            var Rarray = JsonConvert.DeserializeObject<List<ActiveDirectoryUser>>(result).ToString();
-            return (Rarray);
+            var Rarray = JArray.Parse(result);
+            return ("");
         }
        
     }

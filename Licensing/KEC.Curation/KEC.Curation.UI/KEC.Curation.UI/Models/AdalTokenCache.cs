@@ -25,7 +25,7 @@ namespace KEC.Curation.UI.Models
             // look up the entry in the database
             Cache = db.UserTokenCacheList.FirstOrDefault(c => c.webUserUniqueId == userId);
             // place the entry in memory
-            this.Deserialize((Cache == null) ? null : MachineKey.Unprotect(Cache.cacheBits,"ADALCache"));
+            this.Deserialize((Cache == null) ? null : MachineKey.Protect(Cache.cacheBits,"ADALCache"));
         }
 
         // clean up the database
@@ -63,7 +63,7 @@ namespace KEC.Curation.UI.Models
                     Cache = db.UserTokenCacheList.FirstOrDefault(c => c.webUserUniqueId == userId);
                 }
             }
-            this.Deserialize((Cache == null) ? null : MachineKey.Unprotect(Cache.cacheBits, "ADALCache"));
+            this.Deserialize((Cache == null) ? null : MachineKey.Protect(Cache.cacheBits, "ADALCache"));
         }
 
         // Notification raised after ADAL accessed the cache.
