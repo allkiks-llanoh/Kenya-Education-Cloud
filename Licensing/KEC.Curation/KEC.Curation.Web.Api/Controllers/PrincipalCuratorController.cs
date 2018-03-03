@@ -52,7 +52,7 @@ namespace KEC.Curation.Web.Api.Controllers
                                        && p.PublicationStageLogs.Max(l => l.Stage)
                                        == PublicationStage.Curation);
             var publicationList = publications.Any() ?
-                publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
             return Ok(value: publicationList);
         }
         [HttpGet("{stage}")]
@@ -73,7 +73,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
                 var publications = _uow.PublicationRepository.Find(p => publicationIds.Contains(p.Id));
                 var publicationList = publications.Any() ?
-                            publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                            publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
                 return Ok(value: publicationList);
             }
             catch (Exception)
@@ -119,6 +119,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     AssignmetDateUtc = DateTime.UtcNow
 
                 };
+
                 _uow.ChiefCuratorAssignmentRepository.Add(asignment);
                 publicationLog.Owner = model.PrincipalCuratorGuid;
                 publicationLog.Notes = model.Notes;
