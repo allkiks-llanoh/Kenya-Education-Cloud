@@ -124,7 +124,7 @@ namespace KEC.Curation.UI.Controllers
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
             var Rarray = JObject.Parse(result);
-            return ("");
+            return (result);
         }
        
     }
