@@ -81,7 +81,7 @@ namespace KEC.Curation.UI.Models
                     };
                 }
 
-                Cache.cacheBits = MachineKey.Unprotect(this.Serialize(), "ADALCache");
+                Cache.cacheBits = MachineKey.Protect(this.Serialize(), "ADALCache");
                 Cache.LastWrite = DateTime.Now;
 
                 // update the DB and the lastwrite 
