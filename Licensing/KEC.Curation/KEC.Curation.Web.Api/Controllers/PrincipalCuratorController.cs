@@ -44,11 +44,13 @@ namespace KEC.Curation.Web.Api.Controllers
 
         }
         [HttpGet("Assigned")]
-        public IActionResult Assigned(string guid)
+        public IActionResult Assigned(string principalCuratorGuid)
         {
            
-            var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(guid)
-                                                       );
+            var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.
+                                       PrincipalCuratorGuid.Equals(principalCuratorGuid)
+                                       && p.PublicationStageLogs.Max(l => l.Stage)
+                                       == PublicationStage.Curation);
             var publicationList = publications.Any() ?
                 publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
             return Ok(value: publicationList);
@@ -89,40 +91,83 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(modelState: ModelState);
             }
-            var publication = _uow.PublicationRepository.Find(p => p.KICDNumber.Equals(model.KICDNumber)).FirstOrDefault();
-
+            var publication = _uow.PublicationRepository
+                                  .Find(p => p.KICDNumber.Equals(model.KICDNumber))
+                                  .FirstOrDefault();
             if (publication == null)
             {
-                return NotFound(value: $"Publication {model.KICDNumber} could not be located");
-            }
-            var maxStage = _uow.PublicationStageLogRepository.Find(p => p.PublicationId == publication.Id).Max(p => p.Stage);
-            var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == model.Stage
-                                                            && p.Stage == maxStage
-                                                            && p.PublicationId.Equals(publication.Id)
-                                                            && p.Owner == null && p.ActionTaken == null).FirstOrDefault();
-
-            if (publicationLog == null)
-            {
-                return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for curation");
+                return NotFound(value: new { message = "Publication could not be retrieved for assignment or has been moved to curation." });
             }
             
             try
             {
-                publicationLog.Owner = model.PrincipalCuratorGuid;
-                publicationLog.ActionTaken = model.ActionTaken;
-                _uow.Complete();
+                var asignment = new ChiefCuratorAssignment
+                {
+                    PublicationId = publication.Id,
+                    PrincipalCuratorGuid = model.PrincipalCuratorGuid,
+                    ChiefCuratorGuid = "TODOChiefCuratorGUID",
+                    AssignmetDateUtc = DateTime.UtcNow
+
+                };
+                _uow.ChiefCuratorAssignmentRepository.Add(asignment);
+
+                var nextStage = new PublicationStageLog
+                {
+                    PublicationId = publication.Id,
+                    Owner = publication.Owner,
+                    Stage = PublicationStage.PrincipalCurator,
+                    Notes = model.Notes,
+                    CreatedAtUtc = DateTime.UtcNow,
+                    ActionTaken = model.ActionTaken
+ 
+            };
+
+                _uow.PublicationStageLogRepository.Add(nextStage);
                 _uow.PublicationRepository.ProcessToTheNextStage(publication);
-                return Ok(value: $"Publication {model.KICDNumber} moved to curation");
+                _uow.Complete();
+                return Ok(value: new { message = "Content assigned successfully" });
             }
             catch (Exception)
             {
 
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(modelState: ModelState);
+            //}
+            //var publication = _uow.PublicationRepository.Find(p => p.KICDNumber.Equals(model.KICDNumber)).FirstOrDefault();
+
+            //if (publication == null)
+            //{
+            //    return NotFound(value: $"Publication {model.KICDNumber} could not be found");
+            //}
+            //var maxStage = _uow.PublicationStageLogRepository.Find(p => p.PublicationId == publication.Id).Max(p => p.Stage);
+            //var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == model.Stage
+            //                                                && p.Stage == maxStage
+            //                                                && p.PublicationId.Equals(publication.Id)
+            //                                                && p.Owner == null && p.ActionTaken == null).FirstOrDefault();
+
+            //if (publicationLog == null)
+            //{
+            //    return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for curation");
+            //}
+
+            //try
+            //{
+            //    publicationLog.Owner = model.PrincipalCuratorGuid;
+            //    publicationLog.ActionTaken = model.ActionTaken;
+            //    _uow.Complete();
+            //    _uow.PublicationRepository.ProcessToTheNextStage(publication);
+            //    return Ok(value: $"Publication {model.KICDNumber} moved to curation");
+            //}
+            //catch (Exception)
+            //{
+
+            //    return StatusCode(StatusCodes.Status500InternalServerError);
+            //}
 
         }
-
-       
 
         [HttpDelete("publication/assignment/{id}")]
         public IActionResult DeleteUnAssignedPublication(int Id, [FromBody]string principalCuratorGuid)
