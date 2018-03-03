@@ -124,7 +124,7 @@ namespace KEC.Curation.UI.Controllers
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
             
-            var mwisho = JsonConvert.DeserializeObject<ActiveDirectoryUser>(result).ToString();
+            var mwisho = JsonConvert.DeserializeObject<List<ActiveDirectoryUser>>(result).ToString();
 
             return (mwisho);
         }
