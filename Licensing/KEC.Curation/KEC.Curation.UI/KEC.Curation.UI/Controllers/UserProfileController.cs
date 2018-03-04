@@ -122,8 +122,7 @@ namespace KEC.Curation.UI.Controllers
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
-            var Rarray = JsonConvert.DeserializeObject<List<ActiveDirectoryUser>>(result).ToString();
-            return (Rarray);
+            return (result);
         }
        
     }
