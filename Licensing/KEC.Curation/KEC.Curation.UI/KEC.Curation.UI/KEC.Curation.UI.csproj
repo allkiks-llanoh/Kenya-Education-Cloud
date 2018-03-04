@@ -829,6 +829,8 @@
     <Content Include="Views\Curator\CuratePublication.cshtml" />
     <Content Include="Views\Curator\ToCurate.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Shared\_DocumentViewerPartial.cshtml" />
+    <Content Include="Views\UserProfile\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

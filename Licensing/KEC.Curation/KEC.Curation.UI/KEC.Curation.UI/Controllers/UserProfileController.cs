@@ -127,7 +127,12 @@ namespace KEC.Curation.UI.Controllers
             return (result);
         }
         [HttpGet]
-        public async Task<List<ActiveDirectoryUser>> GetUsers()
+        public async Task<ActionResult> Users()
+        {
+            var users = await GetUsers();
+            return View(users);
+        }
+        private async Task<List<ActiveDirectoryUser>> GetUsers()
         {
 
             string signedInUserID = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -138,12 +143,12 @@ namespace KEC.Curation.UI.Controllers
             ClientCredential clientcred = new ClientCredential(clientId, appKey);
             // initialize AuthenticationContext with the token cache of the currently signed in user, as kept in the app's database
             AuthenticationContext authenticationContext = new AuthenticationContext(aadInstance + tenantID, new ADALTokenCache(signedInUserID));
-            AuthenticationResult authenticationResult = await authenticationContext.AcquireTokenSilentAsync(graphResourceID, clientcred, new UserIdentifier(userObjectID, UserIdentifierType.UniqueId));
+            var accessToken = await GetTokenForApplication();
 
             HttpClient client = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage(
             HttpMethod.Get, graphResourceIDGroups);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
             var users = (new JavaScriptSerializer()).Deserialize<List<ActiveDirectoryUser>>(result);
