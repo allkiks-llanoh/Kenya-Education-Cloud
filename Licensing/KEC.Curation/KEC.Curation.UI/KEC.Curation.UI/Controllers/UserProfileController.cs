@@ -145,19 +145,18 @@ namespace KEC.Curation.UI.Controllers
             ClientCredential clientcred = new ClientCredential(clientId, appKey);
             // initialize AuthenticationContext with the token cache of the currently signed in user, as kept in the app's database
             AuthenticationContext authenticationContext = new AuthenticationContext(aadInstance + tenantID, new ADALTokenCache(signedInUserID));
-            var accessToken = await GetTokenForApplication();
-
+            AuthenticationResult authenticationResult = await authenticationContext.AcquireTokenSilentAsync(graphResourceID, clientcred, new UserIdentifier(userObjectID, UserIdentifierType.UniqueId));
             HttpClient client = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage(
             HttpMethod.Get, graphResourceIDGroups);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStreamAsync().Result;
+   
             JArray array = new JArray();
             var users = new List<ActiveDirectoryUser>();
             using (var reader = new StreamReader(result))
             {
-                JavaScriptSerializer js = new JavaScriptSerializer();
                 var objText = reader.ReadToEnd();
                 var joResponse = JObject.Parse(objText);
                 var jObject = (JObject)joResponse["value"];
@@ -165,7 +164,6 @@ namespace KEC.Curation.UI.Controllers
                 {
                     users.Add(jToken.ToObject<ActiveDirectoryUser>());
                 }
-                string statu = array[0]["dlrStat"].ToString();
             }
             return users;
         }
