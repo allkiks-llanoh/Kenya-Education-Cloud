@@ -467,7 +467,12 @@ namespace KEC.Curation.UI
             // Text spinners styles
             bundles.Add(new StyleBundle("~/plugins/textSpinnersStyles").Include(
                       "~/Content/plugins/textSpinners/spinners.css"));
-
+            // metisMenu Menu
+            bundles.Add(new StyleBundle("~/plugins/metisMenu").Include(
+                      "~/Scripts/plugins/metisMenu/metisMenu.min.js"));
+            // Pace
+            bundles.Add(new StyleBundle("~/plugins/pace").Include(
+                      "~/Scripts/plugins/pace/pace.min.js"));
             // Password meter 
             bundles.Add(new StyleBundle("~/plugins/passwordMeter").Include(
                         "~/Scripts/plugins/pwstrength/pwstrength-bootstrap.min.js",
