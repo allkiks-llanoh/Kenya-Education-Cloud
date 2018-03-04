@@ -18,6 +18,8 @@ using Newtonsoft.Json;
 using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
 using KEC.Curation.UI.ActionFilters;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace KEC.Curation.UI.Controllers
 {
@@ -150,9 +152,23 @@ namespace KEC.Curation.UI.Controllers
             HttpMethod.Get, graphResourceIDGroups);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             var response = await client.SendAsync(request);
-            var result = response.Content.ReadAsStringAsync().Result;
-            var users = (new JavaScriptSerializer()).Deserialize<List<ActiveDirectoryUser>>(result);
+            var result = response.Content.ReadAsStreamAsync().Result;
+            JArray array = new JArray();
+            var users = new List<ActiveDirectoryUser>();
+            using (var reader = new StreamReader(result))
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                var objText = reader.ReadToEnd();
+                var joResponse = JObject.Parse(objText);
+                var jObject = (JObject)joResponse["value"];
+                foreach (var jToken in jObject.Values())
+                {
+                    users.Add(jToken.ToObject<ActiveDirectoryUser>());
+                }
+                string statu = array[0]["dlrStat"].ToString();
+            }
             return users;
         }
+
     }
 }
