@@ -1,8 +1,10 @@
 ﻿
 
 let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurator`)
+
 var prGuid = $('#dataGUID').attr('data-pGUID');
 
+   //Definition of global draw rows function
     function tableRows(data) {
         var tableRows = [];
         for (var i = 0; i < data.length; i++) {
@@ -11,7 +13,9 @@ var prGuid = $('#dataGUID').attr('data-pGUID');
         return tableRows;
     };
 
-    //Start by getting voucher list based on batch Id
+   //UnAssigned Table starts here
+
+    //Start by getting a list of contents that have not been assigned to chief curators
     $.ajax({
         url: principalCuratorGetUrl,
         type: "GET",
@@ -35,3 +39,7 @@ var prGuid = $('#dataGUID').attr('data-pGUID');
 
         return row[0];
     } 
+
+
+   
+ 

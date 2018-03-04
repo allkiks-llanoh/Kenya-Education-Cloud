@@ -449,8 +449,8 @@ namespace KEC.Curation.UI
                       "~/Content/plugins/bootstrapSocial/bootstrap-social.css"));
 
             // Typehead
-            bundles.Add(new ScriptBundle("~/plugins/typehead").Include(
-                      "~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"));
+            bundles.Add(new ScriptBundle("~/plugins/typtypehead").Include(
+                      "~/Scripts/plugins/typtypehead/bootstrap3-typeahead.min.js"));
 
             // Pdfjs
             bundles.Add(new ScriptBundle("~/plugins/pdfjs").Include(
@@ -467,7 +467,12 @@ namespace KEC.Curation.UI
             // Text spinners styles
             bundles.Add(new StyleBundle("~/plugins/textSpinnersStyles").Include(
                       "~/Content/plugins/textSpinners/spinners.css"));
-
+            // metisMenu Menu
+            bundles.Add(new StyleBundle("~/plugins/metisMenu").Include(
+                      "~/Scripts/plugins/metisMenu/metisMenu.min.js"));
+            // Pace
+            bundles.Add(new StyleBundle("~/plugins/pace").Include(
+                      "~/Scripts/plugins/pace/pace.min.js"));
             // Password meter 
             bundles.Add(new StyleBundle("~/plugins/passwordMeter").Include(
                         "~/Scripts/plugins/pwstrength/pwstrength-bootstrap.min.js",

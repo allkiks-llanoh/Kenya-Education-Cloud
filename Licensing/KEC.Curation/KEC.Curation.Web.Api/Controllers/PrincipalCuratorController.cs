@@ -43,15 +43,29 @@ namespace KEC.Curation.Web.Api.Controllers
 
 
         }
-        [HttpGet("Assigned")]
-        public IActionResult Assigned()
+        [HttpGet("publications/assignedtochiefs")]
+        public IActionResult ToCuration()
         {
 
-            var publicatons = _uow.ChiefCuratorAssignmentRepository.GetAll().ToList();
-          
-            return Ok(value: publicatons);
+            var publicatons = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
+                              (PublicationStage.Curation));
+            var publicationList = publicatons.Any() ?
+                publicatons.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
+            return Ok(value: publicationList);
 
 
+        }
+        [HttpGet("Assigned")]
+        public IActionResult Assigned(string principalCuratorGuid)
+        {
+           
+            var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.
+                                       PrincipalCuratorGuid.Equals(principalCuratorGuid)
+                                       && p.PublicationStageLogs.Max(l => l.Stage)
+                                       == PublicationStage.Curation);
+            var publicationList = publications.Any() ?
+                publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
+            return Ok(value: publicationList);
         }
         [HttpGet("{stage}")]
         public IActionResult PublicationsByStage(PublicationStage stage)
@@ -71,7 +85,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
                 var publications = _uow.PublicationRepository.Find(p => publicationIds.Contains(p.Id));
                 var publicationList = publications.Any() ?
-                            publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                            publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
                 return Ok(value: publicationList);
             }
             catch (Exception)
@@ -85,6 +99,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpPost("publication/{publicationId:int}/assign")]
         public IActionResult Assign(int publicationId,[FromBody]ChiefCuratorAssignmentSerializer model)
         {
+           
             if (!ModelState.IsValid)
             {
                 return BadRequest(modelState: ModelState);
@@ -93,7 +108,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
             if (publication == null)
             {
-                return NotFound(value: $"Publication {model.KICDNumber} could not be located");
+                return NotFound(value: $"Publication {model.KICDNumber} could not be found");
             }
             var maxStage = _uow.PublicationStageLogRepository.Find(p => p.PublicationId == publication.Id).Max(p => p.Stage);
             var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == model.Stage
@@ -105,13 +120,29 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for curation");
             }
-            
+
             try
             {
-                publicationLog.Owner = model.PrincipalCuratorGuid;
-                publicationLog.ActionTaken = model.ActionTaken;
+                var asignment = new ChiefCuratorAssignment
+                {
+                    PublicationId = publication.Id,
+                    PrincipalCuratorGuid = model.PrincipalCuratorGuid,
+                    ChiefCuratorGuid = "TODOChiefCuratorGUID",
+                    AssignmetDateUtc = DateTime.UtcNow
+
+                };
+                var nextStage = new PublicationStageLog
+                {
+                    PublicationId = publication.Id,
+                    Owner = publication.Owner,
+                    Notes = model.Notes,
+                    Stage= PublicationStage.Curation,
+                    ActionTaken=model.ActionTaken
+                };
+                _uow.ChiefCuratorAssignmentRepository.Add(asignment);
+                _uow.PublicationStageLogRepository.Add(nextStage);
                 _uow.Complete();
-                _uow.PublicationRepository.ProcessToTheNextStage(publication);
+               
                 return Ok(value: $"Publication {model.KICDNumber} moved to curation");
             }
             catch (Exception)
@@ -120,18 +151,26 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-        } 
-        
-        // PUT: api/PrincipalCurator/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
         }
-        
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+        [HttpDelete("publication/assignment/{id}")]
+        public IActionResult DeleteUnAssignedPublication(int Id, [FromBody]string principalCuratorGuid)
         {
+            try
+            {
+                var assignment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PrincipalCuratorGuid.Equals(principalCuratorGuid) && p.Id.Equals(Id)).FirstOrDefault();
+                if (assignment == null)
+                {
+                    return BadRequest(error: new { message = "Chief Curator assigment cannot be deleted" });
+                }
+                _uow.ChiefCuratorAssignmentRepository.Remove(assignment);
+                _uow.Complete();
+                return Ok(value: new { message = "Chief Curator assignment deleted successfully" });
+            }
+            catch (Exception)
+            {
+                return StatusCode(statusCode: StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

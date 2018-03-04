@@ -231,7 +231,6 @@
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\demodoc.html" />
     <Content Include="Content\landing\avatar_all.png" />
     <Content Include="Content\landing\header_one.jpg" />
     <Content Include="Content\landing\header_two.jpg" />
@@ -359,6 +358,7 @@
     <Content Include="js\legalView.js" />
     <Content Include="js\Levels.js" />
     <Content Include="js\PrincipalCurator.js" />
+    <Content Include="js\PrincipalCuratorAssigned.js" />
     <Content Include="js\PrincipalCuratorView.js" />
     <Content Include="js\Subjects.js" />
     <Content Include="js\SubjectTypes.js" />
@@ -415,7 +415,6 @@
     <Content Include="Content\font-awesome\scss\_screen-reader.scss" />
     <Content Include="Content\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\font-awesome\scss\_variables.scss" />
-    <Content Include="Content\demodoc.pdf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\globalConstants.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -767,31 +766,11 @@
     <Content Include="Scripts\plugins\topojson\topojson.js" />
     <Content Include="Scripts\plugins\touchpunch\jquery.ui.touch-punch.min.js" />
     <Content Include="Scripts\plugins\touchspin\jquery.bootstrap-touchspin.min.js" />
-    <Content Include="Scripts\plugins\typehead\bootstrap3-typeahead.min.js" />
+    <Content Include="Scripts\plugins\typtypehead\bootstrap3-typeahead.min.js" />
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
     <Content Include="Scripts\plugins\velocity\velocity.min.js" />
     <Content Include="Scripts\plugins\velocity\velocity.ui.min.js" />
     <Content Include="Scripts\plugins\video\responsible-video.js" />
-    <Content Include="Scripts\plugins\ViewerJS\compatibility.js" />
-    <Content Include="Scripts\plugins\ViewerJS\example.local.css" />
-    <Content Include="Scripts\plugins\ViewerJS\images\kogmbh.png" />
-    <Content Include="Scripts\plugins\ViewerJS\images\nlnet.png" />
-    <Content Include="Scripts\plugins\ViewerJS\images\texture.png" />
-    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-download.png" />
-    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-fullscreen.png" />
-    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-menuArrows.png" />
-    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-pageDown.png" />
-    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-pageUp.png" />
-    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-presentation.png" />
-    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-zoomIn.png" />
-    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-zoomOut.png" />
-    <Content Include="Scripts\plugins\ViewerJS\index.html" />
-    <Content Include="Scripts\plugins\ViewerJS\pdf.js" />
-    <Content Include="Scripts\plugins\ViewerJS\pdf.worker.js" />
-    <Content Include="Scripts\plugins\ViewerJS\pdfjsversion.js" />
-    <Content Include="Scripts\plugins\ViewerJS\text_layer_builder.js" />
-    <Content Include="Scripts\plugins\ViewerJS\ui_utils.js" />
-    <Content Include="Scripts\plugins\ViewerJS\webodf.js" />
     <Content Include="Scripts\plugins\wow\wow.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -849,7 +828,7 @@
     <Content Include="Views\ChiefCurator\PublicationHistory.cshtml" />
     <Content Include="Views\Curator\CuratePublication.cshtml" />
     <Content Include="Views\Curator\ToCurate.cshtml" />
-    <Content Include="Views\Shared\_DocumentViewerPartial.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
