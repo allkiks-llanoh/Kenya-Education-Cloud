@@ -30,7 +30,7 @@ namespace KEC.Curation.UI
                       "~/Content/font-awesome/css/font-awesome.min.css",
                       "~/Content/font-awesome/css/font-awesome.css"
                     ));
-                      
+
 
             // jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -498,7 +498,7 @@ namespace KEC.Curation.UI
             bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
              "~/js/globalConstants.js"));
             //globalConstants
-
+            
         }
     }
 }

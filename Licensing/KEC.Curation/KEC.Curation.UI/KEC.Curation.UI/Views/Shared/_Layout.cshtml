@@ -21,7 +21,7 @@
 <body>
 
     <!-- Wrapper-->
-    <div id="wrapper"  style="background-color:black;">
+    <div id="wrapper" style="background-color:black;">
 
         <!-- Navigation -->
         @Html.Partial("_Navigation")
@@ -34,20 +34,9 @@
 
             <!-- Main view  -->
             <!--Alert-->
+            @Html.Partial("_DocumentViewerPartial")
 
-            <div class="alert alert-success alert-dismissable m-t hidden">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <p class="font-bold" id="success-message">Success</p>
-            </div>
-            <div class="alert alert-danger alert-dismissable m-t hidden">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <p class="font-bold" id="error-message">Error</p>
-            </div>
-            <div class="alert alert-warning alert-dismissable m-t hidden">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <p class="font-bold" id="warning-message">Warning</p>
-            </div>
-
+           
 
             <!--Alert-->
             @RenderBody()
@@ -69,7 +58,8 @@
     @Scripts.Render("~/plugins/pace")
     @Scripts.Render("~/plugins/slimScroll")
     @Scripts.Render("~/bundles/inspinia")
-   @Scripts.Render("~/js/globalConstants")
+    @Scripts.Render("~/js/globalConstants")
     @RenderSection("scripts", required: false)
+   
 </body>
 </html>
