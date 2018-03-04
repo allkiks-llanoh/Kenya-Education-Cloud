@@ -117,14 +117,14 @@ namespace KEC.Curation.UI.Controllers
             AuthenticationContext authenticationContext = new AuthenticationContext(aadInstance + tenantID, new ADALTokenCache(signedInUserID));
             AuthenticationResult authenticationResult = await authenticationContext.AcquireTokenSilentAsync(graphResourceID, clientcred, new UserIdentifier(userObjectID, UserIdentifierType.UniqueId));
 
-            HttpClient client = new HttpClient();
-            HttpRequestMessage request = new HttpRequestMessage(
-            HttpMethod.Get, graphResourceID);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
-            var response = await client.SendAsync(request);
+            //HttpClient client = new HttpClient();
+            //HttpRequestMessage request = new HttpRequestMessage(
+            //HttpMethod.Get, graphResourceID);
+            //request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
+            //var response = await client.SendAsync(request);
 
-            var result = response.Content.ReadAsStringAsync().Result;
-            return (result);
+            //var result = response.Content.ReadAsStringAsync().Result;
+            return (authenticationResult.AccessToken);
         }
        
     }
