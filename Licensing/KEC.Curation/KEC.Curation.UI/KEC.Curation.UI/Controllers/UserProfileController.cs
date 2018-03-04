@@ -20,6 +20,8 @@ using KEC.Curation.UI.ActionFilters;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using KEC.Curation.UI.Helpers;
+using System.Diagnostics;
 
 namespace KEC.Curation.UI.Controllers
 {
@@ -155,11 +157,10 @@ namespace KEC.Curation.UI.Controllers
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
             var users = new List<ActiveDirectoryUser>();
-            var joResponse = JObject.Parse(result);
-            var jUsers = joResponse["value"];
-            foreach (var jToken in jUsers.Values())
+            using (var reader = new FixedJsonTextReader(new StringReader(result)))
             {
-                users.Add(jToken.ToObject<ActiveDirectoryUser>());
+
+                users = JsonSerializer.CreateDefault().Deserialize<List<ActiveDirectoryUser>>(reader);
             }
             return users;
         }
