@@ -150,6 +150,8 @@ namespace KEC.Curation.UI.Controllers
             HttpRequestMessage request = new HttpRequestMessage(
             HttpMethod.Get, graphResourceIDGroups);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
+            request.Headers.Accept.Clear();
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
             var users = new List<ActiveDirectoryUser>();
