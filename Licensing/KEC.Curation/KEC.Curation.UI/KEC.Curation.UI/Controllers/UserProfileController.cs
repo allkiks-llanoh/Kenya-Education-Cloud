@@ -159,8 +159,16 @@ namespace KEC.Curation.UI.Controllers
             var users = new List<ActiveDirectoryUser>();
             using (var reader = new FixedJsonTextReader(new StringReader(result)))
             {
+                var settings = new JsonSerializerSettings
+                {
+                    Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+                    {
+                        Debug.WriteLine(args.ErrorContext.Error.Message);
+                        args.ErrorContext.Handled = true;
+                    }
+                };
 
-                users = JsonSerializer.CreateDefault().Deserialize<List<ActiveDirectoryUser>>(reader);
+                users = JsonSerializer.CreateDefault(settings).Deserialize<List<ActiveDirectoryUser>>(reader);
             }
             return users;
         }
