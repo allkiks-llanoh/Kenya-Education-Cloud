@@ -151,18 +151,13 @@ namespace KEC.Curation.UI.Controllers
             HttpMethod.Get, graphResourceIDGroups);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
             var response = await client.SendAsync(request);
-            var result = response.Content.ReadAsStreamAsync().Result;
-
+            var result = response.Content.ReadAsStringAsync().Result;
             var users = new List<ActiveDirectoryUser>();
-            using (var reader = new StreamReader(result))
+            var joResponse = JObject.Parse(result);
+            var jUsers = joResponse["value"];
+            foreach (var jToken in jUsers.Values())
             {
-                var objText = reader.ReadToEnd();
-                var joResponse = JObject.Parse(objText);
-                var jUsers = joResponse["value"];
-                foreach (var jToken in jUsers.Values())
-                {
-                    users.Add(jToken.ToObject<ActiveDirectoryUser>());
-                }
+                users.Add(jToken.ToObject<ActiveDirectoryUser>());
             }
             return users;
         }
