@@ -68,6 +68,7 @@ namespace KEC.Curation.UI.Controllers
         public async Task<ActionResult> GetChiefCurators()
         {
 
+
             string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
             string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
 
@@ -118,9 +119,10 @@ namespace KEC.Curation.UI.Controllers
 
             HttpClient client = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage(
-            HttpMethod.Get, graphResourceIDGroups);
+            HttpMethod.Get, graphResourceID);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
             var response = await client.SendAsync(request);
+
             var result = response.Content.ReadAsStringAsync().Result;
             return (result);
         }
