@@ -72,7 +72,7 @@ namespace KEC.Curation.UI.Controllers
             string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
             string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
 
-            Uri servicePointUri = new Uri(graphResourceID);
+            Uri servicePointUri = new Uri(graphResourceIDGroups);
             Uri serviceRoot = new Uri(servicePointUri, tenantID);
             var curatorsList = new List<User>();
             ActiveDirectoryClient activeDirectoryClient = new ActiveDirectoryClient(serviceRoot,
