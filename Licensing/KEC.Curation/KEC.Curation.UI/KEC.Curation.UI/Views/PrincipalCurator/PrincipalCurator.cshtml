@@ -6,9 +6,11 @@
 @section Scripts
 {
 
-  
+
     <script src="@Url.Content("~/js/PrincipalCuratorView.js")"></script>
     <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
+    <script src="@Url.Content("~/js/PrincipalCuratorAssigned.js")"></script>
+
 }
 <div class="text-center m-t-lg">
     <h1>
@@ -20,7 +22,7 @@
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#tab-unassigned" style="background-color:red; color:white;" aria-expanded="true">Unassigned Publications</a></li>
         <li class=""><a data-toggle="tab" href="#tab-assigned" style="background-color:#00B85F; color:white;" aria-expanded="false">Assigned Publications</a></li>
-        <li class=""><a data-toggle="tab" href="#tab-history" style="background-color:black;  color:white;"aria-expanded="false">Publications History</a></li>
+        <li class=""><a data-toggle="tab" href="#tab-history" style="background-color:black;  color:white;" aria-expanded="false">Publications History</a></li>
     </ul>
     <div class="tab-content">
         <div id="tab-unassigned" class="tab-pane active">
