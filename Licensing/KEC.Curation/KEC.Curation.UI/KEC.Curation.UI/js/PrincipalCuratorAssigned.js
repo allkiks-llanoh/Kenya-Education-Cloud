@@ -29,9 +29,9 @@ let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $("<tr />")
-        row.append($("<td>" + rowData.id + "</td>"));
-        row.append($("<td>" + rowData.title + "</td>"));
-        row.append($("<td>" + rowData.description + "</td>"));
+     
+        row.append($("<td>" + rowData.description  + "</td>"));
+        row.append($("<td>" + rowData.kicdNumber + "</td>"));
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
         return row[0];
     } 
