@@ -358,6 +358,7 @@
     <Content Include="js\legalView.js" />
     <Content Include="js\Levels.js" />
     <Content Include="js\PrincipalCurator.js" />
+    <Content Include="js\PrincipalCuratorAssigned.js" />
     <Content Include="js\PrincipalCuratorView.js" />
     <Content Include="js\Subjects.js" />
     <Content Include="js\SubjectTypes.js" />
@@ -765,7 +766,7 @@
     <Content Include="Scripts\plugins\topojson\topojson.js" />
     <Content Include="Scripts\plugins\touchpunch\jquery.ui.touch-punch.min.js" />
     <Content Include="Scripts\plugins\touchspin\jquery.bootstrap-touchspin.min.js" />
-    <Content Include="Scripts\plugins\typehead\bootstrap3-typeahead.min.js" />
+    <Content Include="Scripts\plugins\typtypehead\bootstrap3-typeahead.min.js" />
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
     <Content Include="Scripts\plugins\velocity\velocity.min.js" />
     <Content Include="Scripts\plugins\velocity\velocity.ui.min.js" />

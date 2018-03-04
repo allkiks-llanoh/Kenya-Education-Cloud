@@ -449,8 +449,8 @@ namespace KEC.Curation.UI
                       "~/Content/plugins/bootstrapSocial/bootstrap-social.css"));
 
             // Typehead
-            bundles.Add(new ScriptBundle("~/plugins/typehead").Include(
-                      "~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"));
+            bundles.Add(new ScriptBundle("~/plugins/typtypehead").Include(
+                      "~/Scripts/plugins/typtypehead/bootstrap3-typeahead.min.js"));
 
             // Pdfjs
             bundles.Add(new ScriptBundle("~/plugins/pdfjs").Include(
