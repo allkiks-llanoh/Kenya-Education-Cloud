@@ -152,15 +152,13 @@ namespace KEC.Curation.UI.Controllers
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStreamAsync().Result;
-   
-            JArray array = new JArray();
             var users = new List<ActiveDirectoryUser>();
             using (var reader = new StreamReader(result))
             {
                 var objText = reader.ReadToEnd();
-                var joResponse = JObject.Parse(objText);
-                var jObject = (JObject)joResponse["value"];
-                foreach (var jToken in jObject.Values())
+                var joResponse = JArray.Parse(objText);
+                var jUsers = joResponse["value"];
+                foreach (var jToken in jUsers.Values())
                 {
                     users.Add(jToken.ToObject<ActiveDirectoryUser>());
                 }
