@@ -8,7 +8,7 @@
         loadPublicationSubjects(assignedSubjectsUrl, '#assigned-subjects-list', 'assigned');
         $('#load-unassigned-publications').click(function (e) {
             e.preventDefault();
-            let subjectId = "Maths"
+            let subjectId = 1
             if (subjectId === null || subjectId === "") {
                 return ShowAlert('Please select a subject to load publications', 'error');
             }
