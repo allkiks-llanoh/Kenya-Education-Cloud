@@ -20,6 +20,8 @@ using KEC.Curation.UI.ActionFilters;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using KEC.Curation.UI.Helpers;
+using System.Diagnostics;
 
 namespace KEC.Curation.UI.Controllers
 {
@@ -151,19 +153,23 @@ namespace KEC.Curation.UI.Controllers
             HttpRequestMessage request = new HttpRequestMessage(
             HttpMethod.Get, graphResourceIDGroups);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
+            request.Headers.Accept.Clear();
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var response = await client.SendAsync(request);
-            var result = response.Content.ReadAsStreamAsync().Result;
-
+            var result = response.Content.ReadAsStringAsync().Result;
             var users = new List<ActiveDirectoryUser>();
-            using (var reader = new StreamReader(result))
+            using (var reader = new FixedJsonTextReader(new StringReader(result)))
             {
-                var objText = reader.ReadToEnd();
-                var joResponse = JObject.Parse(objText);
-                var jUsers = joResponse["value"];
-                foreach (var jToken in jUsers.Values())
+                var settings = new JsonSerializerSettings
                 {
-                    users.Add(jToken.ToObject<ActiveDirectoryUser>());
-                }
+                    Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+                    {
+                        Debug.WriteLine(args.ErrorContext.Error.Message);
+                        args.ErrorContext.Handled = true;
+                    }
+                };
+
+                users = JsonSerializer.CreateDefault(settings).Deserialize<List<ActiveDirectoryUser>>(reader);
             }
             return users;
         }

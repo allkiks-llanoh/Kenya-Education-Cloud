@@ -211,6 +211,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FixJsonTextReader.cs" />
     <Compile Include="Migrations\201802262225569_InitialMigrations.cs" />
     <Compile Include="Migrations\201802262225569_InitialMigrations.Designer.cs">
       <DependentUpon>201802262225569_InitialMigrations.cs</DependentUpon>
