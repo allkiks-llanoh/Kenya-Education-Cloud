@@ -20,7 +20,8 @@ namespace KEC.Curation.UI.Controllers
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
-          
+           
+
             
                 //var result = new UserProfileController().GetTokenForApplication();
                 

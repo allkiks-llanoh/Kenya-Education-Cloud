@@ -10,7 +10,7 @@ $(document).ready(function () {
         var notes = "Assigned To Chief Curator"
         var actiontaken = "PublicationMoveToNextStage"
         var kicdNumber = $('#kicd').attr('data-kicdNumber');
-        var principalCuratorGuid = $('#UserGuid').val();
+        var principalCuratorGuid = "50af779b-7d14-4cb3-a7ac-96655e8b24e5"
         var chiefCuratorGuid = $('#UserGuid').val();
         console.log(`${publicationID}`);
         console.log(`${principalCuratorGuid}`);
