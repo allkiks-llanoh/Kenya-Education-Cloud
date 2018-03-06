@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Azure;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace KEC.Curation.PublishersUI.Controllers
 {
@@ -12,6 +15,14 @@ namespace KEC.Curation.PublishersUI.Controllers
     [Authorize]
     public class PublisherController : Controller
     {
+        private CloudBlobContainer GetCloudBlobContainer()
+        {
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+            CloudConfigurationManager.GetSetting("keccuration_AzureStorageConnectionString"));
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference("publications");
+            return container;
+        }
 
         // GET: Publisher
         public ActionResult Upload()
@@ -28,8 +39,12 @@ namespace KEC.Curation.PublishersUI.Controllers
                     LastName = user.LastName,
                     guid= user.Id
                 };
-                return View(publisher);
+
+               return View(publisher);
+
             }
+
+            
         }
         public ActionResult Approved()
         {

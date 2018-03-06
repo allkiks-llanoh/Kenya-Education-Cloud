@@ -8,7 +8,7 @@
         loadPublicationSubjects(assignedSubjectsUrl, '#assigned-subjects-list', 'assigned');
         $('#load-unassigned-publications').click(function (e) {
             e.preventDefault();
-            let subjectId = $('#unassigned-subjects-list').val();
+            let subjectId = 1
             if (subjectId === null || subjectId === "") {
                 return ShowAlert('Please select a subject to load publications', 'error');
             }
@@ -49,7 +49,8 @@
             },
             contentType: 'application/json',
             accepts: 'application/json',
-            type: 'GET'
+            type: 'GET',
+            data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
         }).done(function (data, textStatus, jqXHR) {
             let subjects = data;
             if (subjects.length === 0) {
@@ -82,7 +83,7 @@
                     ShowAlert("You are not authorized to access the specified resource", "warning");
                 }
                 ,
-                data: JSON.stringify({ chiefCuratorGuid: ""})
+                data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
             },
             contentType: 'application/json',
             accepts: 'application/json',

@@ -7,7 +7,7 @@
     function getPublicationsToCurate() {
         let url = apiBaseUrl.concat('/curator/tocurate');
         let curationUrl = $("#publications-to-curate").attr('data-curateurl');
-        let userGuid = "";
+        let userGuid = currentUserGuid;
         $.ajax({
             url: url,
             type: 'GET',

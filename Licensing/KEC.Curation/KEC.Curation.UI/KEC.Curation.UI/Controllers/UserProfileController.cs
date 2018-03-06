@@ -16,10 +16,18 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using Microsoft.Azure.ActiveDirectory.GraphClient.Extensions;
+using KEC.Curation.UI.ActionFilters;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using KEC.Curation.UI.Helpers;
+using System.Diagnostics;
 
 namespace KEC.Curation.UI.Controllers
 {
-    //[Authorize]
+    [Authorize]
+    [AllowCrossSiteJson]
+    [UserGuidJson]
     public class UserProfileController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -65,10 +73,11 @@ namespace KEC.Curation.UI.Controllers
         public async Task<ActionResult> GetChiefCurators()
         {
 
+
             string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
             string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
 
-            Uri servicePointUri = new Uri(graphResourceID);
+            Uri servicePointUri = new Uri(graphResourceIDGroups);
             Uri serviceRoot = new Uri(servicePointUri, tenantID);
             var curatorsList = new List<User>();
             ActiveDirectoryClient activeDirectoryClient = new ActiveDirectoryClient(serviceRoot,
@@ -102,6 +111,7 @@ namespace KEC.Curation.UI.Controllers
 
         public async Task<string> GetTokenForApplication()
         {
+
             string signedInUserID = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
             string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
             string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
@@ -114,13 +124,55 @@ namespace KEC.Curation.UI.Controllers
 
             HttpClient client = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage(
-            HttpMethod.Get, graphResourceIDGroups);
+            HttpMethod.Get, graphResourceID);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;
-        
+           
             return (result);
         }
-       
+        [HttpGet]
+        public async Task<ActionResult> Users()
+        {
+            var users = await GetUsers();
+            return View(users);
+        }
+        private async Task<List<ActiveDirectoryUser>> GetUsers()
+        {
+
+            string signedInUserID = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
+            string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+
+            // get a token for the Graph without triggering any user interaction (from the cache, via multi-resource refresh token, etc)
+            ClientCredential clientcred = new ClientCredential(clientId, appKey);
+            // initialize AuthenticationContext with the token cache of the currently signed in user, as kept in the app's database
+            AuthenticationContext authenticationContext = new AuthenticationContext(aadInstance + tenantID, new ADALTokenCache(signedInUserID));
+            AuthenticationResult authenticationResult = await authenticationContext.AcquireTokenSilentAsync(graphResourceID, clientcred, new UserIdentifier(userObjectID, UserIdentifierType.UniqueId));
+            HttpClient client = new HttpClient();
+            HttpRequestMessage request = new HttpRequestMessage(
+            HttpMethod.Get, graphResourceIDGroups);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
+            request.Headers.Accept.Clear();
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var response = await client.SendAsync(request);
+            var result = response.Content.ReadAsStringAsync().Result;
+            var users = new List<ActiveDirectoryUser>();
+            using (var reader = new FixedJsonTextReader(new StringReader(result)))
+            {
+                var settings = new JsonSerializerSettings
+                {
+                    Error = delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+                    {
+                        Debug.WriteLine(args.ErrorContext.Error.Message);
+                        args.ErrorContext.Handled = true;
+                    }
+                };
+
+                users = JsonSerializer.CreateDefault(settings).Deserialize<List<ActiveDirectoryUser>>(reader);
+            }
+            return users;
+        }
+
     }
 }

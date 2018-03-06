@@ -21,6 +21,9 @@ namespace KEC.Curation.Web.Api.Serializers
         public string Notes { get; set; }
         [Required(ErrorMessage = "Publication stage cannot be null")]
         public PublicationStage Stage { get; set; }
-       
+        [Required(ErrorMessage = "Action Taken cannot be null")]
+        public ActionTaken ActionTaken { get; set; }
+
+
     }
 }

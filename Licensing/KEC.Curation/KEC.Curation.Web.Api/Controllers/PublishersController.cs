@@ -26,6 +26,66 @@ namespace KEC.Curation.Publishers.Web.Api.Controllers
             _uow = uow;
             _env = env;
         }
+        [HttpGet("count/approved")]
+         public IActionResult ApprovedCount([FromBody]PublicationCountSerilizer model)
+        {
+            var guid = model.UserGuid;
+            var stage = model.Stage;
+
+            try
+            {
+
+                var publicationsCount = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
+                                                               (ActionTaken.PublicationApproved)
+                                                                && p.Owner.Equals(guid)).Count();
+                return Ok(value: publicationsCount);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpGet("count/partial")]
+        public IActionResult PartialCount([FromBody]PublicationCountSerilizer model)
+        {
+            var guid = model.UserGuid;
+            var stage = model.Stage;
+
+            try
+            {
+
+                var publicationsCount = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
+                                                               (ActionTaken.PublicationConditionalApproval)
+                                                                && p.Owner.Equals(guid)).Count();
+                return Ok(value: publicationsCount);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpGet("count/rejected")]
+        public IActionResult RejectedCount([FromBody]PublicationCountSerilizer model)
+        {
+            var guid = model.UserGuid;
+            var stage = model.Stage;
+
+            try
+            {
+
+                var publicationsCount = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
+                                                               (ActionTaken.PublicationRejected)
+                                                               && p.Owner.Equals(guid)).Count();
+                return Ok(value: publicationsCount);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
         [HttpGet("approved")]
         public IActionResult PublicationsByStage(string guid)
         {
@@ -53,11 +113,12 @@ namespace KEC.Curation.Publishers.Web.Api.Controllers
             {
 
                 var conditionalapproved = _uow.PublicationRepository.Find(p => p.PublicationStageLogs
-                .Equals(ActionTaken.PublicationConditionalApproval)
-                && p.Owner.Equals(guid)).ToList();
+                                          .Equals(ActionTaken.PublicationConditionalApproval)
+                                           && p.Owner.Equals(guid)).ToList();
                 var publicationList = conditionalapproved.Any() ?
-                           conditionalapproved.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList()
-                           : new List<PublicationDownloadSerilizer>();
+                                      conditionalapproved.Select(p => new PublicationDownloadSerilizer
+                                      (p, _uow)).ToList()
+                                       : new List<PublicationDownloadSerilizer>();
                 return Ok(value: publicationList);
             }
             catch (Exception)

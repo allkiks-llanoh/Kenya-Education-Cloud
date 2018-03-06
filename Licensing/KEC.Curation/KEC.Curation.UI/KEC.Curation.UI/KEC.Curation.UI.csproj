@@ -193,21 +193,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\UserGuidJsonAttribute .cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChiefCuratorController.cs" />
+    <Compile Include="Controllers\CuratorController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PrincipalCuratorController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\StagesController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
-    <Compile Include="Cors\AllowCrossSiteJsonAttribute.cs" />
+    <Compile Include="ActionFilters\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FixJsonTextReader.cs" />
     <Compile Include="Migrations\201802262225569_InitialMigrations.cs" />
     <Compile Include="Migrations\201802262225569_InitialMigrations.Designer.cs">
       <DependentUpon>201802262225569_InitialMigrations.cs</DependentUpon>
@@ -217,6 +221,7 @@
     <Compile Include="Models\AdalTokenCache.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\AzureActiveDirectoryUserSerilizer.cs" />
+    <Compile Include="Models\ResultsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -356,6 +361,7 @@
     <Content Include="js\legalView.js" />
     <Content Include="js\Levels.js" />
     <Content Include="js\PrincipalCurator.js" />
+    <Content Include="js\PrincipalCuratorAssigned.js" />
     <Content Include="js\PrincipalCuratorView.js" />
     <Content Include="js\Subjects.js" />
     <Content Include="js\SubjectTypes.js" />
@@ -763,7 +769,7 @@
     <Content Include="Scripts\plugins\topojson\topojson.js" />
     <Content Include="Scripts\plugins\touchpunch\jquery.ui.touch-punch.min.js" />
     <Content Include="Scripts\plugins\touchspin\jquery.bootstrap-touchspin.min.js" />
-    <Content Include="Scripts\plugins\typehead\bootstrap3-typeahead.min.js" />
+    <Content Include="Scripts\plugins\typtypehead\bootstrap3-typeahead.min.js" />
     <Content Include="Scripts\plugins\validate\jquery.validate.min.js" />
     <Content Include="Scripts\plugins\velocity\velocity.min.js" />
     <Content Include="Scripts\plugins\velocity\velocity.ui.min.js" />
@@ -809,7 +815,6 @@
     <Content Include="Views\Shared\_NavigationStages.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
     <Content Include="Views\ChiefCurator\AssignPublication.cshtml" />
-    <Content Include="Views\ChiefCurator\Index.cshtml" />
     <Content Include="Views\ChiefCurator\Publications.cshtml" />
     <Content Include="Views\ChiefCurator\ViewPublication.cshtml" />
     <Content Include="Views\PrincipalCurator\PrincipalCurator.cshtml" />
@@ -823,10 +828,17 @@
     <Content Include="Views\Shared\_NotesEditorPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutChiefCurator.cshtml" />
     <Content Include="Views\Shared\_NavigationChiefCurator.cshtml" />
+    <Content Include="Views\ChiefCurator\PublicationHistory.cshtml" />
+    <Content Include="Views\Curator\CuratePublication.cshtml" />
+    <Content Include="Views\Curator\ToCurate.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Shared\_DocumentViewerPartial.cshtml" />
+    <Content Include="Views\UserProfile\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Curation\" />
+    <Folder Include="Views\Groups\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
