@@ -16,6 +16,11 @@ namespace KEC.Curation.PublishersUI
                       "~/Content/animate.css",
                       "~/Content/style.css"));
 
+            // CSS style (noscript)
+            bundles.Add(new StyleBundle("~/Content/assets/css").Include(
+                      "~/Content/assets/css/main.css",
+                    "~/Content/assets/css/noscript.css"));
+
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(
                       "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
@@ -35,6 +40,14 @@ namespace KEC.Curation.PublishersUI
             // Bootstrap
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js"));
+            
+
+            // Landing page javascript
+            bundles.Add(new ScriptBundle("~/bundles/javascript").Include(
+                      "~/Content/assets/js/jquery.min.js",
+                      "~/Content/assets/js/skel.min.js",
+                      "~/Content/assets/js/util.js",
+                      "~/Content/assets/js/main.js"));
 
             // Inspinia script
             bundles.Add(new ScriptBundle("~/bundles/inspinia").Include(

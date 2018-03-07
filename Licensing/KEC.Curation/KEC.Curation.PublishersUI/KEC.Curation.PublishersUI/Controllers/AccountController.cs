@@ -55,6 +55,12 @@ namespace KEC.Curation.PublishersUI.Controllers
         }
 
         //
+        [AllowAnonymous]
+        public ActionResult LandingPage()
+        {
+
+            return View();
+        }
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -148,7 +154,7 @@ namespace KEC.Curation.PublishersUI.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
