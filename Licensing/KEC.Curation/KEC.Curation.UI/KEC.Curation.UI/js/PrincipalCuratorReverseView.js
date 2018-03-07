@@ -37,10 +37,10 @@ let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`
        
         return row[0];
     } 
-    function tableRows(data) {
+    function tableRowss(data) {
         var tableRows = [];
         for (var i = 0; i < data.length; i++) {
-            tableRows.push(drawRow(data[i]));
+            tableRows.push(drawRows(data[i]));
         }
         return tableRows;
     };
@@ -57,12 +57,12 @@ let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`
 
             //This code snipet prepares to append Json Data
 
-            $('#history-publications').append(tableRows(data));
+            $('#history-publications').append(tableRowss(data));
         }
     });
 
     //This functionpopulates the tbody inner HTML with json data on call
-    function drawRow(rowData) {
+    function drawRows(rowData) {
         var row = $("<tr />")
         row.append($("<td>" + rowData.id + "</td>"));
         row.append($("<td>" + rowData.title + "</td>"));
