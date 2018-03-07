@@ -1,5 +1,5 @@
 ﻿
-let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`)
+let AssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`)
 function tableRows(data) {
     var tableRows = [];
     for (var i = 0; i < data.length; i++) {
@@ -12,7 +12,7 @@ function tableRows(data) {
 
 //Start by getting a list of contents that have been assigned to chief curators
 $.ajax({
-    url: principalCuratorAssignedUrl,
+    url: AssignedUrl,
     type: "GET",
     dataType: 'json',
     success: function (data, status, jqhxr) {
