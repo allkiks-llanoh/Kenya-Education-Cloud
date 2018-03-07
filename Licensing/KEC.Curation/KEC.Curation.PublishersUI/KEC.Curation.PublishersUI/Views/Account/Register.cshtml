@@ -6,7 +6,8 @@
 
 <img src="~/Content/plugins/images/logo.png" /> 
     @*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) { @Html.AntiForgeryToken()
-    <h4>Create a new account</h4>
+   
+        <h4>Create a new account</h4>
     <hr /> @Html.ValidationSummary("", new { @class = "text-danger" })
 
     <div class="form-group">
@@ -55,7 +56,7 @@
 
     <div class="" >
 
-        <div class="" >
+        <div class="">
 
 
             <div class="ibox-content" style="width:100%;">
@@ -67,303 +68,297 @@
                 </h2>
 
                 <form id="form" action="#" class="wizard-big">
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "wizard-big", role = "form"}))
+            {@Html.AntiForgeryToken()
 
-                    <h1>Account</h1>
+            <h1>Account</h1>
 
-                    <fieldset>
+            <fieldset>
 
-                        <h2>Account Information</h2>
+                <div class="row">
 
-                        <div class="row">
+                    <div class="col-lg-8">
 
-                            <div class="col-lg-8">
+                        <div class="form-group">
 
-                                <div class="form-group">
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.FirstName) })
 
-                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.FirstName) })
+                        </div>
 
-                                </div>
+                        <div class="form-group">
 
-                                <div class="form-group">
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.LastName) })
 
-                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.LastName) })
+                        </div>
 
-                                </div>
-
-                                <div class="form-group">
-
-
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control required email", placeholder = Html.DisplayNameFor(n => n.Email) })
+                        <div class="form-group">
 
 
-                                </div>
-                                <div class="form-group">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control required email", placeholder = Html.DisplayNameFor(n => n.Email) })
 
 
-                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.PhoneNumber) })
+                        </div>
+                        <div class="form-group">
 
 
-                                </div>
-                                <div class="form-group">
+                            @Html.TextBoxFor(m => m.Contact, new { @class = "form-control required", placeholder = "0712345678" })
 
 
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control required valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.Password) })
-
-                                </div>
-                                <div class="form-group">
+                        </div>
+                        <div class="form-group">
 
 
-                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.ConfirmPassword) })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control required valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.Password) })
 
-                                </div>
+                        </div>
+                        <div class="form-group">
 
-                            </div>
 
-                            <div class="col-lg-4">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.ConfirmPassword) })
 
-                                <div class="text-center">
+                        </div>
 
-                                    <div style="margin-top: 20px">
+                    </div>
 
-                                        <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                    <div class="col-lg-4">
 
-                                    </div>
+                        <div class="text-center">
 
-                                </div>
+                            <div style="margin-top: 20px">
+
+                                <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
 
                             </div>
 
                         </div>
 
-                    </fieldset>
+                    </div>
 
-                    <h1>Profile</h1>
+                </div>
 
-                    <fieldset>
+            </fieldset>
 
-                        <h2>Profile Information</h2>
+            <h1>Company</h1>
 
-                        <div class="row">
+            <fieldset>
 
-                            <div class="col-lg-6">
+                <h2>Company Information</h2>
 
-                                <div class="form-group">
+                <div class="row">
 
-                                    <label>First name *</label>
+                    <div class="col-lg-6">
 
-                                    <input id="name" name="name" type="text" class="form-control required">
+                        <div class="form-group">
 
-                                </div>
-
-                                <div class="form-group">
-
-                                    <label>Last name *</label>
-
-                                    <input id="surname" name="surname" type="text" class="form-control required">
-
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-6">
-
-                                <div class="form-group">
-
-                                    <label>Email *</label>
-
-                                    <input id="email" name="email" type="text" class="form-control required email">
-
-                                </div>
-
-                                <div class="form-group">
-
-                                    <label>Address *</label>
-
-                                    <input id="address" name="address" type="text" class="form-control">
-
-                                </div>
-
-                            </div>
+                            @Html.TextBoxFor(m => m.Company, new { @class = "form-control  required", placeholder = Html.DisplayNameFor(n => n.Company) })
 
                         </div>
 
-                    </fieldset>
+                        <div class="form-group">
 
-                    <h1>Warning</h1>
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.Address) })
+                        </div>
 
-                    <fieldset>
+                    </div>
 
-                        <div class="text-center" style="margin-top: 120px">
+                    <div class="col-lg-6">
 
-                            <h2>You did it Man :-)</h2>
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(m => m.PostalAddress, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.PostalAddress) })
+                        </div>
+
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(m => m.KraPin, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.KraPin) })
 
                         </div>
 
-                    </fieldset>
+                    </div>
+                    <div class="col-lg-6">
 
-                    <h1>Finish</h1>
+                        <div class="form-group">
 
-                    <fieldset>
+                            @Html.TextBoxFor(m => m.BusinessNumber, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.BusinessNumber) })
+                        </div>
 
-                        <h2>Terms and Conditions</h2>
 
-                        <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
-                        <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+                    </div>
 
-                    </fieldset>
+                </div>
 
-                </form>
+            </fieldset>
+
+
+            <h1>Submit</h1>
+
+            <fieldset>
+
+                <h2>Terms and Conditions</h2>
+
+                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
+                <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+                <input type="submit" class="btn btn-info col-md-6 col-md-offset-3" style="background-color:#00af57; margin-left:-30px; width:200px;" value="Register" />
+
+
+            </fieldset>
+
+}
+
+            </div>
+            <p style="text-align:center;">
+                @Html.ActionLink("Already Registered? Login", "Login")
+                <br /> &copy;KEC 2018
+            </p>
+
+        </div>
 
             </div>
 
         </div>
 
-    </div>
+        @section Scripts { @Scripts.Render("~/bundles/jquery") @Scripts.Render("~/bundles/bootstrap") @Scripts.Render("~/plugins/metsiMenu") @Scripts.Render("~/plugins/pace") @Scripts.Render("~/plugins/slimScroll") @Scripts.Render("~/bundles/inspinia") @Scripts.Render("~/plugins/wizardSteps") @Scripts.Render("~/plugins/iCheck") @Scripts.Render("~/plugins/validate")
 
-</div>
+        <script type="text/javascript">
+            $(document).ready(function () {
 
-@section Scripts { @Scripts.Render("~/bundles/jquery") @Scripts.Render("~/bundles/bootstrap") @Scripts.Render("~/plugins/metsiMenu") @Scripts.Render("~/plugins/pace") @Scripts.Render("~/plugins/slimScroll") @Scripts.Render("~/bundles/inspinia") @Scripts.Render("~/plugins/wizardSteps") @Scripts.Render("~/plugins/iCheck") @Scripts.Render("~/plugins/validate")
+                $("#wizard").steps();
 
-<script type="text/javascript">
-    $(document).ready(function () {
+                $("#form").steps({
 
-        $("#wizard").steps();
+                    bodyTag: "fieldset",
 
-        $("#form").steps({
+                    onStepChanging: function (event,
+                        currentIndex, newIndex) {
 
-            bodyTag: "fieldset",
+                        // Always allow going backward even if the current step contains invalid fields!
 
-            onStepChanging: function (event,
-                currentIndex, newIndex) {
+                        if (currentIndex >
+                            newIndex) {
 
-                // Always allow going backward even if the current step contains invalid fields!
+                            return true;
 
-                if (currentIndex >
-                    newIndex) {
+                        }
 
-                    return true;
+                        // Forbid suppressing "Warning" step if the user is to young
 
-                }
+                        if (newIndex ===
+                            3 && Number($("#age").val()) <
+                            18) {
 
-                // Forbid suppressing "Warning" step if the user is to young
+                            return false;
 
-                if (newIndex ===
-                    3 && Number($("#age").val()) <
-                    18) {
+                        }
 
-                    return false;
+                        var form =
+                            $(this);
 
-                }
+                        // Clean up if user went backward before
 
-                var form =
-                    $(this);
+                        if (currentIndex <
+                            newIndex) {
 
-                // Clean up if user went backward before
+                            // To remove error styles
 
-                if (currentIndex <
-                    newIndex) {
+                            $(".body:eq(" +
+                                newIndex + ") label.error",
+                                form).remove();
 
-                    // To remove error styles
+                            $(".body:eq(" +
+                                newIndex + ") .error",
+                                form).removeClass("error");
 
-                    $(".body:eq(" +
-                        newIndex + ") label.error",
-                        form).remove();
+                        }
 
-                    $(".body:eq(" +
-                        newIndex + ") .error",
-                        form).removeClass("error");
+                        // Disable validation on fields that are disabled or hidden.
 
-                }
+                        form.validate().settings.ignore =
+                            ":disabled,:hidden";
 
-                // Disable validation on fields that are disabled or hidden.
+                        // Start validation; Prevent going forward if false
 
-                form.validate().settings.ignore =
-                    ":disabled,:hidden";
+                        return form.valid();
 
-                // Start validation; Prevent going forward if false
+                    },
 
-                return form.valid();
+                    onStepChanged: function (event,
+                        currentIndex, priorIndex) {
 
-            },
+                        // Suppress (skip) "Warning" step if the user is old enough.
 
-            onStepChanged: function (event,
-                currentIndex, priorIndex) {
+                        if (currentIndex ===
+                            2 && Number($("#age").val()) >=
+                            18) {
 
-                // Suppress (skip) "Warning" step if the user is old enough.
+                            $(this).steps("next");
 
-                if (currentIndex ===
-                    2 && Number($("#age").val()) >=
-                    18) {
+                        }
 
-                    $(this).steps("next");
+                        // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
 
-                }
+                        if (currentIndex ===
+                            2 && priorIndex ===
+                            3) {
 
-                // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
+                            $(this).steps("previous");
 
-                if (currentIndex ===
-                    2 && priorIndex ===
-                    3) {
+                        }
 
-                    $(this).steps("previous");
+                    },
 
-                }
+                    onFinishing: function (event,
+                        currentIndex) {
 
-            },
+                        var form =
+                            $(this);
 
-            onFinishing: function (event,
-                currentIndex) {
+                        // Disable validation on fields that are disabled.
 
-                var form =
-                    $(this);
+                        // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
 
-                // Disable validation on fields that are disabled.
+                        form.validate().settings.ignore =
+                            ":disabled";
 
-                // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
+                        // Start validation; Prevent form submission if false
 
-                form.validate().settings.ignore =
-                    ":disabled";
+                        return form.valid();
 
-                // Start validation; Prevent form submission if false
+                    },
 
-                return form.valid();
+                    onFinished: function (event,
+                        currentIndex) {
 
-            },
+                        var form =
+                            $(this);
 
-            onFinished: function (event,
-                currentIndex) {
+                        // Submit form input
 
-                var form =
-                    $(this);
+                        form.submit();
 
-                // Submit form input
+                    }
 
-                form.submit();
+                }).validate({
 
-            }
+                    errorPlacement: function (error,
+                        element) {
 
-        }).validate({
+                        element.before(error);
 
-            errorPlacement: function (error,
-                element) {
+                    },
 
-                element.before(error);
+                    rules: {
 
-            },
+                        confirm: {
 
-            rules: {
+                            equalTo: "#password"
 
-                confirm: {
+                        }
 
-                    equalTo: "#password"
+                    }
 
-                }
+                });
 
-            }
+            });
+        </script>
 
-        });
-
-    });
-</script>
-
-}
+        }

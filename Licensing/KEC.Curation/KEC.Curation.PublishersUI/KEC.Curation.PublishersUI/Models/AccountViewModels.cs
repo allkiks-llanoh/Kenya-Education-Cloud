@@ -77,10 +77,39 @@ namespace KEC.Curation.PublishersUI.Models
         public string Company { get; set; }
 
         [Required]
+
+        [Display(Name = "Contact")]
+        public string Contact { get; set; }
+
+        [Required]
+
+        [Display(Name = "KraPin")]
+        public string KraPin { get; set; }
+
+        [Required]
+
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Required]
+
+        [Display(Name = "PostalAddress")]
+        public string PostalAddress { get; set; }
+
+
+        [Display(Name = "Business Number")]
+        public string BusinessNumber { get; set; }
+
+
+
+
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+    
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]

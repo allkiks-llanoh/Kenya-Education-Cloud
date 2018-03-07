@@ -76,5 +76,6 @@ namespace KEC.Curation.PublishersUI.Controllers
 
             return View();
         }
+       
     }
 }

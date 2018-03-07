@@ -3,8 +3,15 @@
     "",
     "\\Licensing",
     "\\Licensing\\KEC.Curation",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.UI"
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views\\Account",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI\\Views",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI\\Views\\ChiefCurator",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI\\Views\\Home"
   ],
-  "SelectedNode": "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI.sln",
+  "SelectedNode": "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views\\Account\\Register.cshtml",
   "PreviewInSolutionExplorer": false
 }

@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201802231813089_AddedNewRowsToTable.Designer.cs">
       <DependentUpon>201802231813089_AddedNewRowsToTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803061455020_changeregistrationmodel.cs" />
+    <Compile Include="Migrations\201803061455020_changeregistrationmodel.Designer.cs">
+      <DependentUpon>201803061455020_changeregistrationmodel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -233,9 +237,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
+    <Content Include="Content\assets\css\font-awesome.min.css" />
+    <Content Include="Content\assets\css\ie9.css" />
+    <Content Include="Content\assets\css\main.css" />
+    <Content Include="Content\assets\css\noscript.css" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\assets\js\jquery.min.js" />
+    <Content Include="Content\assets\js\main.js" />
+    <Content Include="Content\assets\js\skel.min.js" />
+    <Content Include="Content\assets\js\util.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\email.css" />
+    <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\bg1.jpg" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\overlay.png" />
+    <Content Include="Content\images\pic01.jpg" />
+    <Content Include="Content\images\pic02.jpg" />
+    <Content Include="Content\images\pic03.jpg" />
     <Content Include="Content\landing\avatar_all.png" />
     <Content Include="Content\landing\header_one.jpg" />
     <Content Include="Content\landing\header_two.jpg" />
@@ -303,6 +323,7 @@
     <Content Include="Content\plugins\images\bootstrap-colorpicker\hue-horizontal.png" />
     <Content Include="Content\plugins\images\bootstrap-colorpicker\hue.png" />
     <Content Include="Content\plugins\images\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Content\plugins\images\cms.jpg" />
     <Content Include="Content\plugins\images\logo.png" />
     <Content Include="Content\plugins\images\sort.png" />
     <Content Include="Content\plugins\images\sort_asc.png" />
@@ -404,6 +425,32 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Scripts\api\typehead_collection.json" />
     <Content Include="Connected Services\keccurationAzureStorage\ConnectedService.json" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\assets\fonts\FontAwesome.otf" />
+    <Content Include="Content\assets\sass\base\_page.scss" />
+    <Content Include="Content\assets\sass\base\_typography.scss" />
+    <Content Include="Content\assets\sass\components\_box.scss" />
+    <Content Include="Content\assets\sass\components\_button.scss" />
+    <Content Include="Content\assets\sass\components\_form.scss" />
+    <Content Include="Content\assets\sass\components\_icon.scss" />
+    <Content Include="Content\assets\sass\components\_image.scss" />
+    <Content Include="Content\assets\sass\components\_list.scss" />
+    <Content Include="Content\assets\sass\components\_table.scss" />
+    <Content Include="Content\assets\sass\ie9.scss" />
+    <Content Include="Content\assets\sass\layout\_bg.scss" />
+    <Content Include="Content\assets\sass\layout\_footer.scss" />
+    <Content Include="Content\assets\sass\layout\_header.scss" />
+    <Content Include="Content\assets\sass\layout\_main.scss" />
+    <Content Include="Content\assets\sass\layout\_wrapper.scss" />
+    <Content Include="Content\assets\sass\libs\_functions.scss" />
+    <Content Include="Content\assets\sass\libs\_mixins.scss" />
+    <Content Include="Content\assets\sass\libs\_skel.scss" />
+    <Content Include="Content\assets\sass\libs\_vars.scss" />
+    <Content Include="Content\assets\sass\main.scss" />
+    <Content Include="Content\assets\sass\noscript.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -816,6 +863,9 @@
     <Content Include="Views\Blobs\CreateBlobContainer.cshtml" />
     <Content Include="Views\Blobs\ListBlobs.cshtml" />
     <Content Include="Views\Blobs\DownloadBlob.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Account\LandingPage.cshtml" />
+    <Content Include="Views\Shared\_LayoutLanding.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -839,6 +889,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802231813089_AddedNewRowsToTable.resx">
       <DependentUpon>201802231813089_AddedNewRowsToTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803061455020_changeregistrationmodel.resx">
+      <DependentUpon>201803061455020_changeregistrationmodel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
