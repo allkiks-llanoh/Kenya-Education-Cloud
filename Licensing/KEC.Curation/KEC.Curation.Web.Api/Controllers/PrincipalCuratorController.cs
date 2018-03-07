@@ -123,13 +123,14 @@ namespace KEC.Curation.Web.Api.Controllers
 
             try
             {
+             
                 var asignment = new ChiefCuratorAssignment
                 {
                     PublicationId = publication.Id,
                     PrincipalCuratorGuid = model.PrincipalCuratorGuid,
                     ChiefCuratorGuid = "TODOChiefCuratorGUID",
                     AssignmetDateUtc = DateTime.UtcNow
-
+                    
                 };
                 var nextStage = new PublicationStageLog
                 {
@@ -139,12 +140,13 @@ namespace KEC.Curation.Web.Api.Controllers
                     Stage = PublicationStage.Curation,
                     ActionTaken = model.ActionTaken
                 };
-
-                var chiefCuratorPublicationID = new Publication
+                var curationId = new Publication
                 {
-                    ChiefCuratorAssignmentId = asignment.Id
+                    ChiefCuratorAssignmentId = publicationLog.Publication.ChiefCuratorAssignmentId
                 };
-                _uow.PublicationRepository.Add(chiefCuratorPublicationID);
+
+
+                _uow.PublicationRepository.Add(curationId);
                 _uow.ChiefCuratorAssignmentRepository.Add(asignment);
                 _uow.PublicationStageLogRepository.Add(nextStage);
                 _uow.Complete();
