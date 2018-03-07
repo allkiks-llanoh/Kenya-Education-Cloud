@@ -8,7 +8,7 @@ $(function () {
             var options = '';
             
                 options += '<option value="Select">Select</option>';
-                for (var i = 0; i < response.length; i++) {
+                for (var i = 1; i < response.length; i++) {
                     options += '<option value="' + response.id + '">' + response.dispalyName + '</option>';
                 }
                 $('#UserGuid').append(options);

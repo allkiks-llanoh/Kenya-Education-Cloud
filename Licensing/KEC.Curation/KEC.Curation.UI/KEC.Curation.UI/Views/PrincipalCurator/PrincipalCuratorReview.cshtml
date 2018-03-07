@@ -11,11 +11,12 @@
 @section Scripts
 {
 
- 
+
     <script src="@Url.Content("~/js/PrincipalCurator.js")"></script>
-    
+    <script src="@Url.Content("~/js/GetChiefCurators.js")"></script>
+
     <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
-   
+
 
 }
 @{
@@ -77,7 +78,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <br/>
+                                        <br />
                                         <div class="form-group" style="margin-left:15px;">
                                             <label for="comment" class="col-md-4">Select Chief Curator:</label>
 
@@ -112,33 +113,33 @@
         </div>
     </div>
 </div>
-    <div class="  hidden">
+<div class="  hidden">
 
-        <h1 id="identity" data-identity=@PId></h1>
-        <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
-        <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
-        <span><strong>Publication:&nbsp;</strong></span>@Publication
+    <h1 id="identity" data-identity=@PId></h1>
+    <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
+    <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
+    <span><strong>Publication:&nbsp;</strong></span>@Publication
 
 
-    </div>
-    <script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+</div>
+<script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
+<script type="text/javascript">
+    $(document).ready(function () {
 
-            $('.summernote').summernote();
+        $('.summernote').summernote();
 
-        });
+    });
 
-        var edit = function () {
-            $('.click2edit').summernote({ focus: true });
-        };
+    var edit = function () {
+        $('.click2edit').summernote({ focus: true });
+    };
 
-        var save = function () {
-            var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
-            $('.click2edit').destroy();
-        };
-    </script>
+    var save = function () {
+        var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+        $('.click2edit').destroy();
+    };
+</script>
 
 
 
