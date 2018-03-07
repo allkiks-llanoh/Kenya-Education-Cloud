@@ -32,11 +32,12 @@ $.ajax({
     async: false,
     crossDomain: true,
     success: function (data) {
+        var users = JSON.parse(data)
         //clear the current content of the select
         $select.html('');
         //iterate over the data and append a select option
         $.each(data, function (index, val) {
-            $select.append(`<option id=${val.id}  value='${val.id}'+ >${val.name}</option>`);
+            $select.append('<option'>+ users[val]+ '</option>');
         })
     },
     error: function () {
