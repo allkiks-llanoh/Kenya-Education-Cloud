@@ -23,12 +23,12 @@ namespace KEC.Curation.Web.Api.Controllers
     {
 
         private readonly IUnitOfWork _uow;
-        
+
 
         public PrincipalCuratorController(IUnitOfWork uow)
         {
             _uow = uow;
-          
+
         }
 
         [HttpGet]
@@ -39,7 +39,7 @@ namespace KEC.Curation.Web.Api.Controllers
                               (PublicationStage.PrincipalCurator));
             var publicationList = publicatons.Any() ?
                 publicatons.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
-            return Ok(value:publicationList);
+            return Ok(value: publicationList);
 
 
         }
@@ -58,7 +58,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("Assigned")]
         public IActionResult Assigned(string principalCuratorGuid)
         {
-           
+
             var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.
                                        PrincipalCuratorGuid.Equals(principalCuratorGuid)
                                        && p.PublicationStageLogs.Max(l => l.Stage)
@@ -97,9 +97,9 @@ namespace KEC.Curation.Web.Api.Controllers
         }
         // POST: api/PrincipalCurator/publication/publicationId/assign
         [HttpPost("publication/{publicationId:int}/assign")]
-        public IActionResult Assign(int publicationId,[FromBody]ChiefCuratorAssignmentSerializer model)
+        public IActionResult Assign(int publicationId, [FromBody]ChiefCuratorAssignmentSerializer model)
         {
-           
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(modelState: ModelState);
@@ -136,16 +136,19 @@ namespace KEC.Curation.Web.Api.Controllers
                     PublicationId = publication.Id,
                     Owner = publication.Owner,
                     Notes = model.Notes,
-                    Stage= PublicationStage.Curation,
-                    ActionTaken=model.ActionTaken
+                    Stage = PublicationStage.Curation,
+                    ActionTaken = model.ActionTaken
                 };
 
-               
-                _uow.PublicationRepository.Add(publicationLog.Publication);
+                var chiefCuratorPublicationID = new Publication
+                {
+                    ChiefCuratorAssignmentId = asignment.Id
+                };
+                _uow.PublicationRepository.Add(chiefCuratorPublicationID);
                 _uow.ChiefCuratorAssignmentRepository.Add(asignment);
                 _uow.PublicationStageLogRepository.Add(nextStage);
                 _uow.Complete();
-               
+
                 return Ok(value: $"Publication {model.KICDNumber} moved to curation");
             }
             catch (Exception)
