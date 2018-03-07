@@ -140,13 +140,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     Stage = PublicationStage.Curation,
                     ActionTaken = model.ActionTaken
                 };
-                var curationId = new Publication
-                {
-                    ChiefCuratorAssignmentId = publicationLog.Publication.ChiefCuratorAssignmentId
-                };
-
-
-                _uow.PublicationRepository.Add(curationId);
+               
                 _uow.ChiefCuratorAssignmentRepository.Add(asignment);
                 _uow.PublicationStageLogRepository.Add(nextStage);
                 _uow.Complete();
