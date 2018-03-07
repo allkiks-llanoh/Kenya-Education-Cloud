@@ -746,6 +746,7 @@
     <Content Include="Scripts\plugins\slimscroll\jquery.slimscroll.min.js" />
     <Content Include="Scripts\plugins\sparkline\jquery.sparkline.min.js" />
     <Content Include="Scripts\plugins\steps\jquery.steps.min.js" />
+    <Content Include="Scripts\plugins\steps\steps.js" />
     <Content Include="Scripts\plugins\summernote\summernote.min.js" />
     <Content Include="Scripts\plugins\sweetalert\sweetalert.min.js" />
     <Content Include="Scripts\plugins\switchery\switchery.js" />
