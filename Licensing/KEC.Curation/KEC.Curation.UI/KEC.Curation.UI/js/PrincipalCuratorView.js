@@ -25,7 +25,7 @@ var prGuid = $('#dataGUID').attr('data-pGUID');
 
             //This code snipet prepares to append Json Data
             $('#unassigned-publications').append(tableRows(data));
-            $('#history-publications').append(tableRows(data));
+           
         }
     });
 
@@ -37,6 +37,7 @@ var prGuid = $('#dataGUID').attr('data-pGUID');
         row.append($("<td>" + rowData.description + "</td>"));
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
         row.append($(`<td> <a href="/PrincipalCurator/PrincipalCuratorReview/?Title=${rowData.title}&PGUID=${prGuid}&Identity=${rowData.id}&KICDN=${rowData.kicdNumber}&Publication=${rowData.url}&Stage=PrincipalCurator" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Review</a>`));
+
         return row[0];
     } 
 
