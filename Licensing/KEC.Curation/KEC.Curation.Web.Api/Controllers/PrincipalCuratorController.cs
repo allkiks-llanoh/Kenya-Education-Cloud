@@ -139,6 +139,9 @@ namespace KEC.Curation.Web.Api.Controllers
                     Stage= PublicationStage.Curation,
                     ActionTaken=model.ActionTaken
                 };
+
+               
+                _uow.PublicationRepository.Add(publicationLog.Publication);
                 _uow.ChiefCuratorAssignmentRepository.Add(asignment);
                 _uow.PublicationStageLogRepository.Add(nextStage);
                 _uow.Complete();
