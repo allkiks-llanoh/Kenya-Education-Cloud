@@ -491,11 +491,7 @@ namespace KEC.Curation.UI
             bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
                      "~/js/globalConstants.js"));
 
-            bundles.Add(new ScriptBundle("~/js/PrincipalCuratorReverseView").Include(
-                    "~/js/PrincipalCuratorReverseView.js"));
-
-            bundles.Add(new ScriptBundle("~/js/PrincipalCuratorReverse").Include(
-                  "~/js/PrincipalCuratorReverse.js"));
+           
             //Curator 
             bundles.Add(new ScriptBundle("~/js/curatorToCurate").Include(
                   "~/js/curatorToCurate.js"));
