@@ -8,10 +8,10 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="text-center m-t-lg">
-                <h1>
+                <h4>
                     @ViewData["SubTitle"]
-                </h1>
-                <small>@ViewData["Message"]</small>
+                </h4>
+                <h2>@ViewData["Message"]</h2>
                 <br>
                 <br>
                 <div class="alert alert-success hidden">
@@ -82,7 +82,7 @@
                             <label for="Title">Description</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="text" name="Description" id="Description" class="form-control" placeholder="Give Brief Description (200 words)">
+                            <textarea name="Description" id="Description" class="form-control" placeholder="Give Brief Description (200 words)"></textarea>
                         </div>
                     </div>
                     <br>

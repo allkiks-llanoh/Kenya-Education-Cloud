@@ -67,8 +67,7 @@
 
                 </h2>
 
-                <form id="form" action="#" class="wizard-big">
-                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "wizard-big", role = "form"}))
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "wizard-big",@id="form", role = "form"}))
             {@Html.AntiForgeryToken()
 
             <h1>Account</h1>
@@ -198,9 +197,7 @@
 
                 <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
                 <label for="acceptTerms">I agree with the Terms and Conditions.</label>
-                <input type="submit" class="btn btn-info col-md-6 col-md-offset-3" style="background-color:#00af57; margin-left:-30px; width:200px;" value="Register" />
-
-
+                
             </fieldset>
 
 }
