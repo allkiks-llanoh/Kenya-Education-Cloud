@@ -35,10 +35,9 @@ $.ajax({
         //clear the current content of the select
         $select.html('');
         //iterate over the data and append a select option
-        options += '<option value="Select">Select</option>';
-        for (var i = 0; i < data.length; i++) {
-            options += '<option value="' + data[i].id + '">' + data[i].job + '</option>';
-        }
+        $.each(data, function (index, val) {
+            $select.append(`<option id=${val.id}  value='${val.id}'+ >${val.name}</option>`);
+        })
     },
     error: function () {
         //if there is an error append a 'none available' option
