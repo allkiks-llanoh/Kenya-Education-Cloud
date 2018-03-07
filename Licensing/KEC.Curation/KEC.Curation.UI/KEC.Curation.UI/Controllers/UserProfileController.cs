@@ -124,7 +124,7 @@ namespace KEC.Curation.UI.Controllers
 
             HttpClient client = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage(
-            HttpMethod.Get, graphResourceID);
+            HttpMethod.Get, graphResourceIDGroups);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authenticationResult.AccessToken);
             var response = await client.SendAsync(request);
             var result = response.Content.ReadAsStringAsync().Result;

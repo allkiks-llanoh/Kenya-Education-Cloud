@@ -42,9 +42,7 @@ namespace KEC.Curation.PublishersUI.Controllers
 
                return View(publisher);
 
-            }
-
-            
+            }      
         }
         public ActionResult Approved()
         {

@@ -12,6 +12,10 @@ namespace KEC.Curation.PublishersUI.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string  Company { get; set; }
+        public string Contact { get; set; }
+        public string Address { get; set; }
+        public string RegistrationNumber { get; set; }
+        public string PinNumber { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

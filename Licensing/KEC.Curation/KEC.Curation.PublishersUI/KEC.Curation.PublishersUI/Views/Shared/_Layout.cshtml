@@ -9,26 +9,26 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
 </head>
-<body>
+<body style="background-color:white;">
 
     <!-- Wrapper-->
-    <div id="wrapper" style="background-color:black;">
+    <div id="wrapper" style="background-color:white;">
 
         <!-- Navigation -->
-        @Html.Partial("_Navigation")
+      
 
         <!-- Page wraper -->
-        <div id="page-wrapper" class="gray-bg">
+      
 
             <!-- Top Navbar -->
-            @Html.Partial("_TopNavbar")
+        
 
             <!-- Main view  -->
             @RenderBody()
 
             <!-- Footer -->
             @Html.Partial("_Footer")
-        </div>
+        
       <!-- End page wrapper-->
     </div>
     <!-- End wrapper-->
