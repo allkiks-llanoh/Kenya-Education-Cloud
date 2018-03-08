@@ -123,13 +123,14 @@ namespace KEC.Curation.Web.Api.Controllers
 
             try
             {
-             
+
                 var asignment = new ChiefCuratorAssignment
                 {
                     PublicationId = publication.Id,
                     PrincipalCuratorGuid = model.PrincipalCuratorGuid,
                     ChiefCuratorGuid = "TODOChiefCuratorGUID",
-                    AssignmetDateUtc = DateTime.UtcNow
+                    AssignmetDateUtc = DateTime.UtcNow,
+                    
                     
                 };
                 var nextStage = new PublicationStageLog
@@ -140,9 +141,10 @@ namespace KEC.Curation.Web.Api.Controllers
                     Stage = PublicationStage.Curation,
                     ActionTaken = model.ActionTaken
                 };
-               
+
                 _uow.ChiefCuratorAssignmentRepository.Add(asignment);
                 _uow.PublicationStageLogRepository.Add(nextStage);
+                publication.ChiefCuratorAssignmentId = asignment.Id;
                 _uow.Complete();
 
                 return Ok(value: $"Publication {model.KICDNumber} moved to curation");

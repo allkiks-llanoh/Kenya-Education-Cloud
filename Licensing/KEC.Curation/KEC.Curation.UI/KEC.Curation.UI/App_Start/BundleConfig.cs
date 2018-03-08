@@ -490,6 +490,8 @@ namespace KEC.Curation.UI
 
             bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
                      "~/js/globalConstants.js"));
+
+           
             //Curator 
             bundles.Add(new ScriptBundle("~/js/curatorToCurate").Include(
                   "~/js/curatorToCurate.js"));

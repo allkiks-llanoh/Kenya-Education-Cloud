@@ -25,6 +25,7 @@ var prGuid = $('#dataGUID').attr('data-pGUID');
 
             //This code snipet prepares to append Json Data
             $('#unassigned-publications').append(tableRows(data));
+           
         }
     });
 
