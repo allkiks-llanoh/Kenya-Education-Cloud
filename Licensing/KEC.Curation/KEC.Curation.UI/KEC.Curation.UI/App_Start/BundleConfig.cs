@@ -9,7 +9,7 @@ namespace KEC.Curation.UI
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-3.1.1.min.js"));
+                         "~/Scripts/jquery-3.1.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -491,7 +491,7 @@ namespace KEC.Curation.UI
             bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
                      "~/js/globalConstants.js"));
 
-           
+
             //Curator 
             bundles.Add(new ScriptBundle("~/js/curatorToCurate").Include(
                   "~/js/curatorToCurate.js"));
@@ -505,7 +505,6 @@ namespace KEC.Curation.UI
             bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
              "~/js/globalConstants.js"));
             //globalConstants
-            
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿@using Microsoft.Azure.ActiveDirectory.GraphClient;
-@model User
+﻿
 
 @{
     ViewBag.Title = "Review";
@@ -27,6 +26,8 @@
     var KICDNumber = Request.Params["KICDN"];
 
 }
+
+
 <div class="text-center m-t-lg">
     <h1>
         @ViewData["SubTitle"]
@@ -85,7 +86,7 @@
                                         </div>
                                         <div class="form-group col-md-10">
                                             <select name="UserGuid" id="UserGuid" class="col-md-8 form-control" style="color:black; margin-left:15px;">
-                                               
+
                                             </select>
 
                                         </div>

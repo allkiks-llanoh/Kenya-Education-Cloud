@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-    [Authorize]
+   // [CustomAuthorize(Roles = "Principal Curator")]
     [UserGuidJson]
     [AllowCrossSiteJson]
     public class PrincipalCuratorController : Controller

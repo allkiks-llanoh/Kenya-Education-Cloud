@@ -3,10 +3,11 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-    [Authorize]
+    [CustomAuthorize(Roles = "Curator")]
     [AllowCrossSiteJson]
     [UserGuidJson]
     [RoutePrefix("{controller}")]
+   
     public class CuratorController : Controller
     {
         // GET: Curator

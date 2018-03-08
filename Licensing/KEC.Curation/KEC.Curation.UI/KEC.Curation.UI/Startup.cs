@@ -1,8 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 
+[assembly: OwinStartupAttribute(typeof(KEC.Curation.UI.Startup))]
 namespace KEC.Curation.UI
 {
     public partial class Startup
