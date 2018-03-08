@@ -159,7 +159,10 @@ namespace KEC.Curation.PublishersUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {FirstName=model.FirstName,LastName=model.LastName,Company=model.Company, UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {FirstName=model.FirstName,LastName=model.LastName,Company=model.Company,
+                                                UserName = model.Email, Email = model.Email,
+                                                Address=model.Address, PostalAddress=model.PostalAddress,
+                                                Contact=model.Contact, KraPin=model.KraPin, BusinessNumber=model.BusinessNumber};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
