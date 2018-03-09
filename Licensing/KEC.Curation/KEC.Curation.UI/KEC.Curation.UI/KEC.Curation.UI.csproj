@@ -222,6 +222,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\StagesController.cs" />
     <Compile Include="ActionFilters\AllowCrossSiteJsonAttribute.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CustomAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -230,6 +231,10 @@
     <Compile Include="Migrations\201802262225569_InitialMigrations.cs" />
     <Compile Include="Migrations\201802262225569_InitialMigrations.Designer.cs">
       <DependentUpon>201802262225569_InitialMigrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803091331364_Subject.cs" />
+    <Compile Include="Migrations\201803091331364_Subject.Designer.cs">
+      <DependentUpon>201803091331364_Subject.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -384,6 +389,7 @@
     <Content Include="js\PrincipalCuratorReverseView.js" />
     <Content Include="js\PrincipalCuratorAssigned.js" />
     <Content Include="js\PrincipalCuratorView.js" />
+    <Content Include="js\SubjectsForCurators.js" />
     <Content Include="js\Subjects.js" />
     <Content Include="js\SubjectTypes.js" />
     <Content Include="Scripts\app\inspinia.js" />
@@ -883,6 +889,8 @@
     <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\PrincipalCurator\PrincipalCuratorReverse.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -907,6 +915,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802262225569_InitialMigrations.resx">
       <DependentUpon>201802262225569_InitialMigrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803091331364_Subject.resx">
+      <DependentUpon>201803091331364_Subject.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

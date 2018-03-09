@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -45,6 +46,21 @@ namespace KEC.Curation.UI.Controllers
                 list.Add(new RoleViewModel(role));
             return View(list);
         }
+        public async Task<string> Subjects(RegisterViewModel model)
+        {
+            using (var client = new HttpClient())
+            {
+                var uri = new Uri("https://curationapi-d.kec.ac.ke/api/SubjectTypes");
+
+                var response = await client.GetAsync(uri);
+
+                string textResult = await response.Content.ReadAsStringAsync();
+              
+
+                return textResult;
+            }
+        }
+
         public ActionResult Create()
         {
             return View();

@@ -30,6 +30,15 @@ namespace KEC.Curation.Web.Api.Controllers
                 subjects.Select(p => new SubjectDownloadSerializer(p,_uow)): new List<SubjectDownloadSerializer>();
             return Ok(value: subjectList.ToList());
         }
+        // GET: api/Subjects
+        [HttpGet("ForCurators")]
+        public IActionResult CuratorSubjects()
+        {
+            var subjects = _uow.SubjectRepository.GetAll().ToList();
+            var subjectList = subjects.Any() ?
+                subjects.Select(p => new SubjectDownloadSerializerForCurators(p, _uow)) : new List<SubjectDownloadSerializerForCurators>();
+            return Ok(value: subjectList.ToList());
+        }
         // GET: api/Subjects/5
         [HttpGet("{id}", Name = "SubjectById")]
         public IActionResult SubjectById(int id)
@@ -41,6 +50,7 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             return Ok(value: new SubjectDownloadSerializer(subject, _uow));
         }
+
 
         // POST: api/Subjects
         [HttpPost]
