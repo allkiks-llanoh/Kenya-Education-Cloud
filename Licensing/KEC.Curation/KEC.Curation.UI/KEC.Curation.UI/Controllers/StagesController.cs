@@ -3,13 +3,12 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-        [AllowCrossSiteJson]
-        [UserGuidJson]
+        
     public class StagesController : Controller
     {
-
-
         // GET: Stages
+        [AllowCrossSiteJson]
+        [UserGuidJson]
         //[CustomAuthorize(Roles = "Verification office")]
         public ActionResult Legal()
         {
@@ -18,6 +17,8 @@ namespace KEC.Curation.UI.Controllers
 
             return View();
         }
+        [AllowCrossSiteJson]
+        [UserGuidJson]
         //[CustomAuthorize(Roles = "Finance Office")]
         public ActionResult Finance()
         {
@@ -26,6 +27,8 @@ namespace KEC.Curation.UI.Controllers
 
             return View();
         }
+        [AllowCrossSiteJson]
+        [UserGuidJson]
         //[CustomAuthorize(Roles = "Verification office")]
         public ActionResult LegalVerify()
         {
@@ -34,6 +37,8 @@ namespace KEC.Curation.UI.Controllers
 
             return View();
         }
+        [AllowCrossSiteJson]
+        [UserGuidJson]
         //[CustomAuthorize(Roles = "Finance Office")]
         public ActionResult FinanceVerify()
         {

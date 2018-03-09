@@ -17,6 +17,8 @@ namespace KEC.Curation.Web.Api.Controllers
 {
 
     [AllowCrossSiteJson]
+   
+  
     [Produces("application/json")]
     [Route("api/PrincipalCurator")]
     public class PrincipalCuratorController : Controller
