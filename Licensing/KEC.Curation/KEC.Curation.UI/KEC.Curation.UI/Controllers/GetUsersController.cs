@@ -14,7 +14,7 @@ namespace Authentication_Test.Controllers
         // GET: GetUsers
         public ActionResult GetChiefCurators(string role)
         {
-            role = "6b1e1d44-d286-45c9-9ee8-295c6b240086";
+            role = "30fae6a5-126f-4898-8440-fd666473659a";
 
             var user = context.Users.Where(p => p.Roles.Any(s=>s.RoleId.Equals(role))).ToList();
 
@@ -23,7 +23,7 @@ namespace Authentication_Test.Controllers
 
         public ActionResult GetCurators(string role)
         {
-            role = "f8dcc78a-4303-472e-9d2d-e59c1eb8bc1d";
+            role = "408e4cdb-b809-41ee-835c-69aac91273ab";
 
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 

@@ -1,5 +1,8 @@
 ﻿
-let AssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`)
+
+let principalCuratorHistoryUrl = apiBaseUrl.concat(`/PrincipalCurator/Reverse/Curation`)
+//var prGuid = $('#dataGUID').attr('data-pGUID');
+
 function tableRows(data) {
     var tableRows = [];
     for (var i = 0; i < data.length; i++) {
@@ -12,22 +15,23 @@ function tableRows(data) {
 
 //Start by getting a list of contents that have been assigned to chief curators
 $.ajax({
-    url: AssignedUrl,
+    url: principalCuratorHistoryUrl ,
     type: "GET",
     dataType: 'json',
     success: function (data, status, jqhxr) {
         console.log(data);
 
         //This code snipet prepares to append Json Data
-
+    
         $('#history-publications').append(tableRows(data));
+
     }
 });
 
 //This functionpopulates the tbody inner HTML with json data on call
 function drawRow(rowData) {
     var row = $("<tr />")
-    row.append($("<td>" + rowData.id + "</td>"));
+    row.append($(`<td class="hidden"> + rowData.id + </td>`));
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.description + "</td>"));
     row.append($("<td>" + rowData.kicdNumber + "</td>"));

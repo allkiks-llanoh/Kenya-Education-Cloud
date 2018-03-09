@@ -23,7 +23,8 @@ namespace KEC.Curation.UI
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/animate.css",
-                      "~/Content/style.css", "~/Content/CustomStyles/ChiefCurator.css"));
+                      "~/Content/style.css", 
+                      "~/Content/CustomStyles/ChiefCurator.css"));
 
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/Content/font-awesome/css").Include(

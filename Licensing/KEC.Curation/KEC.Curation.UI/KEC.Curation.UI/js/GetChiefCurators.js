@@ -4,7 +4,7 @@ $select = $('#UserGuid');
 //request the JSON data and parse into the select element
 $.ajax({
     type: 'POST',
-    url: '@Url.Action("GetChiefCurators", "GetUsers")',
+    url: 'https://localhost:44317/GetUsers/GetChiefCurators',
     dataType: 'JSON',
     async: false,
     crossDomain: true,

@@ -1,14 +1,15 @@
 ﻿
 @{
     ViewBag.Title = "PrincipalCurator";
-    Layout = "~/Views/Shared/_LayoutPrincipalCurator.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section Scripts
 {
     <script src="@Url.Content("~/js/PrincipalCuratorView.js")"></script>
-    <script src="~/js/JavaScriptFunction.js"></script>
+  
     <script src="@Url.Content("~/js/PrincipalCuratorAssigned.js")"></script>
+    <script src="@Url.Content("~/js/JavaScriptFunction.js")"></script>
     <script src="@Url.Content("~/Scripts/plugins/typtypehead/bootstrap3-typeahead.min.js")"></script>
 }
 
@@ -87,11 +88,11 @@
                                             <table class="table table-striped table-bordered table-hover dataTables-example" id="assigned-publications">
                                                 <thead>
                                                     <tr>
-                                                       
+
                                                         <th>Title</th>
                                                         <th>KICD Number</th>
                                                         <th>Assignee</th>
-                                                        
+
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>
