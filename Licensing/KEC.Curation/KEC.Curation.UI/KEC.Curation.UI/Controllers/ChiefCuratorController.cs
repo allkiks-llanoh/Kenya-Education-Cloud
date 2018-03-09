@@ -1,9 +1,10 @@
-﻿using KEC.Curation.UI.ActionFilters;
+﻿using KEC.Curation.UI;
+using KEC.Curation.UI.ActionFilters;
 using System.Web.Mvc;
 
 namespace KEC.Curatiom.Web.UI.Controllers
 {
-    [Authorize]
+    [CustomAuthorize(Roles = "Chief Curator")]
     [UserGuidJson]
     [AllowCrossSiteJson]
     [RoutePrefix("{controller}")]

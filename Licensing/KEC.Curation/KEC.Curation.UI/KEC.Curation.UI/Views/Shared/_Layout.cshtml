@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>KEC CURATION | @ViewBag.Title</title>
-  
+
     @if (IsSectionDefined("Styles"))
     {@RenderSection("Styles", required: false)}
 
@@ -33,10 +33,6 @@
             @Html.Partial("_TopNavbar")
 
             <!-- Main view  -->
-          
-          
-           
-
             <!--Alert-->
             @RenderBody()
 
@@ -59,6 +55,6 @@
     @Scripts.Render("~/bundles/inspinia")
     @Scripts.Render("~/js/globalConstants")
     @RenderSection("scripts", required: false)
-   
+
 </body>
 </html>

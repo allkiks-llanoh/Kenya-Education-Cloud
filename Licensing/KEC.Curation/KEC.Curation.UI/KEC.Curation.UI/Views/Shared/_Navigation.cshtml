@@ -1,5 +1,4 @@
-﻿@using Microsoft.Azure.ActiveDirectory.GraphClient
-@model User
+﻿
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
@@ -31,7 +30,7 @@
                 <ul class="nav nav-second-level collapse">
                     <li> <a href="@Url.Action("Legal", "Stages")"><i class="glyphicon glyphicon-thumbs-up"></i><span class="nav-label">Submission Validation</span> </a></li>
                     <li> <a href="@Url.Action("Finance", "Stages")"><i class="glyphicon glyphicon-usd"></i><span class="nav-label">Payment Validation</span></a></li>
-                  
+
                 </ul>
             </li>
             <li>
@@ -42,7 +41,13 @@
                     <li> <a href="@Url.Action("PrincipalCurator", "PrincipalCurator")"><i class="glyphicon glyphicon-tags"></i> <span class="nav-label">Principal Curators</span></a></li>
                 </ul>
             </li>
-
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Manage Roles</span> </a>
+                <ul class="nav nav-second-level collapse">
+                    <li>@Html.ActionLink("Role", "Index", "Role")</li>
+                    
+                </ul>
+            </li>
 
         </ul>
     </div>
