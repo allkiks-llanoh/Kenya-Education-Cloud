@@ -1,6 +1,6 @@
 ﻿
 let legalVerifyUrl = apiBaseUrl.concat(`/Publications/process`);
-
+let guid = currentUserGuid;
         $(document).ready(function () {
             $('#LegalApprove').click(function () {
                 $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
@@ -9,7 +9,7 @@ let legalVerifyUrl = apiBaseUrl.concat(`/Publications/process`);
                 var notes = $('.note-editable').val();
                 var action = $('#actionTaken').val();
                 var stages = "LegalVerification";
-                var guid = "TODOGUIDAUTOMATION";
+                var guid = guid;
                 console.log(`${kicdnumber}`);
                 console.log(` ${notes} `);
                 console.log(` ${guid} `);

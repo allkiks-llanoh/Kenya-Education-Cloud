@@ -1,6 +1,5 @@
 ﻿let financeVerifyUrl = apiBaseUrl.concat(`/Publications/process`);
-
-
+let guid = currentUserGuid;
         $(document).ready(function()
         {
             $('#LegalApprove').click(function () {
@@ -10,8 +9,8 @@
                 var notes = $('.note-editable').val();
                 var action = "PublicationMoveToNextStage";
                 var stages = "PaymentVerification";
-                var guid = "TODOGUIDAUTOMATION";
-                var s = "GUIDPLACeHOLDeR"
+                var guid = guid;
+                
                 console.log(`${kicdnumber}`);
                 console.log(` ${notes} `);
                 console.log(` ${guid} `);
@@ -22,7 +21,7 @@
                     },
                     url: financeVerifyUrl,
                     type: "PATCH",
-                    data: JSON.stringify({ KICDNumber: kicdnumber, Notes: notes, ActionTaken: action, Stage: stages, UserGuid: s }),
+                    data: JSON.stringify({ KICDNumber: kicdnumber, Notes: notes, ActionTaken: action, Stage: stages, UserGuid: guid }),
 
                     success: function (response, status, jxhr) {
                         console.log(response);
