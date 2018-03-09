@@ -231,10 +231,6 @@
     <Compile Include="Migrations\201802262225569_InitialMigrations.Designer.cs">
       <DependentUpon>201802262225569_InitialMigrations.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803090830017_ToCuratioUiDb.cs" />
-    <Compile Include="Migrations\201803090830017_ToCuratioUiDb.Designer.cs">
-      <DependentUpon>201803090830017_ToCuratioUiDb.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\GetUsersModel.cs" />
@@ -316,11 +312,13 @@
     <Content Include="Content\plugins\iCheck\custom.css" />
     <Content Include="Content\plugins\iCheck\green%402x.png" />
     <Content Include="Content\plugins\iCheck\green.png" />
+    <Content Include="Content\plugins\images\bg.jpg" />
     <Content Include="Content\plugins\images\bootstrap-colorpicker\alpha-horizontal.png" />
     <Content Include="Content\plugins\images\bootstrap-colorpicker\alpha.png" />
     <Content Include="Content\plugins\images\bootstrap-colorpicker\hue-horizontal.png" />
     <Content Include="Content\plugins\images\bootstrap-colorpicker\hue.png" />
     <Content Include="Content\plugins\images\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Content\plugins\images\cmss.jpg" />
     <Content Include="Content\plugins\images\logo.png" />
     <Content Include="Content\plugins\images\sort.png" />
     <Content Include="Content\plugins\images\sort_asc.png" />
@@ -884,7 +882,7 @@
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Shared\AuthorizeFailed.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\PrincipalCurator\PrincipalCuratorReverse.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -909,9 +907,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802262225569_InitialMigrations.resx">
       <DependentUpon>201802262225569_InitialMigrations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803090830017_ToCuratioUiDb.resx">
-      <DependentUpon>201803090830017_ToCuratioUiDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
