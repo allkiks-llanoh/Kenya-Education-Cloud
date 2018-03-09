@@ -53,10 +53,8 @@ namespace KEC.Curation.UI.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            List<RoleViewModel> list = new List<RoleViewModel>();
-            foreach (var role in UserManager.)
-                list.Add(new RoleViewModel(role));
-            return View(list);
+           
+            return View();
         }
         
         // GET: Users/Details/5

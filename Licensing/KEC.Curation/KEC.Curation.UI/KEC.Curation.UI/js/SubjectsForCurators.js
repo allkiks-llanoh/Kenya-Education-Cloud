@@ -1,5 +1,5 @@
 ﻿const apiBaseUrl = "https://curationapi-d.kec.ac.ke/api";
-let subjectsUrl = apiBaseUrl.concat(`/SubjectTypes`);
+let subjectsUrl = apiBaseUrl.concat(`/Subjects/ForCurators`);
 
 
 //get a reference to the select element
