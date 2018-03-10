@@ -214,14 +214,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
-    <Compile Include="Migrations\201802230622150_InitialCreate.cs" />
-    <Compile Include="Migrations\201802230622150_InitialCreate.Designer.cs">
-      <DependentUpon>201802230622150_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802231813089_AddedNewRowsToTable.cs" />
-    <Compile Include="Migrations\201802231813089_AddedNewRowsToTable.Designer.cs">
-      <DependentUpon>201802231813089_AddedNewRowsToTable.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201803061455020_changeregistrationmodel.cs" />
     <Compile Include="Migrations\201803061455020_changeregistrationmodel.Designer.cs">
       <DependentUpon>201803061455020_changeregistrationmodel.cs</DependentUpon>
@@ -884,12 +876,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802230622150_InitialCreate.resx">
-      <DependentUpon>201802230622150_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802231813089_AddedNewRowsToTable.resx">
-      <DependentUpon>201802231813089_AddedNewRowsToTable.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803061455020_changeregistrationmodel.resx">
       <DependentUpon>201803061455020_changeregistrationmodel.cs</DependentUpon>
     </EmbeddedResource>
