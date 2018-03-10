@@ -6,7 +6,7 @@ let guid = currentUserGuid;
                 $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
 
                 var kicdnumber = $('#kicd').attr('data-kicdNumber');
-                var notes = $('.note-editable').val();
+                var notes = $('.note-editable').html();
                 var action = $('#actionTaken').val();
                 var stages = "LegalVerification";
                 var guid = guid;

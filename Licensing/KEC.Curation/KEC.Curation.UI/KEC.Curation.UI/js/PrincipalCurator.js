@@ -7,7 +7,7 @@ $(document).ready(function () {
     $('#LegalApprove').click(function () {
         $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         var stage = "PrincipalCurator"
-        var notes  = $('.note-editable').val();
+        var notes  = $('.note-editable').html();
         var actiontaken = "PublicationMoveToNextStage"
         var kicdNumber = $('#kicd').attr('data-kicdNumber');
         var chiefCuratorGuid = $('#UserGuid').val();
