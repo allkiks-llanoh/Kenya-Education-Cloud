@@ -15,7 +15,8 @@
     <script src="@Url.Content("~/js/GetChiefCurators.js")"></script>
     <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
     @Scripts.Render("~/plugins/summernote")
-    @Styles.Render("~/plugins/summernoteStyles")
+    @Styles.Render("~/plugins/summernoteStyles") 
+    @Scripts.Render("~/plugins/sweetAlert")
 }
 @{
     var Title = Request.Params["Title"];
@@ -137,6 +138,12 @@
         $('.click2edit').destroy();
     };
 </script>
+
+section Styles {
+@Styles.Render("~/plugins/sweetAlertStyles")
+}
+
+
 
 
 

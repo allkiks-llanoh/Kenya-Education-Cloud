@@ -5,6 +5,7 @@ $(document).ready(function () {
     let principalCuratorPostUrl = apiBaseUrl.concat(`/PrincipalCurator/publication/${publicationID}/assign`)
     let principalCuratorGuid = currentUserGuid;
     $('#LegalApprove').click(function () {
+       
         $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         var stage = "PrincipalCurator"
         var notes  = $('.note-editable').html();
@@ -30,14 +31,15 @@ $(document).ready(function () {
                 $('#message').html(` ${response}.`)
                 $('div.alert-success').toggleClass('hidden');
                 $('#LegalApprove').html('APPROVE');
-
+                ShowAlert("Curation notes saved successfully", "success");
             },
-            error: function (request, status, error) {
+            error: function (response, status, jxhr) {
 
                 console.log(request);
                 console.log(status);
 
                 console.log(request.responseText);
+                ShowAlert("Something went wrong while saving your notes", "error");
                 $('#error').html(request.statusText)
                 $('div.alert-danger').toggleClass('hidden');
                 $('#LegalApprove').html('APPROVE');
@@ -45,6 +47,7 @@ $(document).ready(function () {
 
             }
         });
+     
 
 
     });
