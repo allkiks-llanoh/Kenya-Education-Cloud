@@ -89,7 +89,7 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: publicationList);
         }
         [HttpPost("publication/{publicationId:int}/assign")]
-        public IActionResult Assign(int publicationId, CurationContentAssignmentSerializer model)
+        public IActionResult Assign(int publicationId, [FromBody] CurationContentAssignmentSerializer model)
         {
             if (!ModelState.IsValid)
             {

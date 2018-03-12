@@ -6,6 +6,7 @@
 }
 @section Scripts{
     @Scripts.Render("~/js/chiefCuratorAssignPublication")
+<script src="@Url.Content("~/js/GetCurators.js")"></script>
 }
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="wrapper wrapper-content animated fadeIn">
@@ -46,7 +47,9 @@
 
                         <div class="form-group">
                             <label for="unassigned-curator">Curator:</label>
-                            <input placeholder="Start typing curators name..." class="form-control m-b" id="unassigned-curator" style="" type="text">
+                            <input placeholder="Start typing curators name..." class="form-control m-b hidden" id="unassigned-curator" style="" type="text">
+                            <select name="UserGuid" id="UserGuid" class="col-md-8 form-control" style="color:black; margin-left:15px;"></select>
+
                         </div>
                         <div class="form-group">
                             <label for="section-assigned">Section:</label>

@@ -7,8 +7,9 @@
 
     function loadPublication() {
         let publicationId = $('#publication-view').attr('data-publicationId');
-        let url = apiBaseUrl.concat(`/chiefcurator/UnAssignedPublication/${publicationId}`);
         let chiefCuratorGuid = $('#CurrentUserGuid').val();
+        let url = apiBaseUrl.concat(`/chiefcurator/UnAssignedPublication/${publicationId}?chiefCuratorGuid=${chiefCuratorGuid}`);
+       
         $.ajax({
             url: url,
             crossDomain: true,
@@ -22,7 +23,7 @@
             contentType: 'application/json',
             accepts: 'application/json',
             type: 'GET',
-            data: JSON.stringify({ chiefCuratorGuid: chiefCuratorGuid })
+           
         }).done(function (publication, textStatus, jqXHR) {
             $('#publication-details').replaceWith(
                 `<dl id="publication-details" data-stage="${publication.stage}">
@@ -58,14 +59,18 @@
         section = section === null || section === null ? "Whole publication" : section;
         let publicationId = $('#publication-view').attr('data-publicationId');
         let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/assign`);
-        let userGuid = currentUserGuid;
+        var userGuid = $('#CurrentUserGuid').val();
+        var fullyAssigned = "fullyAssigned"
+        var chiefCuratorGuid = $('#UserGuid').val();
+        console.log(`${userGuid}`);
+        console.log(`${chiefCuratorGuid}`);
         $.ajax({
             url: url,
             crossDomain: true,
             contentType: 'application/json',
             accepts: 'application/json',
             type: 'POST',
-            data: JSON.stringify({ Section: section, AssignedBy: userGuid, Assignee: curator, FullyAssign: fullyAssigned }),
+            data: JSON.stringify({ Section: section, AssignedBy: userGuid, Assignee: chiefCuratorGuid, FullyAssign: fullyAssigned }),
             statusCode: {
 
                 403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); }

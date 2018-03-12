@@ -383,6 +383,7 @@
     <Content Include="js\curatorToCurate.js" />
     <Content Include="js\financeVerify.js" />
     <Content Include="js\financeView.js" />
+    <Content Include="js\GetCurators.js" />
     <Content Include="js\GetChiefCurators.js" />
     <Content Include="js\globalConstants.js" />
     <Content Include="js\JavaScriptFunction.js" />
