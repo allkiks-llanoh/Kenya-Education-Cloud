@@ -9,10 +9,11 @@
         $('#load-unassigned-publications').click(function (e) {
             e.preventDefault();
             let subjectId = $('#SubjectId').val();
+            let chiefCuratorGUID = $('#CurrentUserGuid').val();
             if (subjectId === null || subjectId === "") {
                 return ShowAlert('Please select a subject to load publications', 'error');
             }
-            let unassignedPublicationsUrl = apiBaseUrl.concat(`/publications/${subjectId}/unassigned`);
+            let unassignedPublicationsUrl = apiBaseUrl.concat(`/chiefcurator/publications/${subjectId}/unassigned?subjectid=${subjectId}&chiefcuratorguid=${chiefCuratorGUID}`);
             loadPublications(unassignedPublicationsUrl, '#unassigned-publications', 'Assign', 'unassigned');
         });
         $('#load-assigned-publications').click(function (e) {
@@ -21,7 +22,7 @@
             if (subjectId === null || subjectId.trim() === "") {
                 return ShowAlert("Please select a subject to load publiactions", 'error');
             }
-            let assignedPublicationsUrl = apiBaseUrl.concat(`/publications/${subjectId}/assigned`);
+            let assignedPublicationsUrl = apiBaseUrl.concat(`/chiefcurator/publications/${subjectId}/assigned`);
             loadPublications(unassignedPublicationsUrl, '#assigned-publications', 'View', 'assigned');
         });
         $('load-history-publications').click(function (e) {

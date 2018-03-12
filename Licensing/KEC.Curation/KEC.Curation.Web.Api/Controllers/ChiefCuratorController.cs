@@ -72,7 +72,7 @@ namespace KEC.Curation.Web.Api.Controllers
                                                          && p.SubjectId.Equals(subjectId)
                                                          && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid));
             var publicationList = publications.Any() ?
-                publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
         }
         [HttpGet("publications/{subjectId:int}/assigned")]
@@ -161,7 +161,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound(value: new { message = "Publication record could not be retrieved" });
             }
-            return Ok(value: new PublicationDownloadSerilizer(publication, _uow));
+            return Ok(value: new PublicationDownloadSerilizerToCurators(publication, _uow));
         }
         [HttpDelete("publication/assignment/{id}")]
         public IActionResult DeleteUnAssignedPublication(int Id, [FromBody]string chiefCuratorGuid)
