@@ -8,7 +8,7 @@
     function loadPublication() {
         let publicationId = $('#publication-view').attr('data-publicationId');
         let url = apiBaseUrl.concat(`/chiefcurator/UnAssignedPublication/${publicationId}`);
-        let chiefCuratorGuid = currentUserGuid;
+        let chiefCuratorGuid = $('#CurrentUserGuid').val();
         $.ajax({
             url: url,
             crossDomain: true,

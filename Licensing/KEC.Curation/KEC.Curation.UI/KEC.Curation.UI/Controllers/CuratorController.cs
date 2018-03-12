@@ -1,4 +1,6 @@
 ﻿using KEC.Curation.UI.ActionFilters;
+using KEC.Curation.UI.Models;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
@@ -15,13 +17,31 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult ToCurate(string curatorGuid)
         {
             ViewBag.CurateUrl = Url.Action("CuratePublication");
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId
+                };
+                return View(chiefCurator);
+            }
         }
         [HttpGet,Route("CuratePublication/{Id}")]
         public ActionResult CuratePublication(int Id)
         {
             ViewBag.AssignmentId = Id;
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId
+                };
+                return View(chiefCurator);
+            }
         }
     }
 }

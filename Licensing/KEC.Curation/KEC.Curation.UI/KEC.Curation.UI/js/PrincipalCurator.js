@@ -3,19 +3,21 @@
 $(document).ready(function () {
     var publicationID = parseInt($('#identity').attr('data-identity'));
     let principalCuratorPostUrl = apiBaseUrl.concat(`/PrincipalCurator/publication/${publicationID}/assign`)
-    let principalCuratorGuid = currentUserGuid;
+    
     $('#LegalApprove').click(function () {
        
         $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         var stage = "PrincipalCurator"
         var notes  = $('.note-editable').html();
         var actiontaken = "PublicationMoveToNextStage"
+        var principalCuratorGuid = $('#CurrentUserGuid').val();
         var kicdNumber = $('#kicd').attr('data-kicdNumber');
         var chiefCuratorGuid = $('#UserGuid').val();
         console.log(`${publicationID}`);
         console.log(`${principalCuratorGuid}`);
         console.log(` ${chiefCuratorGuid} `);
         console.log(` ${notes} `);
+       
         $.ajax({
             headers : {
                 'Accept' : 'application/json',

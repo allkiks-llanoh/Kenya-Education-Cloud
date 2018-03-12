@@ -1,4 +1,5 @@
-﻿
+﻿@using KEC.Curation.UI.Models;
+@model ChiefCurators
 @{
     ViewBag.Title = "Assign";
     Layout = "~/Views/Shared/_LayoutChiefCurator.cshtml";
@@ -57,11 +58,11 @@
                                 <input type="checkbox" class="form-check-input" id="fully-assigned" />
                             </label>
                         </div>
-                            <div class="form-group">
-                                <a href="#" class="btn btn-primary" style="background-color:#00B85F;" id="assign-curator">Assign curator</a>
-                            </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-primary" style="background-color:#00B85F;" id="assign-curator">Assign curator</a>
                         </div>
                     </div>
+                </div>
 
             </div>
         </div>
@@ -97,3 +98,10 @@
         </div>
     </div>
 </div>
+<div class="form-group col-md-10">
+    <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
+</div>
+<div class="form-group col-md-10">
+    <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
+</div>
+   

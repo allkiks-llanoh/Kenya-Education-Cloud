@@ -8,25 +8,25 @@
         loadPublicationSubjects(assignedSubjectsUrl, '#assigned-subjects-list', 'assigned');
         $('#load-unassigned-publications').click(function (e) {
             e.preventDefault();
-            let subjectId = 1
+            let subjectId = $('#SubjectId').val();
             if (subjectId === null || subjectId === "") {
                 return ShowAlert('Please select a subject to load publications', 'error');
             }
-            let unassignedPublicationsUrl = apiBaseUrl.concat(`/${subjectId}/unassigned`);
+            let unassignedPublicationsUrl = apiBaseUrl.concat(`/publications/${subjectId}/unassigned`);
             loadPublications(unassignedPublicationsUrl, '#unassigned-publications', 'Assign', 'unassigned');
         });
         $('#load-assigned-publications').click(function (e) {
             e.preventDefault();
-            let subjectId = $('#assigned-subjects-list').val();
+            let subjectId = $('#SubjectId').val();
             if (subjectId === null || subjectId.trim() === "") {
                 return ShowAlert("Please select a subject to load publiactions", 'error');
             }
-            let assignedPublicationsUrl = apiBaseUrl.concat(`/${subjectId}/assigned`);
+            let assignedPublicationsUrl = apiBaseUrl.concat(`/publications/${subjectId}/assigned`);
             loadPublications(unassignedPublicationsUrl, '#assigned-publications', 'View', 'assigned');
         });
         $('load-history-publications').click(function (e) {
             e.preventDefault();
-            let subjectId = $('#history-subjects-list').val();
+            let subjectId = $('#SubjectId').val();
             if (subjectId === null || subjectId.trim() === "") {
                 return ShowAlert("Please select a subject to load publiactions history", 'error');
             }

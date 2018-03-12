@@ -13,6 +13,7 @@ namespace KEC.Curation.UI.Models
     {
         public string FullName { get; set; }
         public string Subject { get; set; }
+        public int SubjectId{ get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -23,6 +24,7 @@ namespace KEC.Curation.UI.Models
     }
     public class ApplicationRole : IdentityRole
     {
+       
         public ApplicationRole() : base() { }
         public ApplicationRole(string roleName) : base(roleName) { }
     }
