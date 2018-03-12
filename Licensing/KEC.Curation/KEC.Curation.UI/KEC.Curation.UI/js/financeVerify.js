@@ -1,5 +1,5 @@
 ﻿let financeVerifyUrl = apiBaseUrl.concat(`/Publications/process`);
-let guid = currentUserGuid;
+
         $(document).ready(function()
         {
             $('#LegalApprove').click(function () {
@@ -7,13 +7,14 @@ let guid = currentUserGuid;
 
                 var kicdnumber = $('#kicd').attr('data-kicdNumber');
                 var notes = $('.note-editable').html();
+                var userGuid = $('#CurrentUserGuid').val();
                 var action = "PublicationMoveToNextStage";
                 var stages = "PaymentVerification";
-                var guid = guid;
+               
                 
                 console.log(`${kicdnumber}`);
                 console.log(` ${notes} `);
-                console.log(` ${guid} `);
+                console.log(` ${userGuid} `);
                 $.ajax({
                     headers :  {
                         'Accept' :  'application/json',
@@ -21,7 +22,7 @@ let guid = currentUserGuid;
                     },
                     url: financeVerifyUrl,
                     type: "PATCH",
-                    data: JSON.stringify({ KICDNumber: kicdnumber, Notes: notes, ActionTaken: action, Stage: stages, UserGuid: guid }),
+                    data: JSON.stringify({ KICDNumber: kicdnumber, Notes: notes, ActionTaken: action, Stage: stages, UserGuid: userGuid }),
 
                     success: function (response, status, jxhr) {
                         console.log(response);

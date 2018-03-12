@@ -13177,11 +13177,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
+      "projectUniqueName": "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
       "projectName": "KEC.Curation.Web.Api",
-      "projectPath": "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
+      "projectPath": "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
       "packagesPath": "C:\\Users\\collo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\obj\\",
+      "outputPath": "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13200,11 +13200,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj": {
-              "projectPath": "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj"
+            "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj": {
+              "projectPath": "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj"
             },
-            "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj": {
-              "projectPath": "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj"
+            "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj": {
+              "projectPath": "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj"
             }
           }
         }

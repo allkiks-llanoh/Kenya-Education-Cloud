@@ -34,4 +34,8 @@
     <ProjectReference Include="..\KEC.Curation.Services\KEC.Curation.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.5" />
+  </ItemGroup>
+
 </Project>

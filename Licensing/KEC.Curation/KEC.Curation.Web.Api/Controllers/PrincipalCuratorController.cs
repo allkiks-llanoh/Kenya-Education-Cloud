@@ -171,17 +171,10 @@ namespace KEC.Curation.Web.Api.Controllers
                     Stage = PublicationStage.Curation,
                     ActionTaken = model.ActionTaken
                 };
-                var updatedPublication = new Publication
-                {
-                  Id= publication.Id,
-                  KICDNumber = publication.KICDNumber,
-                  Owner=publication.Owner,
-                  ChiefCuratorAssignmentId= asignment.Id
-                };
+               
                 _uow.ChiefCuratorAssignmentRepository.Add(asignment);
                 _uow.PublicationStageLogRepository.Add(nextStage);
-
-                _uow.PublicationRepository.Add(updatedPublication);
+                publication.ChiefCuratorAssignmentId =(asignment.Id);
                 _uow.Complete();
 
                 return Ok(value: $"Publication {model.KICDNumber} moved to curation");

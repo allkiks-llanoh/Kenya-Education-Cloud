@@ -673,11 +673,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj",
+      "projectUniqueName": "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj",
       "projectName": "KEC.Curation.Services",
-      "projectPath": "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj",
+      "projectPath": "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj",
       "packagesPath": "C:\\Users\\collo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\obj\\",
+      "outputPath": "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
