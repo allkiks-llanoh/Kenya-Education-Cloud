@@ -6,12 +6,14 @@
     "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI",
     "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI",
     "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views\\Account",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views\\Shared",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI",
     "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI\\Content",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI\\Content\\plugins\\images",
     "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI\\Views",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI\\Views\\ChiefCurator",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI\\Views\\Home"
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI\\Views\\Account"
   ],
-  "SelectedNode": "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views\\Account\\Register.cshtml",
+  "SelectedNode": "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI.sln",
   "PreviewInSolutionExplorer": false
 }
