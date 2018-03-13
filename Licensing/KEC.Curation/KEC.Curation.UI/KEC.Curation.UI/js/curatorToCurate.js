@@ -5,9 +5,9 @@
     });
     //Functions Section
     function getPublicationsToCurate() {
-        let url = apiBaseUrl.concat('/curator/tocurate');
-        let curationUrl = $("#publications-to-curate").attr('data-curateurl');
-        let userGuid = currentUserGuid;
+        var userGuid = $('#CurrentUserGuid').val();
+        let url = apiBaseUrl.concat(`/curator/tocurate?userGuid=${userGuid}`);
+        console.log(`${userGuid}`);
         $.ajax({
             url: url,
             type: 'GET',
@@ -19,7 +19,7 @@
                 403: () => { ShowAlert("You are not authorized to access the requested resource", "warning"); },
                 500: () => { ShowAlert("Something went wrong while loading publications", "error"); }
             },
-            data: JSON.stringify({ userGuid: userGuid })
+           
         }).done(function (assigments, textStatus, jqXHR) {
             $('#publications-to-curate').find('tbody').empty();
             if (assigments.length === 0) {

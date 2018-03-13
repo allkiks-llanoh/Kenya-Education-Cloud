@@ -7,8 +7,9 @@
     //Functions Section
     function getAssignment() {
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
-        let assignmentUrl = apiBaseUrl.concat(`/curator/curate/${assignmentId}`);
-        let userGuid = currentUserGuid;
+        let userGuid = $('#CurrentUserGuid').val();
+        let assignmentUrl = apiBaseUrl.concat(`/curator/curate/${assignmentId}?userGuid=${userGuid}`);
+        
         $.ajax({
             url: assignmentUrl,
             crossDomain: true,
@@ -20,7 +21,7 @@
                     ShowAlert("You are not authorized to access the specified resource", "warning");
                 }
             },
-            data: JSON.stringify({ userGuid: userGuid }),
+           
             type: 'GET'
         }).done(function (assignment, textStatus, jqXHR) {
             $('#assignment-details').replaceWith(
