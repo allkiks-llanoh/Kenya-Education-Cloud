@@ -382,6 +382,7 @@
     <Content Include="js\curate.js" />
     <Content Include="js\curatorToCurate.js" />
     <Content Include="js\financeVerify.js" />
+    <Content Include="js\ChiefView.js" />
     <Content Include="js\financeView.js" />
     <Content Include="js\GetCurators.js" />
     <Content Include="js\GetChiefCurators.js" />
@@ -399,6 +400,7 @@
     <Content Include="js\SubjectsForCurators.js" />
     <Content Include="js\Subjects.js" />
     <Content Include="js\SubjectTypes.js" />
+    <Content Include="js\View.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -911,6 +913,7 @@
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\PrincipalCurator\PrincipalCuratorReverse.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\ChiefCurator\ChiefCuratorView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -956,7 +959,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63772</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

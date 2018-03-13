@@ -9,7 +9,8 @@
         let publicationId = $('#publication-view').attr('data-publicationId');
         let chiefCuratorGuid = $('#CurrentUserGuid').val();
         let url = apiBaseUrl.concat(`/chiefcurator/UnAssignedPublication/${publicationId}?chiefCuratorGuid=${chiefCuratorGuid}`);
-       
+        let Geturl = apiBaseUrl.concat(`/chiefcurator/UnAssignedPublications/${publicationId}?chiefCuratorGuid=${chiefCuratorGuid}`);
+
         $.ajax({
             url: url,
             crossDomain: true,
@@ -38,7 +39,7 @@
                    <dt>Subject</dt>
                    <dd>${publication.subject}</dd>
                    <dt>Url</dt>
-                   <dd><a href="${url}">Link to publication</a></dd>
+                   <dd><a href="${Geturl}">Link to publication</a></dd>
                    <dt>Level</dt>
                    <dd>${publication.level}</dd>
                    <dt>Completion date</dt>

@@ -85,7 +85,7 @@ namespace KEC.Curation.Web.Api.Controllers
                                                          && p.SubjectId.Equals(subjectId)
                                                           && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid));
             var publicationList = publications.Any() ?
-                publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
         }
         [HttpPost("publication/{publicationId:int}/assign")]
@@ -151,6 +151,20 @@ namespace KEC.Curation.Web.Api.Controllers
 
         [HttpGet("UnAssignedPublication/{id}")]
         public IActionResult UnAssignedPublication(int Id, string chiefCuratorGuid)
+        {
+            var publication = _uow.PublicationRepository.Find(p => !p.FullyAssigned
+                                                        && p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.Curation
+                                                        && p.Id.Equals(Id)
+                                                         && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid)).FirstOrDefault();
+            if (publication == null)
+            {
+                return NotFound(value: new { message = "Publication record could not be retrieved" });
+            }
+            return Ok(value: new PublicationDownloadSerilizerToCurators(publication, _uow));
+        }
+        [HttpGet("UnAssignedPublications/{id}")]
+        public IActionResult UnAssignedPublications(int Id, string chiefCuratorGuid)
         {
             var publication = _uow.PublicationRepository.Find(p => !p.FullyAssigned
                                                         && p.PublicationStageLogs
