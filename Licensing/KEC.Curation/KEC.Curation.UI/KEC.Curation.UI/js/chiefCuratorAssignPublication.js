@@ -158,34 +158,70 @@
         row.append($("<td>" + rowData.assignee + "</td>"));
         row.append($("<td>" + rowData.sectionToCurate + "</td>"));
         row.append($("<td>" + rowData.assignmentDateUtc + "</td>"));
-        row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.assignmentId} class="btn btn-w-m btn-info btn-md NewBatch" onclick="Function(DeleteCuratorAssignment)" role="button">Remove Assignment</button>`));  
+        row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.assignmentId} class="btn btn-w-m btn-info btn-md DeleteAssignment" id="delete" role="button">Remove Assignment</button>`));  
         return row[0];
     }
+    
+    //function DeleteCuratorAssignment(e) {
+    //    e.preventDefault();
+    //    let publicationId = $(this).attr('data-assignmentId');
+    //    let chiefCuratorGuid = $('#CurrentUserGuid').val();
+    //    let url = apiBaseUrl.concat(`/chiefcurator/publication/assignment/${publicationId}?chiefCuratorGuid=${chiefCuratorGuid}`);
+    //    $.ajax({
+    //        url: url,
+    //        crossDomain: true,
+    //        statusCode: {
+    //            404: () => { ShowAlert('Publication assignment could not be retrieved', "error"); }
+    //            ,
+    //            403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); }
+    //            ,
+    //            500: () => { ShowAlert('Something went wrong while deleting publication curator assignment', 'error'); }
+    //        },
+    //        contentType: 'application/json',
+    //        accepts: 'application/json',
+    //        type: 'GET',
+    //        data: JSON.stringify({ chiefCuratorGuid: chiefCuratorGuid })
+    //    }).done(function (data, textStatus, jqXHR) {
+    //        ShowAlert('Curator assignment deleted successfully', 'success');
+    //    }).fail(function (jqXHR, textStatus, errorThrow) {
+    //        ShowAlert('Something went wrong while deleting publication curator assignment', 'error');
+    //    });
+    //}
+    //End Function section
+    function deleteAssignment() {
+        $('#delete').click(function () {
+            let url = apiBaseUrl.concat(`/chiefcurator/publication/assignment/${publicationId}?chiefCuratorGuid=${chiefCuratorGuid}`);
 
-    function DeleteCuratorAssignment(e) {
-        e.preventDefault();
-        let publicationId = $(this).attr('data-assignmentId');
-        let chiefCuratorGuid = $('#CurrentUserGuid').val();
-        let url = apiBaseUrl.concat(`/chiefcurator/publication/assignment/${publicationId}?chiefCuratorGuid=${chiefCuratorGuid}`);
-        $.ajax({
-            url: url,
-            crossDomain: true,
-            statusCode: {
-                404: () => { ShowAlert('Publication assignment could not be retrieved', "error"); }
-                ,
-                403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); }
-                ,
-                500: () => { ShowAlert('Something went wrong while deleting publication curator assignment', 'error'); }
-            },
-            contentType: 'application/json',
-            accepts: 'application/json',
-            type: 'GET',
-           
-        }).done(function (data, textStatus, jqXHR) {
-            ShowAlert('Curator assignment deleted successfully', 'success');
-        }).fail(function (jqXHR, textStatus, errorThrow) {
-            ShowAlert('Something went wrong while deleting publication curator assignment', 'error');
+            $(this).html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+
+            var publicationId = $(this).attr('data-assignmentId');
+            var chiefCuratorGuid = $('#CurrentUserGuid').val();
+
+            console.log($(this).attr('data-county'));
+            $.ajax({
+                headers : {
+                    'Accept' : 'application/json',
+                    'Content-Type' : 'application/json'
+                },
+                beforeSend: function () {
+                    if (!$('div.alert-success').attr('class').includes('hidden')) {
+                        $('div.alert-success').toggleClass('hidden');
+                    }
+                },
+                url: url,
+                type: "POST",
+
+                success: function (response, status, jxhr) {
+                    console.log(response);
+                    console.log(status);
+                    $('#alert').html(`${response}`)
+                    $('div.alert-success').toggleClass('hidden');
+                    reloadSchoolTypes();
+
+                }
+            });
         });
     }
-    //End Function section
 })();
+
+//Start by getting publication list based on Payment Verification Stage

@@ -29,7 +29,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 var publicationId = _uow.PublicationSectionRepository.Get(_assignment.PublicationSectionId)?.PublicationId;
                 var publicationRecord = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
                 var subject = _uow.SubjectRepository.Get(publicationRecord.SubjectId).Name;
-                var recordinfo = $"Title: {publicationRecord.Title} Subject: {subject} KICD Number: {publicationRecord.KICDNumber}";
+                var recordinfo = $"Subject: {subject} KICD Number: {publicationRecord.KICDNumber}";
                 return recordinfo;
             }
         }
