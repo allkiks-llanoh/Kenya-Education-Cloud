@@ -175,7 +175,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound(value: new { message = "Publication record could not be retrieved" });
             }
-            return Ok(value: new PublicationDownloadSerilizerToCurators(publication, _uow));
+            return Ok(value: new PublicationDownloadSerilizerGetUrl(publication, _uow));
         }
         [HttpDelete("publication/assignment/{id}")]
         public IActionResult DeleteUnAssignedPublication(int Id, [FromBody]string chiefCuratorGuid)
