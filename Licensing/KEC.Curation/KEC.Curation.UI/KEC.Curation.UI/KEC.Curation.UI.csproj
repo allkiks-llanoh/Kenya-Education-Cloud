@@ -401,6 +401,7 @@
     <Content Include="js\Subjects.js" />
     <Content Include="js\SubjectTypes.js" />
     <Content Include="js\View.js" />
+    <Content Include="Publications\index.jpeg" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -914,6 +915,7 @@
     <Content Include="Views\PrincipalCurator\PrincipalCuratorReverse.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\ChiefCurator\ChiefCuratorView.cshtml" />
+    <Content Include="Views\ChiefCurator\_DocumentViewerPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

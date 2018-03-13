@@ -165,10 +165,10 @@ namespace KEC.Curation.Publishers.Web.Api.Controllers
             try
             {
 
-                //  var filePath = $"{_env.ContentRootPath}\\Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
+               // var mapedPath = $"{_env.ContentRootPath}/Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
 
                 //var mapedPath = Path.Combine(_env.WebRootPath, "Publications");
-                 var mapedPath = $"Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
+               var mapedPath = $"Publications/{model.PublicationFile.FileName}";
 
                 var publication = new Publication
                 {
