@@ -165,8 +165,11 @@ namespace KEC.Curation.Publishers.Web.Api.Controllers
             try
             {
 
-               // var filePath = $"{_env.ContentRootPath}\\Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
-               var mapedPath = Path.Combine(_env.WebRootPath, model.PublicationFile.FileName);
+                //  var filePath = $"{_env.ContentRootPath}\\Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
+
+                //var mapedPath = Path.Combine(_env.WebRootPath, "Publications");
+                 var mapedPath = $"~Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
+
                 var publication = new Publication
                 {
                     AuthorName = model.AuthorName,
