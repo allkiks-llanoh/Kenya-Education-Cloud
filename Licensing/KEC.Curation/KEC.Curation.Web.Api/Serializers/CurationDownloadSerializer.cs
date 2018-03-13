@@ -62,6 +62,14 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _assignment.Notes;
             }
         }
+        public string Assignee
+        {
+            get
+            {
+                return _assignment.Assignee;
+            }
+        }
+    
         public string PublicationUrl
         {
             get

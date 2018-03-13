@@ -169,7 +169,7 @@ namespace KEC.Curation.Publishers.Web.Api.Controllers
 
                 //var mapedPath = Path.Combine(_env.WebRootPath, "Publications");
                var mapedPath = $"Publications/{model.PublicationFile.FileName}";
-
+               
                 var publication = new Publication
                 {
                     AuthorName = model.AuthorName,
