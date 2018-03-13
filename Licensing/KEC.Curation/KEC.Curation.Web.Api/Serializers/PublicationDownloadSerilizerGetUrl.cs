@@ -18,8 +18,8 @@ namespace KEC.Curation.Web.Api.Serializers
             _uow = uow;
 
         }
-        
-       
+
+        [DataType(DataType.Url)]
         public string Url
         {
             get

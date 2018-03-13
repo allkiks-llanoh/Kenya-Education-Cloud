@@ -165,8 +165,8 @@ namespace KEC.Curation.Publishers.Web.Api.Controllers
             try
             {
 
-                var filePath = $"{_env.ContentRootPath}\\Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
-               
+               // var filePath = $"{_env.ContentRootPath}\\Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
+               var mapedPath = Path.Combine(_env.WebRootPath, model.PublicationFile.FileName);
                 var publication = new Publication
                 {
                     AuthorName = model.AuthorName,
@@ -180,7 +180,7 @@ namespace KEC.Curation.Publishers.Web.Api.Controllers
                     Title = model.Title,
                     MimeType = model.PublicationFile.ContentType,
                     Owner = model.UserGuid,
-                    Url = filePath,
+                    Url = mapedPath,
                     KICDNumber = _uow.PublicationRepository
                                       .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
                     CreatedTimeUtc = DateTime.UtcNow,
@@ -201,7 +201,7 @@ namespace KEC.Curation.Publishers.Web.Api.Controllers
                 using (var memoryStream = new MemoryStream())
                 {
                     await model.PublicationFile.CopyToAsync(memoryStream);
-                    var fileStream = new FileStream(filePath, FileMode.CreateNew, FileAccess.ReadWrite);
+                    var fileStream = new FileStream(mapedPath, FileMode.CreateNew, FileAccess.ReadWrite);
                     memoryStream.WriteTo(fileStream);
                 }
                 return Ok(value: "Publication submitted successfully");
