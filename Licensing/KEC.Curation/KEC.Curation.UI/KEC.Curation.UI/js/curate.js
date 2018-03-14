@@ -42,7 +42,7 @@
         e.preventDefault();
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
         let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}`);
-        let notes = $('.note-editable').html();
+        let notes = $('.note-editable').val();
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
         }
@@ -71,7 +71,7 @@
         e.preventDefault();
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
         let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}`);
-        let notes = $('.note-editable').html();
+        let notes = $('#note-editable').val();
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
         }
