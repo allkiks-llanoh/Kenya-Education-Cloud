@@ -30,23 +30,23 @@
                   <dt>Publication</dt>
                   <dd>${assignment.publication}</dd>
                   <dt>Section</dt>
-                   <dd>${assignment.sectiontocurate}</dd>
+                   <dd>${assignment.sectionToCurate}</dd>
                    <dt>Assignment date</dt>
-                   <dd>${assignment.assignmentdateutc}</dd>
+                   <dd>${assignment.assignmentDateUtc}</dd>
                    <dt>Url</dt>
-                   <dd>${assignment.publicationurl}</dd></dl>`);
+                   <dd>${assignment.publicationUrl}</dd></dl>`);
             $('.note-editable').html($.parseHTML(assignment.notes))
         })
     }
     function saveNotesAndSubmit(e) {
         e.preventDefault();
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
-        let url = apiBaseUrl.concat(`/curator/curate/${assignmentId}`);
+        let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}`);
         let notes = $('.note-editable').html();
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
         }
-        let userGuid = currentUserGuid;
+        let userGuid = $('#CurrentUserGuid').val();
         $.ajax({
             url: url,
             crossDomain: true,
@@ -70,7 +70,7 @@
     function saveNotes(e) {
         e.preventDefault();
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
-        let url = apiBaseUrl.concat(`/curator/curate/${assignmentId}`);
+        let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}`);
         let notes = $('.note-editable').html();
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
