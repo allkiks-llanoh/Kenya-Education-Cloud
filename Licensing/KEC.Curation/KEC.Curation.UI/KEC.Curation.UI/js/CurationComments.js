@@ -1,8 +1,8 @@
 ﻿
-var CuratorGUID = $('#CurrentUserGuid').val();
+var CuratorCommId = $('#CurrentUserGuid').val();
 var SubjectId = $('#SubjectId').val();
-
-let getCommentsUrl = apiBaseUrl.concat(`/chiefcurator/publications/${subjectId}/history?subjectid=${subjectId}&chiefCuratorGuid=${CuratorGUID}`);
+var publicationID = parseInt($('#identity').attr('data-identity'));
+let getComments = apiBaseUrl.concat(`/chiefcurator/publication/${publicationID}/curatorsubmissions?chiefCuratorGuid=${CuratorCommId}&publicationId=${publicationID}`);
 
 function tableRows(data) {
         var tableRows = [];
@@ -14,24 +14,22 @@ function tableRows(data) {
    
     //Start by getting publication list based on Payment Verification Stage
     $.ajax({
-        url: getCommentsUrl,
+        url: getComments,
         type: "GET",
         dataType: "json",
         success: function (data, status, jqhxr) {
         console.log(data);
 
     //This code snipet prepares to append Json Data
-        $('#curated-publications').append(tableRows(data));
+        $('#comments').append(tableRows(data));
         }
     });
 
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $("<tr />")
-        row.append($("<td>" + rowData.id + "</td>"));
-        row.append($("<td>" + rowData.kicdNumber + "</td>"));
-        row.append($("<td>" + rowData.chiefCuratorComment + "</td>"));
-        row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.id}?Pub=${rowData.id}"class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Curation Comments</a>`));
-
+        row.append($("<td>" + rowData.assignmentId + "</td>"));
+        row.append($("<td>" + rowData.sectionToCurate+ "</td>"));
+        row.append($("<td>" + rowData.notes + "</td>"));
         return row[0];
     }
