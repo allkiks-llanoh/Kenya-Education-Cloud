@@ -12,7 +12,7 @@
         console.log(` ${userGuid}`);
         console.log(` ${assignmentId}`);
         $.ajax({
-            url: 'https://curationapi-d.kec.ac.ke/api/chiefcurator/curator/curate/1?userGuid=1cb673c8-a921-4a9f-b42f-69050a70aae6',
+            url: url,
             crossDomain: true,
             statusCode: {
                 404: function (jqXHR, textStatus, errorThrown) {

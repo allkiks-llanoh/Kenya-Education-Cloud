@@ -207,7 +207,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound(value: new { message = "Publication record could not be retrieved" });
             }
-            return Ok(value: new PublicationDownloadSerilizer(publication, _uow));
+            return Ok(value: new PublicationDownloadSerilizerToCurators(publication, _uow));
         }
         #endregion
 

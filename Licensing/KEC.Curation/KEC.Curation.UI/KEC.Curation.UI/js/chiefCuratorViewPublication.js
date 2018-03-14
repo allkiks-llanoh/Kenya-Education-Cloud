@@ -16,8 +16,9 @@
 
     ///Functions Section
     function getPublication() {
+        let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        var url = apiBaseUrl.concat(`/chiefcurator/AssignedPublication/${publicationId}`);
+        var url = apiBaseUrl.concat(`/chiefcurator/AssignedPublication/${publicationId}?chiefCuratorGuid=${chiefCuratorGUID}`);
         console.log(url);
         $.ajax({
             url: url,
@@ -30,7 +31,7 @@
                 403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
                 500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
             },
-            data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
+          
 
         }).done(function (publication, textStatus, jqXHR) {
             showChiefCuratorSubmissionSection(publication, "#publication-view");
@@ -57,8 +58,9 @@
     }
 
     function getPublicationCurationComments() {
+        let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorsubmissions`);
+        let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorsubmissions?chiefCuratorGuid=${chiefCuratorGUID}&publicationId=${publicationId}`);
         $.ajax({
             url: url,
             type: 'GET',
@@ -70,7 +72,7 @@
                 403: () => { ShowAlert("You are not authorized to access curator submissions"); },
                 500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
             },
-            data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
+          
 
         }).done(function (submissions, textStatus, jqXHR) {
             let commentsHtml = "";
