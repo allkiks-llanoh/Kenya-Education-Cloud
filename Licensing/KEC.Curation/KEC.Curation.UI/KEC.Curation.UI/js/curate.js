@@ -7,7 +7,7 @@
     //Functions Section
     function getAssignment() {
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
-        let userGuid = $('#CurrentUserGuid').val();
+        var userGuid = $('#CurrentUserGuid').val();
         let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}?userGuid=${userGuid}`);
         console.log(` ${userGuid}`);
         console.log(` ${assignmentId}`);
@@ -42,14 +42,19 @@
         e.preventDefault();
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
         let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}`);
-        let notes = $('.note-editable').val();
+        let notes = $('.note-editable').html();
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
         }
-        let userGuid = $('#CurrentUserGuid').val();
+        var userGuid = $('#CurrentUserGuid').val();
         $.ajax({
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            },
             url: url,
             crossDomain: true,
+            type: 'PATCH',
             statusCode: {
                 404: function (jqXHR, textStatus, errorThrown) {
                     ShowAlert("Specified resource could not be located", "error");
@@ -59,7 +64,7 @@
                 }
             },
             data: JSON.stringify({userGuid: userGuid, Notes: notes, Submitted: true }),
-            type: 'PATCH'
+           
         }).done(function (data, textStatus, jqXHR) {
             ShowAlert("Curation notes saved successfully", "success");
         }).fail(function (jqXHR, textStatus, errorThrown) {
@@ -71,14 +76,20 @@
         e.preventDefault();
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
         let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}`);
-        let notes = $('#note-editable').val();
+        let notes = $('.note-editable').html();
+        let sub = "false"
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
         }
-        let userGuid = $('#CurrentUserGuid').val();
+        var userGuid = $('#CurrentUserGuid').val();
         $.ajax({
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            },
             url: url,
             crossDomain: true,
+            type: 'PATCH',
             statusCode: {
                 404: function (jqXHR, textStatus, errorThrown) {
                     ShowAlert("Specified resource could not be located", "error");
@@ -87,8 +98,8 @@
                     ShowAlert("You are not authorized to access the specified resource", "warning");
                 }
             },
-            data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: false }),
-            type: 'PATCH'
+            data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: sub }),
+         
         }).done(function (data, textStatus, jqXHR) {
             ShowAlert("Curation notes saved and submitted successfully", "success");
             let url = $('#back-to-assignments').attr('href');

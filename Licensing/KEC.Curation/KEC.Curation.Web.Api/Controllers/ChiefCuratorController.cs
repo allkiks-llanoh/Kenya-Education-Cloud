@@ -148,8 +148,6 @@ namespace KEC.Curation.Web.Api.Controllers
                 assignments.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
             return Ok(assignmentList);
         }
-       
-
         [HttpGet("UnAssignedPublication/{id}")]
         public IActionResult UnAssignedPublication(int Id, string chiefCuratorGuid)
         {
