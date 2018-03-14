@@ -13,6 +13,7 @@ namespace KEC.Curation.Data.UnitOfWork
         PublicationStageLogRepository PublicationStageLogRepository { get; }
         LevelRepository LevelRepository { get; }
         ChiefCuratorAssignmentRepository ChiefCuratorAssignmentRepository { get;}
+        ChiefCuratorCommentRepository ChiefCuratorCommentRepository { get; }
         int Complete();
     }
 }

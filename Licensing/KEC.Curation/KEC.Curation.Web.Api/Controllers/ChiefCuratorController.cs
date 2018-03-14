@@ -299,6 +299,58 @@ namespace KEC.Curation.Web.Api.Controllers
         }
         #endregion
 
+        #region Chief Curator Comments
+        [HttpPost("ChiefCuratorComments/{id}")]
+        public IActionResult Comments(int publicationId, [FromBody] ChiefCuratorCommentsSerilizer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+            var publication = _uow.PublicationRepository
+                                  .Find(p => p.Id.Equals(publicationId)
+                                  && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(model.ChiefCuratorGuid))
+                                  .FirstOrDefault();
+            if (publication == null)
+            {
+                return NotFound(value: new { message = "Publication could not be retrieved for assignment." });
+            }
+            if (publication.FullyAssigned)
+            {
+                return BadRequest(error: new { message = "Publication is fully assigned" });
+            }
+            try
+            {
+
+     
+                var comment = new ChiefCuratorComment
+                {
+                    PublicationId = publication.Id,
+                    Notes = model.Notes,
+                   ChiefCuratorGuid = model.ChiefCuratorGuid
+
+                };
+                _uow.ChiefCuratorCommentRepository.Add(comment);
+                var recommendation = new PublicationStageLog
+                {
+                    PublicationId= publication.Id,
+                    Stage = PublicationStage.PublicationApproval,
+                    Notes = model.Notes,
+                    CreatedAtUtc = DateTime.UtcNow,
+                    Owner = model.ChiefCuratorGuid,
+                    ActionTaken = model.ActionTaken
+                };
+                _uow.PublicationStageLogRepository.Add(recommendation);
+                _uow.Complete();
+                return Ok(value: new { message = "Recommendations Sent To Chief Curator" });
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        #endregion
         #region Methods
         private List<CurationDownloadSerializer> CurationAssignments(string userGuid, IUnitOfWork uow)
         {
@@ -308,5 +360,7 @@ namespace KEC.Curation.Web.Api.Controllers
             return assigmentList;
         }
         #endregion
+
+       
     }
 }
