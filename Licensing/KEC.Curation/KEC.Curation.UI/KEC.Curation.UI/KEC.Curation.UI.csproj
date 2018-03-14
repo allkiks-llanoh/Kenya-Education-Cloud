@@ -379,6 +379,7 @@
     <Content Include="js\chiefCuratorPublicationHistory.js" />
     <Content Include="js\chiefCuratorPublications.js" />
     <Content Include="js\chiefCuratorViewPublication.js" />
+    <Content Include="js\curatorView.js" />
     <Content Include="js\curate.js" />
     <Content Include="js\curatorToCurate.js" />
     <Content Include="js\financeVerify.js" />
@@ -916,6 +917,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\ChiefCurator\ChiefCuratorView.cshtml" />
     <Content Include="Views\ChiefCurator\_DocumentViewerPartial.cshtml" />
+    <Content Include="Views\Curator\CuratorView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

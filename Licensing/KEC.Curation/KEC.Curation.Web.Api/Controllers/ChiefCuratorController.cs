@@ -148,6 +148,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 assignments.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
             return Ok(assignmentList);
         }
+       
 
         [HttpGet("UnAssignedPublication/{id}")]
         public IActionResult UnAssignedPublication(int Id, string chiefCuratorGuid)
@@ -253,13 +254,13 @@ namespace KEC.Curation.Web.Api.Controllers
         #endregion
 
         #region Curator
-        [HttpGet("~api/curator/tocurate")]
+        [HttpGet("curator/tocurate")]
         public IActionResult ToCurate(string userGuid)
         {
             var assignmentList = CurationAssignments(userGuid, _uow);
             return Ok(value: assignmentList);
         }
-        [HttpPatch("~api/curator/curate/{AssignmentId:int}")]
+        [HttpPatch("curator/curate/{AssignmentId:int}")]
         public IActionResult SubmitCuration(int AssignmentId, [FromBody]CurationUploadSerializer model)
         {
             if (!ModelState.IsValid)
@@ -287,7 +288,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpGet("~api/curator/curate/{Id:int}")]
+        [HttpGet("curator/curate/{Id:int}")]
         public IActionResult GetCuration(string userGuid, int Id)
         {
             var assigment = _uow.CuratorAssignmentRepository.Find(p => p.Id.Equals(Id) && !p.Submitted
