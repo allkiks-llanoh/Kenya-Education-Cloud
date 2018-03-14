@@ -75,7 +75,7 @@
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
         }
-        let userGuid = currentUserGuid;
+        let userGuid = $('#CurrentUserGuid').val();
         $.ajax({
             url: url,
             crossDomain: true,
