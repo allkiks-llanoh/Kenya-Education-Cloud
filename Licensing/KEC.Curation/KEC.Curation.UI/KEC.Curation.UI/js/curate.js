@@ -8,10 +8,11 @@
     function getAssignment() {
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
         let userGuid = $('#CurrentUserGuid').val();
-        let assignmentUrl = apiBaseUrl.concat(`/curator/curate/${assignmentId}?userGuid=${userGuid}`);
-        
+        let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}?userGuid=${userGuid}`);
+        console.log(` ${userGuid}`);
+        console.log(` ${assignmentId}`);
         $.ajax({
-            url: assignmentUrl,
+            url: 'https://curationapi-d.kec.ac.ke/api/chiefcurator/curator/curate/1?userGuid=1cb673c8-a921-4a9f-b42f-69050a70aae6',
             crossDomain: true,
             statusCode: {
                 404: function (jqXHR, textStatus, errorThrown) {
@@ -31,7 +32,7 @@
                   <dt>Section</dt>
                    <dd>${assignment.sectiontocurate}</dd>
                    <dt>Assignment date</dt>
-                   <dd>${convertUTCDateToLocalDate(assignment.assignmentdateutc).toLocaleDateString()}</dd>
+                   <dd>${assignment.assignmentdateutc}</dd>
                    <dt>Url</dt>
                    <dd>${assignment.publicationurl}</dd></dl>`);
             $('.note-editable').html($.parseHTML(assignment.notes))

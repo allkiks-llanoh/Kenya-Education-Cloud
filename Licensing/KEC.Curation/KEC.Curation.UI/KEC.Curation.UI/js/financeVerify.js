@@ -14,7 +14,7 @@
                 
                 console.log(`${kicdnumber}`);
                 console.log(` ${notes} `);
-                console.log(` ${userGuid} `);
+                console.log(` ${userGuid}`);
                 $.ajax({
                     headers :  {
                         'Accept' :  'application/json',

@@ -28,6 +28,21 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [HttpGet, Route("curatorview")]
+        public ActionResult curatorview(string userguidGuid)
+        {
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId
+                };
+                return View(chiefCurator);
+            }
+        }
         [HttpGet,Route("CuratePublication/{Id}")]
         public ActionResult CuratePublication(int Id)
         {

@@ -297,7 +297,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound("Curation record could not be retrieved or has been submitted");
             }
-            return Ok(value: assigment);
+            return Ok(value: new CurationDownloadSerializer(assigment, _uow));
         }
         #endregion
 
