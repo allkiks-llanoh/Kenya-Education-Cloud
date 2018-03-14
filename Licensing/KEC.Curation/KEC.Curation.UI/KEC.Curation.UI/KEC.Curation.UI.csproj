@@ -379,6 +379,7 @@
     <Content Include="js\chiefCuratorPublicationHistory.js" />
     <Content Include="js\chiefCuratorPublications.js" />
     <Content Include="js\chiefCuratorViewPublication.js" />
+    <Content Include="js\CurationCommentsChief.js" />
     <Content Include="js\curatorView.js" />
     <Content Include="js\curate.js" />
     <Content Include="js\curatorToCurate.js" />

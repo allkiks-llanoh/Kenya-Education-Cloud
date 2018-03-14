@@ -232,7 +232,7 @@ namespace KEC.Curation.Web.Api.Controllers
                                 && p.FullyAssigned && p.PublicationStageLogs.Any(l => l.Stage == PublicationStage.Curation && l.Notes != null)
                                 && p.SubjectId.Equals(subjectId));
             var publicationList = publications.Any() ?
-                publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
 
             return Ok(value: publicationList);
         }
