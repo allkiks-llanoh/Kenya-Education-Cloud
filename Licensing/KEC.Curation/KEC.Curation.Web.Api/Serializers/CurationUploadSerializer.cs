@@ -6,7 +6,7 @@ namespace KEC.Curation.Web.Api.Serializers
     {
      
         [Required(ErrorMessage ="Notes cannot be blank")]
-    
+        [DataType(DataType.MultilineText)]
         public string Notes { get; set; }
         public bool Submitted { get; set; }
         [Required(ErrorMessage = "User cannot be blank")]
