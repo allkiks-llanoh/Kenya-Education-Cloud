@@ -4,21 +4,21 @@
     ViewBag.Title = "Publication";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@section Scripts{
-    @Scripts.Render("~/js/chiefCuratorViewPublication")
-    <script src="@Url.Content("~/js/CurationComments.js")"></script>
-    <script src="@Url.Content("~/js/Comments.js")"></script>
-    <script src="@Url.Content("~/js/ReadCurationComments.js")"></script>
-    @Scripts.Render("~/plugins/summernote")
-    @Styles.Render("~/plugins/summernoteStyles")
-    @Scripts.Render("~/plugins/sweetAlert")
-}
 @{
     var PubId = Request.Params["Pub"];
 
 
 }
+@section Scripts{
+    @Scripts.Render("~/js/chiefCuratorViewPublication")
+    <script src="@Url.Content("~/js/CurationCommentsChief.js")"></script>
+
+    <script src="@Url.Content("~/js/ReadCurationComments.js")"></script>
+    @Scripts.Render("~/plugins/summernote")
+    @Styles.Render("~/plugins/summernoteStyles")
+    @Scripts.Render("~/plugins/sweetAlert")
+}
+
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">
@@ -68,9 +68,9 @@
                                     <thead>
                                         <tr>
 
-                                            <th>Assignment No</th>
-                                            <th>Curation Section</th>
-                                            <th>Curator Comments</th>
+                                          
+                                            <th>Status</th>
+                                            <th>Recommendation</th>
 
                                         </tr>
                                     </thead>
@@ -95,7 +95,7 @@
                                     <thead>
                                         <tr>
 
-                                            <th class="hidden">Id</th>
+                                           
                                             <th>Status</th>
                                             <th>Recommendation</th>
 

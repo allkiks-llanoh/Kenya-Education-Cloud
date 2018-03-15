@@ -1,7 +1,7 @@
 ﻿
-let publicationId = $('#publication-view').attr('data-publicationId');
-let chiefCuratorGuid = $('#CurrentUserGuid').val();
-let readCurationCommentsUrl = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/comments?publicationId=${publicationId}`)
+let publication = $('#publication-view').attr('data-publicationId');
+
+let readCurationCommentsUrl = apiBaseUrl.concat(`/chiefcurator/PrincipalCurator/Comments/${publication}?publicationId=${publication}`)
 //var prGuid = $('#dataGUID').attr('data-pGUID');
 
     function tableRows(data) {
@@ -23,7 +23,7 @@ let readCurationCommentsUrl = apiBaseUrl.concat(`/chiefcurator/publication/${pub
             console.log(data);
 
             //This code snipet prepares to append Json Data
-            $('#chiefcomments').append(tableRows(data));
+            $('#comments').append(tableRows(data));
           
             
         }
@@ -32,8 +32,8 @@ let readCurationCommentsUrl = apiBaseUrl.concat(`/chiefcurator/publication/${pub
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $("<tr />")
-        row.append($(`<td class="hidden"> + rowData.publicationId + </td>`));
-        row.append($("<td>" + rowData.status + "</td>"));
+       
+        row.append($("<td>" + "Curated" + "</td>"));
         row.append($("<td>" + rowData.notes + "</td>"));
 
        

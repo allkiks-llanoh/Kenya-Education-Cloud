@@ -69,6 +69,19 @@ namespace KEC.Curation.Web.Api.Controllers
                 publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
             return Ok(value: publicationList);
         }
+        [HttpGet("Curated")]
+        public IActionResult CuratedPublications(string principalCuratorGuid)
+        {
+
+            var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.
+                                       PrincipalCuratorGuid.Equals(principalCuratorGuid)
+                                       && p.PublicationStageLogs.Max(l => l.Stage)
+                                       == PublicationStage.Curation
+                                       && p.ChiefCuratorAssignment.Submitted==true);
+            var publicationList = publications.Any() ?
+                publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
+            return Ok(value: publicationList);
+        }
         [HttpGet("{stage}")]
         public IActionResult PublicationsByStage(PublicationStage stage)
         {
