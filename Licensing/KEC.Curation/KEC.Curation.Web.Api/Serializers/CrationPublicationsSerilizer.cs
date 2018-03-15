@@ -23,11 +23,7 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-                var publicationId = _uow.ChiefCuratorAssignmentRepository.Get(_assignment.PublicationSection.PublicationId)?.PublicationId;
-                var publicationRecord = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
-                var subject = _uow.SubjectRepository.Get(publicationRecord.SubjectId).Name;
-                var recordinfo = $"Subject: {subject} KICD Number: {publicationRecord.KICDNumber}";
-                return recordinfo;
+                return _assignment.Publication.ISBNNumber;
             }
         }
        
