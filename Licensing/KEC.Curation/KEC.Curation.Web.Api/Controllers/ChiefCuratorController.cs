@@ -223,6 +223,18 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(assignmentList);
         }
         #endregion
+        #region Curator Comments For Principal Curators
+        [HttpGet("publication/{publicationId:int}/comments")]
+        public IActionResult CuratorSubmissionsPrincipal([FromQuery]int publicationId, string principalCuratorGuid)
+        {
+            var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId)
+            && p.PublicationSection.Publication.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(principalCuratorGuid)
+            && p.Submitted == true);
+            var assignmentList = assignmentSubmissions.Any() ?
+                assignmentSubmissions.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
+            return Ok(assignmentList);
+        }
+        #endregion
 
         #region Curation History
         [HttpGet("publications/{subjectId:int}/history")]

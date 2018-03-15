@@ -922,6 +922,7 @@
     <Content Include="Views\ChiefCurator\ChiefCuratorView.cshtml" />
     <Content Include="Views\ChiefCurator\_DocumentViewerPartial.cshtml" />
     <Content Include="Views\Curator\CuratorView.cshtml" />
+    <Content Include="Views\PrincipalCurator\ViewPublication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

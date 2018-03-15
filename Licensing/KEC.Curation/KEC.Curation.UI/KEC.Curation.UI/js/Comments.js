@@ -32,7 +32,7 @@
                 403: () => { ShowAlert("You are not authorized to process publication"); },
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
             }
-        }).done(function (data, textStatus, jqXHR) {
+        }).success(function (data, textStatus, jqXHR) {
             ShowAlert("Recomendations passed to Principal Curator");
         }).fail(function () {
             ShowAlert("Something went wrong while processing publication", 'error');

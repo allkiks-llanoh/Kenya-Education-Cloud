@@ -53,5 +53,21 @@ namespace KEC.Curation.UI.Controllers
 
             return View();
         }
+        [HttpGet, Route("ViewPublication/{Id:int}")]
+        public ActionResult ViewPublication(int Id)
+        {
+            ViewBag.PublicationId = Id;
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId
+                };
+                return View(chiefCurator);
+            }
+
+        }
     }
 }
