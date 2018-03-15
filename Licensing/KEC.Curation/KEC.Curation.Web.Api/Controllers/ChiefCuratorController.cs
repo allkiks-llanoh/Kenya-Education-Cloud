@@ -375,7 +375,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpGet("PrincipalCuratorComments/{id}")]
+        [HttpGet("PrincipalCurator/Comments/{id}")]
         public IActionResult GetCommentsForPrincipal([FromQuery]int publicationId)
         {
             try
