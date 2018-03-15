@@ -79,9 +79,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 var publications = _uow.ChiefCuratorAssignmentRepository.Find(p =>
                                 p.PrincipalCuratorGuid.Equals(principalCuratorGuid)
                                 && p.Submitted == false).ToList();
-                var publicationList = publications.Any() ?
-                publications.Select(p => new CrationPublicationsSerilizer(p, _uow)).ToList() : new List<CrationPublicationsSerilizer>();
-                return Ok(value: publicationList);
+                return Ok(value: publications);
             }
             catch (Exception)
             {
