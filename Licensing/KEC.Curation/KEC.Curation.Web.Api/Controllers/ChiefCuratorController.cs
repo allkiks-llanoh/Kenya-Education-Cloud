@@ -376,7 +376,7 @@ namespace KEC.Curation.Web.Api.Controllers
             }
         }
         [HttpGet("PrincipalCuratorComments/{id}")]
-        public IActionResult GetCommentsForPrincipal(int publicationId)
+        public IActionResult GetCommentsForPrincipal([FromQuery]int publicationId)
         {
             var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId)
            && p.Submitted == true
