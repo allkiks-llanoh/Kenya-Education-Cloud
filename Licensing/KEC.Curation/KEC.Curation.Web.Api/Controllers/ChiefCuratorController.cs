@@ -125,7 +125,8 @@ namespace KEC.Curation.Web.Api.Controllers
                     PublicationSectionId = section.Id,
                     CreatedUtc = DateTime.UtcNow,
                     Assignee = model.Assignee,
-                    AssignedBy = model.AssignedBy   
+                    AssignedBy = model.AssignedBy, 
+                    PublicationId=publication.Id
                 };
                
 
@@ -336,7 +337,8 @@ namespace KEC.Curation.Web.Api.Controllers
                 {
                     PublicationId = publication.Id,
                     Notes = model.Notes,
-                    ChiefCuratorGuid = model.ChiefCuratorGuid
+                    ChiefCuratorGuid = model.ChiefCuratorGuid,
+                    
 
                 };
                 _uow.ChiefCuratorCommentRepository.Add(comment);
@@ -382,7 +384,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
 
                 var comments = _uow.CuratorAssignmentRepository.Find(p =>
-                                p.PublicationSection.PublicationId.Equals(publicationId)
+                                p.PublicationId.Equals(publicationId)
                                 && p.Status==true).ToList();
                 return Ok(value: comments);
             }
@@ -391,12 +393,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-            // var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId)
-            //&& p.Submitted == true
-            //&& p.Status == true);
-            // var assignmentList = assignmentSubmissions.Any() ?
-            //     assignmentSubmissions.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
-            // return Ok(assignmentList);
+           
         }
         #endregion
         #region Methods
