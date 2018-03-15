@@ -70,33 +70,25 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: publicationList);
         }
         [HttpGet("Curated")]
-        public IActionResult CuratedPublications([FromQuery] string principalCuratorGuid)
+        public IActionResult CuratedPublications([FromQuery] string principalCuratorGuid, string publicationId)
         {
 
             try
             {
 
-                var publications = _uow.ChiefCuratorAssignmentRepository.Find(p =>
-                                p.PrincipalCuratorGuid.Equals(principalCuratorGuid)
-                                && p.Submitted == false).ToList();
-                // return Ok(value: publications);
-                var publicationList = publications.Any() ?
-                    publications.Select(p => new CrationPublicationsSerilizer(p, _uow)).ToList() : new List<CrationPublicationsSerilizer>();
-                return Ok(value: publicationList);
+                var publications = _uow.PublicationRepository.Find(p =>
+                                   p.Id.Equals(publicationId)
+                                   && p.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(principalCuratorGuid)
+                                   && p.ChiefCuratorAssignment.Submitted == false).ToList();
+                return Ok(value: publications);
+
             }
             catch (Exception)
             {
 
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-            //var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.
-            //                            PrincipalCuratorGuid.Equals(principalCuratorGuid)
-            //                            && p.ChiefCuratorAssignment.Submitted == false
-            //                            && p.PublicationStageLogs.Max(l => l.Stage)
-            //                            == PublicationStage.Curation);
-            //var publicationList = publications.Any() ?
-            //    publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
-            //return Ok(value: publicationList);
+           
         }
         [HttpGet("{stage}")]
         public IActionResult PublicationsByStage(PublicationStage stage)
