@@ -70,7 +70,7 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: publicationList);
         }
         [HttpGet("Curated")]
-        public IActionResult CuratedPublications([FromQuery] string principalCuratorGuid, string publicationId)
+        public IActionResult CuratedPublications([FromQuery] string principalCuratorGuid, int publicationId)
         {
 
             try
