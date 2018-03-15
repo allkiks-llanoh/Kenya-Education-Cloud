@@ -6,11 +6,11 @@ namespace KEC.Curation.Web.Api.Serializers
 {
     public class CurationCommentSerializer
     {
-        private readonly ChiefCuratorAssignment _assignment;
+        private readonly ChiefCuratorComment _assignment;
 
         private readonly IUnitOfWork _uow;
 
-        public CurationCommentSerializer(ChiefCuratorAssignment assignment, IUnitOfWork uow)
+        public CurationCommentSerializer(ChiefCuratorComment assignment, IUnitOfWork uow)
         {
             _assignment = assignment;
             _uow = uow;
@@ -20,7 +20,7 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-                return _assignment.Publication.Id;
+                return _assignment.PublicationId;
             }
         }
        
@@ -36,16 +36,9 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-                var publicationId = _uow.PublicationSectionRepository.Get(_assignment.Publication.Id)?.PublicationId;
-                var publication = _uow.ChiefCuratorCommentRepository.Get(publicationId.GetValueOrDefault());
-                if (publication == null)
-                {
-                    return string.Empty;
-                }
-                else
-                {
-                    return publication.Notes;
-                }
+              
+                    return _assignment.Notes;
+               
             }
         }
        
@@ -53,7 +46,7 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-                var publicationId = _uow.PublicationSectionRepository.Get(_assignment.Publication.Id)?.PublicationId;
+                var publicationId = _uow.PublicationSectionRepository.Get(_assignment.PublicationId)?.PublicationId;
                 var publication = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
                 if (publication == null)
                 {

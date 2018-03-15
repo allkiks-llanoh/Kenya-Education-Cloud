@@ -225,14 +225,14 @@ namespace KEC.Curation.Web.Api.Controllers
         #endregion
         #region Curator Comments For Principal Curators
         [HttpGet("publication/{publicationId:int}/comments")]
-        public IActionResult CuratorSubmissionsPrincipal([FromQuery]int publicationId, string principalCuratorGuid)
+        public IActionResult CuratorSubmissionsPrincipal([FromQuery]int publicationId)
         {
-            var assignmentSubmissions = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId)
-            && p.PublicationSection.Publication.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(principalCuratorGuid)
-            && p.Submitted == false);
-            var assignmentList = assignmentSubmissions.Any() ?
-                assignmentSubmissions.Select(p => new CurationCommentSerializer(p, _uow)).ToList() : new List<CurationCommentSerializer>();
-            return Ok(assignmentList);
+            var curationComments = _uow.ChiefCuratorCommentRepository.Find(p => p.PublicationId.Equals(publicationId)
+                                   && p.Submitted == false);
+            var curationCommentList = curationComments.Any() ?
+                curationComments.Select(p => new CurationCommentSerializer(p, _uow)).ToList() : new List<CurationCommentSerializer>();
+            return Ok(curationCommentList);
+           
         }
         #endregion
 
