@@ -1,6 +1,7 @@
 ﻿using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace KEC.Curation.Web.Api.Serializers
 {
@@ -32,6 +33,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _assignment.Submitted ? "Submitted" : "Pending";
             }
         }
+        [DataType(DataType.Html)]
         public string Notes
         {
             get
