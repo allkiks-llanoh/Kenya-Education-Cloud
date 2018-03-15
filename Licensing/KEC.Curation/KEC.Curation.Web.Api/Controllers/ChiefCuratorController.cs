@@ -313,12 +313,9 @@ namespace KEC.Curation.Web.Api.Controllers
                                   .FirstOrDefault();
             if (publication == null)
             {
-                return NotFound(value: new { message = "Publication could not be retrieved for assignment." });
+                return NotFound(value: new { message = "Publication Not Found in Repository." });
             }
-            if (publication.FullyAssigned)
-            {
-                return BadRequest(error: new { message = "Publication is fully assigned" });
-            }
+           
             try
             {
 
