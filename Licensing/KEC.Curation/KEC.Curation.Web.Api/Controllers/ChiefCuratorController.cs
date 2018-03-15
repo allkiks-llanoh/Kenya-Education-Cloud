@@ -227,11 +227,11 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("publication/{publicationId:int}/comments")]
         public IActionResult CuratorSubmissionsPrincipal([FromQuery]int publicationId, string principalCuratorGuid)
         {
-            var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId)
+            var assignmentSubmissions = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId)
             && p.PublicationSection.Publication.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(principalCuratorGuid)
-            && p.Submitted == true);
+            && p.Submitted == false);
             var assignmentList = assignmentSubmissions.Any() ?
-                assignmentSubmissions.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
+                assignmentSubmissions.Select(p => new CurationCommentSerializer(p, _uow)).ToList() : new List<CurationCommentSerializer>();
             return Ok(assignmentList);
         }
         #endregion
