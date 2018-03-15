@@ -125,9 +125,9 @@ namespace KEC.Curation.Web.Api.Controllers
                     PublicationSectionId = section.Id,
                     CreatedUtc = DateTime.UtcNow,
                     Assignee = model.Assignee,
-                    AssignedBy = model.AssignedBy
-
+                    AssignedBy = model.AssignedBy   
                 };
+               
 
                 _uow.CuratorAssignmentRepository.Add(assignment);
                 _uow.Complete();
@@ -378,12 +378,25 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("PrincipalCuratorComments/{id}")]
         public IActionResult GetCommentsForPrincipal([FromQuery]int publicationId)
         {
-            var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId)
-           && p.Submitted == true
-           && p.Status == true);
-            var assignmentList = assignmentSubmissions.Any() ?
-                assignmentSubmissions.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
-            return Ok(assignmentList);
+            try
+            {
+
+                var comments = _uow.CuratorAssignmentRepository.Find(p =>
+                                p.PublicationSection.PublicationId.Equals(publicationId)
+                                && p.Status==true).ToList();
+                return Ok(value: comments);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+            // var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId)
+            //&& p.Submitted == true
+            //&& p.Status == true);
+            // var assignmentList = assignmentSubmissions.Any() ?
+            //     assignmentSubmissions.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
+            // return Ok(assignmentList);
         }
         #endregion
         #region Methods
