@@ -207,7 +207,82 @@ namespace KEC.Curation.Web.Api.Controllers
             }
 
         }
+        [HttpPost("PrincipalCuratorComments/{id}")]
+        public IActionResult Comments(int publicationId, [FromBody] PrincipalCuratorCommentsSerilizer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+            var publication = _uow.PublicationRepository
+                                  .Find(p => p.Id.Equals(publicationId)
+                                  && p.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(model.PrincipalCuratorGuid))
+                                  .FirstOrDefault();
+            if (publication == null)
+            {
+                return NotFound(value: new { message = "Publication Not Found in Repository." });
+            }
 
+            try
+            {
+
+
+                var comment = new PrincipalCuratorComment
+                {
+                    PublicationId = publication.Id,
+                    Notes = model.Notes,
+                    PrincipalCuratorGuid = model.PrincipalCuratorGuid,
+
+
+                };
+                _uow.PrincipalCuratorCommentRepository.Add(comment);
+                var recommendation = new PublicationStageLog
+                {
+                    PublicationId = publication.Id,
+                    Stage = PublicationStage.PublicationApproval,
+                    Notes = model.Notes,
+                    CreatedAtUtc = DateTime.UtcNow,
+                    Owner = model.PrincipalCuratorGuid,
+                    ActionTaken = model.ActionTaken
+                };
+                _uow.PublicationStageLogRepository.Add(recommendation);
+                _uow.Complete();
+                return Ok(value: new { message = "Recommendations Sent To Curation Managers" });
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpPatch("update/chiefcuratorcomments/{id}")]
+        public IActionResult UpdateChiefCurationComments(int publicationId, [FromBody]ChiefFlagSubmittedSerilizer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+            var assigment = _uow.ChiefCuratorAssignmentRepository.Find(p => !p.Submitted
+                                                                  && p.Id == publicationId
+                                                                  && p.PrincipalCuratorGuid.Equals(model.UserGuid))
+                                                                  .FirstOrDefault();
+            if (assigment == null)
+            {
+                return NotFound("Record could not be retrieved");
+            }
+            try
+            {
+               
+                assigment.Submitted = model.Submitted;
+                _uow.Complete();
+                return Ok(value: new { message = "Curation Fully Submitted" });
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
         [HttpDelete("publication/assignment/{id}")]
         public IActionResult DeleteUnAssignedPublication(int Id, [FromBody]string principalCuratorGuid)
         {

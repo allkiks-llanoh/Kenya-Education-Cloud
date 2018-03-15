@@ -16,9 +16,9 @@
 
     ///Functions Section
     function getPublication() {
-        let chiefCuratorGUID = $('#CurrentUserGuid').val();
+        let PrincipalCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        var url = apiBaseUrl.concat(`/chiefcurator/AssignedPublication/${publicationId}?chiefCuratorGuid=${chiefCuratorGUID}&Id=${publicationId}`);
+        var url = apiBaseUrl.concat(`/principalcurator/curated?principalCuratorGuid=${PrincipalCuratorGUID}&publicationId=${publicationId}`);
         console.log(url);
         $.ajax({
             url: url,
@@ -36,24 +36,14 @@
         }).done(function (publication, textStatus, jqXHR) {
             showChiefCuratorSubmissionSection(publication, "#publication-view");
             $('#publication-details').replaceWith(
-                `<dl id="publication-details" data-stage="${publication.stage}">
+                `<dl id="publication-details">
                   <dt>KICD Number</dt>
-                  <dd id="kicd-number">${publication.kicdnumber}</dd>
+                  <dd id="kicd-number">${publication.kicdNumber}</dd>
                   <dt>Title</dt>
                    <dd>${publication.title}</dd>
                    <dt>Description</dt>
-                   <dd>${publication.description}</dd>
-                   <dt>Type</dt>
-                   <dd>${publication.type}</dd>
-                   <dt>Subject</dt>
-                   <dd>${publication.subject}</dd>
-                   <dt>Url</dt>
-                   <dd><a href="${url}">Link to publication</a></dd>
-                   <dt>Level</dt>
-                   <dd>${publication.level}</dd>
-                   <dt>Completion date</dt>
-                   <dd>${publication.completiondate}</dd></dl>`);
-            getPublicationCurationComments();
+                   <dd>${publication.description}</dd></dl>`);
+          
         });
     }
 

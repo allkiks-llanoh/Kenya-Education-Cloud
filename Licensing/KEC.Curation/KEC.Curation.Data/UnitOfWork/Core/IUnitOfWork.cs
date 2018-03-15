@@ -14,6 +14,7 @@ namespace KEC.Curation.Data.UnitOfWork
         LevelRepository LevelRepository { get; }
         ChiefCuratorAssignmentRepository ChiefCuratorAssignmentRepository { get;}
         ChiefCuratorCommentRepository ChiefCuratorCommentRepository { get; }
+        PrincipalCuratorCommentRepository PrincipalCuratorCommentRepository { get; }
         int Complete();
     }
 }
