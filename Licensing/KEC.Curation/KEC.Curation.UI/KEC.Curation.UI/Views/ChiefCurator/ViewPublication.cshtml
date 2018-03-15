@@ -8,6 +8,7 @@
 @section Scripts{
     @Scripts.Render("~/js/chiefCuratorViewPublication")
     <script src="@Url.Content("~/js/CurationComments.js")"></script>
+    <script src="@Url.Content("~/js/Comments.js")"></script>
     @Scripts.Render("~/plugins/summernote")
     @Styles.Render("~/plugins/summernoteStyles")
     @Scripts.Render("~/plugins/sweetAlert")
@@ -87,20 +88,20 @@
                         <div>
                             <br>
                             <br>
-                            </div>
+                        </div>
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <select class="form-control">
+                                <select class="form-control" id="action-selected">
                                     <option>Select Action To Recommend</option>
                                     <option value="PublicationApproved">Approve Content</option>
                                     <option value="PublicationRejected">Reject Content</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="submit" class="btn btn-success form-control" style="background-color:#00B55F; color:white;"  value="Submit Recommendation" id="recommend">
+                                <input type="submit" class="btn btn-success form-control" style="background-color:#00B55F; color:white;" value="Submit Recommendation" id="recommend">
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>

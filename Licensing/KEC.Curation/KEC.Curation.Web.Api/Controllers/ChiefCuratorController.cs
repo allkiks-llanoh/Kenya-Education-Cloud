@@ -347,6 +347,22 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [HttpGet("ChiefCuratorComments/{id}")]
+        public IActionResult GetComments(int publicationId, [FromBody] ChiefCuratorCommentsGet model)
+        {
+            try
+            {
+
+                var comments = _uow.ChiefCuratorCommentRepository.Find(p =>
+                                p.Id.Equals(publicationId)).ToList();
+                return Ok(value: comments);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
         #endregion
         #region Methods
         private List<CurationDownloadSerializer> CurationAssignments(string userGuid, IUnitOfWork uow)
