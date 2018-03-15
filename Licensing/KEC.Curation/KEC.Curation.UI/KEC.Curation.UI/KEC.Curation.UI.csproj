@@ -397,6 +397,7 @@
     <Content Include="js\legalVerify.js" />
     <Content Include="js\legalView.js" />
     <Content Include="js\Levels.js" />
+    <Content Include="js\ReadCurationComments.js" />
     <Content Include="js\PrincipalCuratorReverse.js" />
     <Content Include="js\PrincipalCurator.js" />
     <Content Include="js\PrincipalCuratorReverseView.js" />

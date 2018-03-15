@@ -9,6 +9,7 @@
     @Scripts.Render("~/js/chiefCuratorViewPublication")
     <script src="@Url.Content("~/js/CurationComments.js")"></script>
     <script src="@Url.Content("~/js/Comments.js")"></script>
+    <script src="@Url.Content("~/js/ReadCurationComments.js")"></script>
     @Scripts.Render("~/plugins/summernote")
     @Styles.Render("~/plugins/summernoteStyles")
     @Scripts.Render("~/plugins/sweetAlert")
@@ -77,6 +78,34 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="ibox-title">
+                            <h5>Chief Curators comments</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table style="border:none;" class="table  table-hover dataTables-example" id="chiefcomments">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="hidden">Id</th>
+                                            <th>Status</th>
+                                            <th>Recommendation</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody style="border:none;"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
                         <div class="row ibox-title">
                             <h5>Give Your Comments Here</h5>
                             <div class="ibox-content no-padding">
@@ -85,7 +114,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div>
                             <br>
                             <br>

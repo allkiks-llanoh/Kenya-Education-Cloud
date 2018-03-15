@@ -336,7 +336,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 {
                     PublicationId = publication.Id,
                     Notes = model.Notes,
-                   ChiefCuratorGuid = model.ChiefCuratorGuid
+                    ChiefCuratorGuid = model.ChiefCuratorGuid
 
                 };
                 _uow.ChiefCuratorCommentRepository.Add(comment);
@@ -374,6 +374,16 @@ namespace KEC.Curation.Web.Api.Controllers
 
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
+        }
+        [HttpGet("PrincipalCuratorComments/{id}")]
+        public IActionResult GetCommentsForPrincipal(int publicationId)
+        {
+            var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId)
+           && p.Submitted == true
+           && p.Status == true);
+            var assignmentList = assignmentSubmissions.Any() ?
+                assignmentSubmissions.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
+            return Ok(assignmentList);
         }
         #endregion
         #region Methods

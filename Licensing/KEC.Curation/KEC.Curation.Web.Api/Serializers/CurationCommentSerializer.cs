@@ -33,6 +33,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _assignment.Submitted ? "Submitted" : "Pending";
             }
         }
+       
         [DataType(DataType.Html)]
         public string Notes
         {

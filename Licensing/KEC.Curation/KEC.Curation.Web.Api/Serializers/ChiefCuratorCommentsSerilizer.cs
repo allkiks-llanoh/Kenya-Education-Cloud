@@ -17,6 +17,8 @@ namespace KEC.Curation.Web.Api.Serializers
         public string Notes { get; set; }
         [Required(ErrorMessage = "You Have to provide user Guid")]
         public string ChiefCuratorGuid { get; set; }
+        [Required(ErrorMessage = "Status is Required")]
+        public string Status { get; set; }
         [Required(ErrorMessage = "Action Taken is a requirement")]
         public  ActionTaken ActionTaken { get; set; }
     }

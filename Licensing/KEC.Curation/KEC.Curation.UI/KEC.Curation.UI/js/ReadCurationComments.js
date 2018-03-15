@@ -1,6 +1,7 @@
 ﻿
-
-let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`)
+let publicationId = $('#publication-view').attr('data-publicationId');
+let chiefCuratorGuid = $('#CurrentUserGuid').val();
+let readCurationCommentsUrl = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/comments?publicationId=${publicationId}`)
 //var prGuid = $('#dataGUID').attr('data-pGUID');
 
     function tableRows(data) {
@@ -15,14 +16,14 @@ let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`
 
     //Start by getting a list of contents that have been assigned to chief curators
     $.ajax({
-        url: principalCuratorAssignedUrl,
+        url: readCurationCommentsUrl,
         type: "GET",
         dataType: 'json',
         success: function (data, status, jqhxr) {
             console.log(data);
 
             //This code snipet prepares to append Json Data
-            $('#assigned-publications').append(tableRows(data));
+            $('#chiefcomments').append(tableRows(data));
           
             
         }
@@ -31,10 +32,9 @@ let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $("<tr />")
-        row.append($(`<td class="hidden"> + rowData.id + </td>`));
-        row.append($("<td>" + rowData.title + "</td>"));
-        row.append($("<td>" + rowData.kicdNumber + "</td>"));
-        row.append($(`<td> <a href="/PrincipalCurator/ViewPublication/${rowData.id}?Publication=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Curation Comments</a>`));
+        row.append($(`<td class="hidden"> + rowData.publicationId + </td>`));
+        row.append($("<td>" + rowData.status + "</td>"));
+        row.append($("<td>" + rowData.notes + "</td>"));
 
        
         return row[0];
