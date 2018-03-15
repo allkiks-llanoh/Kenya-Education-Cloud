@@ -70,14 +70,14 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: publicationList);
         }
         [HttpGet("Curated")]
-        public IActionResult CuratedPublications(string principalCuratorGuid)
+        public IActionResult CuratedPublications([FromQuery] string principalCuratorGuid)
         {
 
             var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.
-                                       PrincipalCuratorGuid.Equals(principalCuratorGuid)
-                                       && p.PublicationStageLogs.Max(l => l.Stage)
-                                       == PublicationStage.Curation
-                                       && p.ChiefCuratorAssignment.Submitted==false);
+                                        PrincipalCuratorGuid.Equals(principalCuratorGuid)
+                                        && p.ChiefCuratorAssignment.Submitted == false
+                                        && p.PublicationStageLogs.Max(l => l.Stage)
+                                        == PublicationStage.Curation);
             var publicationList = publications.Any() ?
                 publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
             return Ok(value: publicationList);
