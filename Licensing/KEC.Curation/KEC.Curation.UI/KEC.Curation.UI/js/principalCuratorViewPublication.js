@@ -38,7 +38,7 @@
             $('#publication-details').replaceWith(
                 `<dl id="publication-details">
                   <dt>KICD Number</dt>
-                  <dd id="kicd-number">${publication.kicdNumber}</dd>
+                  <dd>${publication.kicdNumber}</dd>
                   <dt>Title</dt>
                    <dd>${publication.title}</dd>
                    <dt>Description</dt>
