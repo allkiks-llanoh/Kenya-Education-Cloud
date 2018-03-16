@@ -25,7 +25,7 @@
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
             }
         }).success(function (data, textStatus, jqXHR) {
-            ShowAlert("Publication Fully Curated");
+            ShowAlert("Publication Fully Curated", "success");
         }).fail(function () {
             ShowAlert("Something went wrong while processing publication", 'error');
         });
