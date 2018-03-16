@@ -378,6 +378,9 @@
     <Content Include="js\chiefCuratorAssignPublication.js" />
     <Content Include="js\chiefCuratorPublicationHistory.js" />
     <Content Include="js\chiefCuratorPublications.js" />
+    <Content Include="js\FullyAssignCurator.js" />
+    <Content Include="js\FullyAssignChiefCurator.js" />
+    <Content Include="js\PrincipalCuratorComments.js" />
     <Content Include="js\principalCuratorViewPublication.js" />
     <Content Include="js\chiefCuratorViewPublication.js" />
     <Content Include="js\Comments.js" />

@@ -262,8 +262,8 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(modelState: ModelState);
             }
-            var assigment = _uow.ChiefCuratorAssignmentRepository.Find(p => !p.Submitted
-                                                                  && p.Id == publicationId
+            var assigment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.Submitted==false
+                                                                  && p.PublicationId.Equals(model.publicationId)
                                                                   && p.PrincipalCuratorGuid.Equals(model.UserGuid))
                                                                   .FirstOrDefault();
             if (assigment == null)
@@ -273,7 +273,7 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
                
-                assigment.Submitted = model.Submitted;
+                assigment.Submitted = true;
                 _uow.Complete();
                 return Ok(value: new { message = "Curation Fully Submitted" });
             }

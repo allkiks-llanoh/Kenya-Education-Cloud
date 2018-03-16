@@ -18,7 +18,7 @@
             contentType: 'application/json',
             crossDomain: true,
             accepts: 'application/json',
-            data: JSON.stringify({ UserGuid: CuserGuid, Status: true }),
+            data: JSON.stringify({ UserGuid: CuserGuid, Status: true, publicationId: Id}),
             statusCode: {
                 404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to process publication"); },
