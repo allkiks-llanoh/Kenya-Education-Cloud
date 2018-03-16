@@ -15,7 +15,19 @@ namespace KEC.Curation.UI.Controllers
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+
+                };
+
+                return View(chiefCurator);
+
+            }
 
         }
         public ActionResult PrincipalCuratorReview()

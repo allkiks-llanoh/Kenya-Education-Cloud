@@ -1,6 +1,6 @@
 ﻿
-
-let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`)
+let userGuid = $('#CurrentUserGuid').val();
+let principalCuratorAssignedUrl = apiBaseUrl.concat(`/principalcurator/withcomments?principalCuratorGuid=${userGuid}`)
 //var prGuid = $('#dataGUID').attr('data-pGUID');
 
     function tableRows(data) {
@@ -23,7 +23,7 @@ let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`
 
             //This code snipet prepares to append Json Data
             $('#assigned-publications').append(tableRows(data));
-          
+           
             
         }
     });
@@ -34,7 +34,7 @@ let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`
         row.append($(`<td class="hidden"> + rowData.id + </td>`));
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
-        row.append($(`<td> <a href="/PrincipalCurator/ViewPublication/${rowData.id}?Publication=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Curation Comments</a>`));
+        row.append($(`<td> <a href="/PrincipalCurator/ViewPublication/${rowData.id}?Pub=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Curation Comments</a>`));
 
        
         return row[0];
