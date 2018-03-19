@@ -45,7 +45,7 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
 
-                var filePath = $"{_env.WebRootPath}/Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
+                var filePath = $"{_env. ContentRootPath}/Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
                 UriBuilder uriBuilder = new UriBuilder();
                
                 uriBuilder.Path = filePath;
