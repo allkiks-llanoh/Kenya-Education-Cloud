@@ -45,7 +45,7 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
 
-                var filePath = $"{_env. ContentRootPath}/Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
+                var filePath = $"{_env. WebRootPath}/Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
                 UriBuilder uriBuilder = new UriBuilder();
                
                 uriBuilder.Path = filePath;
@@ -62,7 +62,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     Price = model.Price.GetValueOrDefault(),
                     Title = model.Title,
                     MimeType = model.PublicationFile.ContentType,
-                    Url = uriBuilder.Uri.ToString(),
+                    Url =filePath,
                     KICDNumber = _uow.PublicationRepository
                                       .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
                     CreatedTimeUtc = DateTime.UtcNow,
