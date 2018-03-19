@@ -9,5 +9,6 @@ namespace KEC.Curation.UI.Models
     {
         public string Guid { get; set; }
         public int Subjectid{ get; set; }
+       
     }
 }

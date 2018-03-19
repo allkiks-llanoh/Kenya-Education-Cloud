@@ -42,6 +42,7 @@ namespace KEC.Curation.UI.Controllers
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
+                    
 
                 };
 

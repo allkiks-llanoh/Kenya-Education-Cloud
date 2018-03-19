@@ -858,6 +858,7 @@
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Account\LandingPage.cshtml" />
     <Content Include="Views\Shared\_LayoutLanding.cshtml" />
+    <Content Include="Views\Blobs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

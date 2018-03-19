@@ -15,22 +15,15 @@ namespace KEC.Curation.PublishersUI.Controllers
     [Authorize]
     public class PublisherController : Controller
     {
-        private CloudBlobContainer GetCloudBlobContainer()
-        {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-            CloudConfigurationManager.GetSetting("keccuration_AzureStorageConnectionString"));
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer container = blobClient.GetContainerReference("publications");
-            return container;
-        }
-
         // GET: Publisher
         public ActionResult Upload()
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Upload Publication";
+
             using (var context = new ApplicationDbContext())
             {
+               
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
 
                 var publisher = new Publishers
