@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using KEC.Curation.Data.Models;
@@ -12,6 +13,12 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Auth;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.Storage.File;
+using Newtonsoft.Json.Linq;
 
 namespace KEC.Curation.Web.Api.Controllers
 {
@@ -20,6 +27,10 @@ namespace KEC.Curation.Web.Api.Controllers
     [Route("api/Publications")]
     public class PublicationsController : Controller
     {
+        const string StorageAccountName = "keccuration";
+        const string StorageAccountKey = "nqpjBFfMAxk/IzF3ZhQBeHGB56XlnX/d1B1faFq7qDH5jo5RXXTQGZncHtpmku46gmrzOojx16x0uaXDd8kxxA==";
+        const string pathToFile = "https://keccuration.file.core.windows.net/publications";
+       
         private readonly IUnitOfWork _uow;
         private readonly IHostingEnvironment _env;
 
@@ -31,6 +42,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpPost("submit")]
         public async Task<IActionResult> Submit([FromForm]PublicationUploadSerilizer model)
         {
+           
             var invaliExtension = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".exe");
 
             if (invaliExtension == true)
@@ -44,8 +56,29 @@ namespace KEC.Curation.Web.Api.Controllers
            
             try
             {
+                var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccountName, StorageAccountKey), false);
+               
+                //Create azure File Share
+                var share = storageAccount.CreateCloudFileClient().GetShareReference("publications");
+                await share.CreateIfNotExistsAsync();
+                //Create File in root directory
+                CloudFileClient cloudFileClient = storageAccount.CreateCloudFileClient();
+                var rootDir = share.GetRootDirectoryReference();
+                CloudFileShare newfile = cloudFileClient.GetShareReference("publications");
+                await newfile.CreateIfNotExistsAsync();
+                CloudFileDirectory rootDirectory = newfile.GetRootDirectoryReference();
+                CloudFile file = rootDirectory.GetFileReference($"{model.PublicationFile.FileName}");
+                await file.CreateAsync(model.PublicationFile.Length);
+                //create folders with files
+                //Blob starts here
+                var blob = storageAccount.CreateCloudBlobClient();
+               
+                CloudBlobContainer container = blob.GetContainerReference("publications");
+                CloudBlockBlob blobs = container.GetBlockBlobReference($"{model.PublicationFile.FileName}");
+                
 
-                var filePath = $"{_env. WebRootPath}/Publications/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
+                var filePath = $"{pathToFile}/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
+               
                 UriBuilder uriBuilder = new UriBuilder();
                
                 uriBuilder.Path = filePath;
@@ -62,7 +95,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     Price = model.Price.GetValueOrDefault(),
                     Title = model.Title,
                     MimeType = model.PublicationFile.ContentType,
-                    Url =filePath,
+                    Url =blobs.Uri.ToString(),
                     KICDNumber = _uow.PublicationRepository
                                       .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
                     CreatedTimeUtc = DateTime.UtcNow,
@@ -77,15 +110,37 @@ namespace KEC.Curation.Web.Api.Controllers
                     ActionTaken = ActionTaken.PublicationSubmitted
 
                 });
+                
                 _uow.PublicationRepository.Add(publication);
                 _uow.Complete();
                 _uow.PublicationRepository.ProcessToTheNextStage(publication);
-                using (var memoryStream = new MemoryStream())
+
+                var tempPath = Path.GetTempFileName();
+
+                using (var stream = new FileStream(tempPath, FileMode.Create))
                 {
-                    await model.PublicationFile.CopyToAsync(memoryStream);
-                    var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);
-                    memoryStream.WriteTo(fileStream);
+                    await model.PublicationFile.CopyToAsync(stream);
                 }
+                
+
+                using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
+                {
+                    await file.UploadFromStreamAsync(stream);
+                }
+                using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
+                {
+                    await blobs.UploadFromStreamAsync(stream);
+                }
+                //using (MemoryStream stream = new MemoryStream())
+                //{
+                //    await blobs.UploadFromStreamAsync(stream);
+                //}
+                //using (var memoryStream = new MemoryStream())
+                //{
+                //    await model.PublicationFile.CopyToAsync(memoryStream);
+                //    var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);
+                //    memoryStream.WriteTo(fileStream);
+                //}
                 return Ok(value: "Publication submitted successfully");
             }
             catch (Exception ex)
@@ -93,6 +148,13 @@ namespace KEC.Curation.Web.Api.Controllers
 
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
+        }
+        [HttpGet("file/download")]
+        public IActionResult DownloadPublication([FromQuery] string url)
+        {
+            var cred = new StorageCredentials(StorageAccountName, StorageAccountKey);
+            var file = new CloudFile(new Uri(url), cred);
+            return Ok(value: file);
         }
         [HttpGet("LegalVerification/Legal")]
         public IActionResult PublicationLegal()
