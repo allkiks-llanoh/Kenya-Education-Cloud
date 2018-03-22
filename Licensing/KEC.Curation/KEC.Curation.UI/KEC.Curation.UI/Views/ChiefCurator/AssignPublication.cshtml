@@ -5,8 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Scripts{
-    @Scripts.Render("~/js/chiefCuratorAssignPublication")
-<script src="@Url.Content("~/js/GetCurators.js")"></script>
+    @Scripts.Render("~/js/chiefCuratorAssignPublication")  
+    <script src="@Url.Content("~/js/UpdateFullyAssign.js")"></script>
+    <script src="@Url.Content("~/js/GetCurators.js")"></script>
 }
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="wrapper wrapper-content animated fadeIn">
@@ -61,12 +62,17 @@
                                 <input type="checkbox" class="form-check-input" id="fully-assigned" />
                             </label>
                         </div>
-                        <div class="form-group">
-                            <a href="#" class="btn btn-primary" style="background-color:#00B85F;" id="assign-curator">Assign curator</a>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <a href="#" class="btn btn-primary" style="background-color:#00B85F;" id="assign-curator">Assign curator</a>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <a href="#" class="btn btn-info" id="fully-assign">Mark as Fully Assigned</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-              
+
             </div>
         </div>
         <div class="row">
@@ -94,7 +100,7 @@
 
                             </table>
                         </div>
-                      
+
                     </div>
                 </div>
             </div>
@@ -107,4 +113,4 @@
 <div class="form-group col-md-10">
     <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
 </div>
-   
+

@@ -235,6 +235,34 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(curationCommentList);
            
         }
+        [HttpPatch("update/curatorcomments/{id}")]
+        public IActionResult UpdateCurationComments(int publicationId, [FromBody]ChiefFlagSubmittedSerilizer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+            var assigment = _uow.PublicationRepository.Find(p => p.FullyAssigned==false
+                                                                  && p.Id.Equals(model.publicationId)
+                                                                  && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(model.UserGuid))
+                                                                  .FirstOrDefault();
+            if (assigment == null)
+            {
+                return NotFound("Record could not be retrieved");
+            }
+            try
+            {
+
+                assigment.FullyAssigned = true;
+                _uow.Complete();
+                return Ok(value: new { message = "Curation Fully Assigned" });
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
         #endregion
 
         #region Curation History

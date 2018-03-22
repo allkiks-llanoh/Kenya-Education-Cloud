@@ -48,7 +48,7 @@
                    <dt>Subject</dt>
                    <dd>${publication.subject}</dd>
                    <dt>Url</dt>
-                   <dd><a href="${url}">Link to publication</a></dd>
+                   <dd><a href="${publication.url}">Link to publication</a></dd>
                    <dt>Level</dt>
                    <dd>${publication.level}</dd>
                    <dt>Completion date</dt>
