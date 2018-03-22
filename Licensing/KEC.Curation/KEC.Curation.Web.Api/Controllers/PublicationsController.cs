@@ -95,7 +95,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     Price = model.Price.GetValueOrDefault(),
                     Title = model.Title,
                     MimeType = model.PublicationFile.ContentType,
-                    Url =blobs.Uri.ToString(),
+                    Url =blobs.StorageUri.PrimaryUri.ToString(),
                     KICDNumber = _uow.PublicationRepository
                                       .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
                     CreatedTimeUtc = DateTime.UtcNow,
@@ -121,8 +121,8 @@ namespace KEC.Curation.Web.Api.Controllers
                 {
                     await model.PublicationFile.CopyToAsync(stream);
                 }
-                
 
+                blobs.Properties.ContentType = $"{model.PublicationFile.ContentType}";
                 using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
                 {
                     await file.UploadFromStreamAsync(stream);
@@ -131,10 +131,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 {
                     await blobs.UploadFromStreamAsync(stream);
                 }
-                //using (MemoryStream stream = new MemoryStream())
-                //{
-                //    await blobs.UploadFromStreamAsync(stream);
-                //}
+               
                 //using (var memoryStream = new MemoryStream())
                 //{
                 //    await model.PublicationFile.CopyToAsync(memoryStream);
