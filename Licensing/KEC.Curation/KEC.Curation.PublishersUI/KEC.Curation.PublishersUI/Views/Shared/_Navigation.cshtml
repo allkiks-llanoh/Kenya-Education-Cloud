@@ -8,27 +8,27 @@
                     CMS+
                 </div>
             </li>
-            <li>
+            @*<li>
                 <a href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard"></i> <span class="nav-label">Home</span> </a>
-            </li>
+            </li>*@
             <li>
                 <a href="@Url.Action("Upload", "Publisher")"><i class="fa fa-cloud-upload"></i> <span class="nav-label">Upload</span> </a>
             </li>
             <li>
                 <a href="@Url.Action("Approved", "Publisher")"><i class="fa fa-info-circle"></i> <span class="nav-label">Status</span></a>
             </li>
-            <li>
+            @*<li>
                 @Html.ActionLink("Create blob container", "CreateBlobContainer", "Blobs")
             </li>
             <li>@Html.ActionLink("Upload blob", "UploadBlob", "Blobs")</li>
             <li>@Html.ActionLink("List blobs", "ListBlobs", "Blobs")</li>
-            <li>@Html.ActionLink("Download blob", "DownloadBlob", "Blobs")</li>
-            @* <li>
+            <li>@Html.ActionLink("Download blob", "DownloadBlob", "Blobs")</li>*@
+             <li>
             <a href="@Url.Action("Conditional", "Publisher")"><i class="fa fa-laptop"></i> <span class="nav-label">Conditional</span> </a>
         </li>
         <li>
             <a href="@Url.Action("Rejected", "Publisher")"><i class="fa fa-laptop"></i> <span class="nav-label">Rejected</span> </a>
-        </li>*@
+        </li>
 
         </ul>
     </div>
