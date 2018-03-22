@@ -29,6 +29,7 @@
                         console.log(status);
                         $('#message').html(` ${response}.`)
                         $('div.alert-success').toggleClass('hidden');
+                        ShowAlert("Payment Verified", "success");
                         $('#LegalApprove').html('APPROVE');
 
                     },
