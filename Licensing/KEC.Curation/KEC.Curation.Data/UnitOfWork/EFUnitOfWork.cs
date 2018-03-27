@@ -13,7 +13,7 @@ namespace KEC.Curation.Data.UnitOfWork
             var optionsBuilder = new DbContextOptionsBuilder();
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("Database.json").Build();
-            var connectionString = configuration.GetConnectionString("CurationDb");
+            var connectionString = configuration.GetConnectionString("CurationDatabase");
             optionsBuilder.UseSqlServer(connectionString);
             _context = new Database.CurationDataContext(optionsBuilder.Options);
         }
