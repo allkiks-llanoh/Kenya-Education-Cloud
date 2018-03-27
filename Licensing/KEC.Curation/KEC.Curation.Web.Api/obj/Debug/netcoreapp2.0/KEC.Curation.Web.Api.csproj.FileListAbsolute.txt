@@ -62,3 +62,4 @@ C:\Users\comwenga\source\repos\Kenya Education Cloud2\Licensing\KEC.Curation\KEC
 C:\Users\comwenga\source\repos\Kenya Education Cloud2\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.AssemblyInfo.cs
 C:\Users\comwenga\source\repos\Kenya Education Cloud2\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.dll
 C:\Users\comwenga\source\repos\Kenya Education Cloud2\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.pdb
+C:\Users\collo\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Web.Api\obj\Debug\netcoreapp2.0\KEC.Curation.Web.Api.csproj.CopyComplete
