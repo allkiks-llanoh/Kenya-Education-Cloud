@@ -76,17 +76,15 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: publicationList);
         }
         [HttpGet("publications/{subjectId:int}/assigned")]
-        public IActionResult Assigned(int subjectId, string guid, string chiefCuratorGuid)
+        public IActionResult Assigned(int subjectId, string chiefCuratorGuid)
         {
 
-            var publications = _uow.PublicationRepository.Find(p => p.FullyAssigned
-                                                         && p.PublicationStageLogs
-                                                         .Max(l => l.Stage) == PublicationStage.Curation
-                                                         && p.SubjectId.Equals(subjectId)
-                                                          && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid));
-            var publicationList = publications.Any() ?
-                publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
-            return Ok(value: publicationList);
+            var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefCuratorGuid)).ToList();
+                                                      
+                                                        
+                                                        
+          
+            return Ok(value: publications);
         }
         [HttpPost("publication/{publicationId:int}/assign")]
         public IActionResult Assign(int publicationId, [FromBody] CurationContentAssignmentSerializer model)
