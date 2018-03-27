@@ -274,3 +274,18 @@
 
     });
 </script>
+<script type="text/javascript">
+    function ShowAlert(message, type) {
+
+        if (type === "error") {
+            $.notify(message, 'error');
+        } else if (type === "warning") {
+            $.notify(message, 'warning');
+        } else if (type === "success") {
+            $.notify(message, 'success');
+
+        } else if (type === "info") {
+            $.notify(message, 'info');
+        }
+    }
+    </script>
