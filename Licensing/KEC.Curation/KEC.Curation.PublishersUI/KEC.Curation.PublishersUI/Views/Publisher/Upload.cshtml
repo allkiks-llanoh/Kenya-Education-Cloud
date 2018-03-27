@@ -4,6 +4,14 @@
     ViewBag.Title = "Upload";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section Scripts{
+   
+    @Scripts.Render("~/plugins/summernote")
+    @Styles.Render("~/plugins/summernoteStyles")
+    @Scripts.Render("~/plugins/sweetAlert")
+}
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -21,7 +29,7 @@
                 <div class="form-group" align="center" id="spinner">
                     <div class="loader"></div>
                 </div>
-               
+
                 <form method="post" enctype="multipart/form-data" id="uploadform">
                     <div class="row align-left">
                         <div class="col-sm-2">
@@ -232,6 +240,7 @@
             },
             success: function (response, status, jxhr) {
                 console.log(response);
+                ShowAlert("Publication Uploaded successfully");
                 $('#message').html(response);
                 $('div.alert-success').toggleClass('hidden');
                 $('#btn-postFile').html('SUBMIT PUBLICATION');
@@ -255,7 +264,7 @@
 
             }
 
-            
+
         });
     });
 

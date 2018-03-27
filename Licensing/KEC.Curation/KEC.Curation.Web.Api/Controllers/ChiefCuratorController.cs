@@ -79,11 +79,9 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult Assigned(int subjectId, string chiefCuratorGuid)
         {
 
-            var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefCuratorGuid)).ToList();
+            var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefCuratorGuid)
+                                                                         &&p.Submitted).ToList();
                                                       
-                                                        
-                                                        
-          
             return Ok(value: publications);
         }
         [HttpPost("publication/{publicationId:int}/assign")]
