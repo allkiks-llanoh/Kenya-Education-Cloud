@@ -11,7 +11,7 @@ namespace KEC.Curation.UI.Controllers
         // GET: Stages
         [AllowCrossSiteJson]
         [UserGuidJson]
-        [CustomAuthorize(Roles = "Verification office")]
+        [CustomAuthorize(Roles = "Verification Office")]
         public ActionResult Legal()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -31,7 +31,7 @@ namespace KEC.Curation.UI.Controllers
         }
         [AllowCrossSiteJson]
         [UserGuidJson]
-        [CustomAuthorize(Roles = "Verification office")]
+        [CustomAuthorize(Roles = "Verification Office")]
         public ActionResult LegalVerify()
         {
             ViewData["SubTitle"] = "Curation Management System";
