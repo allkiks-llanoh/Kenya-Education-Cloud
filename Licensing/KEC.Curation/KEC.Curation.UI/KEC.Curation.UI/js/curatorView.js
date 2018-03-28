@@ -19,7 +19,7 @@ function tableRows(data) {
         console.log(data);
 
     //This code snipet prepares to append Json Data
-        $('#unassigned-publications').append(tableRows(data));
+            $('#tab-unassigned').append(tableRows(data));
         }
     });
 
