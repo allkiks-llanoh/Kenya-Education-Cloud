@@ -4,11 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Scripts{
+   
     <script src="@Url.Content("~/js/curate.js")"></script>
     @Scripts.Render("~/plugins/summernote")
     @Styles.Render("~/plugins/summernoteStyles")
 }
-}
+
 
 <div class="wrapper wrapper-content animated fadeInRight" id="assignment-view" data-assignmentId="@ViewBag.AssignmentId">
     <div class="wrapper wrapper-content animated fadeIn">
