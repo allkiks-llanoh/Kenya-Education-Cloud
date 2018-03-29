@@ -62,9 +62,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-10">
-                                    <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control" value="@Model.Guid">
-                                </div>
+                               
                                 <div class="row">
                                     <div class="form-group">
                                         <button type="button" name="LegalApprove" id="LegalApprove" style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
@@ -87,6 +85,7 @@
     <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
     <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
     <span><strong>Publication:&nbsp;</strong></span>@Publication
+    <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control" value="@Model.Guid">
 </div>
 
 
