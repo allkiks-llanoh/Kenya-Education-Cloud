@@ -292,8 +292,12 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("curator/tocurate")]
         public IActionResult ToCurate(string userGuid)
         {
-            var assignmentList = CurationAssignments(userGuid, _uow);
-            return Ok(value: assignmentList);
+          
+            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted
+                                                                && p.Assignee.Equals(userGuid))
+                                                                .ToList();
+            return Ok(value: assigment);                      
+
         }
         [HttpPatch("curator/curate/{AssignmentId:int}")]
         public IActionResult SubmitCuration(int AssignmentId, [FromBody]CurationUploadSerializer model)

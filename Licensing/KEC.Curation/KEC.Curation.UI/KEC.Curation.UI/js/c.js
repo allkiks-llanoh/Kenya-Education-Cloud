@@ -35,4 +35,4 @@ function drawRow(rowData) {
     row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Assign</a>`));
 
     return row[0];
-}
+},

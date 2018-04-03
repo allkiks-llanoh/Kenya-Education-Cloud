@@ -1,10 +1,8 @@
 ﻿
-
-
 let subjectId = $('#SubjectId').val();
 let chiefCuratorGUID = $('#CurrentUserGuid').val();
 
-let chiefCuratorGETUrl = apiBaseUrl.concat(`/chiefcurator/publications/${subjectId}/unassigned?subjectid=${subjectId}&chiefcuratorguid=${chiefCuratorGUID}`);
+let chiefCuratorGETUrl = apiBaseUrl.concat(`/chiefcurator/publications/${subjectId}/unassigned?subjectid=${subjectId}&chiefcuratorguid=${chiefCuratorGUID}`)
 function tableRows(data) {
         var tableRows = [];
         for (var i = 0; i < data.length; i++) {
@@ -34,7 +32,7 @@ function tableRows(data) {
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
-        row.append($(`<td> <a href="/ChiefCurator/AssignPublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Assign</a>`));
+       row.append($(`<td> <a href="/ChiefCurator/AssignPublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Assign</a>`));
 
         return row[0];
-    };
+};

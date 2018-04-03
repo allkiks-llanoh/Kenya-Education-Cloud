@@ -19,7 +19,7 @@ function tableRows(data) {
         console.log(data);
 
     //This code snipet prepares to append Json Data
-            $('#tab-unassigned').append(tableRows(data));
+            $('#unassigned-publications').append(tableRows(data));
         }
     });
 
@@ -33,4 +33,4 @@ function tableRows(data) {
         row.append($(`<td> <a href="/Curator/CuratePublication/${rowData.assignmentId}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Curate</a>`));
 
         return row[0];
-    }
+};
