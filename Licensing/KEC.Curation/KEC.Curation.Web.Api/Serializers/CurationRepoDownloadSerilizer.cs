@@ -51,16 +51,18 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-                var publicationId = _uow.PublicationSectionRepository.Get(_assignment.PublicationId)?.PublicationId;
-                var publication = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
-                if (publication == null)
-                {
-                    return string.Empty;
-                }
-                else
-                {
-                    return publication.Url;
-                }
+                //var publicationId = _uow.PublicationSectionRepository.Get(_assignment.PublicationId)?.PublicationId;
+                //var publication = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
+                //if (publication == null)
+                //{
+                //    return string.Empty;
+                //}
+                //else
+                //{
+                //    return publication.Url;
+                return _assignment.Publication.Url;
+
+                //}
             }
         }
     }
