@@ -67,7 +67,7 @@
             data: JSON.stringify({userGuid: userGuid, Notes: notes, Submitted: true }),
            
         }).done(function (data, textStatus, jqXHR) {
-            ShowAlert("Curation notes saved successfully", "success");
+            ShowAlert("Curation notes saved and submitted successfully", "success");
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert("Something went wrong while saving your notes", "error");
         });
@@ -102,17 +102,17 @@
             data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: sub }),
          
         }).done(function (data, textStatus, jqXHR) {
-            ShowAlert("Curation notes saved and submitted successfully", "success");
+            ShowAlert("Curation notes saved successfully", "success");
             let url = $('#back-to-assignments').attr('href');
-            if (typeof IE_fix != "undefined") // IE8 and lower fix to pass the http referer
-            {
-                document.write("redirecting..."); // Don't remove this line or appendChild() will fail because it is called before document.onload to make the redirect as fast as possible. Nobody will see this text, it is only a tech fix.
-                var referLink = document.createElement("a");
-                referLink.href = url;
-                document.body.appendChild(referLink);
-                referLink.click();
-            }
-            else { window.location.replace(url); }
+            //if (typeof IE_fix != "undefined") // IE8 and lower fix to pass the http referer
+            //{
+            //    document.write("redirecting..."); // Don't remove this line or appendChild() will fail because it is called before document.onload to make the redirect as fast as possible. Nobody will see this text, it is only a tech fix.
+            //    var referLink = document.createElement("a");
+            //    referLink.href = url;
+            //    document.body.appendChild(referLink);
+            //    referLink.click();
+            //}
+            //else { window.location.replace(url); }
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert("Something went wrong while saving your notes", "error");
         });

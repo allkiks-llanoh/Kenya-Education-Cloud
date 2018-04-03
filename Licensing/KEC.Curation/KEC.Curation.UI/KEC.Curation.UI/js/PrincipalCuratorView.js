@@ -40,8 +40,6 @@ let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurat
 
 
         return row[0];
-    }
-
-;
+    };
    
  

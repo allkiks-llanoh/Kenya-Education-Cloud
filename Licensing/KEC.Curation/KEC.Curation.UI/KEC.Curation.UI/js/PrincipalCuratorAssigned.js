@@ -38,4 +38,4 @@ let principalCuratorAssignedUrl = apiBaseUrl.concat(`/principalcurator/withcomme
 
        
         return row[0];
-    } 
+};
