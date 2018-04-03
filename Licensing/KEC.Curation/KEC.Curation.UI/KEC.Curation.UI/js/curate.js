@@ -28,8 +28,7 @@
         }).done(function (assignment, textStatus, jqXHR) {
             $('#assignment-details').replaceWith(
                 `<dl id="assignment-details">
-                  <dt>Publication</dt>
-                  <dd>${assignment.publication}</dd>
+                  
                   <dt>Section</dt>
                    <dd>${assignment.sectionToCurate}</dd>
                    <dt>Assignment date</dt>
