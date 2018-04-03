@@ -4,6 +4,14 @@
     ViewBag.Title = "Upload";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section Scripts{
+   
+    @Scripts.Render("~/plugins/summernote")
+    @Styles.Render("~/plugins/summernoteStyles")
+    @Scripts.Render("~/plugins/sweetAlert")
+}
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -21,7 +29,7 @@
                 <div class="form-group" align="center" id="spinner">
                     <div class="loader"></div>
                 </div>
-               
+
                 <form method="post" enctype="multipart/form-data" id="uploadform">
                     <div class="row align-left">
                         <div class="col-sm-2">
@@ -114,10 +122,10 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-sm-2">
+                        <div class="col-sm-2" hidden>
                             <label for="Title">Unique Identifier</label>
                         </div>
-                        <div class="col-sm-10">
+                        <div class="col-sm-10" hidden>
                             <input type="text" name="UserGuid" id="UserGuid" class="form-control" readonly value="@Model.guid">
                         </div>
                     </div>
@@ -214,7 +222,7 @@
 </script>
 <script type="text/JavaScript">
     const apiBaseUrl = "https://curationapi-d.kec.ac.ke/api";
-    let publicationSubmitUrl = apiBaseUrl.concat(`/Publishers/submit`);
+    let publicationSubmitUrl = apiBaseUrl.concat(`/Publications/submit`);
     $('#btn-postFile').click(function (e) {
         e.preventDefault();
         $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
@@ -232,6 +240,7 @@
             },
             success: function (response, status, jxhr) {
                 console.log(response);
+                ShowAlert("Publication Uploaded successfully");
                 $('#message').html(response);
                 $('div.alert-success').toggleClass('hidden');
                 $('#btn-postFile').html('SUBMIT PUBLICATION');
@@ -255,7 +264,7 @@
 
             }
 
-            
+
         });
     });
 
@@ -265,3 +274,18 @@
 
     });
 </script>
+<script type="text/javascript">
+    function ShowAlert(message, type) {
+
+        if (type === "error") {
+            $.notify(message, 'error');
+        } else if (type === "warning") {
+            $.notify(message, 'warning');
+        } else if (type === "success") {
+            $.notify(message, 'success');
+
+        } else if (type === "info") {
+            $.notify(message, 'info');
+        }
+    }
+    </script>

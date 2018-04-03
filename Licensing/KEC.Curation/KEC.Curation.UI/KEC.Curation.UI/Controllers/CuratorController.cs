@@ -16,7 +16,22 @@ namespace KEC.Curation.UI.Controllers
         [HttpGet,Route("ToCurate")]
         public ActionResult ToCurate(string curatorGuid)
         {
-            ViewBag.CurateUrl = Url.Action("CuratePublication");
+           
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId
+                };
+                return View(chiefCurator);
+            }
+        }
+        [HttpGet, Route("curatorview")]
+        public ActionResult curatorview(string userguidGuid)
+        {
+
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));

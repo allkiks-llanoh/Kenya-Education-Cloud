@@ -8,26 +8,33 @@ namespace KEC.Curation.PublishersUI
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                       "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                        "~/Scripts/jquery.validate*"));
+
+            // Use the development version of Modernizr to develop with and learn from. Then, when you're
+            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                        "~/Scripts/modernizr-*"));
 
             // CSS style (bootstrap/inspinia)
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/animate.css",
-                      "~/Content/style.css"));
-
-            // CSS style (noscript)
-            bundles.Add(new StyleBundle("~/Content/assets/css").Include(
-                      "~/Content/assets/css/main.css",
-                    "~/Content/assets/css/noscript.css"));
+                      "~/Content/style.css",
+                      "~/Content/CustomStyles/ChiefCurator.css"));
 
             // Font Awesome icons
-            bundles.Add(new StyleBundle("~/font-awesome/css").Include(
-                      "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+            bundles.Add(new StyleBundle("~/Content/font-awesome/css").Include(
+                      "~/Content/font-awesome/css/font-awesome.min.css",
+                      "~/Content/font-awesome/css/font-awesome.css"
+                    ));
 
-            // jQuery
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-3.1.1.min.js"));
+
+            //// jQuery
+
 
             // jQueryUI CSS
             bundles.Add(new ScriptBundle("~/Scripts/plugins/jquery-ui/jqueryuiStyles").Include(
@@ -40,14 +47,6 @@ namespace KEC.Curation.PublishersUI
             // Bootstrap
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js"));
-            
-
-            // Landing page javascript
-            bundles.Add(new ScriptBundle("~/bundles/javascript").Include(
-                      "~/Content/assets/js/jquery.min.js",
-                      "~/Content/assets/js/skel.min.js",
-                      "~/Content/assets/js/util.js",
-                      "~/Content/assets/js/main.js"));
 
             // Inspinia script
             bundles.Add(new ScriptBundle("~/bundles/inspinia").Include(
@@ -468,13 +467,45 @@ namespace KEC.Curation.PublishersUI
             // Text spinners styles
             bundles.Add(new StyleBundle("~/plugins/textSpinnersStyles").Include(
                       "~/Content/plugins/textSpinners/spinners.css"));
-
+            // metisMenu Menu
+            bundles.Add(new StyleBundle("~/plugins/metisMenu").Include(
+                      "~/Scripts/plugins/metisMenu/metisMenu.min.js"));
+            // Pace
+            bundles.Add(new StyleBundle("~/plugins/pace").Include(
+                      "~/Scripts/plugins/pace/pace.min.js"));
             // Password meter 
             bundles.Add(new StyleBundle("~/plugins/passwordMeter").Include(
                         "~/Scripts/plugins/pwstrength/pwstrength-bootstrap.min.js",
                         "~/Scripts/plugins/pwstrength/zxcvbn.js"));
+            // Chief curator js
+            bundles.Add(new ScriptBundle("~/js/chiefCuratorPublications").Include(
+                     "~/js/chiefCuratorPublications.js"));
+            bundles.Add(new ScriptBundle("~/js/chiefCuratorViewPublication").Include(
+                     "~/js/chiefCuratorViewPublication.js"));
+            bundles.Add(new ScriptBundle("~/js/chiefCuratorAssignPublication").Include(
+                     "~/js/chiefCuratorAssignPublication.js"));
+            bundles.Add(new ScriptBundle("~/js/chiefCuratorPublicationHistory").Include(
+                    "~/js/chiefCuratorPublicationHistory.js"));
+            // Chief curator js
+
+            bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
+                     "~/js/globalConstants.js"));
 
 
+            //Curator 
+            bundles.Add(new ScriptBundle("~/js/curatorToCurate").Include(
+                  "~/js/curatorToCurate.js"));
+            bundles.Add(new ScriptBundle("~/js/curate").Include(
+                 "~/js/curate.js"));
+            // Curator js
+            //notify.min.js
+            bundles.Add(new ScriptBundle("~/plugins/notify").Include(
+                  "~/scripts/plugins/notify.min.js"));
+            //globalConstants
+            bundles.Add(new ScriptBundle("~/js/globalConstants").Include(
+             "~/js/globalConstants.js"));
+            //globalConstants
         }
     }
 }
+

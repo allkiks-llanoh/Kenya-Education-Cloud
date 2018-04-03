@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace KEC.Curation.Data.Models
@@ -13,6 +14,9 @@ namespace KEC.Curation.Data.Models
         public string AssignedBy { get; set; }
         public string Notes { get; set; }
         public bool Submitted { get; set; }
+        public bool Status { get; set; }
+        public int PublicationId { get; set; }
+        public virtual Publication Publication { get; set; }
         public virtual PublicationSection PublicationSection { get; set; }
     }
 }

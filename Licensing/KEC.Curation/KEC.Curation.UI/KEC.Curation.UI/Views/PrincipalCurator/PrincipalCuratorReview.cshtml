@@ -23,6 +23,7 @@
     var PId = Request.Params["Identity"];
     var Stage = Request.Params["Stage"];
     var Publication = Request.Params["Publication"];
+    var Urls = Request.Params["Urls"];
     var KICDNumber = Request.Params["KICDN"];
 
 }
@@ -45,12 +46,12 @@
                             <div class="panel-body">
 
                                 <dl>
-                                    <dt>KICD Number</dt>
+                                    <dt>Curation Number</dt>
                                     <dd>@KICDNumber</dd>
                                     <dt>Title</dt>
                                     <dd>@Title</dd>
                                     <dt>Publication</dt>
-                                    <dd>@Publication</dd>
+                                    <dd><a href="@Urls" target="_blank">Link to publication</a></dd>
 
                                 </dl>
                                 <div>
@@ -88,10 +89,10 @@
                                             <select name="UserGuid" id="UserGuid" class="col-md-8 form-control" style="color:black; margin-left:15px;"></select>
 
                                         </div>
-                                        <div class="form-group col-md-10">
+                                        <div class="form-group col-md-8">
                                             <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden"  value="@Model.Guid">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-4">
 
                                             <button type="button" name="LegalApprove" id="LegalApprove" style="background-color:#00B55F; margin-right:15px;" class="btn btn-w-m btn-primary pull-right">ASSIGN</button>
                                         </div>

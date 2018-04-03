@@ -2,10 +2,12 @@
 @model ChiefCurators
 @{
     ViewBag.Title = "Assign";
-    Layout = "~/Views/Shared/_LayoutChiefCurator.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Scripts{
-    @Scripts.Render("~/js/chiefCuratorAssignPublication")
+    @Scripts.Render("~/js/chiefCuratorAssignPublication")  
+    <script src="@Url.Content("~/js/UpdateFullyAssign.js")"></script>
+    <script src="@Url.Content("~/js/GetCurators.js")"></script>
 }
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="wrapper wrapper-content animated fadeIn">
@@ -46,20 +48,27 @@
 
                         <div class="form-group">
                             <label for="unassigned-curator">Curator:</label>
-                            <input placeholder="Start typing curators name..." class="form-control m-b" id="unassigned-curator" style="" type="text">
+                            <input placeholder="Start typing curators name..." class="form-control m-b hidden" id="unassigned-curator" style="" type="text">
+                            <select name="UserGuid" id="UserGuid" class="col-md-8 form-control" style="color:black; margin-left:15px;"></select>
+
                         </div>
                         <div class="form-group">
                             <label for="section-assigned">Section:</label>
                             <input placeholder="Section assigned..." class="form-control m-b" id="section-assigned" style="" type="text">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group hidden">
                             <label class="form-check-label form-control">
                                 Fully Assigned:
                                 <input type="checkbox" class="form-check-input" id="fully-assigned" />
                             </label>
                         </div>
-                        <div class="form-group">
-                            <a href="#" class="btn btn-primary" style="background-color:#00B85F;" id="assign-curator">Assign curator</a>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <a href="#" class="btn btn-primary" style="background-color:#00B85F;" id="assign-curator">Assign curator</a>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <a href="#" class="btn btn-info" id="fully-assign">Mark as Fully Assigned</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,4 +113,4 @@
 <div class="form-group col-md-10">
     <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
 </div>
-   
+

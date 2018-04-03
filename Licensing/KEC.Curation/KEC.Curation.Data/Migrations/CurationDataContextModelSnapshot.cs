@@ -34,9 +34,29 @@ namespace KEC.Curation.Data.Migrations
 
                     b.Property<int?>("PublicationId");
 
+                    b.Property<bool>("Submitted");
+
                     b.HasKey("Id");
 
                     b.ToTable("ChiefCuratorAssignments");
+                });
+
+            modelBuilder.Entity("KEC.Curation.Data.Models.ChiefCuratorComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ChiefCuratorGuid");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<int>("PublicationId");
+
+                    b.Property<bool>("Submitted");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChiefCuratorComments");
                 });
 
             modelBuilder.Entity("KEC.Curation.Data.Models.CuratorAssignment", b =>
@@ -52,14 +72,17 @@ namespace KEC.Curation.Data.Migrations
 
                     b.Property<string>("Notes");
 
+                    b.Property<int>("PublicationId");
+
                     b.Property<int>("PublicationSectionId");
+
+                    b.Property<bool>("Status");
 
                     b.Property<bool>("Submitted");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PublicationSectionId")
-                        .IsUnique();
+                    b.HasIndex("PublicationId");
 
                     b.ToTable("CuratorAssignments");
                 });
@@ -74,6 +97,24 @@ namespace KEC.Curation.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Levels");
+                });
+
+            modelBuilder.Entity("KEC.Curation.Data.Models.PrincipalCuratorComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Notes");
+
+                    b.Property<string>("PrincipalCuratorGuid");
+
+                    b.Property<int>("PublicationId");
+
+                    b.Property<bool>("Submitted");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PrincipalCuratorComments");
                 });
 
             modelBuilder.Entity("KEC.Curation.Data.Models.Publication", b =>
@@ -137,7 +178,13 @@ namespace KEC.Curation.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("ChiefCuratorAssignmentId");
+
+                    b.Property<int?>("ChiefCuratorAssignmentId1");
+
                     b.Property<DateTime>("CreatedAtUtc");
+
+                    b.Property<int?>("CuratorAssignmentId");
 
                     b.Property<string>("Owner");
 
@@ -146,6 +193,16 @@ namespace KEC.Curation.Data.Migrations
                     b.Property<string>("SectionDescription");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ChiefCuratorAssignmentId")
+                        .IsUnique()
+                        .HasFilter("[ChiefCuratorAssignmentId] IS NOT NULL");
+
+                    b.HasIndex("ChiefCuratorAssignmentId1")
+                        .IsUnique()
+                        .HasFilter("[ChiefCuratorAssignmentId1] IS NOT NULL");
+
+                    b.HasIndex("CuratorAssignmentId");
 
                     b.HasIndex("PublicationId");
 
@@ -214,9 +271,9 @@ namespace KEC.Curation.Data.Migrations
 
             modelBuilder.Entity("KEC.Curation.Data.Models.CuratorAssignment", b =>
                 {
-                    b.HasOne("KEC.Curation.Data.Models.PublicationSection", "PublicationSection")
-                        .WithOne("CuratorAssignment")
-                        .HasForeignKey("KEC.Curation.Data.Models.CuratorAssignment", "PublicationSectionId")
+                    b.HasOne("KEC.Curation.Data.Models.Publication", "Publication")
+                        .WithMany()
+                        .HasForeignKey("PublicationId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -239,6 +296,18 @@ namespace KEC.Curation.Data.Migrations
 
             modelBuilder.Entity("KEC.Curation.Data.Models.PublicationSection", b =>
                 {
+                    b.HasOne("KEC.Curation.Data.Models.CuratorAssignment", "ChiefCuratorAssignment")
+                        .WithOne("PublicationSection")
+                        .HasForeignKey("KEC.Curation.Data.Models.PublicationSection", "ChiefCuratorAssignmentId");
+
+                    b.HasOne("KEC.Curation.Data.Models.ChiefCuratorAssignment")
+                        .WithOne("PublicationSection")
+                        .HasForeignKey("KEC.Curation.Data.Models.PublicationSection", "ChiefCuratorAssignmentId1");
+
+                    b.HasOne("KEC.Curation.Data.Models.CuratorAssignment", "CuratorAssignment")
+                        .WithMany()
+                        .HasForeignKey("CuratorAssignmentId");
+
                     b.HasOne("KEC.Curation.Data.Models.Publication", "Publication")
                         .WithMany()
                         .HasForeignKey("PublicationId")

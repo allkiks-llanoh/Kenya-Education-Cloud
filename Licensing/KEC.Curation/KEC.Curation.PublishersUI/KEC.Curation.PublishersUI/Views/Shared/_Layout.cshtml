@@ -1,13 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CMS | @ViewBag.Title</title>
+    <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/font-awesome/css")
+    @Styles.Render("~/Content/font-awesome/css/")
+    @Styles.Render("~/fonts/font-awesome/css")
 </head>
 <body style="background-color:white;">
 
@@ -28,16 +30,20 @@
             @Html.Partial("_Footer")
         </div>
 
-            <!-- End page wrapper-->
-        </div>
-        <!-- End wrapper-->
+        <!-- End page wrapper-->
+    </div>
+    <!-- End wrapper-->
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/plugins/metsiMenu")
-        @Scripts.Render("~/plugins/pace")
-        @Scripts.Render("~/plugins/slimScroll")
-        @Scripts.Render("~/bundles/inspinia")
-        @RenderSection("scripts", required: false)
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/plugins/summernote")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/notify")
+    @Scripts.Render("~/plugins/metisMenu")
+    @Scripts.Render("~/plugins/pace")
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/bundles/inspinia")
+    @Scripts.Render("~/js/globalConstants")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

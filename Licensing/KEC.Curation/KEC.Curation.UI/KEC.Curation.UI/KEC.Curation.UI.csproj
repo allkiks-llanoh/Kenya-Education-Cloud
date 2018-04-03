@@ -375,14 +375,26 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="js\c.js" />
     <Content Include="js\chiefCuratorAssignPublication.js" />
     <Content Include="js\chiefCuratorPublicationHistory.js" />
     <Content Include="js\chiefCuratorPublications.js" />
+    <Content Include="js\FullyAssignCurator.js" />
+    <Content Include="js\FullyAssignChiefCurator.js" />
+    <Content Include="js\PrincipalCuratorComments.js" />
+    <Content Include="js\principalCuratorViewPublication.js" />
     <Content Include="js\chiefCuratorViewPublication.js" />
+    <Content Include="js\Comments.js" />
+    <Content Include="js\CurationComments.js" />
+    <Content Include="js\CurationCommentsChief.js" />
+    <Content Include="js\curatorView.js" />
     <Content Include="js\curate.js" />
     <Content Include="js\curatorToCurate.js" />
+    <Content Include="js\financeVerify - Copy.js" />
     <Content Include="js\financeVerify.js" />
+    <Content Include="js\ChiefView.js" />
     <Content Include="js\financeView.js" />
+    <Content Include="js\GetCurators.js" />
     <Content Include="js\GetChiefCurators.js" />
     <Content Include="js\globalConstants.js" />
     <Content Include="js\JavaScriptFunction.js" />
@@ -390,6 +402,7 @@
     <Content Include="js\legalVerify.js" />
     <Content Include="js\legalView.js" />
     <Content Include="js\Levels.js" />
+    <Content Include="js\ReadCurationComments.js" />
     <Content Include="js\PrincipalCuratorReverse.js" />
     <Content Include="js\PrincipalCurator.js" />
     <Content Include="js\PrincipalCuratorReverseView.js" />
@@ -398,6 +411,9 @@
     <Content Include="js\SubjectsForCurators.js" />
     <Content Include="js\Subjects.js" />
     <Content Include="js\SubjectTypes.js" />
+    <Content Include="js\UpdateFullyAssign.js" />
+    <Content Include="js\View.js" />
+    <Content Include="Publications\index.jpeg" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -910,6 +926,10 @@
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\PrincipalCurator\PrincipalCuratorReverse.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\ChiefCurator\ChiefCuratorView.cshtml" />
+    <Content Include="Views\ChiefCurator\_DocumentViewerPartial.cshtml" />
+    <Content Include="Views\Curator\CuratorView.cshtml" />
+    <Content Include="Views\PrincipalCurator\ViewPublication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -955,7 +975,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63772</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

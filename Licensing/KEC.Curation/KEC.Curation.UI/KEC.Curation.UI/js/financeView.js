@@ -34,4 +34,4 @@ let financeGETUrl = apiBaseUrl.concat(`/Publications/1/${_stage}`)
 
 
         return row[0];
-    }
+};

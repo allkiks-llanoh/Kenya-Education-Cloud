@@ -16,8 +16,9 @@
 
     ///Functions Section
     function getPublication() {
+        let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        var url = apiBaseUrl.concat(`/chiefcurator/AssignedPublication/${publicationId}`);
+        var url = apiBaseUrl.concat(`/chiefcurator/AssignedPublication/${publicationId}?chiefCuratorGuid=${chiefCuratorGUID}&Id=${publicationId}`);
         console.log(url);
         $.ajax({
             url: url,
@@ -30,7 +31,7 @@
                 403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
                 500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
             },
-            data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
+          
 
         }).done(function (publication, textStatus, jqXHR) {
             showChiefCuratorSubmissionSection(publication, "#publication-view");
@@ -47,7 +48,7 @@
                    <dt>Subject</dt>
                    <dd>${publication.subject}</dd>
                    <dt>Url</dt>
-                   <dd><a href="${url}">Link to publication</a></dd>
+                   <dd><a href="${publication.url}">Link to publication</a></dd>
                    <dt>Level</dt>
                    <dd>${publication.level}</dd>
                    <dt>Completion date</dt>
@@ -57,8 +58,10 @@
     }
 
     function getPublicationCurationComments() {
+        let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorsubmissions`);
+        let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorsubmissions?chiefCuratorGuid=${chiefCuratorGUID}&publicationId=${publicationId}`);
+
         $.ajax({
             url: url,
             type: 'GET',
@@ -70,30 +73,15 @@
                 403: () => { ShowAlert("You are not authorized to access curator submissions"); },
                 500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
             },
-            data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
+          
 
         }).done(function (submissions, textStatus, jqXHR) {
-            let commentsHtml = "";
+           
             submissions.forEach(function (submission) {
-                commentsHtml.concat(`<div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="heading-${submission.id}">
-                                            <h4 class="panel-title">
-                                                <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                                    href="#submisssion-${submission.id}" aria-expanded="true" 
-                                                    aria-controls="submisssion-${submission.id}">
-                                                    Curator Name( ${submission.sectiontocurate})
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="submisssion-${submission.id}" class="panel-collapse collapse in" 
-                                          role="tabpanel" aria-labelledby="submisssion-${submission.id}">
-                                            <div class="panel-body">
-                                                ${$.parseHtml(submission.notes)}
-                                            </div>
-                                        </div>
-                                    </div>`);
+                $('#currator-commets').html(` ${submission.assignmentId},${submission.notes}`);
+
             });
-            $('#curator-comments').html(`<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">${commentsHtml}</div>`);
+        
         });
     }
 

@@ -14,7 +14,6 @@ namespace KEC.Curation.Web.Api.Serializers
         public string PublisherName { get; set; }
         [Required(ErrorMessage = "Publication author cannot be blank")]
         public string AuthorName { get; set; }
-        [Required(ErrorMessage = "Publication price cannot be blank")]
         public decimal? Price { get; set; }
         [Required(ErrorMessage = "Publication completion Date cannot be blank")]
         [DisplayName("Completion Date")]

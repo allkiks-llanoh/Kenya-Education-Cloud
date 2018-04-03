@@ -1,4 +1,5 @@
-﻿
+﻿@using KEC.Curation.UI.Models;
+@model ChiefCurators
 @{
     ViewBag.Title = "Legal";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,7 +14,7 @@
 
     @Scripts.Render("~/plugins/summernote")
     @Styles.Render("~/plugins/summernoteStyles")
-
+    @Scripts.Render("~/plugins/sweetAlert")
 }
 @{
     var Title = Request.Params["Title"];
@@ -47,7 +48,7 @@
                                     <dt>Title</dt>
                                     <dd>@Title</dd>
                                     <dt>Publication</dt>
-                                    <dd>@Publication</dd>
+                                    <dd><a href="@Publication" target="_blank">Link to publication</a></dd>
                                 </dl>
                                 <div>
 
@@ -61,7 +62,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="form-group" style="text-align:left;">
                                         &nbsp; &nbsp;<label for="actiontaken">Select Action:</label>
@@ -69,6 +70,9 @@
                                             <option value="PublicationMoveToNextStage">Approve</option>
                                             <option value="PublicationRejected">Reject</option>
                                         </select>
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
                                     </div>
                                     <div class="form-group">
                                         <button type="button" name="LegalApprove" id="LegalApprove" style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>

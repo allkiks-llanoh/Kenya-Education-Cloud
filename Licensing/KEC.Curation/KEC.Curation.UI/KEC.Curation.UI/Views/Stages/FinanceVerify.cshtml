@@ -1,4 +1,5 @@
-﻿
+﻿@using KEC.Curation.UI.Models;
+@model ChiefCurators
 
 @{
     ViewBag.Title = "Finance";
@@ -7,12 +8,13 @@
 @section Scripts
 {
 
- 
+
     <script src="@Url.Content("~/js/financeVerify.js")"></script>
     <script src="@Url.Content("~/js/GetChiefCurators.js")"></script>
     <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
     @Scripts.Render("~/plugins/summernote")
     @Styles.Render("~/plugins/summernoteStyles")
+    @Scripts.Render("~/plugins/sweetAlert")
 
 }
 @{
@@ -43,7 +45,7 @@
                                     <dd>@KICDNumber</dd>
                                     <dt>Title</dt>
                                     <dd>@Title</dd>
-                                   
+
                                 </dl>
                                 <div>
 
@@ -52,7 +54,7 @@
                             <div class="panel-footer">
                                 <div class="row">
                                     <div class="ibox-content no-padding">
-                                        
+
                                         <div class="note-editor note-frame panel panel-default">
                                             <div class="summernote" style="height:100px">
 
@@ -60,7 +62,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                               
                                 <div class="row">
                                     <div class="form-group">
                                         <button type="button" name="LegalApprove" id="LegalApprove" style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
@@ -83,6 +85,7 @@
     <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
     <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
     <span><strong>Publication:&nbsp;</strong></span>@Publication
+    <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control" value="@Model.Guid">
 </div>
 
 

@@ -1,0 +1,155 @@
+﻿@using KEC.Curation.UI.Models;
+@model ChiefCurators
+@{
+    ViewBag.Title = "Publication";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var PubId = Request.Params["Pub"];
+
+
+}
+@section Scripts{
+    @Scripts.Render("~/js/principalCuratorViewPublication.js")  
+    <script src="@Url.Content("~/js/CurationCommentsChief.js")"></script>
+    <script src="@Url.Content("~/js/ReadCurationComments.js")"></script>
+    <script src="@Url.Content("~/js/PrincipalCuratorComments.js")"></script>
+    <script src="@Url.Content("~/js/FullyAssignChiefCurator.js")"></script>
+    @Scripts.Render("~/plugins/summernote")
+    @Styles.Render("~/plugins/summernoteStyles")
+    @Scripts.Render("~/plugins/sweetAlert")
+}
+
+<div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Publication Details</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                        <dl id="publication-details"></dl>
+                    </div>
+                    <div class="ibox-footer">
+                        <span class="pull-right">
+                            Publication Details
+                        </span>
+                        Publication Details
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Curators comments</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table style="border:none;" class="table  table-hover dataTables-example" id="comments">
+                                    <thead>
+                                        <tr>
+
+
+                                            <th>Status</th>
+                                            <th>Curation Comments</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody style="border:none;"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="ibox-title">
+                            <h5>Chief Curators comments</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table style="border:none;" class="table  table-hover dataTables-example" id="chiefcomments">
+                                    <thead>
+                                        <tr>
+
+
+                                            <th>Status</th>
+                                            <th>Curation Comments</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody style="border:none;"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row ibox-title">
+                            <h5>Give Your Comments Here</h5>
+                            <div class="ibox-content no-padding">
+                                <div class="summernote" style="height:100px">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <select class="form-control" id="action-selected">
+                                    <option>Select Action To Recommend</option>
+                                    <option value="PublicationApproved">Approve Content</option>
+                                    <option value="PublicationRejected">Reject Content</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="submit" class="btn btn-success form-control" style="background-color:#00B55F; color:white;" value="Submit Recommendation" id="recommend">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group col-md-10">
+    <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
+</div>
+<div class="form-group col-md-10">
+    <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
+</div>
+
+<div class="  hidden">
+
+    <h1 id="identity" data-identity=@PubId></h1>
+
+
+
+</div>

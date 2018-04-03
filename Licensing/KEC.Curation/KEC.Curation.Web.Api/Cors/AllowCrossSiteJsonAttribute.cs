@@ -8,7 +8,7 @@ namespace KEC.Curation.Web.Api.Cors
         {
             if (context.HttpContext.Response != null && !context.HttpContext.Response.Headers.ContainsKey("Access-Control-Allow-Origin"))
             {
-                context.HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "https://curationapi-d.kec.ac.ke");
+                context.HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             }
             base.OnActionExecuted(context);
         }

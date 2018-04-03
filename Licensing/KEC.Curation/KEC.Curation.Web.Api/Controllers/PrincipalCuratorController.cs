@@ -69,6 +69,38 @@ namespace KEC.Curation.Web.Api.Controllers
                 publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
             return Ok(value: publicationList);
         }
+        [HttpGet("withcomments")]
+        public IActionResult WithComments(string principalCuratorGuid)
+        {
+
+            var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.
+                                       PrincipalCuratorGuid.Equals(principalCuratorGuid)
+                                       && p.ChiefCuratorAssignment.Submitted==true);
+            var publicationList = publications.Any() ?
+                publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
+            return Ok(value: publicationList);
+        }
+        [HttpGet("Curated")]
+        public IActionResult CuratedPublications([FromQuery] string principalCuratorGuid, int publicationId)
+        {
+
+            try
+            {
+
+                var publications = _uow.PublicationRepository.Find(p =>
+                                   p.Id.Equals(publicationId)
+                                   && p.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(principalCuratorGuid)
+                                   && p.ChiefCuratorAssignment.Submitted == true).ToList();
+                return Ok(value: publications);
+
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+           
+        }
         [HttpGet("{stage}")]
         public IActionResult PublicationsByStage(PublicationStage stage)
         {
@@ -171,17 +203,10 @@ namespace KEC.Curation.Web.Api.Controllers
                     Stage = PublicationStage.Curation,
                     ActionTaken = model.ActionTaken
                 };
-                var updatedPublication = new Publication
-                {
-                  Id= publication.Id,
-                  KICDNumber = publication.KICDNumber,
-                  Owner=publication.Owner,
-                  ChiefCuratorAssignmentId= asignment.Id
-                };
+               
                 _uow.ChiefCuratorAssignmentRepository.Add(asignment);
                 _uow.PublicationStageLogRepository.Add(nextStage);
-
-                _uow.PublicationRepository.Add(updatedPublication);
+                publication.ChiefCuratorAssignmentId =(asignment.Id);
                 _uow.Complete();
 
                 return Ok(value: $"Publication {model.KICDNumber} moved to curation");
@@ -193,7 +218,82 @@ namespace KEC.Curation.Web.Api.Controllers
             }
 
         }
+        [HttpPost("PrincipalCuratorComments/{id}")]
+        public IActionResult Comments(int publicationId, [FromBody] PrincipalCuratorCommentsSerilizer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+            var publication = _uow.PublicationRepository
+                                  .Find(p => p.Id.Equals(publicationId)
+                                  && p.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(model.PrincipalCuratorGuid))
+                                  .FirstOrDefault();
+            if (publication == null)
+            {
+                return NotFound(value: new { message = "Publication Not Found in Repository." });
+            }
 
+            try
+            {
+
+
+                var comment = new PrincipalCuratorComment
+                {
+                    PublicationId = publication.Id,
+                    Notes = model.Notes,
+                    PrincipalCuratorGuid = model.PrincipalCuratorGuid,
+
+
+                };
+                _uow.PrincipalCuratorCommentRepository.Add(comment);
+                var recommendation = new PublicationStageLog
+                {
+                    PublicationId = publication.Id,
+                    Stage = PublicationStage.PublicationApproval,
+                    Notes = model.Notes,
+                    CreatedAtUtc = DateTime.UtcNow,
+                    Owner = model.PrincipalCuratorGuid,
+                    ActionTaken = model.ActionTaken
+                };
+                _uow.PublicationStageLogRepository.Add(recommendation);
+                _uow.Complete();
+                return Ok(value: new { message = "Recommendations Sent To Curation Managers" });
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpPatch("update/chiefcuratorcomments/{id}")]
+        public IActionResult UpdateChiefCurationComments(int publicationId, [FromBody]ChiefFlagSubmittedSerilizer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+            var assigment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.Submitted==false
+                                                                  && p.PublicationId.Equals(model.publicationId)
+                                                                  && p.PrincipalCuratorGuid.Equals(model.UserGuid))
+                                                                  .FirstOrDefault();
+            if (assigment == null)
+            {
+                return NotFound("Record could not be retrieved");
+            }
+            try
+            {
+               
+                assigment.Submitted = true;
+                _uow.Complete();
+                return Ok(value: new { message = "Curation Fully Submitted" });
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
         [HttpDelete("publication/assignment/{id}")]
         public IActionResult DeleteUnAssignedPublication(int Id, [FromBody]string principalCuratorGuid)
         {

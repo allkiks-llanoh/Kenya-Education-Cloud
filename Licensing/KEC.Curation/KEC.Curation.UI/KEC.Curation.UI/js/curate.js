@@ -7,10 +7,13 @@
     //Functions Section
     function getAssignment() {
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
-        let assignmentUrl = apiBaseUrl.concat(`/curator/curate/${assignmentId}`);
-        let userGuid = currentUserGuid;
+        var userGuid = $('#CurrentUserGuid').val();
+        let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}?userGuid=${userGuid}`);
+        console.log(` ${userGuid}`);
+        console.log(` ${assignmentId}`);
         $.ajax({
-            url: assignmentUrl,
+            url: url,
+           // data: JSON.stringify({ userGuid: userGuid, Id: assignmentId }),
             crossDomain: true,
             statusCode: {
                 404: function (jqXHR, textStatus, errorThrown) {
@@ -20,34 +23,39 @@
                     ShowAlert("You are not authorized to access the specified resource", "warning");
                 }
             },
-            data: JSON.stringify({ userGuid: userGuid }),
+           
             type: 'GET'
         }).done(function (assignment, textStatus, jqXHR) {
             $('#assignment-details').replaceWith(
                 `<dl id="assignment-details">
-                  <dt>Publication</dt>
-                  <dd>${assignment.publication}</dd>
+                  
                   <dt>Section</dt>
-                   <dd>${assignment.sectiontocurate}</dd>
+                   <dd>${assignment.sectionToCurate}</dd>
                    <dt>Assignment date</dt>
-                   <dd>${convertUTCDateToLocalDate(assignment.assignmentdateutc).toLocaleDateString()}</dd>
+                   <dd>${assignment.assignmentDateUtc}</dd>
                    <dt>Url</dt>
-                   <dd>${assignment.publicationurl}</dd></dl>`);
+                   <dd><a href="${assignment.publicationUrl}" target="_blank">Link to publication</a></dd>`);
+                 //  <dd>${assignment.publicationUrl}</dd></dl>`);
             $('.note-editable').html($.parseHTML(assignment.notes))
         })
     }
     function saveNotesAndSubmit(e) {
         e.preventDefault();
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
-        let url = apiBaseUrl.concat(`/curator/curate/${assignmentId}`);
+        let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}`);
         let notes = $('.note-editable').html();
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
         }
-        let userGuid = currentUserGuid;
+        var userGuid = $('#CurrentUserGuid').val();
         $.ajax({
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            },
             url: url,
             crossDomain: true,
+            type: 'PATCH',
             statusCode: {
                 404: function (jqXHR, textStatus, errorThrown) {
                     ShowAlert("Specified resource could not be located", "error");
@@ -57,7 +65,7 @@
                 }
             },
             data: JSON.stringify({userGuid: userGuid, Notes: notes, Submitted: true }),
-            type: 'PATCH'
+           
         }).done(function (data, textStatus, jqXHR) {
             ShowAlert("Curation notes saved successfully", "success");
         }).fail(function (jqXHR, textStatus, errorThrown) {
@@ -68,15 +76,21 @@
     function saveNotes(e) {
         e.preventDefault();
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
-        let url = apiBaseUrl.concat(`/curator/curate/${assignmentId}`);
+        let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}`);
         let notes = $('.note-editable').html();
+        let sub = "false"
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
         }
-        let userGuid = currentUserGuid;
+        var userGuid = $('#CurrentUserGuid').val();
         $.ajax({
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            },
             url: url,
             crossDomain: true,
+            type: 'PATCH',
             statusCode: {
                 404: function (jqXHR, textStatus, errorThrown) {
                     ShowAlert("Specified resource could not be located", "error");
@@ -85,8 +99,8 @@
                     ShowAlert("You are not authorized to access the specified resource", "warning");
                 }
             },
-            data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: false }),
-            type: 'PATCH'
+            data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: sub }),
+         
         }).done(function (data, textStatus, jqXHR) {
             ShowAlert("Curation notes saved and submitted successfully", "success");
             let url = $('#back-to-assignments').attr('href');

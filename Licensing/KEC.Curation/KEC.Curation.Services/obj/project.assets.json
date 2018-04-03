@@ -515,7 +515,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.0.1": {
-      "sha512": "Rgwturmal/A4iD0kqWu0NYAjz7hBsioJGTCg3KzaKG9+r9jN7qbhX04L/AQvypaPyMxFfcWUelSby4ZKWxMoEA==",
+      "sha512": "/Kuy9nQ167n5ABQy787zge7LWvXaV37KC4aYSWAgv0Ptzp8Exn73dEZR/1JnY8R9rXayUTe7K28B3OQSjCx6iA==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.0.1",
       "files": [
@@ -673,11 +673,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj",
+      "projectUniqueName": "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj",
       "projectName": "KEC.Curation.Services",
-      "projectPath": "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj",
+      "projectPath": "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj",
       "packagesPath": "C:\\Users\\collo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\collo\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\obj\\",
+      "outputPath": "C:\\Users\\collo\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

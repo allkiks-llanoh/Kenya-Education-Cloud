@@ -34,7 +34,41 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.description + "</td>"));
     row.append($("<td>" + rowData.kicdNumber + "</td>"));
-    row.append($(`<td> <a href="/PrincipalCurator/PrincipalCuratorReview/?Title=${rowData.title}&PGUID=""&Identity=${rowData.id}&KICDN=${rowData.kicdNumber}&Publication=${rowData.url}&Stage=PrincipalCurator" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Reverse</a>`));
+    row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.id} class="btn btn-w-m btn-info btn-md DeleteAssignment" id="delete" role="button">Remove Assignment</button>`));
 
     return row[0];
+   
 } 
+function deleteAssignment() {
+   
+        let cGuid = $('#CurrentUserGuid').val();
+        let pId = $(this).attr('data-assignmentId');
+        let url = apiBaseUrl.concat(`/chiefcurator/publication/assignment/${pId}?chiefCuratorGuid=${cGuid}`);
+
+        $(this).html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+
+        console.log($(this).attr('data-county'));
+        $.ajax({
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            },
+          
+            url: url,
+            type: "DELETE",
+
+            success: function (response, status, jxhr) {
+                console.log(response);
+                console.log(status);
+                ShowAlert('Assignment removed from curator', 'success');
+            },
+            error: function (request, status, error) {
+
+                ShowAlert('Something went wrong while loading publication curator assignments', 'error');
+                $('#delete').html('Remove Assignment');
+
+
+            }
+        });
+   
+}

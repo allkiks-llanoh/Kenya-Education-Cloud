@@ -7,6 +7,16 @@
 
 @section Scripts{
     @Scripts.Render("~/js/chiefCuratorViewPublication")
+    <script src="@Url.Content("~/js/CurationComments.js")"></script>
+    <script src="@Url.Content("~/js/Comments.js")"></script>
+    @Scripts.Render("~/plugins/summernote")
+    @Styles.Render("~/plugins/summernoteStyles")
+    @Scripts.Render("~/plugins/sweetAlert")
+}
+@{
+    var PubId = Request.Params["Pub"];
+
+
 }
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="wrapper wrapper-content animated fadeIn">
@@ -52,10 +62,47 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row">
-                            <div class="col-md-12" id="curator-comments">
+                            <div class="table-responsive">
+                                <table style="border:none;" class="table  table-hover dataTables-example" id="comments">
+                                    <thead>
+                                        <tr>
 
+                                            <th>Assignment No</th>
+                                            <th>Curation Section</th>
+                                            <th>Curator Comments</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody style="border:none;"></tbody>
+                                </table>
                             </div>
                         </div>
+                        <div class="row ibox-title">
+                            <h5>Give Your Comments Here</h5>
+                            <div class="ibox-content no-padding">
+                                <div class="summernote" style="height:100px">
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <select class="form-control" id="action-selected">
+                                    <option>Select Action To Recommend</option>
+                                    <option value="PublicationApproved">Approve Content</option>
+                                    <option value="PublicationRejected">Reject Content</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="submit" class="btn btn-success form-control" style="background-color:#00B55F; color:white;" value="Submit Recommendation" id="recommend">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -69,3 +116,10 @@
     <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
 </div>
 
+<div class="hidden">
+
+    <h1 id="identity" data-identity=@PubId></h1>
+
+
+
+</div>
