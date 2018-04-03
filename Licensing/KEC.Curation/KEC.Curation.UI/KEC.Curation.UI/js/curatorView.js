@@ -26,11 +26,11 @@ function tableRows(data) {
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $("<tr />")
-        row.append($("<td>" + rowData.assignmentId + "</td>"));
-        row.append($("<td>" + rowData.publication + "</td>"));
-        row.append($("<td>" + rowData.sectionToCurate + "</td>"));
-        row.append($("<td>" + rowData.assignmentDateUtc + "</td>"));
-        row.append($(`<td> <a href="/Curator/CuratePublication/${rowData.assignmentId}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Curate</a>`));
+        row.append($("<td>" + rowData.id + "</td>"));
+        row.append($("<td>" + rowData.createdUtc + "</td>"));
+        row.append($("<td>" + rowData.publicationSectionId + "</td>"));
+        row.append($("<td>" + rowData.status + "</td>"));
+        row.append($(`<td> <a href="/Curator/CuratePublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Curate</a>`));
 
         return row[0];
 };

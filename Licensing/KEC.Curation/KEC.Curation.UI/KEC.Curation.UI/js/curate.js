@@ -13,6 +13,7 @@
         console.log(` ${assignmentId}`);
         $.ajax({
             url: url,
+           // data: JSON.stringify({ userGuid: userGuid, Id: assignmentId }),
             crossDomain: true,
             statusCode: {
                 404: function (jqXHR, textStatus, errorThrown) {
