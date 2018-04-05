@@ -25,7 +25,13 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _assignment.PublicationId;
             }
         }
-
+        public int AssignmentId
+        {
+            get
+            {
+                return _assignment.Id;
+            }
+        }
 
         public string Status
         {
@@ -82,15 +88,16 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-                var section = _uow.PublicationSectionRepository.Find(p => p.PublicationId.Equals(_assignment.PublicationId)
-                && p.CuratorAssignment.Assignee.Equals(_assignment.Assignee)).FirstOrDefault();
+                var section = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(_assignment.PublicationId)
+                && p.PublicationSectionId.Equals(_assignment.Id)).FirstOrDefault();
+               
                 if (section == null)
                 {
                     return string.Empty;
                 }
                 else
                 {
-                    return section.SectionDescription;
+                    return section.PublicationSection.SectionDescription;
                 }
                 
             }

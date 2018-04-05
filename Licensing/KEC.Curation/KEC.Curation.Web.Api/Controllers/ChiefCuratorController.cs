@@ -115,7 +115,6 @@ namespace KEC.Curation.Web.Api.Controllers
                     Owner = model.AssignedBy,
                     SectionDescription = model.Section == null ? "Whole content" : model.Section,
                     CreatedAtUtc = DateTime.UtcNow
-
                 };
                 _uow.PublicationSectionRepository.Add(section);
                 var assignment = new CuratorAssignment
