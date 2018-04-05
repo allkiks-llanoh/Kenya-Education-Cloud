@@ -213,9 +213,9 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("publication/{publicationId:int}/curatorsubmissions")]
         public IActionResult CuratorSubmissions([FromQuery]int publicationId, string chiefCuratorGuid)
         {
-            var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationSection.PublicationId.Equals(publicationId)
-            && p.PublicationSection.Publication.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid)
-            && p.Submitted == true);
+            var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publicationId)
+            && p.AssignedBy.Equals(chiefCuratorGuid)
+            );
             var assignmentList = assignmentSubmissions.Any() ?
                 assignmentSubmissions.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
             return Ok(assignmentList);
@@ -395,7 +395,7 @@ namespace KEC.Curation.Web.Api.Controllers
             }
         }
         [HttpGet("ChiefCuratorComments/{id}")]
-        public IActionResult GetComments(int publicationId, [FromBody] ChiefCuratorCommentsGet model)
+        public IActionResult GetComments([FromQuery]int publicationId)
         {
             try
             {

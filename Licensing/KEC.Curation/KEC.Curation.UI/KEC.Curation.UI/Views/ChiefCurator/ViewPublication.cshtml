@@ -6,13 +6,13 @@
 }
 
 @section Scripts{
+
     @Scripts.Render("~/js/chiefCuratorViewPublication")
-    <script src="@Url.Content("~/js/CurationComments.js")"></script>
-    @*<script src="@Url.Content("~/js/Comments.js")"></script>*@
     @Scripts.Render("~/plugins/summernote")
     @Styles.Render("~/plugins/summernoteStyles")
     @Scripts.Render("~/plugins/sweetAlert")
 }
+<script src="~/js/Comments.js"></script>
 @{
     var PubId = Request.Params["Pub"];
 
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div>
                             <br>
                             <br>

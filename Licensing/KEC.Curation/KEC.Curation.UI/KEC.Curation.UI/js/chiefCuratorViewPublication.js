@@ -1,6 +1,8 @@
 ﻿(function () {
     $(document).ready(function () {
         getPublication();
+        getPublicationCurationComments();
+        $('#recommend').click(submitChiefNotesAndAction);
     });
     $(document).ready(function () {
         $(".btn-select").each(function (e) {
@@ -11,9 +13,6 @@
             }
         });
     });
-
-
-
     ///Functions Section
     function getPublication() {
         let chiefCuratorGUID = $('#CurrentUserGuid').val();
@@ -38,7 +37,7 @@
             $('#publication-details').replaceWith(
                 `<dl id="publication-details" data-stage="${publication.stage}">
                   <dt>KICD Number</dt>
-                  <dd id="kicd-number">${publication.kicdnumber}</dd>
+                  <dd id="kicd-number">${publication.kicdNumber}</dd>
                   <dt>Title</dt>
                    <dd>${publication.title}</dd>
                    <dt>Description</dt>
@@ -52,8 +51,8 @@
                    <dt>Level</dt>
                    <dd>${publication.level}</dd>
                    <dt>Completion date</dt>
-                   <dd>${publication.completiondate}</dd></dl>`);
-            getPublicationCurationComments();
+                   <dd>${publication.completionDate}</dd></dl>`);
+           
         });
     }
 
@@ -61,7 +60,7 @@
         let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
         let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorsubmissions?chiefCuratorGuid=${chiefCuratorGUID}&publicationId=${publicationId}`);
-
+        //let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
         $.ajax({
             url: url,
             type: 'GET',
@@ -117,12 +116,12 @@
     }
     function submitChiefNotesAndAction(e) {
         e.preventDefault();
-        let actionSelected = $('#action-taken').find('li.selected').attr('id');
+        let publicationId = $('#publication-view').attr('data-publicationId');
+        let actionSelected = $("#action-selected").val();
         let notes = $('.note-editable').html();
-        let kicdNumber = $("#kicd-number").val();
-        let stage = $('#publication-details').attr('data-stage');
-        let url = apiBaseUrl.concat('/Publications');
-        let userGuid = currentUserGuid;
+
+        let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
+        let userGuid = $('#CurrentUserGuid').val();
         if (notes === null || notes === "") {
             return ShowAlert("Curation notes cannot be blank", "error");
         }
@@ -131,24 +130,28 @@
         }
 
         $.ajax({
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            },
             url: url,
-            type: 'PATCH',
+            type: 'POST',
             contentType: 'application/json',
             crossDomain: true,
             accepts: 'application/json',
-            data: JSON.stringify({ KICDNumber: kicdNumber, Notes: notes, ActionTaken: actionSelected, Stage: stage, UserGuid: userGuid }),
+            data: JSON.stringify({ ChiefCuratorGuid: userGuid, Notes: notes, ActionTaken: actionSelected, publicationId: publicationId, Status: true }),
             statusCode: {
                 404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to process publication"); },
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
             }
-        }).done(function (data, textStatus, jqXHR) {
-            ShowAlert("Publication processed successfully");
+        }).success(function (data, textStatus, jqXHR) {
+            ShowAlert("Recomendations passed to Principal Curator");
         }).fail(function () {
             ShowAlert("Something went wrong while processing publication", 'error');
         });
     }
     //Functions Section
-
+    
 
 })();

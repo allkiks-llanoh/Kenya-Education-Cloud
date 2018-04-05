@@ -1,7 +1,9 @@
 ﻿(function () {
-    $(document).ready(function () {
-        $('#recommend').click(submitChiefNotesAndAction);
+          $(document).ready(function () {
+          $('#recommend').click(submitChiefNotesAndAction);
     });
+
+   
     function submitChiefNotesAndAction(e) {
         e.preventDefault();
         let publicationId = $('#publication-view').attr('data-publicationId');
