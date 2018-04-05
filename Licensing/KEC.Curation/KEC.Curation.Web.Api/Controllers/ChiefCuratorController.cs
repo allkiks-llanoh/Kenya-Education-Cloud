@@ -214,7 +214,7 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult CuratorSubmissions([FromQuery]int publicationId, string chiefCuratorGuid)
         {
             var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publicationId)
-            && p.AssignedBy.Equals(chiefCuratorGuid)
+            && p.AssignedBy.Equals(chiefCuratorGuid)&& p.Submitted && p.Publication.PublicationStageLogs.Max(l => l.Stage) == PublicationStage.Curation
             );
             var assignmentList = assignmentSubmissions.Any() ?
                 assignmentSubmissions.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
@@ -371,7 +371,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     PublicationId = publication.Id,
                     Notes = model.Notes,
                     ChiefCuratorGuid = model.ChiefCuratorGuid,
-                    
+                    Recomendation = model.ActionTaken
 
                 };
                 _uow.ChiefCuratorCommentRepository.Add(comment);

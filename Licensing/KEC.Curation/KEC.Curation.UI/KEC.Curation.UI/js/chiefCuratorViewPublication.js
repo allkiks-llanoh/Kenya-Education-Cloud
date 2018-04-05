@@ -77,7 +77,7 @@
         }).done(function (submissions, textStatus, jqXHR) {
            
             submissions.forEach(function (submission) {
-                $('#currator-commets').html(` ${submission.assignmentId},${submission.notes}`);
+                $('#currator-commets').html(` ${submission.status},${submission.notes}`);
 
             });
         
