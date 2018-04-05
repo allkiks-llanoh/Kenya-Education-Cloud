@@ -1,10 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Licensing",
-    "\\Licensing\\KEC.Curation",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.Data"
+    "\\CuratorsManager",
+    "\\CuratorsManager\\Views",
+    "\\CuratorsManager\\Views\\Home",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views\\Shared",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI"
   ],
-  "SelectedNode": "\\Licensing\\KEC.Curation\\KEC.Curation.Data\\Database",
+  "SelectedNode": "\\CuratorsManager",
   "PreviewInSolutionExplorer": false
 }
