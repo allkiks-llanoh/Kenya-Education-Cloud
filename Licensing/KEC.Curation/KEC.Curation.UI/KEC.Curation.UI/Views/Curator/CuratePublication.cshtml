@@ -4,12 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Scripts{
-   
     <script src="@Url.Content("~/js/curate.js")"></script>
     @Scripts.Render("~/plugins/summernote")
     @Styles.Render("~/plugins/summernoteStyles")
 }
-
+}
 
 <div class="wrapper wrapper-content animated fadeInRight" id="assignment-view" data-assignmentId="@ViewBag.AssignmentId">
     <div class="wrapper wrapper-content animated fadeIn">
@@ -59,7 +58,7 @@
 
                         <a href="#" class="btn btn-primary" id="save-notes">Save comments</a>
                         <a href="#" class="btn btn-success" id="save-notes-submit">Save&nbsp;&amp;&nbsp;Submit</a>
-                        <a href="@Url.Action("CuratorView","Curator")" class="btn btn-info pull-right" id="back-to-assignments">Back to Assignments</a>
+                        <a href="@Url.Action("ToCurate","Curator")" class="btn btn-default" id="back-to-assignments">Back to Assignments</a>
                     </div>
                 </div>
             </div>

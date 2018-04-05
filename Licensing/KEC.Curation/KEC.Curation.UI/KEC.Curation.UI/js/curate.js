@@ -13,7 +13,6 @@
         console.log(` ${assignmentId}`);
         $.ajax({
             url: url,
-           // data: JSON.stringify({ userGuid: userGuid, Id: assignmentId }),
             crossDomain: true,
             statusCode: {
                 404: function (jqXHR, textStatus, errorThrown) {
@@ -28,14 +27,14 @@
         }).done(function (assignment, textStatus, jqXHR) {
             $('#assignment-details').replaceWith(
                 `<dl id="assignment-details">
-                  
+                  <dt>Publication</dt>
+                  <dd>${assignment.publication}</dd>
                   <dt>Section</dt>
                    <dd>${assignment.sectionToCurate}</dd>
                    <dt>Assignment date</dt>
                    <dd>${assignment.assignmentDateUtc}</dd>
                    <dt>Url</dt>
-                   <dd><a href="${assignment.publicationUrl}" target="_blank">Link to publication</a></dd>`);
-                 //  <dd>${assignment.publicationUrl}</dd></dl>`);
+                   <dd>${assignment.publicationUrl}</dd></dl>`);
             $('.note-editable').html($.parseHTML(assignment.notes))
         })
     }
@@ -67,7 +66,7 @@
             data: JSON.stringify({userGuid: userGuid, Notes: notes, Submitted: true }),
            
         }).done(function (data, textStatus, jqXHR) {
-            ShowAlert("Curation notes saved and submitted successfully", "success");
+            ShowAlert("Curation notes saved successfully", "success");
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert("Something went wrong while saving your notes", "error");
         });
@@ -102,17 +101,17 @@
             data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: sub }),
          
         }).done(function (data, textStatus, jqXHR) {
-            ShowAlert("Curation notes saved successfully", "success");
+            ShowAlert("Curation notes saved and submitted successfully", "success");
             let url = $('#back-to-assignments').attr('href');
-            //if (typeof IE_fix != "undefined") // IE8 and lower fix to pass the http referer
-            //{
-            //    document.write("redirecting..."); // Don't remove this line or appendChild() will fail because it is called before document.onload to make the redirect as fast as possible. Nobody will see this text, it is only a tech fix.
-            //    var referLink = document.createElement("a");
-            //    referLink.href = url;
-            //    document.body.appendChild(referLink);
-            //    referLink.click();
-            //}
-            //else { window.location.replace(url); }
+            if (typeof IE_fix != "undefined") // IE8 and lower fix to pass the http referer
+            {
+                document.write("redirecting..."); // Don't remove this line or appendChild() will fail because it is called before document.onload to make the redirect as fast as possible. Nobody will see this text, it is only a tech fix.
+                var referLink = document.createElement("a");
+                referLink.href = url;
+                document.body.appendChild(referLink);
+                referLink.click();
+            }
+            else { window.location.replace(url); }
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert("Something went wrong while saving your notes", "error");
         });

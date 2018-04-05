@@ -79,9 +79,11 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult Assigned(int subjectId, string chiefCuratorGuid)
         {
 
-            var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefCuratorGuid)
-                                                                         &&p.Submitted).ToList();
+            var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefCuratorGuid)).ToList();
                                                       
+                                                        
+                                                        
+          
             return Ok(value: publications);
         }
         [HttpPost("publication/{publicationId:int}/assign")]
@@ -292,12 +294,8 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("curator/tocurate")]
         public IActionResult ToCurate(string userGuid)
         {
-          
-            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted
-                                                                && p.Assignee.Equals(userGuid))
-                                                                .ToList();
-            return Ok(value: assigment);                      
-
+            var assignmentList = CurationAssignments(userGuid, _uow);
+            return Ok(value: assignmentList);
         }
         [HttpPatch("curator/curate/{AssignmentId:int}")]
         public IActionResult SubmitCuration(int AssignmentId, [FromBody]CurationUploadSerializer model)
@@ -336,7 +334,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound("Curation record could not be retrieved or has been submitted");
             }
-            return Ok(value: new CurationRepoDownloadSerilizer(assigment, _uow));
+            return Ok(value: new CurationDownloadSerializer(assigment, _uow));
         }
         #endregion
 

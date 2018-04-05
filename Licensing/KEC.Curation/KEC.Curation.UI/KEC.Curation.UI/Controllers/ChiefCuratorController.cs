@@ -79,6 +79,22 @@ namespace KEC.Curatiom.Web.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [HttpGet]
+        public ActionResult ChiefCuratorComments()
+        {
+
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId
+                };
+                return View(chiefCurator);
+            }
+        }
         [HttpGet, Route("PublicationHistory/{id:int}")]
         public ActionResult PublicationHistory(int Id)
         {

@@ -36,10 +36,12 @@ let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurat
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.description + "</td>"));
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
-        row.append($(`<td> <a href="/PrincipalCurator/PrincipalCuratorReview/?Identity=${rowData.id}&Title=${rowData.title}&KICDN=${rowData.kicdNumber}&Urls=${rowData.url}&Stage=PaymentVerification" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Review</a>`));
+        row.append($(`<td> <a href="/Stages/FinanceVerify/?Title=${rowData.title}&Publication=${rowData.kicdNumber}&Stage=PaymentVerification" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Review</a>`));
 
 
         return row[0];
-    };
+    }
+
+
    
  

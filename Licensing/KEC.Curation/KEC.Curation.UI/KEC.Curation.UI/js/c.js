@@ -23,7 +23,7 @@ $.ajax({
         console.log(data);
 
         //This code snipet prepares to append Json Data
-        $('#curated-publications').append(tableRows(data));
+        $('#unassigned-publications').append(tableRows(data));
     }
 });
 
@@ -32,7 +32,7 @@ function drawRow(rowData) {
     var row = $("<tr />")
     row.append($("<td>" + rowData.id + "</td>"));
     row.append($("<td>" + rowData.submitted + "</td>"));
-    row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Assign</a>`));
+    row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.publicationId}?Pub=${rowData.publicationId}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Comments</a>`));
 
     return row[0];
-},
+};
