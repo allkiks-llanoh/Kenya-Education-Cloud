@@ -62,6 +62,22 @@ namespace KEC.Curation.Web.Api.Serializers
                 }
             }
         }
+        public string Publication
+        {
+            get
+            {
+                var publicationId = _uow.CuratorAssignmentRepository.Get(_assignment.PublicationId)?.PublicationId;
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                if (publication == null)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    return publication.KICDNumber;
+                }
+            }
+        }
         public string SectionToCurate
         {
             get

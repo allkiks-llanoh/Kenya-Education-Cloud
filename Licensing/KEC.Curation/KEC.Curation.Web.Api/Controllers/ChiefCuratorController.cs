@@ -294,8 +294,16 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("curator/tocurate")]
         public IActionResult ToCurate(string userGuid)
         {
-            var assignmentList = CurationAssignments(userGuid, _uow);
-            return Ok(value: assignmentList);
+            //  var assigment = CurationAssignments(userGuid, _uow);
+            ////  return Ok(value: assignmentList);
+            //  return Ok(value: new CurationDownloadSerializer(assigment, _uow));
+            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted
+                                                                 && p.Assignee.Equals(userGuid)).FirstOrDefault();
+            if (assigment == null)
+            {
+                return NotFound("Curation record could not be retrieved or has been submitted");
+            }
+            return Ok(value: new CurationRepoDownloadSerilizer(assigment, _uow));
         }
         [HttpPatch("curator/curate/{AssignmentId:int}")]
         public IActionResult SubmitCuration(int AssignmentId, [FromBody]CurationUploadSerializer model)
@@ -334,7 +342,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound("Curation record could not be retrieved or has been submitted");
             }
-            return Ok(value: new CurationDownloadSerializer(assigment, _uow));
+            return Ok(value: new CurationRepoDownloadSerilizer(assigment, _uow));
         }
         #endregion
 
