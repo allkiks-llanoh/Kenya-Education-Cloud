@@ -32,7 +32,7 @@
             $('#publication-details').replaceWith(
                 `<dl id="publication-details" data-stage="${publication.stage}">
                   <dt>KICD Number</dt>
-                  <dd id="kicd-number">${publication.kicdnumber}</dd>
+                  <dd id="kicd-number">${publication.kicdNumber}</dd>
                   <dt>Title</dt>
                    <dd>${publication.title}</dd>
                    <dt>Description</dt>
@@ -42,11 +42,11 @@
                    <dt>Subject</dt>
                    <dd>${publication.subject}</dd>
                    <dt>Url</dt>
-                   <dd><a href="${publication.url}">Link to publication</a></dd>
+                   <dd><a href="${publication.url}" target="blank">Link to publication</a></dd>
                    <dt>Level</dt>
                    <dd>${publication.level}</dd>
                    <dt>Completion date</dt>
-                   <dd>${publication.completiondate}</dd></dl>`);
+                   <dd>${publication.completionDate}</dd></dl>`);
             loadCurators();
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert('Something went wrong while loading publication', 'error');

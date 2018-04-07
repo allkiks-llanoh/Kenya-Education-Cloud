@@ -80,11 +80,10 @@ namespace KEC.Curation.Web.Api.Controllers
         {
 
             var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefCuratorGuid)).ToList();
-                                                      
-                                                        
-                                                        
-          
-            return Ok(value: publications);
+            var assignmentList = publications.Any() ?
+            publications.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
+            return Ok(assignmentList);
+
         }
         [HttpPost("publication/{publicationId:int}/assign")]
         public IActionResult Assign(int publicationId, [FromBody] CurationContentAssignmentSerializer model)
