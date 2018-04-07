@@ -15,9 +15,13 @@ function tableRows(data) {
 
 //Start by getting publication list based on Payment Verification Stage
 $.ajax({
+    headers : {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json',
+       ' Access-Control-Allow-Origin': '*'
+    },
     url: cUrl,
     type: "GET",
-
     dataType: "json",
     success: function (data, status, jqhxr) {
         console.log(data);

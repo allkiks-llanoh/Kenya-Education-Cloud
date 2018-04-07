@@ -28,20 +28,21 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-                var publicationId = _uow.PublicationSectionRepository.Get(_assignment.PublicationSection.PublicationId)?.PublicationId;
-                var publicationRecord = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
-                var subject = _uow.SubjectRepository.Get(publicationRecord.SubjectId).Name;
-                var recordinfo = $"Subject: {subject} KICD Number: {publicationRecord.KICDNumber}";
-               
-                return recordinfo;
+                //var publicationId = _uow.ChiefCuratorAssignmentRepository.Get(_assignment.Publication.)?.PublicationId;
+                //var publicationRecord = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
+                //var subject = _uow.SubjectRepository.Get(publicationRecord.SubjectId).Name;
+                //var recordinfo = $"Subject: {subject} KICD Number: {publicationRecord.KICDNumber}";
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                return publication.KICDNumber;
             }
         }
         public string SectionToCurate
         {
             get
             {
-                var section = _uow.PublicationSectionRepository.Get(_assignment.PublicationSection.PublicationId)?.SectionDescription;
-                return section;
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                var section = _uow.PublicationSectionRepository.Find(p=> p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+                return section.SectionDescription;
             }
         }
         public int AssignmentId
@@ -65,8 +66,9 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-                var publicationId = _uow.PublicationSectionRepository.Get(_assignment.PublicationSection.Id)?.PublicationId;
-                var publication = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                var publicationId = _uow.PublicationSectionRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+               
                 if (publication == null)
                 {
                     return string.Empty;
