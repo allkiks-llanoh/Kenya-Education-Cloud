@@ -50,7 +50,7 @@
     function getPublicationCurationComments() {
         let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorsubmissions?chiefCuratorGuid=${chiefCuratorGUID}&publicationId=${publicationId}`);
+        let url = apiBaseUrl.concat(`/principalcurator/curated?principalCuratorGuid=${chiefCuratorGUID}&publicationId=${publicationId}`);
 
         $.ajax({
             url: url,
@@ -98,7 +98,7 @@
         });
     }
     function showChiefCuratorSubmissionSection(publication, parentElementId) {
-        if (publication !== null && publication.chiefcuratorcanProcess) {
+        if (publication !== null ) {
             let chiefCuratorSection = $('#chief-curator-section').html();
             $(parentElementId).html(chiefCuratorSection);
             $('#process-publication').click(submitChiefNotesAndAction);

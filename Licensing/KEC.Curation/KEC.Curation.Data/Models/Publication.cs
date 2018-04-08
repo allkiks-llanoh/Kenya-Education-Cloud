@@ -31,6 +31,8 @@ namespace KEC.Curation.Data.Models
         public string CertificateUrl { get; set; }
         public bool FullyAssigned { get; set; }
         public string Owner { get; set; }
+        public bool Approved { get; set; }
+        public bool Rejected { get; set; }
         public virtual Subject Subject { get; set; }
         public virtual Level Level { get; set; }
         public virtual ChiefCuratorAssignment ChiefCuratorAssignment { get; set; }

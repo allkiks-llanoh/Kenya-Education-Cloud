@@ -229,7 +229,9 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             var publication = _uow.PublicationRepository
                                   .Find(p => p.Id.Equals(publicationId)
-                                  && p.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(model.PrincipalCuratorGuid))
+                                  && p.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(model.PrincipalCuratorGuid)
+                                   && p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.PublicationApproval)
                                   .FirstOrDefault();
             if (publication == null)
             {
@@ -252,14 +254,16 @@ namespace KEC.Curation.Web.Api.Controllers
                 var recommendation = new PublicationStageLog
                 {
                     PublicationId = publication.Id,
-                    Stage = PublicationStage.PublicationApproval,
+                   
                     Notes = model.Notes,
                     CreatedAtUtc = DateTime.UtcNow,
                     Owner = model.PrincipalCuratorGuid,
                     ActionTaken = model.ActionTaken
                 };
                 _uow.PublicationStageLogRepository.Add(recommendation);
+              
                 _uow.Complete();
+                _uow.PublicationRepository.ProcessToTheNextStage(publication);
                 return Ok(value: new { message = "Recommendations Sent To Curation Managers" });
             }
             catch (Exception)
