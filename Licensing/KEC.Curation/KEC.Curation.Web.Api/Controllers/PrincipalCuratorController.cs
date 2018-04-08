@@ -91,8 +91,9 @@ namespace KEC.Curation.Web.Api.Controllers
                 var publications = _uow.PublicationRepository.Find(p =>
                                    p.Id.Equals(publicationId)
                                    && p.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(principalCuratorGuid)
-                                   && p.ChiefCuratorAssignment.Submitted == true).ToList();
-                return Ok(value: publications);
+                                    && p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.PublicationApproval);
+                return Ok(value: publications.ToList());
 
             }
             catch (Exception)

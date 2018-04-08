@@ -22,7 +22,7 @@ let principalCuratorAssignedUrl = apiBaseUrl.concat(`/principalcurator/withcomme
             console.log(data);
 
             //This code snipet prepares to append Json Data
-            $('#assigned-publications').append(tableRows(data));
+            $('#unassigned-publications').append(tableRows(data));
            
             
         }
