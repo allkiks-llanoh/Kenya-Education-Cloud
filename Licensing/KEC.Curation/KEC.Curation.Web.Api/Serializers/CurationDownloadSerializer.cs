@@ -1,6 +1,7 @@
 ﻿using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
 using System;
+using System.Linq;
 
 namespace KEC.Curation.Web.Api.Serializers
 {
@@ -70,7 +71,15 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _assignment.Assignee;
             }
         }
-    
+        public int publicationId
+        {
+            get
+            {
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                return publication.Id;
+            }
+        }
+
         public string PublicationUrl
         {
             get

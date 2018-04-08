@@ -85,6 +85,17 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(assignmentList);
 
         }
+        [HttpGet("publications/{subjectId:int}/comments")]
+        public IActionResult AssignedWithComments(int subjectId, string chiefCuratorGuid)
+        {
+
+            var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefCuratorGuid)
+                               && p.Submitted==false).ToList();
+            var assignmentList = publications.Any() ?
+            publications.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
+            return Ok(assignmentList);
+
+        }
         [HttpPost("publication/{publicationId:int}/assign")]
         public IActionResult Assign(int publicationId, [FromBody] CurationContentAssignmentSerializer model)
         {
@@ -230,6 +241,21 @@ namespace KEC.Curation.Web.Api.Controllers
                 curationComments.Select(p => new CurationCommentSerializer(p, _uow)).ToList() : new List<CurationCommentSerializer>();
             return Ok(curationCommentList);
            
+        }
+        [HttpGet("publication/withcomments")]
+        public IActionResult WithCommentsAtChiefCuratorLevel([FromQuery]string userId)
+        {
+            var curationComments = _uow.CuratorAssignmentRepository.Find(p => p.AssignedBy.Equals(userId)
+                                   && p.Publication.FullyAssigned == true
+                                   && p.Submitted == true);
+            //var curationCommentss = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(userId)
+            //                       && p.Publication.FullyAssigned == true
+            //                       && p.PublicationSection.CuratorAssignment.Submitted == true);
+            //var curationCommentList = curationComments.Any () ?
+            //    curationComments.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
+           
+            return Ok(curationComments.ToList());
+
         }
         [HttpPatch("update/curatorcomments/{id}")]
         public IActionResult UpdateCurationComments(int publicationId, [FromBody]ChiefFlagSubmittedSerilizer model)
