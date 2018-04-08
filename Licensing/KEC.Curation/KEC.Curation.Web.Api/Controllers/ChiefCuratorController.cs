@@ -90,7 +90,8 @@ namespace KEC.Curation.Web.Api.Controllers
         {
 
             var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefCuratorGuid)
-                               && p.Submitted==false).ToList();
+                              && p.Publication.PublicationStageLogs.Max(l => l.Stage) == PublicationStage.Curation
+                              && p.Submitted==false).ToList();
             var assignmentList = publications.Any() ?
             publications.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
             return Ok(assignmentList);
