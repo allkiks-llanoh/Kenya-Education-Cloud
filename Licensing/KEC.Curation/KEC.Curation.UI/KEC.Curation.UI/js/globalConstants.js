@@ -29,8 +29,8 @@ function fetchUserHeader(callback) {
     // came with the current page, but we have no guarantee.
     // Since we are only after the headers, a HEAD request may be sufficient.
     //
-    request.open('HEAD', document.location, true);
-    request.send(null);
+    //request.open('HEAD', document.location, true);
+   // request.send(null);
 }
 
 function ShowAlert(message, type) {
