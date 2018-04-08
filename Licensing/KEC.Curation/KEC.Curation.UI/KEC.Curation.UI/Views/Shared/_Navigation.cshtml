@@ -17,38 +17,61 @@
                     KEC
                 </div>
             </li>
-            <li>
-                <a href="#"><i class="glyphicon glyphicon-folder-close"></i> <span class="nav-label">Admininstration</span> </a>
-                <ul class="nav nav-second-level collapse">
-                    <li> <a href="@Url.Action("SubjectTypes", "Home")"><i class="glyphicon glyphicon-file"></i><span class="nav-label">Subject Categories</span> </a></li>
-                    <li> <a href="@Url.Action("Levels", "Home")"><i class="glyphicon glyphicon-flash"></i> <span class="nav-label">Publication Levels</span> </a></li>
-                    <li> <a href="@Url.Action("Subjects", "Home")"><i class="glyphicon glyphicon-pencil"></i> <span class="nav-label">Publication Subjects</span></a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="glyphicon glyphicon-ok-sign"></i> <span class="nav-label">Publication Conformity</span> </a>
-                <ul class="nav nav-second-level collapse">
-                    <li> <a href="@Url.Action("Legal", "Stages")"><i class="glyphicon glyphicon-thumbs-up"></i><span class="nav-label">Submission Validation</span> </a></li>
-                    <li> <a href="@Url.Action("Finance", "Stages")"><i class="glyphicon glyphicon-usd"></i><span class="nav-label">Payment Validation</span></a></li>
-
-                </ul>
-            </li>
+            @if (User.IsInRole("Admin"))
+             {
+             <li>
+              <a href="#"><i class="glyphicon glyphicon-folder-close"></i> <span class="nav-label">Admininstration</span> </a>
+              <ul class="nav nav-second-level collapse">
+                <li> <a href="@Url.Action("SubjectTypes", "Home")"><i class="glyphicon glyphicon-file"></i><span class="nav-label">Subject Categories</span> </a></li>
+                <li> <a href="@Url.Action("Levels", "Home")"><i class="glyphicon glyphicon-flash"></i> <span class="nav-label">Publication Levels</span> </a></li>
+                <li> <a href="@Url.Action("Subjects", "Home")"><i class="glyphicon glyphicon-pencil"></i> <span class="nav-label">Publication Subjects</span></a></li>
+              </ul>
+             </li>
+             }
+           
+             <li>
+               
+    
+             <a href="#"><i class="glyphicon glyphicon-ok-sign"></i> <span class="nav-label">Publication Conformity</span> </a>
+             <ul class="nav nav-second-level collapse">
+                 @if (User.IsInRole("Verification Office"))
+                  {
+                   <li> <a href="@Url.Action("Legal", "Stages")"><i class="glyphicon glyphicon-thumbs-up"></i><span class="nav-label">Submission Validation</span> </a></li>
+                  }
+                 @if (User.IsInRole("Finance Office"))
+                  {
+                   <li> <a href="@Url.Action("Finance", "Stages")"><i class="glyphicon glyphicon-usd"></i><span class="nav-label">Payment Validation</span></a></li>
+                  }
+             </ul>
+                 
+             </li>
+             
             <li>
                 <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
                 <ul class="nav nav-second-level collapse">
-                    <li> <a href="@Url.Action("CuratorView", "Curator")"><i class="glyphicon glyphicon-user"></i><span class="nav-label">Curators</span> </a></li>
-                    <li> <a href="@Url.Action("ChiefCuratorView","ChiefCurator")"><i class="glyphicon glyphicon-tasks"></i><span class="nav-label">Chief curators</span> </a></li>
-                    <li> <a href="@Url.Action("PrincipalCurator", "PrincipalCurator")"><i class="glyphicon glyphicon-tags"></i> <span class="nav-label">Principal Curators</span></a></li>
+                    @if (User.IsInRole("Curator"))
+                     {
+                      <li> <a href="@Url.Action("CuratorView", "Curator")"><i class="glyphicon glyphicon-user"></i><span class="nav-label">Curators</span> </a></li>
+                     }
+                    @if (User.IsInRole("Chief Curator"))
+                     {
+                      <li> <a href="@Url.Action("ChiefCuratorView","ChiefCurator")"><i class="glyphicon glyphicon-tasks"></i><span class="nav-label">Chief curators</span> </a></li>
+                     }
+                    @if (User.IsInRole("Principal Curator"))
+                     {
+                      <li> <a href="@Url.Action("PrincipalCurator", "PrincipalCurator")"><i class="glyphicon glyphicon-tags"></i> <span class="nav-label">Principal Curators</span></a></li>
+                     }
                 </ul>
             </li>
-            <li>
-                <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Manage Roles</span> </a>
-                <ul class="nav nav-second-level collapse">
-                    <li>@Html.ActionLink("Role", "Index", "Role")</li>
-                    
-                </ul>
-            </li>
-
+            @if (User.IsInRole("Admin"))
+             {
+              <li>
+               <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Manage Roles</span> </a>
+               <ul class="nav nav-second-level collapse">
+               <li>@Html.ActionLink("Role", "Index", "Role")</li>
+               </ul>
+              </li>
+             }
         </ul>
     </div>
 </nav>
