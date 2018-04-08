@@ -75,7 +75,8 @@ namespace KEC.Curation.Web.Api.Controllers
 
             var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.
                                        PrincipalCuratorGuid.Equals(principalCuratorGuid)
-                                       && p.ChiefCuratorAssignment.Submitted==true);
+                                        && p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.PublicationApproval);
             var publicationList = publications.Any() ?
                 publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
             return Ok(value: publicationList);

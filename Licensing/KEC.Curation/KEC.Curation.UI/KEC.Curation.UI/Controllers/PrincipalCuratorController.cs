@@ -51,6 +51,21 @@ namespace KEC.Curation.UI.Controllers
             }
            
         }
+        public ActionResult PrincipalCuratorComments()
+        {
+
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId
+                };
+                return View(chiefCurator);
+            }
+        }
         public ActionResult PrincipalCuratorReverse()
         {
             ViewData["SubTitle"] = "Curation Management System";

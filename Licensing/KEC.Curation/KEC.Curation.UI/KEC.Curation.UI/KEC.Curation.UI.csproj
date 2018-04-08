@@ -932,6 +932,7 @@
     <Content Include="Views\PrincipalCurator\ViewPublication.cshtml" />
     <Content Include="Views\ChiefCurator\ChiefCuratorViewAssigned.cshtml" />
     <Content Include="Views\ChiefCurator\ChiefCuratorComments.cshtml" />
+    <Content Include="Views\PrincipalCurator\PrincipalCuratorComments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
