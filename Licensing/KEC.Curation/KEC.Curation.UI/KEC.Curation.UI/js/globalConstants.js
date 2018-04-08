@@ -30,7 +30,7 @@ function fetchUserHeader(callback) {
     // Since we are only after the headers, a HEAD request may be sufficient.
     //
     request.open('HEAD', document.location, true);
-   // request.send(null);
+    request.send(null);
 }
 
 function ShowAlert(message, type) {
