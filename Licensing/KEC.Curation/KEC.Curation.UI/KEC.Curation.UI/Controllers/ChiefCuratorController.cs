@@ -63,7 +63,7 @@ namespace KEC.Curatiom.Web.UI.Controllers
                 return View(chiefCurator);
             }
         }
-        [HttpGet]
+    
         public ActionResult ChiefCuratorView()
         {
          
@@ -79,7 +79,7 @@ namespace KEC.Curatiom.Web.UI.Controllers
                 return View(chiefCurator);
             }
         }
-        [HttpGet]
+    
         public ActionResult ChiefCuratorComments()
         {
 
