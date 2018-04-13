@@ -1,6 +1,11 @@
-﻿
+﻿(function () {
+    $(document).ready(function () {
+       
+        $("#deleteas").click(deleteAssignment);
+       
+    });
 
-let principalCuratorHistoryUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`)
+    let principalCuratorHistoryUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`);
 
 function tableRows(data) {
     var tableRows = [];
@@ -34,7 +39,7 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.description + "</td>"));
     row.append($("<td>" + rowData.kicdNumber + "</td>"));
-    row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.id} class="btn btn-w-m btn-info btn-md DeleteAssignment" id="delete" role="button">Remove Assignment</button>`));
+    row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.id} class="btn btn-w-m btn-info btn-md DeleteAssignment" id="deleteas" role="button">Remove Assignment</button>`));
 
     return row[0];
    
@@ -65,10 +70,11 @@ function deleteAssignment() {
             error: function (request, status, error) {
 
                 ShowAlert('Something went wrong while loading publication curator assignments', 'error');
-                $('#delete').html('Remove Assignment');
+                $('#deleteas').html('Remove Assignment');
 
 
             }
         });
    
-}
+    }
+})();

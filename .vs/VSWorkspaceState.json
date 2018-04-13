@@ -1,16 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\CuratorsManager",
-    "\\CuratorsManager\\Views",
-    "\\CuratorsManager\\Views\\Home",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views\\Shared",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.UI",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI"
+    "\\Licensing",
+    "\\Licensing\\KEC.Curation",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.Data"
   ],
-  "SelectedNode": "\\CuratorsManager",
+  "SelectedNode": "\\.gitignore",
   "PreviewInSolutionExplorer": false
 }
