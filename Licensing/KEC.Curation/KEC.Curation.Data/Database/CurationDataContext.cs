@@ -34,6 +34,7 @@ namespace KEC.Curation.Data.Database
         public DbSet<ChiefCuratorAssignment> ChiefCuratorAssignments { get; set; }
         public DbSet<ChiefCuratorComment> ChiefCuratorComments{ get; set; }
         public DbSet<PrincipalCuratorComment> PrincipalCuratorComments { get; set; }
+        public DbSet<CurationManagersComment> CurationManagersComments { get; set; }
 
     }
 }

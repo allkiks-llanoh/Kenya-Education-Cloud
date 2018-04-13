@@ -18,22 +18,16 @@ namespace KEC.Curation.Data.UnitOfWork
             _context = new Database.CurationDataContext(optionsBuilder.Options);
         }
         public PublicationRepository PublicationRepository => new PublicationRepository(_context);
-
         public PublicationSectionRepository PublicationSectionRepository => new PublicationSectionRepository(_context);
-
         public SubjectRepository SubjectRepository => new SubjectRepository(_context);
-
         public SubjectTypeRepository SubjectTypeRepository => new SubjectTypeRepository(_context);
-
         public CuratorAssignmentRepository CuratorAssignmentRepository => new CuratorAssignmentRepository(_context);
-
         public LevelRepository LevelRepository => new LevelRepository(_context);
-
         public PublicationStageLogRepository PublicationStageLogRepository => new PublicationStageLogRepository(_context);
-
         public ChiefCuratorAssignmentRepository ChiefCuratorAssignmentRepository => new ChiefCuratorAssignmentRepository(_context);
         public ChiefCuratorCommentRepository ChiefCuratorCommentRepository => new ChiefCuratorCommentRepository(_context);
         public PrincipalCuratorCommentRepository PrincipalCuratorCommentRepository => new PrincipalCuratorCommentRepository(_context);
+        public CurationManagersCommentRepository CurationManagersCommentRepository => new CurationManagersCommentRepository(_context);
 
         public int Complete()
         {

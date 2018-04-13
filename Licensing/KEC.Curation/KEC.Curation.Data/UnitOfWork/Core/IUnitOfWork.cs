@@ -15,6 +15,7 @@ namespace KEC.Curation.Data.UnitOfWork
         ChiefCuratorAssignmentRepository ChiefCuratorAssignmentRepository { get;}
         ChiefCuratorCommentRepository ChiefCuratorCommentRepository { get; }
         PrincipalCuratorCommentRepository PrincipalCuratorCommentRepository { get; }
+        CurationManagersCommentRepository CurationManagersCommentRepository { get; }
         int Complete();
     }
 }
