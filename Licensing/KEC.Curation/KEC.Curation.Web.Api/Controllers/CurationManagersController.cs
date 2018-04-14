@@ -145,11 +145,27 @@ namespace KEC.Curation.Web.Api.Controllers
 
             return Ok(value: publicationsCount);
         }
+        [HttpGet("get/approved/{Id}")]
+        public IActionResult GetApprovedById(int Id)
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Approved &&p.Id.Equals(Id)).FirstOrDefault();
+
+            return Ok(value: publicationsCount);
+        }
         [HttpGet("get/rejected")]
         public IActionResult GetRejected()
         {
 
             var publicationsCount = _uow.PublicationRepository.Find(p => p.Rejected).ToList();
+
+            return Ok(value: publicationsCount);
+        }
+        [HttpGet("get/rejected/{Id}")]
+        public IActionResult GetRejectedById(int Id)
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Rejected && p.Id.Equals(Id)).FirstOrDefault();
 
             return Ok(value: publicationsCount);
         }
