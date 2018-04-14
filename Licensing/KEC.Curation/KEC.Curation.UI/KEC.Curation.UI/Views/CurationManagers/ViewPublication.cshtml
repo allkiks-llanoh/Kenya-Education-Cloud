@@ -1,0 +1,189 @@
+﻿@{
+    ViewBag.Title = "Publication";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+
+
+    @Scripts.Render("~/plugins/summernote")
+    @Styles.Render("~/plugins/summernoteStyles")
+    @Scripts.Render("~/plugins/sweetAlert")
+}
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@{
+    var PubId = Request.Params["Pub"];
+
+
+}
+<script type="text/javascript">
+    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+</script>
+<script type="text/javascript">
+    (function () {
+        $(document).ready(function () {
+            getPublication();
+
+
+        });
+
+        ///Functions Section
+        function getPublication() {
+            let publicationId = $('#publication-view').attr('data-publicationId');
+            var urls = apiBaseUrls.concat(`CurationManagers/get/publications/${publicationId}`);
+
+            $.ajax({
+                url: urls,
+                type: 'GET',
+                contentType: 'application/json',
+                accepts: 'application/json',
+                crossDomain: true,
+                statusCode: {
+                    404: () => { ShowAlert("Publication record could not be retrieved", 'error'); },
+                    403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
+                    500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
+                },
+
+
+            }).done(function (publication, textStatus, jqXHR) {
+
+                $('#publication-details').replaceWith(
+                    `<dl id="publication-details" data-stage="${publication.stage}">
+                  <dt>Curation Number</dt>
+                  <dd id="kicd-number">${publication.kicdNumber}</dd>
+                   <dt>Publisher</dt>
+                   <dd>${publication.publisherName}</dd>
+                   <dt>Title</dt>
+                   <dd>${publication.title}</dd>
+                   <dt>Description</dt>
+                   <dd>${publication.description}</dd>
+                   <dt>Content</dt>
+                   <dd><a href="${publication.url}" target="blank">Link to publication</a></dd>
+                   <dt>Level</dt>
+                   <dd>${publication.level}</dd>
+                   <dt>Completion date</dt>
+                   <dd>${publication.completionDate}</dd></dl>`);
+
+            });
+        }
+
+        function getActionsTaken() {
+            var url = apiBaseUrl.concat('/lookups/actions');
+            $.ajax({
+                url: url,
+                type: 'GET',
+                accept: 'application/json',
+                contentType: 'application/json',
+                crossDomain: true
+
+
+            }).done(function (data, textStatus, jqXHR) {
+                let itemsHtml = '';
+                data.forEach(function (actionItem) {
+                    itemsHtml = itemsHtml.concat(`<li id='${actionItem.name}'>${actionItem.description}<li>`);
+
+                });
+                $('#action-taken').html(itemsHtml);
+                hookBtnSelect();
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                ShowAlert("Something went wrong while loading actions", "error");
+            });
+        }
+        function showChiefCuratorSubmissionSection(publication, parentElementId) {
+            if (publication !== null) {
+                let chiefCuratorSection = $('#chief-curator-section').html();
+                $(parentElementId).html(chiefCuratorSection);
+
+            }
+        }
+        function submitChiefNotesAndAction(e) {
+            e.preventDefault();
+            let publicationId = $('#publication-view').attr('data-publicationId');
+            let actionSelected = $("#action-selected").val();
+            let notes = $('.note-editable').html();
+
+            let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
+            let userGuid = $('#CurrentUserGuid').val();
+            if (notes === null || notes === "") {
+                return ShowAlert("Curation notes cannot be blank", "error");
+            }
+            if (actionSelected === null || actionSelected === "") {
+                return ShowAlert("Please select an action taken from the list", "error");
+            }
+
+            $.ajax({
+                headers : {
+                    'Accept' : 'application/json',
+                    'Content-Type' : 'application/json'
+                },
+                url: url,
+                type: 'POST',
+                contentType: 'application/json',
+                crossDomain: true,
+                accepts: 'application/json',
+                data: JSON.stringify({ ChiefCuratorGuid: userGuid, Notes: notes, ActionTaken: actionSelected, publicationId: publicationId, Status: true }),
+                statusCode: {
+                    404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
+                    403: () => { ShowAlert("You are not authorized to process publication"); },
+                    500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
+                }
+            }).success(function (data, textStatus, jqXHR) {
+                ShowAlert("Recomendations passed to Principal Curator");
+            }).fail(function () {
+                ShowAlert("Something went wrong while processing publication", 'error');
+            });
+        }
+        //Functions Section
+
+
+    })();
+</script>
+<div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Publication Details</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                        <dl id="publication-details"></dl>
+                    </div>
+                    <div class="ibox-footer">
+                        <span class="pull-right">
+                            Publication Details
+                        </span>
+                        Publication Details
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group ">
+
+                <a href="/CurationManagers/AllPublications" class="btn btn-w-m btn-info pull-right" style="background-color:#00B95F;" role="button">Back To List</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@*<div class="form-group col-md-10">
+        <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
+    </div>
+    <div class="form-group col-md-10">
+        <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
+    </div>*@
+
+<div class="hidden">
+
+    <h1 id="identity" data-identity=@PubId></h1>
+
+</div>

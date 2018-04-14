@@ -66,6 +66,16 @@ namespace KEC.Curation.Web.Api.Controllers
 
             return Ok(value: curationCommentsList);
         }
+        [HttpGet("getcomments/fromcuration")]
+        public IActionResult GetCommentsFromCuration(int publicationId)
+        {
+
+            var curationComments = _uow.PublicationRepository.Find(p => p.Id.Equals(publicationId));
+            var curationCommentsList = curationComments.Any() ?
+               curationComments.Select(p => new GetCommentsFromCurationSerilizer(p, _uow)).ToList() : new List<GetCommentsFromCurationSerilizer>();
+
+            return Ok(value: curationCommentsList);
+        }
         #endregion
         #region Create Comment
         [HttpPost]
@@ -111,6 +121,14 @@ namespace KEC.Curation.Web.Api.Controllers
         #endregion
         #region Get Publications
 
+        [HttpGet("get/publications/{Id}")]
+        public IActionResult GetAllPublicationsById(int Id)
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p=> p.Id.Equals(Id)).FirstOrDefault();
+
+            return Ok(value: publicationsCount);
+        }
         [HttpGet("get/publications")]
         public IActionResult GetAllPublications()
         {
@@ -141,6 +159,17 @@ namespace KEC.Curation.Web.Api.Controllers
 
             var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
                                        == PublicationStage.PublicationApproval).ToList();
+
+            return Ok(value: publicationsCount);
+        }
+       //Pending Publications By Id
+        [HttpGet("get/pending/{id}")]
+        public IActionResult GetPendingById(int Id)
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
+                                       == PublicationStage.PublicationApproval
+                                       &&p.Id.Equals(Id)).FirstOrDefault();
 
             return Ok(value: publicationsCount);
         }

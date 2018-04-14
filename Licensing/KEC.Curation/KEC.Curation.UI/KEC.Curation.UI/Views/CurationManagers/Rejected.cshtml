@@ -11,9 +11,9 @@
         <div class="col-lg-12">
             <div class="text-center m-t-lg">
                 <h1>
-                    cURATION
+                    @ViewData["SubTitle"]
                 </h1>
-
+                <small>@ViewData["Message"]</small>
             </div>
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -76,7 +76,7 @@
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.publisherName + "</td>"));
 
-        row.append($(`<td> <a href="/ChiefCurator/AssignPublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Assign</a>`));
+        row.append($(`<td> <a href="/ChiefCurator/AssignPublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
 
         return row[0];
     };
