@@ -129,7 +129,7 @@
                     </div>
                 </div>
         
-            
+            </div>
       
         <div class="footer" style="">
             <strong>Copyright</strong> KEC  &copy; 2018

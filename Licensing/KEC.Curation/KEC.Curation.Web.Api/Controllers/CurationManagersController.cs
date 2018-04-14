@@ -20,7 +20,7 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             _uow = uow;
         }
-        // GET: api/CurationManagers/Count
+        #region Get Counts
         [HttpGet("count/publications")]
         public IActionResult CountPublications()
         {
@@ -45,8 +45,8 @@ namespace KEC.Curation.Web.Api.Controllers
 
             return Ok(value: publicationsCount);
         }
-        [HttpGet("count/partial")]
-        public IActionResult CountPartial()
+        [HttpGet("count/pending")]
+        public IActionResult CountPending()
         {
 
             var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
@@ -54,6 +54,8 @@ namespace KEC.Curation.Web.Api.Controllers
 
             return Ok(value: publicationsCount);
         }
+        #endregion
+        #region Get Comments
         [HttpGet("getcomments")]
         public IActionResult GetComments(int publicationId)
         {
@@ -64,7 +66,8 @@ namespace KEC.Curation.Web.Api.Controllers
 
             return Ok(value: curationCommentsList);
         }
-        // POST: api/CurationManagers
+        #endregion
+        #region Create Comment
         [HttpPost]
         public IActionResult CreateComment([FromBody] CurationManagersSerilizer model)
         {
@@ -105,17 +108,42 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        #endregion
+        #region Get Publications
 
-        // PUT: api/CurationManagers/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpGet("get/publications")]
+        public IActionResult GetAllPublications()
         {
+
+            var publicationsCount = _uow.PublicationRepository.GetAll().ToList();
+
+            return Ok(value: publicationsCount);
         }
-        
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpGet("get/approved")]
+        public IActionResult GetApproved()
         {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Approved).ToList();
+
+            return Ok(value: publicationsCount);
         }
+        [HttpGet("get/rejected")]
+        public IActionResult GetRejected()
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Rejected).ToList();
+
+            return Ok(value: publicationsCount);
+        }
+        [HttpGet("get/pending")]
+        public IActionResult GetPending()
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
+                                       == PublicationStage.PublicationApproval).ToList();
+
+            return Ok(value: publicationsCount);
+        }
+        #endregion
     }
 }

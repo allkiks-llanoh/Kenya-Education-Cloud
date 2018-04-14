@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "AllPublications";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/Content/footable/footable.core.css" rel="stylesheet" />
+<script type="text/javascript">
+    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+</script>
+<div id="wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center m-t-lg">
+                <h1>
+                    cURATION
+                </h1>
+
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Search For A Publication</h5>
+                </div>
+                <div class="ibox-content">
+                    <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Use Curation Number">
+                    <table id="allpublications" class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+
+                        <tr class="footable-sortable">
+                            <th> CURATION NUMBER </th>
+                            <th> TITLE </th>
+                            <th> PUBLISHER</th>
+                            <th> ACTIONS</th>
+                        </tr>
+
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <ul class="pagination pull-right"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer" style="">
+        <strong>Copyright</strong> KEC &copy; 2018
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    let Url = apiBaseUrls.concat(`/curationmanagers/get/rejected`);
+    function tableRows(data) {
+        var tableRows = [];
+        for (var i = 0; i < data.length; i++) {
+            tableRows.push(drawRow(data[i]));
+        }
+        return tableRows;
+    };
+    $.ajax({
+        url: Url,
+        type: "GET",
+        dataType: "json",
+        success: function (data, status, jqhxr) {
+            console.log(data);
+            //This code snipet prepares to append Json Data
+            $('#allpublications').append(tableRows(data));
+        }
+    });
+
+    //This functionpopulates the tbody inner HTML with json data on call
+    function drawRow(rowData) {
+        var row = $("<tr />")
+        row.append($(`<td class="hidden"> + rowData.id + </td>`));
+        row.append($("<td>" + rowData.kicdNumber + "</td>"));
+        row.append($("<td>" + rowData.title + "</td>"));
+        row.append($("<td>" + rowData.publisherName + "</td>"));
+
+        row.append($(`<td> <a href="/ChiefCurator/AssignPublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Assign</a>`));
+
+        return row[0];
+    };
+
+</script>
