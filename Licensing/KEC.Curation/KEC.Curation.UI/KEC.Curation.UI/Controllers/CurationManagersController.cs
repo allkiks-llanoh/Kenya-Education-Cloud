@@ -22,8 +22,15 @@ namespace KEC.Curation.UI.Controllers
             ViewData["Message"] = "Assign To Chief Curators";
             return View();
         }
-        [HttpGet, Route("ReviewPublication/{Id:int}")]
+       
         public ActionResult ReviewPublication(int Id)
+        {
+            ViewBag.PublicationId = Id;
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
+            return View();
+        }
+        public ActionResult DetailApproved(int Id)
         {
             ViewBag.PublicationId = Id;
             ViewData["SubTitle"] = "Curation Management System";

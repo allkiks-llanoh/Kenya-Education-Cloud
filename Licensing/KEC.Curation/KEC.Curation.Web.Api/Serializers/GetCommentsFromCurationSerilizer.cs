@@ -50,6 +50,22 @@ namespace KEC.Curation.Web.Api.Serializers
                
             }
         }
-       
+        public string CutationManagersCuratorComments
+        {
+            get
+            {
+                var publication = _uow.CurationManagersCommentRepository.Find(p => p.PublicationId.Equals(_assignment.Id)).FirstOrDefault();
+                if (publication == null)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    return publication.Notes;
+                }
+
+            }
+        }
+
     }
 }

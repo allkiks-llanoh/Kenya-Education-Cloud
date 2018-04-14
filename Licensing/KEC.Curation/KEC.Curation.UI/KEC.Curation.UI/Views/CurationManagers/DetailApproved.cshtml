@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Review Publication";
+    ViewBag.Title = "Detail Approved";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -28,13 +28,13 @@
         $(document).ready(function () {
             getPublication();
             getPublicationCurationComments();
-            $('#recommend').click(submitChiefNotesAndAction);
+          
         });
 
         ///Functions Section
         function getPublication() {
             let publicationId = $('#publication-view').attr('data-publicationId');
-            var urls = apiBaseUrls.concat(`/CurationManagers/get/publications/${publicationId}`);
+            var urls = apiBaseUrls.concat(`/CurationManagers/get/approved/${publicationId}`);
 
             $.ajax({
                 url: urls,
@@ -70,7 +70,7 @@
             });
         }
         function getPublicationCurationComments() {
-         
+
             let publicationId = $('#publication-view').attr('data-publicationId');
             let url = apiBaseUrl.concat(`/CurationManagers/getcomments/fromcuration?publicationId=${publicationId}`);
             //let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
@@ -92,7 +92,8 @@
                 submissions.forEach(function (submission) {
                     $('#currator-commets').html(` <dt>Curator Comments</dt><dd> ${submission.curatorComments}</dd>
                                                   <dt>Chief Curator Comments</dt><dd>${submission.chiefCuratorComments}</dd>
-                                                  <dt>Principal Curator Comments</dt><dd>${submission.principalCuratorComments}</dd>`);
+                                                  <dt>Principal Curator Comments</dt><dd>${submission.principalCuratorComments}</dd>
+                                                  <dt>Curation Managers Comments</dt><dd>${submission.curationManagersCuratorComments}</dd>`);
 
                 });
 
@@ -140,11 +141,11 @@
             let notes = $('.note-editable').html();
 
             let url = apiBaseUrl.concat(`/CurationManagers`);
-           
+
             if (notes === null || notes === "") {
                 return ShowAlert("Curation notes cannot be blank", "error");
             }
-           
+
             $.ajax({
                 headers : {
                     'Accept' : 'application/json',
@@ -174,7 +175,7 @@
 </script>
 <script type="text/javascript">
 
-    </script>
+</script>
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">

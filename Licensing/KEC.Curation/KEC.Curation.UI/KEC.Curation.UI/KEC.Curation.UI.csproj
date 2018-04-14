@@ -962,6 +962,7 @@
     <Content Include="Views\CurationManagers\Pending.cshtml" />
     <Content Include="Views\CurationManagers\ViewPublication.cshtml" />
     <Content Include="Views\CurationManagers\ReviewPublication.cshtml" />
+    <Content Include="Views\CurationManagers\DetailApproved.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -49,7 +49,7 @@
 </div>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-    let Url = apiBaseUrls.concat(`/curationmanagers/get/rejected`);
+    let Url = apiBaseUrls.concat(`/curationmanagers/get/approved`);
     function tableRows(data) {
         var tableRows = [];
         for (var i = 0; i < data.length; i++) {
@@ -76,7 +76,7 @@
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.publisherName + "</td>"));
 
-        row.append($(`<td> <a href="/ChiefCurator/AssignPublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
+        row.append($(`<td> <a href="/CurationManagers/DetailApproved/${rowData.id}?Pub=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
 
         return row[0];
     };
