@@ -84,12 +84,16 @@
 </div>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript">
+    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+</script>
 <script type="text/JavaScript">
 
     $(document).ready(function () {
+        let PublicationsUrl = apiBaseUrls.concat(`/curationmanagers/count/publications`);
         var AllCount = $('#all_wait');
         $.ajax({
-            url: `http://localhost:15176/api/curationmanagers/count/publications`,
+            url: PublicationsUrl,
             type: "GET",
 
             dataType: "json",
@@ -103,10 +107,10 @@
 <script type="text/JavaScript">
 
     $(document).ready(function () {
-
+        let PendingUrl = apiBaseUrls.concat(`/curationmanagers/count/pending`);
         var PendingCount = $('#pending_wait');
         $.ajax({
-            url: `http://localhost:15176/api/curationmanagers/count/pending`,
+            url:PendingUrl,
             type: "GET",
             dataType: "json",
             success: function (data, status, jqhxr) {
@@ -118,10 +122,10 @@
 <script type="text/JavaScript">
 
     $(document).ready(function () {
-
+        let ApprovedUrl = apiBaseUrls.concat(`/curationmanagers/count/approved`);
         var ApprovedCount = $('#approved_wait');
         $.ajax({
-            url: `http://localhost:15176/api/curationmanagers/count/approved`,
+            url:ApprovedUrl,
             type: "GET",
             dataType: "json",
             success: function (data, status, jqhxr) {
@@ -133,10 +137,10 @@
 <script type="text/JavaScript">
 
     $(document).ready(function () {
-
+        let RejectedUrl = apiBaseUrls.concat(`/curationmanagers/count/rejected`);
         var RejectedCount = $('#rejected_wait');
         $.ajax({
-            url: `http://localhost:15176/api/curationmanagers/count/rejected`,
+            url: RejectedUrl,
             type: "GET",
             dataType: "json",
             success: function (data, status, jqhxr) {
