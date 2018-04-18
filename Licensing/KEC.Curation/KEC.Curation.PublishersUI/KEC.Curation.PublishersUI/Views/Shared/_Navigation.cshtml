@@ -3,7 +3,16 @@
     <div class="sidebar-collapse" >
         <ul class="nav" id="side-menu">
             <li>
+                <div class="dropdown profile-element" style="background-color:white;">
+                    <a data-toggle="dropdown" style="background-color:white;" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <img src="~/Content/plugins/images/logo.png" />
+                            </span>
+                        </span>
+                    </a>
 
+                </div>
                 <div class="logo-element">
                     CMS+
                 </div>
@@ -17,18 +26,13 @@
             <li>
                 <a href="@Url.Action("Approved", "Publisher")"><i class="fa fa-info-circle"></i> <span class="nav-label">Status</span></a>
             </li>
-            @*<li>
-                @Html.ActionLink("Create blob container", "CreateBlobContainer", "Blobs")
-            </li>
-            <li>@Html.ActionLink("Upload blob", "UploadBlob", "Blobs")</li>
-            <li>@Html.ActionLink("List blobs", "ListBlobs", "Blobs")</li>
-            <li>@Html.ActionLink("Download blob", "DownloadBlob", "Blobs")</li>*@
-             <li>
+            
+             @*<li>
             <a href="@Url.Action("Conditional", "Publisher")"><i class="fa fa-laptop"></i> <span class="nav-label">Conditional</span> </a>
-        </li>
-        <li>
+        </li>*@
+        @*<li>
             <a href="@Url.Action("Rejected", "Publisher")"><i class="fa fa-laptop"></i> <span class="nav-label">Rejected</span> </a>
-        </li>
+        </li>*@
 
         </ul>
     </div>

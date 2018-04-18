@@ -8,6 +8,7 @@ namespace KEC.Curation.PublishersUI.Models
     public class Publishers
     {
         public string Company{ get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
         public string guid { get; set; }
     }

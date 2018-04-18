@@ -16,8 +16,22 @@ namespace KEC.Curation.PublishersUI.Controllers
 
         public ActionResult Index()
         {
-           
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
         }
 
         public ActionResult About()

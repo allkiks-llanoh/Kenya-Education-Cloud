@@ -1,4 +1,6 @@
-﻿<div class="row border-bottom" >
+﻿@using KEC.Curation.PublishersUI.Models
+@model Publishers
+<div class="row border-bottom">
     <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" style="background-color:#00af57;" href="#"><i class="fa fa-bars"></i> </a>
@@ -8,6 +10,13 @@
                 </div>
             </form>
         </div>
-        @Html.Partial("_LoginPartial")
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+               
+                @Html.ActionLink("Hello " + @Model.FirstName + " " + @Model.LastName + "!", "", "", routeValues: null, htmlAttributes: new { title = "Manage" })
+
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
     </nav>
 </div>
