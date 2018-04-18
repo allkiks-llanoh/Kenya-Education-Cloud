@@ -7,13 +7,12 @@
 @section Scripts{
     <script src="@Url.Content("~/js/CurationCommentsChief.js")"></script>
     <script src="@Url.Content("~/js/ReadCurationComments.js")"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
-    @Scripts.Render("~/plugins/summernote")
-    @Styles.Render("~/plugins/summernoteStyles")
     @Scripts.Render("~/plugins/sweetAlert")
 }
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
 
 @{
     var PubId = Request.Params["Pub"];
@@ -70,7 +69,7 @@
             });
         }
         function getPublicationCurationComments() {
-         
+
             let publicationId = $('#publication-view').attr('data-publicationId');
             let url = apiBaseUrl.concat(`/CurationManagers/getcomments/fromcuration?publicationId=${publicationId}`);
             //let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
@@ -140,11 +139,11 @@
             let notes = $('.note-editable').html();
 
             let url = apiBaseUrl.concat(`/CurationManagers`);
-           
+
             if (notes === null || notes === "") {
                 return ShowAlert("Curation notes cannot be blank", "error");
             }
-           
+
             $.ajax({
                 headers : {
                     'Accept' : 'application/json',
@@ -155,7 +154,7 @@
                 contentType: 'application/json',
                 crossDomain: true,
                 accepts: 'application/json',
-                data: JSON.stringify({ PublicationId: publicationId, Notes: notes, ToDo: todo}),
+                data: JSON.stringify({ PublicationId: publicationId, Notes: notes, ToDo: todo }),
                 statusCode: {
                     404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
                     403: () => { ShowAlert("You are not authorized to process publication"); },
@@ -174,7 +173,7 @@
 </script>
 <script type="text/javascript">
 
-    </script>
+</script>
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">
