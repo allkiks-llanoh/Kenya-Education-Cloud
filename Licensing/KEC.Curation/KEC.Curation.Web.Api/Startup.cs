@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using KEC.Curation.Data.UnitOfWork;
+﻿using KEC.Curation.Data.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+
 
 namespace KEC.Curation.Web.Api
 {
@@ -17,6 +14,8 @@ namespace KEC.Curation.Web.Api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+         
+           
         }
 
         public IConfiguration Configuration { get; }
@@ -25,6 +24,19 @@ namespace KEC.Curation.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddCors(o => o.AddPolicy("AllowCrossSiteJson", builder =>
+                                                                        {
+                                                                            builder.AllowAnyHeader()
+                                                                                   .AllowAnyMethod()
+                                                                                   .AllowAnyOrigin();
+                                                                        }));
+
+            services.Configure<MvcOptions>(option =>
+                                            {
+                                                option.OutputFormatters.RemoveType
+                                                <XmlDataContractSerializerOutputFormatter>();
+                                            });
+
             services.AddTransient<IUnitOfWork>(m=>new EFUnitOfWork());
         }
 
@@ -35,10 +47,11 @@ namespace KEC.Curation.Web.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-           app.UseCors(builder =>
-           builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+            
+           app.UseCors("AllowCrossSiteJson");
 
             app.UseMvc();
+
         }
     }
 }

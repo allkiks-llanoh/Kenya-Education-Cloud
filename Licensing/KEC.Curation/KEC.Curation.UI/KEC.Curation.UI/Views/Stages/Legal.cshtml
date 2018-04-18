@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Legal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+
+  
+    <script src="@Url.Content("~/js/legalView.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
+}
+    <div class="text-center m-t-lg">
+        <h1>
+            @ViewData["SubTitle"]
+        </h1>
+        <small>@ViewData["Message"]</small>
+    </div>
+<div class="tabs-container">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#tab-unassigned" aria-expanded="true">Legal Verification Stage</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="tab-unassigned" class="tab-pane active">
+            <div class="panel-body">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Listing Unverified Publications</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered table-hover dataTables-example" id="LegalList">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Title</th>
+                                                        <th>Description</th>
+                                                        <th>KICD Number</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="hidden">
+    <input type="text" id="identity" data-identity="1">
+</div>

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
+using KEC.Curation.Web.Api.Cors;
 using KEC.Curation.Web.Api.Serializers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KEC.Curation.Web.Api.Controllers
 {
+    [AllowCrossSiteJson]
     [Produces("application/json")]
     [Route("api/Subjects")]
     public class SubjectsController : Controller
@@ -28,7 +30,15 @@ namespace KEC.Curation.Web.Api.Controllers
                 subjects.Select(p => new SubjectDownloadSerializer(p,_uow)): new List<SubjectDownloadSerializer>();
             return Ok(value: subjectList.ToList());
         }
-
+        // GET: api/Subjects
+        [HttpGet("ForCurators")]
+        public IActionResult CuratorSubjects()
+        {
+            var subjects = _uow.SubjectRepository.GetAll().ToList();
+            var subjectList = subjects.Any() ?
+                subjects.Select(p => new SubjectDownloadSerializerForCurators(p, _uow)) : new List<SubjectDownloadSerializerForCurators>();
+            return Ok(value: subjectList.ToList());
+        }
         // GET: api/Subjects/5
         [HttpGet("{id}", Name = "SubjectById")]
         public IActionResult SubjectById(int id)
@@ -40,6 +50,7 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             return Ok(value: new SubjectDownloadSerializer(subject, _uow));
         }
+
 
         // POST: api/Subjects
         [HttpPost]

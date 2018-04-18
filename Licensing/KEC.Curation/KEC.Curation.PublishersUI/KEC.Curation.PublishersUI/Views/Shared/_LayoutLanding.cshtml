@@ -1,0 +1,37 @@
+﻿<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>KEC Landing Page</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        @Styles.Render(" ~/Content/assets/css/main.css")
+    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+    <noscript>
+        @Styles.Render(" ~/Content/assets/css/noscript.css")
+    </noscript>
+</head>
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper" style="background:url('~/Content/assets/images/bg.jpg');">
+        @RenderBody()
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright">KEC &copy;  2018.</p>
+        </footer>
+
+    </div>
+
+    <!-- BG -->
+    <div id="bg"></div>
+
+    <!-- Scripts -->
+    @Scripts.Render("~/bundles/javascript")
+   
+    @RenderSection("scripts", required: false)
+    
+
+</body>
+</html>

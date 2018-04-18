@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEC.Curation.PublishersUI", "KEC.Curation.PublishersUI\KEC.Curation.PublishersUI.csproj", "{EEDA859E-ACEC-40C6-94D4-B17FB695CCEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEDA859E-ACEC-40C6-94D4-B17FB695CCEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDA859E-ACEC-40C6-94D4-B17FB695CCEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDA859E-ACEC-40C6-94D4-B17FB695CCEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDA859E-ACEC-40C6-94D4-B17FB695CCEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C7BDB5E-B436-4D88-A127-BE2E958B04D8}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,7 @@
+﻿{
+  "ConnectionStrings": {
+    "CurationDatabase": "Data Source=tcp:kecapiserver.database.windows.net,1433;Initial Catalog=CurationDb;Persist Security Info=False;User ID=miyabi@kecapiserver;Password=YZ{@MB6[UH:H;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    //"CurationDatabase": "Data Source=DESKTOP-C9UC49M\\SQLEXPRESS;Initial Catalog=Curation;Integrated Security=True;"
+
+  }
+}

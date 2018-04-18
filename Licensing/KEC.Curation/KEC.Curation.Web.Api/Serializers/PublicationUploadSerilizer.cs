@@ -14,13 +14,12 @@ namespace KEC.Curation.Web.Api.Serializers
         public string PublisherName { get; set; }
         [Required(ErrorMessage = "Publication author cannot be blank")]
         public string AuthorName { get; set; }
-        [Required(ErrorMessage = "Publication price cannot be blank")]
         public decimal? Price { get; set; }
         [Required(ErrorMessage = "Publication completion Date cannot be blank")]
         [DisplayName("Completion Date")]
         public DateTime? CompletionDate { get; set; }
         [Required(ErrorMessage = "Please provide brief descriptio (200 words)")]
-        [StringLength(200,ErrorMessage ="A maximum of 2oo words is required")]
+        [StringLength(200,ErrorMessage ="A maximum of 200 words is required")]
         public string Description { get; set; }
         [Required(ErrorMessage ="Please specified the publication subject")]
         [DisplayName("Subject")]

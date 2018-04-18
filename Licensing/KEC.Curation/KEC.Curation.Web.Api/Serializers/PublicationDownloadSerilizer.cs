@@ -1,10 +1,9 @@
-﻿using KEC.Curation.Data.Database;
-using KEC.Curation.Data.Models;
+﻿using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using KEC.Curation.Services.Extensions;
+using System.ComponentModel.DataAnnotations;
 
 namespace KEC.Curation.Web.Api.Serializers
 {
@@ -19,7 +18,21 @@ namespace KEC.Curation.Web.Api.Serializers
             _uow = uow;
 
         }
-
+        public int Id
+        {
+            get
+            {
+                return _publication.Id;
+            }
+        }
+       
+        public string Url
+        {
+            get
+            {
+                return _publication.Url;
+            }
+        }
         public string Title
         {
             get
@@ -41,7 +54,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.KICDNumber;
             }
         }
-       
+
         public decimal Price
         {
             get
@@ -71,5 +84,82 @@ namespace KEC.Curation.Web.Api.Serializers
             }
         }
 
+        public string Subject
+        {
+            get
+            {
+                var subject = _uow.SubjectRepository.Get(_publication.SubjectId);
+                return subject.Name;
+            }
+        }
+        public string Type
+        {
+            get
+            {
+                return _publication.MimeType;
+            }
+        }
+        public string Level
+        {
+            get
+            {
+                var level = _uow.LevelRepository.Get(_publication.LevelId);
+                return level.Name;
+            }
+        }
+        public DateTime CompletionDate
+        {
+            get
+            {
+                return _publication.CompletionDate;
+            }
+        }
+        public string Stage
+        {
+            get
+            {
+                var maxStage = _uow.PublicationStageLogRepository
+                               .Find(p => p.PublicationId.Equals(_publication.Id))
+                               .Max(p => p.Stage);
+                var currentStage = _uow.PublicationStageLogRepository
+                                          .Find(p => p.PublicationId.Equals(_publication.Id)
+                                          && p.Stage == maxStage
+                                          && p.ActionTaken != null
+                                          && p.Owner != null).FirstOrDefault();
+                if (currentStage == null)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    var stageName = Enum.GetName((typeof(PublicationStage)), currentStage);
+                    return stageName;
+                }
+            }
+        }
+        public bool ChiefCuratorCanProcess
+        {
+            get
+            {
+                return _uow.PublicationRepository.CanProcessCurationPublication(_publication);
+            }
+        }
+        public string ChiefCuratorActionTaken
+        {
+            get
+            {
+                var curationStageLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == PublicationStage.Curation && p.Id.Equals(_publication.Id)).FirstOrDefault();
+                return curationStageLog == null ? string.Empty : curationStageLog.Stage.GetDescription();
+            }
+        }
+        public string ChiefCuratorComment
+        {
+            get
+            {
+             var stageLog =   _uow.PublicationStageLogRepository.Find(p => p.Stage == PublicationStage.Curation).FirstOrDefault();
+                return stageLog == null ? string.Empty : stageLog.Notes;
+                
+            }
+        }
     }
 }

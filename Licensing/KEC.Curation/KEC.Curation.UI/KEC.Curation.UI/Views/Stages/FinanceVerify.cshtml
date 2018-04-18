@@ -1,0 +1,157 @@
+﻿@using KEC.Curation.UI.Models;
+@model ChiefCurators
+
+@{
+    ViewBag.Title = "Finance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+
+
+    <script src="@Url.Content("~/js/financeVerify.js")"></script>
+    <script src="@Url.Content("~/js/GetChiefCurators.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
+    @Scripts.Render("~/plugins/summernote")
+    @Styles.Render("~/plugins/summernoteStyles")
+    @Scripts.Render("~/plugins/sweetAlert")
+
+}
+@{
+    var Title = Request.Params["Title"];
+    var Stage = Request.Params["Stage"];
+    var Publication = Request.Params["Publication"];
+    var KICDNumber = Request.Params["Publication"];
+
+}
+<div class="text-center m-t-lg">
+    <h1>
+        @ViewData["SubTitle"]
+    </h1>
+    <small>@ViewData["Message"]</small>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row m">
+                        <div class="panel panel-success">
+                            <div class="panel-heading" style="background-color:#2855A8;">Publication Information</div>
+                            <div class="panel-body">
+
+                                <dl>
+                                    <dt>KICD Number</dt>
+                                    <dd>@KICDNumber</dd>
+                                    <dt>Title</dt>
+                                    <dd>@Title</dd>
+
+                                </dl>
+                                <div>
+
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="ibox-content no-padding">
+
+                                        <div class="note-editor note-frame panel panel-default">
+                                            <div class="summernote" style="height:100px">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="row">
+                                    <div class="form-group">
+                                        <button type="button" name="LegalApprove" id="LegalApprove" style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group" style="text-align:left;">
+                                <a class="button btn btn-w-m btn-primary pull-right" style="background-color:#00B95F;" href="/Stages/Finance">BACK TO PUBLICATIONS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hidden">
+    <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
+    <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
+    <span><strong>Publication:&nbsp;</strong></span>@Publication
+    <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control" value="@Model.Guid">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center m-t-lg">
+                    <h1>
+                        @ViewData["SubTitle"]
+                    </h1>
+                    <small>@ViewData["Message"]</small>
+                    <br>
+                    <br>
+                    <div class="alert alert-success hidden">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p id="message"></p>
+                    </div>
+                    <div class="alert alert-danger hidden">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p id="error"></p>
+                    </div>
+                    <!--Uploding code starts here-->
+                    <div class="form-group">
+                        <div class="panel panel-info text-justify">
+                            <div class="panel-heading">PUBLICATION INFORMATION</div>
+                            <div class="panel-body">
+
+                                <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
+                                <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
+                                <span><strong>Publication:&nbsp;</strong></span>@Publication
+
+                            </div>
+
+
+                            <a class="button btn btn-w-m btn-primary pull-right" href="/Stages/Finance">BACK TO PUBLICATIONS</a>
+
+                        </div>
+                        <!--Uploding code ends here-->
+                        <div class="form-group" style="text-align:left;">
+                            <label for="comment">Comment:</label>
+                            <textarea class="form-control" rows="5" id="notes" data-notess></textarea>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="form-group col-md-12">
+                                <button type="button" name="LegalApprove" id="LegalApprove" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>*@

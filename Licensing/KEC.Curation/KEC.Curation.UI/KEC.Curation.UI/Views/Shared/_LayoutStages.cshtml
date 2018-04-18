@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>KEC CURATION  | @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/font-awesome/css")
+    @Styles.Render("~/Content/font-awesome/fonts")
+    @Styles.Render("~/Content/font-awesome/less")
+    @Styles.Render("~/Content/font-awesome/scss")
+</head>
+<body>
+
+    <!-- Wrapper-->
+    <div id="wrapper" style="background-color:black;">
+
+        <!-- Navigation -->
+        @Html.Partial("_NavigationStages")
+
+        <!-- Page wraper -->
+        <div id="page-wrapper" class="gray-bg">
+            <!-- Top Navbar -->
+            @Html.Partial("_TopNavbar")
+            <div class="alert alert-success alert-dismissable m-t hidden">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p class="font-bold" id="success-message">Success</p>
+            </div>
+            <div class="alert alert-danger alert-dismissable m-t hidden">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p class="font-bold" id="error-message">Error</p>
+            </div>
+            <div class="alert alert-warning alert-dismissable m-t hidden">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p class="font-bold" id="warning-message">Warning</p>
+            </div><!-- Main view  -->
+            @RenderBody()
+            <!-- Footer -->
+            @Html.Partial("_Footer")
+        </div>
+        <!-- End page wrapper-->
+
+    </div>
+    <!-- End wrapper-->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/metsiMenu")
+    @Scripts.Render("~/plugins/pace")
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/bundles/inspinia")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

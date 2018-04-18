@@ -1,0 +1,151 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+
+
+    <div class="col-lg-3">
+
+        <div class="widget style1 lazur-bg">
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="fa fa-book fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> All Publications </span>
+                    <h3 id="all_wait">loading...</h3>
+                    <br>
+                    <a href="/CurationManagers/AllPublications" class="btn btn-success" style="background-color:#00B95F;font-size: 14px;">View List</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-3">
+
+        <div class="widget style1 lazur-bg">
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="fa fa-book fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> Pending Publications </span>
+                    <h3 id="pending_wait">loading...</h3>
+                    <br>
+                    <a href="/CurationManagers/Pending" class="btn btn-success" style="background-color:#00B95F;font-size: 14px;">View List</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-3">
+
+        <div class="widget style1 yellow-bg">
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="fa fa-check-circle fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> Approved Publications </span>
+                    <h3 id="approved_wait">loading...</h3>
+                    <br>
+                    <a href="/CurationManagers/Approved" class="btn btn-success" style="background-color:#00B95F;font-size: 14px;">View List</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-3">
+
+        <div class="widget style1 red-bg">
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="fa fa-exclamation fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> Rejected Publications </span>
+                    <h3 id="rejected_wait">loading...</h3>
+                    <br>
+                    <a href="/CurationManagers/Rejected" class="btn btn-success" style="background-color:#00B95F;font-size: 14px;">View List</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="footer" style="">
+    <strong>Copyright</strong> KEC  &copy; 2018
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript">
+    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+</script>
+<script type="text/JavaScript">
+
+    $(document).ready(function () {
+        let PublicationsUrl = apiBaseUrls.concat(`/curationmanagers/count/publications`);
+        var AllCount = $('#all_wait');
+        $.ajax({
+            url: PublicationsUrl,
+            type: "GET",
+
+            dataType: "json",
+            success: function (data, status, jqhxr) {
+                console.log(data);
+                $('#all_wait').html(data)
+            }
+        });
+    }) ;
+</script>
+<script type="text/JavaScript">
+
+    $(document).ready(function () {
+        let PendingUrl = apiBaseUrls.concat(`/curationmanagers/count/pending`);
+        var PendingCount = $('#pending_wait');
+        $.ajax({
+            url:PendingUrl,
+            type: "GET",
+            dataType: "json",
+            success: function (data, status, jqhxr) {
+                $('#pending_wait').html(data)
+            }
+        });
+    }) ;
+</script>
+<script type="text/JavaScript">
+
+    $(document).ready(function () {
+        let ApprovedUrl = apiBaseUrls.concat(`/curationmanagers/count/approved`);
+        var ApprovedCount = $('#approved_wait');
+        $.ajax({
+            url:ApprovedUrl,
+            type: "GET",
+            dataType: "json",
+            success: function (data, status, jqhxr) {
+                $('#approved_wait').html(data)
+            }
+        });
+    }) ;
+</script>
+<script type="text/JavaScript">
+
+    $(document).ready(function () {
+        let RejectedUrl = apiBaseUrls.concat(`/curationmanagers/count/rejected`);
+        var RejectedCount = $('#rejected_wait');
+        $.ajax({
+            url: RejectedUrl,
+            type: "GET",
+            dataType: "json",
+            success: function (data, status, jqhxr) {
+                $('#rejected_wait').html(data)
+            }
+        });
+    }) ;
+</script>

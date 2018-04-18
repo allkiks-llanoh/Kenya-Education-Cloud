@@ -1,0 +1,56 @@
+﻿@using KEC.Curation.PublishersUI.Models;
+@model Publishers
+@{
+    ViewBag.Title = "Landing";
+    Layout = "~/Views/Shared/_LayoutLanding.cshtml";
+}
+
+
+
+<!-- Header -->
+<header id="header">
+    <div class="">
+        <img src="~/Content/images/logo.png">
+    </div>
+    <div class="content">
+        <div class="inner">
+            <h1>KENYA EDUCATION CLOUD</h1>
+            <p>Welcome to Publisher's portal.</p>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#intro">Instructions</a></li>
+            <li><a href="/Account/Login">Login</a></li>
+            <li><a href="/Account/Register">Register</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main -->
+<div id="main">
+
+    <!-- Intro -->
+    <article id="intro">
+        <h2 class="major">Instruction</h2>
+        <p>Welcome to Kenya Education Cloud</p>
+        <p>For registered members, kindly click on the login button on the landing page to access you account.<br />
+        For new members, click on the register button on the landing page to access publishers content management system.
+        On logging in the account, the dashboard menu will have following items; Home, Upload, Status on the left side of the screen
+        &amp; log off on the top right corner and below is the content of the menu items </p>
+        <ul>
+            <li>Home: Shows the number of your publications categorized by the approval/reject 
+            status. If you have no publication yet, "Nothing to Display" will be displayed.</li>
+            <li>Upload: Presents you with a form to upload your publication. Kindly fill all the details as instructed in the form. </li>
+            <li>Status: Shows a list of all your publication characterized by their status. There are 3 categories: approved, partially approved and rejected.</li>
+            <li>Log off: Logs you off the account</li>
+        </ul>
+    </article>
+
+
+
+
+</div>
+
+
+

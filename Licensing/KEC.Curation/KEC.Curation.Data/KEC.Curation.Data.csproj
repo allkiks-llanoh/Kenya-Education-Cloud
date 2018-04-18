@@ -7,6 +7,9 @@
   <ItemGroup>
     <Compile Remove="Migrations\20180202105943_Initial.cs" />
     <Compile Remove="Migrations\20180202194021_AddDateColumnsToSubjectsAndSubjectTypes.cs" />
+    <Compile Remove="Migrations\20180217125120_AddChiefCuratorAssignmentModel.cs" />
+    <Compile Remove="Migrations\20180217125502_AddChiefCuratorAssignmentModel.cs" />
+    <Compile Remove="Migrations\20180217125814_AddChiefCuratorAssignmentModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +32,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KEC.Curation.Services\KEC.Curation.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.NETCore.App" Version="2.0.5" />
   </ItemGroup>
 
 </Project>
