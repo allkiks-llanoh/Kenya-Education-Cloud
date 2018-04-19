@@ -3,13 +3,11 @@
     <div class="sidebar-collapse" >
         <ul class="nav" id="side-menu">
             <li>
-                <div class="dropdown profile-element" style="background-color:white;">
+                <div class="dropdown profile-element" style="background-color:white; height:60px;" >
                     <a data-toggle="dropdown" style="background-color:white;" class="dropdown-toggle" href="#">
-                        <span class="clear">
-                            <span class="block m-t-xs">
-                                <img src="~/Content/plugins/images/logo.png" />
-                            </span>
-                        </span>
+                       
+                                    <img src="~/Content/plugins/images/logo.png"  style="height:56px; width:123px;" />
+
                     </a>
 
                 </div>
@@ -17,14 +15,15 @@
                     CMS+
                 </div>
             </li>
+            <br>
             @*<li>
                 <a href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard"></i> <span class="nav-label">Home</span> </a>
             </li>*@
             <li>
-                <a href="@Url.Action("Upload", "Publisher")"><i class="fa fa-cloud-upload"></i> <span class="nav-label">Upload</span> </a>
+                <a href="@Url.Action("Upload", "Publisher")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Upload Content</span> </a>
             </li>
             <li>
-                <a href="@Url.Action("Approved", "Publisher")"><i class="fa fa-info-circle"></i> <span class="nav-label">Status</span></a>
+                <a href="@Url.Action("Approved", "Publisher")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Uploaded Content</span></a>
             </li>
             
              @*<li>

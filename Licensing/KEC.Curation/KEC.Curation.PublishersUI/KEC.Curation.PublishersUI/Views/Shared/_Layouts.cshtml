@@ -9,7 +9,8 @@
     @if (IsSectionDefined("Styles"))
     {@RenderSection("Styles", required: false)}
     
-
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/font-awesome/css")
     @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
     @Styles.Render("~/plugins/wizardStepsStyles")
 </head>

@@ -1,22 +1,10 @@
-﻿@using KEC.Curation.PublishersUI.Models
-@model Publishers
+﻿
 <div class="row border-bottom">
     <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" style="background-color:#00af57;" href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" method="post" action="">
-                <div class="form-group">
-                    
-                </div>
-            </form>
-        </div>
-        <ul class="nav navbar-top-links navbar-right">
-            <li>
-               
-                @Html.ActionLink("Hello " + @Model.FirstName + " " + @Model.LastName + "", "", "", routeValues: null, htmlAttributes: new { title = "Manage" })
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" style="background-color:#00B95F" href="#"><i class="fa fa-bars"></i> </a>
 
-            </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        </ul>
+        </div>
+        @Html.Partial("_LoginPartial")
     </nav>
 </div>

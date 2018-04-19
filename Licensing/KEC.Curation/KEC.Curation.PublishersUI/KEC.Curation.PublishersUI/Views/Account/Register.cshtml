@@ -4,14 +4,14 @@
         Layout = "~/Views/Shared/_Layouts.cshtml";
         }
 
-<img src="~/Content/plugins/images/logo.png" /> 
+<img src="~/Content/plugins/images/logo.png" style="margin-left:170px;" /> 
     @*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) { @Html.AntiForgeryToken()
    
         <h4>Create a new account</h4>
     <hr /> @Html.ValidationSummary("", new { @class = "text-danger" })
 
     <div class="form-group">
-        <div class="col-md-8" style="width:300px;">
+        <div class="col-md-8" style="width:300px; margin-left:100px;">
             @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.FirstName) })
         </div>
     </div>
@@ -59,9 +59,9 @@
         <div class="">
 
 
-            <div class="ibox-content" style="width:100%;">
+            <div class="ibox-content" style="width:100%; margin-right:-100px !important;">
 
-                <h2>
+                <h2 style="text-align:center;">
 
                     Registration Form
 
@@ -72,7 +72,7 @@
 
             <h1>Account</h1>
 
-            <fieldset>
+            <fieldset style="margin-left:100px !important;">
 
                 <div class="row">
 
@@ -141,7 +141,7 @@
 
             <fieldset>
 
-                <h2>Company Information</h2>
+                <h2 style="text-align:center;">Company Information</h2>
 
                 <div class="row">
 
@@ -189,9 +189,9 @@
             </fieldset>
 
 
-            <h1>Submit</h1>
+            <h1 style="text-align:center;">Submit</h1>
 
-            <fieldset>
+            <fieldset style="margin-left:100px !important;">
 
                 <h2>Terms and Conditions</h2>
 

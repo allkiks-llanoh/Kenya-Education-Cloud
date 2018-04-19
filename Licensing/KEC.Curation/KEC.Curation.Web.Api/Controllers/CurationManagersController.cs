@@ -20,6 +20,64 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             _uow = uow;
         }
+        #region PUblishers Count
+        [HttpGet("count/approved/publisher/{guid}")]
+        public IActionResult CountApprovedPublisher(string guid)
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Approved && p.Owner.Equals(guid)).Count();
+
+            return Ok(value: publicationsCount);
+        }
+        [HttpGet("count/rejected/publisher/{guid}")]
+        public IActionResult CountRejectedPublisher(string guid)
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Rejected && p.Owner.Equals(guid)).Count();
+
+            return Ok(value: publicationsCount);
+        }
+        [HttpGet("count/all/publisher/{guid}")]
+        public IActionResult CountAllPublisher(string guid)
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Owner.Equals(guid)).Count();
+
+            return Ok(value: publicationsCount);
+        }
+        #endregion
+        #region Publishers Publications
+
+
+        [HttpGet("get/approved/publisher")]
+        public IActionResult GetApproved(string guid)
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Approved && p.Owner.Equals(guid)).ToList();
+
+            return Ok(value: publicationsCount);
+        }
+       
+        [HttpGet("get/rejected/publisher")]
+        public IActionResult GetRejected(string guid)
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Rejected && p.Owner.Equals(guid)).ToList();
+
+            return Ok(value: publicationsCount);
+        }
+       
+        [HttpGet("get/pending/publisher")]
+        public IActionResult GetPending(string guid)
+        {
+
+            var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && p.Owner.Equals(guid) && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
+                                       == PublicationStage.PublicationApproval).ToList();
+
+            return Ok(value: publicationsCount);
+        }
+        
+        #endregion
         #region Get Counts
         [HttpGet("count/publications")]
         public IActionResult CountPublications()
