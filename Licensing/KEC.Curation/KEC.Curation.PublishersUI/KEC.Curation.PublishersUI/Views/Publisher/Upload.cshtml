@@ -30,7 +30,7 @@
                 <div class="form-group" align="center" id="spinner">
                     <div class="loader"></div>
                 </div>
-
+               
                 <form method="post" enctype="multipart/form-data" id="uploadform">
                     <div class="row align-left">
                         <div class="col-sm-2">
@@ -226,47 +226,51 @@
     let publicationSubmitUrl = apiBaseUrl.concat(`/Publications/submit`);
     $('#btn-postFile').click(function (e) {
         e.preventDefault();
-        $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
-        var form_data = new FormData($('#uploadform')[0]);
-        $.ajax({
-            type: 'POST',
-            url: publicationSubmitUrl,
-            processData: false,
-            contentType: false,
-            async: true,
-            cache: false,
-            data: form_data,
-            beforeSend: function () {
-                $('#spinner').show();
-            },
-            success: function (response, status, jxhr) {
-                console.log(response);
-                ShowAlert("Publication Uploaded successfully");
-                $('#message').html(response);
-                $('div.alert-success').toggleClass('hidden');
-                $('#btn-postFile').html('SUBMIT PUBLICATION');
-                $('#Title').html(' ');
-                $('#ISBNNumber').html(' ');
-                $('#AuthorName').html(' ');
-                $('#Price').html(' ');
-                $('#CompletionDate').html(' ');
-                $('#PublicationFile').html(' No Publication Selected');
-            },
-            error: function (request, status, error) {
+        var conf = confirm("Are You Sure You want to Submit Content");
+        if (conf == true) {
+            $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+            var form_data = new FormData($('#uploadform')[0]);
+            $.ajax({
+                type: 'POST',
+                url: publicationSubmitUrl,
+                processData: false,
+                contentType: false,
+                async: true,
+                cache: false,
+                data: form_data,
+                beforeSend: function () {
+                    $('#spinner').show();
+                },
+                success: function (response, status, jxhr) {
+                    console.log(response);
+                    ShowAlert("Publication Uploaded successfully");
+                    $('#message').html(response);
+                    $('div.alert-success').toggleClass('hidden');
+                    $('#btn-postFile').html('SUBMIT PUBLICATION');
+                    $('#Title').html(' ');
+                    $('#ISBNNumber').html(' ');
+                    $('#AuthorName').html(' ');
+                    $('#Price').html(' ');
+                    $('#CompletionDate').html(' ');
+                    $('#PublicationFile').html(' No Publication Selected');
+                },
+                error: function (request, status, error) {
 
-                console.log(request);
-                console.log(status);
+                    console.log(request);
+                    console.log(status);
 
-                console.log(request.responseText);
-                $('#error').html(request.responseText)
-                $('div.alert-danger').toggleClass('hidden');
-                $('#btn-postFile').html('SUBMIT PUBLICATION');
-
-
-            }
+                    console.log(request.responseText);
+                    $('#error').html(request.responseText)
+                    $('div.alert-danger').toggleClass('hidden');
+                    $('#btn-postFile').html('SUBMIT PUBLICATION');
 
 
-        });
+                }
+
+
+            });
+        }
+       
     });
 
     $(document).ready(function () {

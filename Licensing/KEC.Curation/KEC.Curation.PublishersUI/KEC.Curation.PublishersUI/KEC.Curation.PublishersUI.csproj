@@ -480,6 +480,8 @@
     <Content Include="Content\font-awesome\scss\_variables.scss" />
     <Content Include="Content\font-awesome\scss\font-awesome.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dialog.css" />
+    <Content Include="Scripts\dialog.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
