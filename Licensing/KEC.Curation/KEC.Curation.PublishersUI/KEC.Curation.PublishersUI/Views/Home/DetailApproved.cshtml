@@ -93,40 +93,13 @@
                     $('#currator-commets').html(` <dt>Curator Comments</dt><dd> ${submission.curatorComments}</dd>
                                                   <dt>Chief Curator Comments</dt><dd>${submission.chiefCuratorComments}</dd>
                                                   <dt>Principal Curator Comments</dt><dd>${submission.principalCuratorComments}</dd>
-                                                  <dt>Curation Managers Comments</dt><dd>${submission.curationManagersCuratorComments}</dd>`);
+                                                  <dt>Curation Managers Comments</dt><dd>${submission.cutationManagersCuratorComments}</dd>`);
 
                 });
 
             });
         }
-        //function getCuratorComments() {
-        //    let publicationId = $('#publication-view').attr('data-publicationId');
-        //    var urls = apiBaseUrls.concat(`/CurationManagers/getcomments/fromcuration?publicationId=${publicationId}`);
-
-        //    $.ajax({
-        //        url: urls,
-        //        type: 'GET',
-        //        contentType: 'application/json',
-        //        accepts: 'application/json',
-        //        crossDomain: true,
-        //        statusCode: {
-        //            404: () => { ShowAlert("Publication record could not be retrieved", 'error'); },
-        //            403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
-        //            500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
-        //        },
-        //    }).done(function (publication, textStatus, jqXHR) {
-
-        //        $('#currator-commets').replaceWith(
-        //            `<dl id="publication-details">
-        //          <dt>Curator Comments</dt>
-        //          <dd id="kicd-number">${publication.curatorComments}</dd>
-        //           <dt>Chief Curator Comments</dt>
-        //           <dd>${publication.chiefCuratorComments}</dd>
-        //           <dt>Principal Curator Comments</dt>
-        //           <dd>${publication.principalCuratorComments}</dd>`);
-
-        //    });
-        //}
+        
         function showChiefCuratorSubmissionSection(publication, parentElementId) {
             if (publication !== null) {
                 let chiefCuratorSection = $('#chief-curator-section').html();
@@ -221,48 +194,11 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        @*<div class="row">
-                                <div class="table-responsive">
-                                    <table style="border:none;" class="table  table-hover dataTables-example" id="comments">
-                                        <thead>
-                                            <tr>
-
-                                                <th>Assignment No</th>
-                                                <th>Curation Section</th>
-                                                <th>Curator Comments</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody style="border:none;"></tbody>
-                                    </table>
-                                </div>
-                            </div>*@
-
-                        <div class="row ibox-title">
-                            <h5>Give Your Comments Here</h5>
-                            <div class="ibox-content no-padding">
-                                <div class="summernote" style="height:100px">
-
-                                </div>
-                            </div>
-                        </div>
-
                         <div>
                             <br>
                             <br>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <select class="form-control" id="action-selected">
-                                    <option>Select Action To Recommend</option>
-                                    <option value="Approve">Approve Content</option>
-                                    <option value="Reject">Reject Content</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="submit" class="btn btn-success form-control" style="background-color:#00B55F; color:white;" value="Process Publication" id="recommend">
-                            </div>
-                        </div>
+                        <a href="/Home/Approved" class="btn btn-w-m btn-info pull-right" style="background-color:#00B95F;" role="button">Back  To Approved Submissions</a>
 
                     </div>
                 </div>
@@ -270,12 +206,7 @@
         </div>
     </div>
 </div>
-@*<div class="form-group col-md-10">
-        <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
-    </div>
-    <div class="form-group col-md-10">
-        <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
-    </div>*@
+
 
 <div class="hidden">
 

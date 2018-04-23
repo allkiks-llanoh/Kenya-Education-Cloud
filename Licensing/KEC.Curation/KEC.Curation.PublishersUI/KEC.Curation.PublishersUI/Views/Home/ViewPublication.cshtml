@@ -32,7 +32,7 @@
         ///Functions Section
         function getPublication() {
             let publicationId = $('#publication-view').attr('data-publicationId');
-            var urls = apiBaseUrls.concat(`CurationManagers/get/publications/${publicationId}`);
+            var urls = apiBaseUrls.concat(`/CurationManagers/get/publications/${publicationId}`);
 
             $.ajax({
                 url: urls,
@@ -168,7 +168,7 @@
 
             <div class="form-group ">
 
-                <a href="/CurationManagers/AllPublications" class="btn btn-w-m btn-info pull-right" style="background-color:#00B95F;" role="button">Back To List</a>
+                <a href="/Home/AllPublications" class="btn btn-w-m btn-info pull-right" style="background-color:#00B95F;" role="button">Back To List</a>
             </div>
         </div>
 

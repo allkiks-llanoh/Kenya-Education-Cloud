@@ -46,7 +46,14 @@
                 </div>
             </div>
         </div>
+        <div class="ibox-content">
+            <div>
+                <br>
+                <br>
+            </div>
+            <a href="/Home/Index" class="btn btn-w-m btn-info pull-right" style="background-color:#00B95F;" role="button">Back  To Summary</a>
 
+        </div>
     </div>
     <div class="footer" style="">
         <strong>Copyright</strong> KEC &copy; 2018
@@ -57,7 +64,7 @@
 </div>
 <script type="text/javascript">
     let PublisherGUID = $('#CurrentUserGuid').val();
-    let Url = apiBaseUrls.concat(`/curationmanagers/count/all/publisher/${PublisherGUID}`);
+    let Url = apiBaseUrls.concat(`/curationmanagers/get/all/publisher/${PublisherGUID}`);
     function tableRows(data) {
         var tableRows = [];
         for (var i = 0; i < data.length; i++) {
@@ -84,7 +91,7 @@
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.publisherName + "</td>"));
 
-        row.append($(`<td> <a href="/CurationManagers/ViewPublication/${rowData.id}?Pub=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Publication Details</a>`));
+        row.append($(`<td> <a href="/Home/ViewPublication/${rowData.id}?Pub=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Publication Details</a>`));
 
         return row[0];
     };

@@ -44,7 +44,14 @@
                 </div>
             </div>
         </div>
+        <div class="ibox-content">
+            <div>
+                <br>
+                <br>
+            </div>
+            <a href="/Home/Index" class="btn btn-w-m btn-info pull-right" style="background-color:#00B95F;" role="button">Back  To Summary</a>
 
+        </div>
     </div>
     <div class="footer" style="">
         <strong>Copyright</strong> KEC &copy; 2018
@@ -83,7 +90,7 @@
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.publisherName + "</td>"));
 
-        row.append($(`<td> <a href="/CurationManagers/DetailApproved/${rowData.id}?Pub=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
+        row.append($(`<td> <a href="/Home/DetailApproved/${rowData.id}?Pub=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
 
         return row[0];
     };

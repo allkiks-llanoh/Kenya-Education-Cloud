@@ -3,10 +3,10 @@
     <div class="sidebar-collapse" >
         <ul class="nav" id="side-menu">
             <li>
-                <div class="dropdown profile-element" style="background-color:white; height:60px;" >
+                <div class="dropdown profile-element" style="background-color:white; height:60px;">
                     <a data-toggle="dropdown" style="background-color:white;" class="dropdown-toggle" href="#">
-                       
-                                    <img src="~/Content/plugins/images/logo.png"  style="height:56px; width:123px;" />
+
+                        <img src="~/Content/plugins/images/logo.png" style="height:56px; width:123px;" />
 
                     </a>
 
@@ -16,22 +16,20 @@
                 </div>
             </li>
             <br>
-            @*<li>
-                <a href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard"></i> <span class="nav-label">Home</span> </a>
-            </li>*@
             <li>
-                <a href="@Url.Action("Upload", "Publisher")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Upload Content</span> </a>
+                <a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submissions Summary</span> </a>
             </li>
             <li>
-                <a href="@Url.Action("Approved", "Publisher")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Uploaded Content</span></a>
+                <a href="@Url.Action("Upload", "Publisher")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submit Content</span> </a>
             </li>
-            
-             @*<li>
-            <a href="@Url.Action("Conditional", "Publisher")"><i class="fa fa-laptop"></i> <span class="nav-label">Conditional</span> </a>
-        </li>*@
-        @*<li>
-            <a href="@Url.Action("Rejected", "Publisher")"><i class="fa fa-laptop"></i> <span class="nav-label">Rejected</span> </a>
-        </li>*@
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submitted Content</span> </a>
+                <ul class="nav nav-second-level collapse">
+                    <li> <a href="@Url.Action("AllPublications", "Home")"><i class="glyphicon glyphicon-book"></i><span class="nav-label">All Submissions</span> </a></li>
+                    <li> <a href="@Url.Action("Approved", "Home")"><i class="glyphicon glyphicon-book"></i> <span class="nav-label">Approved Levels</span> </a></li>
+                    <li> <a href="@Url.Action("Rejected", "Home")"><i class="glyphicon glyphicon-book"></i> <span class="nav-label">Rejected Submissions</span></a></li>
+                </ul>
+            </li>
 
         </ul>
     </div>

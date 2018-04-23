@@ -119,5 +119,34 @@ namespace KEC.Curation.PublishersUI.Controllers
 
             }
         }
+        
+        public ActionResult ViewPublication(int Id)
+        {
+            ViewBag.PublicationId = Id;
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
+            return View();
+        }
+
+        public ActionResult ReviewPublication(int Id)
+        {
+            ViewBag.PublicationId = Id;
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
+            return View();
+        }
+        public ActionResult DetailApproved(int Id)
+        {
+            ViewBag.PublicationId = Id;
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
+            return View();
+        }
+        public ActionResult ChiefCurators()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
+            return View();
+        }
     }
 }
