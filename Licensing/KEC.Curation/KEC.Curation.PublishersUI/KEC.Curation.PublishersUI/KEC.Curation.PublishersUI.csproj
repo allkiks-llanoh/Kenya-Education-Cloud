@@ -808,6 +808,7 @@
     <Content Include="Scripts\plugins\morris\morris.js" />
     <Content Include="Scripts\plugins\morris\raphael-2.1.0.min.js" />
     <Content Include="Scripts\plugins\nestable\jquery.nestable.js" />
+    <Content Include="Scripts\plugins\notify\notify.min.js" />
     <Content Include="Scripts\plugins\nouslider\jquery.nouislider.min.js" />
     <Content Include="Scripts\plugins\pace\pace.min.js" />
     <Content Include="Scripts\plugins\pdfjs\pdf.js" />
@@ -897,6 +898,14 @@
     <Content Include="Views\Account\LandingPage.cshtml" />
     <Content Include="Views\Shared\_LayoutLanding.cshtml" />
     <Content Include="Views\Blobs\Index.cshtml" />
+    <Content Include="Views\Home\Approved.cshtml" />
+    <Content Include="Views\Home\DetailApproved.cshtml" />
+    <Content Include="Views\Home\PartiallyApproved.cshtml" />
+    <Content Include="Views\Home\Pending.cshtml" />
+    <Content Include="Views\Home\Rejected.cshtml" />
+    <Content Include="Views\Home\ReviewPublication.cshtml" />
+    <Content Include="Views\Home\ViewPublication.cshtml" />
+    <Content Include="Views\Home\AllPublications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

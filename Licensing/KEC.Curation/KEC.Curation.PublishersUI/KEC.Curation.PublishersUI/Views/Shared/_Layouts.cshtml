@@ -23,12 +23,16 @@
     </div>
 
 
+
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/plugins/summernote")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/plugins/metsiMenu")
+    @Scripts.Render("~/plugins/notify")
+    @Scripts.Render("~/plugins/metisMenu")
     @Scripts.Render("~/plugins/pace")
     @Scripts.Render("~/plugins/slimScroll")
     @Scripts.Render("~/bundles/inspinia")
+    @Scripts.Render("~/js/globalConstants")
     @RenderSection("scripts", required: false)
 </body>
 </html>

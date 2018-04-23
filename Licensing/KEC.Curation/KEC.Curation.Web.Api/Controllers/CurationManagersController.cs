@@ -48,8 +48,15 @@ namespace KEC.Curation.Web.Api.Controllers
         #endregion
         #region Publishers Publications
 
+        [HttpGet("get/all/publisher/{guid}")]
+        public IActionResult GetAll(string guid)
+        {
 
-        [HttpGet("get/approved/publisher")]
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Owner.Equals(guid)).ToList();
+
+            return Ok(value: publicationsCount);
+        }
+        [HttpGet("get/approved/publisher/{guid}")]
         public IActionResult GetApproved(string guid)
         {
 
@@ -58,7 +65,7 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: publicationsCount);
         }
        
-        [HttpGet("get/rejected/publisher")]
+        [HttpGet("get/rejected/publisher/{guid}")]
         public IActionResult GetRejected(string guid)
         {
 
@@ -67,7 +74,7 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: publicationsCount);
         }
        
-        [HttpGet("get/pending/publisher")]
+        [HttpGet("get/pending/publisher/{guid}")]
         public IActionResult GetPending(string guid)
         {
 

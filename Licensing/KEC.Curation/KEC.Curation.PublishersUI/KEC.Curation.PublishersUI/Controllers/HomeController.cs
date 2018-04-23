@@ -34,17 +34,90 @@ namespace KEC.Curation.PublishersUI.Controllers
             }
         }
 
-        public ActionResult About()
+        public ActionResult AllPublications()
         {
-           
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "View All Publications";
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                   
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
+        }
+        public ActionResult Approved()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "View Approved Publications";
+
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
+        }
+        public ActionResult PartiallyApproved()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
+
             return View();
         }
-
-        public ActionResult Contact()
+        public ActionResult Pending()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "View Pending Publications";
+            using (var context = new ApplicationDbContext())
+            {
 
-            return View();
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
+        }
+        public ActionResult Rejected()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "View Rejected Publications";
+
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
         }
     }
 }

@@ -1,0 +1,282 @@
+﻿
+@{
+    ViewBag.Title = "Review Publication";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script src="@Url.Content("~/js/CurationCommentsChief.js")"></script>
+    <script src="@Url.Content("~/js/ReadCurationComments.js")"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    @Scripts.Render("~/plugins/sweetAlert")
+}
+
+
+
+@{
+    var PubId = Request.Params["Pub"];
+
+
+}
+<script type="text/javascript">
+    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+</script>
+<script type="text/javascript">
+    (function () {
+        $(document).ready(function () {
+            getPublication();
+            getPublicationCurationComments();
+            $('#recommend').click(submitChiefNotesAndAction);
+        });
+
+        ///Functions Section
+        function getPublication() {
+            let publicationId = $('#publication-view').attr('data-publicationId');
+            var urls = apiBaseUrls.concat(`/CurationManagers/get/publications/${publicationId}`);
+
+            $.ajax({
+                url: urls,
+                type: 'GET',
+                contentType: 'application/json',
+                accepts: 'application/json',
+                crossDomain: true,
+                statusCode: {
+                    404: () => { ShowAlert("Publication record could not be retrieved", 'error'); },
+                    403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
+                    500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
+                },
+
+
+            }).done(function (publication, textStatus, jqXHR) {
+
+                $('#publication-details').replaceWith(
+                    `<dl id="publication-details" data-stage="${publication.stage}">
+                  <dt>Curation Number</dt>
+                  <dd id="kicd-number">${publication.kicdNumber}</dd>
+                   <dt>Publisher</dt>
+                   <dd>${publication.publisherName}</dd>
+                   <dt>Title</dt>
+                   <dd>${publication.title}</dd>
+                   <dt>Description</dt>
+                   <dd>${publication.description}</dd>
+                   <dt>Content</dt>
+                   <dd><a href="${publication.url}" target="blank">Link to publication</a></dd>
+                   <dt>Level</dt>
+                   <dd>${publication.level}</dd>
+                   <dt>Completion date</dt>
+                   <dd>${publication.completionDate}</dd></dl>`);
+            });
+        }
+        function getPublicationCurationComments() {
+
+            let publicationId = $('#publication-view').attr('data-publicationId');
+            let url = apiBaseUrl.concat(`/CurationManagers/getcomments/fromcuration?publicationId=${publicationId}`);
+            //let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
+            $.ajax({
+                url: url,
+                type: 'GET',
+                contentType: 'application/json',
+                crossDomain: true,
+                accepts: 'application/json',
+                statusCode: {
+                    404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
+                    403: () => { ShowAlert("You are not authorized to access curator submissions"); },
+                    500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
+                },
+
+
+            }).done(function (submissions, textStatus, jqXHR) {
+
+                submissions.forEach(function (submission) {
+                    $('#currator-commets').html(` <dt>Curator Comments</dt><dd> ${submission.curatorComments}</dd>
+                                                  <dt>Chief Curator Comments</dt><dd>${submission.chiefCuratorComments}</dd>
+                                                  <dt>Principal Curator Comments</dt><dd>${submission.principalCuratorComments}</dd>`);
+
+                });
+
+            });
+        }
+        //function getCuratorComments() {
+        //    let publicationId = $('#publication-view').attr('data-publicationId');
+        //    var urls = apiBaseUrls.concat(`/CurationManagers/getcomments/fromcuration?publicationId=${publicationId}`);
+
+        //    $.ajax({
+        //        url: urls,
+        //        type: 'GET',
+        //        contentType: 'application/json',
+        //        accepts: 'application/json',
+        //        crossDomain: true,
+        //        statusCode: {
+        //            404: () => { ShowAlert("Publication record could not be retrieved", 'error'); },
+        //            403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
+        //            500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
+        //        },
+        //    }).done(function (publication, textStatus, jqXHR) {
+
+        //        $('#currator-commets').replaceWith(
+        //            `<dl id="publication-details">
+        //          <dt>Curator Comments</dt>
+        //          <dd id="kicd-number">${publication.curatorComments}</dd>
+        //           <dt>Chief Curator Comments</dt>
+        //           <dd>${publication.chiefCuratorComments}</dd>
+        //           <dt>Principal Curator Comments</dt>
+        //           <dd>${publication.principalCuratorComments}</dd>`);
+
+        //    });
+        //}
+        function showChiefCuratorSubmissionSection(publication, parentElementId) {
+            if (publication !== null) {
+                let chiefCuratorSection = $('#chief-curator-section').html();
+                $(parentElementId).html(chiefCuratorSection);
+
+            }
+        }
+        function submitChiefNotesAndAction(e) {
+            e.preventDefault();
+            let publicationId = $('#publication-view').attr('data-publicationId');
+            let todo = $("#action-selected").val();
+            let notes = $('.note-editable').html();
+
+            let url = apiBaseUrl.concat(`/CurationManagers`);
+
+            if (notes === null || notes === "") {
+                return ShowAlert("Curation notes cannot be blank", "error");
+            }
+
+            $.ajax({
+                headers : {
+                    'Accept' : 'application/json',
+                    'Content-Type' : 'application/json'
+                },
+                url: url,
+                type: 'POST',
+                contentType: 'application/json',
+                crossDomain: true,
+                accepts: 'application/json',
+                data: JSON.stringify({ PublicationId: publicationId, Notes: notes, ToDo: todo }),
+                statusCode: {
+                    404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
+                    403: () => { ShowAlert("You are not authorized to process publication"); },
+                    500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
+                }
+            }).success(function (data, textStatus, jqXHR) {
+                ShowAlert("Curated Publication Processed Succesfully", 'success');
+            }).fail(function () {
+                ShowAlert("Something went wrong while processing publication", 'error');
+            });
+        }
+        //Functions Section
+
+
+    })();
+</script>
+<script type="text/javascript">
+
+</script>
+<div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Publication Details</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                        <dl id="publication-details"></dl>
+                    </div>
+                    <div class="ibox-footer">
+                        <span class="pull-right">
+                            Publication Details
+                        </span>
+                        Publication Details
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Publication curation comments</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                        <div class="ibox-content" id="currator-commets">
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        @*<div class="row">
+                                <div class="table-responsive">
+                                    <table style="border:none;" class="table  table-hover dataTables-example" id="comments">
+                                        <thead>
+                                            <tr>
+
+                                                <th>Assignment No</th>
+                                                <th>Curation Section</th>
+                                                <th>Curator Comments</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody style="border:none;"></tbody>
+                                    </table>
+                                </div>
+                            </div>*@
+
+                        <div class="row ibox-title">
+                            <h5>Give Your Comments Here</h5>
+                            <div class="ibox-content no-padding">
+                                <div class="summernote" style="height:100px">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <select class="form-control" id="action-selected">
+                                    <option>Select Action To Recommend</option>
+                                    <option value="Approve">Approve Content</option>
+                                    <option value="Reject">Reject Content</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="submit" class="btn btn-success form-control" style="background-color:#00B55F; color:white;" value="Process Publication" id="recommend">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="form-group col-md-10">
+        <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
+    </div>
+    <div class="form-group col-md-10">
+        <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
+    </div>*@
+
+<div class="hidden">
+
+    <h1 id="identity" data-identity=@PubId></h1>
+
+</div>
