@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-    [Authorize]
+    
     [UserGuidJson]
     [AllowCrossSiteJson]
     public class HomeController : Controller
@@ -14,6 +14,7 @@ namespace KEC.Curation.UI.Controllers
            
             return View();
         }
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult SubjectTypes()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -21,7 +22,7 @@ namespace KEC.Curation.UI.Controllers
 
             return View();
         }
-
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Subjects()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -29,6 +30,7 @@ namespace KEC.Curation.UI.Controllers
 
             return View();
         }
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Levels()
         {
 
