@@ -22,6 +22,8 @@ namespace KEC.Curation.UI.Controllers
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
+                    FullName = user.FullName
+          
 
                 };
 
@@ -42,7 +44,7 @@ namespace KEC.Curation.UI.Controllers
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
-                    
+                    FullName = user.FullName
 
                 };
 
@@ -61,7 +63,8 @@ namespace KEC.Curation.UI.Controllers
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
-                    Subjectid = user.SubjectId
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
                 };
                 return View(chiefCurator);
             }
@@ -70,16 +73,36 @@ namespace KEC.Curation.UI.Controllers
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
-          
 
-            return View();
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
         }
         public ActionResult get()
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
 
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
         }
         [HttpGet, Route("ViewPublication/{Id:int}")]
         public ActionResult ViewPublication(int Id)
@@ -91,7 +114,8 @@ namespace KEC.Curation.UI.Controllers
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
-                    Subjectid = user.SubjectId
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
                 };
                 return View(chiefCurator);
             }

@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using KEC.Curation.UI.Models;
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Security;
 
 namespace KEC.Curation.UI.Controllers
 {
@@ -413,6 +414,7 @@ namespace KEC.Curation.UI.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Login", "Account");
+          
         }
 
         //

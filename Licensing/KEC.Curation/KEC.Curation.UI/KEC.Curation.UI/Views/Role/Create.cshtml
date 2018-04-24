@@ -27,15 +27,17 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-info" />
+
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        <a href="@Url.Action("Index", "Role")" class="btn btn-primary" style="background-color:#00b95f;"> <i class="fa fa-arrow-circle-left"></i> Back to List </a>
+
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

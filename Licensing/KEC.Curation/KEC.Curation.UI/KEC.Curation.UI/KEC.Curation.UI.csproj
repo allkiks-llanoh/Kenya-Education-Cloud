@@ -227,6 +227,7 @@
     <Compile Include="Controllers\CuratorController.cs" />
     <Compile Include="Controllers\GetUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ChangePassword.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PrincipalCuratorController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
@@ -964,6 +965,10 @@
     <Content Include="Views\CurationManagers\ReviewPublication.cshtml" />
     <Content Include="Views\CurationManagers\DetailApproved.cshtml" />
     <Content Include="Views\Shared\_Layouts.cshtml" />
+    <Content Include="Views\Shared\_ChangePassword.cshtml" />
+    <Content Include="Views\Shared\_LayoutPassword.cshtml" />
+    <Content Include="Views\ChangePassword\ChangePassword.cshtml" />
+    <Content Include="Views\ChangePassword\ChangePasswordConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

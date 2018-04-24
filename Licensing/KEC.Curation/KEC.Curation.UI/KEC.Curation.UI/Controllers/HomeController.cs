@@ -1,4 +1,6 @@
 ﻿using KEC.Curation.UI.ActionFilters;
+using KEC.Curation.UI.Models;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
@@ -11,8 +13,18 @@ namespace KEC.Curation.UI.Controllers
 
         public ActionResult Index()
         {
-           
-            return View();
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
         }
         [CustomAuthorize(Roles = "Admin")]
         public ActionResult SubjectTypes()
@@ -20,7 +32,17 @@ namespace KEC.Curation.UI.Controllers
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Create Subject Type / Category";
 
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
         }
         [CustomAuthorize(Roles = "Admin")]
         public ActionResult Subjects()
@@ -28,7 +50,17 @@ namespace KEC.Curation.UI.Controllers
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Create Subject";
 
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName  = user.FullName
+                };
+                return View(chiefCurator);
+            }
         }
         [CustomAuthorize(Roles = "Admin")]
         public ActionResult Levels()
@@ -37,7 +69,17 @@ namespace KEC.Curation.UI.Controllers
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Create Level";
 
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
 
 
         }

@@ -17,7 +17,17 @@ namespace KEC.Curation.UI.Controllers
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Verify Legal Requirements";
 
-            return View();
+          using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
         }
         [AllowCrossSiteJson]
         [UserGuidJson]
@@ -27,7 +37,17 @@ namespace KEC.Curation.UI.Controllers
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Verify Payment";
 
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
         }
         [AllowCrossSiteJson]
         [UserGuidJson]

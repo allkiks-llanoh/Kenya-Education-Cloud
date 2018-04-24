@@ -12,6 +12,7 @@ namespace KEC.Curation.UI.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public string FullName { get; set; }
     }
 
     public class ManageLoginsViewModel
