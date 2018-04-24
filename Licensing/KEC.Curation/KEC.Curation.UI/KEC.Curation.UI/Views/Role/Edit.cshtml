@@ -1,10 +1,14 @@
 ﻿@model KEC.Curation.UI.Models.RoleViewModel
 
+@{
+    ViewBag.Title = "Manage Roles";
+    Layout = "~/Views/Shared/_LayoutPassword.cshtml";
+}
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Edit Role</h4>
         <hr />
@@ -27,10 +31,10 @@
     </div>
 }
 
-    <div>
-        <a href="@Url.Action("Index", "Role")" class="btn btn-primary" style="background-color:#00b95f;"> <i class="fa fa-arrow-circle-left"></i> Back to List </a>
+<div>
+    <a href="@Url.Action("Index", "Role")" class="btn btn-primary" style="background-color:#00b95f;"> <i class="fa fa-arrow-circle-left"></i> Back to List </a>
 
-    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
