@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KEC.Curation.UI.ActionFilters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,9 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
+    [CustomAuthorize(Roles = "Curation Manager")]
+    [UserGuidJson]
+    [AllowCrossSiteJson]
     public class CurationManagersController : Controller
     {
         // GET: CurationManagers
