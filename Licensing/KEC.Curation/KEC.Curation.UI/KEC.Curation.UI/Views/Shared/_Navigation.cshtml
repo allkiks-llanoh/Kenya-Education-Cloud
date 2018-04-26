@@ -1,7 +1,7 @@
 ﻿
 <nav class="navbar-default navbar-static-side" role="navigation">
-    <div class="sidebar-collapse">
-        <ul class="nav" id="side-menu">
+    <div class="sidebar-collapse" >
+        <ul class="nav" id="side-menu" >
             <li class="">
                 <div class="dropdown profile-element" style="background-color:white; height:60px;">
                     <a data-toggle="dropdown" style="background-color:white;" class="dropdown-toggle" href="#">
@@ -37,57 +37,57 @@
                  <li>
                 @if (User.IsInRole("Verification Office"))
                 {
-                  <li>
-                  <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Conformity</span> </a>
-                  <ul class="nav nav-second-level collapse">
+                 <li>
+                     <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Conformity</span> </a>
+                 </li>
                   <li> <a href="@Url.Action("Legal", "Stages")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Submission Validation</span> </a></li>
-                  </ul>
-                  </li>
+                 
+                 
                  }
                 @if (User.IsInRole("Finance Office"))
                 {
                   <li>
-                  <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Conformity</span> </a>
-                  <ul class="nav nav-second-level collapse">
-                  <li> <a href="@Url.Action("Finance", "Stages")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Payment Validation</span></a></li>
-                  </ul>
+                      <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Conformity</span> </a>
                   </li>
+                  <li> <a href="@Url.Action("Finance", "Stages")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Payment Validation</span></a></li>
+                  
+                  
                  }
                   <li>
                 @if (User.IsInRole("Curator"))
                 {
                    <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
-                   <ul class="nav nav-second-level collapse">
+                   
                    <li> <a href="@Url.Action("CuratorView", "Curator")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Curators</span> </a></li>
-                  </ul>
+                  
                 }
                 @if (User.IsInRole("Chief Curator"))
                 {
                    <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
-                   <ul class="nav nav-second-level collapse">
+                   
                    <li> <a href="@Url.Action("ChiefCuratorView","ChiefCurator")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Chief curators</span> </a></li>
-                   </ul>
+                   
                 }
                 @if (User.IsInRole("Principal Curator"))
                 {
                   <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
-                  <ul class="nav nav-second-level collapse">
+                  
                   <li> <a href="@Url.Action("PrincipalCurator", "PrincipalCurator")"><i class="glyphicon glyphicon-edit"></i> <span class="nav-label">Principal Curators</span></a></li>
-                  </ul>
+                 
                 }
                 @if (User.IsInRole("Curation Manager"))
                 {
-                  <li>
-                  <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Curation Overview</span> </a>
-                  <ul class="nav nav-second-level collapse">
-                      <li> <a href="@Url.Action("Index", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Submission Summary</span> </a></li>
-                      <li> <a href="@Url.Action("AllPublications", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">All Submissions</span> </a></li>
-                      <li> <a href="@Url.Action("Pending", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Pending Submissions </span> </a></li>
-                      <li> <a href="@Url.Action("Approved", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Approved Content </span> </a></li>
-                      <li> <a href="@Url.Action("Rejected", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Rejected Content </span> </a></li>
-
-                  </ul>
+                  <li style="background-color:#808080;">
+                      <a href="#"><i class="glyphicon glyphicon-dashboard"></i> <span class="nav-label" style=" color:white;">Manager Navigation</span> </a>
                   </li>
+                      <li> <a href="@Url.Action("Index", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Submission Summary</span> </a></li>
+                      <li> <a href="@Url.Action("AllPublications", "CurationManagers")"><i class="glyphicon glyphicon-th"></i><span class="nav-label">All Submissions</span> </a></li>
+                      <li> <a href="@Url.Action("Pending", "CurationManagers")"><i class="glyphicon glyphicon-refresh"></i><span class="nav-label">Pending Submissions </span> </a></li>
+                      <li> <a href="@Url.Action("Approved", "CurationManagers")"><i class="glyphicon glyphicon-check"></i><span class="nav-label">Approved Content </span> </a></li>
+                      <li> <a href="@Url.Action("Rejected", "CurationManagers")"><i class="glyphicon glyphicon-exclamation-sign"></i><span class="nav-label">Rejected Content </span> </a></li>
+
+                  
+                 
                 }
                  
                   </ul>
