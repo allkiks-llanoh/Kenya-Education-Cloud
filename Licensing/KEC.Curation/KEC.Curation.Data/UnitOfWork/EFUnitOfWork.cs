@@ -1,5 +1,6 @@
 ﻿using KEC.Curation.Data.Database;
 using KEC.Curation.Data.Repositories;
+using KEC.Curation.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
