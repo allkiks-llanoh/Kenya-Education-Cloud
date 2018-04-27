@@ -9,6 +9,9 @@
 .vs/Kenya Education Cloud/v15/.suo
 .vs/VSWorkspaceState.json
 .vs/slnx.sqlite
+*.vs
+*.slnx.sqlite
+*.cache
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
