@@ -16,10 +16,10 @@
                     <i class="fa fa-book fa-5x"></i>
                 </div>
                 <div class="col-xs-8 text-right">
-                    <span> All Publications </span>
+                    <span> All<br /> Publications </span>
                     <h3 id="all_wait">loading...</h3>
                     <br>
-                    <a href="/CurationManagers/AllPublications" class="btn btn-success" style="background-color:#00B95F;font-size: 14px;">View List</a>
+                    <a href="/CurationManagers/AllPublications"class="btn btn-default" style="background-color:#ffffff; color:black;font-size: 14px;">View List</a>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="col-lg-3">
 
-        <div class="widget style1 lazur-bg">
+        <div class="widget style1 lazur-bg" style="background-color:#216BB1;">
             <div class="row">
                 <div class="col-xs-4">
                     <i class="fa fa-book fa-5x"></i>
@@ -36,7 +36,7 @@
                     <span> Pending Publications </span>
                     <h3 id="pending_wait">loading...</h3>
                     <br>
-                    <a href="/CurationManagers/Pending" class="btn btn-success" style="background-color:#00B95F;font-size: 14px;">View List</a>
+                    <a href="/CurationManagers/Pending" class="btn btn-default" style="background-color:#ffffff; color:black;font-size: 14px;">View List</a>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
     </div>
     <div class="col-lg-3">
 
-        <div class="widget style1 yellow-bg">
+        <div class="widget style1 yellow-bg" style="background-color:#00b95f;">
             <div class="row">
                 <div class="col-xs-4">
                     <i class="fa fa-check-circle fa-5x"></i>
@@ -53,7 +53,7 @@
                     <span> Approved Publications </span>
                     <h3 id="approved_wait">loading...</h3>
                     <br>
-                    <a href="/CurationManagers/Approved" class="btn btn-success" style="background-color:#00B95F;font-size: 14px;">View List</a>
+                    <a href="/CurationManagers/Approved" class="btn btn-default" style="background-color:#ffffff; color:black;font-size: 14px;">View List</a>
                 </div>
             </div>
         </div>
@@ -71,14 +71,86 @@
                     <span> Rejected Publications </span>
                     <h3 id="rejected_wait">loading...</h3>
                     <br>
-                    <a href="/CurationManagers/Rejected" class="btn btn-success" style="background-color:#00B95F;font-size: 14px;">View List</a>
+                    <a href="/CurationManagers/Rejected" class="btn btn-default" style="background-color:#ffffff; color:black;font-size: 14px;">View List</a>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+<div class="row">
 
+
+    <div class="col-lg-3">
+
+        <div class="widget style1 lazur-bg" style="background-color:#00b95f;">
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="fa fa-book fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> All Users </span>
+                    <h3 id="users_wait">loading...</h3>
+                    <br>
+                    <a href="/CurationManagers/AllUsers" class="btn btn-default" style="background-color:#ffffff; color:black;font-size: 14px;">View List</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-3">
+
+        <div class="widget style1 yellow-bg" style="background-color:black;">
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="fa fa-book fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> Principal Curators </span>
+                    <h3 id="principal_wait">loading...</h3>
+                    <br>
+                    <a href="/CurationManagers/PrincipalCurators" class="btn btn-default" style="background-color:#ffffff; color:black; font-size: 14px;">View List</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-3">
+
+        <div class="widget style1 lazur-bg">
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="fa fa-check-circle fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> Chief Curators </span>
+                    <h3 id="chief_wait">loading...</h3>
+                    <br>
+                    <a href="/CurationManagers/ChiefCurators" class="btn btn-default" style="background-color:#ffffff; color:black; font-size: 14px;">View List</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-3">
+
+        <div class="widget style1 red-bg" style="background-color:#216BB1;">
+            <div class="row">
+                <div class="col-xs-4">
+                    <i class="fa fa-exclamation fa-5x"></i>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <span> Subject Curators </span>
+                    <h3 id="subject_wait">loading...</h3>
+                    <br>
+                    <a href="/CurationManagers/Curators" class="btn btn-default" style="background-color:#ffffff; color:black;font-size: 14px;">View List</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 <div class="footer" style="">
     <strong>Copyright</strong> KEC  &copy; 2018
 </div>
@@ -149,3 +221,110 @@
         });
     }) ;
 </script>
+<script type="text/JavaScript">
+
+    $(document).ready(function () {
+       
+        var AllUsersCount = $('#users_wait');
+        $.ajax({
+           
+            url: "https://curation-d.kec.ac.ke/GetUsers/CountAllUsers",
+            type: "GET",
+            dataType: "json",
+            dataType: 'JSON',
+            async: false,
+            crossDomain: true,
+            success: function (data, status, jqhxr) {
+                $('#users_wait').html(data)
+            }
+        });
+    }) ;
+</script>
+<script type="text/JavaScript">
+
+    $(document).ready(function () {
+
+        var PrincipalCuratorCount = $('#principal_wait');
+        $.ajax({
+            url: "https://curation-d.kec.ac.ke/GetUsers/CountPrincipalCurators",
+            type: "POST",
+            dataType: "json",
+            dataType: 'JSON',
+            async: false,
+            crossDomain: true,
+            success: function (data, status, jqhxr) {
+                $('#principal_wait').html(data)
+            }
+        });
+    }) ;
+</script>
+<script type="text/JavaScript">
+
+    $(document).ready(function () {
+
+        var ChiefCuratorCount = $('#chief_wait');
+        $.ajax({
+            url: "https://curation-d.kec.ac.ke/GetUsers/CountChiefCurators",
+            type: "POST",
+            dataType: "json",
+            dataType: 'JSON',
+            async: false,
+            crossDomain: true,
+            success: function (data, status, jqhxr) {
+                $('#chief_wait').html(data)
+            }
+        });
+    }) ;
+</script>
+<script type="text/JavaScript">
+
+    $(document).ready(function () {
+
+        var CuratorCount = $('#subject_wait');
+        $.ajax({
+            url: "https://curation-d.kec.ac.ke/GetUsers/CountCurators",
+            type: "POST",
+            dataType: "json",
+            dataType: 'JSON',
+            async: false,
+            crossDomain: true,
+            success: function (data, status, jqhxr) {
+                $('#subject_wait').html(data)
+            }
+        });
+    }) ;
+</script>
+@*<script type="text/javascript">
+    function tableRows(data) {
+        var tableRows = [];
+        for (var i = 0; i < data.length; i++) {
+            tableRows.push(drawRow(data[i]));
+        }
+        return tableRows;
+    };
+    $.ajax({
+        url: "https://curation-d.kec.ac.ke/GetUsers/GetCurators",
+        type: "POST",
+
+        dataType: "json",
+        success: function (data, status, jqhxr) {
+            console.log(data);
+
+            //This code snipet prepares to append Json Data
+            $('#FinanceList').append(tableRows(data));
+        }
+    });
+
+    //This functionpopulates the tbody inner HTML with json data on call
+    function drawRow(rowData) {
+        var row = $("<tr />")
+        row.append($("<td>" + rowData.id + "</td>"));
+        row.append($("<td>" + rowData.title + "</td>"));
+        row.append($("<td>" + rowData.kicdNumber + "</td>"));
+        row.append($(`<td> <a href="/Stages/FinanceVerify/?Title=${rowData.title}&Publication=${rowData.kicdNumber}&Stage=PaymentVerification" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Review</a>`));
+
+
+        return row[0];
+    }
+
+    </script>*@

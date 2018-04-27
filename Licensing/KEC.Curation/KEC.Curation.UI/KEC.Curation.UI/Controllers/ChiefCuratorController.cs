@@ -25,7 +25,8 @@ namespace KEC.Curatiom.Web.UI.Controllers
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
-                    Subjectid= user.SubjectId
+                    Subjectid= user.SubjectId,
+                    FullName = user.FullName
                 };
                 return View(chiefCurator);
             }
@@ -41,7 +42,8 @@ namespace KEC.Curatiom.Web.UI.Controllers
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
-                    Subjectid = user.SubjectId
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
                 };
                 return View(chiefCurator);
             }
@@ -58,7 +60,8 @@ namespace KEC.Curatiom.Web.UI.Controllers
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
-                    Subjectid = user.SubjectId
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
                 };
                 return View(chiefCurator);
             }
@@ -74,7 +77,8 @@ namespace KEC.Curatiom.Web.UI.Controllers
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
-                    Subjectid = user.SubjectId
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
                 };
                 return View(chiefCurator);
             }
@@ -90,7 +94,8 @@ namespace KEC.Curatiom.Web.UI.Controllers
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
-                    Subjectid = user.SubjectId
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
                 };
                 return View(chiefCurator);
             }
@@ -106,7 +111,8 @@ namespace KEC.Curatiom.Web.UI.Controllers
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
-                    Subjectid = user.SubjectId
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
                 };
                 return View(chiefCurator);
             }

@@ -29,6 +29,7 @@ namespace KEC.Curation.PublishersUI.Controllers
                 var publisher = new Publishers
                 {
                     Company = user.Company,
+                    FirstName = user.FirstName,
                     LastName = user.LastName,
                     guid= user.Id
                 };
@@ -48,6 +49,7 @@ namespace KEC.Curation.PublishersUI.Controllers
                 var publisher = new Publishers
                 {
                     Company = user.Company,
+                    FirstName = user.FirstName,
                     LastName = user.LastName,
                     guid = user.Id
                 };
@@ -66,8 +68,19 @@ namespace KEC.Curation.PublishersUI.Controllers
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Rejected Publication";
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
 
-            return View();
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+                return View(publisher);
+            }
         }
        
     }

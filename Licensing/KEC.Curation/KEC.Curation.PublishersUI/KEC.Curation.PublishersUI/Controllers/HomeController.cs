@@ -16,20 +16,136 @@ namespace KEC.Curation.PublishersUI.Controllers
 
         public ActionResult Index()
         {
-           
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
+        }
+
+        public ActionResult AllPublications()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "View All Publications";
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                   
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
+        }
+        public ActionResult Approved()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "View Approved Publications";
+
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
+        }
+        public ActionResult PartiallyApproved()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
+
+            return View();
+        }
+        public ActionResult Pending()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "View Pending Publications";
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
+        }
+        public ActionResult Rejected()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "View Rejected Publications";
+
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
+        }
+        
+        public ActionResult ViewPublication(int Id)
+        {
+            ViewBag.PublicationId = Id;
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult ReviewPublication(int Id)
         {
-           
+            ViewBag.PublicationId = Id;
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
             return View();
         }
-
-        public ActionResult Contact()
+        public ActionResult DetailApproved(int Id)
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.PublicationId = Id;
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
+            return View();
+        }
+        public ActionResult ChiefCurators()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
             return View();
         }
     }

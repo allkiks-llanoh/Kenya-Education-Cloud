@@ -13,14 +13,13 @@
 
 </head>
 <body style="background-color:white;">
-
-    <!-- Wrapper-->
-    <div id="wrapper" style="background-color:black;">
-
-        <!-- Navigation -->
+   
+        <!-- Wrapper-->
+    <div id="wrapper" style="background-color:#19272b;">
         @Html.Partial("_Navigation")
+        <!-- Navigation -->
         <!-- Page wraper -->
-        <div id="page-wrapper" class="gray-bg">
+        <div id="page-wrapper" style="background-color:#FBFBFB;">
             <!-- Top Navbar -->
             @Html.Partial("_TopNavbar")
 
@@ -33,18 +32,18 @@
 
         <!-- End page wrapper-->
     </div>
-    <!-- End wrapper-->
+        <!-- End wrapper-->
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/plugins/summernote")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/plugins/notify")
-    @Scripts.Render("~/plugins/metisMenu")
-    @Scripts.Render("~/plugins/pace")
-    @Scripts.Render("~/plugins/slimScroll")
-    @Scripts.Render("~/bundles/inspinia")
-    @Scripts.Render("~/js/globalConstants")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/plugins/summernote")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/plugins/notify")
+        @Scripts.Render("~/plugins/metisMenu")
+        @Scripts.Render("~/plugins/pace")
+        @Scripts.Render("~/plugins/slimScroll")
+        @Scripts.Render("~/bundles/inspinia")
+        @Scripts.Render("~/js/globalConstants")
+        @RenderSection("scripts", required: false)
 </body>
 </html>

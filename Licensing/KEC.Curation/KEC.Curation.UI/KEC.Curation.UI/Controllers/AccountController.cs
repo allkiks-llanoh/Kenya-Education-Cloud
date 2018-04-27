@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using KEC.Curation.UI.Models;
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Security;
 
 namespace KEC.Curation.UI.Controllers
 {
@@ -151,7 +152,7 @@ namespace KEC.Curation.UI.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Register()
         {
             List<SelectListItem> list = new List<SelectListItem>();
@@ -164,7 +165,7 @@ namespace KEC.Curation.UI.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [CustomAuthorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -412,7 +413,8 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
+          
         }
 
         //

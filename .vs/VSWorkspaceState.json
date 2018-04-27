@@ -3,8 +3,10 @@
     "",
     "\\Licensing",
     "\\Licensing\\KEC.Curation",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.Data"
+    "\\Licensing\\KEC.Curation\\KEC.Curation.Data",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI"
   ],
-  "SelectedNode": "\\Licensing\\KEC.Curation\\Kec.Publishers.Web.Api",
+  "SelectedNode": "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI.sln",
   "PreviewInSolutionExplorer": false
 }

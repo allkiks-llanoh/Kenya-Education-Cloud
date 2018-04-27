@@ -32,7 +32,7 @@
         ///Functions Section
         function getPublication() {
             let publicationId = $('#publication-view').attr('data-publicationId');
-            var urls = apiBaseUrls.concat(`CurationManagers/get/publications/${publicationId}`);
+            var urls = apiBaseUrls.concat(`/CurationManagers/get/publications/${publicationId}`);
 
             $.ajax({
                 url: urls,
