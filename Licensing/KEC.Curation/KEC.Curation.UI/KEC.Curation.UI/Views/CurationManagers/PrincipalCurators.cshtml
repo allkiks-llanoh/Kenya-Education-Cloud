@@ -80,9 +80,19 @@
         return row[0];
     };
 </script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.footable').footable();
-        $('.footable2').footable();
-    });
-</script>
+@section Styles {
+    @Styles.Render("~/plugins/footableStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/footable")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.footable').footable();
+            $('.footable2').footable();
+
+        });
+    </script>
+}
