@@ -2,6 +2,7 @@
     ViewData["Title"] = "AllPublications";
 }
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <script type="text/javascript">
     const apiBaseUrls = "https://curation-d.kec.ac.ke";
@@ -26,7 +27,6 @@
                         <tr class="footable-sortable">
                             <th> NAME </th>
                             <th> SUBJECT </th>
-                            <th> ACTIONS</th>
                         </tr>
 
                         <tfoot>
@@ -42,7 +42,7 @@
         </div>
         <div class="form-group ">
 
-            <a href="/CurationManagers/Index" class="btn btn-w-m btn-info pull-left" style="background-color:#00B95F;margin-left:40px;" role="button"> <i class="fa fa-arrow-circle-left"></i>  Back To Index</a>
+          
         </div>
     </div>
     <div class="footer" style="">
