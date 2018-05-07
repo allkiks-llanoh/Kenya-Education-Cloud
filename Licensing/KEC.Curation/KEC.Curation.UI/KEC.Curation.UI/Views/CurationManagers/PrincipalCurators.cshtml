@@ -4,7 +4,7 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <script type="text/javascript">
-    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+    const apiBaseUrls = "https://curation-d.kec.ac.ke";
 </script>
 <div id="wrapper">
     <div class="row">
@@ -27,7 +27,6 @@
                             <th class="hidden"> ID </th>
                             <th> NAME </th>
                             <th> SUBJECT </th>
-                            <th> PHONE NUMBER</th>
                             <th> ACTIONS</th>
                         </tr>
 
@@ -76,10 +75,8 @@
     function drawRow(rowData) {
         var row = $("<tr />")
         row.append($(`<td class="hidden"> + rowData.Id + </td>`));
-        row.append($("<td>" + rowData.FullName + "</td>"));
-        row.append($("<td>" + rowData.Subject + "</td>"));
-        row.append($("<td>" + rowData.PhoneNumber + "</td>"));
-
+        row.append($("<td>" + rowData.Value + "</td>"));
+        row.append($("<td>" + rowData.Text + "</td>"));
         row.append($(`<td> <a href="/CurationManagers/DetailApproved/${rowData.id}?Pub=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
 
         return row[0];

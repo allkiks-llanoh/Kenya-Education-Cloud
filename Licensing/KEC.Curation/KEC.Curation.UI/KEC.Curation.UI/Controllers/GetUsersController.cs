@@ -20,7 +20,7 @@ namespace Authentication_Test.Controllers
 
             var user = context.Users.Where(p => p.Roles.Any(s=>s.RoleId.Equals(role))).ToList();
 
-            return Json(user);
+            return Json(new SelectList(user, "FullName", "Subject"));
         }
 
         public ActionResult GetCurators(string role)
@@ -29,7 +29,7 @@ namespace Authentication_Test.Controllers
 
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
-            return Json(user);
+            return Json(new SelectList(user, "FullName", "Subject"));
         }
         public ActionResult GetPrincipalCurators(string role)
         {
@@ -37,13 +37,13 @@ namespace Authentication_Test.Controllers
 
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
-            return Json(user);
+            return Json(new SelectList(user, "FullName", "Subject"));
         }
         public ActionResult GetAllUsers()
         {
             var _users = context.Users.ToList();
 
-            return Json(_users);
+            return Json(new SelectList(_users, "FullName","Subject"));
         }
         public int CountAllUsers()
         {
