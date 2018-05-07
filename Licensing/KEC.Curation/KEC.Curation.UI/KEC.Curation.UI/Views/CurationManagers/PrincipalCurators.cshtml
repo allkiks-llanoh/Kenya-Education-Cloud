@@ -24,7 +24,6 @@
                     <table id="allpublications" class="footable table table-stripped" data-page-size="8" data-filter=#filter>
 
                         <tr class="footable-sortable">
-                            <th class="hidden"> ID </th>
                             <th> NAME </th>
                             <th> SUBJECT </th>
                             <th> ACTIONS</th>
@@ -61,6 +60,11 @@
         return tableRows;
     };
     $.ajax({
+        headers : {
+            'Accept' : 'application/json',
+            'Content-Type' : 'application/json',
+            'Access-Controll-Allow-Origin': '*'
+        },
         url: Url,
         type: "POST",
         dataType: "json",
@@ -74,11 +78,8 @@
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $("<tr />")
-        row.append($(`<td class="hidden"> + rowData.Id + </td>`));
         row.append($("<td>" + rowData.Value + "</td>"));
         row.append($("<td>" + rowData.Text + "</td>"));
-        row.append($(`<td> <a href="/CurationManagers/DetailApproved/${rowData.id}?Pub=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
-
         return row[0];
     };
 
