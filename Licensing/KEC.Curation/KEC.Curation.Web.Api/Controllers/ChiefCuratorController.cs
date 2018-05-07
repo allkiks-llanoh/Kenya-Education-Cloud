@@ -61,7 +61,12 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: subjectList);
         }
         #endregion
-
+        /// <summary>
+        /// Get unassigned publications
+        /// </summary>
+        /// <param name="subjectId"></param>
+        /// <param name="chiefCuratorGuid"></param>
+        /// <returns></returns>
         #region Assignments
         [HttpGet("publications/{subjectId:int}/unassigned")]
         public IActionResult UnAssigned(int subjectId, string chiefCuratorGuid)
@@ -75,6 +80,13 @@ namespace KEC.Curation.Web.Api.Controllers
                 publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
         }
+
+        /// <summary>
+        /// Get assigned publications
+        /// </summary>
+        /// <param name="subjectId"></param>
+        /// <param name="chiefCuratorGuid"></param>
+        /// <returns></returns>
         [HttpGet("publications/{subjectId:int}/assigned")]
         public IActionResult Assigned(int subjectId, string chiefCuratorGuid)
         {
