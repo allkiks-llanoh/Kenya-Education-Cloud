@@ -37,13 +37,13 @@ namespace Authentication_Test.Controllers
 
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
-            return Json(new SelectList(user, "id", "FullName"));
+            return Json(user);
         }
         public ActionResult GetAllUsers()
         {
             var _users = context.Users.ToList();
 
-            return Json(new SelectList(_users, "id", "FullName"));
+            return Json(new SelectList(_users, "FullName","Subject", "Email"));
         }
         public int CountAllUsers()
         {

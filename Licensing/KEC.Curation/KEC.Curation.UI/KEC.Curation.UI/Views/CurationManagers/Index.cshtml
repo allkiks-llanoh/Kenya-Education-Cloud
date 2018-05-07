@@ -19,7 +19,7 @@
                     <span> All<br /> Publications </span>
                     <h3 id="all_wait">loading...</h3>
                     <br>
-                    <a href="/CurationManagers/AllPublications"class="btn btn-default" style="background-color:#ffffff; color:black;font-size: 14px;">View List</a>
+                    <a href="/CurationManagers/AllPublications" class="btn btn-default" style="background-color:#ffffff; color:black;font-size: 14px;">View List</a>
                 </div>
             </div>
         </div>
@@ -182,7 +182,7 @@
         let PendingUrl = apiBaseUrls.concat(`/curationmanagers/count/pending`);
         var PendingCount = $('#pending_wait');
         $.ajax({
-            url:PendingUrl,
+            url: PendingUrl,
             type: "GET",
             dataType: "json",
             success: function (data, status, jqhxr) {
@@ -197,7 +197,7 @@
         let ApprovedUrl = apiBaseUrls.concat(`/curationmanagers/count/approved`);
         var ApprovedCount = $('#approved_wait');
         $.ajax({
-            url:ApprovedUrl,
+            url: ApprovedUrl,
             type: "GET",
             dataType: "json",
             success: function (data, status, jqhxr) {
@@ -224,10 +224,10 @@
 <script type="text/JavaScript">
 
     $(document).ready(function () {
-       
+
         var AllUsersCount = $('#users_wait');
         $.ajax({
-           
+
             url: "https://curation-d.kec.ac.ke/GetUsers/CountAllUsers",
             type: "GET",
             dataType: "json",
