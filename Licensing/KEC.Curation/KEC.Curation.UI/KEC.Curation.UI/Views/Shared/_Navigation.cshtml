@@ -27,6 +27,16 @@
             </ul>
         </li>
         <li>
+            <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submissions Summary</span><span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse" style="">
+                <li> <a href="@Url.Action("AllPublications", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">All Submissions</span> </a></li>
+                <li> <a href="@Url.Action("Pending", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Pending Submissions </span> </a></li>
+                <li> <a href="@Url.Action("Approved", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Approved Content </span> </a></li>
+                <li> <a href="@Url.Action("Rejected", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Rejected Content </span> </a></li>
+
+            </ul>
+        </li>
+        <li>
             <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Manage Users</span><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level collapse">
                 <li> <a href="@Url.Action("Index","Role")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Manage Roles</span> </a></li>

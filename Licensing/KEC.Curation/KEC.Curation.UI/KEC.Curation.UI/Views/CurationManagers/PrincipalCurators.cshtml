@@ -1,7 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "AllPublications";
+    ViewData["Title"] = "Principal Curators";
 }
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
 <script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <script type="text/javascript">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="ibox-content">
                     <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Search in table">
-                    <table id="allpublication" class="footable table table-stripped footable-loaded tablet breakpoint no-paging" data-page-size="8" data-filter="#filter">
+                    <table id="allpublications" class="footable table table-stripped footable-loaded tablet breakpoint no-paging" data-page-size="8" data-filter="#filter">
 
                         <tr class="footable-sortable">
                             <th> NAME </th>
@@ -46,10 +46,9 @@
         </div>
     </div>
     <div class="footer" style="">
-        <strong>Copyright</strong> KEC &copy; 2018
+        <strong>Copyright</strong> Kenya Education Cloud &copy; 2018
     </div>
 </div>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
     let Url = apiBaseUrls.concat(`/GetUSers/GetPrincipalCurators`);
     function tableRows(data) {
