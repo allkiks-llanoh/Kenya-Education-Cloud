@@ -23,7 +23,6 @@ namespace KEC.Curation.Web.Api
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -33,58 +32,22 @@ namespace KEC.Curation.Web.Api
             services.AddCors(o => o.AddPolicy("AllowCrossSiteJson", builder =>
             {
                 builder.AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowAnyOrigin();
+                       .AllowAnyMethod()
+                       .AllowAnyOrigin();
             }));
 
             services.Configure<MvcOptions>(option =>
             {
                 option.OutputFormatters.RemoveType
-                    <XmlDataContractSerializerOutputFormatter>();
+                <XmlDataContractSerializerOutputFormatter>();
             });
 
             services.AddTransient<IUnitOfWork>(m => new EFUnitOfWork());
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info
-                {
-                    Version = "V1",
-                    Title = "KEC Curation API",
-                    Description = "The Kenya Education Cloud Curation API",
-                    TermsOfService = "None",
-                    Contact = new Contact
-                    {
-                        Name = "Kenya Education Cloud",
-                        Email = "developer@kec.ac.ke",
-                        Url = "https://kec.ac.ke.com"
-                    },
-                    License = new License
-                    {
-                        Name = "KEC API License",
-                        Url = "https://kec.ac.ke/api-license"
-                    }
-                });
-                // Set the comments path for the Swagger JSON and UI.
-                var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-            });
-
         }
-
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "KEC Curation API");
-                c.RoutePrefix = string.Empty;
-            });
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
