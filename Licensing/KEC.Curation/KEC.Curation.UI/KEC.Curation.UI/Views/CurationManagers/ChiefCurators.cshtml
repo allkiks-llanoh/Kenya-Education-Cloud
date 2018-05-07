@@ -23,7 +23,7 @@
                 </div>
                 <div class="ibox-content">
                     <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Search in table">
-                    <table id="allpublications" class="footable table table-stripped footable-loaded tablet breakpoint no-paging" data-page-size="8" data-filter="#filter">
+                    <table id="allpublications" class="footable table table-stripped" data-page-size="8" data-filter="#filter">
 
                         <tr class="footable-sortable">
                             <th> NAME </th>
@@ -32,7 +32,7 @@
 
                         <tfoot>
                             <tr>
-                                <td colspan="5">
+                                <td colspan="2">
                                     <ul class="pagination pull-right"></ul>
                                 </td>
                             </tr>
@@ -66,13 +66,12 @@
         success: function (data, status, jqhxr) {
             console.log(data);
             //This code snipet prepares to append Json Data
-            $('#allpublications').append(tableRows(data));
+            $('#allpublications>tbody').append(tableRows(data));
         }
     });
-
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
-        var row = $("<tr />")
+        var row = $('<tr class="footable-sortable" />')
         //row.append($(`<td class="hidden"> + rowData.Id + </td>`));
         row.append($("<td>" + rowData.Value + "</td>"));
         row.append($("<td>" + rowData.Text + "</td>"));
@@ -83,10 +82,7 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-
         $('.footable').footable();
         $('.footable2').footable();
-
-
     });
 </script>
