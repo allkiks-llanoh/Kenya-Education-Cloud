@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "AllPublications";
+    ViewData["Title"] = "Subject Curators";
 }
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
@@ -23,16 +23,14 @@
                 </div>
                 <div class="ibox-content">
                     <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Search in table">
-                    <table id="allpublications" class="footable table table-stripped footable-loaded tablet breakpoint no-paging" data-page-size="8" data-filter="#filter">
-
+                    <table id="allpublications" class="footable table table-stripped" data-page-size="8" data-filter="#filter">
                         <tr class="footable-sortable">
                             <th> NAME </th>
                             <th> SUBJECT </th>
                         </tr>
-
                         <tfoot>
                             <tr>
-                                <td colspan="5">
+                                <td colspan="2">
                                     <ul class="pagination pull-right"></ul>
                                 </td>
                             </tr>
@@ -42,6 +40,7 @@
             </div>
         </div>
         <div class="form-group ">
+
         </div>
     </div>
     <div class="footer" style="">
@@ -70,18 +69,19 @@
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $('<tr class="footable-sortable" />')
+        //row.append($(`<td class="hidden"> + rowData.Id + </td>`));
         row.append($("<td>" + rowData.Value + "</td>"));
         row.append($("<td>" + rowData.Text + "</td>"));
+
         return row[0];
     };
+
 </script>
 @section Styles {
     @Styles.Render("~/plugins/footableStyles")
 }
-
 @section Scripts {
     @Scripts.Render("~/plugins/footable")
-
     <script type="text/javascript">
         $(document).ready(function () {
 
