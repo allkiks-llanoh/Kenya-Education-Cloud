@@ -116,6 +116,7 @@ namespace KEC.Curation.UI.Controllers
             await RoleManager.DeleteAsync(role);
             return RedirectToAction("Index");
         }
+        [HttpPost]
         public async Task<ActionResult> DeleteUserFromRole(string roleName, string guid)
 
         {
