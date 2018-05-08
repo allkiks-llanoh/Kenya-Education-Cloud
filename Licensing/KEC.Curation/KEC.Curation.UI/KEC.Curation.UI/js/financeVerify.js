@@ -30,7 +30,9 @@
                         $('#message').html(` ${response}.`)
                         $('div.alert-success').toggleClass('hidden');
                         ShowAlert("Payment Verified", "success");
-                        $('#LegalApprove').html('APPROVE');
+                        $('#LegalApprove').html('Yes');
+                        $('#confirm').modal('hide');
+                        $('.modal-backdrop').remove();
 
                     },
                     error: function (request, status, error) {
