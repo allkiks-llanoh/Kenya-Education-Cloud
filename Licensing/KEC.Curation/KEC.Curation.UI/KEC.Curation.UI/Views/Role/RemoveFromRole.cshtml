@@ -8,7 +8,7 @@
     var UserId = Request.Params["Id"];
 }
     <h2>Remove User From Role</h2>
-    @using (Html.BeginForm("DeleteUserFromRole", "Roles"))
+    @using (Html.BeginForm("DeleteUserFromRole", "Role"))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)

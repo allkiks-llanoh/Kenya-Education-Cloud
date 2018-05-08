@@ -121,7 +121,7 @@ namespace KEC.Curation.UI.Controllers
 
         {
             var role = await RoleManager.FindByNameAsync(roleName);
-            var user = await UserManager.FindByIdAsync(guid);
+            var user = await UserManager.FindByEmailAsync(guid);
             await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
             return RedirectToAction("Index");
         }
