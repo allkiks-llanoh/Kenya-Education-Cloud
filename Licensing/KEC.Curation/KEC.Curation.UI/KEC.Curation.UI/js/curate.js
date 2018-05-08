@@ -68,6 +68,8 @@
            
         }).done(function (data, textStatus, jqXHR) {
             ShowAlert("Curation notes saved successfully", "success");
+            $('#confirmsave').modal('hide');
+            $('.modal-backdrop').remove();
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert("Something went wrong while saving your notes", "error");
         });

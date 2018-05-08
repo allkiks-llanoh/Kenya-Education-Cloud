@@ -40,7 +40,9 @@ let legalVerifyUrl = apiBaseUrl.concat(`/Publications/process`);
                         console.log(request.responseText);
                         $('#error').html(responseText)
                         $('div.alert-danger').toggleClass('hidden');
-                        $('#LegalApprove').html('APPROVE');
+                        $('#LegalApprove').html('Yes');
+                        $('#confirmlegal').modal('hide');
+                        $('.modal-backdrop').remove();
 
 
                     }

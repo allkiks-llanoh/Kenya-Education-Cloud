@@ -84,6 +84,9 @@
                 500: () => { ShowAlert('Something went wrong while processing curator assignment', 'error'); }
             }
         }).done(function (data, textStatus, jqXHR) {
+            $('#assign-curator').html('Yes');
+            $('#assign').modal('hide');
+            $('.modal-backdrop').remove();
             ShowAlert('Curator assigned sucessfully', 'success');
             loadCurators();
         }).fail(function (jqXHR, textStatus, errorThrown) {

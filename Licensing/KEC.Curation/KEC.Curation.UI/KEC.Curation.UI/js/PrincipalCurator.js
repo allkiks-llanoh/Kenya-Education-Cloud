@@ -32,7 +32,9 @@ $(document).ready(function () {
                 console.log(status);
                 $('#message').html(` ${response}.`)
                 $('div.alert-success').toggleClass('hidden');
-                $('#LegalApprove').html('APPROVE');
+                $('#LegalApprove').html('Yes');
+                $('#confirm').modal('hide');
+                $('.modal-backdrop').remove();
                 ShowAlert("Curation notes saved successfully", "success");
             },
             error: function (response, status, jxhr) {
