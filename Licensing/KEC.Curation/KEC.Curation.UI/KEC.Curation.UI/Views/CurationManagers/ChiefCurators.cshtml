@@ -19,7 +19,7 @@
             </div>
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Search For A Publication</h5>
+                    <h5>Search For A User</h5>
                 </div>
                 <div class="ibox-content">
                     <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Search in table">
@@ -33,7 +33,7 @@
 
                         <tfoot>
                             <tr>
-                                <td colspan="2">
+                                <td colspan="3">
                                     <ul class="pagination pull-right"></ul>
                                 </td>
                             </tr>
@@ -67,7 +67,7 @@
         success: function (data, status, jqhxr) {
             console.log(data);
             //This code snipet prepares to append Json Data
-            $('#allpublications>tbody').append(tableRows(data));
+            $('#allpublications').append(tableRows(data));
         }
     });
     //This functionpopulates the tbody inner HTML with json data on call
