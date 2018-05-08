@@ -969,6 +969,7 @@
     <Content Include="Views\Shared\_LayoutPassword.cshtml" />
     <Content Include="Views\ChangePassword\ChangePassword.cshtml" />
     <Content Include="Views\ChangePassword\ChangePasswordConfirm.cshtml" />
+    <Content Include="Views\Role\RemoveFromRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
 using KEC.Curation.Web.Api.Serializers;
@@ -59,10 +58,10 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("get/approved/publisher/{guid}")]
         public IActionResult GetApproved(string guid)
         {
-
-            var publicationsCount = _uow.PublicationRepository.Find(p => p.Approved && p.Owner.Equals(guid)).ToList();
-
-            return Ok(value: publicationsCount);
+            var publicatons = _uow.PublicationRepository.Find(p => p.Approved && p.Owner.Equals(guid));
+            var publicationList = publicatons.Any() ?
+                publicatons.Select(p => new PublisherContentDownloadSerilizer(p, _uow)).ToList() : new List<PublisherContentDownloadSerilizer>();
+            return Ok(value: publicationList);
         }
        
         [HttpGet("get/rejected/publisher/{guid}")]
@@ -169,6 +168,8 @@ namespace KEC.Curation.Web.Api.Controllers
                 if (model.ToDo == "Approve")
                 {
                     assigment.Approved = true;
+                    assigment.CertificateNumber = _uow.PublicationRepository
+                                     .GetContentNUmber(_uow.PublicationRepository.GetAll().ToList());
                 }
                 else
                 {
