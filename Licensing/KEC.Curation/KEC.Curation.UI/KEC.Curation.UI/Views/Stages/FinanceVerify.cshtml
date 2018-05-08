@@ -61,10 +61,29 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                                 <div class="row">
                                     <div class="form-group">
-                                        <button type="button" name="LegalApprove" id="LegalApprove" style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
+                                        <button type="button" data-toggle="modal" data-target="#confirm"  style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
+                                    </div>
+                                </div>
+                                <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                <h4 class="modal-title">Confirm Submission</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                    Are you sure the publication meets all requirements?
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                                <button type="button" name="LegalApprove" id="LegalApprove" class="btn btn-primary">Yes</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
