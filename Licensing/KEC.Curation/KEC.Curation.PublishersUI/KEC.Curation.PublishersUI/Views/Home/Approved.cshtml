@@ -2,9 +2,12 @@
 @model Publishers
 @{
     ViewBag.Title = "Approved";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <script type="text/javascript">
     const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
@@ -24,7 +27,7 @@
                 </div>
                 <div class="ibox-content">
                     <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Use Curation Number">
-                    <table id="allpublications" class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                    <table id="allpublications" class="footable table table-stripped" data-page-size="15" data-filter="#filter">
 
                         <tr class="footable-sortable">
                             <th> CURATION NUMBER </th>
@@ -78,13 +81,13 @@
         success: function (data, status, jqhxr) {
             console.log(data);
             //This code snipet prepares to append Json Data
-            $('#allpublications').append(tableRows(data));
+            $('#allpublications>tbody').append(tableRows(data));
         }
     });
 
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
-        var row = $("<tr />")
+        var row = $('<tr class="footable-sortable" />')
         row.append($(`<td class="hidden"> + rowData.id + </td>`));
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
         row.append($("<td>" + rowData.title + "</td>"));
@@ -96,3 +99,19 @@
     };
 
 </script>
+@section Styles {
+    @Styles.Render("~/plugins/footableStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/footable")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.footable').footable();
+            $('.footable2').footable();
+
+        });
+    </script>
+}

@@ -8,6 +8,8 @@
     <title>CMS | @ViewBag.Title</title>
     <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/css")
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
     <link href="~/Content/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 
