@@ -42,7 +42,7 @@
                                     <label for="Title">ISBN Number</label>
                                 </div>
                                 <div class="col-sm-9 hidden">
-                                    <input type="text" name="ISBNNumber" id="ISBNNumber" class="form-control" placeholder="Enter ISBN Number">
+                                    <input type="text" name="ISBNNumber" id="ISBNNumber" class="form-control" placeholder="Enter ISBN Number" required>
                                 </div>
                             </div>
                             <br>
@@ -60,7 +60,7 @@
                                     <label for="Title">Author Name</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="text" name="AuthorName" id="AuthorName" class="form-control" placeholder=" Enter Author's' Name">
+                                    <input type="text" name="AuthorName" id="AuthorName" class="form-control" placeholder=" Enter Author's' Name" required>
                                 </div>
                             </div>
                             <br>
@@ -78,7 +78,7 @@
                                     <label for="Title">Completion Date</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="date" name="CompletionDate" id="CompletionDate" class="form-control" placeholder="elect Completion Date">
+                                    <input type="date" name="CompletionDate" id="CompletionDate" class="form-control" placeholder="elect Completion Date" required>
                                 </div>
                             </div>
                             <br>
@@ -89,7 +89,7 @@
                                     <label for="Title">Description</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <textarea name="Description" id="Description" class="form-control" placeholder="Give Brief Description (200 words)"></textarea>
+                                    <textarea name="Description" id="Description" class="form-control" placeholder="Give Brief Description (200 words)" required></textarea>
                                 </div>
                             </div>
                             <br>
@@ -134,7 +134,7 @@
                                     <label for="Title">Publication File</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="file" name="PublicationFile" id="PublicationFile" class="form-control">
+                                    <input type="file" name="PublicationFile" id="PublicationFile" class="form-control" required>
                                 </div>
                             </div>
                             <br>
@@ -230,11 +230,12 @@
     let publicationSubmitUrl = apiBaseUrl.concat(`/Publications/submit`);
 
     $('#btn-postFile').click(function (e) {
-        e.preventDefault();
+       
         //var conf = confirm("Are You Sure You want to Submit Content");
         //if (conf == true) {
-            $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
-            var form_data = new FormData($('#uploadform')[0]);
+        $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+        var form_data = new FormData($('#uploadform')[0]);
+       
             $.ajax({
                 type: 'POST',
                 url: publicationSubmitUrl,
@@ -244,7 +245,7 @@
                 cache: false,
                 data: form_data,
                 beforeSend: function () {
-                    $('#spinner').show();
+                   
                 },
                 success: function (response, status, jxhr) {
                     console.log(response);

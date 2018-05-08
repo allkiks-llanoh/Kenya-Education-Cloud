@@ -109,13 +109,13 @@
 
 
                             @Html.PasswordFor(m => m.Password, new { @class = "form-control required valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.Password) })
-
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
                         </div>
                         <div class="form-group">
 
 
                             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.ConfirmPassword) })
-
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "error" })
                         </div>
 
                     </div>
