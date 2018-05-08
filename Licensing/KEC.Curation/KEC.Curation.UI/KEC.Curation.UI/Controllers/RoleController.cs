@@ -117,13 +117,14 @@ namespace KEC.Curation.UI.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public async Task<ActionResult> DeleteUserFromRole(string roleName, string guid)
+        public async Task<ActionResult> DeleteUserFromRoleChief(string guid)
 
         {
-            var role = await RoleManager.FindByNameAsync(roleName);
+            var roleName = "30fae6a5-126f-4898-8440-fd666473659a";
+            var role = await RoleManager.FindByIdAsync(roleName);
             var user = await UserManager.FindByEmailAsync(guid);
             await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
-            return RedirectToAction("Index");
+            return RedirectToAction("/CurationManagers/ChiefCurators");
         }
         public ActionResult RemoveFromRole()
         {
