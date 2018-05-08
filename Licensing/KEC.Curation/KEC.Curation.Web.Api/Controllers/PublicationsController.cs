@@ -99,7 +99,8 @@ namespace KEC.Curation.Web.Api.Controllers
                     KICDNumber = _uow.PublicationRepository
                                       .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
                     CreatedTimeUtc = DateTime.UtcNow,
-                    ModifiedTimeUtc = DateTime.UtcNow
+                    ModifiedTimeUtc = DateTime.UtcNow,
+                    Owner = model.UserGuid
 
                 };
                 publication.PublicationStageLogs.Add(new PublicationStageLog
