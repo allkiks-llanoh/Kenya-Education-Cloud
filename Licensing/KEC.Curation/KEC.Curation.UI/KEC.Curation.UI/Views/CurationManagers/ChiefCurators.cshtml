@@ -28,12 +28,11 @@
                         <tr class="footable-sortable">
                             <th> NAME </th>
                             <th> SUBJECT </th>
-                            <th> ACTION </th>
                         </tr>
 
                         <tfoot>
                             <tr>
-                                <td colspan="3">
+                                <td colspan="2">
                                     <ul class="pagination pull-right"></ul>
                                 </td>
                             </tr>
@@ -76,7 +75,6 @@
         //row.append($(`<td class="hidden"> + rowData.Id + </td>`));
         row.append($("<td>" + rowData.Value + "</td>"));
         row.append($("<td>" + rowData.Text + "</td>"));
-        row.append($(`<td> <a href="/Role/RemoveFromRole" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Remove From Role</a>`));
         return row[0];
     };
 

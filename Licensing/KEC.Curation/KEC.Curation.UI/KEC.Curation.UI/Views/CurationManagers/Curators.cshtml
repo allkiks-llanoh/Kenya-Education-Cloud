@@ -69,7 +69,6 @@
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $('<tr class="footable-sortable" />')
-        //row.append($(`<td class="hidden"> + rowData.Id + </td>`));
         row.append($("<td>" + rowData.Value + "</td>"));
         row.append($("<td>" + rowData.Text + "</td>"));
 
