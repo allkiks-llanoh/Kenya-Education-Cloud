@@ -31,6 +31,17 @@ namespace KEC.Curation.Data.Repositories
 
             return kicdNumber;
         }
+        public string GetContentNUmber(List<Publication> publications)
+        {
+            var contentNumber = string.Empty;
+            do
+            {
+                contentNumber = RandomCodeGenerator.GetContentNUmber("KEC");
+            } while ((Find(p => p.CertificateNumber.Equals(contentNumber)).FirstOrDefault() != null) &&
+            (publications.Where(p => p.CertificateNumber.Equals(contentNumber)).FirstOrDefault() != null));
+
+            return contentNumber;
+        }
         public bool CanProcessCurationPublication(Publication publication)
         {
             var canProcess = publication.FullyAssigned

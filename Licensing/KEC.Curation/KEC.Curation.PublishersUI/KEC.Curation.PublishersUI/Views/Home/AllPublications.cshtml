@@ -30,7 +30,6 @@
                     <table id="allpublications" class="footable table table-stripped" data-page-size="15" data-filter="#filter">
 
                         <tr class="footable-sortable">
-                            <th> CURATION NUMBER </th>
                             <th> TITLE </th>
                             <th> PUBLISHER</th>
                             <th> ACTIONS</th>
@@ -88,7 +87,6 @@
     function drawRow(rowData) {
         var row = $('<tr class="footable-sortable" />')
         row.append($(`<td class="hidden"> + rowData.id + </td>`));
-        row.append($("<td>" + rowData.kicdNumber + "</td>"));
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.publisherName + "</td>"));
 
