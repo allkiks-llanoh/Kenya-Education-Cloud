@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-    [CustomAuthorize(Roles = "Curation Manager")]
+    [CustomAuthorize(Roles = "Curation Manager,  Admin")]
     [UserGuidJson]
     [AllowCrossSiteJson]
     public class CurationManagersController : Controller
@@ -68,6 +68,22 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult DetailApproved(int Id)
         {
             ViewBag.PublicationId = Id;
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
+        }
+        public ActionResult Curators()
+        {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
             using (var context = new ApplicationDbContext())

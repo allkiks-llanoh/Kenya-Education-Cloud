@@ -4,14 +4,8 @@
     ViewBag.Title = "Upload Content";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@section Scripts{
-
-
-    @Scripts.Render("~/plugins/summernote")
-    @Styles.Render("~/plugins/summernoteStyles")
-    @Scripts.Render("~/plugins/sweetAlert")
-}
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
 
 <div class="wrapper wrapper-content animated fadeInRight" style="margin-top:-40px;">
     <div class="row">
@@ -234,10 +228,11 @@
 <script type="text/JavaScript">
     const apiBaseUrl = "https://curationapi-d.kec.ac.ke/api";
     let publicationSubmitUrl = apiBaseUrl.concat(`/Publications/submit`);
+
     $('#btn-postFile').click(function (e) {
         e.preventDefault();
-        var conf = confirm("Are You Sure You want to Submit Content");
-        if (conf == true) {
+        //var conf = confirm("Are You Sure You want to Submit Content");
+        //if (conf == true) {
             $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
             var form_data = new FormData($('#uploadform')[0]);
             $.ajax({
@@ -257,11 +252,12 @@
                     $('#message').html(response);
                     $('div.alert-success').toggleClass('hidden');
                     $('#btn-postFile').html('SUBMIT PUBLICATION');
-                    $('#Title').html(' ');
-                    $('#ISBNNumber').html(' ');
-                    $('#AuthorName').html(' ');
-                    $('#Price').html(' ');
-                    $('#CompletionDate').html(' ');
+                    $('#Title').val(' ');
+                    $('#ISBNNumber').val(' ');
+                    $('#Description').val(' ');
+                    $('#AuthorName').val(' ');
+                    $('#Price').val(' ');
+                    $('#CompletionDate').val(' ');
                     $('#PublicationFile').html(' No Publication Selected');
                 },
                 error: function (response, status, jxhr) {
@@ -274,20 +270,9 @@
                     $('#error').html(status)
                     $('div.alert-danger').toggleClass('hidden');
                     $('#btn-postFile').html('SUBMIT PUBLICATION');
-
-
                 }
-
-
             });
-        }
-
-    });
-
-    $(document).ready(function () {
-
-        $('#spinner').hide();
-
+        //}
     });
 </script>
 

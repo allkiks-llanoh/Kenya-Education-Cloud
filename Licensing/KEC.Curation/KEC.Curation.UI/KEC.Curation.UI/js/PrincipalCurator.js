@@ -1,7 +1,7 @@
 ﻿
 
 $(document).ready(function () {
-    var publicationID = parseInt($('#identity').attr('data-identity'));
+    var publicationID = $('#identity').attr('data-identity');
     let principalCuratorPostUrl = apiBaseUrl.concat(`/PrincipalCurator/publication/${publicationID}/assign`)
     
     $('#LegalApprove').click(function () {
