@@ -1,5 +1,6 @@
 ﻿
 using KEC.Curation.UI.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
@@ -15,15 +16,17 @@ namespace KEC.Curation.UI.Controllers
     public class RoleController : Controller
     {
         private ApplicationRoleManager _roleManager;
+        private ApplicationUserManager _userManager;
 
         public RoleController()
         {
         }
-
-        public RoleController(ApplicationRoleManager roleManager)
+        
+        public RoleController(ApplicationRoleManager roleManager, ApplicationUserManager userManager)
         {
             RoleManager = roleManager;
-           
+            UserManager = UserManager;
+
         }
 
         public ApplicationRoleManager RoleManager
@@ -35,6 +38,17 @@ namespace KEC.Curation.UI.Controllers
             private set
             {
                 _roleManager = value;
+            }
+        }
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().Get<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
             }
         }
 
@@ -101,6 +115,19 @@ namespace KEC.Curation.UI.Controllers
             var role = await RoleManager.FindByIdAsync(id);
             await RoleManager.DeleteAsync(role);
             return RedirectToAction("Index");
+        }
+        public async Task<ActionResult> DeleteUserFromRole(string roleName, string guid)
+
+        {
+            var role = await RoleManager.FindByNameAsync(roleName);
+            var user = await UserManager.FindByIdAsync(guid);
+            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
+            return RedirectToAction("Index");
+        }
+        public ActionResult RemoveFromRole()
+        {
+           
+            return View();
         }
     }
 }

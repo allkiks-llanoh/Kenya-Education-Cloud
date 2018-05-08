@@ -25,7 +25,7 @@ namespace KEC.Curation.Data.Repositories
             var kicdNumber = string.Empty;
             do
             {
-                kicdNumber = RandomCodeGenerator.GetKICDNUmber("KICD");
+                kicdNumber = RandomCodeGenerator.GetKICDNUmber("KEC");
             } while ((Find(p => p.KICDNumber.Equals(kicdNumber)).FirstOrDefault() != null) &&
             (publications.Where(p => p.KICDNumber.Equals(kicdNumber)).FirstOrDefault() != null));
 
@@ -36,7 +36,7 @@ namespace KEC.Curation.Data.Repositories
             var contentNumber = string.Empty;
             do
             {
-                contentNumber = RandomCodeGenerator.GetContentNUmber("KEC");
+                contentNumber = RandomCodeGenerator.GetContentNUmber("KEC-");
             } while ((Find(p => p.CertificateNumber.Equals(contentNumber)).FirstOrDefault() != null) &&
             (publications.Where(p => p.CertificateNumber.Equals(contentNumber)).FirstOrDefault() != null));
 

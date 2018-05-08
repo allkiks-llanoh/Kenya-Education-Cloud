@@ -1,0 +1,21 @@
+﻿@using KEC.Curation.UI.Models;
+@model ChiefCurators
+@{
+    ViewBag.Title = "RemoveFromRole";
+}
+
+<h2>Remove User From Role</h2>
+@using (Html.BeginForm("DeleteUserFromRole", "Roles"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<p>
+    Username :   <input type="text" name="guid" id="guid" class="form-control" readonly value="@Model.Guid">
+    Role Name:   <input type="text" name="roleName" id="roleName" class="form-control" readonly value="Chief Curator">
+</p>
+
+    <input type="submit" value="Delete this user from Role" />
+}
+
+

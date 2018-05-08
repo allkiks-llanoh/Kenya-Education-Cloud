@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using KEC.Curation.Data.Models;
 using KEC.Curation.Data.UnitOfWork;
 using KEC.Curation.Web.Api.Serializers;
@@ -170,7 +169,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 {
                     assigment.Approved = true;
                     assigment.CertificateNumber = _uow.PublicationRepository
-                                      .GetContentNUmber(_uow.PublicationRepository.GetAll().ToList());
+                                     .GetContentNUmber(_uow.PublicationRepository.GetAll().ToList());
                 }
                 else
                 {

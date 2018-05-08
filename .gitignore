@@ -12,7 +12,8 @@
 *.vs
 *.slnx.sqlite
 *.cache
-
+*.sql
+*.sqlite
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
