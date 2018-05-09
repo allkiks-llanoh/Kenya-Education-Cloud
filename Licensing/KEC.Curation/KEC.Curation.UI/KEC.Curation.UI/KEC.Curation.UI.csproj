@@ -223,6 +223,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChiefCuratorController.cs" />
+    <Compile Include="Controllers\CurationController.cs" />
     <Compile Include="Controllers\CurationManagersController.cs" />
     <Compile Include="Controllers\CuratorController.cs" />
     <Compile Include="Controllers\GetUsersController.cs" />
@@ -974,10 +975,11 @@
     <Content Include="Views\ChangePassword\ChangePassword.cshtml" />
     <Content Include="Views\ChangePassword\ChangePasswordConfirm.cshtml" />
     <Content Include="Views\Role\RemoveFromRole.cshtml" />
+    <Content Include="Views\Curator\Curator.cshtml" />
+    <Content Include="Views\Curation\CuratorView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Curation\" />
     <Folder Include="Views\GetUsers\" />
     <Folder Include="Views\Groups\" />
     <Folder Include="Views\UsersAdmin\" />

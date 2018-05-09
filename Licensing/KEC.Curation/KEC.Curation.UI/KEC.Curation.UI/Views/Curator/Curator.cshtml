@@ -1,18 +1,13 @@
 ﻿@using KEC.Curation.UI.Models;
 @model ChiefCurators
 @{
-    /**/
 
     ViewBag.Title = "Curator View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@section Scripts
-{
+<script src="~/js/jquery-3.1.1.min.js"></script>
 <script src="~/js/curatorView.js"></script>
-    <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
-}
-
+<script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
 <div class="text-center m-t-lg">
     <h1>
         @ViewData["SubTitle"]
@@ -22,7 +17,7 @@
 <div class="tabs-container">
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#tab-unassigned" style="background-color:red; color:white;" aria-expanded="true">Assigned Publications</a></li>
-         </ul>
+    </ul>
     <div class="tab-content">
         <div id="tab-unassigned" class="tab-pane active">
             <div class="panel-body">

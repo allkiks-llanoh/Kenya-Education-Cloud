@@ -340,7 +340,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound("Curation record could not be retrieved or has been submitted");
             }
-            return Ok(value: new CurationRepoDownloadSerilizer(assigment, _uow));
+            return Ok(assigment);
         }
         [HttpPatch("curator/curate/{AssignmentId:int}")]
         public IActionResult SubmitCuration(int AssignmentId, [FromBody]CurationUploadSerializer model)
