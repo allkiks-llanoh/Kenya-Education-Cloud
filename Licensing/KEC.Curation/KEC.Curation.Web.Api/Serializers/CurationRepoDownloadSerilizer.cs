@@ -93,7 +93,7 @@ namespace KEC.Curation.Web.Api.Serializers
                
                 if (section == null)
                 {
-                    return string.Empty;
+                    return "Whole Document";
                 }
                 else
                 {

@@ -40,7 +40,7 @@ namespace KEC.Curation.Web.Api.Serializers
             get
             {
                 var section = _uow.PublicationSectionRepository.Get(_assignment.PublicationSectionId)?.SectionDescription;
-                return section;
+                return section ;
             }
         }
         public int AssignmentId
