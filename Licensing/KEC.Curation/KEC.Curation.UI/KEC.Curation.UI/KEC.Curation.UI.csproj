@@ -395,9 +395,20 @@
     <Content Include="js\chiefCuratorAssignPublication.js" />
     <Content Include="js\chiefCuratorPublicationHistory.js" />
     <Content Include="js\chiefCuratorPublications.js" />
+    <Content Include="js\DeleteCategory.js" />
+    <Content Include="js\DeleteLevel.js" />
+    <Content Include="js\DeleteSubject.js" />
+    <Content Include="js\DetailApproved.js" />
+    <Content Include="js\EditCategory.js" />
+    <Content Include="js\EditLevel.js" />
+    <Content Include="js\EditSubject.js" />
     <Content Include="js\FullyAssignCurator.js" />
     <Content Include="js\FullyAssignChiefCurator.js" />
+    <Content Include="js\ListingCategories.js" />
+    <Content Include="js\ListingLevels.js" />
+    <Content Include="js\ListingSubjects.js" />
     <Content Include="js\PrincipalCuratorComments.js" />
+    <Content Include="js\ReviewPublication.js" />
     <Content Include="js\TryCuratorView.js" />
     <Content Include="js\principalCuratorViewPublication.js" />
     <Content Include="js\chiefCuratorViewPublication.js" />
@@ -979,6 +990,12 @@
     <Content Include="Views\Curator\Curator.cshtml" />
     <Content Include="Views\Curation\CuratorView.cshtml" />
     <Content Include="Views\Curator\List.cshtml" />
+    <Content Include="Views\Home\ListCategory.cshtml" />
+    <Content Include="Views\Home\EditCategory.cshtml" />
+    <Content Include="Views\Home\EditLevel.cshtml" />
+    <Content Include="Views\Home\ListLevels.cshtml" />
+    <Content Include="Views\Home\ListSubjects.cshtml" />
+    <Content Include="Views\Home\EditSubjects.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

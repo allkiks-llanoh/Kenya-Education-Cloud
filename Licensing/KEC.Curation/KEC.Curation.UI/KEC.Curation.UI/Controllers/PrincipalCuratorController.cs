@@ -55,7 +55,8 @@ namespace KEC.Curation.UI.Controllers
         }
         public ActionResult PrincipalCuratorComments()
         {
-
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Curation Recommendations";
 
             using (var context = new ApplicationDbContext())
             {

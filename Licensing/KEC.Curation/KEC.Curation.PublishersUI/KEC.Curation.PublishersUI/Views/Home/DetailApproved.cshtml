@@ -90,10 +90,7 @@
             }).done(function (submissions, textStatus, jqXHR) {
 
                 submissions.forEach(function (submission) {
-                    $('#currator-commets').html(` <dt>Curator Comments</dt><dd> ${submission.curatorComments}</dd>
-                                                  <dt>Chief Curator Comments</dt><dd>${submission.chiefCuratorComments}</dd>
-                                                  <dt>Principal Curator Comments</dt><dd>${submission.principalCuratorComments}</dd>
-                                                  <dt>Curation Managers Comments</dt><dd>${submission.cutationManagersCuratorComments}</dd>`);
+                    $('#currator-commets').html(`<dt>Recommendations/Remarks</dt><dd>${submission.cutationManagersCuratorComments}</dd>`);
 
                 });
 
@@ -181,7 +178,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Publication curation comments</h5>
+                        <h5>Publication Remarks</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>

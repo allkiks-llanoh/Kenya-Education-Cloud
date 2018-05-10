@@ -37,13 +37,21 @@
             showChiefCuratorSubmissionSection(publication, "#publication-view");
             $('#publication-details').replaceWith(
                 `<dl id="publication-details">
-                  <dt>KICD Number</dt>
-                  <dd>${publication.kicdNumber}</dd>
-                  <dt>Title</dt>
-                   <dd>${publication.title}</dd>
-                   <dt>Description</dt>
-                   <dd>${publication.description}</dd></dl>`);
-          
+                    <div class="row">
+                        <div class="col-md-4">
+                            <dt>KICD Number</dt>
+                            <dd>${publication.kicdNumber}</dd>
+                        </div>
+                        <div class="col-md-4">
+                            <dt>Title</dt>
+                            <dd>${publication.title}</dd>
+                        </div>
+                        <div class="col-md-4">
+                             <dt>Description</dt>
+                             <dd>${publication.description}</dd>
+                        </div>
+                    </div>
+                  </dl>`);
         });
     }
 

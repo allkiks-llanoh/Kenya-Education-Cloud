@@ -27,6 +27,7 @@
                             <th> CURATION NUMBER </th>
                             <th> TITLE </th>
                             <th> PUBLISHER</th>
+                            <th>SUBJECT</th>
                             <th> ACTIONS</th>
                         </tr>
 
@@ -78,6 +79,7 @@
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.publisherName + "</td>"));
+        row.append($("<td>" + rowData.subject + "</td>"));
 
         row.append($(`<td> <a href="/ChiefCurator/AssignPublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
 

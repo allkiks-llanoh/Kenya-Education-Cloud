@@ -71,6 +71,8 @@ namespace KEC.Curation.UI.Controllers
                     Guid = user.Id,
                     Subjectid = user.SubjectId,
                     FullName = user.FullName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber
                 };
                 return View(chiefCurator);
             }
