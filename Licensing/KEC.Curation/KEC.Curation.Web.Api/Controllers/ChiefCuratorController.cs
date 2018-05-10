@@ -103,7 +103,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
             var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefCuratorGuid)
                               && p.Publication.PublicationStageLogs.Max(l => l.Stage) == PublicationStage.Curation
-                              && p.Submitted==false).ToList();
+                              && !p.Submitted).ToList();
             var assignmentList = publications.Any() ?
             publications.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
             return Ok(assignmentList);
@@ -277,7 +277,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(modelState: ModelState);
             }
-            var assigment = _uow.PublicationRepository.Find(p => p.FullyAssigned==false
+            var assigment = _uow.PublicationRepository.Find(p => !p.FullyAssigned
                                                                   && p.Id.Equals(model.publicationId)
                                                                   && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(model.UserGuid))
                                                                   .FirstOrDefault();
@@ -402,8 +402,9 @@ namespace KEC.Curation.Web.Api.Controllers
            
             try
             {
-
-     
+                var update = _uow.ChiefCuratorAssignmentRepository
+                                  .Find(p => p.PublicationId.Equals(publicationId)).FirstOrDefault();
+                update.Submitted = true;
                 var comment = new ChiefCuratorComment
                 {
                     PublicationId = publication.Id,

@@ -6,7 +6,7 @@
     //Functions Section
     function getPublicationsToCurate() {
         var userGuid = $('#CurrentUserGuid').val();
-        let url = apiBaseUrl.concat(`/curator/tocurate?userGuid=${userGuid}`);
+        let url = apiBaseUrl.concat(`/chiefcurator/curator/tocurate?userGuid=${userGuid}`);
         console.log(`${userGuid}`);
         $.ajax({
             url: url,
@@ -28,10 +28,11 @@
             var targetTable = $('#publications-to-curate').find('tbody');
             assigments.forEach(function (assignment) {
                 var row = $targetTable.insertRow($targetTable.rows.length);
-                row.innerHTML = `<td>${assignment.publication}</td>
-                                 <td>${assignment.sectiontocurate}</td>
-                                 <td>${assignment.assignmentdateutc}</td>
-                                 <td><a href="${curationUrl.concat('/', assignment.id)}" type="button" data-assignment=${assignment.id} 
+                row.innerHTML = `<td>${assignment.publicationId}</td>
+                                 <td>${assignment.publication}</td>
+                                 <td>${assignment.sectionToCurate}</td>
+                                 <td>${assignment.assignmentDateUtc}</td>
+                                 <td><a href="${curationUrl.concat('/', assignment.assignmentId)}" type="button" data-assignment=${assignment.assignmentId} 
                                  class="btn btn-success publication-action">Curate</a></td>`;
             }).fail(function (jqXHR, textStatus, errorThrow) {
                 ShowAlert("Something went wrong while retrieving publications", "error");
