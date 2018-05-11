@@ -29,14 +29,14 @@
     <div class="form-group">
         @Html.LabelFor(m => m.RoleName, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
-            @Html.DropDownListFor(m => m.RoleName, new SelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control" })
-       
+            <select name="RoleName" id="RoleName" class="form-control"></select>
+
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Subject, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
-           
+
 
             <select name="SubjectTypeId" id="SubjectTypeId" class="form-control"></select>
         </div>
@@ -65,4 +65,5 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="@Url.Content("~/Scripts/jquery-3.1.1.min.js")"></script>
     <script src="@Url.Content("~/js/SubjectsForCurators.js")"></script>
+    <script src="@Url.Content("~/js/GetRoles.js")"></script>
 }

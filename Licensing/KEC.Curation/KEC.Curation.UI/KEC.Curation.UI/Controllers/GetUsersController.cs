@@ -89,5 +89,11 @@ namespace Authentication_Test.Controllers
             return _users;
 
         }
+        public ActionResult GetRoles()
+        {
+            var _users = context.Roles.ToList();
+
+            return Json(new SelectList(_users, "Name", "Id"));
+        }
     }
 }
