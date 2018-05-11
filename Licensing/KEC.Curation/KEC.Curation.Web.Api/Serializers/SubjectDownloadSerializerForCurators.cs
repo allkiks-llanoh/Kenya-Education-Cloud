@@ -24,7 +24,13 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _subject.Name;
             }
         }
-       
 
+        public int Id
+        {
+            get
+            {
+                return _subject.Id;
+            }
+        }
     }
 }
