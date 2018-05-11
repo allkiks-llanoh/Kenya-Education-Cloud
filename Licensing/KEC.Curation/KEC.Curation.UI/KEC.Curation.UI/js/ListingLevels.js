@@ -1,5 +1,5 @@
 ﻿
-let financeGETUrl = apiBaseUrl.concat(`/Listings/Levels`);
+let financeGETUrl = apiBaseUrl.concat(`/Subjects/Listings/Levels`);
 
 function tableRows(data) {
     var tableRows = [];

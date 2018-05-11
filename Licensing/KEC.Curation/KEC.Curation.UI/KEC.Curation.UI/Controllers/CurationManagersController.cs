@@ -200,7 +200,7 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult Rejected()
         {
             ViewData["SubTitle"] = "Curation Management System";
-            ViewData["Message"] = "View Rejected Publications";
+            ViewData["Message"] = "View Not Approved Publications";
 
             using (var context = new ApplicationDbContext())
             {
