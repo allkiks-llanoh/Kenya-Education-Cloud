@@ -39,6 +39,22 @@ namespace KEC.Curation.Web.Api.Controllers
                 subjects.Select(p => new SubjectDownloadSerializerForCurators(p, _uow)) : new List<SubjectDownloadSerializerForCurators>();
             return Ok(value: subjectList.ToList());
         }
+        // GET: api/Listing/Levels
+        [HttpGet("Listing/Levels")]
+        public IActionResult ListLevels()
+        {
+            var subjects = _uow.LevelRepository.GetAll().ToList();
+            var subjectList = subjects.Any() ?
+                subjects.Select(p => new LevelsDownloadSerilizer(p, _uow)) : new List<LevelsDownloadSerilizer>();
+            return Ok(value: subjectList.ToList());
+        }
+        // GET: api/Listing/Levels
+        [HttpGet("Listing/Category")]
+        public IActionResult ListCategory()
+        {
+            var subjects = _uow.SubjectTypeRepository.GetAll().ToList();
+            return Ok(subjects);
+        }
         // GET: api/Subjects/5
         [HttpGet("{id}", Name = "SubjectById")]
         public IActionResult SubjectById(int id)
@@ -87,8 +103,8 @@ namespace KEC.Curation.Web.Api.Controllers
         }
 
         // PUT: api/Subjects/5
-        [HttpPut("{id}")]
-        public IActionResult EditSubject(int Id,[FromBody]SubjectUploadSerializer model)
+        [HttpPatch("subject/{id}")]
+        public IActionResult EditSubject(int Id,[FromBody]SubjectUploadSerializerEdit model)
         {
             if (!ModelState.IsValid)
             {
@@ -101,16 +117,10 @@ namespace KEC.Curation.Web.Api.Controllers
                 {
                     return NotFound("Subject could not retrieved for updating");
                 }
-                var exist = _uow.SubjectRepository.Find(p => p.Name.Equals(model.Name)
-                                                      && p.SubjectTypeId.Equals(model.SubjectTypeId.GetValueOrDefault())
-                                                      && !p.Id.Equals(Id)).Any();
-                if (exist)
-                {
-                    return BadRequest("A different subject with the same properties exists");
-                }
+                
+              
                 subject.Name = model.Name;
                 subject.UpdatedAtUtc = DateTime.Now.ToUniversalTime();
-                subject.SubjectTypeId = model.SubjectTypeId.Value;
                 _uow.Complete();
                 return Ok("Subject updated successfully");
             }
@@ -120,6 +130,21 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,"Something went wrong while processing your request");
             }
 
+        }
+        [HttpDelete("{id}")]
+
+        public IActionResult DeleteSubject(DeleteSerilizer model)
+        {
+
+            var level = _uow.SubjectRepository.Get(model.Id.GetValueOrDefault());
+            if (level == null)
+            {
+                return NotFound("Level could not be retrieved for deleting or is missing ");
+            }
+            _uow.SubjectRepository.Remove(level);
+
+            _uow.Complete();
+            return Ok("Subject Deleted From Repository");
         }
 
     }
