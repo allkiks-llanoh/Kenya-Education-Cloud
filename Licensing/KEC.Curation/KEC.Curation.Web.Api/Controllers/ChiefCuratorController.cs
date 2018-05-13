@@ -264,7 +264,7 @@ namespace KEC.Curation.Web.Api.Controllers
             var assignedList = assigned.Any() ?
                 assigned.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
 
-            return Ok(assigned.ToList());
+            return Ok(assignedList);
         }
         [HttpPatch("update/curatorcomments/{id}")]
         public IActionResult UpdateCurationComments(int publicationId, [FromBody]ChiefFlagSubmittedSerilizer model)

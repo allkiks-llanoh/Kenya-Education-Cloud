@@ -28,10 +28,6 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-                //var publicationId = _uow.ChiefCuratorAssignmentRepository.Get(_assignment.Publication.)?.PublicationId;
-                //var publicationRecord = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
-                //var subject = _uow.SubjectRepository.Get(publicationRecord.SubjectId).Name;
-                //var recordinfo = $"Subject: {subject} KICD Number: {publicationRecord.KICDNumber}";
                 var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
                 return publication.KICDNumber;
             }
@@ -41,8 +37,16 @@ namespace KEC.Curation.Web.Api.Serializers
             get
             {
                 var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
-                var section = _uow.PublicationSectionRepository.Find(p=> p.PublicationId.Equals(publication.Id)).FirstOrDefault();
-                return section.SectionDescription;
+                var section = _uow.PublicationSectionRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+
+                if (section == null)
+                {
+                    return "Whole Document";
+                }
+                else
+                {
+                    return section.SectionDescription;
+                }
             }
         }
         public int AssignmentId
@@ -66,6 +70,14 @@ namespace KEC.Curation.Web.Api.Serializers
             {
                 var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
                 return publication.Id;
+            }
+        }
+        public string Title
+        {
+            get
+            {
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                return publication.Title;
             }
         }
 
