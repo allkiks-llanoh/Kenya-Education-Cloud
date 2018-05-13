@@ -99,10 +99,10 @@ namespace KEC.Curation.Web.Api.Controllers
 
         }
         [HttpGet("publications/{subjectId:int}/comments")]
-        public IActionResult AssignedWithComments(int subjectId, string chiefCuratorGuid)
+        public IActionResult AssignedWithComments(int subjectid, string chiefcuratorguid)
         {
 
-            var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefCuratorGuid)
+            var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefcuratorguid)
                               && p.Publication.PublicationStageLogs.Max(l => l.Stage) == PublicationStage.Curation
                               && !p.Submitted).ToList();
             var assignmentList = publications.Any() ?
