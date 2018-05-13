@@ -90,7 +90,7 @@
                     {
                         <a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
 
-                        <li> <a href="@Url.Action("PrincipalCurator", "PrincipalCurator")"><i class="glyphicon glyphicon-edit"></i> <span class="nav-label">Principal Curation</span></a></li>
+                        <li> <a href="@Url.Action("AssignMultiple", "PrincipalCurator")"><i class="glyphicon glyphicon-edit"></i> <span class="nav-label">Principal Curation</span></a></li>
 
                     }
                     @if (User.IsInRole("Curation Manager"))

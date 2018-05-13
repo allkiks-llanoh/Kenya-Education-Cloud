@@ -410,6 +410,8 @@
     <Content Include="js\ListingSubjects.js" />
     <Content Include="js\PrincipalCuratorComments.js" />
     <Content Include="js\ReviewPublication.js" />
+    <Content Include="js\SelectedContentDrawTable.js" />
+    <Content Include="js\TryAssignMultiple.js" />
     <Content Include="js\TryCuratorView.js" />
     <Content Include="js\principalCuratorViewPublication.js" />
     <Content Include="js\chiefCuratorViewPublication.js" />
@@ -997,6 +999,7 @@
     <Content Include="Views\Home\ListLevels.cshtml" />
     <Content Include="Views\Home\ListSubjects.cshtml" />
     <Content Include="Views\Home\EditSubjects.cshtml" />
+    <Content Include="Views\PrincipalCurator\AssignMultiple.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

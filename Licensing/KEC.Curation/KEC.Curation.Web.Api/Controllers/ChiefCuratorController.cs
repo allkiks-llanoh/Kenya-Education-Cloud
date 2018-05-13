@@ -8,6 +8,7 @@ using KEC.Curation.Web.Api.Serializers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using KEC.Curation.Services.Extensions;
+using System.Threading.Tasks;
 
 namespace KEC.Curation.Web.Api.Controllers
 {
@@ -131,7 +132,7 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
 
-                publication.FullyAssigned = model.FullyAssigned;
+
                 var section = new PublicationSection
                 {
                     PublicationId = publication.Id,
@@ -145,10 +146,10 @@ namespace KEC.Curation.Web.Api.Controllers
                     PublicationSectionId = section.Id,
                     CreatedUtc = DateTime.UtcNow,
                     Assignee = model.Assignee,
-                    AssignedBy = model.AssignedBy, 
-                    PublicationId=publication.Id
+                    AssignedBy = model.AssignedBy,
+                    PublicationId = publication.Id,
                 };
-               
+
 
                 _uow.CuratorAssignmentRepository.Add(assignment);
                 _uow.Complete();
@@ -237,7 +238,7 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult CuratorSubmissions([FromQuery]int publicationId, string chiefCuratorGuid)
         {
             var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publicationId)
-            && p.AssignedBy.Equals(chiefCuratorGuid)&& p.Submitted && p.Publication.PublicationStageLogs.Max(l => l.Stage) == PublicationStage.Curation
+            && p.AssignedBy.Equals(chiefCuratorGuid) && p.Submitted && p.Publication.PublicationStageLogs.Max(l => l.Stage) == PublicationStage.Curation
             );
             var assignmentList = assignmentSubmissions.Any() ?
                 assignmentSubmissions.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
@@ -253,7 +254,7 @@ namespace KEC.Curation.Web.Api.Controllers
             var curationCommentList = curationComments.Any() ?
                 curationComments.Select(p => new CurationCommentSerializer(p, _uow)).ToList() : new List<CurationCommentSerializer>();
             return Ok(curationCommentList);
-           
+
         }
         [HttpGet("publication/withcomments")]
         public IActionResult WithCommentsAtChiefCuratorLevel([FromQuery]string userId)
@@ -266,7 +267,7 @@ namespace KEC.Curation.Web.Api.Controllers
             //                       && p.PublicationSection.CuratorAssignment.Submitted == true);
             //var curationCommentList = curationComments.Any () ?
             //    curationComments.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
-           
+
             return Ok(curationComments.ToList());
 
         }
@@ -313,7 +314,7 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: publicationList);
         }
         [HttpGet("publication/{publicationId:int}/history")]
-        public IActionResult PublicationCurationHistory(string chiefCuratorGuid,int publicationId)
+        public IActionResult PublicationCurationHistory(string chiefCuratorGuid, int publicationId)
         {
             var publication = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid)
                              && p.FullyAssigned && p.PublicationStageLogs.Any(l => l.Stage == PublicationStage.Curation && l.Notes != null))
@@ -331,11 +332,22 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("curator/tocurate")]
         public IActionResult ToCurate(string userGuid)
         {
-            //  var assigment = CurationAssignments(userGuid, _uow);
-            ////  return Ok(value: assignmentList);
-            //  return Ok(value: new CurationDownloadSerializer(assigment, _uow));
-            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted
-                                                                 && p.Assignee.Equals(userGuid)).FirstOrDefault();
+            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted && !p.Publication.FullyAssigned
+                                                                 && p.Assignee.Equals(userGuid));
+            if (assigment == null)
+            {
+                return NotFound("Curation record could not be retrieved or has been submitted");
+            }
+            var assigmentList = assigment.Any() ?
+               assigment.Select(p => new CurationRepoDownloadSerilizer(p, _uow)).ToList() : new List<CurationRepoDownloadSerilizer>();
+            return Ok(value: assigmentList);
+        }
+
+        [HttpGet("curator/listings/{id}")]
+        public IActionResult GetAllCuratorAssignments(int id)
+        {
+            var publication = _uow.PublicationRepository.Get(id);
+            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted && !p.Publication.FullyAssigned && p.PublicationId.Equals(publication.Id)).FirstOrDefault();
             if (assigment == null)
             {
                 return NotFound("Curation record could not be retrieved or has been submitted");
@@ -360,7 +372,7 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
                 assigment.Notes = model.Notes;
-                assigment.Submitted = model.Submitted;
+                assigment.Submitted = true;
                 _uow.Complete();
                 return Ok(value: CurationAssignments(model.UserGuid, _uow));
             }
@@ -399,7 +411,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound(value: new { message = "Publication Not Found in Repository." });
             }
-           
+
             try
             {
                 var update = _uow.ChiefCuratorAssignmentRepository
@@ -416,7 +428,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 _uow.ChiefCuratorCommentRepository.Add(comment);
                 var recommendation = new PublicationStageLog
                 {
-                    PublicationId= publication.Id,
+                    PublicationId = publication.Id,
                     Stage = PublicationStage.PublicationApproval,
                     Notes = model.Notes,
                     CreatedAtUtc = DateTime.UtcNow,
@@ -457,7 +469,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
                 var comments = _uow.CuratorAssignmentRepository.Find(p =>
                                 p.PublicationId.Equals(publicationId)
-                                && p.Status==true).ToList();
+                                && p.Status == true).ToList();
                 return Ok(value: comments);
             }
             catch (Exception)
@@ -465,7 +477,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-           
+
         }
         #endregion
         #region Methods
@@ -477,7 +489,76 @@ namespace KEC.Curation.Web.Api.Controllers
             return assigmentList;
         }
         #endregion
+        #region assign Multiple To Chief Curators
+        [HttpPost("selected/assign")]
+        public IActionResult AssignSelectedPublications([FromBody] SelectedContentAssignmentSerilizer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+            var publications = _uow.PublicationRepository
+                                  .Find(p => model.SelectedContent.Contains(p.Id) && !p.FullyAssigned).ToList();
+            if (publications == null)
+            {
+                return NotFound(value: new { message = "Publication could not be retrieved for assignment." });
+            }
+            var exists = _uow.ChiefCuratorAssignmentRepository.Find(p => model.SelectedContent.Contains(p.PublicationId)).Any();
 
-       
+            if (exists)
+            {
+                return BadRequest("Content Already Assigned");
+            }
+            var nextStageList = new List<PublicationStageLog>();
+            var assignmentList = new List<ChiefCuratorAssignment>();
+            var padLock = new object();
+
+            try
+            {
+                Parallel.ForEach(publications, (publication, loopState) =>
+                {
+                    var assignment = new ChiefCuratorAssignment
+                    {
+                        PublicationId = publication.Id,
+                        PrincipalCuratorGuid = model.PrincipalCuratorGuid,
+                        ChiefCuratorGuid = model.ChiefCuratorGuid,
+                        AssignmetDateUtc = DateTime.UtcNow
+                    };
+                    var nextStage = new PublicationStageLog
+                    {
+                        PublicationId = publication.Id,
+                        Owner = publication.Owner,
+                        Stage = PublicationStage.Curation,
+                        ActionTaken = ActionTaken.PublicationMoveToNextStage
+                    };
+                    lock (padLock)
+                    {
+                        assignmentList.Add(assignment);
+                    }
+                    lock (padLock)
+                    {
+                        nextStageList.Add(nextStage);
+                    }
+                });
+
+                _uow.ChiefCuratorAssignmentRepository.AddRange(assignmentList);
+                var _assignments = _uow.ChiefCuratorAssignmentRepository.Find(p => model.SelectedContent.Contains(p.PublicationId)).ToList();
+                Parallel.ForEach(publications, (publication, loopThroughPublications) =>
+                {
+                    Parallel.ForEach(_assignments, (_assignment, loopThroughAssignments) =>
+                    {
+                        publication.ChiefCuratorAssignmentId = _assignment.Id;
+                    });
+                });
+                _uow.PublicationStageLogRepository.AddRange(nextStageList);
+                _uow.Complete();
+                return Ok(value: new { message = "Content assigned successfully" });
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        #endregion
     }
 }

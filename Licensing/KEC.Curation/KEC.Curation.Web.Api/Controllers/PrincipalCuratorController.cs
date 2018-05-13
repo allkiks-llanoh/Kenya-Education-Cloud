@@ -17,8 +17,8 @@ namespace KEC.Curation.Web.Api.Controllers
 {
 
     [AllowCrossSiteJson]
-   
-  
+
+
     [Produces("application/json")]
     [Route("api/PrincipalCurator")]
     public class PrincipalCuratorController : Controller
@@ -101,7 +101,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-           
+
         }
         [HttpGet("{stage}")]
         public IActionResult PublicationsByStage(PublicationStage stage)
@@ -194,9 +194,9 @@ namespace KEC.Curation.Web.Api.Controllers
                     PrincipalCuratorGuid = model.PrincipalCuratorGuid,
                     ChiefCuratorGuid = model.ChiefCuratorGuid,
                     AssignmetDateUtc = DateTime.UtcNow,
-                    
 
-                }; 
+
+                };
                 var nextStage = new PublicationStageLog
                 {
                     PublicationId = publication.Id,
@@ -205,10 +205,10 @@ namespace KEC.Curation.Web.Api.Controllers
                     Stage = PublicationStage.Curation,
                     ActionTaken = model.ActionTaken
                 };
-               
+
                 _uow.ChiefCuratorAssignmentRepository.Add(asignment);
                 _uow.PublicationStageLogRepository.Add(nextStage);
-                publication.ChiefCuratorAssignmentId =(asignment.Id);
+                publication.ChiefCuratorAssignmentId = (asignment.Id);
                 _uow.Complete();
 
                 return Ok(value: $"Publication {model.KICDNumber} moved to curation");
@@ -254,14 +254,14 @@ namespace KEC.Curation.Web.Api.Controllers
                 var recommendation = new PublicationStageLog
                 {
                     PublicationId = publication.Id,
-                   
+
                     Notes = model.Notes,
                     CreatedAtUtc = DateTime.UtcNow,
                     Owner = model.PrincipalCuratorGuid,
                     ActionTaken = model.ActionTaken
                 };
                 _uow.PublicationStageLogRepository.Add(recommendation);
-              
+
                 _uow.Complete();
                 _uow.PublicationRepository.ProcessToTheNextStage(publication);
                 return Ok(value: new { message = "Recommendations Sent To Curation Managers" });
@@ -279,7 +279,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(modelState: ModelState);
             }
-            var assigment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.Submitted==false
+            var assigment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.Submitted == false
                                                                   && p.PublicationId.Equals(model.publicationId)
                                                                   && p.PrincipalCuratorGuid.Equals(model.UserGuid))
                                                                   .FirstOrDefault();
@@ -289,7 +289,7 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             try
             {
-               
+
                 assigment.Submitted = true;
                 _uow.Complete();
                 return Ok(value: new { message = "Curation Fully Submitted" });
