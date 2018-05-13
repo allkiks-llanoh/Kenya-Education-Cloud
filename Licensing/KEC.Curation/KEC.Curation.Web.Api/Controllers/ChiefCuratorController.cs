@@ -256,6 +256,16 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(curationCommentList);
 
         }
+        [HttpGet("publication/{publicationId:int}/curatorcomments")]
+        public IActionResult CuratorSubmissionsAndComments([FromQuery]int publicationId)
+        {
+            var curationComments = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publicationId)
+                                   && p.Submitted);
+            var curationCommentList = curationComments.Any() ?
+                curationComments.Select(p => new CurationRepoDownloadSerilizer(p, _uow)).ToList() : new List<CurationRepoDownloadSerilizer>();
+            return Ok(curationCommentList);
+
+        }
         [HttpGet("publication/withcomments")]
         public IActionResult WithCommentsAtChiefCuratorLevel([FromQuery]string userId)
         {
@@ -553,5 +563,16 @@ namespace KEC.Curation.Web.Api.Controllers
             }
         }
         #endregion
+        [HttpGet("publications/{publicationId:int}/curator/comments")]
+        public IActionResult ReadCurationCommentsFromCurators(int publicationId)
+        {
+            var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(publicationId)).FirstOrDefault();
+            if (publication == null)
+            {
+                return NotFound(value: new { message = "Publication record could not be retrieved" });
+            }
+            return Ok(value: new PublicationDownloadSerilizerToCurators(publication, _uow));
+        }
     }
+   
 }

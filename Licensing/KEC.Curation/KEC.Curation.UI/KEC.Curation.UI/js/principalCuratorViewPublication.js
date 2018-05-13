@@ -19,7 +19,7 @@
     function getPublication() {
         let PrincipalCuratorGUID = $('#CurrentUserGuid').val();
         let publicationIdId = $('#publication-view').attr('data-publicationId');
-        var url = apiBaseUrl.concat(`/principalcurator/viewpublication/${publicationIdId}?publicationId=${publicationIdId}`);
+        var url = apiBaseUrl.concat(`/chiefcurator/publications/${publicationIdId}/curator/comments?publicationId=${publicationIdId}`);
         console.log(url);
         $.ajax({
             url: url,
@@ -33,11 +33,10 @@
                 500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
             },
           
-
         }).done(function (publication, textStatus, jqXHR) {
             showChiefCuratorSubmissionSection(publication, "#publication-view");
             $('#publication-details').replaceWith(
-                `<dl id="publication-details" data-stage="${publication.id}">
+                `<dl >
                   <div class="row">
                        <div class="col-md-3">
                            <dt>Curation</dt>
@@ -73,12 +72,14 @@
     }
 
     function getPublicationCurationComments() {
+        //const basUrl = "http://localhost:15177/api";
         let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        let url = apiBaseUrl.concat(`/ChiefCurator/Publication/${publicationId}/curatorcomments?publicationId=${publicationId}`);
-       
+        let urlToReadComments = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorcomments?publicationId=${publicationId}`);
+        //let urls = basUrl.concat(`/chiefcurator/publication/${publicationId}/curatorcomments?publicationId=${publicationId}`);
+
         $.ajax({
-            url: url,
+            url: urlToReadComments,
             type: 'GET',
             contentType: 'application/json',
             crossDomain: true,
@@ -93,7 +94,7 @@
         }).done(function (submissions, textStatus, jqXHR) {
            
             submissions.forEach(function (submission) {
-                $('#comments').html(` ${submission.SectionToCurate},${submission.notes}`);
+                $('#comments').html(`${submission.notes}`);
 
             });
         
