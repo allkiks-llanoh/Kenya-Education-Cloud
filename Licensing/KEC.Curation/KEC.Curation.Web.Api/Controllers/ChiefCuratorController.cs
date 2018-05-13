@@ -260,10 +260,11 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult WithCommentsAtChiefCuratorLevel([FromQuery]string userId)
         {
 
-            var assigned = _uow.CuratorAssignmentRepository.Find(p => p.AssignedBy.Equals(userId) && p.Submitted);
+            var assigned = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(userId) && p.Publication.FullyAssigned);
             var assignedList = assigned.Any() ?
-                assigned.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
-            return Ok(value: assignedList);
+                assigned.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
+
+            return Ok(assigned.ToList());
         }
         [HttpPatch("update/curatorcomments/{id}")]
         public IActionResult UpdateCurationComments(int publicationId, [FromBody]ChiefFlagSubmittedSerilizer model)
