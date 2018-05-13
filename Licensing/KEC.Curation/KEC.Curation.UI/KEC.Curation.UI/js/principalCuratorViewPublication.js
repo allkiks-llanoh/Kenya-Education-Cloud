@@ -36,22 +36,38 @@
         }).done(function (publication, textStatus, jqXHR) {
             showChiefCuratorSubmissionSection(publication, "#publication-view");
             $('#publication-details').replaceWith(
-                `<dl id="publication-details">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <dt>KICD Number</dt>
-                            <dd>${publication.kicdNumber}</dd>
-                        </div>
-                        <div class="col-md-4">
+                `<dl id="publication-details" data-stage="${publication.id}">
+                  <div class="row">
+                       <div class="col-md-3">
+                           <dt>Curation</dt>
+                           <dd id="kicd-number">${publication.kicdNumber}</dd>  
+                       </div>
+                       <div class="col-md-3">
                             <dt>Title</dt>
-                            <dd>${publication.title}</dd>
-                        </div>
-                        <div class="col-md-4">
+                            <dd>${publication.title}</dd> 
+                       </div>
+                         <div class="col-md-3">
+                            <dt>Content Location</dt>
+                            <dd><a href="${publication.url}">Link to publication</a></dd>
+                       </div>
+                  </div>
+                  <br><br>
+                  <div class="row">
+                       <div class="col-md-3">
+                            <dt>Subject</dt>
+                            <dd>${publication.subject}</dd>
+                       </div>
+                        <div class="col-md-3">
+                              <dt>Completion date</dt>
+                                <dd>${publication.completionDate}</dd>
+                       </div>
+                        <div class="col-md-3">
                              <dt>Description</dt>
-                             <dd>${publication.description}</dd>
-                        </div>
-                    </div>
-                  </dl>`);
+                            <dd>${publication.description}</dd>
+                       </div>
+                  </div>
+                 </dl>`);
+
         });
     }
 
