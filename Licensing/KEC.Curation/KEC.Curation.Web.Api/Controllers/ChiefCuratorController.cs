@@ -262,13 +262,11 @@ namespace KEC.Curation.Web.Api.Controllers
             var curationComments = _uow.CuratorAssignmentRepository.Find(p => p.AssignedBy.Equals(userId)
                                    && p.Publication.FullyAssigned == true
                                    && p.Submitted == true);
-            //var curationCommentss = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(userId)
-            //                       && p.Publication.FullyAssigned == true
-            //                       && p.PublicationSection.CuratorAssignment.Submitted == true);
-            //var curationCommentList = curationComments.Any () ?
-            //    curationComments.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
 
-            return Ok(curationComments.ToList());
+            var curationCommentList = curationComments.Any() ?
+                curationComments.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
+
+            return Ok(curationCommentList);
 
         }
         [HttpPatch("update/curatorcomments/{id}")]
