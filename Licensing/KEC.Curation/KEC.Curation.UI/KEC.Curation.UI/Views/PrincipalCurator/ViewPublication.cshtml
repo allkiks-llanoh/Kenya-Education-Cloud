@@ -10,7 +10,8 @@
 
 }
 @section Scripts{
-    @Scripts.Render("~/js/principalCuratorViewPublication.js")  
+   
+    <script src="~/js/principalCuratorViewPublication.js"></script>
     <script src="@Url.Content("~/js/CurationCommentsChief.js")"></script>
     <script src="@Url.Content("~/js/ReadCurationComments.js")"></script>
     <script src="@Url.Content("~/js/PrincipalCuratorComments.js")"></script>
@@ -38,7 +39,7 @@
                         <dl id="publication-details"></dl>
                     </div>
                     <div class="ibox-footer">
-                       
+
                         Publication Details
                     </div>
                 </div>
@@ -78,18 +79,18 @@
                             </div>
                         </div>
                         <div class="row">
-                        <div class="ibox-title">
-                            <h5>Chief Curator Recomendations</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
+                            <div class="ibox-title">
+                                <h5>Chief Curator Recomendations</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                            </div>
                         <div class="row">
                             <div class="table-responsive">
                                 <table style="border:none;" class="table  table-hover dataTables-example" id="chiefcomments">
