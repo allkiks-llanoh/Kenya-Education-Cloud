@@ -21,7 +21,7 @@ $(document).ready(function () {
                 'Content-Type' : 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            url: "http://localhost:15177/api/ChiefCurator/selected/assign",
+            url: principalCuratorPostUrl,
             type: "POST",
             data: ajaxDatas(),
             success: function (data, status, jxhr) {
