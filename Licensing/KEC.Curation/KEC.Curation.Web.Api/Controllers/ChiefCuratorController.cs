@@ -426,8 +426,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     Stage = PublicationStage.PublicationApproval,
                     Notes = model.Notes,
                     CreatedAtUtc = DateTime.UtcNow,
-                    Owner = model.ChiefCuratorGuid,
-                    ActionTaken = model.ActionTaken
+                    Owner = model.ChiefCuratorGuid
                 };
                 _uow.PublicationStageLogRepository.Add(recommendation);
                 _uow.Complete();
