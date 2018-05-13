@@ -38,7 +38,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
             var publications = _uow.PublicationRepository.Find(p => p.Id.Equals(publicationId));
             var publicationList = publications.Any() ?
-                publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
         }
         [HttpGet]
