@@ -4,7 +4,7 @@
 let ectId = $('#SubjectId').val();
 let chiefCuratorGUIDss = $('#CurrentUserGuid').val();
 
-let cUrl = apiBaseUrl.concat(`/chiefcurator/publications/${ectId}/comments?subjectid=${ectId}&chiefcuratorguid=${chiefCuratorGUIDss}`);
+let cUrl = apiBaseUrl.concat(`/chiefcurator/publication/withcomments?userId=userId=${chiefCuratorGUIDss}`);
 function tableRows(data) {
     var tableRows = [];
     for (var i = 0; i < data.length; i++) {
