@@ -260,7 +260,7 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult WithCommentsAtChiefCuratorLevel([FromQuery]string userId)
         {
 
-            var assigned = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(userId) && p.Publication.FullyAssigned);
+            var assigned = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(userId) && p.Publication.FullyAssigned && !p.Submitted);
             var assignedList = assigned.Any() ?
                 assigned.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
 
