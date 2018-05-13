@@ -18,7 +18,7 @@
     function getPublication() {
         let PrincipalCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        var url = apiBaseUrl.concat(`/principalcurator/curated?principalCuratorGuid=${PrincipalCuratorGUID}&publicationId=${publicationId}`);
+        var url = apiBaseUrl.concat(`/principalcurator/viewpublication/${publicationId}?publicationId=${publicationId}`);
         console.log(url);
         $.ajax({
             url: url,
