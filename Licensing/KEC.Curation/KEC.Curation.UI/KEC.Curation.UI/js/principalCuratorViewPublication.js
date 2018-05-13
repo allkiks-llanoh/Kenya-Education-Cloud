@@ -1,6 +1,7 @@
 ﻿(function () {
     $(document).ready(function () {
         getPublication();
+        getPublicationCurationComments();
     });
     $(document).ready(function () {
         $(".btn-select").each(function (e) {
@@ -74,8 +75,8 @@
     function getPublicationCurationComments() {
         let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        let url = apiBaseUrl.concat(`/principalcurator/curated?principalCuratorGuid=${chiefCuratorGUID}&publicationId=${publicationId}`);
-
+        let url = apiBaseUrl.concat(`/ChiefCurator/Publication/${publicationId}/curatorcomments?publicationId=${publicationId}`);
+       
         $.ajax({
             url: url,
             type: 'GET',
@@ -92,7 +93,7 @@
         }).done(function (submissions, textStatus, jqXHR) {
            
             submissions.forEach(function (submission) {
-                $('#currator-commets').html(` ${submission.assignmentId},${submission.notes}`);
+                $('#comments').html(` ${submission.SectionToCurate},${submission.notes}`);
 
             });
         
