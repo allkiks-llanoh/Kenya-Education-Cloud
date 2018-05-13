@@ -30,6 +30,7 @@ function tableRows(data) {
       
         row.append($("<td>" + rowData.status + "</td>"));
         row.append($("<td>" + rowData.notes + "</td>"));
+        row.append($("<td>" + rowData.recomendation + "</td>"));
        
         return row[0];
     }
