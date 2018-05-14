@@ -32,7 +32,15 @@ namespace KEC.Curation.Web.Api.Controllers
             _uow = uow;
 
         }
+        [HttpGet("viewpublication/{publicationId:int}")]
+        public IActionResult ViewPublication(int publicationId)
+        {
 
+            var publications = _uow.PublicationRepository.Find(p => p.Id.Equals(publicationId));
+            var publicationList = publications.Any() ?
+                publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
+            return Ok(value: publicationList);
+        }
         [HttpGet]
         public IActionResult Principal()
         {

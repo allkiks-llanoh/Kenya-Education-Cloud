@@ -1,8 +1,8 @@
 ﻿
-let publication = $('#publication-view').attr('data-publicationId');
+let publicationId = $('#publication-view').attr('data-publicationId');
+let chiefCuratorGuid = $('#CurrentUserGuid').val();
+let readCurationCommentsUrl = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorsubmissions?chiefCuratorGuid=${chiefCuratorGuid}&publicationId=${publicationId}`);
 
-let readCurationCommentsUrl = apiBaseUrl.concat(`/chiefcurator/PrincipalCurator/Comments/${publication}?publicationId=${publication}`)
-//var prGuid = $('#dataGUID').attr('data-pGUID');
 
     function tableRows(data) {
         var tableRows = [];

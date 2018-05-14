@@ -10,9 +10,10 @@
 
 }
 @section Scripts{
-    @Scripts.Render("~/js/principalCuratorViewPublication.js")  
+   
+    <script src="~/js/principalCuratorViewPublication.js"></script>
     <script src="@Url.Content("~/js/CurationCommentsChief.js")"></script>
-    <script src="@Url.Content("~/js/ReadCurationComments.js")"></script>
+
     <script src="@Url.Content("~/js/PrincipalCuratorComments.js")"></script>
     <script src="@Url.Content("~/js/FullyAssignChiefCurator.js")"></script>
     @Scripts.Render("~/plugins/summernote")
@@ -38,7 +39,7 @@
                         <dl id="publication-details"></dl>
                     </div>
                     <div class="ibox-footer">
-                       
+
                         Publication Details
                     </div>
                 </div>
@@ -50,7 +51,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Recommendation for Consideration</h5>
+                        <h5>Recommendation for Consideration From Curators</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -77,15 +78,17 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="ibox-title">
-                            <h5>Chief Curators Recomendations</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
+                        <div class="row">
+                            <div class="ibox-title">
+                                <h5>Chief Curator Recomendations</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -96,7 +99,8 @@
 
 
                                             <th>Status</th>
-                                            <th>Recommendations for consideration</th>
+                                            <th>Recommendations</th>
+                                            <th>Consideration</th>
 
                                         </tr>
                                     </thead>
