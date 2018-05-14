@@ -8,7 +8,7 @@ namespace KEC.ECommerce.Data.Models
     {
         public Cart()
         {
-            CartItems = new List<CartItem>();
+            CartItems = new List<ShoppingCartItem>();
         }
         #region Properties
         public int Id { get; set; }
@@ -16,7 +16,7 @@ namespace KEC.ECommerce.Data.Models
         #endregion
 
         #region Virtual Properties
-        public ICollection<CartItem> CartItems { get; set; }
+        public ICollection<ShoppingCartItem> CartItems { get; set; }
         #endregion
     }
 }

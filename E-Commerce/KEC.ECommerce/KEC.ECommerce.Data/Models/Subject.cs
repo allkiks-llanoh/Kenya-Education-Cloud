@@ -12,7 +12,7 @@ namespace KEC.ECommerce.Data.Models
         }
         #region Properties
         public int Id { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; }
         #endregion
 
         #region Virtual Properties

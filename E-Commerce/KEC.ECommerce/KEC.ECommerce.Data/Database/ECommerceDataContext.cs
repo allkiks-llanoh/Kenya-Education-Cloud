@@ -1,8 +1,5 @@
 ﻿using KEC.ECommerce.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KEC.ECommerce.Data.Database
 {
@@ -21,6 +18,6 @@ namespace KEC.ECommerce.Data.Database
         public DbSet<Level> Levels { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<LineItem> LineItems { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
     }
 }
