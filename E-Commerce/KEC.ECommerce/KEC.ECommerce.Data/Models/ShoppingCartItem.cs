@@ -18,8 +18,8 @@ namespace KEC.ECommerce.Data.Models
         #endregion
 
         #region Virtual Properties
-        public Cart Cart { get; set; }
-        public Publication Publication { get; set; }
+        public virtual Cart Cart { get; set; }
+        public virtual Publication Publication { get; set; }
         #endregion
     }
 }

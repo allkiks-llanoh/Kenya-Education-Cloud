@@ -16,7 +16,7 @@ namespace KEC.ECommerce.Data.Models
         #endregion
 
         #region Virtual Properties
-        public ICollection<ShoppingCartItem> CartItems { get; set; }
+        public virtual ICollection<ShoppingCartItem> CartItems { get; set; }
         #endregion
     }
 }

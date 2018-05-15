@@ -18,7 +18,8 @@ namespace KEC.ECommerce.Data.Models
         #endregion
 
         #region Virtual Properties
-        public ICollection<LineItem> LineItems { get; set; }
+        public virtual ICollection<LineItem> LineItems { get; set; }
+        public virtual Payment Payment { get; set; }
         #endregion
     }
 }

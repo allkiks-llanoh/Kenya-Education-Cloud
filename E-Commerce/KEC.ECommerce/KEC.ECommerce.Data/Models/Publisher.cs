@@ -21,7 +21,7 @@ namespace KEC.ECommerce.Data.Models
         #endregion
 
         #region Virtual Properties
-        public ICollection<Publication> Publications { get; set; }
+        public virtual ICollection<Publication> Publications { get; set; }
         #endregion
     }
 }

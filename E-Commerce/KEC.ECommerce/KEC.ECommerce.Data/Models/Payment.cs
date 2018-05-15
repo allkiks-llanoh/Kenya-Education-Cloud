@@ -1,25 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KEC.ECommerce.Data.Models
 {
-    public class LineItem
+    public class Payment
     {
         #region Properties
         public int Id { get; set; }
-        public decimal UnitPrice { get; set; }
-        public int Quantity { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
+        public string TransactionNumber { get; set; }
+        public DateTime TransactionDate { get; set; }
         #endregion
 
-        #region Foreign Keys
-        public int PublicationId { get; set; }
+        #region Foreign Properties
         public int OrderId { get; set; }
         #endregion
 
         #region Virtual Properties
         public virtual Order Order { get; set; }
-        public virtual Publication Publication { get; set; }
         #endregion
 
     }
