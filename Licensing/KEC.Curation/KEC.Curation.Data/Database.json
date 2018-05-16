@@ -1,7 +1,14 @@
-﻿{
-  "ConnectionStrings": {
+﻿//{
+//  "ConnectionStrings": {
 
-    //"CurationDatabase": "Data Source=tcp:keccurationsvr.database.windows.net,1433;Initial Catalog=CurationDb-dev;Persist Security Info=False;User ID=miyabi@keccurationsvr;Password=Ftt%cg#@hjhWtq3zn;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;",
-    "CurationDatabase": "Server=tcp:keccurationsvr.database.windows.net,1433;Initial Catalog=CurationDb-dev;Persist Security Info=False;User ID=miyabi@keccurationsvr;Password=Ftt%cg#@hjhWtq3zn;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+//    "CurationDatabase": "Data Source=tcp:keccurationsvr.database.windows.net,1433;Initial Catalog=CurationDb-dev;Persist Security Info=False;User ID=miyabi@keccurationsvr;Password=Ftt%cg#@hjhWtq3zn;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;"
+
+//  }
+//}
+
+{
+  "ConnectionStrings": {
+    "CurationDatabase": "Data Source=COMWENGA;Initial Catalog=CurationDb-dev;Integrated Security=True providerName=System.Data.SqlClient"
   }
 }
+
