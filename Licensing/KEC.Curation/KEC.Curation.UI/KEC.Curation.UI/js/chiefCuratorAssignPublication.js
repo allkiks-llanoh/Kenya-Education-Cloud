@@ -47,7 +47,7 @@
                    <dd>${publication.level}</dd>
                    <dt>Completion date</dt>
                    <dd>${publication.completionDate}</dd></dl>`);
-            loadCurators();
+           
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert('Something went wrong while loading publication', 'error');
         });
@@ -65,7 +65,8 @@
         let publicationId = $('#publication-view').attr('data-publicationId');
         let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/assign`);
         var userGuid = $('#CurrentUserGuid').val();
-        var fullyAssigned = "True"
+   
+        var fullyAssigned = "False"
         var chiefCuratorGuid = $('#UserGuid').val();
         console.log(`${userGuid}`);
         console.log(`${chiefCuratorGuid}`);
@@ -76,7 +77,7 @@
             contentType: 'application/json',
             accepts: 'application/json',
             type: 'POST',
-            data: JSON.stringify({ Section: section, AssignedBy: userGuid, Assignee: chiefCuratorGuid, FullyAssign: fullyAssigned }),
+            data: JSON.stringify({ Section: section, AssignedBy: userGuid, Assignee: chiefCuratorGuid, FullyAssign: fullyAssigned}),
             statusCode: {
 
                 403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); }

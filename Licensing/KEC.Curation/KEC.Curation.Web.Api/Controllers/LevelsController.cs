@@ -95,5 +95,20 @@ namespace KEC.Curation.Web.Api.Controllers
             _uow.Complete();
             return Ok("Level Grade updated successfully");
         }
+        [HttpDelete("{id}")]
+
+        public IActionResult DeleteLevel(DeleteSerilizer model)
+        {
+
+            var level = _uow.LevelRepository.Get(model.Id.GetValueOrDefault());
+            if (level == null)
+            {
+                return NotFound("Level could not be retrieved for deleting or is missing ");
+            }
+            _uow.LevelRepository.Remove(level);
+
+            _uow.Complete();
+            return Ok("Level Deleted From Repository");
+        }
     }
 }

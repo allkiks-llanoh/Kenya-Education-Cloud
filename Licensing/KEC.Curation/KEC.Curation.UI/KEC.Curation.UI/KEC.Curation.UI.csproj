@@ -44,7 +44,7 @@
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -253,6 +253,14 @@
     <Compile Include="Migrations\201803120828283_SubjectId.Designer.cs">
       <DependentUpon>201803120828283_SubjectId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805111328031_AddedRoleName.cs" />
+    <Compile Include="Migrations\201805111328031_AddedRoleName.Designer.cs">
+      <DependentUpon>201805111328031_AddedRoleName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805111330167_RemoveRoleName.cs" />
+    <Compile Include="Migrations\201805111330167_RemoveRoleName.Designer.cs">
+      <DependentUpon>201805111330167_RemoveRoleName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChiefCurators.cs" />
@@ -262,6 +270,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\ToCurate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -397,7 +406,10 @@
     <Content Include="js\chiefCuratorPublications.js" />
     <Content Include="js\FullyAssignCurator.js" />
     <Content Include="js\FullyAssignChiefCurator.js" />
+    <Content Include="js\GetRoles.js" />
     <Content Include="js\PrincipalCuratorComments.js" />
+    <Content Include="js\SelectedContentDrawTable.js" />
+    <Content Include="js\TryAssignMultiple.js" />
     <Content Include="js\TryCuratorView.js" />
     <Content Include="js\principalCuratorViewPublication.js" />
     <Content Include="js\chiefCuratorViewPublication.js" />
@@ -979,6 +991,8 @@
     <Content Include="Views\Curator\Curator.cshtml" />
     <Content Include="Views\Curation\CuratorView.cshtml" />
     <Content Include="Views\Curator\List.cshtml" />
+    <Content Include="Views\Curator\GetCuration.cshtml" />
+    <Content Include="Views\PrincipalCurator\AssignMultiple.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1008,6 +1022,12 @@
     <EmbeddedResource Include="Migrations\201803120828283_SubjectId.resx">
       <DependentUpon>201803120828283_SubjectId.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805111328031_AddedRoleName.resx">
+      <DependentUpon>201805111328031_AddedRoleName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805111330167_RemoveRoleName.resx">
+      <DependentUpon>201805111330167_RemoveRoleName.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1023,7 +1043,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63772</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

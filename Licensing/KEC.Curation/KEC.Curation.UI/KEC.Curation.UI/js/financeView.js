@@ -14,7 +14,6 @@ let financeGETUrl = apiBaseUrl.concat(`/Publications/1/${_stage}`)
     $.ajax({
         url: financeGETUrl,
         type: "GET",
-      
         dataType: "json",
         success: function (data, status, jqhxr) {
         console.log(data);

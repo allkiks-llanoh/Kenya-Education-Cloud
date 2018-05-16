@@ -72,7 +72,7 @@ namespace KEC.Curation.Web.Api.Controllers
         }
      
         // PUT: api/SubjectTypes/5
-        [HttpPut("{id}")]
+        [HttpPatch("category/{id}")]
         public IActionResult EditSubjectType(int Id,[FromBody]SubjectTypeUploadSerializer model)
         {
             if (!ModelState.IsValid)
@@ -89,7 +89,21 @@ namespace KEC.Curation.Web.Api.Controllers
             _uow.Complete();
             return Ok("Subject type updated successfully");
         }
-        
-       
+        [HttpDelete("{id}")]
+
+        public IActionResult DeleteSybjectType(DeleteSerilizer model)
+        {
+
+            var level = _uow.SubjectTypeRepository.Get(model.Id.GetValueOrDefault());
+            if (level == null)
+            {
+                return NotFound("Level could not be retrieved for deleting or is missing ");
+            }
+            _uow.SubjectTypeRepository.Remove(level);
+
+            _uow.Complete();
+            return Ok("Category Deleted From Repository");
+        }
+
     }
 }

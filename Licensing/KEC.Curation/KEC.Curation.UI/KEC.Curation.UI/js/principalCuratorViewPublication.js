@@ -18,7 +18,7 @@
     function getPublication() {
         let PrincipalCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        var url = apiBaseUrl.concat(`/principalcurator/curated?principalCuratorGuid=${PrincipalCuratorGUID}&publicationId=${publicationId}`);
+        var url = apiBaseUrl.concat(`/principalcurator/viewpublication/${publicationId}?publicationId=${publicationId}`);
         console.log(url);
         $.ajax({
             url: url,
@@ -37,7 +37,7 @@
             showChiefCuratorSubmissionSection(publication, "#publication-view");
             $('#publication-details').replaceWith(
                 `<dl id="publication-details">
-                  <dt>KICD Number</dt>
+                  <dt>Curation Number</dt>
                   <dd>${publication.kicdNumber}</dd>
                   <dt>Title</dt>
                    <dd>${publication.title}</dd>

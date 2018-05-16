@@ -1,0 +1,69 @@
+﻿@model IEnumerable<KEC.Curation.UI.Models.ToCurate>
+
+@{
+    ViewBag.Title = "GetCuration";
+}
+
+<h2>GetCuration</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignmentId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pending)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Publication)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SectionToCurate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignmentDateUtc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublicationId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignmentId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pending)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publication)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SectionToCurate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignmentDateUtc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

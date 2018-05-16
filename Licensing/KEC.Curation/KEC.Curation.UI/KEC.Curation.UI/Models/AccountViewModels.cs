@@ -86,6 +86,7 @@ namespace KEC.Curation.UI.Models
         public string ConfirmPassword { get; set; }
         public string RoleName { get; set; }
         public string Subject { get; set; }
+        public int SubjectId { get; set; }
     }
 
     public class ResetPasswordViewModel
