@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <ApplicationInsightsResourceId>/subscriptions/8eaca2a2-dc2f-4e58-8ae2-28580934830b/resourcegroups/curation/providers/microsoft.insights/components/curationapi</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/8eaca2a2-dc2f-4e58-8ae2-28580934830b/resourcegroups/curation/providers/microsoft.insights/components/curationapi</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -14,9 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
+    <PackageReference Include="WindowsAzure.Storage" Version="8.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +29,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KEC.Curation.Data\KEC.Curation.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>

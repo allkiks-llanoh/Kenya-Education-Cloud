@@ -1,0 +1,99 @@
+
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters":{
+      "databaseForMySqlAdminName": {
+        "type": "string"
+      },
+        "databaseForMySqlAdminPassword": {
+            "type": "securestring"
+        },
+        "databaseForMySqlDatabaseName": {
+            "type": "string",
+            "defaultValue": "sampledb"
+        },
+        "databaseForMySqlTier": {
+            "type": "string",
+            "defaultValue": "Basic",
+            "allowedValues": [
+                "Basic",
+                "GeneralPurpose",
+                "MemoryOptimized"
+            ]
+        },
+        "databaseForMySqlFamily": {
+            "type": "string",
+            "defaultValue": "Gen4",
+            "allowedValues": [
+                "Gen4",
+                "Gen5"
+            ]
+        },
+        "databaseForMySqlCores": {
+            "type": "int",
+            "defaultValue": 1,
+            "allowedValues": [
+                1,
+                2,
+                4,
+                8,
+                16,
+                32
+            ]
+        },
+        "databaseForMySqlVersion": {
+            "type": "string",
+            "defaultValue": "5.7",
+            "allowedValues": [
+                "5.7",
+                "5.6"
+            ]
+        },
+        "databaseForMySqlSizeGb": {
+            "type": "int",
+            "defaultValue": 5
+        }
+    },
+    "variables": {
+        "location": "[resourceGroup().location]",
+        "databaseForMySqlName": "[concat(resourceGroup().name, 'mysql')]",
+        "databaseForMySqlSku": "[concat(variables('tierSymbol')[parameters('databaseForMySqlTier')], '_', parameters('databaseForMySqlFamily'), '_', parameters('databaseForMySqlCores'))]",
+        "tierSymbol": {
+            "Basic": "B",
+            "GeneralPurpose": "GP",
+            "MemoryOptimized": "MO"
+        }
+    },
+    "resources": [
+        {
+            "name": "[variables('databaseForMySqlName')]",
+            "type": "Microsoft.DBforMySQL/servers",
+            "apiVersion": "2017-12-01",
+            "location": "[variables('location')]",
+            "sku": {
+                "name": "[variables('databaseForMySqlSku')]"
+            },
+            "properties": {
+                "version": "[parameters('databaseForMySqlVersion')]",
+                "administratorLogin": "[parameters('databaseForMySqlAdminName')]",
+                "administratorLoginPassword": "[parameters('databaseForMySqlAdminPassword')]",
+                "createMode": "default"
+            },
+            "resources": [
+                {
+                    "name": "[parameters('databaseForMySqlDatabaseName')]",
+                    "type": "databases",
+                    "apiVersion": "2017-12-01",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.DBforMySQL/servers', variables('databaseForMySqlName'))]"
+                    ],
+                    "properties": {
+                        "charset": "utf8",
+                        "collation": "utf8_general_ci"
+                    }
+                }
+            ]
+        }
+    ]
+}

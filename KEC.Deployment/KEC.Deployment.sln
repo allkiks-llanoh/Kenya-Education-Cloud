@@ -9,6 +9,8 @@ Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "KEC.Deployment.Curation", "
 EndProject
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "KEC.Deployment.BuildServers", "KEC.Deployment.BuildServers\KEC.Deployment.BuildServers.deployproj", "{911E80E6-5C95-4354-831E-B36C65814971}"
 EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "MysqlDb", "MysqlDb\MysqlDb.deployproj", "{457EEA77-55BF-4FDE-BC9B-185EC4B33AE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{911E80E6-5C95-4354-831E-B36C65814971}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{911E80E6-5C95-4354-831E-B36C65814971}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{911E80E6-5C95-4354-831E-B36C65814971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{457EEA77-55BF-4FDE-BC9B-185EC4B33AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{457EEA77-55BF-4FDE-BC9B-185EC4B33AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{457EEA77-55BF-4FDE-BC9B-185EC4B33AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{457EEA77-55BF-4FDE-BC9B-185EC4B33AE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
