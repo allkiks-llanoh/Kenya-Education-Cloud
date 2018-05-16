@@ -203,6 +203,20 @@
     },
     "CurationDbConnectionString": {
       "type": "string"
+    },
+    "VoucherDbName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "VoucherDbSku": {
+      "type": "string",
+      "allowedValues": [
+        "Free",
+        "Jupiter",
+        "Saturn",
+        "Venus"
+      ],
+      "defaultValue": "Free"
     } 
 
 
@@ -533,117 +547,7 @@
       "properties": {
         "applicationId": "[variables('webSiteName')]"
       }
-    },
-    {
-      "name": "[parameters('SqlSvrName')]",
-      "type": "Microsoft.Sql/servers",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2014-04-01-preview",
-      "dependsOn": [],
-      "tags": {
-        "displayName": "keccurationsvr"
-      },
-      "properties": {
-        "administratorLogin": "[parameters('keccurationsvrAdminLogin')]",
-        "administratorLoginPassword": "[parameters('keccurationsvrAdminLoginPassword')]"
-      },
-      "resources": [
-        {
-          "name": "AllowAllWindowsAzureIps",
-          "type": "firewallrules",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2014-04-01-preview",
-          "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', variables('SqlSvrName'))]"
-          ],
-          "properties": {
-            "startIpAddress": "0.0.0.0",
-            "endIpAddress": "0.0.0.0"
-          }
-        },
-        //{
-        //  "name": "AllAccessFirewallRule",
-        //  "type": "Microsoft.Sql/servers/firewallRules",
-        //  "apiVersion": "2015-05-01-preview",
-        //  "properties": {
-        //    "startIpAddress": "0.0.0.0",
-        //    "endIpAddress": "255.255.255.255"
-        //  }
-        //},
-          {
-            "name": "[parameters('CurationDbName')]",
-            "type": "databases",
-            "location": "[resourceGroup().location]",
-            "apiVersion": "2014-04-01-preview",
-            "dependsOn": [
-              "[resourceId('Microsoft.Sql/servers', variables('SqlSvrName'))]"
-            ],
-            "tags": {
-              "displayName": "CurationDb"
-            },
-            "properties": {
-              "collation": "[parameters('CurationDbCollation')]",
-              "edition": "[parameters('CurationDbEdition')]",
-              "maxSizeBytes": "1073741824",
-              "requestedServiceObjectiveName": "[parameters('CurationDbRequestedServiceObjectiveName')]"
-            }
-          },
-        {
-          "name": "[parameters('CurationDbDevName')]",
-          "type": "databases",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2014-04-01-preview",
-          "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', parameters('SqlSvrName'))]"
-          ],
-          "tags": {
-            "displayName": "CurationDbDev"
-          },
-          "properties": {
-            "collation": "[parameters('CurationDbDevCollation')]",
-            "edition": "[parameters('CurationDbDevEdition')]",
-            "maxSizeBytes": "1073741824",
-            "requestedServiceObjectiveName": "[parameters('CurationDbDevRequestedServiceObjectiveName')]"
-          }
-        },
-        {
-          "name": "[parameters('CurationDbStagingName')]",
-          "type": "databases",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2014-04-01-preview",
-          "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', parameters('SqlSvrName'))]"
-          ],
-          "tags": {
-            "displayName": "CurationDbStaging"
-          },
-          "properties": {
-            "collation": "[parameters('CurationDbStagingCollation')]",
-            "edition": "[parameters('CurationDbStagingEdition')]",
-            "maxSizeBytes": "1073741824",
-            "requestedServiceObjectiveName": "[parameters('CurationDbStagingRequestedServiceObjectiveName')]"
-          }
-        },
-        {
-          "name": "[parameters('CurationDbQaName')]",
-          "type": "databases",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2014-04-01-preview",
-          "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', parameters('SqlSvrName'))]"
-          ],
-          "tags": {
-            "displayName": "CurationDbQa"
-          },
-          "properties": {
-            "collation": "[parameters('CurationDbQaCollation')]",
-            "edition": "[parameters('CurationDbQaEdition')]",
-            "maxSizeBytes": "1073741824",
-            "requestedServiceObjectiveName": "[parameters('CurationDbQaRequestedServiceObjectiveName')]"
-          }
-        }
-          ]
-        }
+    }
    
   ]
 }

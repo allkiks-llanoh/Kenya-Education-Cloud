@@ -22,21 +22,13 @@ namespace KEC.Curation.Web.Api.Serializers
             {
                 return _assignment.CreatedUtc;
             }
-        }
+        } 
         public string Publication
         {
             get
             {
                 var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
                 return publication.KICDNumber;
-            }
-        }
-        public string Title
-        {
-            get
-            {
-                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
-                return publication.Title;
             }
         }
         public string SectionToCurate

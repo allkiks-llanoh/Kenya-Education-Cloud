@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace KEC.Curators.UI.Models
+{
+    public class curator
+    {
+        public string Guid { get; set; }
+        public int Subjectid { get; set; }
+        public string FullName { get; set; }
+        public string LastName { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
+
+    }
+}

@@ -199,17 +199,21 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult GetAllPublications()
         {
 
-            var publicationsCount = _uow.PublicationRepository.GetAll().ToList();
+            var publications = _uow.PublicationRepository.GetAll().ToList();
 
-            return Ok(value: publicationsCount);
+            var publicationList = publications.Any() ?
+                publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
+            return Ok(value: publicationList);
         }
         [HttpGet("get/approved")]
         public IActionResult GetApproved()
         {
 
-            var publicationsCount = _uow.PublicationRepository.Find(p => p.Approved).ToList();
+            var publications = _uow.PublicationRepository.Find(p => p.Approved).ToList();
 
-            return Ok(value: publicationsCount);
+            var publicationList = publications.Any() ?
+                publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
+            return Ok(value: publicationList);
         }
         [HttpGet("get/approved/{Id}")]
         public IActionResult GetApprovedById(int Id)
@@ -223,9 +227,11 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult GetRejected()
         {
 
-            var publicationsCount = _uow.PublicationRepository.Find(p => p.Rejected).ToList();
+            var publications = _uow.PublicationRepository.Find(p => p.Rejected).ToList();
 
-            return Ok(value: publicationsCount);
+            var publicationList = publications.Any() ?
+               publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
+            return Ok(value: publicationList);
         }
         [HttpGet("get/rejected/{Id}")]
         public IActionResult GetRejectedById(int Id)
@@ -239,10 +245,11 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult GetPending()
         {
 
-            var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
+            var publications = _uow.PublicationRepository.Find(p => !p.Rejected && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
                                        == PublicationStage.PublicationApproval).ToList();
-
-            return Ok(value: publicationsCount);
+            var publicationList = publications.Any() ?
+               publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
+            return Ok(value: publicationList);
         }
        //Pending Publications By Id
         [HttpGet("get/pending/{id}")]

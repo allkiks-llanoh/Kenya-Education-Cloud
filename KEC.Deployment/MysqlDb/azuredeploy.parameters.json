@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "databaseForMySqlAdminName": {
+      "value": "miyabi"
+    },
+    "databaseForMySqlAdminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/8eaca2a2-dc2f-4e58-8ae2-28580934830b/resourceGroups/keckevault/providers/Microsoft.KeyVault/vaults/dbsvrcreds"
+        },
+        "secretName": "keccurationsvr"
+      }
+    }
+  }
+}
