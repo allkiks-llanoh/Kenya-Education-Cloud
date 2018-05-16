@@ -36,23 +36,37 @@
             showChiefCuratorSubmissionSection(publication, "#publication-view");
             $('#publication-details').replaceWith(
                 `<dl id="publication-details" data-stage="${publication.stage}">
-                  <dt>KICD Number</dt>
-                  <dd id="kicd-number">${publication.kicdNumber}</dd>
-                  <dt>Title</dt>
-                   <dd>${publication.title}</dd>
-                   <dt>Description</dt>
-                   <dd>${publication.description}</dd>
-                   <dt>Type</dt>
-                   <dd>${publication.type}</dd>
-                   <dt>Subject</dt>
-                   <dd>${publication.subject}</dd>
-                   <dt>Url</dt>
-                   <dd><a href="${publication.url}">Link to publication</a></dd>
-                   <dt>Level</dt>
-                   <dd>${publication.level}</dd>
-                   <dt>Completion date</dt>
-                   <dd>${publication.completionDate}</dd></dl>`);
-           
+                  <div class="row">
+                       <div class="col-md-3">
+                           <dt>Curation</dt>
+                           <dd id="kicd-number">${publication.kicdNumber}</dd>  
+                       </div>
+                       <div class="col-md-3">
+                            <dt>Title</dt>
+                            <dd>${publication.title}</dd> 
+                       </div>
+                         <div class="col-md-3">
+                            <dt>Content Location</dt>
+                            <dd><a href="${publication.url}">Link to publication</a></dd>
+                       </div>
+                  </div>
+                  <br><br>
+                  <div class="row">
+                       <div class="col-md-3">
+                            <dt>Subject</dt>
+                            <dd>${publication.subject}</dd>
+                       </div>
+                        <div class="col-md-3">
+                              <dt>Completion date</dt>
+                                <dd>${publication.completionDate}</dd>
+                       </div>
+                        <div class="col-md-3">
+                             <dt>Description</dt>
+                            <dd>${publication.description}</dd>
+                       </div>
+                  </div>
+                 </dl>`);
+       
         });
     }
 

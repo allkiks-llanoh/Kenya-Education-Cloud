@@ -35,7 +35,7 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.description + "</td>"));
     row.append($("<td>" + rowData.subject + "</td>"));
-    row.append($(`<td> <input type='checkbox' id=${rowData.id} data-select=${rowData.id} name=${rowData.id} 'approve' class='approve'/> </td>`));  
+    row.append($(`<td> <input type='checkbox' id=${rowData.id} data-select=${rowData.id} name=${rowData.id} 'approve' class='approve'/> </td>`));
     return row[0];
 }
 

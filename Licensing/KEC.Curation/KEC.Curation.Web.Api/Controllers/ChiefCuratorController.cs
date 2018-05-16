@@ -99,10 +99,10 @@ namespace KEC.Curation.Web.Api.Controllers
 
         }
         [HttpGet("publications/{subjectId:int}/comments")]
-        public IActionResult AssignedWithComments(int subjectId, string chiefCuratorGuid)
+        public IActionResult AssignedWithComments(int subjectid, string chiefcuratorguid)
         {
 
-            var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefCuratorGuid)
+            var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(chiefcuratorguid)
                               && p.Publication.PublicationStageLogs.Max(l => l.Stage) == PublicationStage.Curation
                               && !p.Submitted).ToList();
             var assignmentList = publications.Any() ?
@@ -132,7 +132,7 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
 
-       
+
                 var section = new PublicationSection
                 {
                     PublicationId = publication.Id,
@@ -256,16 +256,26 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(curationCommentList);
 
         }
+        [HttpGet("publication/{publicationId:int}/curatorcomments")]
+        public IActionResult CuratorSubmissionsAndComments([FromQuery]int publicationId)
+        {
+            var curationComments = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publicationId)
+                                   && p.Submitted);
+            var curationCommentList = curationComments.Any() ?
+                curationComments.Select(p => new CurationRepoDownloadSerilizer(p, _uow)).ToList() : new List<CurationRepoDownloadSerilizer>();
+            return Ok(curationCommentList);
+
+        }
         [HttpGet("publication/withcomments")]
         public IActionResult WithCommentsAtChiefCuratorLevel([FromQuery]string userId)
         {
+
             var assigned = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(userId) && p.Publication.FullyAssigned && !p.Submitted);
             var assignedList = assigned.Any() ?
                 assigned.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
-         
+
             return Ok(assignedList);
         }
-
         [HttpPatch("update/curatorcomments/{id}")]
         public IActionResult UpdateCurationComments(int publicationId, [FromBody]ChiefFlagSubmittedSerilizer model)
         {
@@ -327,8 +337,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("curator/tocurate")]
         public IActionResult ToCurate(string userGuid)
         {
-            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted && !p.Publication.FullyAssigned
-                                                                 && p.Assignee.Equals(userGuid));
+            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted && p.Assignee.Equals(userGuid));
             if (assigment == null)
             {
                 return NotFound("Curation record could not be retrieved or has been submitted");
@@ -342,7 +351,7 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult GetAllCuratorAssignments(int id)
         {
             var publication = _uow.PublicationRepository.Get(id);
-            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted && !p.Publication.FullyAssigned && p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted && p.PublicationId.Equals(publication.Id)).FirstOrDefault();
             if (assigment == null)
             {
                 return NotFound("Curation record could not be retrieved or has been submitted");
@@ -359,7 +368,7 @@ namespace KEC.Curation.Web.Api.Controllers
             var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted
                                                                   && p.Id == AssignmentId
                                                                   && p.Assignee.Equals(model.UserGuid))
-                                                                  .FirstOrDefault();  
+                                                                  .FirstOrDefault();
             if (assigment == null)
             {
                 return NotFound("Record could not be retrieved");
@@ -417,7 +426,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     PublicationId = publication.Id,
                     Notes = model.Notes,
                     ChiefCuratorGuid = model.ChiefCuratorGuid,
-              
+                    Recomendation = model.ActionTaken
 
                 };
                 _uow.ChiefCuratorCommentRepository.Add(comment);
@@ -427,8 +436,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     Stage = PublicationStage.PublicationApproval,
                     Notes = model.Notes,
                     CreatedAtUtc = DateTime.UtcNow,
-                    Owner = model.ChiefCuratorGuid,
-                 
+                    Owner = model.ChiefCuratorGuid
                 };
                 _uow.PublicationStageLogRepository.Add(recommendation);
                 _uow.Complete();
@@ -517,7 +525,7 @@ namespace KEC.Curation.Web.Api.Controllers
                         PublicationId = publication.Id,
                         PrincipalCuratorGuid = model.PrincipalCuratorGuid,
                         ChiefCuratorGuid = model.ChiefCuratorGuid,
-                        AssignmetDateUtc = DateTime.UtcNow,
+                        AssignmetDateUtc = DateTime.UtcNow
                     };
                     var nextStage = new PublicationStageLog
                     {
@@ -555,5 +563,16 @@ namespace KEC.Curation.Web.Api.Controllers
             }
         }
         #endregion
+        [HttpGet("publications/{publicationId:int}/curator/comments")]
+        public IActionResult ReadCurationCommentsFromCurators(int publicationId)
+        {
+            var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(publicationId)).FirstOrDefault();
+            if (publication == null)
+            {
+                return NotFound(value: new { message = "Publication record could not be retrieved" });
+            }
+            return Ok(value: new PublicationDownloadSerilizerToCurators(publication, _uow));
+        }
     }
+   
 }

@@ -1,0 +1,6 @@
+﻿{
+  "ConnectionStrings": {
+
+    "EcommerceDatabase": "Server=localhost;Database=ECommerceDb;Trusted_Connection=True;"
+  }
+}

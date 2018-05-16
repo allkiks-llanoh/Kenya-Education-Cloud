@@ -34,7 +34,7 @@ namespace KEC.Curation.UI.Controllers
         {
             ViewBag.PublicationId = Id;
             ViewData["SubTitle"] = "Curation Management System";
-            ViewData["Message"] = "Assign To Chief Curators";
+            ViewData["Message"] = "";
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
@@ -52,7 +52,7 @@ namespace KEC.Curation.UI.Controllers
         {
             ViewBag.PublicationId = Id;
             ViewData["SubTitle"] = "Curation Management System";
-            ViewData["Message"] = "Assign To Chief Curators";
+            ViewData["Message"] = "";
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
@@ -69,7 +69,7 @@ namespace KEC.Curation.UI.Controllers
         {
             ViewBag.PublicationId = Id;
             ViewData["SubTitle"] = "Curation Management System";
-            ViewData["Message"] = "Assign To Chief Curators";
+            ViewData["Message"] = "";
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
@@ -85,7 +85,7 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult Curators()
         {
             ViewData["SubTitle"] = "Curation Management System";
-            ViewData["Message"] = "Assign To Chief Curators";
+            ViewData["Message"] = "";
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
@@ -101,7 +101,7 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult ChiefCurators()
         {
             ViewData["SubTitle"] = "Curation Management System";
-            ViewData["Message"] = "Assign To Chief Curators";
+            ViewData["Message"] = "";
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
@@ -117,7 +117,7 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult PrincipalCurators()
         {
             ViewData["SubTitle"] = "Curation Management System";
-            ViewData["Message"] = "Assign To Chief Curators";
+            ViewData["Message"] = "";
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
@@ -167,7 +167,7 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult PartiallyApproved()
         {
             ViewData["SubTitle"] = "Curation Management System";
-            ViewData["Message"] = "Assign To Chief Curators";
+            ViewData["Message"] = "";
 
             using (var context = new ApplicationDbContext())
             {
@@ -200,7 +200,7 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult Rejected()
         {
             ViewData["SubTitle"] = "Curation Management System";
-            ViewData["Message"] = "View Rejected Publications";
+            ViewData["Message"] = "View Not Approved Publications";
 
             using (var context = new ApplicationDbContext())
             {

@@ -7,7 +7,8 @@
 @section Scripts{
     <script src="@Url.Content("~/js/CurationCommentsChief.js")"></script>
     <script src="@Url.Content("~/js/ReadCurationComments.js")"></script>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="@Url.Content("~/js/ReviewPublication.js")"></script>
+
 
     @Scripts.Render("~/plugins/sweetAlert")
 }
@@ -22,130 +23,7 @@
 <script type="text/javascript">
     const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
 </script>
-<script type="text/javascript">
-    (function () {
-        $(document).ready(function () {
-            getPublication();
-            getPublicationCurationComments();
-            $('#recommend').click(submitChiefNotesAndAction);
-        });
 
-        ///Functions Section
-        function getPublication() {
-            let publicationId = $('#publication-view').attr('data-publicationId');
-            var urls = apiBaseUrls.concat(`/CurationManagers/get/publications/${publicationId}`);
-
-            $.ajax({
-                url: urls,
-                type: 'GET',
-                contentType: 'application/json',
-                accepts: 'application/json',
-                crossDomain: true,
-                statusCode: {
-                    404: () => { ShowAlert("Publication record could not be retrieved", 'error'); },
-                    403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
-                    500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
-                },
-
-
-            }).done(function (publication, textStatus, jqXHR) {
-
-                $('#publication-details').replaceWith(
-                    `<dl id="publication-details" data-stage="${publication.stage}">
-                  <dt>Curation Number</dt>
-                  <dd id="kicd-number">${publication.kicdNumber}</dd>
-                   <dt>Publisher</dt>
-                   <dd>${publication.publisherName}</dd>
-                   <dt>Title</dt>
-                   <dd>${publication.title}</dd>
-                   <dt>Description</dt>
-                   <dd>${publication.description}</dd>
-                   <dt>Content</dt>
-                   <dd><a href="${publication.url}" target="blank">Link to publication</a></dd>
-                   <dt>Level</dt>
-                   <dd>${publication.level}</dd>
-                   <dt>Completion date</dt>
-                   <dd>${publication.completionDate}</dd></dl>`);
-            });
-        }
-        function getPublicationCurationComments() {
-
-            let publicationId = $('#publication-view').attr('data-publicationId');
-            let url = apiBaseUrl.concat(`/CurationManagers/getcomments/fromcuration?publicationId=${publicationId}`);
-            //let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
-            $.ajax({
-                url: url,
-                type: 'GET',
-                contentType: 'application/json',
-                crossDomain: true,
-                accepts: 'application/json',
-                statusCode: {
-                    404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
-                    403: () => { ShowAlert("You are not authorized to access curator submissions"); },
-                    500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
-                },
-
-
-            }).done(function (submissions, textStatus, jqXHR) {
-
-                submissions.forEach(function (submission) {
-                    $('#currator-commets').html(` <dt>Curator Comments</dt><dd> ${submission.curatorComments}</dd>
-                                                  <dt>Chief Curator Comments</dt><dd>${submission.chiefCuratorComments}</dd>
-                                                  <dt>Principal Curator Comments</dt><dd>${submission.principalCuratorComments}</dd>`);
-
-                });
-
-            });
-        }
-        function showChiefCuratorSubmissionSection(publication, parentElementId) {
-            if (publication !== null) {
-                let chiefCuratorSection = $('#chief-curator-section').html();
-                $(parentElementId).html(chiefCuratorSection);
-
-            }
-        }
-        function submitChiefNotesAndAction(e) {
-            e.preventDefault();
-            let publicationId = $('#publication-view').attr('data-publicationId');
-            let todo = $("#action-selected").val();
-            let notes = $('.note-editable').html();
-
-            let url = apiBaseUrl.concat(`/CurationManagers`);
-
-            if (notes === null || notes === "") {
-                return ShowAlert("Curation notes cannot be blank", "error");
-            }
-
-            $.ajax({
-                headers : {
-                    'Accept' : 'application/json',
-                    'Content-Type' : 'application/json'
-                },
-                url: url,
-                type: 'POST',
-                contentType: 'application/json',
-                crossDomain: true,
-                accepts: 'application/json',
-                data: JSON.stringify({ PublicationId: publicationId, Notes: notes, ToDo: todo }),
-                statusCode: {
-                    404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
-                    403: () => { ShowAlert("You are not authorized to process publication"); },
-                    500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
-                }
-            }).success(function (data, textStatus, jqXHR) {
-                ShowAlert("Curated Publication Processed Succesfully", 'success');
-            }).fail(function () {
-                ShowAlert("Something went wrong while processing publication", 'error');
-            });
-        }
-        //Functions Section
-
-
-    })();
-</script>
-<script type="text/javascript">
-
-</script>
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">

@@ -9,7 +9,6 @@ C:\Users\collins\Documents\Visual Studio 2017\Projects\KEC.Curation.API\KEC.Cura
 C:\Users\collins\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\bin\Debug\netcoreapp2.0\KEC.Curation.Services.deps.json
 C:\Users\collins\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\bin\Debug\netcoreapp2.0\KEC.Curation.Services.dll
 C:\Users\collins\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\bin\Debug\netcoreapp2.0\KEC.Curation.Services.pdb
-C:\Users\collins\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.csprojResolveAssemblyReference.cache
 C:\Users\collins\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.csproj.CoreCompileInputs.cache
 C:\Users\collins\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.AssemblyInfoInputs.cache
 C:\Users\collins\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.AssemblyInfo.cs
@@ -24,3 +23,11 @@ C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Cu
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.AssemblyInfo.cs
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.dll
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.pdb
+C:\Users\elsie\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\bin\Debug\netcoreapp2.0\KEC.Curation.Services.deps.json
+C:\Users\elsie\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\bin\Debug\netcoreapp2.0\KEC.Curation.Services.dll
+C:\Users\elsie\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\bin\Debug\netcoreapp2.0\KEC.Curation.Services.pdb
+C:\Users\elsie\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.csproj.CoreCompileInputs.cache
+C:\Users\elsie\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.AssemblyInfoInputs.cache
+C:\Users\elsie\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.AssemblyInfo.cs
+C:\Users\elsie\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.dll
+C:\Users\elsie\Source\Repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Curation.Services\obj\Debug\netcoreapp2.0\KEC.Curation.Services.pdb

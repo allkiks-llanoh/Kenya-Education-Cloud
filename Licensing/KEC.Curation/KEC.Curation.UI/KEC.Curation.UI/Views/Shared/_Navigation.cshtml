@@ -17,86 +17,14 @@
             </li>
             <br>
             @if (User.IsInRole("Admin"))
-    {
-        <li>
-            <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Admininstration</span><span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level collapse">
-                <li><a href="@Url.Action("SubjectTypes", "Home")"><i class="glyphicon glyphicon-book"></i><span class="nav-label">Subject Categories</span> </a></li>
-                <li><a href="@Url.Action("Levels", "Home")"><i class="glyphicon glyphicon-book"></i> <span class="nav-label">Publication Levels</span> </a></li>
-                <li><a href="@Url.Action("Subjects", "Home")"><i class="glyphicon glyphicon-book"></i> <span class="nav-label">Publication Subjects</span></a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submissions Summary</span><span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level collapse" style="">
-                <li> <a href="@Url.Action("AllPublications", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">All Submissions</span> </a></li>
-                <li> <a href="@Url.Action("Pending", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Pending Submissions </span> </a></li>
-                <li> <a href="@Url.Action("Approved", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Approved Content </span> </a></li>
-                <li> <a href="@Url.Action("Rejected", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Rejected Content </span> </a></li>
-
-            </ul>
-        </li>
-        <li>
-            <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Manage Users</span><span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level collapse">
-                <li> <a href="@Url.Action("Index","Role")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Manage Roles</span> </a></li>
-                <li> <a href="@Url.Action("Register","Account")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Register User</span> </a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Curator List</span><span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level collapse" style="">
-                <li> <a href="@Url.Action("PrincipalCurators", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Principal Curators</span> </a></li>
-                <li> <a href="@Url.Action("ChiefCurators", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Chief Curators </span> </a></li>
-                <li> <a href="@Url.Action("Curators", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Subject Curators </span> </a></li>
-            </ul>
-        </li>
-}
-            <li>
-                @if (User.IsInRole("Verification Office"))
-        {
-        <li>
-            <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Conformity</span> </a>
-        </li>
-        <li> <a href="@Url.Action("Legal", "Stages")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Submission Validation</span> </a></li>
-
-
-}
-                @if (User.IsInRole("Finance Office"))
-        {
-            <li>
-                <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Conformity</span> </a>
-            </li>
-            <li> <a href="@Url.Action("Finance", "Stages")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Payment Validation</span></a></li>
-
-
-}
+            {
                 <li>
-                    @if (User.IsInRole("Curator"))
-            {
-                <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
-
-            <li> <a href="@Url.Action("CuratorView", "Curator")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Curators</span> </a></li>
-
-}
-                    @if (User.IsInRole("Chief Curator"))
-            {
-                <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
-
-                <li> <a href="@Url.Action("ChiefCuratorView","ChiefCurator")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Chief curators</span> </a></li>
-
-    }
-                    @if (User.IsInRole("Principal Curator"))
-            {
-                <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
-
-                <li> <a href="@Url.Action("AssignMultiple", "PrincipalCurator")"><i class="glyphicon glyphicon-edit"></i> <span class="nav-label">Principal Curators</span></a></li>
-
-    }
-                    @if (User.IsInRole("Curation Manager"))
-            {
-                <li style="background-color:#808080;">
-                    <a href="#"><i class="glyphicon glyphicon-dashboard"></i> <span class="nav-label" style=" color:white;">Manager Navigation</span> </a>
+                    <a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Administration</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="@Url.Action("ListCategory", "Home")"><i class="glyphicon glyphicon-list"></i><span class="nav-label">Subject Categories</span> </a></li>
+                        <li><a href="@Url.Action("ListLevels", "Home")"><i class="glyphicon glyphicon-list"></i> <span class="nav-label">Publication Levels</span> </a></li>
+                        <li><a href="@Url.Action("ListSubjects", "Home")"><i class="glyphicon glyphicon-list"></i> <span class="nav-label">Publication Subjects</span></a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submissions Summary</span><span class="fa arrow"></span></a>
@@ -104,11 +32,17 @@
                         <li> <a href="@Url.Action("AllPublications", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">All Submissions</span> </a></li>
                         <li> <a href="@Url.Action("Pending", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Pending Submissions </span> </a></li>
                         <li> <a href="@Url.Action("Approved", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Approved Content </span> </a></li>
-                        <li> <a href="@Url.Action("Rejected", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Rejected Content </span> </a></li>
+                        <li> <a href="@Url.Action("Rejected", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Not Approved Content </span> </a></li>
 
                     </ul>
                 </li>
-
+                <li>
+                    <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Manage Users</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li> <a href="@Url.Action("Index","Role")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Manage Roles</span> </a></li>
+                        <li> <a href="@Url.Action("Register","Account")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Register User</span> </a></li>
+                    </ul>
+                </li>
                 <li>
                     <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Curator List</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse" style="">
@@ -117,8 +51,74 @@
                         <li> <a href="@Url.Action("Curators", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Subject Curators </span> </a></li>
                     </ul>
                 </li>
+            }
+            <li>
+                @if (User.IsInRole("Verification Office"))
+                {
+                <li>
+                    <a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Conformity</span> </a>
+                </li>
+                <li> <a href="@Url.Action("Legal", "Stages")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Submission Validation</span> </a></li>
 
-    }
+
+            }
+                @if (User.IsInRole("Finance Office"))
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Conformity</span> </a>
+                    </li>
+                    <li> <a href="@Url.Action("Finance", "Stages")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Payment Validation</span></a></li>
+
+
+                }
+                <li>
+                    @if (User.IsInRole("Curator"))
+                    {
+                        <a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
+
+                    <li> <a href="@Url.Action("CuratorView", "Curator")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Curation</span> </a></li>
+
+                }
+                    @if (User.IsInRole("Chief Curator"))
+                    {
+                        <a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
+
+                        <li> <a href="@Url.Action("ChiefCuratorView","ChiefCurator")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Chief Curation</span> </a></li>
+
+                    }
+                    @if (User.IsInRole("Principal Curator"))
+                    {
+                        <a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
+
+                        <li> <a href="@Url.Action("AssignMultiple", "PrincipalCurator")"><i class="glyphicon glyphicon-edit"></i> <span class="nav-label">Principal Curation</span></a></li>
+
+                    }
+                    @if (User.IsInRole("Curation Manager"))
+                    {
+                        <li style="">
+                            <a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-dashboard"></i> <span class="nav-label" style=" color:white;">Manager Navigation</span> </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submissions Summary</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" style="">
+                                <li> <a href="@Url.Action("AllPublications", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">All Submissions</span> </a></li>
+                                <li> <a href="@Url.Action("Pending", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Pending Submissions </span> </a></li>
+                                <li> <a href="@Url.Action("Approved", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Approved Content </span> </a></li>
+                                <li> <a href="@Url.Action("Rejected", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Not Approved Content </span> </a></li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Curator List</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" style="">
+                                <li> <a href="@Url.Action("PrincipalCurators", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Principal Curators</span> </a></li>
+                                <li> <a href="@Url.Action("ChiefCurators", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Chief Curators </span> </a></li>
+                                <li> <a href="@Url.Action("Curators", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i><span class="nav-label">Subject Curators </span> </a></li>
+                            </ul>
+                        </li>
+
+                    }
 
                 </ul>
             </div>

@@ -7,7 +7,7 @@ $.ajax({
         'Access-Controll-Allow-Origin': '*'
     },
     type: 'POST',
-    url: 'https://curation.kec.ac.ke/GetUsers/GetRoles',
+    url: 'https://curation-d.kec.ac.ke/GetUsers/GetRoles',
     dataType: 'JSON',
     async: false,
     crossDomain: true,
@@ -16,7 +16,7 @@ $.ajax({
         $select.html('');
         //iterate over the data and append a select option
         $.each(data, function (index, val) {
-            $select.append(`<option id=${val.Value}  value='${val.Value}'+ >${val.Value}</option>`);
+            $select.append(`<option id=${val.Text}  value='${val.Text}'+ >${val.Value}</option>`);
         })
     },
     error: function () {

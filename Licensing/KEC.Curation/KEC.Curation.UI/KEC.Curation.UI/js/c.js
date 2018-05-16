@@ -4,7 +4,7 @@
 let ectId = $('#SubjectId').val();
 let chiefCuratorGUIDss = $('#CurrentUserGuid').val();
 
-let cUrl = apiBaseUrl.concat(`/chiefcurator/publications/${ectId}/comments?subjectid=${ectId}&chiefcuratorguid=${chiefCuratorGUIDss}`);
+let cUrl = apiBaseUrl.concat(`/chiefcurator/publication/withcomments?userId=${chiefCuratorGUIDss}`);
 function tableRows(data) {
     var tableRows = [];
     for (var i = 0; i < data.length; i++) {
@@ -31,6 +31,7 @@ $.ajax({
 function drawRow(rowData) {
     var row = $("<tr />")
     row.append($("<td>" + rowData.publication + "</td>"));
+    row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.status + "</td>"));
     row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.publicationId}?Pub=${rowData.publicationId}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Comments</a>`));
 

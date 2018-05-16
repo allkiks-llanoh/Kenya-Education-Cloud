@@ -93,7 +93,7 @@ namespace Authentication_Test.Controllers
         {
             var _users = context.Roles.ToList();
 
-            return Json(new SelectList(_users, "Name", "Name"));
+            return Json(new SelectList(_users, "Name", "Id"));
         }
     }
 }

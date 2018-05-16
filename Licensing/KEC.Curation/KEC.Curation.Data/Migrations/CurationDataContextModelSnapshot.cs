@@ -18,7 +18,7 @@ namespace KEC.Curation.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("KEC.Curation.Data.Models.ChiefCuratorAssignment", b =>
@@ -32,7 +32,7 @@ namespace KEC.Curation.Data.Migrations
 
                     b.Property<string>("PrincipalCuratorGuid");
 
-                    b.Property<int?>("PublicationId");
+                    b.Property<int>("PublicationId");
 
                     b.Property<bool>("Submitted");
 
@@ -52,7 +52,7 @@ namespace KEC.Curation.Data.Migrations
 
                     b.Property<int>("PublicationId");
 
-                    b.Property<int>("Recomendation");
+                    b.Property<string>("Recomendation");
 
                     b.Property<bool>("Submitted");
 

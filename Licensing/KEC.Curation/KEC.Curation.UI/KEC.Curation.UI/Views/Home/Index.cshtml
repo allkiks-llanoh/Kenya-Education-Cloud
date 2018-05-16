@@ -4,8 +4,469 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron text-center">
-    <h3>CURATION MANAGEMENT PORTAL</h3>
 
-</div>
+@if (User.IsInRole("Admin"))
+{
+    <div class="jumbotron text-center">
 
+        <h3>CURATION MANAGEMENT PORTAL</h3>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>All Publication </span>
+                        <br>
+                        <a href="/CurationManagers/AllPublication" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Pending Publication </span>
+                        <br>
+                        <a href="/CurationManagers/Pending" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+
+            <div class="widget style1" style="background-color:#00b95f; color:white;">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-check fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Approved Publication </span>
+                        <br>
+                        <a href="/CurationManagers/Approved" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+
+            <div class="widget style1 red-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-exclamation fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Not Approved Publication </span>
+                        <br>
+                        <a href="/CurationManagers/Rejected" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <div class="widget style1 yellow-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-user-circle fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Principal Curators </span>
+                        <br>
+                        <a href="/CurationManagers/PrincipalCurators" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-user-circle fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Chief Curators</span>
+                        <br>
+                        <a href="/CurationManagers/ChiefCurators" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-user-circle fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Subject Curators </span>
+                        <br>
+                        <a href="/CurationManagers/Curators" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+
+            <div class="widget style1" style="background-color:#00b95f; color:white;">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-user-circle fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>User Roles </span>
+                        <br>
+                        <a href="/Role/Index" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+}
+@if (User.IsInRole("Verification Office"))
+{
+    <div class="jumbotron text-center">
+
+        <h3>CURATION MANAGEMENT PORTAL</h3>
+
+    </div>
+    <div class="row">
+
+        <div class="col-lg-6 col-md-offset-3">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Submission Validation List</span>
+                        <br />
+                        <br />
+                        <a href="/Stages/Legal" style="color:white;font-size: 14px;">Click to View</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+@if (User.IsInRole("Finance Office"))
+{
+    <div class="jumbotron text-center">
+
+        <h3>CURATION MANAGEMENT PORTAL</h3>
+
+    </div>
+    <div class="row">
+
+        <div class="col-lg-6 col-md-offset-3">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Payment Validation List</span>
+                        <br />
+                        <br />
+                        <a href="/Stages/Finance" style="color:white;font-size: 14px;">Click to View</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+}
+@if (User.IsInRole("Curator"))
+{
+    <div class="jumbotron text-center">
+
+        <h3>CURATION MANAGEMENT PORTAL</h3>
+
+    </div>
+    <div class="row">
+
+        <div class="col-lg-6 col-md-offset-3">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>My Assigned Publications </span>
+                        <br>
+                        <br />
+                        <a href="/Curator/CuratorView" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+}
+@if (User.IsInRole("Chief Curator"))
+{
+    <div class="jumbotron text-center">
+
+        <h3>CURATION MANAGEMENT PORTAL</h3>
+
+    </div>
+    <div class="row">
+
+        <div class="col-lg-6">
+
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Publication for Assignment </span>
+                        <br>
+                        <a href="/ChiefCurator/ChiefCuratorComments" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Curation Recommendations </span>
+                        <br>
+                        <a href="/ChiefCurator/ChiefCuratorComments" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+}
+@if (User.IsInRole("Principal Curator"))
+{
+    <div class="jumbotron text-center">
+
+        <h3>CURATION MANAGEMENT PORTAL</h3>
+
+    </div>
+    <div class="row">
+
+        <div class="col-lg-6">
+
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Publication for Assignment </span>
+                        <br>
+                        <a href="/PrincipalCurator/PrincipalCurator" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Curation Recommendations </span>
+                        <br>
+                        <a href="/PrincipalCurator/PrincipalCuratorComments" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+}
+@if (User.IsInRole("Curation Manager"))
+{
+    <div class="jumbotron text-center">
+
+        <h3>CURATION MANAGEMENT PORTAL</h3>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-4">
+
+            <div class="widget style1 yellow-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-user-circle fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Principal Curators </span>
+                        <br>
+                        <a href="/CurationManagers/PrincipalCurators" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4">
+
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-user-circle fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Chief Curators</span>
+                        <br>
+                        <a href="/CurationManagers/ChiefCurators" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-user-circle fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Subject Curators </span>
+                        <br>
+                        <a href="/CurationManagers/Curators" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>All Publication </span>
+                        <br>
+                        <a href="/CurationManagers/AllPublication" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-book fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Pending Publication </span>
+                        <br>
+                        <a href="/CurationManagers/Pending" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+
+            <div class="widget style1" style="background-color:#00b95f; color:white;">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-check fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Approved Publication </span>
+                        <br>
+                        <a href="/CurationManagers/Approved" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3">
+
+            <div class="widget style1 red-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-exclamation fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <span>Not Approved Publication </span>
+                        <br>
+                        <a href="/CurationManagers/Rejected" style="color:white;font-size: 14px;">Click to View List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+}

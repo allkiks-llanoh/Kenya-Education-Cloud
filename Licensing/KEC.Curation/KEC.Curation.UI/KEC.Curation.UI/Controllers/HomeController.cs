@@ -45,6 +45,42 @@ namespace KEC.Curation.UI.Controllers
             }
         }
         [CustomAuthorize(Roles = "Admin")]
+        public ActionResult ListCategory()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Listing Categories";
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
+        }
+        [CustomAuthorize(Roles = "Admin")]
+        public ActionResult EditCategory()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Create Subject Type / Category";
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
+        }
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Subjects()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -63,11 +99,89 @@ namespace KEC.Curation.UI.Controllers
             }
         }
         [CustomAuthorize(Roles = "Admin")]
+        public ActionResult ListSubjects()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "List Subject";
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
+        }
+        [CustomAuthorize(Roles = "Admin")]
+        public ActionResult EditSubjects()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Edit Subject";
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
+        }
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Levels()
         {
 
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Create Level";
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
+
+
+        }
+        [CustomAuthorize(Roles = "Admin")]
+        public ActionResult ListLevels()
+        {
+
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "List Level";
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
+
+
+        }
+        [CustomAuthorize(Roles = "Admin")]
+        public ActionResult EditLevel()
+        {
+
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Edit Level";
 
             using (var context = new ApplicationDbContext())
             {
