@@ -1,0 +1,40 @@
+﻿@model IEnumerable<KEC.Voucher.UI.Models.RoleViewModel>
+
+@{
+    ViewBag.Title = "Manage Roles";
+    Layout = "~/Views/Shared/_LayoutPassword.cshtml";
+}
+
+<h2>Manage User Roles</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Role")" class="btn btn-primary" style="background-color:#00b95f;">Create Role <i class="fa fa-plus"></i></a>
+    <a href="@Url.Action("Register", "Account")" class="btn btn-info" >Register New User <i class="fa fa-plus"></i></a>
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+
+
+                <a href="@Url.Action("Edit", "Role",new { id = item.Id, })" class="btn btn-info">Edit <i class="fa fa-edit"></i></a>
+                <a href="@Url.Action("Details","Role",  new { id = item.Id, })" class="btn btn-success">Details <i class="fa fa-info-circle"></i></a>
+                <a href="@Url.Action("Delete","Role",  new { id = item.Id, })" class="btn btn-danger">Delete <i class="fa fa-close"></i></a>
+               
+            </td> 
+        </tr>
+    }
+
+</table>
