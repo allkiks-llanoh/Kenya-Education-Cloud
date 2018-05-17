@@ -36,8 +36,8 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Subject, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
-           
 
+            @*@Html.DropDownListFor(m => m.Subject, new SelectList("Value", "Text"), new { @class = "form-control", name= "SubjectTypeId", id = "SubjectTypeId" })*@
             <select name="SubjectTypeId" id="SubjectTypeId" class="form-control"></select>
         </div>
     </div>
