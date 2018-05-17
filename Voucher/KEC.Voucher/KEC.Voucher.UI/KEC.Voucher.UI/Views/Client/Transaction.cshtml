@@ -2,7 +2,11 @@
     ViewBag.Title = "Voucher Portal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/js/ClientTransaction.js"></script>
 
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
+<link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <div class="row">
     <div class="col-lg-12">
         <div class="text-center m-t-lg">
@@ -16,12 +20,14 @@
             </div>
             <div class="ibox-content">
                 <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Search For a  Voucher / School To View Transactions">
-                <table id="createdvouchers" class="footable table table-stripped" data-page-size="25" data-filter=#filter>
+                <table id="createdtransactions" class="footable table table-stripped" data-page-size="25" data-filter=#filter>
                     <tr class="footable-sortable">
                         <th style="display:none;"> ID </th>
-                        <th> VOUCHER CODE </th>
-                        <th> AMOUNT</th>
+                        <th> DATE </th>
+                        <th>PIN</th>
                         <th> DESCRIPTION</th>
+                        <th> AMOUNT</th>
+                        <th>TRANSACTED BY</th>
                     </tr>
                     <tfoot>
                         <tr>
@@ -35,6 +41,21 @@
         </div>
     </div>
 </div>
+
+@section Styles {
+    @Styles.Render("~/plugins/footableStyles")
+}
+@section Scripts {
+    @Scripts.Render("~/plugins/footable")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.footable').footable();
+            $('.footable2').footable();
+
+        });
+    </script>
+}
 
 
 

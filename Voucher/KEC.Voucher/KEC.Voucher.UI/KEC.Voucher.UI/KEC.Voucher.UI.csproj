@@ -347,6 +347,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="js\accounting.js" />
+    <Content Include="js\ClientTransactions.js" />
+    <Content Include="js\UploadSchool.js" />
+    <Content Include="js\ClientVoucher.js" />
+    <Content Include="js\globalConstants.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -852,7 +857,6 @@
     <Content Include="Views\Account\SignOutCallback.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\School\Index.cshtml" />
-    <Content Include="Views\School\Transaction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
