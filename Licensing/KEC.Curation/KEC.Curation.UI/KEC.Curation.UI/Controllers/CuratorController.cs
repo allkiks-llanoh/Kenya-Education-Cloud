@@ -102,37 +102,37 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
-        public ActionResult GetCuration()
-        {
-            IEnumerable<ToCurate> toCutate = null;
-            using (var client = new HttpClient())
-            {
-                //var uri = new Uri("https://curationapi-d.kec.ac.ke/api/chiefcurator/curator/tocurate?userGuid=1cb673c8-a921-4a9f-b42f-69050a70aae6");
-                client.BaseAddress = new Uri("https://curationapi-d.kec.ac.ke/api/chiefcurator/curator/");
-                //HTTP GET
-                var responseTask = client.GetAsync("tocurate?userGuid=1cb673c8-a921-4a9f-b42f-69050a70aae6");
+        //public ActionResult GetCuration()
+        //{
+        //    IEnumerable<ToCurate> toCutate = null;
+        //    using (var client = new HttpClient())
+        //    {
+        //        //var uri = new Uri("https://curationapi-d.kec.ac.ke/api/chiefcurator/curator/tocurate?userGuid=1cb673c8-a921-4a9f-b42f-69050a70aae6");
+        //        client.BaseAddress = new Uri("https://curationapi-d.kec.ac.ke/api/chiefcurator/curator/");
+        //        //HTTP GET
+        //        var responseTask = client.GetAsync("tocurate?userGuid=1cb673c8-a921-4a9f-b42f-69050a70aae6");
 
-                responseTask.Wait();
+        //        responseTask.Wait();
 
-                var result = responseTask.Result;
-                if (result.IsSuccessStatusCode)
-                {
-                    var readTask = result.Content.ReadAsAsync<IList<ToCurate>>();
-                    readTask.Wait();
+        //        var result = responseTask.Result;
+        //        if (result.IsSuccessStatusCode)
+        //        {
+        //            var readTask = result.Content.ReadAsAsync<IList<ToCurate>>();
+        //            readTask.Wait();
 
-                    toCutate = readTask.Result;
-                }
-                else //web api sent error response 
-                {
-                    //log response status here..
+        //            toCutate = readTask.Result;
+        //        }
+        //        else //web api sent error response 
+        //        {
+        //            //log response status here..
 
-                    toCutate = Enumerable.Empty<ToCurate>();
+        //            toCutate = Enumerable.Empty<ToCurate>();
 
-                    ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
-                }
-            }
-            return View(toCutate);
-        }
+        //            ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+        //        }
+        //    }
+        //    return View(toCutate);
+        //}
         
     }
 }
