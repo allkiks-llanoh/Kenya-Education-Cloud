@@ -98,8 +98,8 @@ namespace KEC.Curation.Web.Api.Controllers
                     Url =blobs.StorageUri.PrimaryUri.ToString(),
                     KICDNumber = _uow.PublicationRepository
                                       .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
-                    CreatedTimeUtc = DateTime.UtcNow,
-                    ModifiedTimeUtc = DateTime.UtcNow,
+                    CreatedTimeUtc = DateTime.Now.Date,
+                    ModifiedTimeUtc = DateTime.Now.Date,
                     Owner = model.UserGuid
 
                 };
@@ -147,7 +147,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
-        [HttpGet("file/download")]
+                [HttpGet("file/download")]
         public IActionResult DownloadPublication([FromQuery] string url)
         {
             var cred = new StorageCredentials(StorageAccountName, StorageAccountKey);

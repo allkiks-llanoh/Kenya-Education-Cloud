@@ -5,9 +5,15 @@
     ViewBag.Title = "Curator View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/js/jquery-3.1.1.min.js"></script>
+@section Scripts
+{
+
 <script src="~/js/curatorView.js"></script>
-<script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+
+    <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+
+}
+
 <div class="text-center m-t-lg">
     <h1>
         @ViewData["SubTitle"]

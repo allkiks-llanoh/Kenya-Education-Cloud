@@ -9,6 +9,7 @@ namespace KEC.ECommerce.Data.Models
         public PaymentMethod PaymentMethod { get; set; }
         public string TransactionNumber { get; set; }
         public DateTime TransactionDate { get; set; }
+        public string TransactedBy { get; set; }
         #endregion
 
         #region Foreign Properties

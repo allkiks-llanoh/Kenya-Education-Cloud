@@ -12,6 +12,7 @@ using KEC.Curation.UI.Models;
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Security;
+using System.Collections;
 
 namespace KEC.Curation.UI.Controllers
 {
@@ -171,10 +172,12 @@ namespace KEC.Curation.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName=model.FullName, SubjectId=model.SubjectId };
+              
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName=model.FullName, SubjectId = model.SubjectId };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                   
                     result = await UserManager.AddToRoleAsync(user.Id, model.RoleName);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     

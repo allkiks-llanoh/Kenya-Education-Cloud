@@ -1,0 +1,25 @@
+﻿@model KEC.Voucher.UI.Models.RoleViewModel
+
+@{
+    ViewBag.Title = "Manage Roles";
+    Layout = "~/Views/Shared/_LayoutPassword.cshtml";
+}
+<div>
+    <h4>Role Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit", "Role",new { id = Model.Id, })" class="btn btn-info">Edit <i class="fa fa-edit"></i></a>
+    <a href="@Url.Action("Index", "Role")" class="btn btn-primary" style="background-color:#00b95f;"> <i class="fa fa-arrow-circle-left"></i> Back to List </a>
+
+</p>

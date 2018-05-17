@@ -37,8 +37,8 @@ namespace KEC.Curation.Web.Api.Serializers
             get
             {
                 var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
-                var section = _uow.PublicationSectionRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
-
+                var section = _uow.PublicationSectionRepository.Find(p=> p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+             
                 if (section == null)
                 {
                     return "Whole Document";
@@ -63,21 +63,20 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _assignment.Submitted ? "Submitted" : "Pending";
             }
         }
-
-        public int publicationId 
-        {
-            get
-            {
-                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
-                return publication.Id;
-            }
-        }
         public string Title
         {
             get
             {
                 var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
                 return publication.Title;
+            }
+        }
+        public int publicationId 
+        {
+            get
+            {
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                return publication.Id;
             }
         }
 
