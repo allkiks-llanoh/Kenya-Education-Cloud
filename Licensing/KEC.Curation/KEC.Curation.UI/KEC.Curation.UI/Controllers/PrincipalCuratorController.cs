@@ -18,19 +18,13 @@ namespace KEC.Curation.UI.Controllers
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
-
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
                     FullName = user.FullName
-          
-
                 };
-
                 return View(chiefCurator);
-
             }
-
         }
         public ActionResult PrincipalCuratorReview()
         {
@@ -40,24 +34,18 @@ namespace KEC.Curation.UI.Controllers
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
-
                 var chiefCurator = new ChiefCurators
                 {
                     Guid = user.Id,
                     FullName = user.FullName
-
                 };
-
                 return View(chiefCurator);
-
             }
-           
         }
         public ActionResult PrincipalCuratorComments()
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Curation Recommendations";
-
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
@@ -72,24 +60,6 @@ namespace KEC.Curation.UI.Controllers
         }
         public ActionResult AssignMultiple()
         {
-
-
-            using (var context = new ApplicationDbContext())
-            {
-                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
-                var chiefCurator = new ChiefCurators
-                {
-                    Guid = user.Id,
-                    Subjectid = user.SubjectId,
-                    FullName = user.FullName
-                };
-                return View(chiefCurator);
-            }
-        }
-        public ActionResult AssignMultiple()
-        {
-
-
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
@@ -106,8 +76,6 @@ namespace KEC.Curation.UI.Controllers
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
-
-
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
