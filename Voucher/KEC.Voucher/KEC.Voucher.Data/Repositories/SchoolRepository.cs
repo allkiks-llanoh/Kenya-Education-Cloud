@@ -15,7 +15,7 @@ namespace KEC.Voucher.Data.Repositories
         {
             _voucherDbContext = context as VoucherDb;
         }
-        public void AddFromCSV(DbSchool school, DbFundAllocation fundAllocation)
+        public void AddFromCSV(DbSchool school, DbFundAllocation fundAllocation, DbSchoolAdmin schoolAdmin)
         {
             var retrievedSchool = _voucherDbContext.Schools
                                    .FirstOrDefault(p => p.SchoolCode.Equals(school.SchoolCode));
