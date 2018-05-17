@@ -30,6 +30,7 @@ namespace KEC.Curation.UI.Controllers
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
+            //var result = new UserProfileController().GetTokenForApplication();
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
@@ -37,7 +38,6 @@ namespace KEC.Curation.UI.Controllers
                 {
                     Guid = user.Id,
                     FullName = user.FullName
-
                 };
                 return View(chiefCurator);
             }
@@ -105,6 +105,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [HttpGet, Route("ViewPublication/{Id:int}")]
         public ActionResult ViewPublication(int Id)
         {
             ViewBag.PublicationId = Id;
