@@ -63,16 +63,18 @@ namespace KEC.Voucher.UI.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            using (var context = new ApplicationDbContext())
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var voucherUser = new VoucherUser
+                {
+                    Guid = user.Id,
+                    FullName = user.FullName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber
+                };
+                return View(voucherUser);
+            }
         }
 
         //
