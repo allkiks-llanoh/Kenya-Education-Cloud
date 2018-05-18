@@ -33,6 +33,14 @@
             Enables directory browsing
             </summary>
         </member>
+        <member name="M:Microsoft.AspNetCore.StaticFiles.DirectoryBrowserMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Builder.DirectoryBrowserOptions})">
+            <summary>
+            Creates a new instance of the SendFileMiddleware. Using <see cref="P:System.Text.Encodings.Web.HtmlEncoder.Default"/> instance.
+            </summary>
+            <param name="next">The next middleware in the pipeline.</param>
+            <param name="hostingEnv">The <see cref="T:Microsoft.AspNetCore.Hosting.IHostingEnvironment"/> used by this middleware.</param>
+            <param name="options">The configuration for this middleware.</param>
+        </member>
         <member name="M:Microsoft.AspNetCore.StaticFiles.DirectoryBrowserMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Hosting.IHostingEnvironment,System.Text.Encodings.Web.HtmlEncoder,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Builder.DirectoryBrowserOptions})">
             <summary>
             Creates a new instance of the SendFileMiddleware.
@@ -112,6 +120,52 @@
             Generates the view for a directory.
             Implementers should properly handle HEAD requests.
             Implementers should set all necessary response headers (e.g. Content-Type, Content-Length, etc.).
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptions">
+            <summary>
+            Options common to several middleware components
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptions.#ctor">
+            <summary>
+            Defaults to all request paths.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptions.RequestPath">
+            <summary>
+            The request path that maps to static resources
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptions.FileProvider">
+            <summary>
+            The file system used to locate resources
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase">
+            <summary>
+            Options common to several middleware components
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase.#ctor(Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptions)">
+            <summary>
+            Creates an new instance of the SharedOptionsBase.
+            </summary>
+            <param name="sharedOptions"></param>
+        </member>
+        <member name="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase.SharedOptions">
+            <summary>
+            Options common to several middleware components
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase.RequestPath">
+            <summary>
+            The relative request path that maps to static resources.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase.FileProvider">
+            <summary>
+            The file system used to locate resources
             </summary>
         </member>
         <member name="T:Microsoft.AspNetCore.StaticFiles.LoggerExtensions">
@@ -223,52 +277,6 @@
         <member name="P:Microsoft.AspNetCore.StaticFiles.StaticFileResponseContext.File">
             <summary>
             The file to be served.
-            </summary>
-        </member>
-        <member name="T:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptions">
-            <summary>
-            Options common to several middleware components
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptions.#ctor">
-            <summary>
-            Defaults to all request paths.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptions.RequestPath">
-            <summary>
-            The request path that maps to static resources
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptions.FileProvider">
-            <summary>
-            The file system used to locate resources
-            </summary>
-        </member>
-        <member name="T:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase">
-            <summary>
-            Options common to several middleware components
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase.#ctor(Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptions)">
-            <summary>
-            Creates an new instance of the SharedOptionsBase.
-            </summary>
-            <param name="sharedOptions"></param>
-        </member>
-        <member name="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase.SharedOptions">
-            <summary>
-            Options common to several middleware components
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase.RequestPath">
-            <summary>
-            The relative request path that maps to static resources.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase.FileProvider">
-            <summary>
-            The file system used to locate resources
             </summary>
         </member>
         <member name="T:Microsoft.AspNetCore.Builder.DefaultFilesExtensions">
@@ -508,6 +516,24 @@
             Called after the status code and headers have been set, but before the body has been written.
             This can be used to add or change the response headers.
             </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Internal.RangeHelper">
+            <summary>
+            Provides a parser for the Range Header in an <see cref="P:Microsoft.AspNetCore.Http.HttpContext.Request"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Internal.RangeHelper.ParseRange(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.Headers.RequestHeaders,System.Int64)">
+            <summary>
+            Returns the normalized form of the requested range if the Range Header in the <see cref="P:Microsoft.AspNetCore.Http.HttpContext.Request"/> is valid.
+            </summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> associated with the request.</param>
+            <param name="requestHeaders">The <see cref="T:Microsoft.AspNetCore.Http.Headers.RequestHeaders"/> associated with the given <paramref name="context"/>.</param>
+            <param name="length">The total length of the file representation requested.</param>
+            <returns>A boolean value which represents if the <paramref name="requestHeaders"/> contain a single valid 
+            range request. A <see cref="T:Microsoft.Net.Http.Headers.RangeItemHeaderValue"/> which represents the normalized form of the 
+            range parsed from the <paramref name="requestHeaders"/> or <c>null</c> if it cannot be normalized.</returns>
+            <remark>If the Range header exists but cannot be parsed correctly, or if the provided length is 0, then the range request cannot be satisfied (status 416). 
+            This results in (<c>true</c>,<c>null</c>) return values.</remark>
         </member>
         <member name="T:Microsoft.Extensions.DependencyInjection.DirectoryBrowserServiceExtensions">
             <summary>
