@@ -4,33 +4,10 @@
         <name>Microsoft.AspNetCore.Mvc.Abstractions</name>
     </assembly>
     <members>
-        <member name="T:Microsoft.Extensions.Internal.ClosedGenericMatcher">
-            <summary>
-            Helper related to generic interface definitions and implementing classes.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Extensions.Internal.ClosedGenericMatcher.ExtractGenericInterface(System.Type,System.Type)">
-            <summary>
-            Determine whether <paramref name="queryType"/> is or implements a closed generic <see cref="T:System.Type"/>
-            created from <paramref name="interfaceType"/>.
-            </summary>
-            <param name="queryType">The <see cref="T:System.Type"/> of interest.</param>
-            <param name="interfaceType">The open generic <see cref="T:System.Type"/> to match. Usually an interface.</param>
-            <returns>
-            The closed generic <see cref="T:System.Type"/> created from <paramref name="interfaceType"/> that
-            <paramref name="queryType"/> is or implements. <c>null</c> if the two <see cref="T:System.Type"/>s have no such
-            relationship.
-            </returns>
-            <remarks>
-            This method will return <paramref name="queryType"/> if <paramref name="interfaceType"/> is
-            <c>typeof(KeyValuePair{,})</c>, and <paramref name="queryType"/> is
-            <c>typeof(KeyValuePair{string, object})</c>.
-            </remarks>
-        </member>
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.#ctor(System.Reflection.PropertyInfo)">
             <summary>
             Initializes a fast <see cref="T:Microsoft.Extensions.Internal.PropertyHelper"/>.
-            This constructor does not cache the helper. For caching, use <see cref="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Object)"/>.
+            This constructor does not cache the helper. For caching, use <see cref="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Type)"/>.
             </summary>
         </member>
         <member name="P:Microsoft.Extensions.Internal.PropertyHelper.Property">
@@ -67,13 +44,13 @@
             <param name="instance">The object whose property value will be set.</param>
             <param name="value">The property value.</param>
         </member>
-        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Object)">
+        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Reflection.TypeInfo)">
             <summary>
             Creates and caches fast property helpers that expose getters for every public get property on the
             underlying type.
             </summary>
-            <param name="instance">the instance to extract property accessors for.</param>
-            <returns>a cached array of all public property getters from the underlying type of target instance.
+            <param name="typeInfo">The type info to extract property accessors for.</param>
+            <returns>A cached array of all public properties of the specified type.
             </returns>
         </member>
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Type)">
@@ -81,11 +58,11 @@
             Creates and caches fast property helpers that expose getters for every public get property on the
             specified type.
             </summary>
-            <param name="type">the type to extract property accessors for.</param>
-            <returns>a cached array of all public property getters from the type of target instance.
+            <param name="type">The type to extract property accessors for.</param>
+            <returns>A cached array of all public properties of the specified type.
             </returns>
         </member>
-        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetVisibleProperties(System.Object)">
+        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetVisibleProperties(System.Reflection.TypeInfo)">
             <summary>
             <para>
             Creates and caches fast property helpers that expose getters for every non-hidden get property
@@ -96,9 +73,9 @@
             hidden by definitions using the <c>new</c> keyword.
             </para>
             </summary>
-            <param name="instance">The instance to extract property accessors for.</param>
+            <param name="typeInfo">The type info to extract property accessors for.</param>
             <returns>
-            A cached array of all public property getters from the instance's type.
+            A cached array of all public properties of the specified type.
             </returns>
         </member>
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetVisibleProperties(System.Type)">
@@ -114,7 +91,7 @@
             </summary>
             <param name="type">The type to extract property accessors for.</param>
             <returns>
-            A cached array of all public property getters from the type.
+            A cached array of all public properties of the specified type.
             </returns>
         </member>
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.MakeFastPropertyGetter(System.Reflection.PropertyInfo)">
@@ -163,152 +140,27 @@
              faster when the the same type is used multiple times with ObjectToDictionary.
              </remarks>
         </member>
-        <member name="T:Microsoft.AspNetCore.Mvc.ActionContext">
+        <member name="T:Microsoft.Extensions.Internal.ClosedGenericMatcher">
             <summary>
-            Context object for execution of action which has been selected as part of an HTTP request.
+            Helper related to generic interface definitions and implementing classes.
             </summary>
         </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ActionContext.#ctor">
+        <member name="M:Microsoft.Extensions.Internal.ClosedGenericMatcher.ExtractGenericInterface(System.Type,System.Type)">
             <summary>
-            Creates an empty <see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/>.
+            Determine whether <paramref name="queryType"/> is or implements a closed generic <see cref="T:System.Type"/>
+            created from <paramref name="interfaceType"/>.
             </summary>
+            <param name="queryType">The <see cref="T:System.Type"/> of interest.</param>
+            <param name="interfaceType">The open generic <see cref="T:System.Type"/> to match. Usually an interface.</param>
+            <returns>
+            The closed generic <see cref="T:System.Type"/> created from <paramref name="interfaceType"/> that
+            <paramref name="queryType"/> is or implements. <c>null</c> if the two <see cref="T:System.Type"/>s have no such
+            relationship.
+            </returns>
             <remarks>
-            The default constructor is provided for unit test purposes only.
-            </remarks>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ActionContext.#ctor(Microsoft.AspNetCore.Mvc.ActionContext)">
-            <summary>
-            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/>.
-            </summary>
-            <param name="actionContext">The <see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/> to copy.</param>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ActionContext.#ctor(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.RouteData,Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)">
-            <summary>
-            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/>.
-            </summary>
-            <param name="httpContext">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> for the current request.</param>
-            <param name="routeData">The <see cref="T:Microsoft.AspNetCore.Routing.RouteData"/> for the current request.</param>
-            <param name="actionDescriptor">The <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor"/> for the selected action.</param>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ActionContext.#ctor(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.RouteData,Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
-            <summary>
-            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/>.
-            </summary>
-            <param name="httpContext">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> for the current request.</param>
-            <param name="routeData">The <see cref="T:Microsoft.AspNetCore.Routing.RouteData"/> for the current request.</param>
-            <param name="actionDescriptor">The <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor"/> for the selected action.</param>
-            <param name="modelState">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary"/>.</param>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ActionContext.ActionDescriptor">
-            <summary>
-            Gets or sets the <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor"/> for the selected action.
-            </summary>
-            <remarks>
-            The property setter is provided for unit test purposes only.
-            </remarks>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ActionContext.HttpContext">
-            <summary>
-            Gets or sets the <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> for the current request.
-            </summary>
-            <remarks>
-            The property setter is provided for unit test purposes only.
-            </remarks>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ActionContext.ModelState">
-            <summary>
-            Gets the <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary"/>.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ActionContext.RouteData">
-            <summary>
-            Gets or sets the <see cref="T:Microsoft.AspNetCore.Routing.RouteData"/> for the current request.
-            </summary>
-            <remarks>
-            The property setter is provided for unit test purposes only.
-            </remarks>
-        </member>
-        <member name="T:Microsoft.AspNetCore.Mvc.IActionResult">
-            <summary>
-            Defines a contract that represents the result of an action method.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.IActionResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)">
-            <summary>
-            Executes the result operation of the action method asynchronously. This method is called by MVC to process
-            the result of an action method.
-            </summary>
-            <param name="context">The context in which the result is executed. The context information includes
-            information about the action that was executed and request information.</param>
-            <returns>A task that represents the asynchronous execute operation.</returns>
-        </member>
-        <member name="T:Microsoft.AspNetCore.Mvc.IUrlHelper">
-            <summary>
-            Defines the contract for the helper to build URLs for ASP.NET MVC within an application.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.IUrlHelper.ActionContext">
-            <summary>
-            Gets the <see cref="P:Microsoft.AspNetCore.Mvc.IUrlHelper.ActionContext"/> for the current request.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.IUrlHelper.Action(Microsoft.AspNetCore.Mvc.Routing.UrlActionContext)">
-            <summary>
-            Generates a fully qualified or absolute URL specified by <see cref="T:Microsoft.AspNetCore.Mvc.Routing.UrlActionContext"/> for an action
-            method, which contains action name, controller name, route values, protocol to use, host name, and fragment.
-            </summary>
-            <param name="actionContext">The context object for the generated URLs for an action method.</param>
-            <returns>The fully qualified or absolute URL to an action method.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.IUrlHelper.Content(System.String)">
-            <summary>
-            Converts a virtual (relative) path to an application absolute path.
-            </summary>
-            <remarks>
-            If the specified content path does not start with the tilde (~) character,
-            this method returns <paramref name="contentPath"/> unchanged.
-            </remarks>
-            <param name="contentPath">The virtual path of the content.</param>
-            <returns>The application absolute path.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.IUrlHelper.IsLocalUrl(System.String)">
-            <summary>
-            Returns a value that indicates whether the URL is local. A URL with an absolute path is considered local
-            if it does not have a host/authority part. URLs using virtual paths ('~/') are also local.
-            </summary>
-            <param name="url">The URL.</param>
-            <returns><c>true</c> if the URL is local; otherwise, <c>false</c>.</returns>
-            <example>
-            <para>
-            For example, the following URLs are considered local:
-            /Views/Default/Index.html
-            ~/Index.html
-            </para>
-            <para>
-            The following URLs are non-local:
-            ../Index.html
-            http://www.contoso.com/
-            http://localhost/Index.html
-            </para>
-            </example>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.IUrlHelper.RouteUrl(Microsoft.AspNetCore.Mvc.Routing.UrlRouteContext)">
-            <summary>
-            Generates a fully qualified or absolute URL specified by <see cref="T:Microsoft.AspNetCore.Mvc.Routing.UrlRouteContext"/>, which
-            contains the route name, the route values, protocol to use, host name and fragment.
-            </summary>
-            <param name="routeContext">The context object for the generated URLs for a route.</param>
-            <returns>The fully qualified or absolute URL.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.IUrlHelper.Link(System.String,System.Object)">
-            <summary>
-            Generates an absolute URL using the specified route name and values.
-            </summary>
-            <param name="routeName">The name of the route that is used to generate the URL.</param>
-            <param name="values">An object that contains the route values.</param>
-            <returns>The generated absolute URL.</returns>
-            <remarks>
-            The protocol and host is obtained from the current request.
+            This method will return <paramref name="queryType"/> if <paramref name="interfaceType"/> is
+            <c>typeof(KeyValuePair{,})</c>, and <paramref name="queryType"/> is
+            <c>typeof(KeyValuePair{string, object})</c>.
             </remarks>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor.Id">
@@ -327,9 +179,19 @@
             The set of constraints for this action. Must all be satisfied for the action to be selected.
             </summary>
         </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor.Parameters">
+            <summary>
+            The set of parameters associated with this action.
+            </summary>
+        </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor.BoundProperties">
             <summary>
             The set of properties which are model bound.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor.FilterDescriptors">
+            <summary>
+            The set of filters associated with this action.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor.DisplayName">
@@ -386,6 +248,44 @@
             </para>
             </remarks>
         </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvoker">
+            <summary>
+            Defines an interface for invoking an MVC action.
+            </summary>
+            <remarks>
+            An <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvoker"/> is created for each request the MVC handles by querying the set of
+            <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider"/> instances. See <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider"/> for more information. 
+            </remarks>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvoker.InvokeAsync">
+            <summary>
+            Invokes an MVC action.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> which will complete when action processing has completed.</returns>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider">
+            <summary>
+            Defines an interface for components that can create an <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvoker"/> for the
+            current request.
+            </summary>
+            <remarks>
+            <para>
+            <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider"/> instances form a pipeline that results in the creation of an
+            <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvoker"/>. The <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider"/> instances are ordered by
+            an ascending sort of the <see cref="P:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order"/>.  
+            </para>
+            <para>
+            To create an <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvoker"/>, each provider has its <see cref="M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)"/> method
+            called in sequence and given the same instance of <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext"/>. Then each
+            provider has its <see cref="M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)"/> method called in the reverse order. The result is
+            the value of <see cref="P:Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext.Result"/>.  
+            </para>
+            <para>
+            As providers are called in a predefined sequence, each provider has a chance to observe and decorate the
+            result of the providers that have already run. 
+            </para>
+            </remarks>
+        </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order">
             <summary>
             Gets the order value for determining the order of execution of providers. Providers execute in
@@ -406,6 +306,19 @@
             is undefined.
             </para>
             </remarks>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)">
+            <summary>
+            Called to execute the provider. 
+            </summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext"/>.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)">
+            <summary>
+            Called to execute the provider, after the <see cref="M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)"/> methods of all providers,
+            have been called.
+            </summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext"/>.</param>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Abstractions.Resources.ArgumentCannotBeNullOrEmpty">
             <summary>
@@ -575,6 +488,26 @@
         <member name="M:Microsoft.AspNetCore.Mvc.Abstractions.Resources.FormatBindingSource_MustBeGreedy(System.Object,System.Object)">
             <summary>
             The provided binding source '{0}' is not a greedy data source. '{1}' only supports greedy data sources.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.Abstractions.Resources.BindingSource_Special">
+            <summary>
+            Special
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Abstractions.Resources.FormatBindingSource_Special">
+            <summary>
+            Special
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.Abstractions.Resources.BindingSource_FormFile">
+            <summary>
+            FormFile
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Abstractions.Resources.FormatBindingSource_FormFile">
+            <summary>
+            FormFile
             </summary>
         </member>
         <member name="T:Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext">
@@ -776,6 +709,307 @@
             is undefined.
             </para>
             </remarks>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ActionContext">
+            <summary>
+            Context object for execution of action which has been selected as part of an HTTP request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ActionContext.#ctor">
+            <summary>
+            Creates an empty <see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/>.
+            </summary>
+            <remarks>
+            The default constructor is provided for unit test purposes only.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ActionContext.#ctor(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/>.
+            </summary>
+            <param name="actionContext">The <see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/> to copy.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ActionContext.#ctor(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.RouteData,Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/>.
+            </summary>
+            <param name="httpContext">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> for the current request.</param>
+            <param name="routeData">The <see cref="T:Microsoft.AspNetCore.Routing.RouteData"/> for the current request.</param>
+            <param name="actionDescriptor">The <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor"/> for the selected action.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ActionContext.#ctor(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.RouteData,Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/>.
+            </summary>
+            <param name="httpContext">The <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> for the current request.</param>
+            <param name="routeData">The <see cref="T:Microsoft.AspNetCore.Routing.RouteData"/> for the current request.</param>
+            <param name="actionDescriptor">The <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor"/> for the selected action.</param>
+            <param name="modelState">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary"/>.</param>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ActionContext.ActionDescriptor">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor"/> for the selected action.
+            </summary>
+            <remarks>
+            The property setter is provided for unit test purposes only.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ActionContext.HttpContext">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> for the current request.
+            </summary>
+            <remarks>
+            The property setter is provided for unit test purposes only.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ActionContext.ModelState">
+            <summary>
+            Gets the <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ActionContext.RouteData">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.AspNetCore.Routing.RouteData"/> for the current request.
+            </summary>
+            <remarks>
+            The property setter is provided for unit test purposes only.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription">
+            <summary>
+            Represents an API exposed by this application.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription.ActionDescriptor">
+            <summary>
+            Gets or sets <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription.ActionDescriptor"/> for this api.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription.GroupName">
+            <summary>
+            Gets or sets group name for this api.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription.HttpMethod">
+            <summary>
+            Gets or sets the supported HTTP method for this api, or null if all HTTP methods are supported.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription.ParameterDescriptions">
+            <summary>
+            Gets a list of <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription"/> for this api.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription.Properties">
+            <summary>
+            Gets arbitrary metadata properties associated with the <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription.RelativePath">
+            <summary>
+            Gets or sets relative url path template (relative to application root) for this api.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription.SupportedRequestFormats">
+            <summary>
+            Gets the list of possible formats for a request.
+            </summary>
+            <remarks>
+            Will be empty if the action does not accept a parameter decorated with the <c>[FromBody]</c> attribute.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription.SupportedResponseTypes">
+            <summary>
+            Gets the list of possible formats for a response.
+            </summary>
+            <remarks>
+            Will be empty if the action returns no response, or if the response type is unclear. Use
+            <c>ProducesAttribute</c> on an action method to specify a response type.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext">
+            <summary>
+            A context object for <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription"/> providers.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext.#ctor(System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor})">
+            <summary>
+            Creates a new instance of <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext"/>.
+            </summary>
+            <param name="actions">The list of actions.</param>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext.Actions">
+            <summary>
+            The list of actions.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext.Results">
+            <summary>
+            The list of resulting <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription">
+            <summary>
+            A metadata description of an input to an API.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription.ModelMetadata">
+            <summary>
+            Gets or sets the <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription.ModelMetadata"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription.RouteInfo">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterRouteInfo"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription.Source">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription.Type">
+            <summary>
+            Gets or sets the parameter type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription.ParameterDescriptor">
+            <summary>
+            Gets or sets the parameter descriptor.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterRouteInfo">
+            <summary>
+            A metadata description of routing information for an <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterRouteInfo.Constraints">
+            <summary>
+            Gets or sets the set of <see cref="T:Microsoft.AspNetCore.Routing.IRouteConstraint"/> objects for the parameter.
+            </summary>
+            <remarks>
+            Route constraints are only applied when a value is bound from a URL's path. See
+            <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription.Source"/> for the data source considered.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterRouteInfo.DefaultValue">
+            <summary>
+            Gets or sets the default value for the parameter.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterRouteInfo.IsOptional">
+             <summary>
+             Gets a value indicating whether not a parameter is considered optional by routing.
+             </summary>
+             <remarks>
+             An optional parameter is considered optional by the routing system. This does not imply
+             that the parameter is considered optional by the action.
+            
+             If the parameter uses <see cref="F:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.ModelBinding"/> for the value of
+             <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiParameterDescription.Source"/> then the value may also come from the
+             URL query string or form data.
+             </remarks>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiRequestFormat">
+            <summary>
+            A possible format for the body of a request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiRequestFormat.Formatter">
+            <summary>
+            The formatter used to read this request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiRequestFormat.MediaType">
+            <summary>
+            The media type of the request.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseFormat">
+            <summary>
+            Possible format for an <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseType"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseFormat.Formatter">
+            <summary>
+            Gets or sets the formatter used to output this response.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseFormat.MediaType">
+            <summary>
+            Gets or sets the media type of the response.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseType">
+            <summary>
+            Possible type of the response body which is formatted by <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseType.ApiResponseFormats"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseType.ApiResponseFormats">
+            <summary>
+            Gets or sets the response formats supported by this type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseType.ModelMetadata">
+            <summary>
+            Gets or sets <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/> for the <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseType.Type"/> or null.
+            </summary>
+            <remarks>
+            Will be null if <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseType.Type"/> is null or void.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseType.Type">
+            <summary>
+            Gets or sets the CLR data type of the response or null.
+            </summary>
+            <remarks>
+            Will be null if the action returns no response, or if the response type is unclear. Use
+            <c>Microsoft.AspNetCore.Mvc.ProducesAttribute</c> or <c>Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute</c> on an action method
+            to specify a response type.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiResponseType.StatusCode">
+            <summary>
+            Gets or sets the HTTP response status code.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order">
+            <summary>
+            Gets the order value for determining the order of execution of providers. Providers execute in
+            ascending numeric value of the <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order"/> property.
+            </summary>
+            <remarks>
+            <para>
+            Providers are executed in an ordering determined by an ascending sort of the <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order"/> property.
+            A provider with a lower numeric value of <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order"/> will have its
+            <see cref="M:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)"/> called before that of a provider with a higher numeric value of
+            <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order"/>. The <see cref="M:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)"/> method is called in the reverse ordering after
+            all calls to <see cref="M:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)"/>. A provider with a lower numeric value of
+            <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order"/> will have its <see cref="M:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)"/> method called after that of a provider
+            with a higher numeric value of <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order"/>.
+            </para>
+            <para>
+            If two providers have the same numeric value of <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order"/>, then their relative execution order
+            is undefined.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)">
+            <summary>
+            Creates or modifies <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription"/>s.
+            </summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext"/>.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)">
+            <summary>
+            Called after <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider"/> implementations with higher <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order"/> values have been called.
+            </summary>
+            <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext"/>.</param>
         </member>
         <member name="T:Microsoft.AspNetCore.Mvc.Authorization.IAllowAnonymousFilter">
             <summary>
@@ -1521,6 +1755,12 @@
             </summary>
             <typeparam name="T">The type to remove.</typeparam>
         </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection`1.RemoveType(System.Type)">
+            <summary>
+            Removes all formatters of the specified type.
+            </summary>
+            <param name="formatterType">The type to remove.</param>
+        </member>
         <member name="T:Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter">
             <summary>
             Reads an object from the request body.
@@ -1567,6 +1807,36 @@
             A delegate which can create a <see cref="T:System.IO.TextReader"/> for the request body.
             </param>
         </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext.#ctor(Microsoft.AspNetCore.Http.HttpContext,System.String,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary,Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Func{System.IO.Stream,System.Text.Encoding,System.IO.TextReader},System.Boolean)">
+            <summary>
+            Creates a new instance of <see cref="T:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext"/>.
+            </summary>
+            <param name="httpContext">
+            The <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> for the current operation.
+            </param>
+            <param name="modelName">The name of the model.</param>
+            <param name="modelState">
+            The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary"/> for recording errors.
+            </param>
+            <param name="metadata">
+            The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/> of the model to deserialize.
+            </param>
+            <param name="readerFactory">
+            A delegate which can create a <see cref="T:System.IO.TextReader"/> for the request body.
+            </param>
+            <param name="treatEmptyInputAsDefaultValue">
+            A value for the <see cref="P:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext.TreatEmptyInputAsDefaultValue"/> property.
+            </param>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext.TreatEmptyInputAsDefaultValue">
+            <summary>
+            Gets a flag to indicate whether the input formatter should allow no value to be provided.
+            If <see langword="false"/>, the input formatter should handle empty input by returning
+            <see cref="M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult.NoValueAsync"/>. If <see langword="true"/>, the input
+            formatter should handle empty input by returning the default value for the type
+            <see cref="P:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext.ModelType"/>.
+            </summary>
+        </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext.HttpContext">
             <summary>
             Gets the <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> associated with the current operation.
@@ -1605,6 +1875,11 @@
         <member name="P:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult.HasError">
             <summary>
             Gets an indication whether the <see cref="M:Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)"/> operation had an error.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult.IsModelSet">
+            <summary>
+            Gets an indication whether a value for the <see cref="P:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult.Model"/> property was supplied.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult.Model">
@@ -1657,6 +1932,26 @@
             <see cref="M:Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)"/> operation succeeded i.e. with <see cref="P:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult.HasError"/> <c>false</c>.
             </returns>
         </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult.NoValue">
+            <summary>
+            Returns an <see cref="T:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult"/> indicating the <see cref="M:Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)"/>
+            operation produced no value.
+            </summary>
+            <returns>
+            An <see cref="T:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult"/> indicating the <see cref="M:Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)"/>
+            operation produced no value.
+            </returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult.NoValueAsync">
+            <summary>
+            Returns a <see cref="T:System.Threading.Tasks.Task"/> that on completion provides an <see cref="T:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult"/> indicating
+            the <see cref="M:Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)"/> operation produced no value.
+            </summary>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task"/> that on completion provides an <see cref="T:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult"/> indicating the
+            <see cref="M:Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)"/> operation produced no value.
+            </returns>
+        </member>
         <member name="T:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter">
             <summary>
             Writes an object to the output stream.
@@ -1682,6 +1977,28 @@
             A context object for <see cref="M:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter.CanWriteResult(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext)"/>.
             </summary>
         </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext.#ctor">
+            <summary>
+            <para>
+            This constructor is obsolete and will be removed in a future version.
+            Please use <see cref="M:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext.#ctor(Microsoft.AspNetCore.Http.HttpContext)"/> instead.
+            </para>
+            <para>
+            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext"/>.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext.#ctor(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext"/>.
+            </summary>
+            <param name="httpContext">The <see cref="P:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext.HttpContext"/> for the current request.</param>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext.HttpContext">
+            <summary>
+            Gets or sets the <see cref="P:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext.HttpContext"/> context associated with the current operation.
+            </summary>
+        </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext.ContentType">
             <summary>
             Gets or sets the content type to write to the response.
@@ -1692,6 +2009,14 @@
             and expect to see the same value provided in
             <see cref="M:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter.WriteAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)"/>
             </remarks>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext.ContentTypeIsServerDefined">
+            <summary>
+            Gets or sets a value to indicate whether the content type was specified by server-side code.
+            This allows <see cref="M:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter.CanWriteResult(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext)"/> to
+            implement stricter filtering on content types that, for example, are being considered purely
+            because of an incoming Accept header.
+            </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext.Object">
             <summary>
@@ -1717,15 +2042,115 @@
             <param name="objectType">The <see cref="T:System.Type"/> of the object to write to the response.</param>
             <param name="object">The object to write to the response.</param>
         </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext.HttpContext">
-            <summary>
-            Gets or sets the <see cref="P:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext.HttpContext"/> context associated with the current operation.
-            </summary>
-        </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext.WriterFactory">
             <summary>
-            Gets or sets a delegate used to create a <see cref="T:System.IO.TextWriter"/> for writing the response.
+            <para>
+            Gets or sets a delegate used to create a <see cref="T:System.IO.TextWriter"/> for writing text to the response.
+            </para>
+            <para>
+            Write to <see cref="P:Microsoft.AspNetCore.Http.HttpResponse.Body"/> directly to write binary data to the response.
+            </para>
             </summary>
+            <remarks>
+            <para>
+            The <see cref="T:System.IO.TextWriter"/> created by this delegate will encode text and write to the
+            <see cref="P:Microsoft.AspNetCore.Http.HttpResponse.Body"/> stream. Call this delegate to create a <see cref="T:System.IO.TextWriter"/>
+            for writing text output to the response stream.
+            </para>
+            <para>
+            To implement a formatter that writes binary data to the response stream, do not use the
+            <see cref="P:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext.WriterFactory"/> delegate, and use <see cref="P:Microsoft.AspNetCore.Http.HttpResponse.Body"/> instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.IActionResult">
+            <summary>
+            Defines a contract that represents the result of an action method.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.IActionResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            Executes the result operation of the action method asynchronously. This method is called by MVC to process
+            the result of an action method.
+            </summary>
+            <param name="context">The context in which the result is executed. The context information includes
+            information about the action that was executed and request information.</param>
+            <returns>A task that represents the asynchronous execute operation.</returns>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.IUrlHelper">
+            <summary>
+            Defines the contract for the helper to build URLs for ASP.NET MVC within an application.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.IUrlHelper.ActionContext">
+            <summary>
+            Gets the <see cref="P:Microsoft.AspNetCore.Mvc.IUrlHelper.ActionContext"/> for the current request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.IUrlHelper.Action(Microsoft.AspNetCore.Mvc.Routing.UrlActionContext)">
+            <summary>
+            Generates a URL with an absolute path for an action method, which contains the action
+            name, controller name, route values, protocol to use, host name, and fragment specified by
+            <see cref="T:Microsoft.AspNetCore.Mvc.Routing.UrlActionContext"/>. Generates an absolute URL if <see cref="P:Microsoft.AspNetCore.Mvc.Routing.UrlActionContext.Protocol"/> and
+            <see cref="P:Microsoft.AspNetCore.Mvc.Routing.UrlActionContext.Host"/> are non-<c>null</c>.
+            </summary>
+            <param name="actionContext">The context object for the generated URLs for an action method.</param>
+            <returns>The generated URL.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.IUrlHelper.Content(System.String)">
+            <summary>
+            Converts a virtual (relative) path to an application absolute path.
+            </summary>
+            <remarks>
+            If the specified content path does not start with the tilde (~) character,
+            this method returns <paramref name="contentPath"/> unchanged.
+            </remarks>
+            <param name="contentPath">The virtual path of the content.</param>
+            <returns>The application absolute path.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.IUrlHelper.IsLocalUrl(System.String)">
+            <summary>
+            Returns a value that indicates whether the URL is local. A URL is considered local if it does not have a
+            host / authority part and it has an absolute path. URLs using virtual paths ('~/') are also local.
+            </summary>
+            <param name="url">The URL.</param>
+            <returns><c>true</c> if the URL is local; otherwise, <c>false</c>.</returns>
+            <example>
+            <para>
+            For example, the following URLs are considered local:
+            <code>
+            /Views/Default/Index.html
+            ~/Index.html
+            </code>
+            </para>
+            <para>
+            The following URLs are non-local:
+            <code>
+            ../Index.html
+            http://www.contoso.com/
+            http://localhost/Index.html
+            </code>
+            </para>
+            </example>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.IUrlHelper.RouteUrl(Microsoft.AspNetCore.Mvc.Routing.UrlRouteContext)">
+            <summary>
+            Generates a URL with an absolute path, which contains the route name, route values, protocol to use, host
+            name, and fragment specified by <see cref="T:Microsoft.AspNetCore.Mvc.Routing.UrlRouteContext"/>. Generates an absolute URL if
+            <see cref="P:Microsoft.AspNetCore.Mvc.Routing.UrlActionContext.Protocol"/> and <see cref="P:Microsoft.AspNetCore.Mvc.Routing.UrlActionContext.Host"/> are non-<c>null</c>.
+            </summary>
+            <param name="routeContext">The context object for the generated URLs for a route.</param>
+            <returns>The generated URL.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.IUrlHelper.Link(System.String,System.Object)">
+            <summary>
+            Generates an absolute URL for the specified <paramref name="routeName"/> and route
+            <paramref name="values"/>, which contains the protocol (such as "http" or "https") and host name from the
+            current request.
+            </summary>
+            <param name="routeName">The name of the route that is used to generate URL.</param>
+            <param name="values">An object that contains route values.</param>
+            <returns>The generated absolute URL.</returns>
         </member>
         <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo">
             <summary>
@@ -1761,6 +2186,12 @@
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo.PropertyFilterProvider">
             <summary>
             Gets or sets the <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IPropertyFilterProvider"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo.RequestPredicate">
+            <summary>
+            Gets or sets a predicate which determines whether or not the model should be bound based on state
+            from the current request.
             </summary>
         </member>
         <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo.GetBindingInfo(System.Collections.Generic.IEnumerable{System.Object})">
@@ -1815,6 +2246,16 @@
         <member name="F:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.Services">
             <summary>
             A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource"/> for request services.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.Special">
+            <summary>
+            A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource"/> for special parameter types that are not user input.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.FormFile">
+            <summary>
+            A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource"/> for <see cref="T:Microsoft.AspNetCore.Http.IFormFile"/> and <see cref="T:Microsoft.AspNetCore.Http.IFormCollection"/>.
             </summary>
         </member>
         <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
@@ -1930,10 +2371,18 @@
         </member>
         <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.EnumGroupAndName.#ctor(System.String,System.String)">
             <summary>
-            Initializes a new instance of the EnumGroupAndName structure.
+            Initializes a new instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.EnumGroupAndName"/> structure. This constructor should 
+            not be used in any site where localization is important.
             </summary>
             <param name="group">The group name.</param>
             <param name="name">The name.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.EnumGroupAndName.#ctor(System.String,System.Func{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.EnumGroupAndName"/> structure.
+            </summary>
+            <param name="group">The group name.</param>
+            <param name="name">A <see cref="T:System.Func`1"/> which will return the name.</param>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.EnumGroupAndName.Group">
             <summary>
@@ -2026,6 +2475,18 @@
             Gets a predicate which can determines which model properties should be bound by model binding.
             </summary>
         </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.IRequestPredicateProvider">
+            <summary>
+            An interface that allows a top-level model to be bound or not bound based on state associated
+            with the current request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.IRequestPredicateProvider.RequestPredicate">
+            <summary>
+            Gets a function which determines whether or not the model object should be bound based
+            on the current request.
+            </summary>
+        </member>
         <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider">
             <summary>
             Defines the methods that are required for a value provider.
@@ -2058,6 +2519,160 @@
             <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> that when completed will add an <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider"/> instance
             to <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext.ValueProviders"/> list if applicable.</returns>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider">
+            <summary>
+            Provider for error messages the model binding system detects.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider.MissingBindRequiredValueAccessor">
+            <summary>
+            Error message the model binding system adds when a property with an associated
+            <c>BindRequiredAttribute</c> is not bound.
+            </summary>
+            <value>Default <see cref="T:System.String"/> is "A value for the '{0}' property was not provided.".</value>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider.MissingKeyOrValueAccessor">
+            <summary>
+            Error message the model binding system adds when either the key or the value of a
+            <see cref="T:System.Collections.Generic.KeyValuePair`2"/> is bound but not both.
+            </summary>
+            <value>Default <see cref="T:System.String"/> is "A value is required.".</value>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider.MissingRequestBodyRequiredValueAccessor">
+            <summary>
+            Error message the model binding system adds when no value is provided for the request body,
+            but a value is required.
+            </summary>
+            <value>Default <see cref="T:System.String"/> is "A non-empty request body is required.".</value>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor">
+            <summary>
+            Error message the model binding system adds when a <c>null</c> value is bound to a
+            non-<see cref="T:System.Nullable"/> property.
+            </summary>
+            <value>Default <see cref="T:System.String"/> is "The value '{0}' is invalid.".</value>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider.AttemptedValueIsInvalidAccessor">
+            <summary>
+            Error message the model binding system adds when <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelError.Exception"/> is of type
+            <see cref="T:System.FormatException"/> or <see cref="T:System.OverflowException"/>, value is known, and error is associated
+            with a property.
+            </summary>
+            <value>Default <see cref="T:System.String"/> is "The value '{0}' is not valid for {1}.".</value>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider.NonPropertyAttemptedValueIsInvalidAccessor">
+            <summary>
+            Error message the model binding system adds when <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelError.Exception"/> is of type
+            <see cref="T:System.FormatException"/> or <see cref="T:System.OverflowException"/>, value is known, and error is associated
+            with a collection element or action parameter.
+            </summary>
+            <value>Default <see cref="T:System.String"/> is "The value '{0}' is not valid.".</value>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider.UnknownValueIsInvalidAccessor">
+            <summary>
+            Error message the model binding system adds when <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelError.Exception"/> is of type
+            <see cref="T:System.FormatException"/> or <see cref="T:System.OverflowException"/>, value is unknown, and error is associated
+            with a property.
+            </summary>
+            <value>Default <see cref="T:System.String"/> is "The supplied value is invalid for {0}.".</value>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider.NonPropertyUnknownValueIsInvalidAccessor">
+            <summary>
+            Error message the model binding system adds when <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelError.Exception"/> is of type
+            <see cref="T:System.FormatException"/> or <see cref="T:System.OverflowException"/>, value is unknown, and error is associated
+            with a collection element or action parameter.
+            </summary>
+            <value>Default <see cref="T:System.String"/> is "The supplied value is invalid.".</value>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider.ValueIsInvalidAccessor">
+            <summary>
+            Fallback error message HTML and tag helpers display when a property is invalid but the
+            <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelError"/>s have <c>null</c> <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelError.ErrorMessage"/>s.
+            </summary>
+            <value>Default <see cref="T:System.String"/> is "The value '{0}' is invalid.".</value>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider.ValueMustBeANumberAccessor">
+            <summary>
+            Error message HTML and tag helpers add for client-side validation of numeric formats. Visible in the
+            browser if the field for a <c>float</c> (for example) property does not have a correctly-formatted value.
+            </summary>
+            <value>Default <see cref="T:System.String"/> is "The field {0} must be a number.".</value>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider.NonPropertyValueMustBeANumberAccessor">
+            <summary>
+            Error message HTML and tag helpers add for client-side validation of numeric formats. Visible in the
+            browser if the field for a <c>float</c> (for example) collection element or action parameter does not have a
+            correctly-formatted value.
+            </summary>
+            <value>Default <see cref="T:System.String"/> is "The field must be a number.".</value>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity">
+            <summary>
+            A key type which identifies a <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.ForType(System.Type)">
+            <summary>
+            Creates a <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity"/> for the provided model <see cref="T:System.Type"/>.
+            </summary>
+            <param name="modelType">The model <see cref="T:System.Type"/>.</param>
+            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity"/>.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.ForProperty(System.Type,System.String,System.Type)">
+            <summary>
+            Creates a <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity"/> for the provided property.
+            </summary>
+            <param name="modelType">The model type.</param>
+            <param name="name">The name of the property.</param>
+            <param name="containerType">The container type of the model property.</param>
+            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity"/>.</returns>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.ContainerType">
+            <summary>
+            Gets the <see cref="T:System.Type"/> defining the model property respresented by the current
+            instance, or <c>null</c> if the current instance does not represent a property.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.ModelType">
+            <summary>
+            Gets the <see cref="T:System.Type"/> represented by the current instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.MetadataKind">
+            <summary>
+            Gets a value indicating the kind of metadata represented by the current instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.Name">
+            <summary>
+            Gets the name of the current instance if it represents a parameter or property, or <c>null</c> if
+            the current instance represents a type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.Equals(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataKind">
+            <summary>
+            Enumeration for the kinds of <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataKind.Type">
+            <summary>
+            Used for <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/> for a <see cref="T:System.Type"/>.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataKind.Property">
+            <summary>
+            Used for <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/> for a property.
+            </summary>
         </member>
         <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderProviderContext">
             <summary>
@@ -2319,6 +2934,11 @@
             Gets the container type of this metadata if it represents a property, otherwise <c>null</c>.
             </summary>
         </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.ContainerMetadata">
+            <summary>
+            Gets the metadata of the container type that the current instance is part of.
+            </summary>
+        </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.MetadataKind">
             <summary>
             Gets a value indicating the kind of metadata element represented by the current instance.
@@ -2367,8 +2987,8 @@
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.ConvertEmptyStringToNull">
             <summary>
-            Gets a value indicating whether or not to convert an empty string value to <c>null</c> when
-            representing a model as text.
+            Gets a value indicating whether or not to convert an empty string value or one containing only whitespace
+            characters to <c>null</c> when representing a model as text.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.DataTypeName">
@@ -2385,8 +3005,8 @@
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.DisplayFormatString">
             <summary>
-            Gets the composite format <see cref="T:System.String"/> (see
-            http://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to display the model.
+            Gets the format string (see https://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to display the
+            model.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.DisplayName">
@@ -2396,8 +3016,7 @@
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.EditFormatString">
             <summary>
-            Gets the composite format <see cref="T:System.String"/> (see
-            http://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to edit the model.
+            Gets the format string (see https://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to edit the model.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.ElementMetadata">
@@ -2518,7 +3137,7 @@
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.ModelBindingMessageProvider">
             <summary>
-            Gets the <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.IModelBindingMessageProvider"/> instance.
+            Gets the <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelBindingMessageProvider"/> instance.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.Order">
@@ -2567,6 +3186,13 @@
             <summary>
             Gets a string used by the templating system to discover display-templates and editor-templates.
             </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.PropertyValidationFilter">
+            <summary>
+            Gets an <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IPropertyValidationFilter"/> implementation that indicates whether this model should be
+            validated. If <c>null</c>, properties with this <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/> are validated.
+            </summary>
+            <value>Defaults to <c>null</c>.</value>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.ValidateChildren">
             <summary>
@@ -2656,6 +3282,12 @@
             <inheritdoc />
         </member>
         <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.GetMetadataForType(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.GetMetadataForProperties(System.Type)">
             <inheritdoc />
         </member>
         <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelPropertyCollection">
@@ -2890,7 +3522,7 @@
         </member>
         <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.Clear">
             <summary>
-            Removes all keys and values from ths instance of <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary"/>.
+            Removes all keys and values from this instance of <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary"/>.
             </summary>
         </member>
         <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.ContainsKey(System.String)">
@@ -2976,259 +3608,6 @@
             exception <paramref name="message"/>.
             </summary>
             <param name="message">The message that describes the error.</param>
-        </member>
-        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext">
-            <summary>
-            A context for <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory"/>.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext.#ctor(Microsoft.AspNetCore.Mvc.ActionContext)">
-            <summary>
-            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext"/>.
-            </summary>
-            <param name="context">The <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext.ActionContext"/>.</param>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext.ActionContext">
-            <summary>
-            Gets the <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext.ActionContext"/> associated with this context.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext.ValueProviders">
-            <summary>
-            Gets the list of <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider"/> instances.
-            <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory"/> instances should add the appropriate
-            <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider"/> instances to this list.
-            </summary>
-        </member>
-        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult">
-            <summary>
-            Result of an <see cref="M:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.GetValue(System.String)"/> operation.
-            </summary>
-            <remarks>
-            <para>
-            <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> can represent a single submitted value or multiple submitted values.
-            </para>
-            <para>
-            Use <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.FirstValue"/> to consume only a single value, regardless of whether a single value or
-            multiple values were submitted.
-            </para>
-            <para>
-            Treat <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> as an <see cref="T:System.Collections.Generic.IEnumerable`1"/> to consume all values,
-            regardless of whether a single value or multiple values were submitted.
-            </para>
-            </remarks>
-        </member>
-        <member name="F:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.None">
-            <summary>
-            A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> that represents a lack of data.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.#ctor(Microsoft.Extensions.Primitives.StringValues)">
-            <summary>
-            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> using <see cref="P:System.Globalization.CultureInfo.InvariantCulture"/>.
-            </summary>
-            <param name="values">The submitted values.</param>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.#ctor(Microsoft.Extensions.Primitives.StringValues,System.Globalization.CultureInfo)">
-            <summary>
-            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.
-            </summary>
-            <param name="values">The submitted values.</param>
-            <param name="culture">The <see cref="T:System.Globalization.CultureInfo"/> associated with this value.</param>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.Culture">
-            <summary>
-            Gets or sets the <see cref="T:System.Globalization.CultureInfo"/> associated with the values.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.Values">
-            <summary>
-            Gets or sets the values.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.FirstValue">
-            <summary>
-            Gets the first value based on the order values were provided in the request. Use <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.FirstValue"/>
-            to get a single value for processing regardless of whether a single or multiple values were provided
-            in the request.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.Length">
-            <summary>
-            Gets the number of submitted values.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.Equals(System.Object)">
-            <inheritdoc />
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.Equals(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult)">
-            <inheritdoc />
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.GetHashCode">
-            <inheritdoc />
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.ToString">
-            <inheritdoc />
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.GetEnumerator">
-            <summary>
-            Gets an <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.
-            </summary>
-            <returns>An <see cref="T:System.Collections.Generic.IEnumerator`1"/>.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.System#Collections#IEnumerable#GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.op_Explicit(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult)~System.String">
-            <summary>
-            Converts the provided <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> into a comma-separated string containing all
-            submitted values.
-            </summary>
-            <param name="result">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.op_Explicit(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult)~System.String[]">
-            <summary>
-            Converts the provided <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> into a an array of <see cref="T:System.String"/> containing
-            all submitted values.
-            </summary>
-            <param name="result">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.op_Equality(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult,Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult)">
-            <summary>
-            Compares two <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> objects for equality.
-            </summary>
-            <param name="x">A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
-            <param name="y">A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
-            <returns><c>true</c> if the values are equal, otherwise <c>false</c>.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.op_Inequality(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult,Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult)">
-            <summary>
-            Compares two <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> objects for inequality.
-            </summary>
-            <param name="x">A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
-            <param name="y">A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
-            <returns><c>false</c> if the values are equal, otherwise <c>true</c>.</returns>
-        </member>
-        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.IModelBindingMessageProvider">
-            <summary>
-            Provider for error messages the model binding system detects.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.IModelBindingMessageProvider.MissingBindRequiredValueAccessor">
-            <summary>
-            Error message the model binding system adds when a property with an associated
-            <c>BindRequiredAttribute</c> is not bound.
-            </summary>
-            <value>Default <see cref="T:System.String"/> is "A value for the '{0}' property was not provided.".</value>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.IModelBindingMessageProvider.MissingKeyOrValueAccessor">
-            <summary>
-            Error message the model binding system adds when either the key or the value of a
-            <see cref="T:System.Collections.Generic.KeyValuePair`2"/> is bound but not both.
-            </summary>
-            <value>Default <see cref="T:System.String"/> is "A value is required.".</value>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.IModelBindingMessageProvider.ValueMustNotBeNullAccessor">
-            <summary>
-            Error message the model binding system adds when a <c>null</c> value is bound to a
-            non-<see cref="T:System.Nullable"/> property.
-            </summary>
-            <value>Default <see cref="T:System.String"/> is "The value '{0}' is invalid.".</value>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.IModelBindingMessageProvider.AttemptedValueIsInvalidAccessor">
-            <summary>
-            Error message the model binding system adds when <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelError.Exception"/> is of type
-            <see cref="T:System.FormatException"/> or <see cref="T:System.OverflowException"/> and value is known.
-            </summary>
-            <value>Default <see cref="T:System.String"/> is "The value '{0}' is not valid for {1}.".</value>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.IModelBindingMessageProvider.UnknownValueIsInvalidAccessor">
-            <summary>
-            Error message the model binding system adds when <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelError.Exception"/> is of type
-            <see cref="T:System.FormatException"/> or <see cref="T:System.OverflowException"/> and value is unknown.
-            </summary>
-            <value>Default <see cref="T:System.String"/> is "The supplied value is invalid for {0}.".</value>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.IModelBindingMessageProvider.ValueIsInvalidAccessor">
-            <summary>
-            Fallback error message HTML and tag helpers display when a property is invalid but the
-            <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelError"/>s have <c>null</c> <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelError.ErrorMessage"/>s.
-            </summary>
-            <value>Default <see cref="T:System.String"/> is "The value '{0}' is invalid.".</value>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.IModelBindingMessageProvider.ValueMustBeANumberAccessor">
-            <summary>
-            Error message HTML and tag helpers add for client-side validation of numeric formats. Visible in the
-            browser if the field for a <c>float</c> property (for example) does not have a correctly-formatted value.
-            </summary>
-            <value>Default <see cref="T:System.String"/> is "The field {0} must be a number.".</value>
-        </member>
-        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity">
-            <summary>
-            A key type which identifies a <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/>.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.ForType(System.Type)">
-            <summary>
-            Creates a <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity"/> for the provided model <see cref="T:System.Type"/>.
-            </summary>
-            <param name="modelType">The model <see cref="T:System.Type"/>.</param>
-            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity"/>.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.ForProperty(System.Type,System.String,System.Type)">
-            <summary>
-            Creates a <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity"/> for the provided property.
-            </summary>
-            <param name="modelType">The model type.</param>
-            <param name="name">The name of the property.</param>
-            <param name="containerType">The container type of the model property.</param>
-            <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity"/>.</returns>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.ContainerType">
-            <summary>
-            Gets the <see cref="T:System.Type"/> defining the model property respresented by the current
-            instance, or <c>null</c> if the current instance does not represent a property.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.ModelType">
-            <summary>
-            Gets the <see cref="T:System.Type"/> represented by the current instance.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.MetadataKind">
-            <summary>
-            Gets a value indicating the kind of metadata represented by the current instance.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.Name">
-            <summary>
-            Gets the name of the current instance if it represents a parameter or property, or <c>null</c> if
-            the current instance represents a type.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.Equals(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)">
-            <inheritdoc />
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.Equals(System.Object)">
-            <inheritdoc />
-        </member>
-        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity.GetHashCode">
-            <inheritdoc />
-        </member>
-        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataKind">
-            <summary>
-            Enumeration for the kinds of <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/>
-            </summary>
-        </member>
-        <member name="F:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataKind.Type">
-            <summary>
-            Used for <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/> for a <see cref="T:System.Type"/>.
-            </summary>
-        </member>
-        <member name="F:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataKind.Property">
-            <summary>
-            Used for <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/> for a property.
-            </summary>
         </member>
         <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext">
             <summary>
@@ -3359,6 +3738,22 @@
             <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidatorProviderContext.Results"/>.
             </remarks>
         </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IPropertyValidationFilter">
+            <summary>
+            Contract for attributes that determine whether associated properties should be validated. When the attribute is
+            applied to a property, the validation system calls <see cref="M:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IPropertyValidationFilter.ShouldValidateEntry(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry,Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry)"/> to determine whether to
+            validate that property. When applied to a type, the validation system calls <see cref="M:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IPropertyValidationFilter.ShouldValidateEntry(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry,Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry)"/>
+            for each property that type defines to determine whether to validate it.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IPropertyValidationFilter.ShouldValidateEntry(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry,Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry)">
+            <summary>
+            Gets an indication whether the <paramref name="entry"/> should be validated.
+            </summary>
+            <param name="entry"><see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry"/> to check.</param>
+            <param name="parentEntry"><see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry"/> containing <paramref name="entry"/>.</param>
+            <returns><c>true</c> if <paramref name="entry"/> should be validated; <c>false</c> otherwise.</returns>
+        </member>
         <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy">
             <summary>
             Defines a strategy for enumerating the child entries of a model object which should be validated.
@@ -3472,6 +3867,14 @@
             <param name="metadata">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/> associated with <paramref name="model"/>.</param>
             <param name="key">The model prefix associated with <paramref name="model"/>.</param>
             <param name="model">The model object.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Func{System.Object})">
+            <summary>
+            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry"/>.
+            </summary>
+            <param name="metadata">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata"/> associated with the <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry.Model"/>.</param>
+            <param name="key">The model prefix associated with the <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry.Model"/>.</param>
+            <param name="modelAccessor">A delegate that will return the <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry.Model"/>.</param>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry.Key">
             <summary>
@@ -3613,6 +4016,138 @@
             Gets or sets a value indicating whether or not <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidatorItem.Validator"/> can be reused across requests.
             </summary>
         </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext">
+            <summary>
+            A context for <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext.#ctor(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext"/>.
+            </summary>
+            <param name="context">The <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext.ActionContext"/>.</param>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext.ActionContext">
+            <summary>
+            Gets the <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext.ActionContext"/> associated with this context.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderFactoryContext.ValueProviders">
+            <summary>
+            Gets the list of <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider"/> instances.
+            <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory"/> instances should add the appropriate
+            <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider"/> instances to this list.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult">
+            <summary>
+            Result of an <see cref="M:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.GetValue(System.String)"/> operation.
+            </summary>
+            <remarks>
+            <para>
+            <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> can represent a single submitted value or multiple submitted values.
+            </para>
+            <para>
+            Use <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.FirstValue"/> to consume only a single value, regardless of whether a single value or
+            multiple values were submitted.
+            </para>
+            <para>
+            Treat <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> as an <see cref="T:System.Collections.Generic.IEnumerable`1"/> to consume all values,
+            regardless of whether a single value or multiple values were submitted.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.None">
+            <summary>
+            A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> that represents a lack of data.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.#ctor(Microsoft.Extensions.Primitives.StringValues)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> using <see cref="P:System.Globalization.CultureInfo.InvariantCulture"/>.
+            </summary>
+            <param name="values">The submitted values.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.#ctor(Microsoft.Extensions.Primitives.StringValues,System.Globalization.CultureInfo)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.
+            </summary>
+            <param name="values">The submitted values.</param>
+            <param name="culture">The <see cref="T:System.Globalization.CultureInfo"/> associated with this value.</param>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.Culture">
+            <summary>
+            Gets or sets the <see cref="T:System.Globalization.CultureInfo"/> associated with the values.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.Values">
+            <summary>
+            Gets or sets the values.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.FirstValue">
+            <summary>
+            Gets the first value based on the order values were provided in the request. Use <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.FirstValue"/>
+            to get a single value for processing regardless of whether a single or multiple values were provided
+            in the request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.Length">
+            <summary>
+            Gets the number of submitted values.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.Equals(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.ToString">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.GetEnumerator">
+            <summary>
+            Gets an <see cref="T:System.Collections.Generic.IEnumerator`1"/> for this <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerator`1"/>.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.op_Explicit(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult)~System.String">
+            <summary>
+            Converts the provided <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> into a comma-separated string containing all
+            submitted values.
+            </summary>
+            <param name="result">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.op_Explicit(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult)~System.String[]">
+            <summary>
+            Converts the provided <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> into a an array of <see cref="T:System.String"/> containing
+            all submitted values.
+            </summary>
+            <param name="result">The <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.op_Equality(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult,Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult)">
+            <summary>
+            Compares two <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> objects for equality.
+            </summary>
+            <param name="x">A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
+            <param name="y">A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
+            <returns><c>true</c> if the values are equal, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult.op_Inequality(Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult,Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult)">
+            <summary>
+            Compares two <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/> objects for inequality.
+            </summary>
+            <param name="x">A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
+            <param name="y">A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult"/>.</param>
+            <returns><c>false</c> if the values are equal, otherwise <c>true</c>.</returns>
+        </member>
         <member name="T:Microsoft.AspNetCore.Mvc.Routing.AttributeRouteInfo">
             <summary>
             Represents the routing information for an action that is attribute routed.
@@ -3637,6 +4172,16 @@
             route by provided route data.
             </summary>
         </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.Routing.AttributeRouteInfo.SuppressLinkGeneration">
+            <summary>
+            Gets or sets a value that determines if the route entry associated with this model participates in link generation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Mvc.Routing.AttributeRouteInfo.SuppressPathMatching">
+            <summary>
+            Gets or sets a value that determines if the route entry associated with this model participates in path matching (inbound routing).
+            </summary>
+        </member>
         <member name="T:Microsoft.AspNetCore.Mvc.Routing.UrlActionContext">
             <summary>
             Context object to be used for the URLs that <see cref="M:Microsoft.AspNetCore.Mvc.IUrlHelper.Action(Microsoft.AspNetCore.Mvc.Routing.UrlActionContext)"/> generates.
@@ -3654,13 +4199,13 @@
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Routing.UrlActionContext.Values">
             <summary>
-            The object that contains the route parameters that <see cref="M:Microsoft.AspNetCore.Mvc.IUrlHelper.Action(Microsoft.AspNetCore.Mvc.Routing.UrlActionContext)"/>
+            The object that contains the route values that <see cref="M:Microsoft.AspNetCore.Mvc.IUrlHelper.Action(Microsoft.AspNetCore.Mvc.Routing.UrlActionContext)"/>
             uses to generate URLs.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Routing.UrlActionContext.Protocol">
             <summary>
-            The protocol for the URLs that <see cref="M:Microsoft.AspNetCore.Mvc.IUrlHelper.Action(Microsoft.AspNetCore.Mvc.Routing.UrlActionContext)"/> generates
+            The protocol for the URLs that <see cref="M:Microsoft.AspNetCore.Mvc.IUrlHelper.Action(Microsoft.AspNetCore.Mvc.Routing.UrlActionContext)"/> generates,
             such as "http" or "https"
             </summary>
         </member>
@@ -3686,12 +4231,13 @@
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Routing.UrlRouteContext.Values">
             <summary>
-            The object that contains the route values for the generated URLs.
+            The object that contains the route values that <see cref="M:Microsoft.AspNetCore.Mvc.IUrlHelper.RouteUrl(Microsoft.AspNetCore.Mvc.Routing.UrlRouteContext)"/>
+            uses to generate URLs.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Mvc.Routing.UrlRouteContext.Protocol">
             <summary>
-            The protocol for the URLs that <see cref="M:Microsoft.AspNetCore.Mvc.IUrlHelper.RouteUrl(Microsoft.AspNetCore.Mvc.Routing.UrlRouteContext)"/> generates
+            The protocol for the URLs that <see cref="M:Microsoft.AspNetCore.Mvc.IUrlHelper.RouteUrl(Microsoft.AspNetCore.Mvc.Routing.UrlRouteContext)"/> generates,
             such as "http" or "https"
             </summary>
         </member>

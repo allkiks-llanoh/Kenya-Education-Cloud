@@ -7,7 +7,7 @@
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.#ctor(System.Reflection.PropertyInfo)">
             <summary>
             Initializes a fast <see cref="T:Microsoft.Extensions.Internal.PropertyHelper"/>.
-            This constructor does not cache the helper. For caching, use <see cref="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Object)"/>.
+            This constructor does not cache the helper. For caching, use <see cref="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Type)"/>.
             </summary>
         </member>
         <member name="P:Microsoft.Extensions.Internal.PropertyHelper.Property">
@@ -44,13 +44,13 @@
             <param name="instance">The object whose property value will be set.</param>
             <param name="value">The property value.</param>
         </member>
-        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Object)">
+        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Reflection.TypeInfo)">
             <summary>
             Creates and caches fast property helpers that expose getters for every public get property on the
             underlying type.
             </summary>
-            <param name="instance">the instance to extract property accessors for.</param>
-            <returns>a cached array of all public property getters from the underlying type of target instance.
+            <param name="typeInfo">The type info to extract property accessors for.</param>
+            <returns>A cached array of all public properties of the specified type.
             </returns>
         </member>
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Type)">
@@ -58,11 +58,11 @@
             Creates and caches fast property helpers that expose getters for every public get property on the
             specified type.
             </summary>
-            <param name="type">the type to extract property accessors for.</param>
-            <returns>a cached array of all public property getters from the type of target instance.
+            <param name="type">The type to extract property accessors for.</param>
+            <returns>A cached array of all public properties of the specified type.
             </returns>
         </member>
-        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetVisibleProperties(System.Object)">
+        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetVisibleProperties(System.Reflection.TypeInfo)">
             <summary>
             <para>
             Creates and caches fast property helpers that expose getters for every non-hidden get property
@@ -73,9 +73,9 @@
             hidden by definitions using the <c>new</c> keyword.
             </para>
             </summary>
-            <param name="instance">The instance to extract property accessors for.</param>
+            <param name="typeInfo">The type info to extract property accessors for.</param>
             <returns>
-            A cached array of all public property getters from the instance's type.
+            A cached array of all public properties of the specified type.
             </returns>
         </member>
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetVisibleProperties(System.Type)">
@@ -91,7 +91,7 @@
             </summary>
             <param name="type">The type to extract property accessors for.</param>
             <returns>
-            A cached array of all public property getters from the type.
+            A cached array of all public properties of the specified type.
             </returns>
         </member>
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.MakeFastPropertyGetter(System.Reflection.PropertyInfo)">
@@ -184,6 +184,26 @@
         <member name="P:Microsoft.AspNetCore.Routing.IRoutingFeature.RouteData">
             <summary>
             Gets or sets the <see cref="T:Microsoft.AspNetCore.Routing.RouteData"/> associated with the current request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Routing.Abstractions.Resources.RouteValueDictionary_DuplicateKey">
+            <summary>
+            An element with the key '{0}' already exists in the {1}.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.Abstractions.Resources.FormatRouteValueDictionary_DuplicateKey(System.Object,System.Object)">
+            <summary>
+            An element with the key '{0}' already exists in the {1}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Routing.Abstractions.Resources.RouteValueDictionary_DuplicatePropertyName">
+            <summary>
+            The type '{0}' defines properties '{1}' and '{2}' which differ only by casing. This is not supported by {3} which uses case-insensitive comparisons.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.Abstractions.Resources.FormatRouteValueDictionary_DuplicatePropertyName(System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            The type '{0}' defines properties '{1}' and '{2}' which differ only by casing. This is not supported by {3} which uses case-insensitive comparisons.
             </summary>
         </member>
         <member name="T:Microsoft.AspNetCore.Routing.RouteContext">
@@ -486,26 +506,6 @@
         <member name="P:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath">
             <summary>
             Gets or sets the URL that was generated from the <see cref="P:Microsoft.AspNetCore.Routing.VirtualPathData.Router"/>.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Routing.Abstractions.Resources.RouteValueDictionary_DuplicateKey">
-            <summary>
-            An element with the key '{0}' already exists in the {1}.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.Abstractions.Resources.FormatRouteValueDictionary_DuplicateKey(System.Object,System.Object)">
-            <summary>
-            An element with the key '{0}' already exists in the {1}.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Routing.Abstractions.Resources.RouteValueDictionary_DuplicatePropertyName">
-            <summary>
-            The type '{0}' defines properties '{1}' and '{2}' which differ only by casing. This is not supported by {3} which uses case-insensitive comparisons.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.Abstractions.Resources.FormatRouteValueDictionary_DuplicatePropertyName(System.Object,System.Object,System.Object,System.Object)">
-            <summary>
-            The type '{0}' defines properties '{1}' and '{2}' which differ only by casing. This is not supported by {3} which uses case-insensitive comparisons.
             </summary>
         </member>
     </members>

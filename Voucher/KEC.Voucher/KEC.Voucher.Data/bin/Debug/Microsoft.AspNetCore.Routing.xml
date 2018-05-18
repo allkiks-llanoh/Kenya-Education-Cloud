@@ -7,7 +7,7 @@
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.#ctor(System.Reflection.PropertyInfo)">
             <summary>
             Initializes a fast <see cref="T:Microsoft.Extensions.Internal.PropertyHelper"/>.
-            This constructor does not cache the helper. For caching, use <see cref="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Object)"/>.
+            This constructor does not cache the helper. For caching, use <see cref="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Type)"/>.
             </summary>
         </member>
         <member name="P:Microsoft.Extensions.Internal.PropertyHelper.Property">
@@ -44,13 +44,13 @@
             <param name="instance">The object whose property value will be set.</param>
             <param name="value">The property value.</param>
         </member>
-        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Object)">
+        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Reflection.TypeInfo)">
             <summary>
             Creates and caches fast property helpers that expose getters for every public get property on the
             underlying type.
             </summary>
-            <param name="instance">the instance to extract property accessors for.</param>
-            <returns>a cached array of all public property getters from the underlying type of target instance.
+            <param name="typeInfo">The type info to extract property accessors for.</param>
+            <returns>A cached array of all public properties of the specified type.
             </returns>
         </member>
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetProperties(System.Type)">
@@ -58,11 +58,11 @@
             Creates and caches fast property helpers that expose getters for every public get property on the
             specified type.
             </summary>
-            <param name="type">the type to extract property accessors for.</param>
-            <returns>a cached array of all public property getters from the type of target instance.
+            <param name="type">The type to extract property accessors for.</param>
+            <returns>A cached array of all public properties of the specified type.
             </returns>
         </member>
-        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetVisibleProperties(System.Object)">
+        <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetVisibleProperties(System.Reflection.TypeInfo)">
             <summary>
             <para>
             Creates and caches fast property helpers that expose getters for every non-hidden get property
@@ -73,9 +73,9 @@
             hidden by definitions using the <c>new</c> keyword.
             </para>
             </summary>
-            <param name="instance">The instance to extract property accessors for.</param>
+            <param name="typeInfo">The type info to extract property accessors for.</param>
             <returns>
-            A cached array of all public property getters from the instance's type.
+            A cached array of all public properties of the specified type.
             </returns>
         </member>
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.GetVisibleProperties(System.Type)">
@@ -91,7 +91,7 @@
             </summary>
             <param name="type">The type to extract property accessors for.</param>
             <returns>
-            A cached array of all public property getters from the type.
+            A cached array of all public properties of the specified type.
             </returns>
         </member>
         <member name="M:Microsoft.Extensions.Internal.PropertyHelper.MakeFastPropertyGetter(System.Reflection.PropertyInfo)">
@@ -159,287 +159,6 @@
             <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add the services to.</param>
             <param name="configureOptions">The routing options to configure the middleware with.</param>
             <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> so that additional calls can be chained.</returns>
-        </member>
-        <member name="T:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver">
-            <summary>
-            The default implementation of <see cref="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver"/>. Resolves constraints by parsing
-            a constraint key and constraint arguments, using a map to resolve the constraint type, and calling an
-            appropriate constructor for the constraint type.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Routing.RouteOptions})">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver"/> class.
-            </summary>
-            <param name="routeOptions">
-            Accessor for <see cref="T:Microsoft.AspNetCore.Routing.RouteOptions"/> containing the constraints of interest.
-            </param>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.ResolveConstraint(System.String)">
-            <inheritdoc />
-            <example>
-            A typical constraint looks like the following
-            "exampleConstraint(arg1, arg2, 12)".
-            Here if the type registered for exampleConstraint has a single constructor with one argument,
-            The entire string "arg1, arg2, 12" will be treated as a single argument.
-            In all other cases arguments are split at comma.
-            </example>
-        </member>
-        <member name="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver">
-            <summary>
-            Defines an abstraction for resolving inline constraints as instances of <see cref="T:Microsoft.AspNetCore.Routing.IRouteConstraint"/>.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.IInlineConstraintResolver.ResolveConstraint(System.String)">
-            <summary>
-            Resolves the inline constraint.
-            </summary>
-            <param name="inlineConstraint">The inline constraint to resolve.</param>
-            <returns>The <see cref="T:Microsoft.AspNetCore.Routing.IRouteConstraint"/> the inline constraint was resolved to.</returns>
-        </member>
-        <member name="T:Microsoft.AspNetCore.Routing.IRouteBuilder">
-            <summary>
-            Defines a contract for a route builder in an application. A route builder specifies the routes for
-            an application.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Routing.IRouteBuilder.ApplicationBuilder">
-            <summary>
-            Gets the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Routing.IRouteBuilder.DefaultHandler">
-            <summary>
-            Gets or sets the default <see cref="T:Microsoft.AspNetCore.Routing.IRouter"/> that is used as a handler if an <see cref="T:Microsoft.AspNetCore.Routing.IRouter"/>
-            is added to the list of routes but does not specify its own.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Routing.IRouteBuilder.ServiceProvider">
-            <summary>
-            Gets the sets the <see cref="T:System.IServiceProvider"/> used to resolve services for routes.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Routing.IRouteBuilder.Routes">
-            <summary>
-            Gets the routes configured in the builder.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.IRouteBuilder.Build">
-            <summary>
-            Builds an <see cref="T:Microsoft.AspNetCore.Routing.IRouter"/> that routes the routes specified in the <see cref="P:Microsoft.AspNetCore.Routing.IRouteBuilder.Routes"/> property.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> for the given <paramref name="template"/>, and
-            <paramref name="handler"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="template">The route template.</param>
-            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> for the given <paramref name="template"/>, and
-            <paramref name="action"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="template">The route template.</param>
-            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapDelete(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP DELETE requests for the given
-            <paramref name="template"/>, and <paramref name="handler"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="template">The route template.</param>
-            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapDelete(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP DELETE requests for the given
-            <paramref name="template"/>, and <paramref name="action"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="template">The route template.</param>
-            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP GET requests for the given
-            <paramref name="template"/>, and <paramref name="handler"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="template">The route template.</param>
-            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP GET requests for the given
-            <paramref name="template"/>, and <paramref name="action"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="template">The route template.</param>
-            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapPost(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP POST requests for the given
-            <paramref name="template"/>, and <paramref name="handler"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="template">The route template.</param>
-            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapPost(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP POST requests for the given
-            <paramref name="template"/>, and <paramref name="action"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="template">The route template.</param>
-            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapPut(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP PUT requests for the given
-            <paramref name="template"/>, and <paramref name="handler"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="template">The route template.</param>
-            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapPut(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP PUT requests for the given
-            <paramref name="template"/>, and <paramref name="action"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="template">The route template.</param>
-            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP requests for the given
-            <paramref name="verb"/>, <paramref name="template"/>, and <paramref name="handler"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="verb">The HTTP verb allowed by the route.</param>
-            <param name="template">The route template.</param>
-            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
-            <summary>
-            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP requests for the given
-            <paramref name="verb"/>, <paramref name="template"/>, and <paramref name="action"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
-            <param name="verb">The HTTP verb allowed by the route.</param>
-            <param name="template">The route template.</param>
-            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
-            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RouteBase.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)">
-            <inheritdoc />
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)">
-            <inheritdoc />
-        </member>
-        <member name="T:Microsoft.AspNetCore.Routing.RouteConstraintBuilder">
-            <summary>
-            A builder for produding a mapping of keys to see <see cref="T:Microsoft.AspNetCore.Routing.IRouteConstraint"/>.
-            </summary>
-            <remarks>
-            <see cref="T:Microsoft.AspNetCore.Routing.RouteConstraintBuilder"/> allows iterative building a set of route constraints, and will
-            merge multiple entries for the same key.
-            </remarks>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RouteConstraintBuilder.#ctor(Microsoft.AspNetCore.Routing.IInlineConstraintResolver,System.String)">
-            <summary>
-            Creates a new <see cref="T:Microsoft.AspNetCore.Routing.RouteConstraintBuilder"/> instance.
-            </summary>
-            <param name="inlineConstraintResolver">The <see cref="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver"/>.</param>
-            <param name="displayName">The display name (for use in error messages).</param>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RouteConstraintBuilder.Build">
-            <summary>
-            Builds a mapping of constraints.
-            </summary>
-            <returns>An <see cref="T:System.Collections.Generic.IDictionary`2"/> of the constraints.</returns>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RouteConstraintBuilder.AddConstraint(System.String,System.Object)">
-             <summary>
-             Adds a constraint instance for the given key.
-             </summary>
-             <param name="key">The key.</param>
-             <param name="value">
-             The constraint instance. Must either be a string or an instance of <see cref="T:Microsoft.AspNetCore.Routing.IRouteConstraint"/>.
-             </param>
-             <remarks>
-             If the <paramref name="value"/> is a string, it will be converted to a <see cref="T:Microsoft.AspNetCore.Routing.Constraints.RegexRouteConstraint"/>.
-            
-             For example, the string <code>Product[0-9]+</code> will be converted to the regular expression
-             <code>^(Product[0-9]+)</code>. See <see cref="T:System.Text.RegularExpressions.Regex"/> for more details.
-             </remarks>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RouteConstraintBuilder.AddResolvedConstraint(System.String,System.String)">
-            <summary>
-            Adds a constraint for the given key, resolved by the <see cref="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver"/>.
-            </summary>
-            <param name="key">The key.</param>
-            <param name="constraintText">The text to be resolved by <see cref="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver"/>.</param>
-            <remarks>
-            The <see cref="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver"/> can create <see cref="T:Microsoft.AspNetCore.Routing.IRouteConstraint"/> instances
-            based on <paramref name="constraintText"/>. See <see cref="P:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap"/> to register
-            custom constraint types.
-            </remarks>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RouteConstraintBuilder.SetOptional(System.String)">
-            <summary>
-            Sets the given key as optional.
-            </summary>
-            <param name="key">The key.</param>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Routing.RouteOptions.LowercaseUrls">
-            <summary>
-            Gets or sets a value indicating whether all generated URLs are lower-case.
-            </summary>
-        </member>
-        <member name="P:Microsoft.AspNetCore.Routing.RouteOptions.AppendTrailingSlash">
-            <summary>
-            Gets or sets a value indicating whether a trailing slash should be appended to the generated URLs.
-            </summary>
-        </member>
-        <member name="T:Microsoft.AspNetCore.Routing.RouteValueEqualityComparer">
-             <summary>
-             An <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation that compares objects as-if
-             they were route value strings.
-             </summary>
-             <remarks>
-             Values that are are not strings are converted to strings using
-             <c>Convert.ToString(x, CultureInfo.InvariantCulture)</c>. <c>null</c> values are converted
-             to the empty string.
-            
-             strings are compared using <see cref="F:System.StringComparison.OrdinalIgnoreCase"/>.
-             </remarks>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RouteValueEqualityComparer.Equals(System.Object,System.Object)">
-            <inheritdoc />
-        </member>
-        <member name="M:Microsoft.AspNetCore.Routing.RouteValueEqualityComparer.GetHashCode(System.Object)">
-            <inheritdoc />
         </member>
         <member name="T:Microsoft.AspNetCore.Routing.Constraints.AlphaRouteConstraint">
             <summary>
@@ -725,10 +444,93 @@
         <member name="M:Microsoft.AspNetCore.Routing.Constraints.RequiredRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)">
             <inheritdoc />
         </member>
+        <member name="T:Microsoft.AspNetCore.Routing.Constraints.StringRouteConstraint">
+            <summary>
+            Constrains a route parameter to contain only a specified strign.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.Constraints.StringRouteConstraint.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.AspNetCore.Routing.Constraints.StringRouteConstraint"/> class.
+            </summary>
+            <param name="value">The constraint value to match.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.Constraints.StringRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver">
+            <summary>
+            The default implementation of <see cref="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver"/>. Resolves constraints by parsing
+            a constraint key and constraint arguments, using a map to resolve the constraint type, and calling an
+            appropriate constructor for the constraint type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Routing.RouteOptions})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver"/> class.
+            </summary>
+            <param name="routeOptions">
+            Accessor for <see cref="T:Microsoft.AspNetCore.Routing.RouteOptions"/> containing the constraints of interest.
+            </param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.ResolveConstraint(System.String)">
+            <inheritdoc />
+            <example>
+            A typical constraint looks like the following
+            "exampleConstraint(arg1, arg2, 12)".
+            Here if the type registered for exampleConstraint has a single constructor with one argument,
+            The entire string "arg1, arg2, 12" will be treated as a single argument.
+            In all other cases arguments are split at comma.
+            </example>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver">
+            <summary>
+            Defines an abstraction for resolving inline constraints as instances of <see cref="T:Microsoft.AspNetCore.Routing.IRouteConstraint"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.IInlineConstraintResolver.ResolveConstraint(System.String)">
+            <summary>
+            Resolves the inline constraint.
+            </summary>
+            <param name="inlineConstraint">The inline constraint to resolve.</param>
+            <returns>The <see cref="T:Microsoft.AspNetCore.Routing.IRouteConstraint"/> the inline constraint was resolved to.</returns>
+        </member>
         <member name="T:Microsoft.AspNetCore.Routing.Internal.RoutingMarkerService">
             <summary>
             A marker class used to determine if all the routing services were added
             to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> before routing is configured.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Routing.IRouteBuilder">
+            <summary>
+            Defines a contract for a route builder in an application. A route builder specifies the routes for
+            an application.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Routing.IRouteBuilder.ApplicationBuilder">
+            <summary>
+            Gets the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Routing.IRouteBuilder.DefaultHandler">
+            <summary>
+            Gets or sets the default <see cref="T:Microsoft.AspNetCore.Routing.IRouter"/> that is used as a handler if an <see cref="T:Microsoft.AspNetCore.Routing.IRouter"/>
+            is added to the list of routes but does not specify its own.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Routing.IRouteBuilder.ServiceProvider">
+            <summary>
+            Gets the sets the <see cref="T:System.IServiceProvider"/> used to resolve services for routes.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Routing.IRouteBuilder.Routes">
+            <summary>
+            Gets the routes configured in the builder.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.IRouteBuilder.Build">
+            <summary>
+            Builds an <see cref="T:Microsoft.AspNetCore.Routing.IRouter"/> that routes the routes specified in the <see cref="P:Microsoft.AspNetCore.Routing.IRouteBuilder.Routes"/> property.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Routing.Resources.ArgumentMustBeGreaterThanOrEqualTo">
@@ -773,12 +575,12 @@
         </member>
         <member name="P:Microsoft.AspNetCore.Routing.Resources.DefaultHandler_MustBeSet">
             <summary>
-            A default handler must be set on the RouteCollection.
+            A default handler must be set on the {0}.
             </summary>
         </member>
-        <member name="M:Microsoft.AspNetCore.Routing.Resources.FormatDefaultHandler_MustBeSet">
+        <member name="M:Microsoft.AspNetCore.Routing.Resources.FormatDefaultHandler_MustBeSet(System.Object)">
             <summary>
-            A default handler must be set on the RouteCollection.
+            A default handler must be set on the {0}.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Routing.Resources.DefaultInlineConstraintResolver_AmbiguousCtors">
@@ -953,22 +755,22 @@
         </member>
         <member name="P:Microsoft.AspNetCore.Routing.Resources.TemplateRoute_UnescapedBrace">
             <summary>
-            In a route parameter, '{' and '}' must be escaped with '{{' and '}}'
+            In a route parameter, '{' and '}' must be escaped with '{{' and '}}'.
             </summary>
         </member>
         <member name="M:Microsoft.AspNetCore.Routing.Resources.FormatTemplateRoute_UnescapedBrace">
             <summary>
-            In a route parameter, '{' and '}' must be escaped with '{{' and '}}'
+            In a route parameter, '{' and '}' must be escaped with '{{' and '}}'.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Routing.Resources.TemplateRoute_OptionalParameterCanbBePrecededByPeriod">
             <summary>
-            In the segment '{0}', the optional parameter '{1}' is preceded by an invalid segment '{2}'.  Only a period (.) can precede an optional parameter.
+            In the segment '{0}', the optional parameter '{1}' is preceded by an invalid segment '{2}'. Only a period (.) can precede an optional parameter.
             </summary>
         </member>
         <member name="M:Microsoft.AspNetCore.Routing.Resources.FormatTemplateRoute_OptionalParameterCanbBePrecededByPeriod(System.Object,System.Object,System.Object)">
             <summary>
-            In the segment '{0}', the optional parameter '{1}' is preceded by an invalid segment '{2}'.  Only a period (.) can precede an optional parameter.
+            In the segment '{0}', the optional parameter '{1}' is preceded by an invalid segment '{2}'. Only a period (.) can precede an optional parameter.
             </summary>
         </member>
         <member name="P:Microsoft.AspNetCore.Routing.Resources.TemplateRoute_OptionalParameterHasTobeTheLast">
@@ -1000,6 +802,298 @@
             <summary>
             Unable to find the required services. Please add all the required services by calling '{0}.{1}' inside the call to '{2}' in the application startup code.
             </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Routing.Resources.TemplateRoute_Exception">
+            <summary>
+            An error occurred while creating the route with name '{0}' and template '{1}'.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.Resources.FormatTemplateRoute_Exception(System.Object,System.Object)">
+            <summary>
+            An error occurred while creating the route with name '{0}' and template '{1}'.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> for the given <paramref name="template"/>, and
+            <paramref name="handler"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapMiddlewareRoute(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> for the given <paramref name="template"/>, and
+            <paramref name="action"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapDelete(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP DELETE requests for the given
+            <paramref name="template"/>, and <paramref name="handler"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapMiddlewareDelete(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP DELETE requests for the given
+            <paramref name="template"/>, and <paramref name="action"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapDelete(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Func{Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.HttpResponse,Microsoft.AspNetCore.Routing.RouteData,System.Threading.Tasks.Task})">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP DELETE requests for the given
+            <paramref name="template"/>, and <paramref name="handler"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="handler">The route handler.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP GET requests for the given
+            <paramref name="template"/>, and <paramref name="handler"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapMiddlewareGet(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP GET requests for the given
+            <paramref name="template"/>, and <paramref name="action"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Func{Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.HttpResponse,Microsoft.AspNetCore.Routing.RouteData,System.Threading.Tasks.Task})">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP GET requests for the given
+            <paramref name="template"/>, and <paramref name="handler"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="handler">The route handler.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapPost(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP POST requests for the given
+            <paramref name="template"/>, and <paramref name="handler"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapMiddlewarePost(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP POST requests for the given
+            <paramref name="template"/>, and <paramref name="action"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapPost(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Func{Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.HttpResponse,Microsoft.AspNetCore.Routing.RouteData,System.Threading.Tasks.Task})">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP POST requests for the given
+            <paramref name="template"/>, and <paramref name="handler"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="handler">The route handler.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapPut(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP PUT requests for the given
+            <paramref name="template"/>, and <paramref name="handler"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapMiddlewarePut(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP PUT requests for the given
+            <paramref name="template"/>, and <paramref name="action"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapPut(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.Func{Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.HttpResponse,Microsoft.AspNetCore.Routing.RouteData,System.Threading.Tasks.Task})">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP PUT requests for the given
+            <paramref name="template"/>, and <paramref name="handler"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="template">The route template.</param>
+            <param name="handler">The route handler.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.String,System.Func{Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.HttpResponse,Microsoft.AspNetCore.Routing.RouteData,System.Threading.Tasks.Task})">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP requests for the given
+            <paramref name="verb"/>, <paramref name="template"/>, and <paramref name="handler"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="verb">The HTTP verb allowed by the route.</param>
+            <param name="template">The route template.</param>
+            <param name="handler">The route handler.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.String,Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP requests for the given
+            <paramref name="verb"/>, <paramref name="template"/>, and <paramref name="handler"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="verb">The HTTP verb allowed by the route.</param>
+            <param name="template">The route template.</param>
+            <param name="handler">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/> route handler.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapMiddlewareVerb(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.String,System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})">
+            <summary>
+            Adds a route to the <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> that only matches HTTP requests for the given
+            <paramref name="verb"/>, <paramref name="template"/>, and <paramref name="action"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
+            <param name="verb">The HTTP verb allowed by the route.</param>
+            <param name="template">The route template.</param>
+            <param name="action">The action to apply to the <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.</param>
+            <returns>A reference to the <paramref name="builder"/> after this operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteBase.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.AspNetCore.Routing.RouteConstraintBuilder">
+            <summary>
+            A builder for produding a mapping of keys to see <see cref="T:Microsoft.AspNetCore.Routing.IRouteConstraint"/>.
+            </summary>
+            <remarks>
+            <see cref="T:Microsoft.AspNetCore.Routing.RouteConstraintBuilder"/> allows iterative building a set of route constraints, and will
+            merge multiple entries for the same key.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteConstraintBuilder.#ctor(Microsoft.AspNetCore.Routing.IInlineConstraintResolver,System.String)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.AspNetCore.Routing.RouteConstraintBuilder"/> instance.
+            </summary>
+            <param name="inlineConstraintResolver">The <see cref="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver"/>.</param>
+            <param name="displayName">The display name (for use in error messages).</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteConstraintBuilder.Build">
+            <summary>
+            Builds a mapping of constraints.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IDictionary`2"/> of the constraints.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteConstraintBuilder.AddConstraint(System.String,System.Object)">
+             <summary>
+             Adds a constraint instance for the given key.
+             </summary>
+             <param name="key">The key.</param>
+             <param name="value">
+             The constraint instance. Must either be a string or an instance of <see cref="T:Microsoft.AspNetCore.Routing.IRouteConstraint"/>.
+             </param>
+             <remarks>
+             If the <paramref name="value"/> is a string, it will be converted to a <see cref="T:Microsoft.AspNetCore.Routing.Constraints.RegexRouteConstraint"/>.
+            
+             For example, the string <code>Product[0-9]+</code> will be converted to the regular expression
+             <code>^(Product[0-9]+)</code>. See <see cref="T:System.Text.RegularExpressions.Regex"/> for more details.
+             </remarks>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteConstraintBuilder.AddResolvedConstraint(System.String,System.String)">
+            <summary>
+            Adds a constraint for the given key, resolved by the <see cref="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver"/>.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="constraintText">The text to be resolved by <see cref="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver"/>.</param>
+            <remarks>
+            The <see cref="T:Microsoft.AspNetCore.Routing.IInlineConstraintResolver"/> can create <see cref="T:Microsoft.AspNetCore.Routing.IRouteConstraint"/> instances
+            based on <paramref name="constraintText"/>. See <see cref="P:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap"/> to register
+            custom constraint types.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteConstraintBuilder.SetOptional(System.String)">
+            <summary>
+            Sets the given key as optional.
+            </summary>
+            <param name="key">The key.</param>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Routing.RouteCreationException">
+            <summary>
+            The exception that is thrown for invalid routes or constraints.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteCreationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.AspNetCore.Routing.RouteCreationException"/> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteCreationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.AspNetCore.Routing.RouteCreationException"/> class with a specified error message
+            and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Routing.RouteOptions.LowercaseUrls">
+            <summary>
+            Gets or sets a value indicating whether all generated URLs are lower-case.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Routing.RouteOptions.AppendTrailingSlash">
+            <summary>
+            Gets or sets a value indicating whether a trailing slash should be appended to the generated URLs.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Routing.RouteValueEqualityComparer">
+             <summary>
+             An <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation that compares objects as-if
+             they were route value strings.
+             </summary>
+             <remarks>
+             Values that are are not strings are converted to strings using
+             <c>Convert.ToString(x, CultureInfo.InvariantCulture)</c>. <c>null</c> values are converted
+             to the empty string.
+            
+             strings are compared using <see cref="F:System.StringComparison.OrdinalIgnoreCase"/>.
+             </remarks>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteValueEqualityComparer.Equals(System.Object,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.Routing.RouteValueEqualityComparer.GetHashCode(System.Object)">
+            <inheritdoc />
         </member>
         <member name="T:Microsoft.AspNetCore.Routing.Template.InlineConstraint">
             <summary>
@@ -1364,19 +1458,6 @@
             Gets the root of the <see cref="T:Microsoft.AspNetCore.Routing.Tree.UrlMatchingTree"/>.
             </summary>
         </member>
-        <member name="T:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions">
-            <summary>
-            Extension methods for adding the <see cref="T:Microsoft.AspNetCore.Builder.RouterMiddleware"/> middleware to an <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.
-            </summary>
-        </member>
-        <member name="M:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Routing.IRouter)">
-            <summary>
-            Adds a <see cref="T:Microsoft.AspNetCore.Builder.RouterMiddleware"/> middleware to the specified <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> with the specified <see cref="T:Microsoft.AspNetCore.Routing.IRouter"/>.
-            </summary>
-            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> to add the middleware to.</param>
-            <param name="router">The <see cref="T:Microsoft.AspNetCore.Routing.IRouter"/> to use for routing requests.</param>
-            <returns>A reference to this instance after the operation has completed.</returns>
-        </member>
         <member name="T:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions">
             <summary>
             Provides extension methods for <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/> to add routes.
@@ -1399,7 +1480,7 @@
             <param name="name">The name of the route.</param>
             <param name="template">The URL pattern of the route.</param>
             <param name="defaults">
-            An object that contains default values for route parameters. The object's properties represent the names 
+            An object that contains default values for route parameters. The object's properties represent the names
             and values of the default values.
             </param>
             <returns>A reference to this instance after the operation has completed.</returns>
@@ -1442,6 +1523,28 @@
             An object that contains data tokens for the route. The object's properties represent the names and values
             of the data tokens.
             </param>
+            <returns>A reference to this instance after the operation has completed.</returns>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions">
+            <summary>
+            Extension methods for adding the <see cref="T:Microsoft.AspNetCore.Builder.RouterMiddleware"/> middleware to an <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Routing.IRouter)">
+            <summary>
+            Adds a <see cref="T:Microsoft.AspNetCore.Builder.RouterMiddleware"/> middleware to the specified <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> with the specified <see cref="T:Microsoft.AspNetCore.Routing.IRouter"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> to add the middleware to.</param>
+            <param name="router">The <see cref="T:Microsoft.AspNetCore.Routing.IRouter"/> to use for routing requests.</param>
+            <returns>A reference to this instance after the operation has completed.</returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Microsoft.AspNetCore.Routing.IRouteBuilder})">
+            <summary>
+            Adds a <see cref="T:Microsoft.AspNetCore.Builder.RouterMiddleware"/> middleware to the specified <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/>
+            with the <see cref="T:Microsoft.AspNetCore.Routing.IRouter"/> built from configured <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> to add the middleware to.</param>
+            <param name="action">An <see cref="T:System.Action`1"/> to configure the provided <see cref="T:Microsoft.AspNetCore.Routing.IRouteBuilder"/>.</param>
             <returns>A reference to this instance after the operation has completed.</returns>
         </member>
     </members>
