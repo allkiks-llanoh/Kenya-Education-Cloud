@@ -12,9 +12,10 @@ using System;
 namespace KEC.ECommerce.Data.Migrations
 {
     [DbContext(typeof(ECommerceDataContext))]
-    partial class ECommerceDataContextModelSnapshot : ModelSnapshot
+    [Migration("20180519123315_AddPublicationCategories")]
+    partial class AddPublicationCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
