@@ -29,5 +29,6 @@ namespace KEC.ECommerce.Data.Database
         public DbSet<LineItem> LineItems { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
