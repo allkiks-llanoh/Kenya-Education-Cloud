@@ -77,7 +77,7 @@ namespace Authentication_Test.Controllers
         }
         public int CountChiefCurators()
         {
-            role = "6c5175a7-372f-4cfe-a559-f862651813b2";
+            var role = "6c5175a7-372f-4cfe-a559-f862651813b2";
             var _users = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).Count();
             return _users;
 
