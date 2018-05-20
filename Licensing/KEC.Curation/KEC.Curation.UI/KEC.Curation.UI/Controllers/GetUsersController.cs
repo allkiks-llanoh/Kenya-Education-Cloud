@@ -16,7 +16,7 @@ namespace Authentication_Test.Controllers
         // GET: GetUsers
         public ActionResult GetChiefCurators(string role)
         {
-            role = "30fae6a5-126f-4898-8440-fd666473659a";
+            role = "6c5175a7-372f-4cfe-a559-f862651813b2";
 
             var user = context.Users.Where(p => p.Roles.Any(s=>s.RoleId.Equals(role))).ToList();
          
@@ -24,7 +24,7 @@ namespace Authentication_Test.Controllers
         }
         public ActionResult GetChiefCuratorsList(string role)
         {
-            role = "30fae6a5-126f-4898-8440-fd666473659a";
+            role = "6c5175a7-372f-4cfe-a559-f862651813b2";
 
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
@@ -33,7 +33,7 @@ namespace Authentication_Test.Controllers
 
         public ActionResult GetCurators(string role)
         {
-            role = "408e4cdb-b809-41ee-835c-69aac91273ab";
+            role = "ff0a2466-90b3-468f-8ed5-60a170414131";
 
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
@@ -41,7 +41,7 @@ namespace Authentication_Test.Controllers
         }
         public ActionResult GetCuratorsList(string role)
         {
-            role = "408e4cdb-b809-41ee-835c-69aac91273ab";
+            role = "ff0a2466-90b3-468f-8ed5-60a170414131";
 
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
@@ -49,7 +49,7 @@ namespace Authentication_Test.Controllers
         }
         public ActionResult GetPrincipalCurators(string role)
         {
-            role = "7565571d-07c4-4bfe-9587-9aef63adb321";
+            role = "cac3eacd-c5b6-4c40-aaf3-72a48dfb5b2d";
 
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
@@ -70,21 +70,21 @@ namespace Authentication_Test.Controllers
         }
         public int CountPrincipalCurators()
         {
-            var role = "7565571d-07c4-4bfe-9587-9aef63adb321";
+            var role = "cac3eacd-c5b6-4c40-aaf3-72a48dfb5b2d";
             var _users = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).Count();
             return _users;
 
         }
         public int CountChiefCurators()
         {
-            var role = "30fae6a5-126f-4898-8440-fd666473659a";
+            role = "6c5175a7-372f-4cfe-a559-f862651813b2";
             var _users = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).Count();
             return _users;
 
         }
         public int CountCurators()
         {
-            var role = "408e4cdb-b809-41ee-835c-69aac91273ab";
+            var role = "ff0a2466-90b3-468f-8ed5-60a170414131";
             var _users = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).Count();
             return _users;
 
