@@ -1,9 +1,9 @@
-namespace KEC.Curation.UI.Migrations
+namespace KEC.Curation.PublishersUI.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ToCuratioUiDb : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,6 @@ namespace KEC.Curation.UI.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false, maxLength: 256),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
@@ -36,7 +35,14 @@ namespace KEC.Curation.UI.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        FullName = c.String(),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        Company = c.String(),
+                        Contact = c.String(),
+                        KraPin = c.String(),
+                        Address = c.String(),
+                        PostalAddress = c.String(),
+                        BusinessNumber = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -77,22 +83,10 @@ namespace KEC.Curation.UI.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
-            DropTable("dbo.UserTokenCaches");
         }
         
         public override void Down()
         {
-            CreateTable(
-                "dbo.UserTokenCaches",
-                c => new
-                    {
-                        UserTokenCacheId = c.Int(nullable: false, identity: true),
-                        webUserUniqueId = c.String(),
-                        cacheBits = c.Binary(),
-                        LastWrite = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.UserTokenCacheId);
-            
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");

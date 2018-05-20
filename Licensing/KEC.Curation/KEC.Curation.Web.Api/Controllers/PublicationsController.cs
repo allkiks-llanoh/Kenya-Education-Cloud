@@ -27,8 +27,8 @@ namespace KEC.Curation.Web.Api.Controllers
     [Route("api/Publications")]
     public class PublicationsController : Controller
     {
-        const string StorageAccountName = "keccuration";
-        const string StorageAccountKey = "nqpjBFfMAxk/IzF3ZhQBeHGB56XlnX/d1B1faFq7qDH5jo5RXXTQGZncHtpmku46gmrzOojx16x0uaXDd8kxxA==";
+        const string StorageAccountName = "kecpublications";
+        const string StorageAccountKey = "MKMdAUoU2vUWIRSMSR5UXnu7hZ9omXWFXSglCHowJTn3oyOeycxCGSgSQ4huvihn9a0DUObjvvNBd06PfHw2Dg==";
         const string pathToFile = "https://keccuration.file.core.windows.net/publications";
        
         private readonly IUnitOfWork _uow;

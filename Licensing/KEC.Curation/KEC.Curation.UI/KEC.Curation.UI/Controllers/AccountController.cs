@@ -154,6 +154,7 @@ namespace KEC.Curation.UI.Controllers
         //
         // GET: /Account/Register
         [CustomAuthorize(Roles = "Admin")]
+
         public ActionResult Register()
         {
             List<SelectListItem> list = new List<SelectListItem>();
@@ -167,17 +168,18 @@ namespace KEC.Curation.UI.Controllers
         // POST: /Account/Register
         [HttpPost]
         [CustomAuthorize(Roles = "Admin")]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
               
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName=model.FullName, SubjectId = model.SubjectId };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName=model.FullName,SubjectId=model.SubjectId };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                   
+
                     result = await UserManager.AddToRoleAsync(user.Id, model.RoleName);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     

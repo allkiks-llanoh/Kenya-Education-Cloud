@@ -192,7 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BatchContoller.cs" />
+    <Compile Include="Controllers\BatchController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
@@ -348,6 +348,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="js\accounting.js" />
+    <Content Include="js\BatchViewFunctions.js" />
     <Content Include="js\ClientTransactions.js" />
     <Content Include="js\UploadSchool.js" />
     <Content Include="js\ClientVoucher.js" />
@@ -801,6 +802,7 @@
     <Content Include="Scripts\ui-helpers.js" />
     <None Include="Scripts\_references.js" />
     <Content Include="Views\Client\Transaction.cshtml" />
+    <Content Include="Views\Batch\Index.cshtml" />
     <None Include="Views\Client\index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -860,7 +862,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Batch\" />
     <Folder Include="Views\Voucher\" />
   </ItemGroup>
   <ItemGroup>

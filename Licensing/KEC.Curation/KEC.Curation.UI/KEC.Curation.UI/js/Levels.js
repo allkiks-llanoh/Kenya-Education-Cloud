@@ -22,7 +22,7 @@ $(document).ready(function () {
                 $('#alert').html(`${response}.`)
                 $('div.alert-success').toggleClass('hidden');
                 $('#btn-postFile').html('CREATE LEVEL');
-
+                window.location.assign("http://curation-d.kec.ac.ke/Home/ListLevels");
             },
             error: function (request, status, error) {
 
