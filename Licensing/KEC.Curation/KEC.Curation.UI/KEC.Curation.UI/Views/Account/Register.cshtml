@@ -41,7 +41,12 @@
             <select name="SubjectTypeId" id="SubjectTypeId" class="form-control"></select>
         </div>
     </div>
-
+    <div class="form-group">
+        @Html.LabelFor(m => m.SubjectId, new { @class = "col-md-4 control-label" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(m => m.SubjectId, new { @class = "form-control" })
+        </div>
+    </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
