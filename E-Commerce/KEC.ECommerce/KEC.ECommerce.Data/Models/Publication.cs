@@ -21,11 +21,13 @@ namespace KEC.ECommerce.Data.Models
         public int SubjectId { get; set; }
         public int AuthorId { get; set; }
         public int LevelId { get; set; }
+        public int CategoryId { get; set; }
         #endregion
 
         #region Virtual Properties
         public virtual Author Author { get; set; }
         public virtual Publisher Publisher { get; set; }
+        public virtual Category Category { get; set; }
         #endregion
     }
 }

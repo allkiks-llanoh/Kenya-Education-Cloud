@@ -47,6 +47,18 @@ namespace KEC.ECommerce.Data.Migrations
                     b.ToTable("Carts");
                 });
 
+            modelBuilder.Entity("KEC.ECommerce.Data.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("KEC.ECommerce.Data.Models.Level", b =>
                 {
                     b.Property<int>("Id")
@@ -129,6 +141,8 @@ namespace KEC.ECommerce.Data.Migrations
 
                     b.Property<int>("AuthorId");
 
+                    b.Property<int>("CategoryId");
+
                     b.Property<DateTime>("CreatedAt");
 
                     b.Property<string>("Description");
@@ -152,6 +166,8 @@ namespace KEC.ECommerce.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("LevelId");
 
@@ -244,6 +260,11 @@ namespace KEC.ECommerce.Data.Migrations
                     b.HasOne("KEC.ECommerce.Data.Models.Author", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("KEC.ECommerce.Data.Models.Category", "Category")
+                        .WithMany("Publications")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("KEC.ECommerce.Data.Models.Level")
