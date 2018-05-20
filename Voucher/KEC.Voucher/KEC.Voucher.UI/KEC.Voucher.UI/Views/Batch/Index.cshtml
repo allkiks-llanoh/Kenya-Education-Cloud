@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
+<link href="~/Content/footable/footable.core.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-lg-3">
+        <a href="#">
+            <div class="widget style1 navy-bg">
+                <div class="row">
+
+                    <div class="col-xs-12 text-right">
+                        <span style="font-size:18px;">Counties Registerd</span>
+                        <h2 id="count">Loading...</h2>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3">
+        <a href="#">
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+
+                    <div class="col-xs-12 text-right">
+                        <span style="font-size:18px;"> School Types Registered</span>
+                        <h2 id="types">Loading...</h2>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3">
+        <a href="#">
+            <div class="widget style1 red-bg">
+                <div class="row">
+
+                    <div class="col-xs-12 text-right">
+                        <span style="font-size:18px;">Number of Batches Created</span>
+                        <h2 id="batches">Loading...</h2>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3">
+        <a href="#">
+            <div class="widget style1 yellow-bg">
+                <div class="row">
+                    <div class="col-xs-12 text-right">
+                        <span style="margin-left:25; font-size:18px; margin-top:20px;"> Counties with Missing Batches </span>
+                        <h2> <button onclick="show()" style="float:right;" class="btn btn-info">View List</button></h2>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-12" id="list">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <div class="row" class="form-group">
+                    <div col-md-6>
+                        <h5 style="margin-left: 25px; margin-top:10px;">List Of Batches Available for Voucher Creation</h5>
+                    </div>
+                    <div col-md-6>
+                        <a href="batch/" style="float:right; margin-right:20px;" class="btn btn-primary">CREATE THESE BATCHES</a>
+                    </div>
+                </div>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="table-responsive">
+                <table id="createdvouchers" style="text-align:left;" class="footable table table-stripped toggle-arrow-tiny">
+                    <tr>
+                        <th class="hidden"> ID </th>
+                        <th> COUNTY NAME </th>
+                        <th> COUNTY CODE</th>
+                    <tr>
+                    <tfoot>
+                    <td colspan="5"> <ul class="pagination pull-right"></ul> </td>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        @section Styles {
+            @Styles.Render("~/plugins/footableStyles")
+        }
+        @section Scripts {
+            @Scripts.Render("~/plugins/footable")
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    $('.footable').footable();
+                    $('.footable2').footable();
+
+                });
+            </script>
+        }
+

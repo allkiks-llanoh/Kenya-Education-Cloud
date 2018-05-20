@@ -7,8 +7,9 @@ using System.Web.Mvc;
 
 namespace KEC.Voucher.UI.Controllers
 {
-    public class BatchContoller : Controller
+    public class BatchController : Controller
     {
+        // GET: Batch
         public ActionResult Index()
         {
             using (var context = new ApplicationDbContext())
@@ -21,20 +22,6 @@ namespace KEC.Voucher.UI.Controllers
                 };
                 return View(voucherUser);
             }
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

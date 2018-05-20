@@ -253,17 +253,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\FixJsonTextReader.cs" />
-    <Compile Include="Migrations\201802262225569_InitialMigrations.cs" />
-    <Compile Include="Migrations\201802262225569_InitialMigrations.Designer.cs">
-      <DependentUpon>201802262225569_InitialMigrations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803091331364_Subject.cs" />
-    <Compile Include="Migrations\201803091331364_Subject.Designer.cs">
-      <DependentUpon>201803091331364_Subject.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803120828283_SubjectId.cs" />
-    <Compile Include="Migrations\201803120828283_SubjectId.Designer.cs">
-      <DependentUpon>201803120828283_SubjectId.cs</DependentUpon>
+    <Compile Include="Migrations\201805201100075_Initial.cs" />
+    <Compile Include="Migrations\201805201100075_Initial.Designer.cs">
+      <DependentUpon>201805201100075_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1033,18 +1025,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802262225569_InitialMigrations.resx">
-      <DependentUpon>201802262225569_InitialMigrations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803091331364_Subject.resx">
-      <DependentUpon>201803091331364_Subject.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803120828283_SubjectId.resx">
-      <DependentUpon>201803120828283_SubjectId.cs</DependentUpon>
-    </EmbeddedResource>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
+    <EmbeddedResource Include="Migrations\201805201100075_Initial.resx">
+      <DependentUpon>201805201100075_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

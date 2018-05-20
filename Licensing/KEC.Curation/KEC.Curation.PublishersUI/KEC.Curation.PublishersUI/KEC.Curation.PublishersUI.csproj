@@ -219,9 +219,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
-    <Compile Include="Migrations\201803061455020_changeregistrationmodel.cs" />
-    <Compile Include="Migrations\201803061455020_changeregistrationmodel.Designer.cs">
-      <DependentUpon>201803061455020_changeregistrationmodel.cs</DependentUpon>
+    <Compile Include="Migrations\201805201046433_initial.cs" />
+    <Compile Include="Migrations\201805201046433_initial.Designer.cs">
+      <DependentUpon>201805201046433_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -972,12 +972,12 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803061455020_changeregistrationmodel.resx">
-      <DependentUpon>201803061455020_changeregistrationmodel.cs</DependentUpon>
-    </EmbeddedResource>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
+    <EmbeddedResource Include="Migrations\201805201046433_initial.resx">
+      <DependentUpon>201805201046433_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
