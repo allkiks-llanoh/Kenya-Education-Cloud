@@ -81,6 +81,14 @@ namespace KEC.Curation.Web.Api.Controllers
                 publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
         }
+        [HttpGet("publications/{subjectId:int}/unassignedNew")]
+        public IActionResult UnAssignedNew(int subjectId, string chiefCuratorGuid)
+        {
+            var publications = _uow.ChiefCuratorAssignmentRepository.Find(p => !p.Submitted && p.ChiefCuratorGuid.Equals(chiefCuratorGuid));
+            var publicationList = publications.Any() ?
+                publications.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
+            return Ok(value: publicationList);
+        }
 
         /// <summary>
         /// Get assigned publications
@@ -546,9 +554,10 @@ namespace KEC.Curation.Web.Api.Controllers
 
                 _uow.ChiefCuratorAssignmentRepository.AddRange(assignmentList);
                 var _assignments = _uow.ChiefCuratorAssignmentRepository.Find(p => model.SelectedContent.Contains(p.PublicationId)).ToList();
-                Parallel.ForEach(publications, (publication, loopThroughPublications) =>
+           
+                Parallel.ForEach(_assignments, (_assignment, loopThroughAssignments) =>
                 {
-                    Parallel.ForEach(_assignments, (_assignment, loopThroughAssignments) =>
+                    Parallel.ForEach(publications, (publication, loopThroughPublications) =>
                     {
                         publication.ChiefCuratorAssignmentId = _assignment.Id;
                     });
