@@ -234,10 +234,22 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("AssignedPublication/{id}")]
         public IActionResult AssignedPublication(int Id, string chiefCuratorGuid)
         {
-            var publication = _uow.PublicationRepository.Find(p =>p.PublicationStageLogs
+            var publication = _uow.PublicationRepository.Find(p => p.FullyAssigned
+                                                        && p.PublicationStageLogs
                                                         .Max(l => l.Stage) == PublicationStage.Curation
                                                         && p.Id.Equals(Id)
                                                          && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid)).FirstOrDefault();
+            if (publication == null)
+            {
+                return NotFound(value: new { message = "Publication record could not be retrieved" });
+            }
+            return Ok(value: new PublicationDownloadSerilizerToCurators(publication, _uow));
+        }
+        [HttpGet("AssignedPublicationWhenGettingCuration/{id}")]
+        public IActionResult AssignedPublicationWhenGettingCuration(int Id, string chiefCuratorGuid)
+        {
+            
+            var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(Id)).FirstOrDefault();
             if (publication == null)
             {
                 return NotFound(value: new { message = "Publication record could not be retrieved" });
