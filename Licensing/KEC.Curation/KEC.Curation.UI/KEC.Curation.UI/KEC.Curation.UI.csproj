@@ -410,6 +410,7 @@
     <Content Include="js\FullyAssignCurator.js" />
     <Content Include="js\FullyAssignChiefCurator.js" />
     <Content Include="js\GetRoles.js" />
+    <Content Include="js\Kk.js" />
     <Content Include="js\ListingCategories.js" />
     <Content Include="js\ListingLevels.js" />
     <Content Include="js\ListingSubjects.js" />
