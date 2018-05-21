@@ -252,8 +252,7 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult CuratorSubmissions([FromQuery]int publicationId, string chiefCuratorGuid)
         {
             var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publicationId)
-            && p.AssignedBy.Equals(chiefCuratorGuid) && p.Submitted && p.Publication.PublicationStageLogs.Max(l => l.Stage) == PublicationStage.Curation
-            );
+            && p.AssignedBy.Equals(chiefCuratorGuid) && p.Submitted);
             var assignmentList = assignmentSubmissions.Any() ?
                 assignmentSubmissions.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
             return Ok(assignmentList);
@@ -273,6 +272,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("publication/{publicationId:int}/curatorcomments")]
         public IActionResult CuratorSubmissionsAndComments([FromQuery]int publicationId)
         {
+
             var curationComments = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publicationId)
                                    && p.Submitted);
             var curationCommentList = curationComments.Any() ?
@@ -283,10 +283,12 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("publication/withcomments")]
         public IActionResult WithCommentsAtChiefCuratorLevel([FromQuery]string userId)
         {
+            var assignment = _uow.CuratorAssignmentRepository.Find(p => p.AssignedBy.Equals(userId)).FirstOrDefault();
+            var _assignment = _uow.CuratorAssignmentRepository.Get(assignment.Id);
 
-            var assigned = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(userId) && p.Publication.FullyAssigned && !p.Submitted);
+            var assigned = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId));
             var assignedList = assigned.Any() ?
-                assigned.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
+                assigned.Select(p => new CurationRepoDownloadSerilizer3(p, _uow)).ToList() : new List<CurationRepoDownloadSerilizer3>();
 
             return Ok(assignedList);
         }
