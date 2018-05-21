@@ -234,8 +234,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("AssignedPublication/{id}")]
         public IActionResult AssignedPublication(int Id, string chiefCuratorGuid)
         {
-            var publication = _uow.PublicationRepository.Find(p => p.FullyAssigned
-                                                        && p.PublicationStageLogs
+            var publication = _uow.PublicationRepository.Find(p =>p.PublicationStageLogs
                                                         .Max(l => l.Stage) == PublicationStage.Curation
                                                         && p.Id.Equals(Id)
                                                          && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(chiefCuratorGuid)).FirstOrDefault();
