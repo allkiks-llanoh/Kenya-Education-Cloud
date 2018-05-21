@@ -49,7 +49,7 @@ namespace KEC.Curation.UI.Controllers
                 _userManager = value;
             }
         }
-
+     
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)

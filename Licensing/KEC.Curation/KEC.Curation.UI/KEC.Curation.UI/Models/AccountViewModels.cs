@@ -87,6 +87,7 @@ namespace KEC.Curation.UI.Models
         public string RoleName { get; set; }
         public string Subject { get; set; }
         public int SubjectId { get; set; }
+        public string PhoneNumber { get; set; }
     }
 
     public class ResetPasswordViewModel
