@@ -57,6 +57,9 @@
         return tableRows;
     };
     $.ajax({
+        headers : {
+            'Access-Controll-Allow-Origin': '*'
+        },
         url: Url,
         type: "POST",
         dataType: "json",
