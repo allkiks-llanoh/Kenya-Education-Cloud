@@ -51,5 +51,13 @@ namespace KEC.Curation.Web.Api.Serializers
                 return pub.CreatedTimeUtc;
             }
         }
+        public string Status
+        {
+            get
+            {
+                var pub = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationId.Equals(_assignment.Id)).FirstOrDefault();
+                return pub.Submitted ? "Submitted" : "Pending"; ;
+            }
+        }
     }
 }

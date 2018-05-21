@@ -30,7 +30,7 @@ $.ajax({
 //This functionpopulates the tbody inner HTML with json data on call
 function drawRow(rowData) {
     var row = $("<tr />")
-    row.append($("<td>" + rowData.publication + "</td>"));
+    row.append($("<td>" + rowData.kicdNumber + "</td>"));
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.status + "</td>"));
     row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.publicationId}?Pub=${rowData.publicationId}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Comments</a>`));
