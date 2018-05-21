@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27428.2037
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.ECommerce.Data", "KEC.ECommerce.Data\KEC.ECommerce.Data.csproj", "{CF37AA66-2891-442A-A3DC-4238EBC91F8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KEC.ECommerce.Web.UI", "KEC.ECommerce.Web.UI\KEC.ECommerce.Web.UI.csproj", "{FDB8B451-5033-41E4-A2A1-1DC29250EDF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.ECommerce.Web.UI", "KEC.ECommerce.Web.UI\KEC.ECommerce.Web.UI.csproj", "{FDB8B451-5033-41E4-A2A1-1DC29250EDF7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.ECommerce.UI", "..\..\..\..\..\Downloads\ecommerce\ecommerce\KEC.ECommerce.UI.csproj", "{D86D4896-47C0-4CBE-86DB-F45598C5475F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FDB8B451-5033-41E4-A2A1-1DC29250EDF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDB8B451-5033-41E4-A2A1-1DC29250EDF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDB8B451-5033-41E4-A2A1-1DC29250EDF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D86D4896-47C0-4CBE-86DB-F45598C5475F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D86D4896-47C0-4CBE-86DB-F45598C5475F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D86D4896-47C0-4CBE-86DB-F45598C5475F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D86D4896-47C0-4CBE-86DB-F45598C5475F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

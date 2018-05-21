@@ -29,7 +29,9 @@ let legalVerifyUrl = apiBaseUrl.concat(`/Publications/process`);
                         $('#message').html(` ${response}.`)
                         $('div.alert-success').toggleClass('hidden');
                         ShowAlert("Conformity Verified", "success");
-                        $('#LegalApprove').html('APPROVE');
+                        $('#LegalApprove').html('Yes');
+                        $('#confirmlegal').modal('hide');
+                        $('.modal-backdrop').remove();
 
                     },
                     error: function (request, status, error) {
