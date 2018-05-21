@@ -1,9 +1,10 @@
 ﻿
 $(document).ready(function () {
     let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurator`)
-    let principalCuratorPostUrl = apiBaseUrl.concat(`/chiefcurator/selected/assign`)
+  
     function ajaxDatas() {
         //let principalCuratorPostUrl = "https://curationapi-d.kec.ac.ke/api/chiefcurator/selected/assign"
+        let principalCuratorPostUrl = apiBaseUrl.concat(`/chiefcurator/selected/assign`)
         var principalCuratorGuid = $('#CurrentUserGuid').val();
         var chiefCuratorGuid = $('#UserGuid').val();
         var publicationIdArray = []
