@@ -19,7 +19,11 @@ $.ajax({
         url: chiefCuratorGETUrl,
         type: "GET",
       
-        dataType: "json",
+    dataType: "json",
+    statusCode: {
+        201: () => { ShowAlert("Curator already assigned content", 'info'); },
+        500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
+    },
         success: function (data, status, jqhxr) {
         console.log(data);
 

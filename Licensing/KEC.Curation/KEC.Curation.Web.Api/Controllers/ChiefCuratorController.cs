@@ -137,6 +137,12 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(error: new { message = "Publication is fully assigned" });
             }
+            var exists = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publication.Id)).Any();
+
+            if (exists)
+            {
+                return StatusCode(StatusCodes.Status201Created);
+            }
             try
             {
 
