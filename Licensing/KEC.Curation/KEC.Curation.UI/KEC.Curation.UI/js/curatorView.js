@@ -1,6 +1,6 @@
 ﻿
 let userGuid = $('#CurrentUserGuid').val();
-let assignmentUrl = apiBaseUrl.concat(`chiefcurator/curator/tocurate?userGuid=${userGuid}`);
+let assignmentUrl = apiBaseUrl.concat(`/chiefcurator/curator/tocurate?userGuid=${userGuid}`);
 function tableRows(data) {
     var tableRows = [];
     for (var i = 0; i < data.length; i++) {
