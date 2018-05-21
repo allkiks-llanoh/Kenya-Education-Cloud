@@ -92,9 +92,8 @@
             type: 'POST',
             data: JSON.stringify({ Section: section, AssignedBy: userGuid, Assignee: chiefCuratorGuid, FullyAssign: fullyAssigned }),
             statusCode: {
-
-                403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); }
-                ,
+                201: () => { ShowAlert("Curator already assigned content", 'info'); ,
+                403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); },
                 500: () => { ShowAlert('Something went wrong while processing curator assignment', 'error'); }
             }
         }).done(function (data, textStatus, jqXHR) {
