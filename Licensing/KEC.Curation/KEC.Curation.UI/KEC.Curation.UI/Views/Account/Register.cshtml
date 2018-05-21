@@ -17,16 +17,19 @@
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
+        @Html.LabelFor(m => m.FullName, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
             @Html.TextBoxFor(m => m.FullName, new { @class = "form-control  required", placeholder = Html.DisplayNameFor(n => n.FullName) })
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
             @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control  required", placeholder = Html.DisplayNameFor(n => n.PhoneNumber) })
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control required email", placeholder = Html.DisplayNameFor(n => n.Email) })
         </div>
@@ -51,6 +54,7 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control required  valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.Password) })
             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })

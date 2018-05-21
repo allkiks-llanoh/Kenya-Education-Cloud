@@ -65,13 +65,12 @@ namespace KEC.Curation.UI.Models
     public class RegisterViewModel
     {
         [Required]
-       
-        [Display(Name = "Full Name is Required")]
+        [Display(Name = "Full Name ")]
         public string FullName { get; set; }
 
         [Required]
-        [EmailAddress]
         [Display(Name = "Email Is Required")]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
@@ -88,7 +87,7 @@ namespace KEC.Curation.UI.Models
         public string Subject { get; set; }
         public int SubjectId { get; set; }
         [Required]
-        [Display(Name = "Phone Number is required")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
     }
 
