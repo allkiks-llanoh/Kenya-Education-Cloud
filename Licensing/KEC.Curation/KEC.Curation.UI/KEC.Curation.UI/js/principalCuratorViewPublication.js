@@ -72,7 +72,6 @@
     }
 
     function getPublicationCurationComments() {
-        //const basUrl = "http://localhost:15177/api";
         let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
         let urlToReadComments = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorcomments?publicationId=${publicationId}`);

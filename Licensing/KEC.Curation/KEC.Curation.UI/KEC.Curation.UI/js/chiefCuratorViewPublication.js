@@ -1,7 +1,7 @@
 ﻿(function () {
     $(document).ready(function () {
         getPublication();
-        getPublicationCurationComments();
+        //getPublicationCurationComments();
         $('#recommend').click(submitChiefNotesAndAction);
     });
     $(document).ready(function () {
@@ -91,7 +91,7 @@
         }).done(function (submissions, textStatus, jqXHR) {
            
             submissions.forEach(function (submission) {
-                $('#currator-commets').html(` ${submission.status},${submission.notes}`);
+                $('#currator-commets').html(`${submission.notes}`);
 
             });
         
