@@ -19,22 +19,19 @@
     <div class="form-group">
         @Html.LabelFor(m => m.FullName, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
-            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control  required valid validate-equalTo-blur" })
-            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "error" })
+            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control  required" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
-            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control  required valid validate-equalTo-blur" })
-            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "error" })
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control  required" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control required valid validate-equalTo-blur" })
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "error" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control required email" })
         </div>
     </div>
     <div class="form-group">
@@ -59,14 +56,14 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control required valid validate-equalTo-blur" })
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control required  valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.Password) })
             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-4 control-label" })
         <div class="col-md-8">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control required valid validate-equalTo-blur" })
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control required valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.ConfirmPassword) })
             @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "error" })
         </div>
     </div>
