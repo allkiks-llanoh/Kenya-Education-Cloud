@@ -66,12 +66,12 @@ namespace KEC.Curation.UI.Models
     {
         [Required]
        
-        [Display(Name = "FullName")]
+        [Display(Name = "Full Name is Required")]
         public string FullName { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email Is Required")]
         public string Email { get; set; }
 
         [Required]
@@ -87,6 +87,8 @@ namespace KEC.Curation.UI.Models
         public string RoleName { get; set; }
         public string Subject { get; set; }
         public int SubjectId { get; set; }
+        [Required]
+        [Display(Name = "Phone Number is required")]
         public string PhoneNumber { get; set; }
     }
 
