@@ -3,8 +3,7 @@ $(document).ready(function () {
     let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurator`)
   
     function ajaxDatas() {
-        //let principalCuratorPostUrl = "https://curationapi-d.kec.ac.ke/api/chiefcurator/selected/assign"
-        let principalCuratorPostUrl = apiBaseUrl.concat(`/chiefcurator/selected/assign`)
+
         var principalCuratorGuid = $('#CurrentUserGuid').val();
         var chiefCuratorGuid = $('#UserGuid').val();
         var publicationIdArray = []
@@ -23,7 +22,7 @@ $(document).ready(function () {
                 'Content-Type' : 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            url: principalCuratorPostUrl,
+            url: "https://curationapi-d.kec.ac.ke/api/chiefcurator/selected/assign",
             type: "POST",
             data: ajaxDatas(),
             success: function (data, status, jxhr) {
