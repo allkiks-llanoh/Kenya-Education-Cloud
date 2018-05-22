@@ -160,9 +160,9 @@
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
             }
         }).success(function (data, textStatus, jqXHR) {
-            ShowAlert("Recomendations passed to Principal Curator");
+            ShowAlert("Recomendations passed to Principal Curator", "success");
         }).fail(function () {
-            ShowAlert("Something went wrong while processing publication", 'error');
+            ShowAlert("Something went wrong while processing publication", "error");
         });
     }
     //Functions Section
