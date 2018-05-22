@@ -257,6 +257,10 @@
     <Compile Include="Migrations\201805201100075_Initial.Designer.cs">
       <DependentUpon>201805201100075_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805222048075_RoleName.cs" />
+    <Compile Include="Migrations\201805222048075_RoleName.Designer.cs">
+      <DependentUpon>201805222048075_RoleName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChiefCurators.cs" />
@@ -1032,6 +1036,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201805201100075_Initial.resx">
       <DependentUpon>201805201100075_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805222048075_RoleName.resx">
+      <DependentUpon>201805222048075_RoleName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
