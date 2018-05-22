@@ -18,10 +18,8 @@
             url: url,
             crossDomain: true,
             statusCode: {
-                404: () => { ShowAlert('Publication record could not be retrievd', "error"); }
-                ,
-                403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); }
-                ,
+                404: () => { ShowAlert('Publication record could not be retrievd', "error"); } ,
+                403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); },
                 500: () => { ShowAlert('Something went wrong while loading publication', 'error'); }
             },
             contentType: 'application/json',
@@ -92,7 +90,7 @@
             type: 'POST',
             data: JSON.stringify({ Section: section, AssignedBy: userGuid, Assignee: chiefCuratorGuid, FullyAssign: fullyAssigned }),
             statusCode: {
-                201: () => { ShowAlert("Curator already assigned content", 'info'); ,
+                201: () => { ShowAlert("Curator already assigned content", 'info'); },
                 403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); },
                 500: () => { ShowAlert('Something went wrong while processing curator assignment', 'error'); }
             }

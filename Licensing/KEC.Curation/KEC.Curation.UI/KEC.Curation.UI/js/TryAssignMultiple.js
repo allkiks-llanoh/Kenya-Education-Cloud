@@ -15,6 +15,7 @@ $(document).ready(function () {
     };
     $('#assign-p').click(function (e) {
         e.preventDefault();
+        $('#assign-p').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         console.log(ajaxDatas());
         $.ajax({
             headers : {
@@ -26,7 +27,7 @@ $(document).ready(function () {
             type: "POST",
             data: ajaxDatas(),
             success: function (data, status, jxhr) {
-                consol.log(data);
+                $('#assign-p').html('Assign');
             }
         });
     });
