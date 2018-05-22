@@ -64,34 +64,34 @@ namespace KEC.Curation.PublishersUI.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "First Name is required")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Last Name is required")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Company is required")]
         [Display(Name = "Company")]
         public string Company { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Contact Number is required")]
 
         [Display(Name = "Contact")]
         public string Contact { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "KraPin is required")]
 
         [Display(Name = "KraPin")]
         public string KraPin { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Address is required")]
 
         [Display(Name = "Address")]
         public string Address { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Postal Address is required")]
 
         [Display(Name = "PostalAddress")]
         public string PostalAddress { get; set; }
@@ -104,13 +104,14 @@ namespace KEC.Curation.PublishersUI.Models
 
 
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Please enter a valid email")]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
     
-        [Required]
+        [Required(ErrorMessage = "Password is required")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
