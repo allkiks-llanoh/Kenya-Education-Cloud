@@ -28,6 +28,7 @@ $(document).ready(function () {
             data: ajaxDatas(),
             success: function (data, status, jxhr) {
                 $('#assign-p').html('Assign');
+                ShowAlert("Publication processed successfully");
             }
         });
     });
