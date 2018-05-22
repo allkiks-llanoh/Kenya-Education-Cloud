@@ -1,7 +1,7 @@
 ﻿
 var _stage = "LegalVerification";
 var publicationID = $('#identity').attr('data-identity');
-let legalGETUrl = apiBaseUrl.concat(`/Publications/1/${_stage}`)
+let legalGETUrl = apiBaseUrl.concat(`/Publications/${_stage}/Legal`)
         function tableRows(data) {
         var tableRows = [];
         for (var i = 0; i < data.length; i++) {
