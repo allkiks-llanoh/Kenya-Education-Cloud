@@ -30,7 +30,7 @@ namespace KEC.Curation.Web.Api.Controllers
         const string StorageAccountName = "kecpublications";
         const string StorageAccountKey = "MKMdAUoU2vUWIRSMSR5UXnu7hZ9omXWFXSglCHowJTn3oyOeycxCGSgSQ4huvihn9a0DUObjvvNBd06PfHw2Dg==";
         const string pathToFile = "https://keccuration.file.core.windows.net/publications";
-       
+
         private readonly IUnitOfWork _uow;
         private readonly IHostingEnvironment _env;
 
@@ -40,7 +40,7 @@ namespace KEC.Curation.Web.Api.Controllers
             _env = env;
         }
         [HttpPost("submit")]
-     
+
         public async Task<IActionResult> Submit([FromForm]PublicationUploadSerilizer model)
         {
             if (!ModelState.IsValid)
@@ -53,12 +53,12 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 ModelState.AddModelError("File", ".EXE File Extensions are not Permited");
             }
-            
-           
+
+
             try
             {
                 var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccountName, StorageAccountKey), false);
-               
+
                 //Create azure File Share
                 var share = storageAccount.CreateCloudFileClient().GetShareReference("publications");
                 await share.CreateIfNotExistsAsync();
@@ -73,15 +73,15 @@ namespace KEC.Curation.Web.Api.Controllers
                 //create folders with files
                 //Blob starts here
                 var blob = storageAccount.CreateCloudBlobClient();
-               
+
                 CloudBlobContainer container = blob.GetContainerReference("publications");
                 CloudBlockBlob blobs = container.GetBlockBlobReference($"{model.PublicationFile.FileName}");
-                
+
 
                 var filePath = $"{pathToFile}/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
-               
+
                 UriBuilder uriBuilder = new UriBuilder();
-               
+
                 uriBuilder.Path = filePath;
                 var ul = uriBuilder.Uri;
                 var publication = new Publication
@@ -96,7 +96,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     Price = model.Price.GetValueOrDefault(),
                     Title = model.Title,
                     MimeType = model.PublicationFile.ContentType,
-                    Url =blobs.StorageUri.PrimaryUri.ToString(),
+                    Url = blobs.StorageUri.PrimaryUri.ToString(),
                     KICDNumber = _uow.PublicationRepository
                                       .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
                     CreatedTimeUtc = DateTime.Now.Date,
@@ -112,7 +112,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     ActionTaken = ActionTaken.PublicationSubmitted
 
                 });
-                
+
                 _uow.PublicationRepository.Add(publication);
                 _uow.Complete();
                 _uow.PublicationRepository.ProcessToTheNextStage(publication);
@@ -133,7 +133,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 {
                     await blobs.UploadFromStreamAsync(stream);
                 }
-               
+
                 //using (var memoryStream = new MemoryStream())
                 //{
                 //    await model.PublicationFile.CopyToAsync(memoryStream);
@@ -148,7 +148,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
-                [HttpGet("file/download")]
+        [HttpGet("file/download")]
         public IActionResult DownloadPublication([FromQuery] string url)
         {
             var cred = new StorageCredentials(StorageAccountName, StorageAccountKey);
@@ -160,10 +160,11 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             try
             {
-
-                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
-                             (PublicationStage.LegalVerification)).ToList();
-                return Ok(value: publication);
+                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.LegalVerification).ToList();
+                var publicationList = publication.Any() ?
+                publication.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                return Ok(publicationList);
             }
             catch (Exception)
             {
@@ -176,10 +177,11 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             try
             {
-
-                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
-                             (PublicationStage.PaymentVerification)).ToList();
-                return Ok(value: publication);
+                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.PaymentVerification).ToList();
+                var publicationList = publication.Any() ?
+                publication.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                return Ok(publicationList);
             }
             catch (Exception)
             {
@@ -208,14 +210,14 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             try
             {
-                
+
                 var stageLevel = (int)stage;
                 var publicationIds = _uow.PublicationRepository
                                          .Find(p => p.PublicationStageLogs.Count == stageLevel
                                                && !p.PublicationStageLogs.Any(l => l.Stage > stage)
-                                               
+
                                                && !p.PublicationStageLogs
-                                              
+
                                                    .Any(l => l.ActionTaken == ActionTaken.PublicationRejected)
                                                && p.Subject.Id.Equals(subjectId))
                                          .Select(p => p.Id);
@@ -243,7 +245,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound(value: $"Publication {model.KICDNumber} could not be located");
             }
-            var maxStage = _uow.PublicationStageLogRepository.Find(p=> p.PublicationId==publication.Id).Max(p => p.Stage);
+            var maxStage = _uow.PublicationStageLogRepository.Find(p => p.PublicationId == publication.Id).Max(p => p.Stage);
             var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == model.Stage
                                                             && p.Stage == maxStage
                                                             && p.PublicationId.Equals(publication.Id)
@@ -253,7 +255,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
             }
-            if (model.Stage == PublicationStage.Curation && 
+            if (model.Stage == PublicationStage.Curation &&
                 !_uow.PublicationRepository.CanProcessCurationPublication(publication))
             {
                 return BadRequest(error: $"Publication {model.KICDNumber} has pending curation notes");
@@ -295,13 +297,13 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
             }
-            
+
             try
             {
-               
+
                 publicationLog.ActionTaken = model.ActionTaken;
                 _uow.Complete();
-              
+
                 return Ok(value: $"Publication {model.KICDNumber} has been Rejected");
             }
             catch (Exception)
