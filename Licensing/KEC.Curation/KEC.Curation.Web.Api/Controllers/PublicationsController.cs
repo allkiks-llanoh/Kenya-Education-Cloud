@@ -40,19 +40,20 @@ namespace KEC.Curation.Web.Api.Controllers
             _env = env;
         }
         [HttpPost("submit")]
+     
         public async Task<IActionResult> Submit([FromForm]PublicationUploadSerilizer model)
         {
-           
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
             var invaliExtension = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".exe");
 
             if (invaliExtension == true)
             {
                 ModelState.AddModelError("File", ".EXE File Extensions are not Permited");
             }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(modelState: ModelState);
-            }
+            
            
             try
             {

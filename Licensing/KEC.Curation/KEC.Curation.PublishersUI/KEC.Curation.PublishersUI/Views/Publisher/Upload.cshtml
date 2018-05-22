@@ -25,7 +25,7 @@
                     <div class="loader"></div>
                 </div>
 
-                <form method="post" enctype="multipart/form-data" id="uploadform">
+                <form enctype="multipart/form-data" id="uploadform">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row align-left">
@@ -142,9 +142,10 @@
                     </div>
 
                     <div>
-                        <button data-toggle="modal" data-target="#confirm" style="background-color:#00af57;" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>
+                        @*<button data-toggle="modal" data-target="#confirm" style="background-color:#00af57;" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>*@
+                        <button type="button" id="btn-postFile" style="background-color:#00af57;" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>
                     </div>
-                    <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                    @*<div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -162,7 +163,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </form>
 
             </div>
@@ -251,6 +252,10 @@
             $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
             var form_data = new FormData($('#uploadform')[0]);
             $.ajax({
+                headers : {
+                    'Access-Controll-Allow-Origin': '*',
+                   ' Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+                },
                 type: 'POST',
                 url: "https://curationapi-d.kec.ac.ke/api/Publications/submit",
                 data: form_data,
