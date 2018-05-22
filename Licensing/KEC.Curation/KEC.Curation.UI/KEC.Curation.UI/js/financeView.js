@@ -1,6 +1,6 @@
 ﻿
 var _stage = "PaymentVerification";
-let financeGETUrl = apiBaseUrl.concat(`/Publications/1/${_stage}`)
+let financeGETUrl = apiBaseUrl.concat(`/Publications/${_stage}/Finance`)
 
     function tableRows(data) {
         var tableRows = [];
