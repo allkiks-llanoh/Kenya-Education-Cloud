@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using KEC.Curation.Services.Extensions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KEC.Curation.Web.Api.Controllers
 {
@@ -166,6 +167,8 @@ namespace KEC.Curation.Web.Api.Controllers
 
 
                 _uow.CuratorAssignmentRepository.Add(assignment);
+                var _assignedNew = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+                _assignedNew.Assigned = true;
                 _uow.Complete();
                 return Ok(value: new { message = "Content assigned successfully" });
             }
@@ -294,14 +297,13 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("publication/withcomments")]
         public IActionResult WithCommentsAtChiefCuratorLevel([FromQuery]string userId)
         {
-            var assignment = _uow.CuratorAssignmentRepository.Find(p => p.AssignedBy.Equals(userId)).FirstOrDefault();
-            var _assignment = _uow.CuratorAssignmentRepository.Get(assignment.Id);
 
-            var assigned = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId));
-            var assignedList = assigned.Any() ?
-                assigned.Select(p => new CurationRepoDownloadSerilizer3(p, _uow)).ToList() : new List<CurationRepoDownloadSerilizer3>();
+            var assignment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(userId) && !p.Submitted && p.Assigned);
+            var assignmentList = assignment.Any() ?
+             assignment.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
+            return Ok(assignmentList);
 
-            return Ok(assignedList);
+
         }
         [HttpPatch("update/curatorcomments/{id}")]
         public IActionResult UpdateCurationComments(int publicationId, [FromBody]ChiefFlagSubmittedSerilizer model)
@@ -396,6 +398,7 @@ namespace KEC.Curation.Web.Api.Controllers
                                                                   && p.Id == AssignmentId
                                                                   && p.Assignee.Equals(model.UserGuid))
                                                                   .FirstOrDefault();
+           
             if (assigment == null)
             {
                 return NotFound("Record could not be retrieved");
@@ -403,7 +406,7 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
                 assigment.Notes = model.Notes;
-                assigment.Submitted = true;
+                
                 _uow.Complete();
                 return Ok(value: CurationAssignments(model.UserGuid, _uow));
             }
@@ -578,6 +581,10 @@ namespace KEC.Curation.Web.Api.Controllers
                     {
                         publication.ChiefCuratorAssignmentId = _assignment.Id;
                     });
+                });
+                Parallel.ForEach(assignmentList, (_assignment, loopThroughAssignments) =>
+                {
+                    _assignment.Assigned = true;
                 });
                 _uow.PublicationStageLogRepository.AddRange(nextStageList);
                 _uow.Complete();

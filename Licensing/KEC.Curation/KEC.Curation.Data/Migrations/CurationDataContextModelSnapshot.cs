@@ -26,6 +26,8 @@ namespace KEC.Curation.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Assigned");
+
                     b.Property<DateTime>("AssignmetDateUtc");
 
                     b.Property<string>("ChiefCuratorGuid");
