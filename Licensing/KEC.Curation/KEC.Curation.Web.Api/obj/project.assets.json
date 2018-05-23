@@ -13491,6 +13491,7 @@
       "KEC.Curation.Data >= 1.0.0",
       "Microsoft.ApplicationInsights.AspNetCore >= 2.2.1",
       "Microsoft.AspNetCore.All >= 2.0.6",
+      "Microsoft.EntityFrameworkCore >= 2.0.2",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.3",
       "Swashbuckle.AspNetCore >= 2.4.0",
@@ -13498,27 +13499,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\elsie\\.nuget\\packages\\": {},
+    "C:\\Users\\LLANOH\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\elsie\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
+      "projectUniqueName": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
       "projectName": "KEC.Curation.Web.Api",
-      "projectPath": "C:\\Users\\elsie\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
-      "packagesPath": "C:\\Users\\elsie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\elsie\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\obj\\",
+      "projectPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
+      "packagesPath": "C:\\Users\\LLANOH\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\elsie\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\LLANOH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
@@ -13530,8 +13531,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\elsie\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj": {
-              "projectPath": "C:\\Users\\elsie\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj"
+            "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj": {
+              "projectPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj"
             }
           }
         }
@@ -13552,6 +13553,10 @@
           "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "[2.0.6, )"
+          },
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[2.0.2, )"
           },
           "Microsoft.NETCore.App": {
             "target": "Package",

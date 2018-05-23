@@ -574,22 +574,33 @@ namespace KEC.Curation.Web.Api.Controllers
                     {
                         nextStageList.Add(nextStage);
                     }
-                });
-
-                _uow.ChiefCuratorAssignmentRepository.AddRange(assignmentList);
-                Parallel.ForEach(publications, (publication, loopThroughPublications) =>
-                {
-                    Parallel.ForEach(assignmentList, (_assignment, loopThroughAssignments) =>
-                    {
-                        publication.ChiefCuratorAssignmentId = _assignment.Id;
-                    });
-                });
-                Parallel.ForEach(assignmentList, (_assignment, loopThroughAssignments) =>
-                {
-                    _assignment.Assigned = true;
+                    _uow.ChiefCuratorAssignmentRepository.AddRange(assignmentList);
+                    _uow.Complete();
+                     publication.ChiefCuratorAssignmentId = assignment.Id;
+                    _uow.Complete();
+                    assignment.Assigned = true;
+                    _uow.Complete();
                 });
                 _uow.PublicationStageLogRepository.AddRange(nextStageList);
                 _uow.Complete();
+                //_uow.ChiefCuratorAssignmentRepository.AddRange(assignmentList);
+                //publication.ChiefCuratorAssignmentId = _assignment.Id;
+                //Parallel.ForEach(assignmentList, (_assignment, loopThroughAssignments) =>
+                //{
+                //    Parallel.ForEach(publications, (publication, loopThroughPublications) =>
+                //    {
+                //        publication.ChiefCuratorAssignmentId = _assignment.Id;
+                //    });
+
+                //    _assignment.Assigned = true;
+
+                //});
+                ////Parallel.ForEach(assignmentList, (_assignment, loopThroughAssignments) =>
+                ////{
+                   
+                ////});
+                //_uow.PublicationStageLogRepository.AddRange(nextStageList);
+                //_uow.Complete();
                 return Ok(value: new { message = "Content assigned successfully" });
             }
             catch (Exception)
