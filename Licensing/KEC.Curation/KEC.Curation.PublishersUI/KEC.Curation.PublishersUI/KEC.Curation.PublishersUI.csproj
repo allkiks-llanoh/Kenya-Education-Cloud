@@ -955,6 +955,7 @@
     <Content Include="Views\Home\AllPublications.cshtml" />
     <Content Include="Views\Shared\_LayoutPasswords.cshtml" />
     <Content Include="Views\Shared\_TopNavbarAdmin.cshtml" />
+    <Content Include="Views\Home\DetailReject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

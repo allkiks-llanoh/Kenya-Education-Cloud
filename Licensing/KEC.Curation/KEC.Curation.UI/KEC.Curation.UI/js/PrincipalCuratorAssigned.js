@@ -1,6 +1,7 @@
 ﻿
 let userGuid = $('#CurrentUserGuid').val();
 let principalCuratorAssignedUrl = apiBaseUrl.concat(`/principalcurator/withcomments?principalCuratorGuid=${userGuid}`)
+
 //var prGuid = $('#dataGUID').attr('data-pGUID');
 
     function tableRows(data) {

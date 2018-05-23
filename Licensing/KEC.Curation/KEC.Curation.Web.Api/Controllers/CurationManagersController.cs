@@ -68,9 +68,10 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult GetRejected(string guid)
         {
 
-            var publicationsCount = _uow.PublicationRepository.Find(p => p.Rejected && p.Owner.Equals(guid)).ToList();
-
-            return Ok(value: publicationsCount);
+            var publicatons = _uow.PublicationRepository.Find(p => p.Rejected && p.Owner.Equals(guid));
+            var publicationList = publicatons.Any() ?
+                publicatons.Select(p => new PublisherContentDownloadSerilizer(p, _uow)).ToList() : new List<PublisherContentDownloadSerilizer>();
+            return Ok(value: publicationList);
         }
        
         [HttpGet("get/pending/publisher/{guid}")]

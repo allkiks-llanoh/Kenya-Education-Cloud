@@ -83,8 +83,8 @@ namespace KEC.Curation.Web.Api.Controllers
 
             var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.
                                        PrincipalCuratorGuid.Equals(principalCuratorGuid)
-                                        && p.PublicationStageLogs
-                                                        .Max(l => l.Stage) == PublicationStage.PublicationApproval);
+                                       && !p.ChiefCuratorAssignment.Submitted
+                                        );
             var publicationList = publications.Any() ?
                 publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
             return Ok(value: publicationList);
@@ -254,7 +254,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound(value: new { message = "Publication Not Found in Repository." });
             }
-
+            var _publication = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault(); 
             try
             {
 
@@ -275,12 +275,21 @@ namespace KEC.Curation.Web.Api.Controllers
                     Notes = model.Notes,
                     CreatedAtUtc = DateTime.UtcNow,
                     Owner = model.PrincipalCuratorGuid,
-                    ActionTaken = model.ActionTaken
+                    Stage = PublicationStage.PublicationApproval
                 };
                 _uow.PublicationStageLogRepository.Add(recommendation);
 
+                if(model.ActionTaken =="PublicationApproved")
+                {
+                    recommendation.ActionTaken = ActionTaken.PublicationApproved;
+                }
+                else
+                {
+                    recommendation.ActionTaken = ActionTaken.PublicationRejected;
+                }
+                _publication.Submitted = true;
+  
                 _uow.Complete();
-                _uow.PublicationRepository.ProcessToTheNextStage(publication);
                 return Ok(value: new { message = "Recommendations Sent To Curation Managers" });
             }
             catch (Exception)
@@ -290,15 +299,15 @@ namespace KEC.Curation.Web.Api.Controllers
             }
         }
         [HttpPatch("update/chiefcuratorcomments/{id}")]
-        public IActionResult UpdateChiefCurationComments(int publicationId, [FromBody]ChiefFlagSubmittedSerilizer model)
+        public IActionResult UpdateChiefCurationComments([FromQuery]int publicationId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(modelState: ModelState);
             }
-            var assigment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.Submitted == false
-                                                                  && p.PublicationId.Equals(model.publicationId)
-                                                                  && p.PrincipalCuratorGuid.Equals(model.UserGuid))
+            var assigment = _uow.ChiefCuratorAssignmentRepository.Find(p => !p.Submitted
+                                                                  && p.PublicationId.Equals(publicationId))
+                                                                
                                                                   .FirstOrDefault();
             if (assigment == null)
             {
