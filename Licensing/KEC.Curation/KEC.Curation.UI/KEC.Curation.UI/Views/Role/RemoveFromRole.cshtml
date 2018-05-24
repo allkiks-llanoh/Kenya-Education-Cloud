@@ -1,25 +1,28 @@
 ﻿@using KEC.Curation.UI.Models;
-@model ChiefCurators
+@model RoleRemoveViewModel
 @{
     ViewBag.Title = "RemoveFromRole";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdminRoles.cshtml";
 }
 @{
     var UserId = Request.Params["Id"];
     var RoleId = Request.Params["Role"];
 }
-    <h2>Remove User From Role</h2>
-    @using (Html.BeginForm("DeleteRole", "Role"))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
+<h2>Remove User From Role</h2>
+@using (Html.BeginForm("DeleteRole", "Role", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 
-        <p>
-            Username :   <input type="text" name="guid" id="_userName" class="form-control" readonly value="@UserId">
-            Role Name:   <input type="text" name="roleName" id="roleName" class="form-control" readonly value="@RoleId">
-        </p>
-
-        <input type="submit"  class="btn btn-w-m btn-info" style="background-color:#00B95F;" value="Delete this user from Role" />
-    }
+    <div class="col-md-12">
+        @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control  required valid validate-equalTo-blur", Id= "RoleName", Value=RoleId })
+        @Html.ValidationMessageFor(m => m.RoleName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-12">
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control  required valid validate-equalTo-blur", Id = "UserName", Value = UserId })
+        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+    </div>
+    <input type="submit" class="btn btn-w-m btn-info" style="background-color:#00B95F;" value="Delete this user from Role" />
+}
 
 

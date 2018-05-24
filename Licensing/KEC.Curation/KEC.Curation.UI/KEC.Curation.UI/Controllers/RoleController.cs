@@ -149,27 +149,20 @@ namespace KEC.Curation.UI.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteRole(string _userName, string _roleName)
+        public async Task<ActionResult> DeleteRole(RoleRemoveViewModel model)
 
         {
-            var user = await UserManager.FindByNameAsync(_userName);
-            var role = await RoleManager.FindByNameAsync(_roleName);
+            var user = await UserManager.FindByNameAsync(model.UserName);
+            var role = await RoleManager.FindByNameAsync(model.RoleName);
             await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
-            return RedirectToAction("/CurationManagers/Curators");
+            return RedirectToAction("Index");
         }
         public ActionResult RemoveFromRole()
         {
             using (var context = new ApplicationDbContext())
-            {
-                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
-                var chiefCurator = new ChiefCurators
-                {
-                    Guid = user.Id,
-                    Subjectid = user.SubjectId,
-                    FullName = user.FullName
-                };
-                return View(chiefCurator);
-            }
+           
+                return View();
+            
         }
     }
 }
