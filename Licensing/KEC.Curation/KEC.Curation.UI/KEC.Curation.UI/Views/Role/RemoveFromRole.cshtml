@@ -8,6 +8,7 @@
     var UserId = Request.Params["Id"];
     var RoleId = Request.Params["Role"];
 }
+<br>
 <h2>Remove User From Role</h2>
 @using (Html.BeginForm("DeleteRole", "Role", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -22,6 +23,7 @@
         @Html.TextBoxFor(m => m.UserName, new { @class = "form-control readonly required valid validate-equalTo-blur", @readonly = "readonly",  Id = "UserName", Value = UserId })
         @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
     </div>
+    <br>
     <input type="submit" class="btn btn-w-m btn-info" style="background-color:#00B95F;" value="Delete this user from Role" />
 }
 

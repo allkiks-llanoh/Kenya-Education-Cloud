@@ -117,52 +117,24 @@ namespace KEC.Curation.UI.Controllers
             await RoleManager.DeleteAsync(role);
             return RedirectToAction("Index");
         }
-        [HttpPost]
-        public async Task<ActionResult> DeleteUserFromRoleChief(string email)
-
-        {
-            var roleName = "6c5175a7-372f-4cfe-a559-f862651813b2";
-            var role = await RoleManager.FindByNameAsync(roleName);
-            var user = await UserManager.FindByEmailAsync(email);
-            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
-            return RedirectToAction("/CurationManagers/ChiefCurators");
-        }
-        [HttpPost]
-        public async Task<ActionResult> DeleteUserFromRolePrincipal(string email)
-
-        {
-            var roleName = "cac3eacd-c5b6-4c40-aaf3-72a48dfb5b2d";
-            var role = await RoleManager.FindByNameAsync(roleName);
-            var user = await UserManager.FindByEmailAsync(email);
-            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
-            return RedirectToAction("/CurationManagers/PrincipalCurators");
-        }
-        [HttpPost]
-        public async Task<ActionResult> DeleteUserFromRoleCurator(string email)
-
-        {
-            var roleName = "ff0a2466-90b3-468f-8ed5-60a170414131";
-            var role = await RoleManager.FindByNameAsync(roleName);
-            var user = await UserManager.FindByEmailAsync(email);
-            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
-            return RedirectToAction("/CurationManagers/Curators");
-        }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteRole(RoleRemoveViewModel model)
 
         {
             var user = await UserManager.FindByNameAsync(model.UserName);
-            var role = await RoleManager.FindByNameAsync(model.RoleName);
-            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
-            return RedirectToAction("Index");
+          
+            var roleInUse =await  UserManager.GetRolesAsync(user.Id);
+
+            var result = await UserManager.RemoveFromRolesAsync(user.Id, roleInUse.ToArray());
+           
+            return RedirectToAction ("Index");
+         
         }
         public ActionResult RemoveFromRole()
         {
-            using (var context = new ApplicationDbContext())
-           
-                return View();
-            
+                return View();   
         }
     }
 }
