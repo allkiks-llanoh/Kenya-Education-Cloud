@@ -118,14 +118,34 @@ namespace KEC.Curation.UI.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public async Task<ActionResult> DeleteUserFromRoleChief(string guid)
+        public async Task<ActionResult> DeleteUserFromRoleChief(string email)
 
         {
-            var roleName = "30fae6a5-126f-4898-8440-fd666473659a";
+            var roleName = "6c5175a7-372f-4cfe-a559-f862651813b2";
             var role = await RoleManager.FindByIdAsync(roleName);
-            var user = await UserManager.FindByEmailAsync(guid);
+            var user = await UserManager.FindByEmailAsync(email);
             await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
             return RedirectToAction("/CurationManagers/ChiefCurators");
+        }
+        [HttpPost]
+        public async Task<ActionResult> DeleteUserFromRolePrincipal(string email)
+
+        {
+            var roleName = "cac3eacd-c5b6-4c40-aaf3-72a48dfb5b2d";
+            var role = await RoleManager.FindByIdAsync(roleName);
+            var user = await UserManager.FindByEmailAsync(email);
+            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
+            return RedirectToAction("/CurationManagers/PrincipalCurators");
+        }
+        [HttpPost]
+        public async Task<ActionResult> DeleteUserFromRoleCurator(string email)
+
+        {
+            var roleName = "ff0a2466-90b3-468f-8ed5-60a170414131";
+            var role = await RoleManager.FindByIdAsync(roleName);
+            var user = await UserManager.FindByEmailAsync(email);
+            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
+            return RedirectToAction("/CurationManagers/Curators");
         }
         public ActionResult RemoveFromRole()
         {
