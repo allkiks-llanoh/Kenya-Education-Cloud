@@ -15,11 +15,11 @@
     @Html.ValidationSummary(true)
 
     <div class="col-md-12">
-        @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control  required valid validate-equalTo-blur", Id= "RoleName", Value=RoleId })
+        @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control readonly required valid validate-equalTo-blur", @readonly = "readonly", Id = "RoleName", Value=RoleId})
         @Html.ValidationMessageFor(m => m.RoleName, "", new { @class = "text-danger" })
     </div>
     <div class="col-md-12">
-        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control  required valid validate-equalTo-blur", Id = "UserName", Value = UserId })
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control readonly required valid validate-equalTo-blur", @readonly = "readonly",  Id = "UserName", Value = UserId })
         @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
     </div>
     <input type="submit" class="btn btn-w-m btn-info" style="background-color:#00B95F;" value="Delete this user from Role" />
