@@ -9,11 +9,12 @@
 }
 @section Scripts
 {
+    @Scripts.Render("~/plugins/footable")
+    @Scripts.Render("~/plugins/sweetAlert")
     <script src="~/js/GetChiefCurators.js"></script>
     <script src="~/js/TryAssignMultiple.js"></script>
     <script src="~/js/SelectedContentDrawTable.js"></script>
-    @Scripts.Render("~/plugins/footable")
-    @Scripts.Render("~/plugins/sweetAlert")
+
     <script type="text/javascript">
         $(document).ready(function () {
 

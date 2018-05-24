@@ -577,7 +577,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 });
 
                 _uow.ChiefCuratorAssignmentRepository.AddRange(assignmentList);
-               var newlyAssigned = _uow.ChiefCuratorAssignmentRepository.Find(p => model.SelectedContent.Contains(p.Id)).ToList();
+               var newlyAssigned = _uow.ChiefCuratorAssignmentRepository.Find(p => model.SelectedContent.Contains(p.PublicationId)).ToList();
                var toBeAssigned = _uow.PublicationRepository.Find(p => model.SelectedContent.Contains(p.Id)).ToList();
 
                 Parallel.ForEach(newlyAssigned, (_assignment, loopThroughAssignments) =>
