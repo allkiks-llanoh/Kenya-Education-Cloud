@@ -26,6 +26,12 @@ $(document).ready(function () {
             url: "https://curationapi-d.kec.ac.ke/api/chiefcurator/selected/assign",
             type: "POST",
             data: ajaxDatas(),
+            statusCode: {
+                400: () => { ShowAlert('Title Had Aready Been Assigned', "Info"); },
+                404: () => { ShowAlert('Title record could not be retrievd', "error"); },
+                403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); },
+                500: () => { ShowAlert('Something went wrong while assigning the Title', 'error'); }
+            },
             success: function (data, status, jxhr) {
                 $('#assign-p').html('Assign');
                 ShowAlert("Publication processed successfully","success");
