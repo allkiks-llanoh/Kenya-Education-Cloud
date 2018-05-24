@@ -122,7 +122,7 @@ namespace KEC.Curation.UI.Controllers
 
         {
             var roleName = "6c5175a7-372f-4cfe-a559-f862651813b2";
-            var role = await RoleManager.FindByIdAsync(roleName);
+            var role = await RoleManager.FindByNameAsync(roleName);
             var user = await UserManager.FindByEmailAsync(email);
             await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
             return RedirectToAction("/CurationManagers/ChiefCurators");
@@ -132,7 +132,7 @@ namespace KEC.Curation.UI.Controllers
 
         {
             var roleName = "cac3eacd-c5b6-4c40-aaf3-72a48dfb5b2d";
-            var role = await RoleManager.FindByIdAsync(roleName);
+            var role = await RoleManager.FindByNameAsync(roleName);
             var user = await UserManager.FindByEmailAsync(email);
             await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
             return RedirectToAction("/CurationManagers/PrincipalCurators");
@@ -142,8 +142,18 @@ namespace KEC.Curation.UI.Controllers
 
         {
             var roleName = "ff0a2466-90b3-468f-8ed5-60a170414131";
-            var role = await RoleManager.FindByIdAsync(roleName);
+            var role = await RoleManager.FindByNameAsync(roleName);
             var user = await UserManager.FindByEmailAsync(email);
+            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
+            return RedirectToAction("/CurationManagers/Curators");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteRole(string _userName, string _roleName)
+
+        {
+            var user = await UserManager.FindByNameAsync(_userName);
+            var role = await RoleManager.FindByNameAsync(_roleName);
             await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
             return RedirectToAction("/CurationManagers/Curators");
         }
