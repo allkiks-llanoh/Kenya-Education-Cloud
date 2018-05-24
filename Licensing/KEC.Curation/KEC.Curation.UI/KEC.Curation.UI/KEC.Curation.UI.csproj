@@ -1011,6 +1011,7 @@
     <Content Include="Views\Home\ListSubjects.cshtml" />
     <Content Include="Views\Home\EditSubjects.cshtml" />
     <Content Include="Views\PrincipalCurator\AssignMultiple.cshtml" />
+    <Content Include="Views\Shared\RegistrationError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
