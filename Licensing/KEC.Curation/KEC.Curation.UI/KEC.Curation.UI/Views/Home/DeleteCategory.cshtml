@@ -6,7 +6,7 @@
 @section Scripts
 {
 
-    <script src="@Url.Content("~/js/SubjectTypes.js")"></script>
+    <script src="@Url.Content("~/js/DeleteCategory.js")"></script>
     <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
     <script src="~/js/EditSubject.js"></script>
 }
@@ -27,19 +27,16 @@
                 <small>@ViewData["Message"]</small>
                 <br>
                 <br>
-
-                <div class="row align-left">
-                    <div class="col-sm-2">
-                        <label for="Name">Name</label>
-                    </div>
-                    <div class="col-sm-6">
-                        <input type="text" name="Name" id="Name" class="form-control" value="@Name">
+                <hr />
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="panel panel-default" style="padding:10px;">
+                        <h5>Are you sure you want to delete category @Name?</h5>
                         <input type="hidden" name="Id" id="Id" class="form-control" value="@Id">
-                    </div>
-                    <div class="col-sm-4">
-                        <button type="submit" id="editsubject" style="background-color:#00b95f;" class="btn btn-w-m btn-primary pull-right">Edit Subject</button>
+                        <a href="/Home/ListCategory" class="btn btn-danger">No</a>
+                        <button type="submit" id="deletecat" style="background-color:#00b95f;" class="btn btn-primary">Yes</button>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

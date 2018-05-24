@@ -70,7 +70,7 @@ namespace KEC.Curation.Web.Api.Controllers
         // Patch: api/Levels/5
         [HttpPatch("{id}")]
 
-        public IActionResult UpdateLevel(int Id, LevelsUploadSerilizer model)
+        public IActionResult UpdateLevel(int Id, [FromBody]LevelsUploadSerilizer model)
         {
             if (!ModelState.IsValid)
             {
