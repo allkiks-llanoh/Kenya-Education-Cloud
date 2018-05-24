@@ -141,7 +141,7 @@ namespace KEC.Curation.UI.Controllers
 
             var roleToAsign = await RoleManager.FindByNameAsync(model.RoleName);
 
-            var result = await UserManager.AddToRoleAsync(user.Id, roleToAsign.Id);
+            var result = await UserManager.AddToRoleAsync(user.Id, model.RoleName);
 
             return RedirectToAction("Index", "CurationManagers");
 
@@ -154,8 +154,11 @@ namespace KEC.Curation.UI.Controllers
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "";
-
-                return View();           
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (var role in RoleManager.Roles)
+                list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+            ViewBag.Roles = list;
+            return View();           
             
         }
         public ActionResult ListUsers()
