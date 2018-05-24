@@ -12,8 +12,8 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-    //[CustomAuthorize(Roles = "Admin")]
-    [AllowAnonymous]
+    [CustomAuthorize(Roles = "Admin")]
+   
     public class RoleController : Controller
     {
         private ApplicationRoleManager _roleManager;
