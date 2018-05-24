@@ -168,14 +168,14 @@ namespace KEC.Curation.Web.Api.Controllers
 
 
                 _uow.CuratorAssignmentRepository.Add(assignment);
-                var _assignedNew = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
-                _assignedNew.Assigned = true;
+                publication.ChiefCuratorAssignmentId = assignment.Id;
+                var newChiefCuratorAssignment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+                newChiefCuratorAssignment.Assigned = true;
                 _uow.Complete();
                 return Ok(value: new { message = "Content assigned successfully" });
             }
             catch (Exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
