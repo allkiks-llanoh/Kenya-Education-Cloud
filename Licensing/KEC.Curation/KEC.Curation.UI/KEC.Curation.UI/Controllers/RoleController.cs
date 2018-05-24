@@ -128,13 +128,51 @@ namespace KEC.Curation.UI.Controllers
             var roleInUse =await  UserManager.GetRolesAsync(user.Id);
 
             var result = await UserManager.RemoveFromRolesAsync(user.Id, roleInUse.ToArray());
-           
-            return RedirectToAction ("Index");
-         
+
+            return RedirectToAction("ChiefCurators", "CurationManagers");
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddToRole(RoleRemoveViewModel model)
+
+        {
+            var user = await UserManager.FindByNameAsync(model.UserName);
+
+            var roleToAsign = await RoleManager.FindByNameAsync(model.RoleName);
+
+            var result = await UserManager.AddToRoleAsync(user.Id, roleToAsign.Id);
+
+            return RedirectToAction("Index", "CurationManagers");
+
         }
         public ActionResult RemoveFromRole()
         {
                 return View();   
+        }
+        public ActionResult UserManagement()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "";
+
+                return View();           
+            
+        }
+        public ActionResult ListUsers()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "";
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
         }
     }
 }
