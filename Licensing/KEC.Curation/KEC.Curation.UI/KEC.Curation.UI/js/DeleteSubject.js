@@ -1,11 +1,12 @@
 ﻿
 (function () {
     $(document).ready(function () {
-        $('#delete').click(deleteSubject);
+        $('#deletesubject').click(deleteSubject);
     });
     function deleteSubject(e) {
         e.preventDefault();
-        let idd = $('#Id').attr('data-delete');
+        let idd = $('#Id').val();
+        let name = $('#Name').val();
         let url = apiBaseUrl.concat(`/Subjects/${idd}`);
         $.ajax({
             headers : {
@@ -25,6 +26,7 @@
             }
         }).success(function (data, textStatus, jqXHR) {
             ShowAlert("Subject deleted", "success");
+            window.location.assign("http://curation-d.kec.ac.ke/Home/ListSubjects");
         }).fail(function () {
             ShowAlert("There was an error, please try again", 'error');
         });

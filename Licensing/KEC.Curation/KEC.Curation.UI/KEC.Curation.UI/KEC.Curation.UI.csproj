@@ -354,6 +354,7 @@
     <Content Include="Content\plugins\images\bootstrap-colorpicker\hue.png" />
     <Content Include="Content\plugins\images\bootstrap-colorpicker\saturation.png" />
     <Content Include="Content\plugins\images\cmss.jpg" />
+    <Content Include="Content\plugins\images\KEClogo.png" />
     <Content Include="Content\plugins\images\logo.png" />
     <Content Include="Content\plugins\images\sort.png" />
     <Content Include="Content\plugins\images\sort_asc.png" />
@@ -404,6 +405,7 @@
     <Content Include="js\chiefCuratorAssignPublication.js" />
     <Content Include="js\chiefCuratorPublicationHistory.js" />
     <Content Include="js\chiefCuratorPublications.js" />
+    <Content Include="js\delcat.js" />
     <Content Include="js\DeleteCategory.js" />
     <Content Include="js\DeleteLevel.js" />
     <Content Include="js\DeleteSubject.js" />
@@ -1012,6 +1014,9 @@
     <Content Include="Views\Home\EditSubjects.cshtml" />
     <Content Include="Views\PrincipalCurator\AssignMultiple.cshtml" />
     <Content Include="Views\Shared\RegistrationError.cshtml" />
+    <Content Include="Views\Home\DeleteCategory.cshtml" />
+    <Content Include="Views\Home\DeleteSubject.cshtml" />
+    <Content Include="Views\Home\DeleteLevel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1060,9 +1065,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63772</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63773/</IISUrl>
+          <IISUrl>http://localhost:63775/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost:63773/</IISAppRootUrl>
+          <IISAppRootUrl>http://localhost:63775/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

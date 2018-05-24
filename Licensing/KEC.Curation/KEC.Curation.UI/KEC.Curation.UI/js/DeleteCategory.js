@@ -1,11 +1,11 @@
 ﻿
-(function () {
     $(document).ready(function () {
-        $('#delete').click(deleteCategory);
+        $('#deletecat').click(deleteCategory);
     });
     function deleteCategory(e) {
         e.preventDefault();
-        let idd = $('#Id').attr('data-delete');
+        let idd = $('#Id').val();
+        let name = $('#Name').val();
         let url = apiBaseUrl.concat(`/SubjectTypes/${idd}`);
         $.ajax({
             headers : {
@@ -25,9 +25,9 @@
             }
         }).success(function (data, textStatus, jqXHR) {
             ShowAlert("Category deleted", "success");
+            window.location.assign("http://curation-d.kec.ac.ke/Home/ListCategory");
         }).fail(function () {
             ShowAlert("There was an error, please try again", 'error');
         });
     }
 
-})();
