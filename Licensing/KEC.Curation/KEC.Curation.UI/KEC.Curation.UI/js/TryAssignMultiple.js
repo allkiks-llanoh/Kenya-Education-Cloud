@@ -1,7 +1,7 @@
 ﻿
 $(document).ready(function () {
+    var apiBaseUrls = "http://localhost:15177/api";
     let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurator`)
-  
     function ajaxDatas() {
 
         var principalCuratorGuid = $('#CurrentUserGuid').val();

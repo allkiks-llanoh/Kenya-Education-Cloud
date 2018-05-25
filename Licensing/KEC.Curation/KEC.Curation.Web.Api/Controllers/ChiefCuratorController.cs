@@ -252,7 +252,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("AssignedPublicationWhenGettingCuration/{id}")]
         public IActionResult AssignedPublicationWhenGettingCuration(int Id, string chiefCuratorGuid)
         {
-            
+
             var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(Id)).FirstOrDefault();
             if (publication == null)
             {
@@ -399,7 +399,7 @@ namespace KEC.Curation.Web.Api.Controllers
                                                                   && p.Id == AssignmentId
                                                                   && p.Assignee.Equals(model.UserGuid))
                                                                   .FirstOrDefault();
-           
+
             if (assigment == null)
             {
                 return NotFound("Record could not be retrieved");
@@ -574,24 +574,33 @@ namespace KEC.Curation.Web.Api.Controllers
                     {
                         nextStageList.Add(nextStage);
                     }
-                });
 
+                });
                 _uow.ChiefCuratorAssignmentRepository.AddRange(assignmentList);
-               var newlyAssigned = _uow.ChiefCuratorAssignmentRepository.Find(p => model.SelectedContent.Contains(p.PublicationId)).ToList();
-               var toBeAssigned = _uow.PublicationRepository.Find(p => model.SelectedContent.Contains(p.Id)).ToList();
-
-                Parallel.ForEach(newlyAssigned, (_assignment, loopThroughAssignments) =>
-                {
-                    Parallel.ForEach(toBeAssigned, (publication, loopThroughPublications) =>
-                    {
-                        publication.ChiefCuratorAssignmentId = _assignment.Id;
-                    });
-
-                    _assignment.Assigned = true;
-                });
-
                 _uow.PublicationStageLogRepository.AddRange(nextStageList);
                 _uow.Complete();
+
+
+                var newlyAssigned = _uow.ChiefCuratorAssignmentRepository.Find(p => model.SelectedContent.Contains(p.PublicationId)).ToList();
+
+                Parallel.ForEach(publications, (publication, loopThroughPublications) =>
+                {
+                    Parallel.ForEach(newlyAssigned, (_newlyAssigned, loopThroughAssignments) =>
+                    {
+                        lock (padLock)
+                        {
+                            publication.ChiefCuratorAssignmentId = _newlyAssigned.Id;
+                            _uow.Complete();
+                        }
+                        lock (padLock)
+                        {
+                            _newlyAssigned.Assigned = true;
+                            _uow.Complete();
+                        }
+                       
+                    });
+                });
+
                 return Ok(value: new { message = "Content assigned successfully" });
             }
             catch (Exception)
@@ -611,5 +620,5 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: new PublicationDownloadSerilizerToCurators(publication, _uow));
         }
     }
-   
+
 }
