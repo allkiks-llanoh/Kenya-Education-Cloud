@@ -167,15 +167,15 @@ namespace KEC.Curation.Web.Api.Controllers
                 };
 
 
-                _uow.CuratorAssignmentRepository.Add(assignment);
-                publication.ChiefCuratorAssignmentId = assignment.Id;
-                var newChiefCuratorAssignment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
-                newChiefCuratorAssignment.Assigned = true;
+                _uow.CuratorAssignmentRepository.Add(assignment);      
+                var _new = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+                _new.Assigned = bool.Parse("true");
                 _uow.Complete();
                 return Ok(value: new { message = "Content assigned successfully" });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                 ex.GetBaseException();
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
@@ -590,14 +590,13 @@ namespace KEC.Curation.Web.Api.Controllers
                         lock (padLock)
                         {
                             publication.ChiefCuratorAssignmentId = _newlyAssigned.Id;
-                            _uow.Complete();
                         }
                         lock (padLock)
                         {
                             _newlyAssigned.Assigned = true;
-                            _uow.Complete();
+
                         }
-                       
+                        _uow.Complete();
                     });
                 });
 
