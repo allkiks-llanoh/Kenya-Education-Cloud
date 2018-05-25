@@ -99,7 +99,7 @@
             $('#assign').modal('hide');
             $('.modal-backdrop').remove();
             ShowAlert('Curator assigned sucessfully', 'success');
-            loadCurators();
+           
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert('Something went wrong while processing curator assignment', 'error');
         });
