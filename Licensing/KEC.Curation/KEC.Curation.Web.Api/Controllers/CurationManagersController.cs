@@ -14,7 +14,6 @@ namespace KEC.Curation.Web.Api.Controllers
     public class CurationManagersController : Controller
     {
         private readonly IUnitOfWork _uow;
-
         public CurationManagersController(IUnitOfWork uow)
         {
             _uow = uow;
@@ -23,36 +22,27 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("count/approved/publisher/{guid}")]
         public IActionResult CountApprovedPublisher(string guid)
         {
-
             var publicationsCount = _uow.PublicationRepository.Find(p => p.Approved && p.Owner.Equals(guid)).Count();
-
             return Ok(value: publicationsCount);
         }
         [HttpGet("count/rejected/publisher/{guid}")]
         public IActionResult CountRejectedPublisher(string guid)
         {
-
             var publicationsCount = _uow.PublicationRepository.Find(p => p.Rejected && p.Owner.Equals(guid)).Count();
-
             return Ok(value: publicationsCount);
         }
         [HttpGet("count/all/publisher/{guid}")]
         public IActionResult CountAllPublisher(string guid)
         {
-
             var publicationsCount = _uow.PublicationRepository.Find(p => p.Owner.Equals(guid)).Count();
-
             return Ok(value: publicationsCount);
         }
         #endregion
         #region Publishers Publications
-
         [HttpGet("get/all/publisher/{guid}")]
         public IActionResult GetAll(string guid)
         {
-
             var publicationsCount = _uow.PublicationRepository.Find(p => p.Owner.Equals(guid)).ToList();
-
             return Ok(value: publicationsCount);
         }
         [HttpGet("get/approved/publisher/{guid}")]
@@ -63,60 +53,46 @@ namespace KEC.Curation.Web.Api.Controllers
                 publicatons.Select(p => new PublisherContentDownloadSerilizer(p, _uow)).ToList() : new List<PublisherContentDownloadSerilizer>();
             return Ok(value: publicationList);
         }
-       
         [HttpGet("get/rejected/publisher/{guid}")]
         public IActionResult GetRejected(string guid)
         {
-
             var publicatons = _uow.PublicationRepository.Find(p => p.Rejected && p.Owner.Equals(guid));
             var publicationList = publicatons.Any() ?
                 publicatons.Select(p => new PublisherContentDownloadSerilizer(p, _uow)).ToList() : new List<PublisherContentDownloadSerilizer>();
             return Ok(value: publicationList);
         }
-       
         [HttpGet("get/pending/publisher/{guid}")]
         public IActionResult GetPending(string guid)
         {
-
             var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && p.Owner.Equals(guid) && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
                                        == PublicationStage.PublicationApproval).ToList();
-
             return Ok(value: publicationsCount);
         }
-        
         #endregion
         #region Get Counts
         [HttpGet("count/publications")]
         public IActionResult CountPublications()
         {
-
             var publicationsCount = _uow.PublicationRepository.GetAll().Count();
-           
             return Ok(value: publicationsCount);
         }
         [HttpGet("count/approved")]
         public IActionResult CountApproved()
         {
-
             var publicationsCount = _uow.PublicationRepository.Find(p => p.Approved).Count();
-
             return Ok(value: publicationsCount);
         }
         [HttpGet("count/rejected")]
         public IActionResult CountRejected()
         {
-
             var publicationsCount = _uow.PublicationRepository.Find(p => p.Rejected).Count();
-
             return Ok(value: publicationsCount);
         }
         [HttpGet("count/pending")]
         public IActionResult CountPending()
         {
-
             var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
                                        == PublicationStage.PublicationApproval).Count();
-
             return Ok(value: publicationsCount);
         }
         #endregion
@@ -124,21 +100,17 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("getcomments")]
         public IActionResult GetComments(int publicationId)
         {
-
             var curationComments = _uow.CurationManagersCommentRepository.Find(p => p.PublicationId.Equals(publicationId));
             var curationCommentsList = curationComments.Any() ?
-               curationComments.Select(p => new GetComments(p, _uow)).ToList() : new List<GetComments>();
-
+                curationComments.Select(p => new GetComments(p, _uow)).ToList() : new List<GetComments>();
             return Ok(value: curationCommentsList);
         }
         [HttpGet("getcomments/fromcuration")]
         public IActionResult GetCommentsFromCuration(int publicationId)
         {
-
             var curationComments = _uow.PublicationRepository.Find(p => p.Id.Equals(publicationId));
             var curationCommentsList = curationComments.Any() ?
-               curationComments.Select(p => new GetCommentsFromCurationSerilizer(p, _uow)).ToList() : new List<GetCommentsFromCurationSerilizer>();
-
+                curationComments.Select(p => new GetCommentsFromCurationSerilizer(p, _uow)).ToList() : new List<GetCommentsFromCurationSerilizer>();
             return Ok(value: curationCommentsList);
         }
         #endregion
@@ -162,7 +134,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 var comment = new CurationManagersComment
                 {
-                    PublicationId= assigment.Id,
+                    PublicationId = assigment.Id,
                     Notes = model.Notes
                 };
                 _uow.CurationManagersCommentRepository.Add(comment);
@@ -181,7 +153,6 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             catch (Exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
@@ -191,17 +162,13 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("get/publications/{Id}")]
         public IActionResult GetAllPublicationsById(int Id)
         {
-
-            var publicationsCount = _uow.PublicationRepository.Find(p=> p.Id.Equals(Id)).FirstOrDefault();
-
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Id.Equals(Id)).FirstOrDefault();
             return Ok(value: publicationsCount);
         }
         [HttpGet("get/publications")]
         public IActionResult GetAllPublications()
         {
-
             var publications = _uow.PublicationRepository.GetAll().ToList();
-
             var publicationList = publications.Any() ?
                 publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
@@ -209,9 +176,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("get/approved")]
         public IActionResult GetApproved()
         {
-
             var publications = _uow.PublicationRepository.Find(p => p.Approved).ToList();
-
             var publicationList = publications.Any() ?
                 publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
@@ -219,48 +184,39 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("get/approved/{Id}")]
         public IActionResult GetApprovedById(int Id)
         {
-
-            var publicationsCount = _uow.PublicationRepository.Find(p => p.Approved &&p.Id.Equals(Id)).FirstOrDefault();
-
+            var publicationsCount = _uow.PublicationRepository.Find(p => p.Approved && p.Id.Equals(Id)).FirstOrDefault();
             return Ok(value: publicationsCount);
         }
         [HttpGet("get/rejected")]
         public IActionResult GetRejected()
         {
-
             var publications = _uow.PublicationRepository.Find(p => p.Rejected).ToList();
-
             var publicationList = publications.Any() ?
-               publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
+                publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
         }
         [HttpGet("get/rejected/{Id}")]
         public IActionResult GetRejectedById(int Id)
         {
-
             var publicationsCount = _uow.PublicationRepository.Find(p => p.Rejected && p.Id.Equals(Id)).FirstOrDefault();
-
             return Ok(value: publicationsCount);
         }
         [HttpGet("get/pending")]
         public IActionResult GetPending()
         {
-
             var publications = _uow.PublicationRepository.Find(p => !p.Rejected && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
                                        == PublicationStage.PublicationApproval).ToList();
             var publicationList = publications.Any() ?
-               publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
+                publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
         }
-       //Pending Publications By Id
+        //Pending Publications By Id
         [HttpGet("get/pending/{id}")]
         public IActionResult GetPendingById(int Id)
         {
-
             var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
                                        == PublicationStage.PublicationApproval
-                                       &&p.Id.Equals(Id)).FirstOrDefault();
-
+                                       && p.Id.Equals(Id)).FirstOrDefault();
             return Ok(value: publicationsCount);
         }
         #endregion

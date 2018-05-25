@@ -19,7 +19,6 @@ namespace KEC.Curation.Web.Api.Controllers
     public class ChiefCuratorController : Controller
     {
         private IUnitOfWork _uow;
-
         public ChiefCuratorController(IUnitOfWork uow)
         {
             _uow = uow;
