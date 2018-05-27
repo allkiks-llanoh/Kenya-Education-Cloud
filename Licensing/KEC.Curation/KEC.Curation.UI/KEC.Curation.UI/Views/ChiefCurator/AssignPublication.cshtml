@@ -11,6 +11,7 @@
     <script src="@Url.Content("~/js/UpdateFullyAssign.js")"></script>
     <script src="@Url.Content("~/js/GetCurators.js")"></script>
 }
+@{ var Urls = Request.Params["Urls"]; }
 
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="wrapper wrapper-content animated fadeIn">
@@ -30,13 +31,21 @@
                         <dl id="publication-details"></dl>
                     </div>
                     <div class="ibox-footer">
-                        
+
                         Publication Details
                     </div>
                 </div>
             </div>
-
-
+            <div class="ibox-content no-padding">
+                <div class="visible-scrollbar" id="document_viewer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <iframe allowfullscreen="" webkitallowfullscreen="" style="height:100vh;width:80vw"
+                                    src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -106,21 +115,21 @@
                     <div class="ibox-content">
 
                         @*<div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover dataTables-example"
-                                   data-publicationurl="@ViewBag.AssignPublicationUrl" id="publications-to-curate">
-                                <thead>
-                                    <tr>
-                                        <th>Publication</th>
-                                        <th>Curator</th>
-                                        <th>Section</th>
-                                        <th>Assignment Date</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
+                                <table class="table table-striped table-bordered table-hover dataTables-example"
+                                       data-publicationurl="@ViewBag.AssignPublicationUrl" id="publications-to-curate">
+                                    <thead>
+                                        <tr>
+                                            <th>Publication</th>
+                                            <th>Curator</th>
+                                            <th>Section</th>
+                                            <th>Assignment Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
 
-                            </table>
-                        </div>*@
+                                </table>
+                            </div>*@
 
                     </div>
                 </div>

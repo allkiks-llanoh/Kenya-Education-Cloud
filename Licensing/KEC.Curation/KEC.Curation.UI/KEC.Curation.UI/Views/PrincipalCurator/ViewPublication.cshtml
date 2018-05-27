@@ -6,14 +6,13 @@
 }
 @{
     var PubId = Request.Params["Pub"];
-
+    var Urls = Request.Params["Urls"];
 
 }
 @section Scripts{
    
     <script src="~/js/principalCuratorViewPublication.js"></script>
     <script src="@Url.Content("~/js/CurationCommentsChief.js")"></script>
-
     <script src="@Url.Content("~/js/PrincipalCuratorComments.js")"></script>
     <script src="@Url.Content("~/js/FullyAssignChiefCurator.js")"></script>
     @Scripts.Render("~/plugins/summernote")
@@ -44,8 +43,16 @@
                     </div>
                 </div>
             </div>
-
-
+            <div class="ibox-content no-padding">
+                <div class="visible-scrollbar" id="document_viewer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <iframe allowfullscreen="" webkitallowfullscreen="" style="height:100vh;width:80vw"
+                                    src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-12">

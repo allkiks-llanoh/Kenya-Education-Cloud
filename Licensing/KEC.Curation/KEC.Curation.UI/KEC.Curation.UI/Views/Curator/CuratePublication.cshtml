@@ -5,9 +5,8 @@
 }
 @section Scripts{
     <script src="@Url.Content("~/js/curate.js")"></script>
-  
 }
-
+@{ var Urls = Request.Params["Urls"]; }
 <div class="wrapper wrapper-content animated fadeInRight" id="assignment-view" data-assignmentId="@ViewBag.AssignmentId">
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">
@@ -26,12 +25,21 @@
                         <dl id="assignment-details"></dl>
                     </div>
                     <div class="ibox-footer">
-                       
+
                         Assignment Details
                     </div>
                 </div>
             </div>
-
+            <div class="ibox-content no-padding">
+                <div class="visible-scrollbar" id="document_viewer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <iframe allowfullscreen="" webkitallowfullscreen="" style="height:100vh;width:80vw"
+                                    src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 

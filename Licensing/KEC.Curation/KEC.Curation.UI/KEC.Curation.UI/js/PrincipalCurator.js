@@ -35,7 +35,7 @@ $(document).ready(function () {
                 $('#LegalApprove').html('Yes');
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
-                ShowAlert("Curation notes saved successfully", "success");
+                ShowAlert("Title Assigned Succesfully", "success");
             },
             error: function (response, status, jxhr) {
 

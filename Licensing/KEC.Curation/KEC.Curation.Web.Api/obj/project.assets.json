@@ -13505,11 +13505,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
+      "projectUniqueName": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
       "projectName": "KEC.Curation.Web.Api",
-      "projectPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
+      "projectPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
       "packagesPath": "C:\\Users\\LLANOH\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\obj\\",
+      "outputPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13528,8 +13528,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj": {
-              "projectPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj"
+            "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj": {
+              "projectPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj"
             }
           }
         }
