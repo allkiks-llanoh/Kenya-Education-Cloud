@@ -279,6 +279,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CustomStyles\ChiefCurator.css" />
+    <Content Include="Content\CustomStyles\DocumentViewer.css" />
     <Content Include="Content\email.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
@@ -882,6 +883,26 @@
     <Content Include="Scripts\plugins\velocity\velocity.min.js" />
     <Content Include="Scripts\plugins\velocity\velocity.ui.min.js" />
     <Content Include="Scripts\plugins\video\responsible-video.js" />
+    <Content Include="Scripts\plugins\ViewerJS\compatibility.js" />
+    <Content Include="Scripts\plugins\ViewerJS\example.local.css" />
+    <Content Include="Scripts\plugins\ViewerJS\images\kogmbh.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\nlnet.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\texture.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-download.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-fullscreen.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-menuArrows.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-pageDown.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-pageUp.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-presentation.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-zoomIn.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-zoomOut.png" />
+    <Content Include="Scripts\plugins\ViewerJS\index.html" />
+    <Content Include="Scripts\plugins\ViewerJS\pdf.js" />
+    <Content Include="Scripts\plugins\ViewerJS\pdf.worker.js" />
+    <Content Include="Scripts\plugins\ViewerJS\pdfjsversion.js" />
+    <Content Include="Scripts\plugins\ViewerJS\text_layer_builder.js" />
+    <Content Include="Scripts\plugins\ViewerJS\ui_utils.js" />
+    <Content Include="Scripts\plugins\ViewerJS\webodf.js" />
     <Content Include="Scripts\plugins\wow\wow.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -1023,9 +1044,12 @@
     <Content Include="Views\CurationManagers\UserManagement.cshtml" />
     <Content Include="Views\Role\UserManagement.cshtml" />
     <Content Include="Views\Role\ListUsers.cshtml" />
+    <Content Include="Views\Curator\_DocumentViewerPartial.cshtml" />
+    <Content Include="Views\PrincipalCurator\_DocumentViewerPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\plugins\NewFolder1\" />
     <Folder Include="Views\GetUsers\" />
     <Folder Include="Views\Groups\" />
     <Folder Include="Views\UsersAdmin\" />

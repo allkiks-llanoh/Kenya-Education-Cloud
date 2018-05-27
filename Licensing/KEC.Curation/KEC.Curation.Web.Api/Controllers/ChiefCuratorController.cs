@@ -578,27 +578,22 @@ namespace KEC.Curation.Web.Api.Controllers
                 _uow.ChiefCuratorAssignmentRepository.AddRange(assignmentList);
                 _uow.PublicationStageLogRepository.AddRange(nextStageList);
                 _uow.Complete();
-
-
                 var newlyAssigned = _uow.ChiefCuratorAssignmentRepository.Find(p => model.SelectedContent.Contains(p.PublicationId)).ToList();
-
                 Parallel.ForEach(publications, (publication, loopThroughPublications) =>
                 {
                     Parallel.ForEach(newlyAssigned, (_newlyAssigned, loopThroughAssignments) =>
                     {
                         lock (padLock)
                         {
-                            publication.ChiefCuratorAssignmentId = _newlyAssigned.Id;
+                            publication.ChiefCuratorAssignmentId = (_newlyAssigned.Id);
                         }
                         lock (padLock)
                         {
                             _newlyAssigned.Assigned = true;
-
                         }
-                        _uow.Complete();
                     });
                 });
-
+                _uow.Complete();
                 return Ok(value: new { message = "Content assigned successfully" });
             }
             catch (Exception)
