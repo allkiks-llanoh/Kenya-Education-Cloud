@@ -5,19 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 @section Scripts
 {
-
-
     <script src="@Url.Content("~/js/PrincipalCurator.js")"></script>
     <script src="@Url.Content("~/js/GetChiefCurators.js")"></script>
-
     <link href="~/Content/CustomStyles/DocumentViewer.css" rel="stylesheet" />
     <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
-
-
     @Scripts.Render("~/plugins/sweetAlert")
 }
 @{
@@ -27,9 +20,7 @@
     var Publication = Request.Params["Publication"];
     var Urls = Request.Params["Urls"];
     var KICDNumber = Request.Params["KICDN"];
-
 }
-
 
 <div class="text-center m-t-lg">
     <h1>
@@ -65,7 +56,7 @@
                                     <div class="visible-scrollbar" id="document_viewer">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <iframe allowfullscreen="" webkitallowfullscreen="" style="height:100vh;width:80vw"
+                                                <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
                                                         src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
                                             </div>
                                         </div>
