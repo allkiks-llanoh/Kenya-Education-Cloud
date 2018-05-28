@@ -465,7 +465,6 @@
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Scripts\api\typehead_collection.json" />
-    <Content Include="Connected Services\keccurationAzureStorage\ConnectedService.json" />
     <Content Include="Content\assets\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\assets\fonts\fontawesome-webfont.woff" />
