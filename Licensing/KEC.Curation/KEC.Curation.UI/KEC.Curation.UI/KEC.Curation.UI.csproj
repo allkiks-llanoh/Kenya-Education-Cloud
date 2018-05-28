@@ -355,6 +355,7 @@
     <Content Include="Content\plugins\images\bootstrap-colorpicker\saturation.png" />
     <Content Include="Content\plugins\images\cmss.jpg" />
     <Content Include="Content\plugins\images\KEClogo.png" />
+    <Content Include="Content\plugins\images\KEClogo1.png" />
     <Content Include="Content\plugins\images\logo.png" />
     <Content Include="Content\plugins\images\sort.png" />
     <Content Include="Content\plugins\images\sort_asc.png" />

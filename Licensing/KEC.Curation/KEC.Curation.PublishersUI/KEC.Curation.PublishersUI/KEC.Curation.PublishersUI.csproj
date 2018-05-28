@@ -254,6 +254,7 @@
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\bg1.jpg" />
     <Content Include="Content\images\KEClogo.png" />
+    <Content Include="Content\images\KEClogo1.png" />
     <Content Include="Content\images\logo %281%29.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\overlay.png" />
