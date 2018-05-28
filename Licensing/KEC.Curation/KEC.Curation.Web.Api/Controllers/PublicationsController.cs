@@ -56,18 +56,6 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
                 var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccountName, StorageAccountKey), false);
-                //Create azure File Share
-                //var share = storageAccount.CreateCloudFileClient().GetShareReference("publications");
-                //await share.CreateIfNotExistsAsync();
-                ////Create File in root directory
-                //CloudFileClient cloudFileClient = storageAccount.CreateCloudFileClient();
-                //var rootDir = share.GetRootDirectoryReference();
-                //CloudFileShare newfile = cloudFileClient.GetShareReference("publications");
-                //await newfile.CreateIfNotExistsAsync();
-                //CloudFileDirectory rootDirectory = newfile.GetRootDirectoryReference();
-                //CloudFile file = rootDirectory.GetFileReference($"{model.PublicationFile.FileName}");
-                //await file.CreateAsync(model.PublicationFile.Length);
-                //create folders with files
                 //Blob starts here
                 var blob = storageAccount.CreateCloudBlobClient();
                 CloudBlobContainer container = blob.GetContainerReference("publications");
@@ -111,10 +99,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     await model.PublicationFile.CopyToAsync(stream);
                 }
                 blobs.Properties.ContentType = $"{model.PublicationFile.ContentType}";
-                //using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
-                //{
-                //    await file.UploadFromStreamAsync(stream);
-                //}
+
                 using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
                 {
                     await blobs.UploadFromStreamAsync(stream);

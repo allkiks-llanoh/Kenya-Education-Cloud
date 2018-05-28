@@ -146,8 +146,6 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             try
             {
-
-
                 var section = new PublicationSection
                 {
                     PublicationId = publication.Id,
@@ -164,9 +162,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     AssignedBy = model.AssignedBy,
                     PublicationId = publication.Id,
                 };
-
-
-                _uow.CuratorAssignmentRepository.Add(assignment);      
+                _uow.CuratorAssignmentRepository.Add(assignment);
                 var _new = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
                 _new.Assigned = bool.Parse("true");
                 _uow.Complete();
@@ -174,7 +170,7 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                 ex.GetBaseException();
+                ex.GetBaseException();
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
@@ -565,35 +561,15 @@ namespace KEC.Curation.Web.Api.Controllers
                         Stage = PublicationStage.Curation,
                         ActionTaken = ActionTaken.PublicationMoveToNextStage
                     };
-                    lock (padLock)
-                    {
-                        assignmentList.Add(assignment);
-                    }
-                    lock (padLock)
-                    {
-                        nextStageList.Add(nextStage);
-                    }
 
+                    _uow.ChiefCuratorAssignmentRepository.Add(assignment);
+                    _uow.PublicationStageLogRepository.Add(nextStage);
+                    publication.ChiefCuratorAssignmentId = (assignment.Id);
+                    assignment.Assigned = true;
                 });
-                _uow.ChiefCuratorAssignmentRepository.AddRange(assignmentList);
-                _uow.PublicationStageLogRepository.AddRange(nextStageList);
+
                 _uow.Complete();
-                var newlyAssigned = _uow.ChiefCuratorAssignmentRepository.Find(p => model.SelectedContent.Contains(p.PublicationId)).ToList();
-                Parallel.ForEach(publications, (publication, loopThroughPublications) =>
-                {
-                    Parallel.ForEach(newlyAssigned, (_newlyAssigned, loopThroughAssignments) =>
-                    {
-                        lock (padLock)
-                        {
-                            publication.ChiefCuratorAssignmentId = (_newlyAssigned.Id);
-                        }
-                        lock (padLock)
-                        {
-                            _newlyAssigned.Assigned = true;
-                        }
-                    });
-                });
-                _uow.Complete();
+
                 return Ok(value: new { message = "Content assigned successfully" });
             }
             catch (Exception)
