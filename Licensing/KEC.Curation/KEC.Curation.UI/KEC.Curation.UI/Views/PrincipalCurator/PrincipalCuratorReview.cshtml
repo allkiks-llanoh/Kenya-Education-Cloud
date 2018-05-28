@@ -5,18 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 @section Scripts
 {
-
-
     <script src="@Url.Content("~/js/PrincipalCurator.js")"></script>
     <script src="@Url.Content("~/js/GetChiefCurators.js")"></script>
-  
+    <link href="~/Content/CustomStyles/DocumentViewer.css" rel="stylesheet" />
     <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
-
-
     @Scripts.Render("~/plugins/sweetAlert")
 }
 @{
@@ -26,9 +20,7 @@
     var Publication = Request.Params["Publication"];
     var Urls = Request.Params["Urls"];
     var KICDNumber = Request.Params["KICDN"];
-
 }
-
 
 <div class="text-center m-t-lg">
     <h1>
@@ -56,10 +48,20 @@
 
                                 </dl>
                                 <div>
-                                   
+
                                 </div>
                             </div>
                             <div class="panel-footer">
+                                <div class="ibox-content no-padding">
+                                    <div class="visible-scrollbar" id="document_viewer">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
+                                                        src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="ibox-content no-padding">
                                         <div class="summernote" style="height:100px">
@@ -126,7 +128,7 @@
     <h1 id="identity" data-identity=@PId></h1>
     <h1 id="currentUser" data-currentUser=@Model.Guid></h1>
     <h1 id="kicd" data-kicdNumber=@Publication></h1>
-    <span ><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
+    <span><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
     <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
     <span><strong>Publication:&nbsp;</strong></span>@Publication
 

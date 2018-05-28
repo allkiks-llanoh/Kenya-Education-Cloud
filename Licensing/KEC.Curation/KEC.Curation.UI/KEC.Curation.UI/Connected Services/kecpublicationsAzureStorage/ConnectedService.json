@@ -1,6 +1,6 @@
 ﻿{
   "ProviderId": "Microsoft.Azure.Storage",
-  "Version": "15.5",
+  "Version": "15.7",
   "GettingStartedDocument": {
     "Uri": "https://go.microsoft.com/fwlink/?LinkId=513126"
   }

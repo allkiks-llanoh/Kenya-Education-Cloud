@@ -33,7 +33,7 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.publication + "</td>"));
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.status + "</td>"));
-    row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.publicationId}?Pub=${rowData.publicationId}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Comments</a>`));
+    row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.publicationId}?Pub=${rowData.publicationId}&Urls=${rowData.publicationUrl}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Comments</a>`));
 
     return row[0];
 };

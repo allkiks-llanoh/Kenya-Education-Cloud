@@ -12,8 +12,8 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-    //[CustomAuthorize(Roles = "Admin")]
-    [AllowAnonymous]
+    [CustomAuthorize(Roles = "Admin")]
+   
     public class RoleController : Controller
     {
         private ApplicationRoleManager _roleManager;
@@ -117,38 +117,54 @@ namespace KEC.Curation.UI.Controllers
             await RoleManager.DeleteAsync(role);
             return RedirectToAction("Index");
         }
+        
         [HttpPost]
-        public async Task<ActionResult> DeleteUserFromRoleChief(string email)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteRole(RoleRemoveViewModel model)
 
         {
-            var roleName = "6c5175a7-372f-4cfe-a559-f862651813b2";
-            var role = await RoleManager.FindByIdAsync(roleName);
-            var user = await UserManager.FindByEmailAsync(email);
-            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
-            return RedirectToAction("/CurationManagers/ChiefCurators");
+            var user = await UserManager.FindByNameAsync(model.UserName);
+          
+            var roleInUse =await  UserManager.GetRolesAsync(user.Id);
+
+            var result = await UserManager.RemoveFromRolesAsync(user.Id, roleInUse.ToArray());
+
+            return RedirectToAction("ChiefCurators", "CurationManagers");
+
         }
         [HttpPost]
-        public async Task<ActionResult> DeleteUserFromRolePrincipal(string email)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddToRole(RoleRemoveViewModel model)
 
         {
-            var roleName = "cac3eacd-c5b6-4c40-aaf3-72a48dfb5b2d";
-            var role = await RoleManager.FindByIdAsync(roleName);
-            var user = await UserManager.FindByEmailAsync(email);
-            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
-            return RedirectToAction("/CurationManagers/PrincipalCurators");
-        }
-        [HttpPost]
-        public async Task<ActionResult> DeleteUserFromRoleCurator(string email)
+            var user = await UserManager.FindByNameAsync(model.UserName);
 
-        {
-            var roleName = "ff0a2466-90b3-468f-8ed5-60a170414131";
-            var role = await RoleManager.FindByIdAsync(roleName);
-            var user = await UserManager.FindByEmailAsync(email);
-            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
-            return RedirectToAction("/CurationManagers/Curators");
+            var roleToAsign = await RoleManager.FindByNameAsync(model.RoleName);
+
+            var result = await UserManager.AddToRoleAsync(user.Id, model.RoleName);
+
+            return RedirectToAction("Index", "CurationManagers");
+
         }
         public ActionResult RemoveFromRole()
         {
+                return View();   
+        }
+        public ActionResult UserManagement()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "";
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (var role in RoleManager.Roles)
+                list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+            ViewBag.Roles = list;
+            return View();           
+            
+        }
+        public ActionResult ListUsers()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "";
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));

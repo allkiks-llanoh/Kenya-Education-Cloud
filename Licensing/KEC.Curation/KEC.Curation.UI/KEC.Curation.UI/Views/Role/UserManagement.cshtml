@@ -1,0 +1,38 @@
+﻿@model KEC.Curation.UI.Models.RoleRemoveViewModel
+
+@{
+    ViewBag.Title = "User Management";
+    Layout = "~/Views/Shared/_LayoutAdminRoles.cshtml";
+}
+
+@{
+    var UserId = Request.Params["Id"];
+
+}
+<h2>Manage User Roles</h2>
+
+
+@using (Html.BeginForm("AddToRole", "Role", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="col-md-12">
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control readonly required valid validate-equalTo-blur", @readonly = "readonly", Id = "UserName", Value = UserId })
+        </div>
+    </div>
+    <br>
+    <div class="col-md-12">
+        <div class="col-md-8">
+            @Html.DropDownListFor(m => m.RoleName, new SelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control" })
+
+        </div>
+    </div>
+
+    <br>
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-w-m btn-info" style="background-color:#00B95F;" value="Add This User To Role" />
+            </div>
+        </div>
+            }

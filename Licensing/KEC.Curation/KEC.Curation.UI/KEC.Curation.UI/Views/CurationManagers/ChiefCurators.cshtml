@@ -76,7 +76,8 @@
         //row.append($(`<td class="hidden"> + rowData.Id + </td>`));
         row.append($("<td>" + rowData.Value + "</td>"));
         row.append($("<td>" + rowData.Text + "</td>"));
-        row.append($(`<td> <a href="/Role/RemoveFromRole?Id=${rowData.Text}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Remove From Role</a>`));
+        row.append($(`<td> <a href="/Role/RemoveFromRole?Id=${rowData.Text}&Role=${rowData.Value}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Remove From Role</a>`));
+
         return row[0];
     };
 
