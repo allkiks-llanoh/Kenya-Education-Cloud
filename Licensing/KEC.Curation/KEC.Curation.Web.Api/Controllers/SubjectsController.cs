@@ -16,7 +16,6 @@ namespace KEC.Curation.Web.Api.Controllers
     public class SubjectsController : Controller
     {
         private readonly IUnitOfWork _uow;
-
         public SubjectsController(IUnitOfWork uow)
         {
             _uow = uow;
@@ -66,8 +65,6 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             return Ok(value: new SubjectDownloadSerializer(subject, _uow));
         }
-
-
         // POST: api/Subjects
         [HttpPost]
         public IActionResult CreateSubject([FromBody]SubjectUploadSerializer model)
@@ -101,7 +98,6 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-
         // PUT: api/Subjects/5
         [HttpPatch("subject/{id}")]
         public IActionResult EditSubject(int Id,[FromBody]SubjectUploadSerializerEdit model)
@@ -117,8 +113,6 @@ namespace KEC.Curation.Web.Api.Controllers
                 {
                     return NotFound("Subject could not retrieved for updating");
                 }
-                
-              
                 subject.Name = model.Name;
                 subject.UpdatedAtUtc = DateTime.Now.ToUniversalTime();
                 _uow.Complete();
@@ -126,16 +120,12 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             catch (Exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError,"Something went wrong while processing your request");
             }
-
         }
         [HttpDelete("{id}")]
-
         public IActionResult DeleteSubject(DeleteSerilizer model)
         {
-
             var level = _uow.SubjectRepository.Get(model.Id.GetValueOrDefault());
             if (level == null)
             {
@@ -146,6 +136,5 @@ namespace KEC.Curation.Web.Api.Controllers
             _uow.Complete();
             return Ok("Subject Deleted From Repository");
         }
-
     }
 }

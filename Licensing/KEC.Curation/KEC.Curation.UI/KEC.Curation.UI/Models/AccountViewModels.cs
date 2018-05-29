@@ -64,12 +64,12 @@ namespace KEC.Curation.UI.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Full Name is required")]
         [Display(Name = "Full Name ")]
         public string FullName { get; set; }
 
-        [Required]
-        [Display(Name = "Email Is Required")]
+        [Required(ErrorMessage = "Email is required")]
+        [Display(Name = "Email is Required")]
         [EmailAddress]
         public string Email { get; set; }
 
@@ -83,10 +83,12 @@ namespace KEC.Curation.UI.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        [Required(ErrorMessage = "Role is required")]
+        [Display(Name = "Role Name is required")]
         public string RoleName { get; set; }
         public string Subject { get; set; }
         public int SubjectId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "PhoneNumber is required")]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
     }

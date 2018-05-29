@@ -63,6 +63,60 @@ namespace KEC.Curation.UI.Controllers
             }
         }
         [CustomAuthorize(Roles = "Admin")]
+        public ActionResult DeleteCategory()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Delete Categories";
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
+        }
+        [CustomAuthorize(Roles = "Admin")]
+        public ActionResult DeleteLevel()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Delete Level";
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
+        }
+        [CustomAuthorize(Roles = "Admin")]
+        public ActionResult DeleteSubject()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Delete Subject";
+
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var chiefCurator = new ChiefCurators
+                {
+                    Guid = user.Id,
+                    Subjectid = user.SubjectId,
+                    FullName = user.FullName
+                };
+                return View(chiefCurator);
+            }
+        }
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult EditCategory()
         {
             ViewData["SubTitle"] = "Curation Management System";

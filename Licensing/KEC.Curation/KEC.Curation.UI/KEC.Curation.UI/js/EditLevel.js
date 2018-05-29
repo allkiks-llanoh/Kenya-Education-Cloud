@@ -1,7 +1,7 @@
 ﻿
 (function () {
     $(document).ready(function () {
-        $('#editcat').click(updateLevel);
+        $('#editlevel').click(updateLevel);
     });
     function updateLevel(e) {
         e.preventDefault();

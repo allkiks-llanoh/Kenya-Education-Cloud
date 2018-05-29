@@ -1,7 +1,7 @@
 ﻿
 $(document).ready(function () {
+
     let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurator`)
-  
     function ajaxDatas() {
 
         var principalCuratorGuid = $('#CurrentUserGuid').val();
@@ -23,16 +23,19 @@ $(document).ready(function () {
                 'Content-Type' : 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            url: "https://curationapi-d.kec.ac.ke/api/chiefcurator/selected/assign",
+            url: "https://curationapi.kec.ac.ke/api/chiefcurator/selected/assign",
             type: "POST",
             data: ajaxDatas(),
+            statusCode: {
+                400: () => { ShowAlert('Title Had Aready Been Assigned', "Info"); },
+                404: () => { ShowAlert('Title record could not be retrievd', "error"); },
+                403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); },
+                500: () => { ShowAlert('Something went wrong while assigning the Title', 'error'); }
+            },
             success: function (data, status, jxhr) {
                 $('#assign-p').html('Assign');
+                ShowAlert("Publication processed successfully","success");
             }
         });
     });
-
-
-},
-
-);
+});

@@ -210,6 +210,28 @@ namespace KEC.Curation.PublishersUI.Controllers
 
             }
         }
+        public ActionResult DetailReject(int Id)
+        {
+            ViewBag.PublicationId = Id;
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
+        }
         public ActionResult ChiefCurators()
         {
             ViewData["SubTitle"] = "Curation Management System";

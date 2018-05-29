@@ -12,8 +12,8 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-    //[CustomAuthorize(Roles = "Admin")]
-    [AllowAnonymous]
+    [CustomAuthorize(Roles = "Admin")]
+   
     public class RoleController : Controller
     {
         private ApplicationRoleManager _roleManager;
@@ -117,18 +117,54 @@ namespace KEC.Curation.UI.Controllers
             await RoleManager.DeleteAsync(role);
             return RedirectToAction("Index");
         }
+        
         [HttpPost]
-        public async Task<ActionResult> DeleteUserFromRoleChief(string guid)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteRole(RoleRemoveViewModel model)
 
         {
-            var roleName = "30fae6a5-126f-4898-8440-fd666473659a";
-            var role = await RoleManager.FindByIdAsync(roleName);
-            var user = await UserManager.FindByEmailAsync(guid);
-            await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
-            return RedirectToAction("/CurationManagers/ChiefCurators");
+            var user = await UserManager.FindByNameAsync(model.UserName);
+          
+            var roleInUse =await  UserManager.GetRolesAsync(user.Id);
+
+            var result = await UserManager.RemoveFromRolesAsync(user.Id, roleInUse.ToArray());
+
+            return RedirectToAction("ChiefCurators", "CurationManagers");
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddToRole(RoleRemoveViewModel model)
+
+        {
+            var user = await UserManager.FindByNameAsync(model.UserName);
+
+            var roleToAsign = await RoleManager.FindByNameAsync(model.RoleName);
+
+            var result = await UserManager.AddToRoleAsync(user.Id, model.RoleName);
+
+            return RedirectToAction("Index", "CurationManagers");
+
         }
         public ActionResult RemoveFromRole()
         {
+                return View();   
+        }
+        public ActionResult UserManagement()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "";
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (var role in RoleManager.Roles)
+                list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+            ViewBag.Roles = list;
+            return View();           
+            
+        }
+        public ActionResult ListUsers()
+        {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "";
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));

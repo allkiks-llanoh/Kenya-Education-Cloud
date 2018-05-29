@@ -99,47 +99,12 @@
             $('#assign').modal('hide');
             $('.modal-backdrop').remove();
             ShowAlert('Curator assigned sucessfully', 'success');
-            loadCurators();
+           
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert('Something went wrong while processing curator assignment', 'error');
         });
     }
 
-    //function loadCurators() {
-    //    let publicationId = $('#publication-view').attr('data-publicationId');
-    //    let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/assignments`);
-    //    let chiefCuratorGuid = $('#CurrentUserGuid').val();
-    //    $.ajax({
-    //        url: url,
-    //        crossDomain: true,
-    //        statusCode: {
-    //            404: () => { ShowAlert('Publication assignments could not be retrieved', "error"); }
-    //            ,
-    //            403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); }
-    //            ,
-    //            500: () => { ShowAlert('Something went wrong while loading publication curator assignments', 'error'); }
-    //        },
-    //        contentType: 'application/json',
-    //        accepts: 'application/json',
-    //        type: 'GET',
-    //        data: JSON.stringify({ chiefCuratorGuid: chiefCuratorGuid })
-    //    }).done(function (assignments, textStatus, jqXHR) {
-    //        $('#unassigned-publications').find('tbody').empty();
-    //        let targetTable = $('#publications-assignments').find('tbody');
-    //        assignments.forEach(function (assignment) {
-    //            var row = $targetTable.insertRow($targetTable.rows.length);
-    //            row.innerHTML = `<td>${assignment.publication}</td>
-    //                             <td>${assignment.curator}</td>
-    //                             <td>${assignment.sectiontocurate}</td>
-    //                             <td>${convertUTCDateToLocalDate(assignment.assignmentdateutc).toLocaleDateString()}</td>
-    //                             <td><a href="#" type="button" data-publication=${assignment.Id} 
-    //                             class="btn btn-danger remove-assignment">Remove</a></td>`;
-    //        });
-    //        $('.remove-assignment').click(DeleteCuratorAssignment);
-    //    }).fail(function (jqXHR, textStatus, errorThrow) {
-    //        ShowAlert('Something went wrong while loading publication curator assignments', 'error');
-    //    });
-    //}
     let chiefCuratorGuid = $('#CurrentUserGuid').val();
     let publicationId = $('#publication-view').attr('data-publicationId');
     let assignmentGETUrl = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/assignments?chiefCuratorGuid=${chiefCuratorGuid}`);
@@ -176,32 +141,7 @@
         return row[0];
     }
     
-    //function DeleteCuratorAssignment(e) {
-    //    e.preventDefault();
-    //    let publicationId = $(this).attr('data-assignmentId');
-    //    let chiefCuratorGuid = $('#CurrentUserGuid').val();
-    //    let url = apiBaseUrl.concat(`/chiefcurator/publication/assignment/${publicationId}?chiefCuratorGuid=${chiefCuratorGuid}`);
-    //    $.ajax({
-    //        url: url,
-    //        crossDomain: true,
-    //        statusCode: {
-    //            404: () => { ShowAlert('Publication assignment could not be retrieved', "error"); }
-    //            ,
-    //            403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); }
-    //            ,
-    //            500: () => { ShowAlert('Something went wrong while deleting publication curator assignment', 'error'); }
-    //        },
-    //        contentType: 'application/json',
-    //        accepts: 'application/json',
-    //        type: 'GET',
-    //        data: JSON.stringify({ chiefCuratorGuid: chiefCuratorGuid })
-    //    }).done(function (data, textStatus, jqXHR) {
-    //        ShowAlert('Curator assignment deleted successfully', 'success');
-    //    }).fail(function (jqXHR, textStatus, errorThrow) {
-    //        ShowAlert('Something went wrong while deleting publication curator assignment', 'error');
-    //    });
-    //}
-    //End Function section
+    
     function deleteAssignment() {
         $('#delete').click(function () {
             let url = apiBaseUrl.concat(`/chiefcurator/publication/assignment/${publicationId}?chiefCuratorGuid=${chiefCuratorGuid}`);

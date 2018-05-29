@@ -28,7 +28,7 @@ namespace KEC.Curation.UI
             if (filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 ViewDataDictionary dic = new ViewDataDictionary();
-                dic.Add("Message", "You dont have sufficient privillages to perform this operation !");
+                dic.Add("Message", "You dont have sufficient privileges to perform this operation !");
                 var result = new ViewResult() { ViewName = this.ViewName, ViewData = dic };
                 filterContext.Result = result;
             }

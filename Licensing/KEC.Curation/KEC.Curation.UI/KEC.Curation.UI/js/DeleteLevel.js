@@ -1,11 +1,12 @@
 ﻿
 (function () {
     $(document).ready(function () {
-        $('#delete').click(deleteLevel);
+        $('#deletelevel').click(deleteLevel);
     });
     function deleteLevel(e) {
         e.preventDefault();
-        let idd = $('#Id').attr('data-delete');
+        let idd = $('#Id').val();
+        let name = $('#Name').val();
         let url = apiBaseUrl.concat(`/Levels/${idd}`);
         $.ajax({
             headers : {
@@ -25,6 +26,7 @@
             }
         }).success(function (data, textStatus, jqXHR) {
             ShowAlert("Level deleted", "success");
+            window.location.assign("https://curation.kec.ac.ke/Home/ListLevels");
         }).fail(function () {
             ShowAlert("There was an error, please try again", 'error');
         });

@@ -114,14 +114,14 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.CompletionDate;
             }
         }
-       
-        //public string ChiefCuratorComment
-        //{
-        //    get
-        //    {
-        //        var stageLog = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(_publication.Id)).FirstOrDefault();
-        //        return stageLog.Notes;
-        //    }
-        //}
+
+        public string Publisher
+        {
+            get
+            {
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_publication.Id)).FirstOrDefault();
+                return publication.PublisherName;
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<img src="~/Content/plugins/images/logo.png" style="margin-left:-65px;" />
+<img src="~/Content/plugins/images/KEClogo.png" style="width:250px; margin-left:-20px;" />
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
@@ -17,11 +17,7 @@
                 <form class="m-t" role="form">
 
                     <div class="form-group">
-                        <div class="row">
-                           <div class="col-md-12">
-                                <h4 style="margin-left:40px;">Curation Portal</h4>
-                            </div>
-                        </div>
+                        <h4 style="margin-left:90px;">Curation Portal</h4>
                         @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
                         <div class="col-md-8" style="width:300px;">
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
@@ -50,7 +46,7 @@
                     </div>
                 </form>
                 <p style="margin-left:45px;">
-                   
+
                     <br /> &copy;KEC 2018
                 </p>
                 @* Enable this once you have account confirmation enabled for password reset functionality

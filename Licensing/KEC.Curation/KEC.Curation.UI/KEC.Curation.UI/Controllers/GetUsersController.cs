@@ -59,7 +59,7 @@ namespace Authentication_Test.Controllers
         {
             var _users = context.Users.ToList();
 
-            return Json(new SelectList(_users, "FullName","Subject"));
+            return Json(new SelectList(_users, "FullName","Email"));
         }
         public int CountAllUsers()
         {

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.ECommerce.Data", "KEC.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.ECommerce.Web.UI", "KEC.ECommerce.Web.UI\KEC.ECommerce.Web.UI.csproj", "{FDB8B451-5033-41E4-A2A1-1DC29250EDF7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KEC.ECommerce.UI", "..\..\..\..\..\Downloads\ecommerce\ecommerce\KEC.ECommerce.UI.csproj", "{D86D4896-47C0-4CBE-86DB-F45598C5475F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{FDB8B451-5033-41E4-A2A1-1DC29250EDF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDB8B451-5033-41E4-A2A1-1DC29250EDF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDB8B451-5033-41E4-A2A1-1DC29250EDF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D86D4896-47C0-4CBE-86DB-F45598C5475F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D86D4896-47C0-4CBE-86DB-F45598C5475F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D86D4896-47C0-4CBE-86DB-F45598C5475F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D86D4896-47C0-4CBE-86DB-F45598C5475F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
