@@ -445,7 +445,6 @@
     <Content Include="js\curatorView.js" />
     <Content Include="js\curate.js" />
     <Content Include="js\curatorToCurate.js" />
-    <Content Include="js\financeVerify - Copy.js" />
     <Content Include="js\financeVerify.js" />
     <Content Include="js\ChiefView.js" />
     <Content Include="js\financeView.js" />
