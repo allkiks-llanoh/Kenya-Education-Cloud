@@ -286,7 +286,11 @@ namespace KEC.Curation.PublishersUI.Controllers
         {
             return View();
         }
-
+        [AllowAnonymous]
+        public ActionResult TermsAndConditions()
+        {
+            return View();
+        }
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
