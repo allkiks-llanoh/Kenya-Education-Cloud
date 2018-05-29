@@ -107,8 +107,8 @@ namespace KEC.Curation.UI.Controllers
         //    IEnumerable<ToCurate> toCutate = null;
         //    using (var client = new HttpClient())
         //    {
-        //        //var uri = new Uri("https://curationapi-d.kec.ac.ke/api/chiefcurator/curator/tocurate?userGuid=1cb673c8-a921-4a9f-b42f-69050a70aae6");
-        //        client.BaseAddress = new Uri("https://curationapi-d.kec.ac.ke/api/chiefcurator/curator/");
+        //        //var uri = new Uri("https://curationapi.kec.ac.ke/api/chiefcurator/curator/tocurate?userGuid=1cb673c8-a921-4a9f-b42f-69050a70aae6");
+        //        client.BaseAddress = new Uri("https://curationapi.kec.ac.ke/api/chiefcurator/curator/");
         //        //HTTP GET
         //        var responseTask = client.GetAsync("tocurate?userGuid=1cb673c8-a921-4a9f-b42f-69050a70aae6");
 
