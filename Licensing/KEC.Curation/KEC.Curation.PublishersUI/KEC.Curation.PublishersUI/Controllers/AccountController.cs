@@ -174,7 +174,7 @@ namespace KEC.Curation.PublishersUI.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToAction("ConfirmRegitration", "Account");
                 }
                 AddErrors(result);
             }
@@ -194,6 +194,11 @@ namespace KEC.Curation.PublishersUI.Controllers
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
+        }
+        [AllowAnonymous]
+        public ActionResult ConfirmRegitration()
+        {
+            return View();
         }
 
         //
