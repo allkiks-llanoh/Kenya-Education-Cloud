@@ -1,6 +1,7 @@
 ﻿(function () {
     $(document).ready(function () {
         getPublication();
+        getPublicationCurationComments();
     });
     $(document).ready(function () {
         $(".btn-select").each(function (e) {
@@ -17,8 +18,8 @@
     ///Functions Section
     function getPublication() {
         let PrincipalCuratorGUID = $('#CurrentUserGuid').val();
-        let publicationId = $('#publication-view').attr('data-publicationId');
-        var url = apiBaseUrl.concat(`/principalcurator/curated?principalCuratorGuid=${PrincipalCuratorGUID}&publicationId=${publicationId}`);
+        let publicationIdId = $('#publication-view').attr('data-publicationId');
+        var url = apiBaseUrl.concat(`/chiefcurator/publications/${publicationIdId}/curator/comments?publicationId=${publicationIdId}`);
         console.log(url);
         $.ajax({
             url: url,
@@ -31,29 +32,53 @@
                 403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
                 500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
             },
-          
 
         }).done(function (publication, textStatus, jqXHR) {
             showChiefCuratorSubmissionSection(publication, "#publication-view");
             $('#publication-details').replaceWith(
-                `<dl id="publication-details">
-                  <dt>KICD Number</dt>
-                  <dd>${publication.kicdNumber}</dd>
-                  <dt>Title</dt>
-                   <dd>${publication.title}</dd>
-                   <dt>Description</dt>
-                   <dd>${publication.description}</dd></dl>`);
-          
+                `<dl >
+                  <div class="row">
+                       <div class="col-md-3">
+                           <dt>Curation</dt>
+                           <dd id="kicd-number">${publication.kicdNumber}</dd>  
+                       </div>
+                       <div class="col-md-3">
+                            <dt>Title</dt>
+                            <dd>${publication.title}</dd> 
+                       </div>
+                         <div class="col-md-3">
+                            <dt>Content Location</dt>
+                            <dd><a href="${publication.url}">Link to publication</a></dd>
+                       </div>
+                  </div>
+                  <br><br>
+                  <div class="row">
+                       <div class="col-md-3">
+                            <dt>Subject</dt>
+                            <dd>${publication.subject}</dd>
+                       </div>
+                        <div class="col-md-3">
+                              <dt>Completion date</dt>
+                                <dd>${publication.completionDate}</dd>
+                       </div>
+                        <div class="col-md-3">
+                             <dt>Description</dt>
+                            <dd>${publication.description}</dd>
+                       </div>
+                  </div>
+                 </dl>`);
+
         });
     }
 
     function getPublicationCurationComments() {
         let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        let url = apiBaseUrl.concat(`/principalcurator/curated?principalCuratorGuid=${chiefCuratorGUID}&publicationId=${publicationId}`);
+        let urlToReadComments = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorcomments?publicationId=${publicationId}`);
+        //let urls = basUrl.concat(`/chiefcurator/publication/${publicationId}/curatorcomments?publicationId=${publicationId}`);
 
         $.ajax({
-            url: url,
+            url: urlToReadComments,
             type: 'GET',
             contentType: 'application/json',
             crossDomain: true,
@@ -63,15 +88,15 @@
                 403: () => { ShowAlert("You are not authorized to access curator submissions"); },
                 500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
             },
-          
+
 
         }).done(function (submissions, textStatus, jqXHR) {
-           
+
             submissions.forEach(function (submission) {
-                $('#currator-commets').html(` ${submission.assignmentId},${submission.notes}`);
+                $('#comments').html(`${submission.notes}`);
 
             });
-        
+
         });
     }
 
@@ -89,7 +114,7 @@
             let itemsHtml = '';
             data.forEach(function (actionItem) {
                 itemsHtml = itemsHtml.concat(`<li id='${actionItem.name}'>${actionItem.description}<li>`);
-               
+
             });
             $('#action-taken').html(itemsHtml);
             hookBtnSelect();
@@ -98,7 +123,7 @@
         });
     }
     function showChiefCuratorSubmissionSection(publication, parentElementId) {
-        if (publication !== null ) {
+        if (publication !== null) {
             let chiefCuratorSection = $('#chief-curator-section').html();
             $(parentElementId).html(chiefCuratorSection);
             $('#process-publication').click(submitChiefNotesAndAction);

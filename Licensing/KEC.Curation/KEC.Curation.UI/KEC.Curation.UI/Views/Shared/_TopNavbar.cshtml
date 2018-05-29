@@ -13,18 +13,18 @@
                 <ul class="dropdown-menu" role="menu">
 
                     <li>
-                        <a href="@Url.Action("Index", "Manage")"><i class="fa fa-edit"></i>Change Password </a>
+                        <a href="@Url.Action("Index", "Manage")"><i class="fa fa-edit"></i>View Profile </a>
 
                     </li>
                     <li class="divider"></li>
 
                     @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-    {
-                @Html.AntiForgeryToken()
-                <li>
-                    <a class="alert-link" style="margin-left:25px; margin-top:20px; color:	#696969;" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-edit"></i>Log off</a>
-                </li>
-}
+                    {
+                        @Html.AntiForgeryToken()
+                        <li style="margin-bottom:20px !important;">
+                            <a class="alert-link" style="margin-left:25px; margin-top:20px;  color:#696969;" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-edit"></i>Log off</a>
+                        </li>
+                    }
 
 
                 </ul>

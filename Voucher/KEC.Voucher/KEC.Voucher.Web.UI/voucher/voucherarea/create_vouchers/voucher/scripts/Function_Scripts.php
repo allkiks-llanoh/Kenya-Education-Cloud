@@ -60,7 +60,7 @@
                 $('div.alert-success').toggleClass('hidden');
               }
           },
-          url: "http://localhost:60823/api/Vouchers",
+          url: "http://voucherapi-d.kec.ac.ke/api/Vouchers",
           type: "POST",
           data: JSON.stringify({BatchId: bId}),
           success: function(response,status,jxhr) {

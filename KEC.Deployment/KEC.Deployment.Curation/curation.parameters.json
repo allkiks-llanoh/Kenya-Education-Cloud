@@ -1,0 +1,95 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "hostingPlanName": {
+      "value": "curationserviceplan"
+    },
+    "skuName": {
+      "value": "S1"
+    },
+    "skuCapacity": {
+      "value": 1
+    },
+    "keccurationsvrAdminLogin": {
+      "value": "miyabi@keccurationsvr"
+    },
+    "keccurationsvrAdminLoginPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/8eaca2a2-dc2f-4e58-8ae2-28580934830b/resourceGroups/keckevault/providers/Microsoft.KeyVault/vaults/dbsvrcreds"
+        },
+        "secretName": "keccurationsvr"
+      }
+    },
+    "CurationDbName": {
+      "value": "CurationDb"
+    },
+    "CurationDbDevName": {
+      "value": "CurationDb-dev"
+    },
+    "CurationDbStagingName": {
+      "value": "CurationDb-Staging"
+    },
+    "CurationDbQaName": {
+      "value": "CurationDb-QA"
+    },
+    "CurationDbEdition": {
+      "value": "Standard"
+    },
+    "CurationDbDevEdition": {
+      "value": "Standard"
+    },
+    "CurationDbStagingEdition": {
+      "value": "Standard"
+    },
+    "CurationDbQaEdition": {
+      "value": "Standard"
+    },
+    "CurationDbRequestedServiceObjectiveName": {
+      "value": "S2"
+    },
+    "CurationDbDevRequestedServiceObjectiveName": {
+      "value": "S2"
+    },
+    "CurationDbStagingRequestedServiceObjectiveName": {
+      "value": "S2"
+    },
+    "CurationDbQaRequestedServiceObjectiveName": {
+      "value": "S2"
+    },
+    "webSiteName": {
+      "value": "curationapi"
+    },
+    "DevSlotName": {
+      "value": "dev"
+    },
+    "StagingSlotName": {
+      "value": "staging"
+    },
+    "QaSlotName": {
+      "value": "qa"
+    },
+    "SqlSvrName": {
+      "value": "keccurationsvr"
+    },
+    "AutoScaleSettings": {
+      "value": "curationserviceplan"
+    },
+    "CpuHighAlert": {
+      "value": "cpuhighalert"
+    },
+    "ForbiddenRequests": {
+      "value": "forbidenrequestsalert"
+    },
+    "LongHttpQueue": {
+      "value": "longhttpqueuealert"
+    },
+    "ServerErrors": {
+      "value": "servererrorsalert"
+    },
+    "CurationDbConnectionString": {
+      "value": "Data Source=tcp:keccurationsvr.database.windows.net,1433;Initial Catalog=CurationDb;Persist Security Info=False;User ID=miyabi@keccurationsvr;Password=Ftt%cg#@hjhWtq3zn;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;"
+    }
+  }
+}

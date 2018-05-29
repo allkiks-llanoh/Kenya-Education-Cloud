@@ -17,27 +17,22 @@ namespace KEC.Curation.Web.Api.Controllers
     public class LevelsController : Controller
     {
         private readonly IUnitOfWork _uow;
-
         public LevelsController(IUnitOfWork uow)
         {
             _uow = uow;
         }
         // GET: api/Levels
         [HttpGet]
-      
+
         public IActionResult AllLevels()
         {
             var levels = _uow.LevelRepository.GetAll().ToList();
-            var LevelsList = levels.Any()?
-                levels.Select (p=> new LevelsDownloadSerilizer(p, _uow)) : new List<LevelsDownloadSerilizer>();
+            var LevelsList = levels.Any() ?
+                levels.Select(p => new LevelsDownloadSerilizer(p, _uow)) : new List<LevelsDownloadSerilizer>();
             return Ok(value: LevelsList.ToList());
-
         }
-       
-        
         // POST: api/Levels
         [HttpPost]
-       
         public IActionResult CreateLevel([FromBody] LevelsUploadSerilizer model)
         {
             if (!ModelState.IsValid)
@@ -47,14 +42,14 @@ namespace KEC.Curation.Web.Api.Controllers
             var exist = _uow.LevelRepository.Find(p => p.Name.Equals(model.Name)).Any();
             try
             {
-                if (exist) 
+                if (exist)
                 {
                     return BadRequest("Level already exists");
                 }
                 var level = new Level
                 {
                     Name = model.Name,
-                    
+
                 };
                 _uow.LevelRepository.Add(level);
                 _uow.Complete();
@@ -66,11 +61,9 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        
         // Patch: api/Levels/5
         [HttpPatch("{id}")]
-
-        public IActionResult UpdateLevel(int Id, LevelsUploadSerilizer model)
+        public IActionResult UpdateLevel(int Id, [FromBody]LevelsUploadSerilizer model)
         {
             if (!ModelState.IsValid)
             {
@@ -90,10 +83,20 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 level.Name = model.Name;
             }
-          
-           
             _uow.Complete();
             return Ok("Level Grade updated successfully");
+        }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteLevel(DeleteSerilizer model)
+        {
+            var level = _uow.LevelRepository.Get(model.Id.GetValueOrDefault());
+            if (level == null)
+            {
+                return NotFound("Level could not be retrieved for deleting or is missing ");
+            }
+            _uow.LevelRepository.Remove(level);
+            _uow.Complete();
+            return Ok("Level Deleted From Repository");
         }
     }
 }

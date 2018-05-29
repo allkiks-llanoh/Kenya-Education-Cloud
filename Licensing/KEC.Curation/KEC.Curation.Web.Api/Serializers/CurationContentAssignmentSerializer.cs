@@ -16,6 +16,5 @@ namespace KEC.Curation.Web.Api.Serializers
         [Required(ErrorMessage = "Assignee by cannot be blank")]
         public string Assignee { get; set; }
         public bool FullyAssigned { get; set; }
-        
     }
 }

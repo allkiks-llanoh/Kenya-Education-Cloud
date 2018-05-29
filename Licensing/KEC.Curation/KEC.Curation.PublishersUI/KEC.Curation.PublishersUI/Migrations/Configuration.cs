@@ -10,7 +10,6 @@ namespace KEC.Curation.PublishersUI.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "KEC.Curation.PublishersUI.Models.ApplicationDbContext";
         }
 
         protected override void Seed(KEC.Curation.PublishersUI.Models.ApplicationDbContext context)

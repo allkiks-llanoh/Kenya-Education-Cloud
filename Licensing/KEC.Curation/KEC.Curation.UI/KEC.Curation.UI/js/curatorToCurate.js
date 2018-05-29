@@ -1,42 +1,37 @@
-﻿(function () {
+﻿
+(function () {
 
     $(document).ready(function () {
-        getPublicationsToCurate();
+        getPublicationCurationComments();
     });
-    //Functions Section
-    function getPublicationsToCurate() {
-        var userGuid = $('#CurrentUserGuid').val();
-        let url = apiBaseUrl.concat(`/curator/tocurate?userGuid=${userGuid}`);
-        console.log(`${userGuid}`);
-        $.ajax({
-            url: url,
-            type: 'GET',
-            contentType: 'application/json',
-            accepts: 'application/json',
-            crossDomain: true,
-            statusCode: {
-                404: () => { ShowAlert("Publications could not be retrievd", 'error'); },
-                403: () => { ShowAlert("You are not authorized to access the requested resource", "warning"); },
-                500: () => { ShowAlert("Something went wrong while loading publications", "error"); }
-            },
-           
-        }).done(function (assigments, textStatus, jqXHR) {
-            $('#publications-to-curate').find('tbody').empty();
-            if (assigments.length === 0) {
-                ShowAlert("There are no publications to curate for now", "info");
-            }
-            var targetTable = $('#publications-to-curate').find('tbody');
-            assigments.forEach(function (assignment) {
-                var row = $targetTable.insertRow($targetTable.rows.length);
-                row.innerHTML = `<td>${assignment.publication}</td>
-                                 <td>${assignment.sectiontocurate}</td>
-                                 <td>${assignment.assignmentdateutc}</td>
-                                 <td><a href="${curationUrl.concat('/', assignment.id)}" type="button" data-assignment=${assignment.id} 
-                                 class="btn btn-success publication-action">Curate</a></td>`;
-            }).fail(function (jqXHR, textStatus, errorThrow) {
-                ShowAlert("Something went wrong while retrieving publications", "error");
-            });
+function getPublicationCurationComments() {
+
+    let publicationId = $('#publication-view').attr('data-publicationId');
+    let url = apiBaseUrl.concat(`/CurationManagers/getcomments/fromcuration?publicationId=${publicationId}`);
+    //let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
+    $.ajax({
+        url: "http://localhost:15177/api/chiefcurator/curator/listings/120",
+        type: 'GET',
+        contentType: 'application/json',
+        crossDomain: true,
+        accepts: 'application/json',
+        statusCode: {
+            404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
+            403: () => { ShowAlert("You are not authorized to access curator submissions"); },
+            500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
+        },
+
+
+    }).done(function (submissions, textStatus, jqXHR) {
+
+        submissions.forEach(function (submission) {
+            $('#currator-commets').html(` <dt>Curator Comments</dt><dd> ${submission.curatorComments}</dd>
+                                                  <dt>Chief Curator Comments</dt><dd>${submission.assignmentId}</dd>
+                                                  <dt>Principal Curator Comments</dt><dd>${submission.publication}</dd>
+                                                  <dt>Curation Managers Comments</dt><dd>${submission.sectionToCurate}</dd>`);
+
         });
+
+    });
     }
-    //End Functions Section
 })();

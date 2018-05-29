@@ -5,10 +5,10 @@
     function submitNotesAndAction(e) {
         e.preventDefault();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        let actionSelected = $("#action-selected").val(); 
+        let actionSelected = $("#action-selected").val();
         let notes = $('.note-editable').html();
-        let action ="PublicationApproved"
         let url = apiBaseUrl.concat(`/principalCurator/PrincipalCuratorComments/${publicationId}?publicationId=${publicationId}`);
+
         let userGuid = $('#CurrentUserGuid').val();
         console.log(`${userGuid}`);
         if (notes === null || notes === "") {
@@ -28,14 +28,14 @@
             contentType: 'application/json',
             crossDomain: true,
             accepts: 'application/json',
-            data: JSON.stringify({ PrincipalCuratorGuid: userGuid, Notes: notes, ActionTaken: action, Status: false }),
+            data: JSON.stringify({ PrincipalCuratorGuid: userGuid, Notes: notes, ActionTaken: actionSelected }),
             statusCode: {
                 404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to process publication"); },
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
             }
         }).success(function (data, textStatus, jqXHR) {
-            ShowAlert("Recomendations passed to Principal Curator", "success");
+            ShowAlert("Recommendations passed to  Curation Manager", "success");
         }).fail(function () {
             ShowAlert("Something went wrong while processing publication", 'error');
         });

@@ -1,0 +1,7 @@
+﻿{
+  "ConnectionStrings": {
+
+    "CurationDatabase": "Data Source=tcp:keccurationsvr.database.windows.net,1433;Initial Catalog=CurationDb;Persist Security Info=False;User ID=miyabi@keccurationsvr;Password=Ftt%cg#@hjhWtq3zn;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;"
+
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualMachines_kecbuildserver_name": {
+      "value": "kecbuildserver2"
+    },
+    "networkInterfaces_kecbuildserver_name": {
+      "value": "kecbuildserver21"
+    },
+    "publicIPAddresses_kecbuildserver_ip_name": {
+      "value": "kecbuildserver2-ip"
+    },
+    "virtualNetworks_kecbuildservers_vnet_name": {
+      "value": "kecbuildservers-vnet"
+    },
+    "networkSecurityGroups_kecbuildserver_nsg_name": {
+      "value": "kecbuildserver1-nsg"
+    },
+    "availabilitySets_kecbuildserversavailabilityset_name": {
+      "value": "kecbuildserversavailabilityset"
+    },
+    "subnets_default_name": {
+      "value": "default"
+    },
+    "securityRules_default_allow_rdp_name": {
+      "value": "default-allow-rdp"
+    },
+    "virtualMachines_kecbuildserver_id": {
+      "value": null
+    }
+  }
+}

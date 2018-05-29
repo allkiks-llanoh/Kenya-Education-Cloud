@@ -5,9 +5,9 @@
     });
     function updateChiefCuratorAssignment(e) {
         e.preventDefault();
-        let Id = $('#publication-view').attr('data-publicationId');
-        let CuserGuid = $('#CurrentUserGuid').val();      
-        let url = apiBaseUrl.concat(`/principalcurator/update/chiefcuratorcomments/${Id}`);
+        
+        var kbid ="05497821-09e9-4910-9338-b8a5953af127"       
+       
         $.ajax({
             headers : {
                 'Accept' : 'application/json',

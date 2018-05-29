@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/font-awesome/css")
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/plugins/wizardStepsStyles")
+</head>
+<body class="gray-bg" style="background-image:url('../../Content/plugins/images/cmss.jpg'); -webkit-background-size: cover; 
+-moz-background-size: cover; 
+-o-background-size: cover;">
+    <div class="row">
+        <div class="col-lg-8" style="color:lightgrey; font-weight:900; text-align:center; top:250px;">
+            <h1>
+                <strong>
+                    Welcome to KEC Voucher Management Portal
+                </strong>
+            </h1>
+            <h3>
+                <strong>
+                  Generate, Distribute and Manage Vouchers
+
+                </strong>
+            </h3>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default" style="height:100vh; margin:0px; border-radius:0px;">
+                <div class="middle-box text-center loginscreen animated fadeInDown" style="margin-top:100px;">
+                    <!-- Main view  -->
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/metsiMenu")
+    @Scripts.Render("~/plugins/pace")
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/bundles/inspinia")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

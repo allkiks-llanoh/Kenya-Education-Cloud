@@ -1,7 +1,7 @@
 ﻿(function () {
     $(document).ready(function () {
         getPublication();
-        getPublicationCurationComments();
+        //getPublicationCurationComments();
         $('#recommend').click(submitChiefNotesAndAction);
     });
     $(document).ready(function () {
@@ -17,7 +17,7 @@
     function getPublication() {
         let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
-        var url = apiBaseUrl.concat(`/chiefcurator/AssignedPublication/${publicationId}?chiefCuratorGuid=${chiefCuratorGUID}&Id=${publicationId}`);
+        var url = apiBaseUrl.concat(`/chiefcurator/AssignedPublicationWhenGettingCuration/${publicationId}?chiefCuratorGuid=${chiefCuratorGUID}&publicationId=${publicationId}`);
         console.log(url);
         $.ajax({
             url: url,
@@ -36,23 +36,37 @@
             showChiefCuratorSubmissionSection(publication, "#publication-view");
             $('#publication-details').replaceWith(
                 `<dl id="publication-details" data-stage="${publication.stage}">
-                  <dt>KICD Number</dt>
-                  <dd id="kicd-number">${publication.kicdNumber}</dd>
-                  <dt>Title</dt>
-                   <dd>${publication.title}</dd>
-                   <dt>Description</dt>
-                   <dd>${publication.description}</dd>
-                   <dt>Type</dt>
-                   <dd>${publication.type}</dd>
-                   <dt>Subject</dt>
-                   <dd>${publication.subject}</dd>
-                   <dt>Url</dt>
-                   <dd><a href="${publication.url}">Link to publication</a></dd>
-                   <dt>Level</dt>
-                   <dd>${publication.level}</dd>
-                   <dt>Completion date</dt>
-                   <dd>${publication.completionDate}</dd></dl>`);
-           
+                  <div class="row">
+                       <div class="col-md-3">
+                           <dt>Curation</dt>
+                           <dd id="kicd-number">${publication.kicdNumber}</dd>  
+                       </div>
+                       <div class="col-md-3">
+                            <dt>Title</dt>
+                            <dd>${publication.title}</dd> 
+                       </div>
+                         <div class="col-md-3">
+                            <dt>Content Location</dt>
+                            <dd><a href="${publication.url}">Link to publication</a></dd>
+                       </div>
+                  </div>
+                  <br><br>
+                  <div class="row">
+                       <div class="col-md-3">
+                            <dt>Subject</dt>
+                            <dd>${publication.subject}</dd>
+                       </div>
+                        <div class="col-md-3">
+                              <dt>Completion date</dt>
+                                <dd>${publication.completionDate}</dd>
+                       </div>
+                        <div class="col-md-3">
+                             <dt>Description</dt>
+                            <dd>${publication.description}</dd>
+                       </div>
+                  </div>
+                 </dl>`);
+       
         });
     }
 
@@ -77,7 +91,7 @@
         }).done(function (submissions, textStatus, jqXHR) {
            
             submissions.forEach(function (submission) {
-                $('#currator-commets').html(` ${submission.status},${submission.notes}`);
+                $('#currator-commets').html(`${submission.notes}`);
 
             });
         
@@ -146,12 +160,14 @@
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
             }
         }).success(function (data, textStatus, jqXHR) {
-            ShowAlert("Recomendations passed to Principal Curator");
+            ShowAlert("Recomendations passed to Principal Curator", "success");
         }).fail(function () {
-            ShowAlert("Something went wrong while processing publication", 'error');
+            ShowAlert("Something went wrong while processing publication", "error");
         });
     }
     //Functions Section
     
 
 })();
+
+

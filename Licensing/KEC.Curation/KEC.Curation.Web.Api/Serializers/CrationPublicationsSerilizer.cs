@@ -18,38 +18,39 @@ namespace KEC.Curation.Web.Api.Serializers
             _assignment = assignment;
             _uow = uow;
         }
-       
-        public string Publication
+        public int PublicationId
         {
             get
             {
-                return _assignment.Publication.ISBNNumber;
+                var pub = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                return pub.Id;
             }
         }
-       
-        public string Status
+        public string KicdNumber
         {
             get
             {
-                return _assignment.Submitted ? "Submitted" : "Pending";
-            }
-        }
-       
-        public string Assignee
-        {
-            get
-            {
-                return _assignment.ChiefCuratorGuid;
-            }
-        }
-        public int id
-        {
-            get
-            {
-                return _assignment.Publication.Id;
+                var pub = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                return pub.KICDNumber;
             }
         }
 
+        public string Title
+        {
+            get
+            {
+                var pub = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                return pub.Title;
+            }
+        }
+        public DateTime AssignmentDateUtc
+        {
+            get
+            {
+                var pub = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                return pub.CreatedTimeUtc;
+            }
+        }
 
     }
 }

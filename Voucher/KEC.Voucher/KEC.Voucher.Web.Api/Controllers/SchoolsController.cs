@@ -137,13 +137,21 @@ namespace KEC.Voucher.Web.Api.Controllers
                                 CountyId = countyId.GetValueOrDefault(),
                                 DateCreated = DateTime.Now,
                                 DateChanged = DateTime.Now,
+                                
                             };
                             var fundAllocation = new DbFundAllocation
                             {
                                 Amount = csvReader.GetField<Decimal>("Amount"),
                                 Year = csvReader.GetField<int>("Year")
                             };
-                            _uow.SchoolRepository.AddFromCSV(school, fundAllocation);
+                            var schoolAdmin = new DbSchoolAdmin
+                            {
+                                FirstName = csvReader.GetField<string>("FirstName"),
+                                LastName = csvReader.GetField<string>("LastName"),
+                                Email = csvReader.GetField<string>("Email"),
+                                PhoneNumber= csvReader.GetField<string>("PhoneNumber")
+                            };
+                            _uow.SchoolRepository.AddFromCSV(school, fundAllocation, schoolAdmin);
 
                         }
                         _uow.Complete();

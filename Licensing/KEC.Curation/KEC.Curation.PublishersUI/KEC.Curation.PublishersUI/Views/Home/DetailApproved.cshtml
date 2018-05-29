@@ -23,12 +23,76 @@
 <script type="text/javascript">
     const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
 </script>
+
+
+<div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Publication Details</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                        <dl id="publication-details"></dl>
+                    </div>
+                    <div class="ibox-footer">
+                       
+                        Publication Details
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Publication Remarks</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                        <div class="ibox-content" id="currator-commets">
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div>
+                            <br>
+                            <br>
+                        </div>
+                        <a href="/Home/Approved" class="btn btn-w-m btn-info pull-right" style="background-color:#00B95F;" role="button">Back  To Approved Submissions</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="hidden">
+
+    <h1 id="identity" data-identity=@PubId></h1>
+
+</div>
 <script type="text/javascript">
     (function () {
         $(document).ready(function () {
             getPublication();
             getPublicationCurationComments();
-          
+
         });
 
         ///Functions Section
@@ -52,11 +116,11 @@
             }).done(function (publication, textStatus, jqXHR) {
 
                 $('#publication-details').replaceWith(
-                    `<dl id="publication-details" data-stage="${publication.stage}">
+                    `<dl>
                   <dt>Curation Number</dt>
                   <dd id="kicd-number">${publication.kicdNumber}</dd>
                    <dt>Publisher</dt>
-                   <dd>${publication.publisherName}</dd>
+                   <dd>${publication.publisher}</dd>
                    <dt>Title</dt>
                    <dd>${publication.title}</dd>
                    <dt>Description</dt>
@@ -90,16 +154,13 @@
             }).done(function (submissions, textStatus, jqXHR) {
 
                 submissions.forEach(function (submission) {
-                    $('#currator-commets').html(` <dt>Curator Comments</dt><dd> ${submission.curatorComments}</dd>
-                                                  <dt>Chief Curator Comments</dt><dd>${submission.chiefCuratorComments}</dd>
-                                                  <dt>Principal Curator Comments</dt><dd>${submission.principalCuratorComments}</dd>
-                                                  <dt>Curation Managers Comments</dt><dd>${submission.cutationManagersCuratorComments}</dd>`);
+                    $('#currator-commets').html(`<dt>Recommendations/Remarks</dt><dd>${submission.cutationManagersCuratorComments}</dd>`);
 
                 });
 
             });
         }
-        
+
         function showChiefCuratorSubmissionSection(publication, parentElementId) {
             if (publication !== null) {
                 let chiefCuratorSection = $('#chief-curator-section').html();
@@ -129,7 +190,7 @@
                 contentType: 'application/json',
                 crossDomain: true,
                 accepts: 'application/json',
-                data: JSON.stringify({ PublicationId: publicationId, Notes: notes, ToDo: todo}),
+                data: JSON.stringify({ PublicationId: publicationId, Notes: notes, ToDo: todo }),
                 statusCode: {
                     404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
                     403: () => { ShowAlert("You are not authorized to process publication"); },
@@ -146,70 +207,3 @@
 
     })();
 </script>
-<script type="text/javascript">
-
-</script>
-<div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
-    <div class="wrapper wrapper-content animated fadeIn">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Publication Details</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="ibox-content">
-                        <dl id="publication-details"></dl>
-                    </div>
-                    <div class="ibox-footer">
-                        <span class="pull-right">
-                            Publication Details
-                        </span>
-                        Publication Details
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Publication curation comments</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                        <div class="ibox-content" id="currator-commets">
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div>
-                            <br>
-                            <br>
-                        </div>
-                        <a href="/Home/Approved" class="btn btn-w-m btn-info pull-right" style="background-color:#00B95F;" role="button">Back  To Approved Submissions</a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="hidden">
-
-    <h1 id="identity" data-identity=@PubId></h1>
-
-</div>

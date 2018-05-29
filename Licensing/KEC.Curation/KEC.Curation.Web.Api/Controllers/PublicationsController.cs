@@ -19,6 +19,7 @@ using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.File;
 using Newtonsoft.Json.Linq;
+using Aspose.Pdf;
 
 namespace KEC.Curation.Web.Api.Controllers
 {
@@ -27,60 +28,43 @@ namespace KEC.Curation.Web.Api.Controllers
     [Route("api/Publications")]
     public class PublicationsController : Controller
     {
-        const string StorageAccountName = "keccuration";
-        const string StorageAccountKey = "nqpjBFfMAxk/IzF3ZhQBeHGB56XlnX/d1B1faFq7qDH5jo5RXXTQGZncHtpmku46gmrzOojx16x0uaXDd8kxxA==";
+        #region Definitions and Constants
+        const string StorageAccountName = "kecpublications";
+        const string StorageAccountKey = "MKMdAUoU2vUWIRSMSR5UXnu7hZ9omXWFXSglCHowJTn3oyOeycxCGSgSQ4huvihn9a0DUObjvvNBd06PfHw2Dg==";
         const string pathToFile = "https://keccuration.file.core.windows.net/publications";
-       
         private readonly IUnitOfWork _uow;
         private readonly IHostingEnvironment _env;
-
         public PublicationsController(IUnitOfWork uow, IHostingEnvironment env)
         {
             _uow = uow;
             _env = env;
         }
+        #endregion
+        #region Submit Publication
         [HttpPost("submit")]
         public async Task<IActionResult> Submit([FromForm]PublicationUploadSerilizer model)
         {
-           
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
             var invaliExtension = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".exe");
 
             if (invaliExtension == true)
             {
                 ModelState.AddModelError("File", ".EXE File Extensions are not Permited");
             }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(modelState: ModelState);
-            }
-           
+         
+
             try
             {
                 var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccountName, StorageAccountKey), false);
-               
-                //Create azure File Share
-                var share = storageAccount.CreateCloudFileClient().GetShareReference("publications");
-                await share.CreateIfNotExistsAsync();
-                //Create File in root directory
-                CloudFileClient cloudFileClient = storageAccount.CreateCloudFileClient();
-                var rootDir = share.GetRootDirectoryReference();
-                CloudFileShare newfile = cloudFileClient.GetShareReference("publications");
-                await newfile.CreateIfNotExistsAsync();
-                CloudFileDirectory rootDirectory = newfile.GetRootDirectoryReference();
-                CloudFile file = rootDirectory.GetFileReference($"{model.PublicationFile.FileName}");
-                await file.CreateAsync(model.PublicationFile.Length);
-                //create folders with files
                 //Blob starts here
                 var blob = storageAccount.CreateCloudBlobClient();
-               
                 CloudBlobContainer container = blob.GetContainerReference("publications");
                 CloudBlockBlob blobs = container.GetBlockBlobReference($"{model.PublicationFile.FileName}");
-                
-
                 var filePath = $"{pathToFile}/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
-               
                 UriBuilder uriBuilder = new UriBuilder();
-               
                 uriBuilder.Path = filePath;
                 var ul = uriBuilder.Uri;
                 var publication = new Publication
@@ -95,12 +79,12 @@ namespace KEC.Curation.Web.Api.Controllers
                     Price = model.Price.GetValueOrDefault(),
                     Title = model.Title,
                     MimeType = model.PublicationFile.ContentType,
-                    Url =blobs.StorageUri.PrimaryUri.ToString(),
+                    Url = blobs.StorageUri.PrimaryUri.ToString(),
                     KICDNumber = _uow.PublicationRepository
                                       .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
-                    CreatedTimeUtc = DateTime.UtcNow,
-                    ModifiedTimeUtc = DateTime.UtcNow
-
+                    CreatedTimeUtc = DateTime.Now.Date,
+                    ModifiedTimeUtc = DateTime.Now.Date,
+                    Owner = model.UserGuid
                 };
                 publication.PublicationStageLogs.Add(new PublicationStageLog
                 {
@@ -108,44 +92,31 @@ namespace KEC.Curation.Web.Api.Controllers
                     Owner = model.UserGuid,
                     CreatedAtUtc = DateTime.UtcNow,
                     ActionTaken = ActionTaken.PublicationSubmitted
-
                 });
-                
                 _uow.PublicationRepository.Add(publication);
                 _uow.Complete();
                 _uow.PublicationRepository.ProcessToTheNextStage(publication);
-
                 var tempPath = Path.GetTempFileName();
-
                 using (var stream = new FileStream(tempPath, FileMode.Create))
                 {
                     await model.PublicationFile.CopyToAsync(stream);
                 }
-
                 blobs.Properties.ContentType = $"{model.PublicationFile.ContentType}";
-                using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
-                {
-                    await file.UploadFromStreamAsync(stream);
-                }
+
                 using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
                 {
                     await blobs.UploadFromStreamAsync(stream);
                 }
-               
-                //using (var memoryStream = new MemoryStream())
-                //{
-                //    await model.PublicationFile.CopyToAsync(memoryStream);
-                //    var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);
-                //    memoryStream.WriteTo(fileStream);
-                //}
                 return Ok(value: "Publication submitted successfully");
             }
             catch (Exception ex)
             {
-
+                ex.GetBaseException();
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
+        #endregion
+        #region Get Publications
         [HttpGet("file/download")]
         public IActionResult DownloadPublication([FromQuery] string url)
         {
@@ -158,14 +129,14 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             try
             {
-
-                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
-                             (PublicationStage.LegalVerification)).ToList();
-                return Ok(value: publication);
+                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.LegalVerification).ToList();
+                var publicationList = publication.Any() ?
+                publication.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                return Ok(publicationList);
             }
             catch (Exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
@@ -174,10 +145,11 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             try
             {
-
-                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
-                             (PublicationStage.PaymentVerification)).ToList();
-                return Ok(value: publication);
+                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.PaymentVerification).ToList();
+                var publicationList = publication.Any() ?
+                publication.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                return Ok(publicationList);
             }
             catch (Exception)
             {
@@ -190,14 +162,12 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             try
             {
-
                 var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
                              (PublicationStage.LegalVerification)).ToList();
                 return Ok(value: publication);
             }
             catch (Exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
@@ -206,14 +176,11 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             try
             {
-                
                 var stageLevel = (int)stage;
                 var publicationIds = _uow.PublicationRepository
                                          .Find(p => p.PublicationStageLogs.Count == stageLevel
                                                && !p.PublicationStageLogs.Any(l => l.Stage > stage)
-                                               
                                                && !p.PublicationStageLogs
-                                              
                                                    .Any(l => l.ActionTaken == ActionTaken.PublicationRejected)
                                                && p.Subject.Id.Equals(subjectId))
                                          .Select(p => p.Id);
@@ -224,10 +191,19 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             catch (Exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [HttpGet("allpublications")]
+        public IActionResult AllPublications()
+        {
+            var assignments = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals(PublicationStage.NewPublication));
+            var assignmentList = assignments.Any() ?
+                assignments.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+            return Ok(assignmentList);
+        }
+        #endregion
+        #region Patch Process Publication
         [HttpPatch("process")]
         public IActionResult ProcessPublication([FromBody]PublicationProcessingSerializer model)
         {
@@ -241,17 +217,16 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound(value: $"Publication {model.KICDNumber} could not be located");
             }
-            var maxStage = _uow.PublicationStageLogRepository.Find(p=> p.PublicationId==publication.Id).Max(p => p.Stage);
+            var maxStage = _uow.PublicationStageLogRepository.Find(p => p.PublicationId == publication.Id).Max(p => p.Stage);
             var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == model.Stage
                                                             && p.Stage == maxStage
                                                             && p.PublicationId.Equals(publication.Id)
                                                             && p.Owner == null && p.ActionTaken == null).FirstOrDefault();
-
             if (publicationLog == null)
             {
                 return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
             }
-            if (model.Stage == PublicationStage.Curation && 
+            if (model.Stage == PublicationStage.Curation &&
                 !_uow.PublicationRepository.CanProcessCurationPublication(publication))
             {
                 return BadRequest(error: $"Publication {model.KICDNumber} has pending curation notes");
@@ -266,11 +241,11 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             catch (Exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
         }
+        #endregion
+        #region Patch Reject Publication
         [HttpPatch("reject")]
         public IActionResult ProcessRejection([FromBody]PublicationProcessingSerializer model)
         {
@@ -288,34 +263,23 @@ namespace KEC.Curation.Web.Api.Controllers
                                                             && p.Stage == maxStage
                                                             && p.PublicationId.Equals(publication.Id)
                                                             && p.Owner == null && p.ActionTaken == null).FirstOrDefault();
-
             if (publicationLog == null)
             {
                 return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
             }
-            
             try
             {
-               
                 publicationLog.ActionTaken = model.ActionTaken;
                 _uow.Complete();
-              
+
                 return Ok(value: $"Publication {model.KICDNumber} has been Rejected");
             }
             catch (Exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
         }
-        [HttpGet("allpublications")]
-        public IActionResult AllPublications()
-        {
-            var assignments = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals(PublicationStage.NewPublication));
-            var assignmentList = assignments.Any() ?
-                assignments.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
-            return Ok(assignmentList);
-        }
+        #endregion
     }
 }

@@ -9,7 +9,7 @@ namespace KEC.Voucher.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(KEC.Voucher.Data.Models.VoucherDb context)

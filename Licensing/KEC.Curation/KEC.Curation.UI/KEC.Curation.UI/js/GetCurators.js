@@ -16,7 +16,7 @@ $.ajax({
         $select.html('');
         //iterate over the data and append a select option
         $.each(data, function (index, val) {
-            $select.append(`<option id=${val.Value}  value='${val.Value}'+ >${val.Text}</option>`);
+            $select.append(`<option id=${val.Text}  value='${val.Text}'+ >${val.Value}</option>`);
         })
     },
     error: function () {

@@ -45,7 +45,9 @@ namespace KEC.Curation.PublishersUI.Controllers
 
                 var publisher = new Publishers
                 {
-                   
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     guid = user.Id
                 };
 
@@ -65,7 +67,9 @@ namespace KEC.Curation.PublishersUI.Controllers
 
                 var publisher = new Publishers
                 {
-
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     guid = user.Id
                 };
 
@@ -78,7 +82,22 @@ namespace KEC.Curation.PublishersUI.Controllers
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
 
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
         }
         public ActionResult Pending()
         {
@@ -91,7 +110,9 @@ namespace KEC.Curation.PublishersUI.Controllers
 
                 var publisher = new Publishers
                 {
-
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     guid = user.Id
                 };
 
@@ -111,7 +132,9 @@ namespace KEC.Curation.PublishersUI.Controllers
 
                 var publisher = new Publishers
                 {
-
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     guid = user.Id
                 };
 
@@ -125,7 +148,22 @@ namespace KEC.Curation.PublishersUI.Controllers
             ViewBag.PublicationId = Id;
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
         }
 
         public ActionResult ReviewPublication(int Id)
@@ -133,20 +171,87 @@ namespace KEC.Curation.PublishersUI.Controllers
             ViewBag.PublicationId = Id;
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
         }
         public ActionResult DetailApproved(int Id)
         {
             ViewBag.PublicationId = Id;
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
+        }
+        public ActionResult DetailReject(int Id)
+        {
+            ViewBag.PublicationId = Id;
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign To Chief Curators";
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
         }
         public ActionResult ChiefCurators()
         {
             ViewData["SubTitle"] = "Curation Management System";
             ViewData["Message"] = "Assign To Chief Curators";
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+
+                return View(publisher);
+
+            }
         }
     }
 }

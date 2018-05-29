@@ -1,9 +1,7 @@
 ﻿(function () {
           $(document).ready(function () {
-          $('#recommend').click(submitChiefNotesAndAction);
+          //$('#recommend').click(submitChiefNotesAndAction);
     });
-
-   
     function submitChiefNotesAndAction(e) {
         e.preventDefault();
         let publicationId = $('#publication-view').attr('data-publicationId');
@@ -18,7 +16,6 @@
         if (actionSelected === null || actionSelected === "") {
             return ShowAlert("Please select an action taken from the list", "error");
         }
-
         $.ajax({
             headers : {
                 'Accept' : 'application/json',

@@ -114,14 +114,13 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.CompletionDate;
             }
         }
-       
-        public string ChiefCuratorComment
+
+        public string Publisher
         {
             get
             {
-             var stageLog =   _uow.PublicationStageLogRepository.Find(p => p.Stage == PublicationStage.Curation).FirstOrDefault();
-                return stageLog == null ? string.Empty : stageLog.Notes;
-                
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_publication.Id)).FirstOrDefault();
+                return publication.PublisherName;
             }
         }
     }

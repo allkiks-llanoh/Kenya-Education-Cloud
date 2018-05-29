@@ -49,7 +49,7 @@ namespace KEC.Curation.UI.Controllers
                 _userManager = value;
             }
         }
-
+     
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -71,6 +71,8 @@ namespace KEC.Curation.UI.Controllers
                     Guid = user.Id,
                     Subjectid = user.SubjectId,
                     FullName = user.FullName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber
                 };
                 return View(chiefCurator);
             }

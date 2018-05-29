@@ -4,7 +4,7 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <script type="text/javascript">
-    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+    const apiBaseUrls = "https://curationapi.kec.ac.ke/api";
 </script>
 <div id="wrapper">
     <div class="row">
@@ -27,6 +27,7 @@
                             <th> CURATION NUMBER </th>
                             <th> TITLE </th>
                             <th> PUBLISHER</th>
+                            <th>SUBJECT</th>
                             <th> ACTIONS</th>
                         </tr>
 
@@ -47,7 +48,7 @@
         </div>
     </div>
     <div class="footer" style="">
-        <strong>Copyright</strong> KEC &copy; 2018
+        <strong>Copyright</strong> Kenya Education Cloud &copy; 2018
     </div>
 </div>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
@@ -77,7 +78,8 @@
         row.append($(`<td class="hidden"> + rowData.id + </td>`));
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
         row.append($("<td>" + rowData.title + "</td>"));
-        row.append($("<td>" + rowData.publisherName + "</td>"));
+        row.append($("<td>" + rowData.publisher + "</td>"));
+        row.append($("<td>" + rowData.subject + "</td>"));
 
         row.append($(`<td> <a href="/CurationManagers/DetailApproved/${rowData.id}?Pub=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
 

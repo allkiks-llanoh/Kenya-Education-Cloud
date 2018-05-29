@@ -22,25 +22,21 @@ namespace KEC.Curation.Web.Api.Serializers
             {
                 return _assignment.CreatedUtc;
             }
+        } 
+        public string Publication
+        {
+            get
+            {
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                return publication.KICDNumber;
+            }
         }
-        //public string Publication
-        //{
-        //    get
-        //    {
-        //        var publicationId = _uow.PublicationSectionRepository.Get(_assignment.PublicationSectionId)?.PublicationId;
-        //        var publicationRecord = _uow.PublicationRepository.Get(publicationId.GetValueOrDefault());
-        //        var subject = _uow.SubjectRepository.Get(publicationRecord.SubjectId).Name;
-        //        var recordinfo = $"Subject: {subject} KICD Number: {publicationRecord.KICDNumber}";
-        //        var kNumber = _uow.PublicationRepository.Find(p=>p.)
-        //        return recordinfo;
-        //    }
-        //}
         public string SectionToCurate
         {
             get
             {
                 var section = _uow.PublicationSectionRepository.Get(_assignment.PublicationSectionId)?.SectionDescription;
-                return section;
+                return section ;
             }
         }
         public int AssignmentId

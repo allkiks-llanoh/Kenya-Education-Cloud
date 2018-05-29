@@ -27,6 +27,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <WebProject_DirectoryAccessLevelKey>1</WebProject_DirectoryAccessLevelKey>
+    <ApplicationInsightsResourceId>/subscriptions/8eaca2a2-dc2f-4e58-8ae2-28580934830b/resourcegroups/curation/providers/microsoft.insights/components/curationapi</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/8eaca2a2-dc2f-4e58-8ae2-28580934830b/resourcegroups/curation/providers/microsoft.insights/components/curationapi</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,6 +49,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.5.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.5.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.5.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.5.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.5.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.5.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights.TraceListener, Version=2.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.TraceListener.2.5.0\lib\net45\Microsoft.ApplicationInsights.TraceListener.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -56,8 +82,14 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.ActiveDirectory.GraphClient, Version=2.1.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.ActiveDirectory.GraphClient.2.1.1\lib\portable-net4+sl5+win+wpa+wp8\Microsoft.Azure.ActiveDirectory.GraphClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -75,11 +107,23 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.2.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.9.1.0\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
     <Reference Include="Mvc.Bootstrap.Core, Version=3.0.8.12882, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mvc.Bootstrap.Core.3.0.8.12882\lib\net40\Mvc.Bootstrap.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -155,9 +199,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -191,27 +232,6 @@
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
       <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.14.201151115\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationInsights">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.Agent.Intercept">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.Web">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionFilters\UserGuidJsonAttribute .cs" />
@@ -223,6 +243,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChiefCuratorController.cs" />
+    <Compile Include="Controllers\CurationController.cs" />
     <Compile Include="Controllers\CurationManagersController.cs" />
     <Compile Include="Controllers\CuratorController.cs" />
     <Compile Include="Controllers\GetUsersController.cs" />
@@ -236,21 +257,18 @@
     <Compile Include="ActionFilters\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CustomAuthorizeAttribute.cs" />
+    <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\FixJsonTextReader.cs" />
-    <Compile Include="Migrations\201802262225569_InitialMigrations.cs" />
-    <Compile Include="Migrations\201802262225569_InitialMigrations.Designer.cs">
-      <DependentUpon>201802262225569_InitialMigrations.cs</DependentUpon>
+    <Compile Include="Migrations\201805201100075_Initial.cs" />
+    <Compile Include="Migrations\201805201100075_Initial.Designer.cs">
+      <DependentUpon>201805201100075_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803091331364_Subject.cs" />
-    <Compile Include="Migrations\201803091331364_Subject.Designer.cs">
-      <DependentUpon>201803091331364_Subject.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803120828283_SubjectId.cs" />
-    <Compile Include="Migrations\201803120828283_SubjectId.Designer.cs">
-      <DependentUpon>201803120828283_SubjectId.cs</DependentUpon>
+    <Compile Include="Migrations\201805222048075_RoleName.cs" />
+    <Compile Include="Migrations\201805222048075_RoleName.Designer.cs">
+      <DependentUpon>201805222048075_RoleName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -259,6 +277,7 @@
     <Compile Include="Models\GetUsersModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RoleRemoveViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -269,6 +288,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CustomStyles\ChiefCurator.css" />
+    <Content Include="Content\CustomStyles\DocumentViewer.css" />
     <Content Include="Content\email.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
@@ -345,6 +365,8 @@
     <Content Include="Content\plugins\images\bootstrap-colorpicker\hue.png" />
     <Content Include="Content\plugins\images\bootstrap-colorpicker\saturation.png" />
     <Content Include="Content\plugins\images\cmss.jpg" />
+    <Content Include="Content\plugins\images\KEClogo.png" />
+    <Content Include="Content\plugins\images\KEClogo1.png" />
     <Content Include="Content\plugins\images\logo.png" />
     <Content Include="Content\plugins\images\sort.png" />
     <Content Include="Content\plugins\images\sort_asc.png" />
@@ -390,13 +412,31 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="js\AssignmentWhenGettingCuration.js" />
     <Content Include="js\c.js" />
     <Content Include="js\chiefCuratorAssignPublication.js" />
     <Content Include="js\chiefCuratorPublicationHistory.js" />
     <Content Include="js\chiefCuratorPublications.js" />
+    <Content Include="js\delcat.js" />
+    <Content Include="js\DeleteCategory.js" />
+    <Content Include="js\DeleteLevel.js" />
+    <Content Include="js\DeleteSubject.js" />
+    <Content Include="js\DetailApproved.js" />
+    <Content Include="js\EditCategory.js" />
+    <Content Include="js\EditLevel.js" />
+    <Content Include="js\EditSubject.js" />
     <Content Include="js\FullyAssignCurator.js" />
     <Content Include="js\FullyAssignChiefCurator.js" />
+    <Content Include="js\GetRoles.js" />
+    <Content Include="js\Kk.js" />
+    <Content Include="js\ListingCategories.js" />
+    <Content Include="js\ListingLevels.js" />
+    <Content Include="js\ListingSubjects.js" />
     <Content Include="js\PrincipalCuratorComments.js" />
+    <Content Include="js\ReviewPublication.js" />
+    <Content Include="js\SelectedContentDrawTable.js" />
+    <Content Include="js\TryAssignMultiple.js" />
+    <Content Include="js\TryCuratorView.js" />
     <Content Include="js\principalCuratorViewPublication.js" />
     <Content Include="js\chiefCuratorViewPublication.js" />
     <Content Include="js\Comments.js" />
@@ -405,7 +445,6 @@
     <Content Include="js\curatorView.js" />
     <Content Include="js\curate.js" />
     <Content Include="js\curatorToCurate.js" />
-    <Content Include="js\financeVerify - Copy.js" />
     <Content Include="js\financeVerify.js" />
     <Content Include="js\ChiefView.js" />
     <Content Include="js\financeView.js" />
@@ -427,7 +466,6 @@
     <Content Include="js\Subjects.js" />
     <Content Include="js\SubjectTypes.js" />
     <Content Include="js\UpdateFullyAssign.js" />
-    <Content Include="js\View.js" />
     <Content Include="Publications\index.jpeg" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
@@ -485,6 +523,8 @@
     <Content Include="Content\plugins\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\plugins\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\plugins\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Connected Services\Application Insights\ConnectedService.json" />
+    <Content Include="Connected Services\kecpublicationsAzureStorage\ConnectedService.json" />
     <None Include="Content\font-awesome\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Scripts\globalConstants.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -852,19 +892,96 @@
     <Content Include="Scripts\plugins\velocity\velocity.min.js" />
     <Content Include="Scripts\plugins\velocity\velocity.ui.min.js" />
     <Content Include="Scripts\plugins\video\responsible-video.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\compatibility.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\annotations.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\archive.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\book.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\container.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\contents.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\epub.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\epubcfi.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\index.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\layout.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\locations.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\managers\continuous\index.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\managers\default\index.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\managers\helpers\stage.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\managers\helpers\views.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\managers\views\iframe.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\managers\views\inline.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\mapping.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\navigation.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\packaging.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\pagelist.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\rendition.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\resources.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\section.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\spine.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\themes.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\utils\constants.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\utils\core.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\utils\hook.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\utils\path.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\utils\queue.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\utils\replacements.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\utils\request.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\Epub\utils\url.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\example.local.css" />
+    <Content Include="Scripts\plugins\ViewerJSS\images\kogmbh.png" />
+    <Content Include="Scripts\plugins\ViewerJSS\images\nlnet.png" />
+    <Content Include="Scripts\plugins\ViewerJSS\images\texture.png" />
+    <Content Include="Scripts\plugins\ViewerJSS\images\toolbarButton-download.png" />
+    <Content Include="Scripts\plugins\ViewerJSS\images\toolbarButton-fullscreen.png" />
+    <Content Include="Scripts\plugins\ViewerJSS\images\toolbarButton-menuArrows.png" />
+    <Content Include="Scripts\plugins\ViewerJSS\images\toolbarButton-pageDown.png" />
+    <Content Include="Scripts\plugins\ViewerJSS\images\toolbarButton-pageUp.png" />
+    <Content Include="Scripts\plugins\ViewerJSS\images\toolbarButton-presentation.png" />
+    <Content Include="Scripts\plugins\ViewerJSS\images\toolbarButton-zoomIn.png" />
+    <Content Include="Scripts\plugins\ViewerJSS\images\toolbarButton-zoomOut.png" />
+    <Content Include="Scripts\plugins\ViewerJSS\index.html" />
+    <Content Include="Scripts\plugins\ViewerJSS\pdf.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\pdf.worker.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\pdfjsversion.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\text_layer_builder.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\ui_utils.js" />
+    <Content Include="Scripts\plugins\ViewerJSS\webodf.js" />
+    <Content Include="Scripts\plugins\ViewerJS\compatibility.js" />
+    <Content Include="Scripts\plugins\ViewerJS\example.local.css" />
+    <Content Include="Scripts\plugins\ViewerJS\images\kogmbh.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\nlnet.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\texture.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-download.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-fullscreen.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-menuArrows.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-pageDown.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-pageUp.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-presentation.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-zoomIn.png" />
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-zoomOut.png" />
+    <Content Include="Scripts\plugins\ViewerJS\index.html" />
+    <Content Include="Scripts\plugins\ViewerJS\pdf.js" />
+    <Content Include="Scripts\plugins\ViewerJS\pdf.worker.js" />
+    <Content Include="Scripts\plugins\ViewerJS\pdfjsversion.js" />
+    <Content Include="Scripts\plugins\ViewerJS\text_layer_builder.js" />
+    <Content Include="Scripts\plugins\ViewerJS\ui_utils.js" />
+    <Content Include="Scripts\plugins\ViewerJS\webodf.js" />
     <Content Include="Scripts\plugins\wow\wow.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\ui-helpers.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -967,12 +1084,34 @@
     <Content Include="Views\Shared\_Layouts.cshtml" />
     <Content Include="Views\Shared\_ChangePassword.cshtml" />
     <Content Include="Views\Shared\_LayoutPassword.cshtml" />
-    <Content Include="Views\ChangePassword\ChangePassword.cshtml" />
-    <Content Include="Views\ChangePassword\ChangePasswordConfirm.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordConfirm.cshtml" />
+    <Content Include="Views\Role\RemoveFromRole.cshtml" />
+    <Content Include="Views\Curator\Curator.cshtml" />
+    <Content Include="Views\Curation\CuratorView.cshtml" />
+    <Content Include="Views\Curator\List.cshtml" />
+    <Content Include="Views\Home\ListCategory.cshtml" />
+    <Content Include="Views\Home\EditCategory.cshtml" />
+    <Content Include="Views\Home\EditLevel.cshtml" />
+    <Content Include="Views\Home\ListLevels.cshtml" />
+    <Content Include="Views\Home\ListSubjects.cshtml" />
+    <Content Include="Views\Home\EditSubjects.cshtml" />
+    <Content Include="Views\PrincipalCurator\AssignMultiple.cshtml" />
+    <Content Include="Views\Shared\RegistrationError.cshtml" />
+    <Content Include="Views\Home\DeleteCategory.cshtml" />
+    <Content Include="Views\Home\DeleteSubject.cshtml" />
+    <Content Include="Views\Home\DeleteLevel.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdminRoles.cshtml" />
+    <Content Include="Views\Shared\_TopNavbarAdmin.cshtml" />
+    <Content Include="Views\CurationManagers\UserManagement.cshtml" />
+    <Content Include="Views\Role\UserManagement.cshtml" />
+    <Content Include="Views\Role\ListUsers.cshtml" />
+    <Content Include="Views\Curator\_DocumentViewerPartial.cshtml" />
+    <Content Include="Views\PrincipalCurator\_DocumentViewerPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Curation\" />
+    <Folder Include="Scripts\plugins\NewFolder1\" />
     <Folder Include="Views\GetUsers\" />
     <Folder Include="Views\Groups\" />
     <Folder Include="Views\UsersAdmin\" />
@@ -990,14 +1129,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802262225569_InitialMigrations.resx">
-      <DependentUpon>201802262225569_InitialMigrations.cs</DependentUpon>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805201100075_Initial.resx">
+      <DependentUpon>201805201100075_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803091331364_Subject.resx">
-      <DependentUpon>201803091331364_Subject.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803120828283_SubjectId.resx">
-      <DependentUpon>201803120828283_SubjectId.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805222048075_RoleName.resx">
+      <DependentUpon>201805222048075_RoleName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -1014,11 +1153,13 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63772</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44317/</IISUrl>
+          <IISUrl>http://localhost:63775/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:63775/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

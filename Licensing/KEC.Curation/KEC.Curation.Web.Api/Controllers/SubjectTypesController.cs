@@ -17,13 +17,11 @@ namespace KEC.Curation.Web.Api.Controllers
     public class SubjectTypesController : Controller
     {
         private readonly IUnitOfWork _uow;
-
         public SubjectTypesController(IUnitOfWork uow)
         {
             _uow = uow;
         }
         // GET: api/SubjectTypes
-       
         [HttpGet]
         public IActionResult AllSubjectTypes()
         {
@@ -31,8 +29,7 @@ namespace KEC.Curation.Web.Api.Controllers
             var subjectTypesList = subjectTypes.Any() ? 
                 subjectTypes.Select(p => new SubjectTypeDownloadSerializer(p)).ToList() : new List<SubjectTypeDownloadSerializer>();
             return Ok(value: subjectTypesList);
-        }
-      
+        }      
         // GET: api/SubjectTypes/5
         [HttpGet("{id}", Name = "SubjectTypeById")]
         public IActionResult SubjectTypeById(int id)
@@ -44,9 +41,7 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             return Ok(value: new SubjectTypeDownloadSerializer(subjectType));
         }
-
         // POST: api/SubjectTypes
-        
         [HttpPost]
         public IActionResult CreateSubjectType([FromBody] SubjectTypeUploadSerializer model)
         {
@@ -64,15 +59,13 @@ namespace KEC.Curation.Web.Api.Controllers
                 Name = model.Name,
                 CreatedAtUtc = DateTime.Now.ToUniversalTime(),
                 UpdatedAtUtc = DateTime.Now.ToUniversalTime()
-
             };
             _uow.SubjectTypeRepository.Add(subjectType);
             _uow.Complete();
             return Ok("Subject type created successfully");
-        }
-     
+        }  
         // PUT: api/SubjectTypes/5
-        [HttpPut("{id}")]
+        [HttpPatch("category/{id}")]
         public IActionResult EditSubjectType(int Id,[FromBody]SubjectTypeUploadSerializer model)
         {
             if (!ModelState.IsValid)
@@ -89,7 +82,17 @@ namespace KEC.Curation.Web.Api.Controllers
             _uow.Complete();
             return Ok("Subject type updated successfully");
         }
-        
-       
+        [HttpDelete("{id}")]
+        public IActionResult DeleteSybjectType(DeleteSerilizer model)
+        {
+            var level = _uow.SubjectTypeRepository.Get(model.Id.GetValueOrDefault());
+            if (level == null)
+            {
+                return NotFound("Level could not be retrieved for deleting or is missing ");
+            }
+            _uow.SubjectTypeRepository.Remove(level);
+            _uow.Complete();
+            return Ok("Category Deleted From Repository");
+        }
     }
 }

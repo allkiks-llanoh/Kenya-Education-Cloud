@@ -6,8 +6,9 @@
     function updateChiefCuratorAssignment(e) {
         e.preventDefault();
         let Id = $('#publication-view').attr('data-publicationId');
-        let CuserGuid = $('#CurrentUserGuid').val();      
-        let url = apiBaseUrl.concat(`/principalcurator/update/chiefcuratorcomments/${Id}`);
+        let CuserGuid = $('#CurrentUserGuid').val();   
+        let url = apiBaseUrl.concat(`/principalcurator/update/chiefcuratorcomments/${Id}?publicationId=${Id}`);
+
         $.ajax({
             headers : {
                 'Accept' : 'application/json',
@@ -18,7 +19,7 @@
             contentType: 'application/json',
             crossDomain: true,
             accepts: 'application/json',
-            data: JSON.stringify({ UserGuid: CuserGuid, Status: true, publicationId: Id}),
+            data: JSON.stringify({ UserGuid: CuserGuid, publicationId: Id}),
             statusCode: {
                 404: () => { ShowAlert("Curators submissions already submitted", 'error'); },
                 403: () => { ShowAlert("You are not authorized to process publication"); },

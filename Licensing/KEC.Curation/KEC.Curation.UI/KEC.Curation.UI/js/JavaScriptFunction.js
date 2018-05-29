@@ -12,6 +12,7 @@ function tableRows(data) {
     for (var i = 0; i < data.length; i++) {
         tableRows.push(drawRow(data[i]));
     }
+    }
     return tableRows;
 };
 

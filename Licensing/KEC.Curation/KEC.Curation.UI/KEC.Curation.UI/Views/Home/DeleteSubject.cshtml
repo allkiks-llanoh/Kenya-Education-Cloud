@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "EditSubjects";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+
+    <script src="@Url.Content("~/js/DeleteSubject.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
+    <script src="~/js/EditSubject.js"></script>
+}
+@{
+
+    var Id = Request.Params["Id"];
+    var Name = Request.Params["Name"];
+
+
+}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center m-t-lg">
+                <h1>
+                    @ViewData["SubTitle"]
+                </h1>
+                <small>@ViewData["Message"]</small>
+                <br>
+                <br>
+                <hr />
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="panel panel-default" style="padding:10px;">
+                        <h5>Are you sure you want to delete category @Name?</h5>
+                        <input type="hidden" name="Id" id="Id" class="form-control" value="@Id">
+                        <a href="/Home/ListCategory" class="btn btn-danger">No</a>
+                        <button type="submit" id="deletesubject" style="background-color:#00b95f;" class="btn btn-primary">Yes</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

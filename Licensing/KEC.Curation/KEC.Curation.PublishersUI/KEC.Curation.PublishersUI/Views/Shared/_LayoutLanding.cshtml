@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>KEC Landing Page</title>
+    <title>Content Submission</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         @Styles.Render(" ~/Content/assets/css/main.css")
@@ -28,10 +28,14 @@
     <div id="bg"></div>
 
     <!-- Scripts -->
-    @Scripts.Render("~/bundles/javascript")
-   
+    <script src="~/Content/assets/js/jquery.min.js"></script>
+    <script src="~/Content/assets/js/skel.min.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+    <script src="~/Content/assets/js/util.js"></script>
+
+
     @RenderSection("scripts", required: false)
-    
+
 
 </body>
 </html>

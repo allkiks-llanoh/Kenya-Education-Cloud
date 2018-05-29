@@ -8,6 +8,8 @@
     <title>CMS | @ViewBag.Title</title>
     <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/css")
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
     <link href="~/Content/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 
@@ -15,7 +17,7 @@
 <body style="background-color:white;">
    
         <!-- Wrapper-->
-    <div id="wrapper" style="background-color:#19272b;">
+    <div id="wrapper" style="background-color:#112442;">
         @Html.Partial("_Navigation")
         <!-- Navigation -->
         <!-- Page wraper -->
