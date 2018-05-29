@@ -23,7 +23,7 @@
                         </tr>
                         <tfoot>
                             <tr>
-                                <td colspan="5">
+                                <td colspan="3">
                                     <ul class="pagination pull-right"></ul>
                                 </td>
                             </tr>
@@ -48,7 +48,7 @@
     var n = d.getFullYear();
     //Start by getting voucher list based on batch Id
     $.ajax({
-        url: `http://curationapi-d.kec.ac.ke/api/Publishers/rejected`,
+        url: `http://curationapi.kec.ac.ke/api/Publishers/rejected`,
         type: "GET",
         dataType: "json",
         success: function (data, status, jqhxr) {
