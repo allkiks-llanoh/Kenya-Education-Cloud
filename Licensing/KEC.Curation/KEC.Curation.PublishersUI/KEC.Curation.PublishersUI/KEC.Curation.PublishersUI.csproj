@@ -959,6 +959,7 @@
     <Content Include="Views\Home\DetailReject.cshtml" />
     <Content Include="Views\Account\ConfirmRegitration.cshtml" />
     <Content Include="Views\Account\TermsAndConditions.cshtml" />
+    <Content Include="Views\Account\UserNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
