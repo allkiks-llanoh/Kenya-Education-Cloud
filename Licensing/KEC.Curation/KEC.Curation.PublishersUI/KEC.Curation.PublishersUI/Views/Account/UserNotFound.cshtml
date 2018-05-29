@@ -1,13 +1,14 @@
 ﻿@{
-    ViewBag.Title = "Forgot Password Confirmation";
+    ViewBag.Title = "Error";
     Layout = "~/Views/Shared/_Layouts.cshtml";
 }
+
 <br />
 <div class="row" style=" margin-top:60px;">
     <div class="form-group" style="text-align:center; font-size:14px; padding:10px;">
-        <label>Forgot password Confirmation</label>
+        <h4 class="text-danger">User Not Found.</h4>
         <p>
-            Please check your email to reset your password.
+            <h5 class="text-danger">An error occurred while processing your request.</h5>
         </p>
         <p style="text-align:center;">
             @Html.ActionLink("Go back to Login", "Login")
@@ -16,4 +17,3 @@
 
     </div>
 </div>
-	

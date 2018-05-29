@@ -1108,6 +1108,7 @@
     <Content Include="Views\Role\ListUsers.cshtml" />
     <Content Include="Views\Curator\_DocumentViewerPartial.cshtml" />
     <Content Include="Views\PrincipalCurator\_DocumentViewerPartial.cshtml" />
+    <Content Include="Views\Account\UserNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

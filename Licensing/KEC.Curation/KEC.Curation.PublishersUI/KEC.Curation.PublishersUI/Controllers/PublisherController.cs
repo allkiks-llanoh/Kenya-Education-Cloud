@@ -18,7 +18,7 @@ namespace KEC.Curation.PublishersUI.Controllers
         // GET: Publisher
         public ActionResult Upload()
         {
-            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["SubTitle"] = "Publishers Portal";
             ViewData["Message"] = "Upload Publication";
 
             using (var context = new ApplicationDbContext())
@@ -40,7 +40,7 @@ namespace KEC.Curation.PublishersUI.Controllers
         }
         public ActionResult Approved()
         {
-            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["SubTitle"] = "Publishers Portal";
             ViewData["Message"] = "Approved Publications";
             using (var context = new ApplicationDbContext())
             {
@@ -59,14 +59,14 @@ namespace KEC.Curation.PublishersUI.Controllers
         }
         public ActionResult Conditional()
         {
-            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["SubTitle"] = "Publishers Portal";
             ViewData["Message"] = "Approved With Changes Recomended";
 
             return View();
         }
         public ActionResult Rejected()
         {
-            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["SubTitle"] = "Publishers Portal";
             ViewData["Message"] = "Rejected Publication";
             using (var context = new ApplicationDbContext())
             {

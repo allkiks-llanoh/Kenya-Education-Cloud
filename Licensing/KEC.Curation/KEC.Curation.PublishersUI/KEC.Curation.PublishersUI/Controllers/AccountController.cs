@@ -172,9 +172,9 @@ namespace KEC.Curation.PublishersUI.Controllers
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking " + callbackUrl +" ");
 
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToAction("ConfirmRegitration", "Account");
                 }
                 AddErrors(result);
             }
@@ -195,6 +195,11 @@ namespace KEC.Curation.PublishersUI.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
+        [AllowAnonymous]
+        public ActionResult ConfirmRegitration()
+        {
+            return View();
+        }
 
         //
         // GET: /Account/ForgotPassword
@@ -214,18 +219,18 @@ namespace KEC.Curation.PublishersUI.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    return RedirectToAction("UserNotFound", "Account");
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking " + callbackUrl + " ");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -263,7 +268,7 @@ namespace KEC.Curation.PublishersUI.Controllers
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return RedirectToAction("UserNotFound", "Account");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
@@ -281,7 +286,11 @@ namespace KEC.Curation.PublishersUI.Controllers
         {
             return View();
         }
-
+        [AllowAnonymous]
+        public ActionResult TermsAndConditions()
+        {
+            return View();
+        }
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
@@ -413,7 +422,11 @@ namespace KEC.Curation.PublishersUI.Controllers
         {
             return View();
         }
-
+        [AllowAnonymous]
+        public ActionResult UserNotFound()
+        {
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
