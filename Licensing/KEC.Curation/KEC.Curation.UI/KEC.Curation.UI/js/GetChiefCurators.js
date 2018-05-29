@@ -7,7 +7,7 @@ $.ajax({
         'Access-Controll-Allow-Origin': '*'
     },
     type: 'POST',
-    url: 'https://curation-d.kec.ac.ke/GetUsers/GetChiefCurators',
+    url: 'https://curation.kec.ac.ke/GetUsers/GetChiefCurators',
     dataType: 'JSON',
     async: false,
     crossDomain: true,

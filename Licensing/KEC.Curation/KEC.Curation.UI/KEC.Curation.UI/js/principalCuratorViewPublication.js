@@ -32,7 +32,7 @@
                 403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
                 500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
             },
-          
+
         }).done(function (publication, textStatus, jqXHR) {
             showChiefCuratorSubmissionSection(publication, "#publication-view");
             $('#publication-details').replaceWith(
@@ -88,15 +88,15 @@
                 403: () => { ShowAlert("You are not authorized to access curator submissions"); },
                 500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
             },
-          
+
 
         }).done(function (submissions, textStatus, jqXHR) {
-           
+
             submissions.forEach(function (submission) {
                 $('#comments').html(`${submission.notes}`);
 
             });
-        
+
         });
     }
 
@@ -114,7 +114,7 @@
             let itemsHtml = '';
             data.forEach(function (actionItem) {
                 itemsHtml = itemsHtml.concat(`<li id='${actionItem.name}'>${actionItem.description}<li>`);
-               
+
             });
             $('#action-taken').html(itemsHtml);
             hookBtnSelect();
@@ -123,7 +123,7 @@
         });
     }
     function showChiefCuratorSubmissionSection(publication, parentElementId) {
-        if (publication !== null ) {
+        if (publication !== null) {
             let chiefCuratorSection = $('#chief-curator-section').html();
             $(parentElementId).html(chiefCuratorSection);
             $('#process-publication').click(submitChiefNotesAndAction);

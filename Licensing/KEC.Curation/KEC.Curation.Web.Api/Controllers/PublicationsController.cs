@@ -19,6 +19,7 @@ using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.File;
 using Newtonsoft.Json.Linq;
+using Aspose.Pdf;
 
 namespace KEC.Curation.Web.Api.Controllers
 {
@@ -53,6 +54,8 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 ModelState.AddModelError("File", ".EXE File Extensions are not Permited");
             }
+         
+
             try
             {
                 var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccountName, StorageAccountKey), false);

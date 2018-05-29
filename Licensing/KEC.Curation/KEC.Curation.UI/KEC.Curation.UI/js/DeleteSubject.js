@@ -26,7 +26,7 @@
             }
         }).success(function (data, textStatus, jqXHR) {
             ShowAlert("Subject deleted", "success");
-            window.location.assign("http://curation-d.kec.ac.ke/Home/ListSubjects");
+            window.location.assign("https://curation.kec.ac.ke/Home/ListSubjects");
         }).fail(function () {
             ShowAlert("There was an error, please try again", 'error');
         });

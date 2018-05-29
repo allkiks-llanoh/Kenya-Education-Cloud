@@ -25,7 +25,7 @@
             }
         }).success(function (data, textStatus, jqXHR) {
             ShowAlert("Category deleted", "success");
-            window.location.assign("http://curation-d.kec.ac.ke/Home/ListCategory");
+            window.location.assign("https://curation.kec.ac.ke/Home/ListCategory");
         }).fail(function () {
             ShowAlert("There was an error, please try again", 'error');
         });

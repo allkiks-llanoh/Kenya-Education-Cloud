@@ -26,7 +26,7 @@
             }
         }).success(function (data, textStatus, jqXHR) {
             ShowAlert("Level deleted", "success");
-            window.location.assign("http://curation-d.kec.ac.ke/Home/ListLevels");
+            window.location.assign("https://curation.kec.ac.ke/Home/ListLevels");
         }).fail(function () {
             ShowAlert("There was an error, please try again", 'error');
         });

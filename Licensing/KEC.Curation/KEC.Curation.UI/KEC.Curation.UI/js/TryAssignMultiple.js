@@ -1,6 +1,6 @@
 ﻿
 $(document).ready(function () {
-    var apiBaseUrls = "http://localhost:15177/api";
+
     let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurator`)
     function ajaxDatas() {
 
@@ -23,7 +23,7 @@ $(document).ready(function () {
                 'Content-Type' : 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            url: "https://curationapi-d.kec.ac.ke/api/chiefcurator/selected/assign",
+            url: "https://curationapi.kec.ac.ke/api/chiefcurator/selected/assign",
             type: "POST",
             data: ajaxDatas(),
             statusCode: {

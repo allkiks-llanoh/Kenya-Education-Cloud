@@ -32,9 +32,9 @@ $(document).ready(function () {
         var sid = $('#SubjectTypeId').val();
 
         $.ajax({
-            headers :  {
-                'Accept' :  'application/json',
-                'Content-Type' :  'application/json'
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
             },
             url: subjectsPOSTUrl,
             type: "POST",
@@ -47,7 +47,7 @@ $(document).ready(function () {
                 $('#alert').html(`${response}.`)
                 $('div.alert-success').toggleClass('hidden');
                 $('#btn-postFile').html('CREATE SUBJECT');
-                window.location.assign("http://curation-d.kec.ac.ke/Home/ListSubjects");
+                window.location.assign("http://curation.kec.ac.ke/Home/ListSubjects");
             },
             error: function (request, status, error) {
 
