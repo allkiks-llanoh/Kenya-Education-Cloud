@@ -4,7 +4,7 @@ $select = $('#UserGuid');
 //request the JSON data and parse into the select element
 $.ajax({
     type: 'POST',
-    url: 'https://curation-d.kec.ac.ke/GetUsers/GetCurators',
+    url: 'https://curation.kec.ac.ke/GetUsers/GetCurators',
     dataType: 'JSON',
     async: false,
     crossDomain: true,

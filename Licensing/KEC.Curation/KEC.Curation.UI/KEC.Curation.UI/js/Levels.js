@@ -7,9 +7,9 @@ $(document).ready(function () {
         var name = $('#Name').val();
 
         $.ajax({
-            headers :  {
-                'Accept' :  'application/json',
-                'Content-Type' :  'application/json'
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
             },
             url: levelsPOSTUrl,
             type: "POST",

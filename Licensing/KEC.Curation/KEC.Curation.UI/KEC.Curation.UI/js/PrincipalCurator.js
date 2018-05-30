@@ -3,12 +3,12 @@
 $(document).ready(function () {
     var publicationID = $('#identity').attr('data-identity');
     let principalCuratorPostUrl = apiBaseUrl.concat(`/PrincipalCurator/publication/${publicationID}/assign`)
-    
+
     $('#LegalApprove').click(function () {
-       
+
         $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         var stage = "PrincipalCurator"
-        var notes  = $('.note-editable').html();
+        var notes = $('.note-editable').html();
         var actiontaken = "PublicationMoveToNextStage"
         var principalCuratorGuid = $('#CurrentUserGuid').val();
         var kicdNumber = $('#kicd').attr('data-kicdNumber');
@@ -17,7 +17,7 @@ $(document).ready(function () {
         console.log(`${principalCuratorGuid}`);
         console.log(` ${chiefCuratorGuid} `);
         console.log(` ${notes} `);
-       
+
         $.ajax({
             headers : {
                 'Accept' : 'application/json',
@@ -25,7 +25,7 @@ $(document).ready(function () {
             },
             url: principalCuratorPostUrl,
             type: "POST",
-            data: JSON.stringify({ PrincipalCuratorGuid: principalCuratorGuid, ChiefCuratorGuid: chiefCuratorGuid, KICDNumber: kicdNumber, Notes: notes, Stage: stage, ActionTaken: actiontaken}),
+            data: JSON.stringify({ PrincipalCuratorGuid: principalCuratorGuid, ChiefCuratorGuid: chiefCuratorGuid, KICDNumber: kicdNumber, Notes: notes, Stage: stage, ActionTaken: actiontaken }),
 
             success: function (response, status, jxhr) {
                 console.log(response);
@@ -51,7 +51,7 @@ $(document).ready(function () {
 
             }
         });
-     
+
 
 
     });

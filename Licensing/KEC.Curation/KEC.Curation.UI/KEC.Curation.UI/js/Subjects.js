@@ -32,9 +32,9 @@ $(document).ready(function () {
         var sid = $('#SubjectTypeId').val();
 
         $.ajax({
-            headers :  {
-                'Accept' :  'application/json',
-                'Content-Type' :  'application/json'
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
             },
             url: subjectsPOSTUrl,
             type: "POST",
