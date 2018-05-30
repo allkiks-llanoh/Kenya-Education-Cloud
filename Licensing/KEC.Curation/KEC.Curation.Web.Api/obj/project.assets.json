@@ -6326,7 +6326,7 @@
       ]
     },
     "Microsoft.CodeAnalysis.Analyzers/1.1.0": {
-      "sha512": "HS3iRWZKcUw/8eZ/08GXKY2Bn7xNzQPzf8gRPHGSowX7u7XXu9i9YEaBeBNKUXWfI7qjvT2zXtLUvbN0hds8vg==",
+      "sha512": "4cv53DxV1Sp4hb0rYh+2rC1R4jT9aRF+3eq66KVR31gfKN21LUpFgZHnpqPia8OtMK2fQZItxQ/avf5S0U1tDg==",
       "type": "package",
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
       "files": [
@@ -8206,7 +8206,7 @@
       ]
     },
     "runtime.native.System/4.3.0": {
-      "sha512": "c/qWt2LieNZIj1jGnVNsE2Kl23Ya2aSTBuXMD6V7k9KWr6l16Tqdwq+hJScEpWER9753NWC8h96PaVNY5Ld7Jw==",
+      "sha512": "nvrYK8GoWWsKHwXAgcxe8ACX9e453omFEDfliljWJl+3Fg3AduAMeQFHgP+0b7u+LADSDb8GTwX46u0jpdKRjw==",
       "type": "package",
       "path": "runtime.native.system/4.3.0",
       "files": [
@@ -8243,7 +8243,7 @@
       ]
     },
     "runtime.native.System.Net.Http/4.3.0": {
-      "sha512": "ZVuZJqnnegJhd2k/PtAbbIcZ3aZeITq3sj06oKfMBSfphW3HDmk/t4ObvbOk/JA/swGR0LNqMksAh/f7gpTROg==",
+      "sha512": "ao3v9UdiqnsoOLi95bz6tKDMTUEiFF+0RqL18N2DLqwSN+lVJhUjr6dRJLPWrcOMo2n0nomLxPqX6lmmaQ52Tg==",
       "type": "package",
       "path": "runtime.native.system.net.http/4.3.0",
       "files": [
@@ -8255,7 +8255,7 @@
       ]
     },
     "runtime.native.System.Net.Security/4.3.0": {
-      "sha512": "M2nN92ePS8BgQ2oi6Jj3PlTUzadYSIWLdZrHY1n1ZcW9o4wAQQ6W+aQ2lfq1ysZQfVCgDwY58alUdowrzezztg==",
+      "sha512": "ADbyvPb+xe41jS2ObPin2ItcTmVndQvTBfo2/m7FhQs2KDVFB5wL7+2VGwIRUtAtOIdar8WsRH1nz7Z9nRWH4g==",
       "type": "package",
       "path": "runtime.native.system.net.security/4.3.0",
       "files": [
@@ -8267,7 +8267,7 @@
       ]
     },
     "runtime.native.System.Security.Cryptography.Apple/4.3.0": {
-      "sha512": "DloMk88juo0OuOWr56QG7MNchmafTLYWvABy36izkrLI5VledI0rq28KGs1i9wbpeT9NPQrx/wTf8U2vazqQ3Q==",
+      "sha512": "bjGo5l9a95E9EJqAELBC2EH3xGuHP5fp7CyMIcMhui0aukvbnCRMDHd7fFixa9tFSmV6l/3nhjTfbqLPo4shsw==",
       "type": "package",
       "path": "runtime.native.system.security.cryptography.apple/4.3.0",
       "files": [
@@ -8315,7 +8315,7 @@
       ]
     },
     "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple/4.3.0": {
-      "sha512": "kVXCuMTrTlxq4XOOMAysuNwsXWpYeboGddNGpIgNSZmv1b6r/s/DPk0fYMB7Q5Qo4bY68o48jt4T4y5BVecbCQ==",
+      "sha512": "G+i1o7DmSnjrFLyf1Sv/l6b1UTGyNOHW40WPM9rkvY2gz2rQvoBOUlMLnsoA/1fSJzxnh8YmoCTiEEHClOeAxw==",
       "type": "package",
       "path": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple/4.3.0",
       "files": [
@@ -9784,7 +9784,7 @@
       ]
     },
     "System.Dynamic.Runtime/4.3.0": {
-      "sha512": "SNVi1E/vfWUAs/WYKhE9+qlS6KqK0YVhnlT0HQtr8pMIA8YX3lwy3uPMownDwdYISBdmAF/2holEIldVp85Wag==",
+      "sha512": "hEot7UbrvDRzWA4kaQ9dbHr/EwcXfo1n/B6pnSGjgUfDdvL7hgcgMGcRGShaMeMKJKVij4ydTkLszFz2pw85hw==",
       "type": "package",
       "path": "system.dynamic.runtime/4.3.0",
       "files": [
@@ -9955,7 +9955,7 @@
       ]
     },
     "System.Globalization.Extensions/4.3.0": {
-      "sha512": "FhKmdR6MPG+pxow6wGtNAWdZh7noIOpdD5TwQ3CprzgIE1bBBoim0vbR1+AWsWjQmU7zXHgQo4TWSP6lCeiWcQ==",
+      "sha512": "i3ezvsCHmm0zewiOAOqGMGV5oW3mDUmlJq1Gk6R3mkJNy2zdgVSej5JJ2qhgAXxG7ENBc/PElLmwriIhKG1irQ==",
       "type": "package",
       "path": "system.globalization.extensions/4.3.0",
       "files": [
@@ -10427,7 +10427,7 @@
       ]
     },
     "System.Linq.Parallel/4.3.0": {
-      "sha512": "td7x21K8LalpjTWCzW/nQboQIFbq9i0r+PCyBBCdLWWnm4NBcdN18vpz/G9hCpUaCIfRL+ZxJNVTywlNlB1aLQ==",
+      "sha512": "HxTHrFKbie8NeWncIQCRyqcG5KpnBTkT1CASYZthS3a+AstmmRgJdJqkZ5bSyZDhLSPhPw1ReoJe8gLOBqb5PQ==",
       "type": "package",
       "path": "system.linq.parallel/4.3.0",
       "files": [
@@ -11205,7 +11205,7 @@
       ]
     },
     "System.Reflection.Emit/4.3.0": {
-      "sha512": "228FG0jLcIwTVJyz8CLFKueVqQK36ANazUManGaJHkO0icjiIypKW7YLWLIWahyIkdh5M7mV2dJepllLyA1SKg==",
+      "sha512": "YSRaCTVLrOySOl76mdZ+zKoN1VajNSmkZJWvzPEvwTpm/carDbXJDxUCKLPQKVdn8C+i1m0aGMGRoKNdIcYCBw==",
       "type": "package",
       "path": "system.reflection.emit/4.3.0",
       "files": [
@@ -12161,7 +12161,7 @@
       ]
     },
     "System.Security.Claims/4.3.0": {
-      "sha512": "P/+BR/2lnc4PNDHt/TPBAWHVMLMRHsyYZbU1NphW4HIWzCggz8mJbTQQ3MKljFE7LS3WagmVFuBgoLcFzYXlkA==",
+      "sha512": "4mcndSGK4upU+GW1TQ4E6sgTTq+zscCIO6vu5DF+UUSLa6A7aHNTqSKqR+nCYwfC9sthKVbmsWr4+nFy7EyMwA==",
       "type": "package",
       "path": "system.security.claims/4.3.0",
       "files": [
@@ -12263,7 +12263,7 @@
       ]
     },
     "System.Security.Cryptography.Csp/4.3.0": {
-      "sha512": "X4s/FCkEUnRGnwR3aSfVIkldBmtURMhmexALNTwpjklzxWU7yjMk7GHLKOZTNkgnWnE0q7+BCf9N2LVRWxewaA==",
+      "sha512": "dPieAMAehPH6+erdmnTz6i8PuGhwXa2ybytpAAzvUXDj/UYjoUKbzetDqpg+dBxylAUDpSnxwyZUcaT3Q2sfAA==",
       "type": "package",
       "path": "system.security.cryptography.csp/4.3.0",
       "files": [
@@ -12332,7 +12332,7 @@
       ]
     },
     "System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "h4CEgOgv5PKVF/HwaHzJRiVboL2THYCou97zpmhjghx5frc7fIvlkY1jL+lnIQyChrJDMNEXS6r7byGif8Cy4w==",
+      "sha512": "phRlPweV3CtbUUXivs5EITBc8r1UXdi3yBEhRYZopjlI0V1u+oj8XfQKHkY83M25sjm/AFhA9oy87zgCO+eoZw==",
       "type": "package",
       "path": "system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -12464,7 +12464,7 @@
       ]
     },
     "System.Security.Principal/4.3.0": {
-      "sha512": "I1tkfQlAoMM2URscUtpcRo/hX0jinXx6a/KUtEQoz3owaYwl3qwsO8cbzYVVnjxrzxjHo3nJC+62uolgeGIS9A==",
+      "sha512": "bbS9DjcXOvTOBBGEUEWCa6lZI/+iCaK74xNu1k9eGRDxAupJgrdCAHScDkwaPDW3/iC4gxywwHabysFxrhOO+A==",
       "type": "package",
       "path": "system.security.principal/4.3.0",
       "files": [
@@ -13020,7 +13020,7 @@
       ]
     },
     "System.Threading.Tasks.Parallel/4.3.0": {
-      "sha512": "cbjBNZHf/vQCfcdhzx7knsiygoCKgxL8mZOeocXZn5gWhCdzHIq6bYNKWX0LAJCWYP7bds4yBK8p06YkP0oa0g==",
+      "sha512": "t6/WizEIPzpAWM9ufmdHOoaMIUWXvEzyxdPJ6HieZ6D9a4ODqyOCHFfoctKmn0OGhVC+c1RYwV48NDXsF4A5iw==",
       "type": "package",
       "path": "system.threading.tasks.parallel/4.3.0",
       "files": [
@@ -13075,7 +13075,7 @@
       ]
     },
     "System.Threading.Thread/4.3.0": {
-      "sha512": "OHmbT+Zz065NKII/ZHcH9XO1dEuLGI1L2k7uYss+9C1jLxTC9kTZZuzUOyXHayRk+dft9CiDf3I/QZ0t8JKyBQ==",
+      "sha512": "Pj8mzTvACi9OM47CGMGlWXumtqFZSgAlmGMgkKTC+mBtfeEX3tUui5TyIOlo5r02AQZ1ffYaHbZB95NUanOM/w==",
       "type": "package",
       "path": "system.threading.thread/4.3.0",
       "files": [
@@ -13113,7 +13113,7 @@
       ]
     },
     "System.Threading.ThreadPool/4.3.0": {
-      "sha512": "k/+g4b7vjdd4aix83sTgC9VG6oXYKAktSfNIJUNGxPEj7ryEOfzHHhfnmsZvjxawwcD9HyWXKCXmPjX8U4zeSw==",
+      "sha512": "BbfAKt9l4DIOxcYdt0SaA6UC++6Lpe24FkCqWFwizIrBTs2N4EgV809Tu/GsZ7XTAtshbk8h0JdhpiQJpyxNgw==",
       "type": "package",
       "path": "system.threading.threadpool/4.3.0",
       "files": [
@@ -13204,7 +13204,7 @@
       ]
     },
     "System.ValueTuple/4.4.0": {
-      "sha512": "BahUww/+mdP4ARCAh2RQhQTg13wYLVrBb9SYVgW8ZlrwjraGCXHGjo0oIiUfZ34LUZkMMR+RAzR7dEY4S1HeQQ==",
+      "sha512": "k9/6K47pYNYdZM9bk5wRdAZJpuUDeJUZpxtOXqFfLIA/QUebPhVpyrpsUrBLZbsnobdvrzYpAeH1yShenaNO0Q==",
       "type": "package",
       "path": "system.valuetuple/4.4.0",
       "files": [
@@ -13617,11 +13617,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
+      "projectUniqueName": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
       "projectName": "KEC.Curation.Web.Api",
-      "projectPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
+      "projectPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\KEC.Curation.Web.Api.csproj",
       "packagesPath": "C:\\Users\\LLANOH\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\obj\\",
+      "outputPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Web.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13640,8 +13640,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj": {
-              "projectPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj"
+            "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj": {
+              "projectPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj"
             }
           }
         }
