@@ -2880,7 +2880,7 @@
       ]
     },
     "System.Dynamic.Runtime/4.3.0": {
-      "sha512": "SNVi1E/vfWUAs/WYKhE9+qlS6KqK0YVhnlT0HQtr8pMIA8YX3lwy3uPMownDwdYISBdmAF/2holEIldVp85Wag==",
+      "sha512": "hEot7UbrvDRzWA4kaQ9dbHr/EwcXfo1n/B6pnSGjgUfDdvL7hgcgMGcRGShaMeMKJKVij4ydTkLszFz2pw85hw==",
       "type": "package",
       "path": "system.dynamic.runtime/4.3.0",
       "files": [
@@ -3015,7 +3015,7 @@
       ]
     },
     "System.Globalization.Extensions/4.3.0": {
-      "sha512": "FhKmdR6MPG+pxow6wGtNAWdZh7noIOpdD5TwQ3CprzgIE1bBBoim0vbR1+AWsWjQmU7zXHgQo4TWSP6lCeiWcQ==",
+      "sha512": "i3ezvsCHmm0zewiOAOqGMGV5oW3mDUmlJq1Gk6R3mkJNy2zdgVSej5JJ2qhgAXxG7ENBc/PElLmwriIhKG1irQ==",
       "type": "package",
       "path": "system.globalization.extensions/4.3.0",
       "files": [
@@ -3579,7 +3579,7 @@
       ]
     },
     "System.Reflection.Emit/4.3.0": {
-      "sha512": "228FG0jLcIwTVJyz8CLFKueVqQK36ANazUManGaJHkO0icjiIypKW7YLWLIWahyIkdh5M7mV2dJepllLyA1SKg==",
+      "sha512": "YSRaCTVLrOySOl76mdZ+zKoN1VajNSmkZJWvzPEvwTpm/carDbXJDxUCKLPQKVdn8C+i1m0aGMGRoKNdIcYCBw==",
       "type": "package",
       "path": "system.reflection.emit/4.3.0",
       "files": [
@@ -5064,26 +5064,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\elsie\\.nuget\\packages\\": {},
+    "C:\\Users\\LLANOH\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\elsie\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj",
+      "projectUniqueName": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj",
       "projectName": "KEC.Curation.Data",
-      "projectPath": "C:\\Users\\elsie\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj",
-      "packagesPath": "C:\\Users\\elsie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\elsie\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\obj\\",
+      "projectPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\KEC.Curation.Data.csproj",
+      "packagesPath": "C:\\Users\\LLANOH\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\elsie\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\LLANOH\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5096,8 +5093,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\elsie\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj": {
-              "projectPath": "C:\\Users\\elsie\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj"
+            "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj": {
+              "projectPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\Licensing\\KEC.Curation\\KEC.Curation.Services\\KEC.Curation.Services.csproj"
             }
           }
         }

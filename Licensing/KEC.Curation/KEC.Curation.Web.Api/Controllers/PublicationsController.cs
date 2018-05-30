@@ -30,7 +30,7 @@ namespace KEC.Curation.Web.Api.Controllers
     {
         #region Definitions and Constants
         const string StorageAccountName = "kecpublications";
-        const string StorageAccountKey = "MKMdAUoU2vUWIRSMSR5UXnu7hZ9omXWFXSglCHowJTn3oyOeycxCGSgSQ4huvihn9a0DUObjvvNBd06PfHw2Dg==";
+        const string StorageAccountKey = "cP6MXKU+7YLxE4sF4FPS0ETJ9Q5HzqN4YU+/XCtJgTtKoLpOCaAR4aQc7S5YU8q2/QjCvkGLiynLcQXmBGuifQ==";
         const string pathToFile = "https://keccuration.file.core.windows.net/publications";
         private readonly IUnitOfWork _uow;
         private readonly IHostingEnvironment _env;
