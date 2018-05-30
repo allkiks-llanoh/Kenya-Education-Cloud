@@ -24,7 +24,7 @@ $(document).ready(function () {
                 $('#alert').html(`${response}.`)
                 $('div.alert-success').toggleClass('hidden');
                 $('#btn-postFile').html('CREATE CATEGORY');
-                window.location.assign("http://curation.kec.ac.ke/Home/ListCategory");
+                window.location.assign("http://curation-d.kec.ac.ke/Home/ListCategory");
             },
             error: function (request, status, error) {
 

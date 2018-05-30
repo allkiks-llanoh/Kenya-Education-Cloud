@@ -157,7 +157,7 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
 <script type="text/javascript">
-    const apiBaseUrls = "https://curationapi.kec.ac.ke/api";
+    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
 </script>
 <script type="text/JavaScript">
 
@@ -228,7 +228,7 @@
         var AllUsersCount = $('#users_wait');
         $.ajax({
 
-            url: "https://curation.kec.ac.ke/GetUsers/CountAllUsers",
+            url: "https://curation-d.kec.ac.ke/GetUsers/CountAllUsers",
             type: "GET",
             dataType: "json",
             dataType: 'JSON',
@@ -246,7 +246,7 @@
 
         var PrincipalCuratorCount = $('#principal_wait');
         $.ajax({
-            url: "https://curation.kec.ac.ke/GetUsers/CountPrincipalCurators",
+            url: "https://curation-d.kec.ac.ke/GetUsers/CountPrincipalCurators",
             type: "POST",
             dataType: "json",
             dataType: 'JSON',
@@ -264,7 +264,7 @@
 
         var ChiefCuratorCount = $('#chief_wait');
         $.ajax({
-            url: "https://curation.kec.ac.ke/GetUsers/CountChiefCurators",
+            url: "https://curation-d.kec.ac.ke/GetUsers/CountChiefCurators",
             type: "POST",
             dataType: "json",
             dataType: 'JSON',
@@ -282,7 +282,7 @@
 
         var CuratorCount = $('#subject_wait');
         $.ajax({
-            url: "https://curation.kec.ac.ke/GetUsers/CountCurators",
+            url: "https://curation-d.kec.ac.ke/GetUsers/CountCurators",
             type: "POST",
             dataType: "json",
             dataType: 'JSON',
@@ -303,7 +303,7 @@
         return tableRows;
     };
     $.ajax({
-        url: "https://curation.kec.ac.ke/GetUsers/GetCurators",
+        url: "https://curation-d.kec.ac.ke/GetUsers/GetCurators",
         type: "POST",
 
         dataType: "json",
