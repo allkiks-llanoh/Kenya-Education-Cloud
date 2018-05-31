@@ -422,6 +422,7 @@
     <Content Include="js\DeleteLevel.js" />
     <Content Include="js\DeleteSubject.js" />
     <Content Include="js\DetailApproved.js" />
+    <Content Include="js\DetailRejected.js" />
     <Content Include="js\EditCategory.js" />
     <Content Include="js\EditLevel.js" />
     <Content Include="js\EditSubject.js" />
@@ -1109,6 +1110,7 @@
     <Content Include="Views\Curator\_DocumentViewerPartial.cshtml" />
     <Content Include="Views\PrincipalCurator\_DocumentViewerPartial.cshtml" />
     <Content Include="Views\Account\UserNotFound.cshtml" />
+    <Content Include="Views\CurationManagers\DetailRejected.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
