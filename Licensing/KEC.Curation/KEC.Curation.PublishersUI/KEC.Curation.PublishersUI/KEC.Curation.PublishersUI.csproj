@@ -396,6 +396,8 @@
     <Content Include="js\FullyAssignCurator.js" />
     <Content Include="js\GetChiefCurators.js" />
     <Content Include="js\GetCurators.js" />
+    <Content Include="js\getLevelsForPublisher.js" />
+    <Content Include="js\getSubjectsForPublisher.js" />
     <Content Include="js\globalConstants.js" />
     <Content Include="js\JavaScriptFunction.js" />
     <Content Include="js\jquery-3.1.1.min.js" />
@@ -413,6 +415,7 @@
     <Content Include="js\Subjects.js" />
     <Content Include="js\SubjectsForCurators.js" />
     <Content Include="js\SubjectTypes.js" />
+    <Content Include="js\submitPublication.js" />
     <Content Include="js\UpdateFullyAssign.js" />
     <Content Include="js\View.js" />
     <Content Include="Scripts\app\inspinia.js" />

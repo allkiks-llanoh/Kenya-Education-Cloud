@@ -159,7 +159,7 @@
 
     //Start by getting voucher list based on batch Id
         $.ajax({
-            url: 'https://curationapi-d.kec.ac.ke/api/Publishers/approved',
+            url: 'https://curationapi.kec.ac.ke/api/Publishers/approved',
             type: "GET",
             dataType: "json",
             data:{ guid: UguidApproved },
@@ -193,7 +193,7 @@
     var UguidConditional = "@Model.guid";
     //Start by getting voucher list based on batch Id
     $.ajax({
-        url: 'https://curationapi-d.kec.ac.ke/api/Publishers/conditional',
+        url: 'https://curationapi.kec.ac.ke/api/Publishers/conditional',
         type: "GET",
         dataType: "json",
         data:{ guid: UguidConditional },
@@ -227,7 +227,7 @@
     var UguidRejected= "@Model.guid";
     //Start by getting voucher list based on batch Id
     $.ajax({
-        url: 'https://curationapi-d.kec.ac.ke/api/Publishers/rejected',
+        url: 'https://curationapi.kec.ac.ke/api/Publishers/rejected',
         type: "GET",
         dataType: "json",
         data:{ guid: UguidRejected },
