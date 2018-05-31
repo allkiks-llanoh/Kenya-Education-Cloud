@@ -81,8 +81,13 @@
 
             submissions.forEach(function (submission) {
                 $('#currator-commets').html(` <dt>Curator Comments</dt><dd> ${submission.curatorComments}</dd>
+<br/>
+<hr/>
                                                   <dt>Chief Curator Comments</dt><dd>${submission.chiefCuratorComments}</dd>
-                                                  <dt>Principal Curator Comments</dt><dd>${submission.principalCuratorComments}</dd>`);
+<br/>
+<hr/>
+                                                  <dt>Principal Curator Comments</dt><dd>${submission.principalCuratorComments}</dd>
+<br/><hr/>`);
 
             });
 

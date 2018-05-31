@@ -17,8 +17,6 @@ $.ajax({
     type: "GET",
     dataType: "json",
     success: function (data, status, jqhxr) {
-        console.log(data);
-
         //This code snipet prepares to append Json Data
         $('#FinanceList').append(tableRows(data));
     }

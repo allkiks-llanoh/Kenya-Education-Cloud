@@ -162,8 +162,10 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("get/publications/{Id}")]
         public IActionResult GetAllPublicationsById(int Id)
         {
-            var publicationsCount = _uow.PublicationRepository.Find(p => p.Id.Equals(Id)).FirstOrDefault();
-            return Ok(value: publicationsCount);
+            var publications = _uow.PublicationRepository.Find(p => p.Id.Equals(Id));
+            var publicationList = publications.Any() ?
+               publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
+            return Ok(value: publicationList);
         }
         [HttpGet("get/publications")]
         public IActionResult GetAllPublications()

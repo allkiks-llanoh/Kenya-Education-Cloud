@@ -6,7 +6,7 @@
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
 <script type="text/javascript">
-    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+    const apiBaseUrls = "https://curationapi.kec.ac.ke/api";
 </script>
 <div id="wrapper">
     <div class="row">
@@ -29,6 +29,7 @@
                             <th> CURATION NUMBER </th>
                             <th> TITLE </th>
                             <th> PUBLISHER</th>
+                            <th> SUBJECT</th>
                             <th> LEVEL</th>
                             <th> ACTIONS</th>
                         </tr>
@@ -82,6 +83,7 @@
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.publisher + "</td>"));
         row.append($("<td>" + rowData.subject + "</td>"));
+        row.append($("<td style='width:10%;'>" + rowData.level + "</td>"));
 
         row.append($(`<td> <a href="/CurationManagers/ViewPublication/${rowData.id}?Pub=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Publication Details</a>`));
 
