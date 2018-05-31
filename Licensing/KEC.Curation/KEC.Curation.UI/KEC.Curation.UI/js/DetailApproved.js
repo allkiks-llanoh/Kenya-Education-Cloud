@@ -23,40 +23,43 @@
             },
 
 
-        }).done(function (publication, textStatus, jqXHR) {
+        }).done(function (publications, textStatus, jqXHR) {
 
-            $('#publication-details').replaceWith(
-                `<dl id="publication-details" data-stage="${publication.stage}">
-                  <div class="row">
-                       <div class="col-md-3">
-                           <dt>Curation</dt>
-                           <dd id="kicd-number">${publication.kicdNumber}</dd>  
-                       </div>
-                       <div class="col-md-3">
+            publications.forEach(function (publication) {
+                $('#publication-details').replaceWith(
+                    `<dl>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <dt>Curation</dt>
+                            <dd id="kicd-number">${publication.kicdNumber}</dd>
+                        </div>
+                        <div class="col-md-3">
                             <dt>Title</dt>
-                            <dd>${publication.title}</dd> 
-                       </div>
-                         <div class="col-md-3">
+                            <dd>${publication.title}</dd>
+                        </div>
+                        <div class="col-md-3">
                             <dt>Content Location</dt>
                             <dd><a href="${publication.url}">Link to publication</a></dd>
-                       </div>
-                  </div>
-                  <br><br>
-                  <div class="row">
-                       <div class="col-md-3">
-                            <dt>Subject</dt>
-                            <dd>${publication.subject}</dd>
-                       </div>
-                        <div class="col-md-3">
-                              <dt>Completion date</dt>
+                        </div>
+                    </div>
+                    <br><br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <dt>Subject</dt>
+                                <dd>${publication.subject}</dd>
+                            </div>
+                            <div class="col-md-3">
+                                <dt>Completion date</dt>
                                 <dd>${publication.completionDate}</dd>
-                       </div>
-                        <div class="col-md-3">
-                             <dt>Description</dt>
-                            <dd>${publication.description}</dd>
-                       </div>
-                  </div>
-                </dl>`);
+                            </div>
+                            <div class="col-md-3">
+                                <dt>Description</dt>
+                                <dd>${publication.description}</dd>
+                            </div>
+                        </div>
+                 </dl>`);
+
+            });
         });
     }
     function getPublicationCurationComments() {
