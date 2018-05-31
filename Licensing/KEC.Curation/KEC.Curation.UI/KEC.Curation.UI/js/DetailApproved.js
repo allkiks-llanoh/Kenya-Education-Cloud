@@ -80,10 +80,10 @@
             }).done(function (submissions, textStatus, jqXHR) {
 
                 submissions.forEach(function (submission) {
-                    $('#currator-commets').html(` <dt>Curator Recomendation</dt><dd> ${submission.curatorComments}</dd>
-                                                  <dt>Chief Curator Recomendation</dt><dd>${submission.chiefCuratorComments}</dd>
-                                                  <dt>Principal Curator Recomendation</dt><dd>${submission.principalCuratorComments}</dd>
-                                                  <dt>Curation Managers Recomendation</dt><dd>${submission.cutationManagersCuratorComments}</dd>`);
+                    $('#currator-commets').html(` <dt>Curator Recomendation</dt><dd> ${submission.curatorComments}</dd><br/><hr/>
+                                                  <dt>Chief Curator Recomendation</dt><dd>${submission.chiefCuratorComments}</dd><br/><hr/>
+                                                  <dt>Principal Curator Recomendation</dt><dd>${submission.principalCuratorComments}</dd><br/><hr/>
+                                                  <dt>Curation Managers Recomendation</dt><dd>${submission.cutationManagersCuratorComments}</dd><br/><hr/>`);
 
                 });
 
