@@ -111,9 +111,11 @@ namespace KEC.Curation.PublishersUI.Models
         public string Email { get; set; }
 
     
-        [Required(ErrorMessage = "Password is required")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
+        [Required(ErrorMessage = "password is required")]
+        //[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]
+        [RegularExpression(@"^((?=.*[A-Z])(?=.*\d)(?=.*[a-z])|(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&\/=?_.-])|(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%&\/=?_.-])|(?=.*\d)(?=.*[a-z])(?=.*[!@#$%&\/=?_.-])).{8,}$"
+            , ErrorMessage = "Password should contain atleast one symbol, one digit, one capital letter and atleast 8 characters long e.g.#Karibu20.")]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
