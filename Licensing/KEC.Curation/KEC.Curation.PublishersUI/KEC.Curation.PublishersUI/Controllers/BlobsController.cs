@@ -15,7 +15,7 @@ namespace KEC.Curation.PublishersUI.Controllers
     public class BlobsController : Controller
     {
         static CloudBlobClient blobClient;
-        const string blobContainerName = "publications";
+        const string blobContainerName = "publicationtest";
         static CloudBlobContainer blobContainer;
 
         /// <summary> 

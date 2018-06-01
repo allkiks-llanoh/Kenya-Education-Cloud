@@ -40,7 +40,7 @@ namespace KEC.Curation.UI.Controllers
         {
             using (var client = new HttpClient())
             {
-                var uri = new Uri("https://curationapi.kec.ac.ke/api/SubjectTypes");
+                var uri = new Uri("https://curationapi-d.kec.ac.ke/api/SubjectTypes");
 
                 var response = await client.GetAsync(uri);
 

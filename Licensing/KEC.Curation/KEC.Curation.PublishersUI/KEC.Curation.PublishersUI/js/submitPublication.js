@@ -1,4 +1,4 @@
-﻿const apiBaseUrls = "https://curationapi.kec.ac.ke/api";
+﻿const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
 let publicationSubmitUrl = apiBaseUrls.concat(`/Publications/submit`);
 
 $('#btn-postFile').click(function (e) {
