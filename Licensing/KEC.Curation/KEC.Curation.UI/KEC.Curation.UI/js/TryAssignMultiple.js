@@ -23,7 +23,7 @@ $(document).ready(function () {
                 'Content-Type' : 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            url: "https://curationapi.kec.ac.ke/api/chiefcurator/selected/assign",
+            url: "https://curationapi-d.kec.ac.ke/api/chiefcurator/selected/assign",
             type: "POST",
             data: ajaxDatas(),
             statusCode: {

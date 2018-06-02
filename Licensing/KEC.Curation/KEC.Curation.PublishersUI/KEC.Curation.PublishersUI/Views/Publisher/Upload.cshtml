@@ -4,9 +4,12 @@
     ViewBag.Title = "Upload Content";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/Scripts/jquery-3.1.1.min.js"></script>
-<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
 
+
+    <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+   
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
 <div class="wrapper wrapper-content animated fadeInRight" style="margin-top:-40px;">
     <div class="row">
         <div class="col-lg-12">
@@ -17,9 +20,13 @@
                 <h4>@ViewData["Message"]</h4>
                 <br>
                 <br>
-                <div class="alert alert-success hidden">
+                <div class="alert alert-success hidden" id="div-success">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <p id="message"></p>
+                </div>
+                <div class="alert alert-danger hidden" id="div-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <p id="error"></p>
                 </div>
                 <div class="form-group" align="center" id="spinner">
                     <div class="loader"></div>
@@ -42,7 +49,7 @@
                                     <label for="Title">ISBN Number</label>
                                 </div>
                                 <div class="col-sm-9 hidden">
-                                    <input type="text" name="ISBNNumber" id="ISBNNumber" class="form-control" placeholder="Enter ISBN Number" required>
+                                    <input type="text" name="ISBNNumber" id="ISBNNumber" class="form-control" placeholder="Enter ISBN Number">
                                 </div>
                             </div>
                             <br>
@@ -69,7 +76,7 @@
                                     <label for="Title">Price</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="number" name="Price" id="Price" class="form-control" placeholder="Give Publication Price">
+                                    <input type="text" name="Price" id="Price" class="form-control" placeholder="Give Publication Price">
                                 </div>
                             </div>
                             <br>
@@ -142,27 +149,27 @@
                     </div>
 
                     <div>
-                        <button data-toggle="modal" data-target="#confirm" style="background-color:#00af57;" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>
-                    </div>
-                    <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                    <h4 class="modal-title">Confirm Submission</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>
-                                        Are you sure you want to submit this publication?
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                                    <button type="submit" id="btn-postFile" class="btn btn-primary">Yes</button>
+                            <button data-toggle="modal" data-target="#confirm" style="background-color:#00af57;" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>
+                        </div>
+                        <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title">Confirm Submission</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p id="messagem">
+                                            Are you sure you want to submit this publication?
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                        <button type="submit" id="btn-postFile" class="btn btn-primary">Yes</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </form>
 
             </div>
@@ -170,7 +177,7 @@
     </div>
 </div>
 <script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
 <script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="~/Scripts/plugins/notify/notify.min.js"></script>
@@ -180,7 +187,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: "https://curationapi.kec.ac.ke/api/Subjects",
+        url: "https://curationapi-d.kec.ac.ke/api/Subjects",
         dataType: 'JSON',
         success: function (data) {
             //clear the current content of the select
@@ -204,7 +211,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: "https://curationapi.kec.ac.ke/api/Levels",
+        url: "https://curationapi-d.kec.ac.ke/api/Levels",
         dataType: 'JSON',
         success: function (data) {
             //clear the current content of the select
@@ -227,7 +234,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: 'https://curationapi.kec.ac.ke/api/SubjectTypes',
+        url: 'https://curationapi-d.kec.ac.ke/api/SubjectTypes',
         dataType: 'JSON',
         success: function (data) {
             //clear the current content of the select
@@ -245,13 +252,12 @@
 
 </script>
 <script type="text/JavaScript">
-    const apiBaseUrl = "https://curationapi.kec.ac.ke/api";
-    let publicationSubmitUrl = apiBaseUrl.concat(`/Publications/submit`);
+    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+    let publicationSubmitUrl = apiBaseUrls.concat(`/Publications/submit`);
 
     $('#btn-postFile').click(function (e) {
+        e.preventDefault();
 
-        //var conf = confirm("Are You Sure You want to Submit Content");
-        //if (conf == true) {
         $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         var form_data = new FormData($('#uploadform')[0]);
 
@@ -263,55 +269,28 @@
             async: true,
             cache: false,
             data: form_data,
-            beforeSend: function () {
-
-            },
             success: function (response, status, jxhr) {
-                console.log(response);
-                ShowAlert("Publication Uploaded successfully");
-                $('#message').html(response);
-                $('div.alert-success').toggleClass('hidden');
+               
+                $('#div-danger').toggle('hidden');
                 $('#btn-postFile').html('Yes');
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
-                $('#Title').val(' ');
-                $('#ISBNNumber').val(' ');
-                $('#Description').val(' ');
-                $('#AuthorName').val(' ');
-                $('#Price').val(' ');
-                $('#CompletionDate').val(' ');
-                $('#PublicationFile').html(' No Publication Selected');
+                $('#message').html(response);
+                $('div.alert-success').toggleClass('hidden');
+                setTimeout(function () {
+                    window.location.reload(1);
+                }, 5000);
             },
             error: function (response, status, jxhr) {
 
-                console.log(response);
-                console.log(status);
-
-
-                ShowAlert("Please Fill All Fields", 'error');
-                $('#error').html(status)
-                $('div.alert-danger').toggleClass('hidden');
                 $('#btn-postFile').html('Yes');
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
+                $('#error').html("Please Fill All Fields")
+                $('div.alert-danger').toggleClass('hidden');
+                
             }
         });
-        //}
     });
 </script>
 
-<script type="text/javascript">
-    function ShowAlert(message, type) {
-
-        if (type === "error") {
-            $.notify(message, 'error');
-        } else if (type === "warning") {
-            $.notify(message, 'warning');
-        } else if (type === "success") {
-            $.notify(message, 'success');
-
-        } else if (type === "info") {
-            $.notify(message, 'info');
-        }
-    }
-</script>

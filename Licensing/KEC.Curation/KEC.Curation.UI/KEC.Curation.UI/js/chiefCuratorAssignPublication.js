@@ -68,9 +68,9 @@
     function submitCuratorAssignment(e) {
         e.preventDefault();
         let curator = $("unassigned-curator");
-        if (curator === null || curator === "") {
-            return ShowAlert("Please select a curator from the list");
-        }
+        //if (curator === null || curator === "") {
+        //    return ShowAlert("Please select a curator from the list",'error');
+        //}
         
         let section = $("#section-assigned").val();
         section = section === null || section === null ? "Whole publication" : section;
@@ -79,9 +79,6 @@
         var userGuid = $('#CurrentUserGuid').val();
         var fullyAssigned = "True"
         var chiefCuratorGuid = $('#UserGuid').val();
-        console.log(`${userGuid}`);
-        console.log(`${chiefCuratorGuid}`);
-        console.log(`${fullyAssigned}`);
         $.ajax({
             url: url,
             crossDomain: true,

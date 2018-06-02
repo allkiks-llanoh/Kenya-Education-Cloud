@@ -7,12 +7,14 @@ namespace KEC.Curation.PublishersUI
     {
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
-        {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                       "~/Scripts/jquery-{version}.js"));
+        { 
+          bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                       "~/Scripts/jquery-3.1.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                         "~/Scripts/jquery.validate.js",
+                        "~/Scripts/jquery.validate.unobtrusive.js"));
+
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
@@ -27,14 +29,14 @@ namespace KEC.Curation.PublishersUI
                       "~/Content/CustomStyles/ChiefCurator.css"));
 
             // Font Awesome icons
-            //bundles.Add(new StyleBundle("~/Content/font-awesome/css").Include(
-            //          "~/Content/font-awesome/css/font-awesome.min.css",
-            //          "~/Content/font-awesome/css/font-awesome.css"
-            //        ));
+            bundles.Add(new StyleBundle("~/Content/font-awesome/css").Include(
+                      "~/Content/font-awesome/css/font-awesome.min.css",
+                      "~/Content/font-awesome/css/font-awesome.css"
+                    ));
 
 
             //// jQuery
-
+        
 
             // jQueryUI CSS
             bundles.Add(new ScriptBundle("~/Scripts/plugins/jquery-ui/jqueryuiStyles").Include(
@@ -506,6 +508,6 @@ namespace KEC.Curation.PublishersUI
              "~/js/globalConstants.js"));
             //globalConstants
         }
-    }
+}
 }
 

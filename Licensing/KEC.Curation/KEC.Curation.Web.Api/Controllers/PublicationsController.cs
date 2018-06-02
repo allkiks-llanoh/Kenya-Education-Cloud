@@ -30,8 +30,9 @@ namespace KEC.Curation.Web.Api.Controllers
     {
         #region Definitions and Constants
         const string StorageAccountName = "kecpublications";
-        const string StorageAccountKey = "MKMdAUoU2vUWIRSMSR5UXnu7hZ9omXWFXSglCHowJTn3oyOeycxCGSgSQ4huvihn9a0DUObjvvNBd06PfHw2Dg==";
-        const string pathToFile = "https://keccuration.file.core.windows.net/publications";
+        const string StorageAccountKey = "cP6MXKU+7YLxE4sF4FPS0ETJ9Q5HzqN4YU+/XCtJgTtKoLpOCaAR4aQc7S5YU8q2/QjCvkGLiynLcQXmBGuifQ==";
+        //const string pathToFile = "https://keccuration.file.core.windows.net/publications";
+        const string pathToFile = "https://kecpublications.blob.core.windows.net/publicationtest";
         private readonly IUnitOfWork _uow;
         private readonly IHostingEnvironment _env;
         public PublicationsController(IUnitOfWork uow, IHostingEnvironment env)
@@ -61,7 +62,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccountName, StorageAccountKey), false);
                 //Blob starts here
                 var blob = storageAccount.CreateCloudBlobClient();
-                CloudBlobContainer container = blob.GetContainerReference("publications");
+                CloudBlobContainer container = blob.GetContainerReference("publicationtest");
                 CloudBlockBlob blobs = container.GetBlockBlobReference($"{model.PublicationFile.FileName}");
                 var filePath = $"{pathToFile}/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
                 UriBuilder uriBuilder = new UriBuilder();
@@ -203,6 +204,7 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(assignmentList);
         }
         #endregion
+
         #region Patch Process Publication
         [HttpPatch("process")]
         public IActionResult ProcessPublication([FromBody]PublicationProcessingSerializer model)

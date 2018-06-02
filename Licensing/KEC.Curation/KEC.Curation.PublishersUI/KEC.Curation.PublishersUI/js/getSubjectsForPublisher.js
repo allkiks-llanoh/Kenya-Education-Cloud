@@ -1,23 +1,20 @@
-﻿
-//get a reference to the select element
-$select = $('#UserGuid');
+﻿//get a reference to the select element
+$subjectId = $('#SubjectId');
 //request the JSON data and parse into the select element
 $.ajax({
-    type: 'POST',
-    url: 'https://curation.kec.ac.ke/GetUsers/GetCurators',
+    type: 'GET',
+    url: "https://curationapi-d.kec.ac.ke/api/Subjects",
     dataType: 'JSON',
-    async: false,
-    crossDomain: true,
     success: function (data) {
         //clear the current content of the select
-        $select.html('');
+        $subjectId.html('');
         //iterate over the data and append a select option
         $.each(data, function (index, val) {
-            $select.append(`<option id=${val.Value}  value='${val.Value}'+ >${val.Text}</option>`);
+            $subjectId.append(`<option id=${val.id}  value='${val.id}'+ >${val.name}</option>`);
         })
     },
     error: function () {
         //if there is an error append a 'none available' option
-        $select.html('<option id="-1">none available</option>');
+        $subjectId.html('<option id="-1">none available</option>');
     }
 });
