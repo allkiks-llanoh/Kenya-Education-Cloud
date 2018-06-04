@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <ApplicationInsightsResourceId>/subscriptions/8eaca2a2-dc2f-4e58-8ae2-28580934830b/resourcegroups/publishers/providers/microsoft.insights/components/publishersapi</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/8eaca2a2-dc2f-4e58-8ae2-28580934830b/resourcegroups/publishers/providers/microsoft.insights/components/publishersapi</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,10 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Content Remove="wwwroot\Database.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
@@ -29,7 +32,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Database.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\KEC.Publishers.Data\KEC.Publishers.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
