@@ -54,7 +54,7 @@ namespace KEC.Publishers.Api.Controllers
                 var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccountName, StorageAccountKey), false);
                 //Blob starts here
                 var blob = storageAccount.CreateCloudBlobClient();
-                CloudBlobContainer container = blob.GetContainerReference("publication");
+                CloudBlobContainer container = blob.GetContainerReference("publications");
                 CloudBlockBlob blobs = container.GetBlockBlobReference($"{model.PublicationFile.FileName}");
                 var filePath = $"{pathToFile}/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
                 UriBuilder uriBuilder = new UriBuilder();
