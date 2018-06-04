@@ -4966,7 +4966,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
-          "KEC.Publishers.Services": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.1.0",
           "Microsoft.EntityFrameworkCore.Design": "2.1.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.1.0",
@@ -4979,16 +4978,6 @@
         },
         "runtime": {
           "bin/placeholder/KEC.Publishers.Data.dll": {}
-        }
-      },
-      "KEC.Publishers.Services/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.0",
-        "compile": {
-          "bin/placeholder/KEC.Publishers.Services.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/KEC.Publishers.Services.dll": {}
         }
       }
     }
@@ -13027,11 +13016,6 @@
       "type": "project",
       "path": "../KEC.Publishers.Data/KEC.Publishers.Data.csproj",
       "msbuildProject": "../KEC.Publishers.Data/KEC.Publishers.Data.csproj"
-    },
-    "KEC.Publishers.Services/1.0.0": {
-      "type": "project",
-      "path": "../KEC.Publishers.Services/KEC.Publishers.Services.csproj",
-      "msbuildProject": "../KEC.Publishers.Services/KEC.Publishers.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {

@@ -6,28 +6,11 @@
 
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="obj\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="obj\**" />
     <None Remove="bin\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Services.AssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Services.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\project.assets.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Services.AssemblyInfoInputs.cache" />
-    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Services.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Services.csprojAssemblyReference.cache" />
-    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Services.dll" />
-    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Services.pdb" />
-    <None Include="obj\KEC.Publishers.Services.csproj.nuget.cache" />
-    <None Include="obj\KEC.Publishers.Services.csproj.nuget.g.props" />
-    <None Include="obj\KEC.Publishers.Services.csproj.nuget.g.targets" />
+    <None Remove="obj\**" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using KEC.Publishers.Data.Database;
+using KEC.Publishers.Data.Helpers;
 using KEC.Publishers.Data.Models;
-using KEC.Publishers.Services.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
