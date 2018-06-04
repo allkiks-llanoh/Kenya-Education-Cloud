@@ -19,7 +19,6 @@ namespace KEC.Publishers.Api.Controllers
         }
         // GET: api/Levels
         [HttpGet]
-
         public IActionResult AllLevels()
         {
             var levels = _uow.LevelRepository.GetAll().ToList();
