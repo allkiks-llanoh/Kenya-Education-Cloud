@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -14,6 +22,15 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\KEC.Publishers.Api.csproj.nuget.cache" />
+    <None Include="obj\KEC.Publishers.Api.csproj.nuget.g.props" />
+    <None Include="obj\KEC.Publishers.Api.csproj.nuget.g.targets" />
   </ItemGroup>
 
   <ItemGroup>
