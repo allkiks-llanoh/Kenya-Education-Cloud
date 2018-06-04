@@ -1,9 +1,9 @@
 ﻿
 <nav class="navbar-default navbar-static-side" role="navigation" >
     <div class="sidebar-collapse" >
-        <ul class="nav" id="side-menu">
+        <ul class="nav metismenu" id="side-menu">
             <li>
-                <div  style="background-color:white; height:60px;">
+                <div  style="background-color:white; height:60px;" class="hidden-sm hidden-xs">
                     <a  style="background-color:white;" href="/Home/Index">
 
                         <img src="~/Content/images/KEClogo.png" style="width:150px;" />
@@ -12,22 +12,22 @@
 
                 </div>
                 <div class="logo-element">
-                    KEC
+                   <a  href="/Home/Index" style="text-decoration:none;">KEC</a>
                 </div>
             </li>
             <br/>
             <li>
-                <a href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submissions Summary</span> </a>
+                <a href="@Url.Action("Index", "Home")" data-toggle="tooltip" data-placement="top" title="Submission Summary" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submissions Summary</span> </a>
             </li>
             <li>
-                <a href="@Url.Action("Upload", "Publisher")"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submit Content</span> </a>
+                <a href="@Url.Action("Upload", "Publisher")" data-toggle="tooltip" data-placement="top" title="Submit Content" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submit Content</span> </a>
             </li>
             <li>
-                <a href="#"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submitted Content</span> </a>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="Submitted Content" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Submitted Content</span> </a>
                 <ul class="nav nav-second-level collapse">
-                    <li> <a href="@Url.Action("AllPublications", "Home")"><i class="glyphicon glyphicon-book"></i><span class="nav-label">All Submissions</span> </a></li>
-                    <li> <a href="@Url.Action("Approved", "Home")"><i class="glyphicon glyphicon-book"></i> <span class="nav-label">Approved Submissions</span> </a></li>
-                    <li> <a href="@Url.Action("Rejected", "Home")"><i class="glyphicon glyphicon-book"></i> <span class="nav-label">Rejected Submissions</span></a></li>
+                    <li> <a href="@Url.Action("AllPublications", "Home")"><i class="glyphicon glyphicon-book"></i>All Submissions </a></li>
+                    <li> <a href="@Url.Action("Approved", "Home")"><i class="glyphicon glyphicon-book"></i> Approved Submissions </a></li>
+                    <li> <a href="@Url.Action("Rejected", "Home")"><i class="glyphicon glyphicon-book"></i> Rejected Submissions</a></li>
                 </ul>
             </li>
 

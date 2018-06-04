@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Kec.Publishers.Web.Api
+namespace KEC.Publishers.Api
 {
     public class Program
     {
