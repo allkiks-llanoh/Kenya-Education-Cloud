@@ -3,16 +3,15 @@ using KEC.Curation.Data.UnitOfWork;
 using System;
 using System.Linq;
 using KEC.Curation.Services.Extensions;
-using System.ComponentModel.DataAnnotations;
 
-namespace KEC.Curation.Web.Api.Serializers
+namespace KEC.Publishers.Api.Serializers
 {
-    public class PublicationDownloadSerilizer
+    public class PublicationDownloadSerilizerToCurators
     {
         private readonly Publication _publication;
         private readonly IUnitOfWork _uow;
 
-        public PublicationDownloadSerilizer(Publication publication, IUnitOfWork uow)
+        public PublicationDownloadSerilizerToCurators(Publication publication, IUnitOfWork uow)
         {
             _publication = publication;
             _uow = uow;
@@ -25,7 +24,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.Id;
             }
         }
-       
+
         public string Url
         {
             get
@@ -107,6 +106,13 @@ namespace KEC.Curation.Web.Api.Serializers
                 return level.Name;
             }
         }
+        public string Publisher
+        {
+            get
+            {
+                return _publication.PublisherName;
+            }
+        }
         public DateTime CompletionDate
         {
             get
@@ -114,53 +120,21 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.CompletionDate;
             }
         }
-        public string Stage
+        public string ContentNumber
         {
+
             get
             {
-                var maxStage = _uow.PublicationStageLogRepository
-                               .Find(p => p.PublicationId.Equals(_publication.Id))
-                               .Max(p => p.Stage);
-                var currentStage = _uow.PublicationStageLogRepository
-                                          .Find(p => p.PublicationId.Equals(_publication.Id)
-                                          && p.Stage == maxStage
-                                          && p.ActionTaken != null
-                                          && p.Owner != null).FirstOrDefault();
-                if (currentStage == null)
+                if (_publication.CertificateNumber == null)
                 {
-                    return string.Empty;
+                    return "Not Yet Curated Succesfully";
                 }
                 else
                 {
-                    var stageName = Enum.GetName((typeof(PublicationStage)), currentStage);
-                    return stageName;
+                    return _publication.CertificateNumber;
                 }
             }
         }
-        public bool ChiefCuratorCanProcess
-        {
-            get
-            {
-                return _uow.PublicationRepository.CanProcessCurationPublication(_publication);
-            }
-        }
-        public string ChiefCuratorActionTaken
-        {
-            get
-            {
-                var curationStageLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == PublicationStage.Curation && p.Id.Equals(_publication.Id)).FirstOrDefault();
-                return curationStageLog == null ? string.Empty : curationStageLog.Stage.GetDescription();
-            }
-        }
-        public string ChiefCuratorComment
-        {
-            get
-            {
-             var stageLog =   _uow.PublicationStageLogRepository.Find(p => p.Stage == PublicationStage.Curation).FirstOrDefault();
-                return stageLog == null ? string.Empty : stageLog.Notes;
-                
-            }
-        }
-       
+
     }
 }
