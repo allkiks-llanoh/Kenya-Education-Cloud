@@ -187,7 +187,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: "https://publisherapi.kec.ac.ke/Subjects",
+        url: "https://publisherapi.kec.ac.ke/api/Subjects",
         dataType: 'JSON',
         success: function (data) {
             //clear the current content of the select
@@ -211,7 +211,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: "https://publisherapi.kec.ac.ke/Levels",
+        url: "https://publisherapi.kec.ac.ke/api/Levels",
         dataType: 'JSON',
         success: function (data) {
             //clear the current content of the select
@@ -234,7 +234,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: 'https://publisherapi.kec.ac.ke/SubjectTypes',
+        url: 'https://publisherapi.kec.ac.ke/api/SubjectTypes',
         dataType: 'JSON',
         success: function (data) {
             //clear the current content of the select
@@ -252,7 +252,7 @@
 
 </script>
 <script type="text/JavaScript">
-    const apiBaseUrls = "https://publisherapi.kec.ac.ke";
+    const apiBaseUrls = "https://publisherapi.kec.ac.ke/api";
     let publicationSubmitUrl = apiBaseUrls.concat(`/Publications/submit`);
 
     $('#btn-postFile').click(function (e) {
