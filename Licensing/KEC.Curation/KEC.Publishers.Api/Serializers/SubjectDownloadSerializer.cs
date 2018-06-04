@@ -1,5 +1,6 @@
-﻿using KEC.Curation.Data.Models;
-using KEC.Curation.Data.UnitOfWork;
+﻿
+using KEC.Publishers.Data.Models;
+using KEC.Publishers.Data.UnitOfWork.Core;
 using System;
 
 namespace KEC.Publishers.Api.Serializers

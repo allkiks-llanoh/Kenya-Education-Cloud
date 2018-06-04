@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace KEC.Publishers.Data.Models
+{
+    public class PublicationSection
+    {
+        public int Id { get; set; }
+        public int PublicationId { get; set; }
+        public string SectionDescription { get; set; }
+        public string Owner { get; set; }
+        public int? ChiefCuratorAssignmentId { get; set; }
+        public DateTime CreatedAtUtc { get; set; }
+        public virtual Publication Publication { get; set; }
+        public virtual CuratorAssignment CuratorAssignment { get; set; }
+        public virtual CuratorAssignment ChiefCuratorAssignment { get; set; }
+
+    }
+}
