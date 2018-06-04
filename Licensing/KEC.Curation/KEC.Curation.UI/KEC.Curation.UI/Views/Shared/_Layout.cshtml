@@ -35,6 +35,16 @@
         window.appInsights=appInsights;
         appInsights.trackPageView();
     </script>
+   
+    <style>
+        .green-tooltip + .tooltip > .tooltip-inner {
+            background-color: #00b95f;
+        }
+
+        .green-tooltip + .tooltip > .tooltip-arrow {
+            border-bottom-color: #00b95f;
+        }
+    </style>
 </head>
 <body>
 
@@ -65,7 +75,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/plugins/summernote")
-  
+
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/plugins/notify")
     @Scripts.Render("~/plugins/metisMenu")
@@ -74,6 +84,10 @@
     @Scripts.Render("~/bundles/inspinia")
     @Scripts.Render("~/js/globalConstants")
     @RenderSection("scripts", required: false)
-
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 </body>
 </html>
