@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KEC.Curation.Data.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Kec.Publishers.Web.Api
+namespace KEC.Publishers.Api
 {
     public class Startup
     {
@@ -25,7 +24,6 @@ namespace Kec.Publishers.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<IUnitOfWork>(m => new EFUnitOfWork());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,8 +33,6 @@ namespace Kec.Publishers.Web.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(builder =>
-            builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
             app.UseMvc();
         }
