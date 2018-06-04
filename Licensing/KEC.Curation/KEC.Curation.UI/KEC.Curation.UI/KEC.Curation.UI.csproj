@@ -364,6 +364,7 @@
     <Content Include="Content\plugins\images\bootstrap-colorpicker\hue-horizontal.png" />
     <Content Include="Content\plugins\images\bootstrap-colorpicker\hue.png" />
     <Content Include="Content\plugins\images\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Content\plugins\images\cmsss.jpg" />
     <Content Include="Content\plugins\images\cmss.jpg" />
     <Content Include="Content\plugins\images\KEClogo.png" />
     <Content Include="Content\plugins\images\KEClogo1.png" />
