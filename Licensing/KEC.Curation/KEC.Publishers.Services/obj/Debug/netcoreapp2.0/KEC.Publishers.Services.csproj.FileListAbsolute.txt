@@ -1,0 +1,8 @@
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Publishers.Services\bin\Debug\netcoreapp2.0\KEC.Publishers.Services.deps.json
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Publishers.Services\bin\Debug\netcoreapp2.0\KEC.Publishers.Services.dll
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Publishers.Services\bin\Debug\netcoreapp2.0\KEC.Publishers.Services.pdb
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Publishers.Services\obj\Debug\netcoreapp2.0\KEC.Publishers.Services.csproj.CoreCompileInputs.cache
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Publishers.Services\obj\Debug\netcoreapp2.0\KEC.Publishers.Services.AssemblyInfoInputs.cache
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Publishers.Services\obj\Debug\netcoreapp2.0\KEC.Publishers.Services.AssemblyInfo.cs
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Publishers.Services\obj\Debug\netcoreapp2.0\KEC.Publishers.Services.dll
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Licensing\KEC.Curation\KEC.Publishers.Services\obj\Debug\netcoreapp2.0\KEC.Publishers.Services.pdb
