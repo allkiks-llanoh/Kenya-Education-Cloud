@@ -1,9 +1,9 @@
 ﻿
 using System;
 using System.Linq;
+using KEC.Publishers.Data.Extensions;
 using KEC.Publishers.Data.Models;
 using KEC.Publishers.Data.UnitOfWork.Core;
-using KEC.Publishers.Services.Extensions;
 
 namespace KEC.Publishers.Api.Serializers
 {
