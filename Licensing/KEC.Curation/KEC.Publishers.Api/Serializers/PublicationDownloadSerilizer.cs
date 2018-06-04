@@ -3,9 +3,8 @@ using KEC.Curation.Data.UnitOfWork;
 using System;
 using System.Linq;
 using KEC.Curation.Services.Extensions;
-using System.ComponentModel.DataAnnotations;
 
-namespace KEC.Curation.Web.Api.Serializers
+namespace KEC.Publishers.Api.Serializers
 {
     public class PublicationDownloadSerilizer
     {
@@ -25,7 +24,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.Id;
             }
         }
-       
+
         public string Url
         {
             get
@@ -156,11 +155,10 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-             var stageLog =   _uow.PublicationStageLogRepository.Find(p => p.Stage == PublicationStage.Curation).FirstOrDefault();
+                var stageLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == PublicationStage.Curation).FirstOrDefault();
                 return stageLog == null ? string.Empty : stageLog.Notes;
-                
+
             }
         }
-       
     }
 }

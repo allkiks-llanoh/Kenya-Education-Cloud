@@ -21,7 +21,7 @@
 
 }
 <script type="text/javascript">
-    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+    const apiBaseUrls = "https://publisherapi.kec.ac.ke";
 </script>
 
 
@@ -98,7 +98,7 @@
         ///Functions Section
         function getPublication() {
             let publicationId = $('#publication-view').attr('data-publicationId');
-            var urls = apiBaseUrls.concat(`/CurationManagers/get/approved/${publicationId}`);
+            var urls = apiBaseUrls.concat(`/publications/get/approved/${publicationId}`);
 
             $.ajax({
                 url: urls,
@@ -117,18 +117,16 @@
 
                 $('#publication-details').replaceWith(
                     `<dl>
-                  <dt>Curation Number</dt>
-                  <dd id="kicd-number">${publication.kicdNumber}</dd>
+                  <dt>Content Number</dt>
+                  <dd id="kicd-number">${publication.certificateNumber}</dd>
                    <dt>Publisher</dt>
-                   <dd>${publication.publisher}</dd>
+                   <dd>${publication.publisherName}</dd>
                    <dt>Title</dt>
                    <dd>${publication.title}</dd>
                    <dt>Description</dt>
                    <dd>${publication.description}</dd>
                    <dt>Content</dt>
                    <dd><a href="${publication.url}" target="blank">Link to publication</a></dd>
-                   <dt>Level</dt>
-                   <dd>${publication.level}</dd>
                    <dt>Completion date</dt>
                    <dd>${publication.completionDate}</dd></dl>`);
             });
