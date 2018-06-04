@@ -45,10 +45,10 @@
                 },
 
 
-            }).done(function (publication, textStatus, jqXHR) {
-
-                $('#publication-details').replaceWith(
-                    `<dl>
+            }).done(function (publications, textStatus, jqXHR) {
+                publications.forEach(function (publication) {
+                    $('#publication-details').replaceWith(
+                        `<dl>
                     <div class="row">
                         <div class="col-md-3">
                             <dt>Curation</dt>
@@ -79,6 +79,9 @@
                             </div>
                         </div>
                  </dl>`);
+
+                });
+               
 
             });
         }

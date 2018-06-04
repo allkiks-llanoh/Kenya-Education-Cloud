@@ -403,7 +403,10 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 assigment.Notes = model.Notes;
 
-                assigment.Submitted = true;
+                if (model.Submitted == "true")
+                {
+                    assigment.Submitted = true;
+                }
                 _uow.Complete();
                 return Ok(value: CurationAssignments(model.UserGuid, _uow));
             }

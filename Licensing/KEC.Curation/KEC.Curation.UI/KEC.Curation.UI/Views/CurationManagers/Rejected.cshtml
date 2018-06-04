@@ -81,7 +81,7 @@
         row.append($("<td>" + rowData.publisher + "</td>"));
         row.append($("<td>" + rowData.subject + "</td>"));
 
-        row.append($(`<td> <a href="/ChiefCurator/AssignPublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
+        row.append($(`<td> <a href="/CurationManagers/DetailRejected/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
 
         return row[0];
     };

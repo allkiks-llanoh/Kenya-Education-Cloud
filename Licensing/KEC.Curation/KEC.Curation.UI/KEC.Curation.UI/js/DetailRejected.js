@@ -2,13 +2,13 @@
     $(document).ready(function () {
         getPublication();
         getPublicationCurationComments();
-        $('#recommend').click(submitChiefNotesAndAction);
+
     });
 
     ///Functions Section
     function getPublication() {
         let publicationId = $('#publication-view').attr('data-publicationId');
-        var urls = apiBaseUrls.concat(`/CurationManagers/get/publications/${publicationId}`);
+        var urls = apiBaseUrl.concat(`/CurationManagers/get/rejected/${publicationId}`);
 
         $.ajax({
             url: urls,
@@ -83,19 +83,16 @@
         }).done(function (submissions, textStatus, jqXHR) {
 
             submissions.forEach(function (submission) {
-                $('#currator-commets').html(` <dt>Curator Comments</dt><dd> ${submission.curatorComments}</dd>
-<br/>
-<hr/>
-                                                  <dt>Chief Curator Comments</dt><dd>${submission.chiefCuratorComments}</dd>
-<br/>
-<hr/>
-                                                  <dt>Principal Curator Comments</dt><dd>${submission.principalCuratorComments}</dd>
-<br/><hr/>`);
+                $('#currator-commets').html(` <dt>Curator Recomendation</dt><dd> ${submission.curatorComments}</dd><br/><hr/>
+                                                  <dt>Chief Curator Recomendation</dt><dd>${submission.chiefCuratorComments}</dd><br/><hr/>
+                                                  <dt>Principal Curator Recomendation</dt><dd>${submission.principalCuratorComments}</dd><br/><hr/>
+                                                  <dt>Curation Managers Recomendation</dt><dd>${submission.cutationManagersCuratorComments}</dd><br/><hr/>`);
 
             });
 
         });
     }
+
     function showChiefCuratorSubmissionSection(publication, parentElementId) {
         if (publication !== null) {
             let chiefCuratorSection = $('#chief-curator-section').html();

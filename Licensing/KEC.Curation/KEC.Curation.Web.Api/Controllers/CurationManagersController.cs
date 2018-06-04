@@ -65,7 +65,7 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult GetPending(string guid)
         {
             var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && p.Owner.Equals(guid) && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
-                                       == PublicationStage.PublicationApproval).ToList();
+                                       == PublicationStage.IssueOfCertificate).ToList();
             return Ok(value: publicationsCount);
         }
         #endregion
@@ -124,7 +124,7 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             var assigment = _uow.PublicationRepository.Find(p => p.Id.Equals(model.PublicationId)
                                                                      && p.PublicationStageLogs.Max(l => l.Stage)
-                                                                     == PublicationStage.PublicationApproval)
+                                                                     == PublicationStage.IssueOfCertificate)
                                                                     .FirstOrDefault();
             if (assigment == null)
             {
@@ -162,8 +162,10 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("get/publications/{Id}")]
         public IActionResult GetAllPublicationsById(int Id)
         {
-            var publicationsCount = _uow.PublicationRepository.Find(p => p.Id.Equals(Id)).FirstOrDefault();
-            return Ok(value: publicationsCount);
+            var publications = _uow.PublicationRepository.Find(p => p.Id.Equals(Id));
+            var publicationList = publications.Any() ?
+               publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
+            return Ok(value: publicationList);
         }
         [HttpGet("get/publications")]
         public IActionResult GetAllPublications()
@@ -205,7 +207,7 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult GetPending()
         {
             var publications = _uow.PublicationRepository.Find(p => !p.Rejected && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
-                                       == PublicationStage.PublicationApproval).ToList();
+                                       == PublicationStage.IssueOfCertificate).ToList();
             var publicationList = publications.Any() ?
                 publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
@@ -215,7 +217,7 @@ namespace KEC.Curation.Web.Api.Controllers
         public IActionResult GetPendingById(int Id)
         {
             var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
-                                       == PublicationStage.PublicationApproval
+                                       == PublicationStage.IssueOfCertificate
                                        && p.Id.Equals(Id)).FirstOrDefault();
             return Ok(value: publicationsCount);
         }
