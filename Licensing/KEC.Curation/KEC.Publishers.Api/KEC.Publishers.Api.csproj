@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\netcoreapp2.0\Database.json" />
+    <Content Include="bin\Debug\netcoreapp2.0\KEC.Publishers.Api.deps.json" />
+    <Content Include="bin\Debug\netcoreapp2.0\KEC.Publishers.Api.runtimeconfig.dev.json" />
+    <Content Include="bin\Debug\netcoreapp2.0\KEC.Publishers.Api.runtimeconfig.json" />
+    <Content Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -15,6 +28,24 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\netcoreapp2.0\KEC.Curation.Data.dll" />
+    <None Include="bin\Debug\netcoreapp2.0\KEC.Curation.Data.pdb" />
+    <None Include="bin\Debug\netcoreapp2.0\KEC.Curation.Services.dll" />
+    <None Include="bin\Debug\netcoreapp2.0\KEC.Curation.Services.pdb" />
+    <None Include="bin\Debug\netcoreapp2.0\KEC.Publishers.Api.dll" />
+    <None Include="bin\Debug\netcoreapp2.0\KEC.Publishers.Api.pdb" />
+    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.csproj.CopyComplete" />
+    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.dll" />
+    <None Include="obj\Debug\netcoreapp2.0\KEC.Publishers.Api.pdb" />
+    <None Include="obj\KEC.Publishers.Api.csproj.nuget.cache" />
+    <None Include="obj\KEC.Publishers.Api.csproj.nuget.g.props" />
+    <None Include="obj\KEC.Publishers.Api.csproj.nuget.g.targets" />
   </ItemGroup>
 
   <ItemGroup>
