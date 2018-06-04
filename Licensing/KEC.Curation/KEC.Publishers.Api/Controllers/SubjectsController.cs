@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using KEC.Curation.Data.UnitOfWork;
 using KEC.Publishers.Api.Cors;
 using KEC.Publishers.Api.Serializers;
+using KEC.Publishers.Data.UnitOfWork.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KEC.Publishers.Api.Controllers

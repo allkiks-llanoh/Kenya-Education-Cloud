@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KEC.Curation.Data.UnitOfWork;
+using KEC.Publishers.Data.UnitOfWork;
+using KEC.Publishers.Data.UnitOfWork.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

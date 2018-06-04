@@ -1,4 +1,5 @@
-﻿using KEC.Curation.Data.Models;
+﻿
+using KEC.Publishers.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

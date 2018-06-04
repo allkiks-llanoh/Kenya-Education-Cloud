@@ -1,8 +1,7 @@
-﻿using KEC.Curation.Data.Models;
-using KEC.Curation.Data.UnitOfWork;
-using System;
+﻿using System;
 using System.Linq;
-using KEC.Curation.Services.Extensions;
+using KEC.Publishers.Data.Models;
+using KEC.Publishers.Data.UnitOfWork.Core;
 
 namespace KEC.Publishers.Api.Serializers
 {
