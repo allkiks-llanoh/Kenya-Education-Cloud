@@ -17,7 +17,6 @@ namespace KEC.Publishers.Api.Controllers
         {
             _uow = uow;
         }
-        // GET: api/SubjectTypes
         [HttpGet]
         public IActionResult AllSubjectTypes()
         {
