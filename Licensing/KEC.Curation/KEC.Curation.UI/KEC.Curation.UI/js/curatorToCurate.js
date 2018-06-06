@@ -25,10 +25,10 @@ function getPublicationCurationComments() {
     }).done(function (submissions, textStatus, jqXHR) {
 
         submissions.forEach(function (submission) {
-            $('#currator-commets').html(` <dt>Curator Comments</dt><dd> ${submission.curatorComments}</dd>
-                                                  <dt>Chief Curator Comments</dt><dd>${submission.assignmentId}</dd>
-                                                  <dt>Principal Curator Comments</dt><dd>${submission.publication}</dd>
-                                                  <dt>Curation Managers Comments</dt><dd>${submission.sectionToCurate}</dd>`);
+            $('#currator-commets').html(` <dt>Curator Recommendations</dt><dd> ${submission.curatorComments}</dd>
+                                                  <dt>Chief Curator Recommendations</dt><dd>${submission.assignmentId}</dd>
+                                                  <dt>Principal Curator Recommendations</dt><dd>${submission.publication}</dd>
+                                                  <dt>Curation Managers Recommendations</dt><dd>${submission.sectionToCurate}</dd>`);
 
         });
 
