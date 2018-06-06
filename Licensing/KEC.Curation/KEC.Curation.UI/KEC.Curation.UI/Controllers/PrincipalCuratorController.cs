@@ -60,6 +60,8 @@ namespace KEC.Curation.UI.Controllers
         }
         public ActionResult AssignMultiple()
         {
+            ViewData["SubTitle"] = "Curation Management System";
+            ViewData["Message"] = "Assign Multiple";
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));

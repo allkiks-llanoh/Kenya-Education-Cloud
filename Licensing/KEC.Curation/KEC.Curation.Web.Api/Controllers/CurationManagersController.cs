@@ -99,7 +99,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
             var assigment = _uow.PublicationRepository.Find(p => p.Id.Equals(model.PublicationId)
                                                                      && p.PublicationStageLogs.Max(l => l.Stage)
-                                                                     == PublicationStage.LegalVerification)
+                                                                     == PublicationStage.IssueOfCertificate)
                                                                     .FirstOrDefault();
             
 
