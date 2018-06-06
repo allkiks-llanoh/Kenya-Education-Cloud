@@ -55,7 +55,7 @@ namespace Authentication_Test.Controllers
 
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
-            return Json(new SelectList(user, "FullName", "Subject"));
+            return Json(new SelectList(user, "FullName", "Id"));
         }
         public ActionResult GetPrincipalCuratorsList(string role)
         {

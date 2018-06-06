@@ -1,12 +1,16 @@
-﻿@model KEC.Curation.UI.Models.RoleRemoveViewModel
+﻿@using KEC.Curation.UI.Models;
+@model RoleRemoveViewModel
 
 @{
-    ViewBag.Title = "User Management";
-    Layout = "~/Views/Shared/_LayoutAdminRoles.cshtml";
+                /**/
+
+                ViewBag.Title = "User Management";
+                Layout = "~/Views/Shared/_LayoutAdminRoles.cshtml";
 }
 
 @{
     var UserId = Request.Params["Id"];
+    var UserName = Request.Params["User"];
 
 }
 <h2>Manage User Roles</h2>
@@ -21,6 +25,11 @@
             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control readonly required valid validate-equalTo-blur", @readonly = "readonly", Id = "UserName", Value = UserId })
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="col-md-12">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control readonly required valid validate-equalTo-blur", @readonly = "readonly", Id = "UserNames", Value = UserName })
+        </div>
+    </div>
     <br>
     <div class="col-md-12">
         <div class="col-md-8">
@@ -33,6 +42,6 @@
     <div class="col-md-12">
         <div class="col-md-12">
             <input type="submit" class="btn btn-w-m btn-info" style="background-color:#00B95F;" value="Add This User To Role" />
-            </div>
         </div>
-            }
+    </div>
+}
