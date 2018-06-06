@@ -123,5 +123,13 @@ namespace KEC.Curation.Web.Api.Serializers
                 return publication.PublisherName;
             }
         }
+        public string ContentNumber
+        {
+            get
+            {
+                var contentNumber = _uow.PublicationRepository.Find(p => p.Id.Equals(_publication.Id)).FirstOrDefault();
+                return contentNumber == null ? string.Empty : contentNumber.CertificateNumber;
+            }
+        }
     }
 }
