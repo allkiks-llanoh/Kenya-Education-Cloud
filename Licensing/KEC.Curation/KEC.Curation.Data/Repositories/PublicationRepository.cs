@@ -36,7 +36,7 @@ namespace KEC.Curation.Data.Repositories
             var contentNumber = string.Empty;
             do
             {
-                contentNumber = RandomCodeGenerator.GetContentNUmber("KEC-");
+                contentNumber = RandomCodeGenerator.GetContentNUmber();
             } while ((Find(p => p.CertificateNumber.Equals(contentNumber)).FirstOrDefault() != null) &&
             (publications.Where(p => p.CertificateNumber.Equals(contentNumber)).FirstOrDefault() != null));
 

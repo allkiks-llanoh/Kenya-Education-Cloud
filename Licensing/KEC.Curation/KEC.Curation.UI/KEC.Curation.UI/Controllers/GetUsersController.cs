@@ -14,11 +14,12 @@ namespace Authentication_Test.Controllers
     {
         private readonly ApplicationDbContext  context = new ApplicationDbContext();
         // GET: GetUsers
-        public ActionResult GetChiefCurators(string role)
+        public ActionResult GetChiefCurators(int subjectId)
         {
-            role = "6c5175a7-372f-4cfe-a559-f862651813b2";
+            var role = "6c5175a7-372f-4cfe-a559-f862651813b2";
 
-            var user = context.Users.Where(p => p.Roles.Any(s=>s.RoleId.Equals(role))).ToList();
+            var user = context.Users.Where(p => p.Roles.Any(s=>s.RoleId.Equals(role))
+                       && p.SubjectId.Equals(subjectId)).ToList();
          
             return Json(new SelectList(user, "FullName", "Id"));
         }
@@ -31,11 +32,12 @@ namespace Authentication_Test.Controllers
             return Json(new SelectList(user, "FullName", "Email"));
         }
 
-        public ActionResult GetCurators(string role)
+        public ActionResult GetCurators(int subjectId)
         {
-            role = "ff0a2466-90b3-468f-8ed5-60a170414131";
+            var role = "ff0a2466-90b3-468f-8ed5-60a170414131";
 
-            var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
+            var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))
+                       && p.SubjectId.Equals(subjectId)).ToList();
 
             return Json(new SelectList(user, "FullName", "Id"));
         }
@@ -45,7 +47,7 @@ namespace Authentication_Test.Controllers
 
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
-            return Json(new SelectList(user, "FullName", "Subject"));
+            return Json(new SelectList(user, "FullName", "Email"));
         }
         public ActionResult GetPrincipalCurators(string role)
         {
@@ -54,6 +56,14 @@ namespace Authentication_Test.Controllers
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
             return Json(new SelectList(user, "FullName", "Subject"));
+        }
+        public ActionResult GetPrincipalCuratorsList(string role)
+        {
+            role = "cac3eacd-c5b6-4c40-aaf3-72a48dfb5b2d";
+
+            var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
+
+            return Json(new SelectList(user, "FullName", "Email"));
         }
         public ActionResult GetAllUsers()
         {
