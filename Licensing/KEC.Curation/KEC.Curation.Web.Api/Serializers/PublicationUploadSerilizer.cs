@@ -19,17 +19,20 @@ namespace KEC.Curation.Web.Api.Serializers
         [DisplayName("Completion Date")]
         public DateTime? CompletionDate { get; set; }
         [Required(ErrorMessage = "Please provide brief descriptio (200 words)")]
-        [StringLength(200,ErrorMessage ="A maximum of 200 words is required")]
+        [StringLength(200, ErrorMessage = "A maximum of 200 words is required")]
         public string Description { get; set; }
-        [Required(ErrorMessage ="Please specified the publication subject")]
+        [Required(ErrorMessage = "Please specified the publication subject")]
         [DisplayName("Subject")]
         public int SubjectId { get; set; }
         [DisplayName("Level")]
         [Required(ErrorMessage = "Please specified the publication level")]
         public int LevelId { get; set; }
-        [Required(ErrorMessage = "Please upload the publication file")]
-        public IFormFile PublicationFile { get; set; }
         [Required]
         public string UserGuid { get; set; }
+        [Required(ErrorMessage = "Please upload the publication file")]
+        public IFormFile PublicationFile { get; set; }
+        public IFormFile IdentificationFile { get; set; }
+        public IFormFile KraPinFile { get; set; }
+        public IFormFile RegistrationCerticateFile { get; set; }
     }
 }

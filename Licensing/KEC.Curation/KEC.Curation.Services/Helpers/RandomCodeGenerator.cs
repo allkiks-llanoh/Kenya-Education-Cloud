@@ -9,7 +9,7 @@ namespace KEC.Curation.Services.Helpers
     public static class RandomCodeGenerator
     {
         public static string GetKICDNUmber(string prefix) =>$"{prefix}{RandomCode(8)}";
-        public static string GetContentNUmber(string prefix) => $"{prefix}{RandomCode(8)}";
+        public static string GetContentNUmber() => $"{RandomCode(8)}";
         static string RandomCode(int length)
         {
             var alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
