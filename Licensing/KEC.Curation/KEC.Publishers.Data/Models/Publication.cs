@@ -32,6 +32,7 @@ namespace KEC.Publishers.Data.Models
         public string Owner { get; set; }
         public bool Approved { get; set; }
         public bool Rejected { get; set; }
+        public string CutationUrl { get; set; }
         public virtual Subject Subject { get; set; }
         public virtual Level Level { get; set; }
         public virtual ChiefCuratorAssignment ChiefCuratorAssignment { get; set; }
