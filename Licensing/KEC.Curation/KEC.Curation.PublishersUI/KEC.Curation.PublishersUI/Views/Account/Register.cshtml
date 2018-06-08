@@ -5,28 +5,59 @@
 }
 
 
+<script>
+
+    $(document).ready(function () {
+        $('#form-company').hide();
+        $('#form-individual').hide();
+
+        $('#options').on('change', function () {
+            if (this.value == 'Company') {
+                $("#form-company").show();
+                $("#form-individual").hide();
+            }
+            else if (this.value == 'Individual') {
+                $("#form-individual").show();
+                $("#form-company").hide();
+            }
+            else {
+                $("#form-individual").hide();
+                $("#form-company").hide();
+            }
+        });
+    });
+</script>
+
+<div class="form-group">
+    <label>Select Publisher Type</label>
+    <select class="form-control" id="options">
+        <option>Select</option>
+        <option value="Company">Company</option>
+        <option value="Individual">Individual</option>
+    </select>
+</div>
 
 
-<div class="container-fluid">
+<div class="container-fluid" id="form-company">
     <div class="stepwizard">
         <div class="stepwizard-row setup-panel">
             <div class="stepwizard-step">
-                <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                <a href="#acc" type="button" class="btn btn-primary btn-circle">1</a>
                 <p>Account</p>
             </div>
             <div class="stepwizard-step">
-                <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                <a href="#comp" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                 <p>Company</p>
             </div>
             <div class="stepwizard-step">
-                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                <a href="#sub" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
                 <p>Submit</p>
             </div>
         </div>
     </div>
     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @id = "form", role = "form" }))
     {@Html.AntiForgeryToken()
-    <div class="row setup-content" id="step-1" style="margin-left:20px; margin-top:10px;">
+    <div class="row setup-content" id="acc" style="margin-left:20px; margin-top:10px;">
 
         <div class="col-md-12">
             <fieldset>
@@ -118,7 +149,7 @@
             <br />
         </div>
     </div>
-    <div class="row setup-content" id="step-2">
+    <div class="row setup-content" id="com">
         <div class="col-xs-12">
             <div class="col-md-12">
                 <fieldset>
@@ -147,8 +178,7 @@
 
                             <div class="form-group">
 
-                                @Html.TextBoxFor(m => m.PostalAddress, new { @class = "form-control required valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.PostalAddress) })
-                                <p style="color:red;">@Html.ValidationMessageFor(m => m.PostalAddress, "", new { @class = "error" })</p>
+                                @Html.TextBoxFor(m => m.BusinessNumber, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.BusinessNumber) })
                             </div>
 
                             <div class="form-group">
@@ -160,12 +190,13 @@
                         </div>
                         <div class="col-lg-6">
 
+
+
                             <div class="form-group">
 
-                                @Html.TextBoxFor(m => m.BusinessNumber, new { @class = "form-control required", placeholder = Html.DisplayNameFor(n => n.BusinessNumber) })
+                                @Html.TextBoxFor(m => m.PostalAddress, new { @class = "form-control required valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.PostalAddress) })
+                                <p style="color:red;">@Html.ValidationMessageFor(m => m.PostalAddress, "", new { @class = "error" })</p>
                             </div>
-
-
                         </div>
 
                     </div>
@@ -177,7 +208,7 @@
         </div>
     </div>
 
-    <div class="row setup-content" id="step-3">
+    <div class="row setup-content" id="sub">
         <div class="col-xs-12">
             <div class="col-md-12">
                 <fieldset style="margin-left:100px !important;">
@@ -201,3 +232,166 @@
     </p>
 </div>
 
+<div class="container-fluid" id="form-individual">
+    <div class="stepwizard">
+        <div class="stepwizard-row setup-panel">
+            <div class="stepwizard-step">
+                <a href="#account" type="button" class="btn btn-primary btn-circle">1</a>
+                <p>Account</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="#personal" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                <p>Personal Information</p>
+            </div>
+            <div class="stepwizard-step">
+                <a href="#submit" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                <p>Submit</p>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @id = "form", role = "form" }))
+    {@Html.AntiForgeryToken()
+    <div class="row setup-content" id="account" style="margin-left:20px; margin-top:10px;">
+
+        <div class="col-md-12">
+            <fieldset>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>FirstName*</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control required valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.FirstName) })
+                            <p style="color:red;">@Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "error" })</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>LastName*</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control required valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.LastName) })
+                            <p style="color:red;">@Html.ValidationMessageFor(m => m.LastName, "", new { @class = "error" })</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Email*</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+
+
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control required email valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.Email) })
+                            <p style="color:red;">@Html.ValidationMessageFor(m => m.Email, "", new { @class = "error" })</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Contact*</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+
+
+                            @Html.TextBoxFor(m => m.Contact, new { @class = "form-control required valid validate-equalTo-blur", placeholder = "0712345678" })
+                            <p style="color:red;">@Html.ValidationMessageFor(m => m.Contact, "", new { @class = "error" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Password*</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+
+
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control required valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.Password) })
+                            <p style="color:red;">@Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Confirm*</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+
+
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control required valid validate-equalTo-blur", placeholder = Html.DisplayNameFor(n => n.ConfirmPassword) })
+                            <p style="color:red;">@Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "error" })
+                        </div>
+                    </div>
+                </div>
+
+
+            </fieldset>
+
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+            <br />
+        </div>
+    </div>
+    <div class="row setup-content" id="personal">
+        <div class="col-xs-12">
+            <div class="col-md-12">
+                <fieldset>
+
+                    <h2 style="text-align:center;">Personal Information</h2>
+
+                    <div class="row">
+
+
+                        <div class="col-lg-12">
+
+                            <div class="form-group">
+                                <label>Upload ID card</label>
+                                <input type="file" name="" id="" class="form-control" required>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+                <br />
+            </div>
+        </div>
+    </div>
+
+    <div class="row setup-content" id="submit">
+        <div class="col-xs-12">
+            <div class="col-md-12">
+                <fieldset style="margin-left:100px !important;">
+
+                    <h2>Terms and Conditions</h2>
+
+                    <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
+                    <label for="acceptTerms">I agree with the <a href="https://kec.ac.ke/publishers-terms/" target="_blank">Terms and Conditions</a></label>
+
+                </fieldset>
+                <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
+                <br />
+            </div>
+        </div>
+    </div>
+}
+    <hr />
+    <p style="text-align:center;">
+        @Html.ActionLink("Already Registered? Login", "Login")
+        <br /> &copy;KEC 2018
+    </p>
+</div>
