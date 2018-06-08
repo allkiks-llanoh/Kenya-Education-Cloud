@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using KEC.Publishers.Api.Serializers;
 using KEC.Publishers.Data.Models;
@@ -13,6 +16,7 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.File;
+using Microsoft.AspNetCore.Server;
 
 namespace KEC.Publishers.Api.Controllers
 {
@@ -27,14 +31,17 @@ namespace KEC.Publishers.Api.Controllers
         const string pathToFile = "https://kecpublications.blob.core.windows.net/publicationtest";
         private readonly IUnitOfWork _uow;
         private readonly IHostingEnvironment _env;
+
         public PublicationsController(IUnitOfWork uow, IHostingEnvironment env)
         {
             _uow = uow;
             _env = env;
         }
+
         #endregion
         #region Submit Publication
         [HttpPost("submit")]
+        [RequestSizeLimit(3_000_000_000)]
         public async Task<IActionResult> Submit([FromForm]PublicationUploadSerilizer model)
         {
             if (!ModelState.IsValid)
@@ -42,12 +49,12 @@ namespace KEC.Publishers.Api.Controllers
                 return BadRequest(modelState: ModelState);
             }
             var invaliExtension = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".exe");
+            var htmlFile = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".html");
 
             if (invaliExtension == true)
             {
                 ModelState.AddModelError("File", ".EXE File Extensions are not Permited");
             }
-
 
             try
             {
@@ -100,6 +107,42 @@ namespace KEC.Publishers.Api.Controllers
                 {
                     await blobs.UploadFromStreamAsync(stream);
                 }
+
+                var uri = publication.Url;
+                var wc = new WebClient();
+
+                var nstream = wc.OpenRead(uri);
+                var uploads = Path.Combine(_env.ContentRootPath, "uploads");
+                string lastFolderName = Path.GetFileNameWithoutExtension(uri);
+                string curationUrl = string.Empty;
+                using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
+                {
+                    using (ZipArchive archive = new ZipArchive(stream))
+                    {
+
+                        foreach (ZipArchiveEntry entry in archive.Entries)
+                        {
+                            string completeFileName = Path.Combine(uploads, lastFolderName, entry.FullName);
+                            if (!string.IsNullOrEmpty(Path.GetExtension(entry.FullName)))
+
+                            {
+                                Directory.CreateDirectory(Path.GetDirectoryName(completeFileName));
+                                entry.ExtractToFile(completeFileName, true);
+                                continue;
+                            }
+                            else
+                            {
+                                Directory.CreateDirectory(Path.GetDirectoryName(completeFileName));
+                            }
+                            string returnedIndex = "Index.html";
+                            var returnedUrl = $"{"uploads"}{"/"}{lastFolderName}{"/"}{returnedIndex}";
+                            curationUrl = returnedUrl;
+                        }
+
+                    }
+                }
+                publication.CutationUrl = curationUrl;
+                _uow.Complete();
                 return Ok(value: "Publication submitted successfully");
             }
             catch (Exception ex)

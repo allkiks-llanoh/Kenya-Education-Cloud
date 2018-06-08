@@ -38,37 +38,7 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(value: publicationsCount);
         }
         #endregion
-        #region Publishers Publications
-        [HttpGet("get/all/publisher/{guid}")]
-        public IActionResult GetAll(string guid)
-        {
-            var publicationsCount = _uow.PublicationRepository.Find(p => p.Owner.Equals(guid)).ToList();
-            return Ok(value: publicationsCount);
-        }
-        [HttpGet("get/approved/publisher/{guid}")]
-        public IActionResult GetApproved(string guid)
-        {
-            var publicatons = _uow.PublicationRepository.Find(p => p.Approved && p.Owner.Equals(guid));
-            var publicationList = publicatons.Any() ?
-                publicatons.Select(p => new PublisherContentDownloadSerilizer(p, _uow)).ToList() : new List<PublisherContentDownloadSerilizer>();
-            return Ok(value: publicationList);
-        }
-        [HttpGet("get/rejected/publisher/{guid}")]
-        public IActionResult GetRejected(string guid)
-        {
-            var publicatons = _uow.PublicationRepository.Find(p => p.Rejected && p.Owner.Equals(guid));
-            var publicationList = publicatons.Any() ?
-                publicatons.Select(p => new PublisherContentDownloadSerilizer(p, _uow)).ToList() : new List<PublisherContentDownloadSerilizer>();
-            return Ok(value: publicationList);
-        }
-        [HttpGet("get/pending/publisher/{guid}")]
-        public IActionResult GetPending(string guid)
-        {
-            var publicationsCount = _uow.PublicationRepository.Find(p => !p.Rejected && p.Owner.Equals(guid) && !p.Approved && p.PublicationStageLogs.Max(l => l.Stage)
-                                       == PublicationStage.IssueOfCertificate).ToList();
-            return Ok(value: publicationsCount);
-        }
-        #endregion
+        
         #region Get Counts
         [HttpGet("count/publications")]
         public IActionResult CountPublications()
@@ -122,14 +92,65 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(modelState: ModelState);
             }
+            var licenceString = string.Empty;
+            var categoryString = string.Empty;
+            var subjectString = string.Empty;
+
+
             var assigment = _uow.PublicationRepository.Find(p => p.Id.Equals(model.PublicationId)
                                                                      && p.PublicationStageLogs.Max(l => l.Stage)
                                                                      == PublicationStage.IssueOfCertificate)
                                                                     .FirstOrDefault();
+            
+
             if (assigment == null)
             {
                 return NotFound("Record could not be retrieved");
             }
+            var subject = _uow.SubjectRepository.Find(p => p.Id.Equals(assigment.SubjectId)).FirstOrDefault();
+            #region Get Licence TYpe
+            if (assigment.Price == 0) { licenceString = "OL"; }
+            if (assigment.Price > 0) { licenceString = "CL"; }
+            #endregion
+            #region Get Category Type
+            if (subject.SubjectTypeId == 1) { categoryString = "CM"; }
+            if (subject.SubjectTypeId == 2) { categoryString = "SM"; }
+            if (subject.SubjectTypeId == 3) { categoryString = "OR"; }
+            if (subject.SubjectTypeId == 4) { categoryString = "MA"; }
+            if (subject.SubjectTypeId == 5) { categoryString = "EP"; }
+            #endregion
+            #region Get Subject
+            if (subject.Id == 1) { subjectString = "01"; }
+            if (subject.Id == 2) { subjectString = "02"; }
+            if (subject.Id == 3) { subjectString = "03"; }
+            if (subject.Id == 4) { subjectString = "04"; }
+            if (subject.Id == 5) { subjectString = "05"; }
+            if (subject.Id == 6) { subjectString = "06"; }
+            if (subject.Id == 7) { subjectString = "07"; }
+            if (subject.Id == 8) { subjectString = "08"; }
+            if (subject.Id == 9) { subjectString = "09"; }
+            if (subject.Id == 10) { subjectString = "10"; }
+            if (subject.Id == 11) { subjectString = "11"; }
+            if (subject.Id == 12) { subjectString = "12"; }
+            if (subject.Id == 13) { subjectString = "13"; }
+            if (subject.Id == 14) { subjectString = "14"; }
+            if (subject.Id == 15) { subjectString = "15"; }
+            if (subject.Id == 16) { subjectString = "16"; }
+            if (subject.Id == 17) { subjectString = "17"; }
+            if (subject.Id == 18) { subjectString = "18"; }
+            if (subject.Id == 19) { subjectString = "19"; }
+            if (subject.Id == 20) { subjectString = "20"; }
+            if (subject.Id == 21) { subjectString = "21"; }
+            if (subject.Id == 22) { subjectString = "22"; }
+            if (subject.Id != 1 && subject.Id != 2 && subject.Id !=3 && subject.Id != 4 && subject.Id != 5 && subject.Id != 6
+                                && subject.Id != 7 && subject.Id != 8 && subject.Id != 9 && subject.Id != 10 && subject.Id != 11 
+                                && subject.Id != 12 && subject.Id != 13 && subject.Id != 14 && subject.Id != 15 && subject.Id != 16 
+                                && subject.Id != 17 && subject.Id != 18 && subject.Id != 19 && subject.Id != 20 && subject.Id != 21 
+                                && subject.Id != 22) { subjectString = "00"; }
+            #endregion
+            var ranNumber = _uow.PublicationRepository
+                                     .GetContentNUmber(_uow.PublicationRepository.GetAll().ToList());
+            var generatedContentNumber = $"{licenceString}{categoryString}{subjectString}{ranNumber}";
             try
             {
                 var comment = new CurationManagersComment
@@ -141,8 +162,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 if (model.ToDo == "Approve")
                 {
                     assigment.Approved = true;
-                    assigment.CertificateNumber = _uow.PublicationRepository
-                                     .GetContentNUmber(_uow.PublicationRepository.GetAll().ToList());
+                    assigment.CertificateNumber = generatedContentNumber;
                 }
                 else
                 {

@@ -1,7 +1,7 @@
 ﻿(function () {
     $(document).ready(function () {
 
-        $("#deleteas").click(deleteAssignment);
+        $("#allan").click(deleteAssignment);
 
     });
 
@@ -37,11 +37,11 @@ $.ajax({
 //This functionpopulates the tbody inner HTML with json data on call
 function drawRow(rowData) {
     var row = $("<tr />")
-    row.append($(`<td class="hidden"> + rowData.id + </td>`));
+    row.append($("<td>" + rowData.id + "</td>"));
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.description + "</td>"));
     row.append($("<td>" + rowData.kicdNumber + "</td>"));
-    row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.id} class="btn btn-w-m btn-info btn-md DeleteAssignment" id="deleteas" role="button">Remove Assignment</button>`));
+    row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.id} class="btn btn-w-m btn-info btn-md DeleteAssignment" id="allan" role="button">Remove Assignment</button>`));
 
     return row[0];
 
@@ -54,7 +54,7 @@ function deleteAssignment() {
 
     $(this).html('<i class="fa fa-refresh fa-spin"></i> Please wait');
 
-    console.log($(this).attr('data-county'));
+    console.log($(this).attr('data-assignmentId'));
     $.ajax({
         headers : {
             'Accept' : 'application/json',

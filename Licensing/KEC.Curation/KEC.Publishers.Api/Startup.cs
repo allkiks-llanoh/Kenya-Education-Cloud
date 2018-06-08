@@ -6,6 +6,7 @@ using KEC.Publishers.Data.UnitOfWork;
 using KEC.Publishers.Data.UnitOfWork.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
@@ -39,8 +40,13 @@ namespace KEC.Publishers.Api
                 option.OutputFormatters.RemoveType
                 <XmlDataContractSerializerOutputFormatter>();
             });
+            services.Configure<FormOptions>(x =>
+            {
+                x.ValueLengthLimit = int.MaxValue;
+                x.MultipartBodyLengthLimit = int.MaxValue; // In case of multipart
+            });
 
-            services.AddTransient<IUnitOfWork>(m => new EFUnitOfWork());
+                services.AddTransient<IUnitOfWork>(m => new EFUnitOfWork());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

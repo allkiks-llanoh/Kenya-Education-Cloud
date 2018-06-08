@@ -8,13 +8,13 @@ using System.Web.Mvc;
 
 namespace KEC.Curation.UI.Controllers
 {
-    [CustomAuthorize(Roles = "Curation Manager,  Admin")]
+   
     [UserGuidJson]
     [AllowCrossSiteJson]
     public class CurationManagersController : Controller
     {
         // GET: CurationManagers
-
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult Index()
         {
             using (var context = new ApplicationDbContext())
@@ -29,6 +29,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         [HttpGet, Route("ViewPublication/{Id:int}")]
         public ActionResult ViewPublication(int Id)
         {
@@ -47,7 +48,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
-       
+        [CustomAuthorize(Roles = "Curation Manager")]
         public ActionResult ReviewPublication(int Id)
         {
             ViewBag.PublicationId = Id;
@@ -65,6 +66,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult DetailApproved(int Id)
         {
             ViewBag.PublicationId = Id;
@@ -82,6 +84,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult DetailRejected(int Id)
         {
             ViewBag.PublicationId = Id;
@@ -99,6 +102,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult UserManagement()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -115,6 +119,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult Curators()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -131,6 +136,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult ChiefCurators()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -147,6 +153,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult PrincipalCurators()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -163,6 +170,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult AllPublications()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -180,6 +188,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult Approved()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -197,6 +206,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult PartiallyApproved()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -214,6 +224,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult Pending()
         {
             ViewData["SubTitle"] = "Curation Management System";
@@ -230,6 +241,7 @@ namespace KEC.Curation.UI.Controllers
                 return View(chiefCurator);
             }
         }
+        [CustomAuthorize(Roles = "Curation Manager,  Admin")]
         public ActionResult Rejected()
         {
             ViewData["SubTitle"] = "Curation Management System";
