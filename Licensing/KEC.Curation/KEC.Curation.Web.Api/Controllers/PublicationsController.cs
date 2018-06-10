@@ -156,7 +156,7 @@ namespace KEC.Curation.Web.Api.Controllers
                             }
 
                             string returnedIndex = "Index.html";
-                            var returnedUrl = $"{"https://publisherapi.kec.ac.ke/staticfiles/"}{lastFolderName}/{returnedIndex}";
+                            var returnedUrl = $"{"https://publishervm.kec.ac.ke/staticfiles/"}{lastFolderName}/{returnedIndex}";
                             curationUrl = returnedUrl;
                         }
 

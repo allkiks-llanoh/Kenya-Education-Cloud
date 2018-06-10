@@ -19,6 +19,9 @@ namespace KEC.Curation.Web.Api
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
                 .UseApplicationInsights()
                 .UseStartup<Startup>()
                 .Build();

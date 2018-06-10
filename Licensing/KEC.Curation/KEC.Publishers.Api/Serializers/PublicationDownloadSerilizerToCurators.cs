@@ -134,6 +134,13 @@ namespace KEC.Publishers.Api.Serializers
                 }
             }
         }
+        public string CurationUrl
+        {
+            get
+            {
+                return _publication.CutationUrl == null ? string.Empty : _publication.CutationUrl;
+            }
+        }
 
     }
 }
