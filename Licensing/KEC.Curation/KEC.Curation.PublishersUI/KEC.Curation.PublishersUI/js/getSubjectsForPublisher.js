@@ -3,7 +3,7 @@ $subjectId = $('#SubjectId');
 //request the JSON data and parse into the select element
 $.ajax({
     type: 'GET',
-    url: "https://curationapi-d.kec.ac.ke/api/Subjects",
+    url: "https://publishervm.kec.ac.ke/api/Subjects",
     dataType: 'JSON',
     success: function (data) {
         //clear the current content of the select

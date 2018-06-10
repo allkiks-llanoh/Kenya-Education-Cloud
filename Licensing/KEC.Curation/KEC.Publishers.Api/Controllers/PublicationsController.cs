@@ -19,6 +19,7 @@ using Hangfire;
 
 namespace KEC.Publishers.Api.Controllers
 {
+}
     [Produces("application/json")]
     [Route("api/Publications")]
     public class PublicationsController : Controller
@@ -145,11 +146,11 @@ namespace KEC.Publishers.Api.Controllers
                             {
                                 Directory.CreateDirectory(Path.GetDirectoryName(completeFileName));
                                 //entry.ExtractToFile(completeFileName, true);
-                                continue;
+                               // continue;
                             }
 
                             string returnedIndex = "Index.html";
-                            var returnedUrl = $"{"https://publisherapi.kec.ac.ke/staticfiles/"}{lastFolderName}/{returnedIndex}";
+                            var returnedUrl = $"{"https://publishervm.kec.ac.ke/staticfiles/"}{lastFolderName}/{returnedIndex}";
                             curationUrl = returnedUrl;
                         }
 
@@ -447,4 +448,3 @@ namespace KEC.Publishers.Api.Controllers
         }
         #endregion
     }
-}

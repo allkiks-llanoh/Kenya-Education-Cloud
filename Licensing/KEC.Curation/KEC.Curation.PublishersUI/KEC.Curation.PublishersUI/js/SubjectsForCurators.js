@@ -1,4 +1,4 @@
-﻿const apiBaseUrl = "https://curationapi-d.kec.ac.ke/api";
+﻿const apiBaseUrl = "https://publishervm.kec.ac.ke/api";
 let subjectsUrl = apiBaseUrl.concat(`/Subjects/ForCurators`);
 
 

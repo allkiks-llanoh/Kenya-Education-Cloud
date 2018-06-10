@@ -114,29 +114,8 @@ namespace KEC.Publishers.Api.Serializers
                 return _publication.CompletionDate;
             }
         }
-        public string Stage
-        {
-            get
-            {
-                var maxStage = _uow.PublicationStageLogRepository
-                               .Find(p => p.PublicationId.Equals(_publication.Id))
-                               .Max(p => p.Stage);
-                var currentStage = _uow.PublicationStageLogRepository
-                                          .Find(p => p.PublicationId.Equals(_publication.Id)
-                                          && p.Stage == maxStage
-                                          && p.ActionTaken != null
-                                          && p.Owner != null).FirstOrDefault();
-                if (currentStage == null)
-                {
-                    return string.Empty;
-                }
-                else
-                {
-                    var stageName = Enum.GetName((typeof(PublicationStage)), currentStage);
-                    return stageName;
-                }
-            }
-        }
+       
+        
         public bool ChiefCuratorCanProcess
         {
             get
@@ -159,6 +138,13 @@ namespace KEC.Publishers.Api.Serializers
                 var stageLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == PublicationStage.Curation).FirstOrDefault();
                 return stageLog == null ? string.Empty : stageLog.Notes;
 
+            }
+        }
+        public string CurationUrl
+        {
+            get
+            {
+                return _publication.CutationUrl == null ? string.Empty : _publication.CutationUrl;
             }
         }
     }

@@ -131,5 +131,12 @@ namespace KEC.Curation.Web.Api.Serializers
                 return contentNumber == null ? string.Empty : contentNumber.CertificateNumber;
             }
         }
+        public string CurationUrl
+        {
+            get
+            {
+                return _publication.CutationUrl == null ? string.Empty : _publication.CutationUrl;
+            }
+        }
     }
 }
