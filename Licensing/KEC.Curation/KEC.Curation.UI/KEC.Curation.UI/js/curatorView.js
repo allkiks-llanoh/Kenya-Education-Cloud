@@ -32,7 +32,7 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.publication + "</td>"));
     row.append($("<td>" + rowData.sectionToCurate + "</td>"));
     row.append($("<td>" + rowData.assignmentDateUtc + "</td>"));
-    row.append($(`<td> <a href="/Curator/CuratePublication/${rowData.assignmentId}?Urls=${rowData.url}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Curate</a>`));
+    row.append($(`<td> <a href="/Curator/CuratePublication/${rowData.assignmentId}?Urls=${rowData.curationUrl}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Curate</a>`));
 
     return row[0];
 }

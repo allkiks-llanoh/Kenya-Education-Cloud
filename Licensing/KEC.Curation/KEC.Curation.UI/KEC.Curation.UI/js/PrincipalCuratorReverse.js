@@ -34,10 +34,7 @@ $(document).ready(function () {
             },
             error: function (request, status, error) {
 
-                console.log(request);
-                console.log(status);
-
-                console.log(request.responseText);
+             
                 $('#error').html(request.statusText)
                 $('div.alert-danger').toggleClass('hidden');
                 $('#LegalApprove').html('APPROVE');

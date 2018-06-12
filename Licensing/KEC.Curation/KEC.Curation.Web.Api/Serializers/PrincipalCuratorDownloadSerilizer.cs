@@ -30,7 +30,7 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-                return _publication.Url;
+                return _publication.CutationUrl;
             }
         }
         public string Title
