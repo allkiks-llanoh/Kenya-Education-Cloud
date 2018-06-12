@@ -19,11 +19,13 @@ namespace KEC.Publishers.Api
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-              .UseKestrel()
+                .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseWebRoot(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads"))
                 .UseIISIntegration()
                 .UseApplicationInsights()
                 .UseStartup<Startup>()
+                .CaptureStartupErrors(true)
                 .Build();
     }
 }

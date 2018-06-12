@@ -33,6 +33,7 @@ namespace KEC.Publishers.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
             services.AddCors(o => o.AddPolicy("AllowCrossSiteJson", builder =>
             {
                 builder.AllowAnyHeader()
@@ -59,19 +60,27 @@ namespace KEC.Publishers.Api
                 x.MultipartBodyLengthLimit = int.MaxValue; // In case of multipart
             });
             services.AddTransient<IUnitOfWork>(m => new EFUnitOfWork());
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseForwardedHeaders();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseForwardedHeaders();
             app.UseCors("AllowCrossSiteJson");
-            app.UseAuthentication();
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads"))
+            });
             app.UseMvc();
+
         }
     }
 }

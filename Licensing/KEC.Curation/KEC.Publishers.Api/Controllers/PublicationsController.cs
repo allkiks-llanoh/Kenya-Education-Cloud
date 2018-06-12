@@ -19,11 +19,12 @@ using Hangfire;
 
 namespace KEC.Publishers.Api.Controllers
 {
-}
+
     [Produces("application/json")]
     [Route("api/Publications")]
     public class PublicationsController : Controller
     {
+
         #region Definitions and Constants
         const string StorageAccountName = "kecpublications";
         const string StorageAccountKey = "cP6MXKU+7YLxE4sF4FPS0ETJ9Q5HzqN4YU+/XCtJgTtKoLpOCaAR4aQc7S5YU8q2/QjCvkGLiynLcQXmBGuifQ==";
@@ -68,12 +69,7 @@ namespace KEC.Publishers.Api.Controllers
             uriBuilder.Path = filePath;
             var ul = uriBuilder.Uri;
             #endregion
-            //if (htmlFile == true)
-            //{
-
-            //    //BackgroundJob.Enqueue(() =>  WorkOnPublications(model));
-            //   // return Ok(value:"Success");
-            //}
+         
             #region For .ZIP Files
             if (htmlFile == true)
             {
@@ -98,6 +94,7 @@ namespace KEC.Publishers.Api.Controllers
                         CreatedTimeUtc = DateTime.Now.Date,
                         ModifiedTimeUtc = DateTime.Now.Date,
                         Owner = model.UserGuid
+                        
                     };
                     publication.PublicationStageLogs.Add(new PublicationStageLog
                     {
@@ -125,14 +122,12 @@ namespace KEC.Publishers.Api.Controllers
                     var uri = publication.Url;
                     var wc = new WebClient();
 
-                    var nstream = wc.OpenRead(uri);
-                    var uploads = Path.Combine(_env.ContentRootPath, "uploads");
+                    var streamFromAzure = wc.OpenRead(uri);
+                    var uploads = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\uploads");
                     string lastFolderName = Path.GetFileNameWithoutExtension(uri);
                     string curationUrl = string.Empty;
-
-                    using (ZipArchive archive = new ZipArchive(nstream))
+                    using (ZipArchive archive = new ZipArchive(streamFromAzure))
                     {
-
                         foreach (ZipArchiveEntry entry in archive.Entries)
                         {
                             string completeFileName = Path.Combine(uploads, lastFolderName, entry.FullName);
@@ -146,17 +141,15 @@ namespace KEC.Publishers.Api.Controllers
                             {
                                 Directory.CreateDirectory(Path.GetDirectoryName(completeFileName));
                                 //entry.ExtractToFile(completeFileName, true);
-                               // continue;
+                                continue;
                             }
-
                             string returnedIndex = "Index.html";
-                            var returnedUrl = $"{"https://publishervm.kec.ac.ke/staticfiles/"}{lastFolderName}/{returnedIndex}";
+                            var returnedUrl = $"{"https://publishervm.kec.ac.ke/"}{lastFolderName}/{returnedIndex}";
                             curationUrl = returnedUrl;
                         }
-
                     }
-
                     publication.CutationUrl = curationUrl;
+                    
                     _uow.Complete();
                     return Ok(value: "Publication submitted successfully");
                 }
@@ -227,109 +220,7 @@ namespace KEC.Publishers.Api.Controllers
             #endregion
 
         }
-        #region Backgound Task
-        //public async Task WorkOnPublications([FromForm]PublicationUploadSerilizer model)
-        //{
-        //    var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccountName, StorageAccountKey), false);
-        //    //Blob starts here
-        //    var blob = storageAccount.CreateCloudBlobClient();
-        //    CloudBlobContainer container = blob.GetContainerReference("publications");
-        //    CloudBlockBlob blobs = container.GetBlockBlobReference($"{model.PublicationFile.FileName}");
-        //    var filePath = $"{pathToFile}/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
-        //    UriBuilder uriBuilder = new UriBuilder();
-        //    uriBuilder.Path = filePath;
-        //    var ul = uriBuilder.Uri;
-
-        //    try
-        //    {
-
-        //        var publication = new Publication
-        //        {
-        //            AuthorName = model.AuthorName,
-        //            PublisherName = model.PublisherName,
-        //            SubjectId = model.SubjectId,
-        //            LevelId = model.LevelId,
-        //            CompletionDate = model.CompletionDate.Value,
-        //            Description = model.Description,
-        //            ISBNNumber = model.ISBNNumber,
-        //            Price = model.Price.GetValueOrDefault(),
-        //            Title = model.Title,
-        //            MimeType = model.PublicationFile.ContentType,
-        //            Url = blobs.StorageUri.PrimaryUri.ToString(),
-        //            KICDNumber = _uow.PublicationRepository
-        //                              .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
-        //            CreatedTimeUtc = DateTime.Now.Date,
-        //            ModifiedTimeUtc = DateTime.Now.Date,
-        //            Owner = model.UserGuid
-        //        };
-        //        publication.PublicationStageLogs.Add(new PublicationStageLog
-        //        {
-        //            Stage = PublicationStage.NewPublication,
-        //            Owner = model.UserGuid,
-        //            CreatedAtUtc = DateTime.UtcNow,
-        //            ActionTaken = ActionTaken.PublicationSubmitted
-        //        });
-        //        _uow.PublicationRepository.Add(publication);
-        //        _uow.Complete();
-        //        _uow.PublicationRepository.ProcessToTheNextStage(publication);
-
-        //        var tempPath = Path.GetTempFileName();
-        //        using (var stream = new FileStream(tempPath, FileMode.Create))
-        //        {
-        //            await model.PublicationFile.CopyToAsync(stream);
-        //        }
-        //        blobs.Properties.ContentType = $"{model.PublicationFile.ContentType}";
-
-        //        using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
-        //        {
-        //            await blobs.UploadFromStreamAsync(stream);
-        //        }
-
-        //        var uri = publication.Url;
-        //        var wc = new WebClient();
-
-        //        var nstream = wc.OpenRead(uri);
-        //        var uploads = Path.Combine(_env.ContentRootPath, "uploads");
-        //        string lastFolderName = Path.GetFileNameWithoutExtension(uri);
-        //        string curationUrl = string.Empty;
-        //        using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
-        //        {
-        //            using (ZipArchive archive = new ZipArchive(stream))
-        //            {
-
-        //                foreach (ZipArchiveEntry entry in archive.Entries)
-        //                {
-        //                    string completeFileName = Path.Combine(uploads, lastFolderName, entry.FullName);
-        //                    if (!string.IsNullOrEmpty(Path.GetExtension(entry.FullName)))
-
-        //                    {
-        //                        Directory.CreateDirectory(Path.GetDirectoryName(completeFileName));
-        //                        entry.ExtractToFile(completeFileName, true);
-        //                        continue;
-        //                    }
-        //                    else
-        //                    {
-        //                        Directory.CreateDirectory(Path.GetDirectoryName(completeFileName));
-        //                    }
-
-        //                    string returnedIndex = "Index.html";
-        //                    var returnedUrl = $"{"https://publisherapi-d.kec.ac.ke/staticfiles/"}{lastFolderName}/{returnedIndex}";
-        //                    curationUrl = returnedUrl;
-        //                }
-
-        //            }
-        //        }
-        //        publication.CutationUrl = curationUrl;
-        //        _uow.Complete();
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ex.GetBaseException();
-
-        //    }
-        //}
-        #endregion
+    
         #endregion
         #region PUblishers Count
         [HttpGet("count/approved/publisher/{guid}")]
@@ -447,4 +338,170 @@ namespace KEC.Publishers.Api.Controllers
             return Ok(value: publicationsCount);
         }
         #endregion
+        #region Verification Stage
+        [HttpGet("LegalVerification/Legal")]
+        public IActionResult PublicationLegal()
+        {
+            try
+            {
+                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.LegalVerification).ToList();
+                var publicationList = publication.Any() ?
+                publication.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                return Ok(publicationList);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        #endregion
+        #region Finance Stage
+        [HttpGet("PaymentVerification/Finance")]
+        public IActionResult PublicationFinance()
+        {
+            try
+            {
+                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.PaymentVerification).ToList();
+                var publicationList = publication.Any() ?
+                publication.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                return Ok(publicationList);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        #endregion
+        #region get Subject By Id
+        [HttpGet("{subjectId:int}/{stage}/get")]
+        public IActionResult Publication(PublicationStage stage, int subjectId)
+        {
+            try
+            {
+                var publication = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
+                             (PublicationStage.LegalVerification)).ToList();
+                return Ok(value: publication);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        [HttpGet("{subjectId:int}/{stage}")]
+        public IActionResult PublicationsByStage(PublicationStage stage, int subjectId)
+        {
+            try
+            {
+                var stageLevel = (int)stage;
+                var publicationIds = _uow.PublicationRepository
+                                         .Find(p => p.PublicationStageLogs.Count == stageLevel
+                                               && !p.PublicationStageLogs.Any(l => l.Stage > stage)
+                                               && !p.PublicationStageLogs
+                                                   .Any(l => l.ActionTaken == ActionTaken.PublicationRejected)
+                                               && p.Subject.Id.Equals(subjectId))
+                                         .Select(p => p.Id);
+                var publications = _uow.PublicationRepository.Find(p => publicationIds.Contains(p.Id));
+                var publicationList = publications.Any() ?
+                            publications.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                return Ok(value: publicationList);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        #endregion
+        #region All Publications
+        [HttpGet("allpublications")]
+        public IActionResult AllPublications()
+        {
+            var assignments = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals(PublicationStage.NewPublication));
+            var assignmentList = assignments.Any() ?
+                assignments.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+            return Ok(assignmentList);
+        }
+        #endregion
+
+        #region Patch Process Publication
+        [HttpPatch("process")]
+        public IActionResult ProcessPublication([FromBody]PublicationProcessingSerializer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+            var publication = _uow.PublicationRepository.Find(p => p.KICDNumber.Equals(model.KICDNumber)).FirstOrDefault();
+
+            if (publication == null)
+            {
+                return NotFound(value: $"Publication {model.KICDNumber} could not be located");
+            }
+            var maxStage = _uow.PublicationStageLogRepository.Find(p => p.PublicationId == publication.Id).Max(p => p.Stage);
+            var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == model.Stage
+                                                            && p.Stage == maxStage
+                                                            && p.PublicationId.Equals(publication.Id)
+                                                            && p.Owner == null && p.ActionTaken == null).FirstOrDefault();
+            if (publicationLog == null)
+            {
+                return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
+            }
+            if (model.Stage == PublicationStage.Curation &&
+                !_uow.PublicationRepository.CanProcessCurationPublication(publication))
+            {
+                return BadRequest(error: $"Publication {model.KICDNumber} has pending curation notes");
+            }
+            try
+            {
+                publicationLog.Owner = model.UserGuid;
+                publicationLog.ActionTaken = model.ActionTaken;
+                _uow.Complete();
+                _uow.PublicationRepository.ProcessToTheNextStage(publication);
+                return Ok(value: $"Publication {model.KICDNumber} processed successfully");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+        #endregion
+        #region Patch Reject Publication
+        [HttpPatch("reject")]
+        public IActionResult ProcessRejection([FromBody]PublicationProcessingSerializer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+            var publication = _uow.PublicationRepository.Find(p => p.KICDNumber.Equals(model.KICDNumber)).FirstOrDefault();
+            if (publication == null)
+            {
+                return NotFound(value: $"Publication {model.KICDNumber} could not be located");
+            }
+            var maxStage = _uow.PublicationStageLogRepository.Find(p => p.PublicationId == publication.Id).Max(p => p.Stage);
+            var publicationLog = _uow.PublicationStageLogRepository.Find(p => p.Stage == model.Stage
+                                                            && p.Stage == maxStage
+                                                            && p.PublicationId.Equals(publication.Id)
+                                                            && p.Owner == null && p.ActionTaken == null).FirstOrDefault();
+            if (publicationLog == null)
+            {
+                return BadRequest(error: $"Publication {model.KICDNumber} has already been processed for the stage");
+            }
+            try
+            {
+                publicationLog.ActionTaken = model.ActionTaken;
+                _uow.Complete();
+
+                return Ok(value: $"Publication {model.KICDNumber} has been Rejected");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
+        #endregion
     }
+}
