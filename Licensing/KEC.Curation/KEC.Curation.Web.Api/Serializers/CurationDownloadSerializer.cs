@@ -88,7 +88,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 }
                 else
                 {
-                    return publication.Url;
+                    return publication.CutationUrl;
                 }
             }
         }
