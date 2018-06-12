@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
@@ -63,12 +64,21 @@ namespace KEC.Curation.Web.Api
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseForwardedHeaders();
+            //app.UseStaticFiles(); // For the wwwroot folder
+
+          
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors("AllowCrossSiteJson");
             app.UseAuthentication();
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //      Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
+            //    RequestPath = "/StaticFiles"
+            //});
             app.UseMvc();
         }
     }
