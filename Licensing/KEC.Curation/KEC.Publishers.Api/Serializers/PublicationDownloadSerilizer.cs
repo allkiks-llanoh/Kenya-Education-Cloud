@@ -147,5 +147,28 @@ namespace KEC.Publishers.Api.Serializers
                 return _publication.CutationUrl == null ? string.Empty : _publication.CutationUrl;
             }
         }
+        public string Stage
+        {
+            get
+            {
+                var maxStage = _uow.PublicationStageLogRepository
+                               .Find(p => p.PublicationId.Equals(_publication.Id))
+                               .Max(p => p.Stage);
+                var currentStage = _uow.PublicationStageLogRepository
+                                          .Find(p => p.PublicationId.Equals(_publication.Id)
+                                          && p.Stage == maxStage
+                                          && p.ActionTaken != null
+                                          && p.Owner != null).FirstOrDefault();
+                if (currentStage == null)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    var stageName = Enum.GetName((typeof(PublicationStage)), currentStage);
+                    return stageName;
+                }
+            }
+        }
     }
 }
