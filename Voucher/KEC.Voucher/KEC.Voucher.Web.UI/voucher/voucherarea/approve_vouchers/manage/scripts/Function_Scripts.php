@@ -1,6 +1,4 @@
-<?php
-require '.../config.php';
-?>
+
 <script>
         $(document).ready(function() {
 
