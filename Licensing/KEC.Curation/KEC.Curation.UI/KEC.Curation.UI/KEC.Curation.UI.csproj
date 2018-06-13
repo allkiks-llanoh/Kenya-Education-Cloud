@@ -863,6 +863,10 @@
     <Content Include="Scripts\plugins\ladda\spin.min.js" />
     <Content Include="Scripts\plugins\masonary\masonry.pkgd.min.js" />
     <Content Include="Scripts\plugins\metisMenu\metisMenu.min.js" />
+    <Content Include="Scripts\plugins\MobiJs\index.html" />
+    <Content Include="Scripts\plugins\MobiJs\mobi.js" />
+    <Content Include="Scripts\plugins\MobiJs\mobi.min.js" />
+    <Content Include="Scripts\plugins\MobiJs\mobi_es.js" />
     <Content Include="Scripts\plugins\morris\morris.js" />
     <Content Include="Scripts\plugins\morris\raphael-2.1.0.min.js" />
     <Content Include="Scripts\plugins\nestable\jquery.nestable.js" />
@@ -1113,6 +1117,9 @@
     <Content Include="Views\PrincipalCurator\_DocumentViewerPartial.cshtml" />
     <Content Include="Views\Account\UserNotFound.cshtml" />
     <Content Include="Views\CurationManagers\DetailRejected.cshtml" />
+    <Content Include="Views\PrincipalCurator\_HTMLPartial.cshtml" />
+    <Content Include="Views\PrincipalCurator\_EPUBPartial.cshtml" />
+    <Content Include="Views\PrincipalCurator\_MPFourPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

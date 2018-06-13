@@ -4,7 +4,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: "http://voucherapi-d.kec.ac.ke/api/counties",
+        url: "https://voucherapi.kec.ac.ke/api/counties",
       dataType:'JSON',
       success:function(data){
         //clear the current content of the select
@@ -30,7 +30,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: "http://voucherapi-d.kec.ac.ke/api/schooltypes",
+        url: "https://voucherapi.kec.ac.ke/api/schooltypes",
       dataType:'JSON',
       success:function(data){
         //clear the current content of the select
@@ -60,7 +60,7 @@
                   'Accept' : 'application/json',
                   'Content-Type' : 'application/json'
               } ,
-          url: "http://voucherapi-d.kec.ac.ke/api/Batches",
+          url: "https://voucherapi.kec.ac.ke/api/Batches",
           type: "POST",
           data: JSON.stringify({CountyCode: countycode,SchoolTypeId: schooltypeid }),
           success: function(response,status,jxhr) {

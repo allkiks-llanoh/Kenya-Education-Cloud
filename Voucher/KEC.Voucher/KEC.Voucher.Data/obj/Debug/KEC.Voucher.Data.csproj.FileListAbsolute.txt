@@ -369,7 +369,6 @@ C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Vouch
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Diagnostics.DiagnosticSource.dll
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Net.Http.Extensions.dll
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Net.Http.Primitives.dll
-C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Text.Encodings.Web.dll
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Web.WebPages.dll
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\Microsoft.Web.Infrastructure.dll
@@ -423,16 +422,15 @@ C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Vouch
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Diagnostics.DiagnosticSource.xml
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Net.Http.Extensions.xml
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Net.Http.Primitives.xml
-C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Text.Encodings.Web.xml
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Web.WebPages.xml
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Web.Razor.xml
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.csproj.App.config
-C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.csprojResolveAssemblyReference.cache
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.Migrations.InitialOnNewIstance.resources
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.csproj.GenerateResource.cache
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.csproj.CoreCompileInputs.cache
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.csproj.CopyComplete
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.dll
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.pdb
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.csprojAssemblyReference.cache

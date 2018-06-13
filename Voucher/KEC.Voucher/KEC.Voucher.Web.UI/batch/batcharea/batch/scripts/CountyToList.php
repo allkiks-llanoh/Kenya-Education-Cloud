@@ -10,7 +10,7 @@
         var n = d.getFullYear();
     //Start by getting voucher list based on batch Id
         $.ajax({
-            url:  `http://voucherapi-d.kec.ac.ke/api/counties/batch/pending/${n}`,
+            url:  `https://voucherapi.kec.ac.ke/api/counties/batch/pending/${n}`,
             type: "GET",
             dataType: "json",   
             success: function(data,status,jqhxr){

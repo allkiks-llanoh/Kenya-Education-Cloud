@@ -29,7 +29,7 @@
         var d = new Date();
        var n = d.getFullYear();
         $.ajax({
-            url:`http://voucherapi-d.kec.ac.ke/api/batches${n}/withpendingvouchers`,
+            url:`https://voucherapi.kec.ac.ke/api/batches${n}/withpendingvouchers`,
             type: "GET",
             dataType: "json",   
             success: function(data,status,jqhxr){
@@ -60,7 +60,7 @@
                 $('div.alert-success').toggleClass('hidden');
               }
           },
-          url: "http://voucherapi-d.kec.ac.ke/api/Vouchers",
+          url: "https://voucherapi.kec.ac.ke/api/Vouchers",
           type: "POST",
           data: JSON.stringify({BatchId: bId}),
           success: function(response,status,jxhr) {
