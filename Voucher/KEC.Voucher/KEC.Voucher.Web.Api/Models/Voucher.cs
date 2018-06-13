@@ -74,6 +74,13 @@ namespace KEC.Voucher.Web.Api.Models
                 return _dbVoucher.BatchId;
             }
         }
+        public decimal Amount
+        {
+            get
+            {
+                return _dbVoucher.Wallet.WalletAmount;
+            }
+        }
 
     }
 }

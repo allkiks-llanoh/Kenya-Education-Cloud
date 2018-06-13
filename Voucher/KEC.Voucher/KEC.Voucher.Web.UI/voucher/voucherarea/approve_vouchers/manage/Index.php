@@ -226,7 +226,7 @@ function tableRows(data) {
         row.append($("<td class='hidden'>" + rowData.Id + "</td>"));
         row.append($("<td>" + rowData.SchoolName + "</td>"));
     
-        row.append($("<td>" + rowData.WalletAmount + "</td>"));
+        row.append($("<td>" + rowData.Amount + "</td>"));
         row.append($(`<td> <input type='checkbox' id=${rowData.Id} data-voucher=${rowData.Id} name=${rowData.Id} 'approve' class='approve'/> </td>`));  
         row.append($(`<td> <input type='checkbox' id=${rowData.Id} data-voucher=${rowData.Id} name=${rowData.Id} 'reject' class='reject'/> </td>`)); 
         return row[0];
