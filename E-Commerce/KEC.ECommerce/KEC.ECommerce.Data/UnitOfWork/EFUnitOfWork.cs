@@ -4,8 +4,6 @@ using KEC.ECommerce.Data.UnitOfWork.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace KEC.ECommerce.Data.UnitOfWork
 {
@@ -31,6 +29,17 @@ namespace KEC.ECommerce.Data.UnitOfWork
         public AuthorsRepository AuthorsRepository => new AuthorsRepository(_context);
 
         public SubjectsRepository SubjectsRepository => new SubjectsRepository(_context);
+        public CategoriesRepository CategoriesRepository => new CategoriesRepository(_context);
+
+        public ShoppingCartsRepository ShoppingCartsRepository => new ShoppingCartsRepository(_context);
+
+        public ShoppingCartItemsRepository ShoppingCartItemsRepository => new ShoppingCartItemsRepository(_context);
+
+        public OrdersRepository OrdersRepository => new OrdersRepository(_context);
+
+        public LineItemsRepository LineItemsRepository => new LineItemsRepository(_context);
+
+        public LicencesRepository LicencesRepository => new LicencesRepository(_context);
 
         public int Complete()
         {

@@ -1,49 +1,26 @@
-﻿using System;
+﻿using KEC.ECommerce.Data.UnitOfWork.Core;
+using KEC.ECommerce.Web.UI.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
-namespace KEC.Ecommerce.Web.UI.Controllers
+namespace KEC.ECommerce.Web.UI.Controllers
 {
-    [Route("[controller]/[action]")]
     public class StoreController : Controller
     {
-        public ActionResult ProductsList()
-        {
-            return View();
-        }
+        private readonly IUnitOfWork _uow;
 
-        public ActionResult ProductsGrid()
+        public StoreController(IUnitOfWork uow)
         {
-            return View();
+            _uow = uow;
         }
-
-        public ActionResult ProductDetail(int id)
+        public IActionResult Publications(int categoryId)
         {
-            return View();
+            ViewBag.Category = _uow.CategoriesRepository.Get(categoryId)?.Name;
+            var publications = _uow.PublicationsRepository.Find(p => p.CategoryId.Equals(categoryId));
+            var publicationList = publications.Any() ? 
+                publications.Select(p => new ProductViewModel(_uow, p)).ToList() : new List<ProductViewModel>();
+            return View(publicationList);
         }
-
-        public ActionResult ProductEdit()
-        {
-            return View();
-        }
-
-        public ActionResult Payments()
-        {
-            return View();
-        }
-
-        public ActionResult Orders()
-        {
-            return View();
-        }
-
-        public ActionResult Cart()
-        {
-            return View();
-        }
-
     }
 }

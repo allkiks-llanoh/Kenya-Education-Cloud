@@ -8,6 +8,7 @@ namespace KEC.ECommerce.Data.Models
         public Order()
         {
             LineItems = new List<LineItem>();
+            Licences = new List<Licence>();
         }
         #region Properties
         public int Id { get; set; }
@@ -15,10 +16,12 @@ namespace KEC.ECommerce.Data.Models
         public DateTime SubmittedAt { get; set; }
         public decimal Amount { get; set; }
         public string CustomerGuid { get; set; }
+        public OrderStatus Status { get; set;}
         #endregion
 
         #region Virtual Properties
         public virtual ICollection<LineItem> LineItems { get; set; }
+        public virtual ICollection<Licence> Licences { get; set; }
         public virtual Payment Payment { get; set; }
         #endregion
     }

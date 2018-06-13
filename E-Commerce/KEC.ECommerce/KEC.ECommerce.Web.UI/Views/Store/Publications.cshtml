@@ -1,0 +1,29 @@
+﻿@using KEC.ECommerce.Web.UI.Models;
+@model IEnumerable<ProductViewModel>
+@{
+    ViewData["Title"] = @ViewBag.Category;
+}
+@if (Model.Any())
+{
+    <div class="border bd-blue">
+        <div class="grid">
+            <div class="row">
+                <div class="cell-md-full">
+                    <div class="ui horizontal divider">
+                        <p class="text-center text-bold text-upper fg-orange">@ViewBag.Category</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row match-height">
+                @foreach (var product in Model)
+                {
+                    Html.RenderPartial("_ProductDetailPartial", product);
+                }
+            </div>
+        </div>
+    </div>
+
+}
+
+
+

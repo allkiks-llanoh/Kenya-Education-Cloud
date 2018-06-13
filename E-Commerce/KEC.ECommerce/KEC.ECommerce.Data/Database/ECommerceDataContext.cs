@@ -20,10 +20,11 @@ namespace KEC.ECommerce.Data.Database
             
         }
         public DbSet<Publication> Publications { get; set; }
+        public DbSet<Licence> Licences { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
-        public DbSet<Cart> Carts { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Level> Levels { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<LineItem> LineItems { get; set; }

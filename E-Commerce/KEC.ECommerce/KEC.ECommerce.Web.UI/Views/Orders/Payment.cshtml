@@ -1,0 +1,77 @@
+﻿@model OrderViewModel
+@{
+    ViewData["Title"] = "Order Payment";
+}
+<div class="border bd-blue">
+    <div class="grid">
+        <div class="row">
+            <div class="cell-md-full">
+                <div class="ui horizontal divider">
+                    <p class="text-center text-bold text-upper fg-orange">Order Payment - @Model.OrderNumber</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-md-full">
+
+                <div class="ui ordered steps h-center">
+                    <div class="@Model.StepperClass(1)">
+                        <div class="content">
+                            <div class="title">Submit Order</div>
+                            <div class="description">Checkout your shopping cart</div>
+                        </div>
+                    </div>
+                    <div class="@Model.StepperClass(2)">
+                        <div class="content">
+                            <div class="title">Order Payment</div>
+                            <div class="description">Choose your payment option and pay</div>
+                        </div>
+                    </div>
+                    <div class="@Model.StepperClass(3)">
+                        <div class="content">
+                            <div class="title">Order Processing</div>
+                            <div class="description">Certificates generated</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-md-full">
+                <div class="ui horizontal divider">
+                    <p class="text-center text-bold text-upper fg-orange"><span class="mif-cart icon"></span>Order Items</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-md-full">
+                @{
+                    Html.RenderPartial("_LineItemsPartial", Model);
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-md-full">
+                <div class="ui horizontal divider">
+                    <p class="text-center text-bold text-upper fg-orange"><span class="mif-note"></span>Voucher Payment</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-md-full" id="payment">
+                <form class="h-center inline-form" asp-controller="Orders" asp-action="ProcessVoucher" 
+                      data-ajax="true" data-ajax-update="#payment" data-ajax-method="POST" 
+                      data-ajax-mode="replace" data-ajax-loading="#Spinner">
+                    <input type="hidden" name="orderId" value="@Model.Id"/>
+                    <div class="h-center">
+                        <input type="text" required  data-role="input" placeholder="Enter voucher code"
+                          name="VoucherCode"     data-prepend="<span>Voucher:</span>">
+                        <button class="button info outline rounded m-2 place-right">Submit Code</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
