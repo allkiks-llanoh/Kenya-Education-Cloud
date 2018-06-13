@@ -29,7 +29,7 @@
         var d = new Date();
        var n = d.getFullYear();
         $.ajax({
-            url:`https://voucherapi.kec.ac.ke/api/batches${n}/withpendingvouchers`,
+            url:`https://voucherapi.kec.ac.ke/api/batches/${n}/withpendingvouchers`,
             type: "GET",
             dataType: "json",   
             success: function(data,status,jqhxr){

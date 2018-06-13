@@ -21,7 +21,7 @@
        
         var row = $("<tr />")
         row.append($('<td class="hidden"> + rowData.Id + </td>'));
-        row.append($("<td>" + rowData.Description + "</td>"));
+        row.append($("<td>" + rowData.description + "</td>"));
         row.append($(`<td class="pull-right"> <button type="button" data-schooltype=${rowData.Id} data-county='${code}' class="btn btn-w-m btn-info btn-md NewBatch" role="button">CREATE BATCH</button>`));  
         return row[0];
        }
