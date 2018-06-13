@@ -7,7 +7,7 @@ namespace KEC.Curation.Web.Api.Serializers
      
         [Required(ErrorMessage ="Notes cannot be blank")]
         public string Notes { get; set; }
-        public bool Submitted { get; set; }
+        public string Submitted { get; set; }
         [Required(ErrorMessage = "User cannot be blank")]
         public string UserGuid { get; set; }
     }

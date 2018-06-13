@@ -13,8 +13,6 @@ namespace KEC.ECommerce.Data.Models
         #region Properties
         public int Id { get; set; }
         public string Company { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string Guid { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }

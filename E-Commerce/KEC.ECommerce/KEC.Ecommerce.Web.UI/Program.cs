@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace KEC.Ecommerce.Web.UI
+namespace KEC.ECommerce.Web.UI
 {
     public class Program
     {

@@ -30,8 +30,8 @@ namespace KEC.Curation.Publishers.Web.Api.Controllers
     {
         #region Definitions and Constants
         const string StorageAccountName = "kecpublications";
-        const string StorageAccountKey = "MKMdAUoU2vUWIRSMSR5UXnu7hZ9omXWFXSglCHowJTn3oyOeycxCGSgSQ4huvihn9a0DUObjvvNBd06PfHw2Dg==";
-        const string pathToFile = "https://kecpublications.blob.core.windows.net/publications/";
+        const string StorageAccountKey = "cP6MXKU+7YLxE4sF4FPS0ETJ9Q5HzqN4YU+/XCtJgTtKoLpOCaAR4aQc7S5YU8q2/QjCvkGLiynLcQXmBGuifQ==";
+        const string pathToFile = "https://keccuration.file.core.windows.net/publications";
         private readonly IUnitOfWork _uow;
         private readonly IHostingEnvironment _env;
         public PublishersController(IUnitOfWork uow, IHostingEnvironment env)
@@ -163,137 +163,63 @@ namespace KEC.Curation.Publishers.Web.Api.Controllers
             {
                 ModelState.AddModelError("File", ".EXE File Extensions are not Permited");
             }
-            var fileConverted = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".epub");
-
-            if (fileConverted == true)
+            try
             {
-                try
+                var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccountName, StorageAccountKey), false);
+                //Blob starts here
+                var blob = storageAccount.CreateCloudBlobClient();
+                CloudBlobContainer container = blob.GetContainerReference("publications");
+                CloudBlockBlob blobs = container.GetBlockBlobReference($"{model.PublicationFile.FileName}");
+                var filePath = $"{pathToFile}/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
+                UriBuilder uriBuilder = new UriBuilder();
+                uriBuilder.Path = filePath;
+                var ul = uriBuilder.Uri;
+                var publication = new Publication
                 {
-                  
-                    EpubLoadOptions epubload = new EpubLoadOptions();
-                  
-            
-                    Aspose.Pdf.Document pdf = new Aspose.Pdf.Document($"{model.PublicationFile.FileName}", epubload);
-
-                    var document = ($"{model.PublicationFile}{DateTime.Now.ToString("yyyyMMddHHmmss")}{".pdf"}");
-                    var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccountName, StorageAccountKey), false);
-                    //Blob starts here
-                    var blob = storageAccount.CreateCloudBlobClient();
-                    CloudBlobContainer container = blob.GetContainerReference("publications");
-                    CloudBlockBlob blobs = container.GetBlockBlobReference($"{model.PublicationFile.FileName}");
-                    var filePath = $"{pathToFile}/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
-                    UriBuilder uriBuilder = new UriBuilder();
-                    uriBuilder.Path = filePath;
-                    var ul = uriBuilder.Uri;
-                    var publication = new Publication
-                    {
-                        AuthorName = model.AuthorName,
-                        PublisherName = model.PublisherName,
-                        SubjectId = model.SubjectId,
-                        LevelId = model.LevelId,
-                        CompletionDate = model.CompletionDate.Value,
-                        Description = model.Description,
-                        ISBNNumber = model.ISBNNumber,
-                        Price = model.Price.GetValueOrDefault(),
-                        Title = model.Title,
-                        MimeType = model.PublicationFile.ContentType,
-                        Url = $"{pathToFile}{document}",
-                        KICDNumber = _uow.PublicationRepository
-                                          .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
-                        CreatedTimeUtc = DateTime.Now.Date,
-                        ModifiedTimeUtc = DateTime.Now.Date,
-                        Owner = model.UserGuid
-                    };
-                    publication.PublicationStageLogs.Add(new PublicationStageLog
-                    {
-                        Stage = PublicationStage.NewPublication,
-                        Owner = model.UserGuid,
-                        CreatedAtUtc = DateTime.UtcNow,
-                        ActionTaken = ActionTaken.PublicationSubmitted
-                    });
-                    _uow.PublicationRepository.Add(publication);
-                    _uow.Complete();
-                    _uow.PublicationRepository.ProcessToTheNextStage(publication);
-                    var tempPath = Path.GetTempFileName();
-                    using (var stream = new FileStream(tempPath, FileMode.Create))
-                    {
-                        await model.PublicationFile.CopyToAsync(stream);
-                    }
-                    blobs.Properties.ContentType = $"{model.PublicationFile.ContentType}";
-
-                    using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        await blobs.UploadFromStreamAsync(stream);
-                    }
-                    return Ok(value: "Publication submitted successfully");
-                }
-                catch (Exception ex)
+                    AuthorName = model.AuthorName,
+                    PublisherName = model.PublisherName,
+                    SubjectId = model.SubjectId,
+                    LevelId = model.LevelId,
+                    CompletionDate = model.CompletionDate.Value,
+                    Description = model.Description,
+                    ISBNNumber = model.ISBNNumber,
+                    Price = model.Price.GetValueOrDefault(),
+                    Title = model.Title,
+                    MimeType = model.PublicationFile.ContentType,
+                    Url = blobs.StorageUri.PrimaryUri.ToString(),
+                    KICDNumber = _uow.PublicationRepository
+                                      .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
+                    CreatedTimeUtc = DateTime.Now.Date,
+                    ModifiedTimeUtc = DateTime.Now.Date,
+                    Owner = model.UserGuid
+                };
+                publication.PublicationStageLogs.Add(new PublicationStageLog
                 {
-                    ex.GetBaseException();
-                    return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                    Stage = PublicationStage.NewPublication,
+                    Owner = model.UserGuid,
+                    CreatedAtUtc = DateTime.UtcNow,
+                    ActionTaken = ActionTaken.PublicationSubmitted
+                });
+                _uow.PublicationRepository.Add(publication);
+                _uow.Complete();
+                _uow.PublicationRepository.ProcessToTheNextStage(publication);
+                var tempPath = Path.GetTempFileName();
+                using (var stream = new FileStream(tempPath, FileMode.Create))
+                {
+                    await model.PublicationFile.CopyToAsync(stream);
                 }
+                blobs.Properties.ContentType = $"{model.PublicationFile.ContentType}";
+
+                using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
+                {
+                    await blobs.UploadFromStreamAsync(stream);
+                }
+                return Ok(value: "Publication submitted successfully");
             }
-
-            else
+            catch (Exception ex)
             {
-                try
-                {
-                    var storageAccount = new CloudStorageAccount(new StorageCredentials(StorageAccountName, StorageAccountKey), false);
-                    //Blob starts here
-                    var blob = storageAccount.CreateCloudBlobClient();
-                    CloudBlobContainer container = blob.GetContainerReference("publications");
-                    CloudBlockBlob blobs = container.GetBlockBlobReference($"{model.PublicationFile.FileName}");
-                    var filePath = $"{pathToFile}/{DateTime.Now.ToString("yyyyMMddHHmmss")}{model.PublicationFile.FileName}";
-                    UriBuilder uriBuilder = new UriBuilder();
-                    uriBuilder.Path = filePath;
-                    var ul = uriBuilder.Uri;
-                    var publication = new Publication
-                    {
-                        AuthorName = model.AuthorName,
-                        PublisherName = model.PublisherName,
-                        SubjectId = model.SubjectId,
-                        LevelId = model.LevelId,
-                        CompletionDate = model.CompletionDate.Value,
-                        Description = model.Description,
-                        ISBNNumber = model.ISBNNumber,
-                        Price = model.Price.GetValueOrDefault(),
-                        Title = model.Title,
-                        MimeType = model.PublicationFile.ContentType,
-                        Url = blobs.StorageUri.PrimaryUri.ToString(),
-                        KICDNumber = _uow.PublicationRepository
-                                          .GetKICDNUmber(_uow.PublicationRepository.GetAll().ToList()),
-                        CreatedTimeUtc = DateTime.Now.Date,
-                        ModifiedTimeUtc = DateTime.Now.Date,
-                        Owner = model.UserGuid
-                    };
-                    publication.PublicationStageLogs.Add(new PublicationStageLog
-                    {
-                        Stage = PublicationStage.NewPublication,
-                        Owner = model.UserGuid,
-                        CreatedAtUtc = DateTime.UtcNow,
-                        ActionTaken = ActionTaken.PublicationSubmitted
-                    });
-                    _uow.PublicationRepository.Add(publication);
-                    _uow.Complete();
-                    _uow.PublicationRepository.ProcessToTheNextStage(publication);
-                    var tempPath = Path.GetTempFileName();
-                    using (var stream = new FileStream(tempPath, FileMode.Create))
-                    {
-                        await model.PublicationFile.CopyToAsync(stream);
-                    }
-                    blobs.Properties.ContentType = $"{model.PublicationFile.ContentType}";
-
-                    using (var stream = new FileStream(tempPath, FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        await blobs.UploadFromStreamAsync(stream);
-                    }
-                    return Ok(value: "Publication submitted successfully");
-                }
-                catch (Exception ex)
-                {
-                    ex.GetBaseException();
-                    return StatusCode(StatusCodes.Status500InternalServerError, ex);
-                }
+                ex.GetBaseException();
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
         // PUT: api/Publishers/5

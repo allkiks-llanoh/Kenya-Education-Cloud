@@ -1,8 +1,5 @@
 ﻿using KEC.ECommerce.Data.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace KEC.ECommerce.Data.UnitOfWork.Core
 {
     public interface IUnitOfWork : IDisposable
@@ -12,6 +9,12 @@ namespace KEC.ECommerce.Data.UnitOfWork.Core
         LevelsRepository LevelsRepository { get; }
         AuthorsRepository AuthorsRepository { get; }
         SubjectsRepository SubjectsRepository { get; }
+        CategoriesRepository CategoriesRepository { get; }
+        ShoppingCartsRepository ShoppingCartsRepository { get; }
+        ShoppingCartItemsRepository ShoppingCartItemsRepository { get; }
+        OrdersRepository OrdersRepository { get; }
+        LineItemsRepository LineItemsRepository { get; }
+        LicencesRepository LicencesRepository { get;}
         int Complete();
     }
 }

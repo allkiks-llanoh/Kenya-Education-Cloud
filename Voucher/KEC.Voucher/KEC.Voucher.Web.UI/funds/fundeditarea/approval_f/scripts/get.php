@@ -17,7 +17,7 @@ $(document).ready(function(){
         var id     =  $('#fundallocation').attr('data-fund');
         console.log(id);
         $.ajax({
-        url: `http://voucherapi-d.kec.ac.ke/api/fundallocation/${id}`,
+        url: `https://voucherapi.kec.ac.ke/api/fundallocation/${id}`,
 
         type: "GET",
         headers : {
@@ -36,9 +36,9 @@ $(document).ready(function(){
           headers : {
                 'Accept' : 'application/json',
                 'Content-Type' : 'application/json',
-                'Access-Control-Allow-Origin': 'http://voucherapi-d.kec.ac.ke/api/'
+                'Access-Control-Allow-Origin': 'https://voucherapi.kec.ac.ke/api/'
             } ,
-      url: "http://voucherapi-d.kec.ac.ke/api/fundallocations",
+      url: "https://voucherapi.kec.ac.ke/api/fundallocations",
       type: "PATCH",
       data: ajaxData() ,
       success: function(response,status,jxhr) {

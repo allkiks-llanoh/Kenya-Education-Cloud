@@ -28,6 +28,8 @@ namespace KEC.ECommerce.Data.Models
         public virtual Author Author { get; set; }
         public virtual Publisher Publisher { get; set; }
         public virtual Category Category { get; set; }
+        public virtual Level Level { get; set; }
+        public virtual Subject Subject { get; set; }
         #endregion
     }
 }

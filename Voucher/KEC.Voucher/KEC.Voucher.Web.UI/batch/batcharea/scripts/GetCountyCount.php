@@ -3,7 +3,7 @@
 $(document).ready(function(){
    var Count= $('#count');
         $.ajax({
-        url: "http://voucherapi-d.kec.ac.ke/api/counties/count",
+        url: "https://voucherapi.kec.ac.ke/api/counties/count",
         type: "GET",
         dataType: "json",    
         success: function(data,status,jqhxr) {
@@ -18,7 +18,7 @@ $(document).ready(function(){
 $(document).ready(function(){
    var Count= $('#types');
         $.ajax({
-        url: "http://voucherapi-d.kec.ac.ke/api/schooltypes/count",
+        url: "https://voucherapi.kec.ac.ke/api/schooltypes/count",
         type: "GET",
         dataType: "json",    
         success: function(data,status,jqhxr) {
@@ -33,7 +33,7 @@ $(document).ready(function(){
 $(document).ready(function(){
    var Count= $('#batches');
         $.ajax({
-        url: "http://voucherapi-d.kec.ac.ke/api/batches/count",
+        url: "https://voucherapi.kec.ac.ke/api/batches/count",
         type: "GET",
         dataType: "json",    
         success: function(data,status,jqhxr) {

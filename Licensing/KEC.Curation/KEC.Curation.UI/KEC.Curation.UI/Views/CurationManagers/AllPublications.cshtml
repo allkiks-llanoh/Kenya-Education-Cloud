@@ -22,26 +22,29 @@
                     <h5>Search For A Publication</h5>
                 </div>
                 <div class="ibox-content">
-                    <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Use Curation Number">
-                    <table id="allpublications" class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                    <div class="table-responsive">
+                        <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Use Curation Number">
+                        <table id="allpublications" class="footable table table-stripped footable-loaded no-paging" data-page-size="8" data-filter="#filter">
 
-                        <tr class="footable-sortable">
-                            <th> CURATION NUMBER </th>
-                            <th> TITLE </th>
-                            <th> PUBLISHER</th>
-                            <th> SUBJECT</th>
-                            <th> LEVEL</th>
-                            <th> ACTIONS</th>
-                        </tr>
-
-                        <tfoot>
-                            <tr>
-                                <td colspan="5">
-                                    <ul class="pagination pull-right"></ul>
-                                </td>
+                            <tr class="footable-sortable">
+                                <th> CURATION NUMBER </th>
+                                <th> TITLE </th>
+                                <th> PUBLISHER</th>
+                                <th> SUBJECT</th>
+                                <th> LEVEL</th>
+                                <th> ACTIONS</th>
                             </tr>
-                        </tfoot>
-                    </table>
+
+                            <tfoot>
+                                <tr>
+                                    
+                                    <td colspan="5">
+                                        <ul class="pagination pull-right"><li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li><li class="footable-page active"><a data-page="0" href="#">1</a></li><li class="footable-page-arrow disabled"><a data-page="next" href="#next">›</a></li><li class="footable-page-arrow disabled"><a data-page="last" href="#last">»</a></li></ul>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

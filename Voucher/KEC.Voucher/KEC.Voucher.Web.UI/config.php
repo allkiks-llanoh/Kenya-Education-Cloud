@@ -1,3 +1,3 @@
 <?php
-$baseurl = "http://voucherapi-d.kec.ac.ke/"
+$baseurl = "https://voucherapi.kec.ac.ke/"
 ?>

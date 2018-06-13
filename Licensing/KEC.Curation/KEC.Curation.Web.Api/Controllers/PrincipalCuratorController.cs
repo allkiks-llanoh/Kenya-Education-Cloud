@@ -68,7 +68,22 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.
                                        PrincipalCuratorGuid.Equals(principalCuratorGuid)
-                                       && !p.ChiefCuratorAssignment.Submitted);
+                                       && p.ChiefCuratorAssignment.Submitted
+                                        && p.PublicationStageLogs.Max(l => l.Stage)
+                                       == PublicationStage.PublicationApproval);
+            var publicationList = publications.Any() ?
+                publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
+            return Ok(value: publicationList);
+        }
+        [HttpGet("withcommentss")]
+        public IActionResult WithCommentss(string principalCuratorGuid)
+        {
+            var publications = _uow.PublicationRepository.Find(p => p.ChiefCuratorAssignment.
+                                       PrincipalCuratorGuid.Equals(principalCuratorGuid)
+                                       && p.ChiefCuratorAssignment.Submitted
+                                       && p.PublicationStageLogs.Max(l => l.Stage)
+                                       == PublicationStage.PublicationApproval);
+                                       ;
             var publicationList = publications.Any() ?
                 publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
             return Ok(value: publicationList);
@@ -230,7 +245,7 @@ namespace KEC.Curation.Web.Api.Controllers
                     Notes = model.Notes,
                     CreatedAtUtc = DateTime.UtcNow,
                     Owner = model.PrincipalCuratorGuid,
-                    Stage = PublicationStage.PublicationApproval
+                    Stage = PublicationStage.IssueOfCertificate
                 };
                 _uow.PublicationStageLogRepository.Add(recommendation);
 

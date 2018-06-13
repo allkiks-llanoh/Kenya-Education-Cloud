@@ -19,7 +19,7 @@
 
 }
 <script type="text/javascript">
-    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+    const apiBaseUrls = "https://publishervm.kec.ac.ke/api";
 </script>
 <script type="text/javascript">
     (function () {
@@ -32,7 +32,7 @@
         ///Functions Section
         function getPublication() {
             let publicationId = $('#publication-view').attr('data-publicationId');
-            var urls = apiBaseUrls.concat(`/CurationManagers/get/publications/${publicationId}`);
+            var urls = apiBaseUrls.concat(`/Publications/get/publications/${publicationId}`);
 
             $.ajax({
                 url: urls,
@@ -47,14 +47,14 @@
                 },
 
 
-            }).done(function (publication, textStatus, jqXHR) {
-
+            }).done(function (publications, textStatus, jqXHR) {
+                publications.forEach(function (publication) {
                 $('#publication-details').replaceWith(
-                    `<dl id="publication-details" data-stage="${publication.stage}">
-                  <dt>Curation Number</dt>
-                  <dd id="kicd-number">${publication.kicdNumber}</dd>
+                    `<dl>
+                  <dt>Content Number</dt>
+                  <dd id="kicd-number">${publication.contentNumber}</dd>
                    <dt>Publisher</dt>
-                   <dd>${publication.publisherName}</dd>
+                   <dd>${publication.publisher}</dd>
                    <dt>Title</dt>
                    <dd>${publication.title}</dd>
                    <dt>Description</dt>
@@ -63,9 +63,9 @@
                    <dd><a href="${publication.url}" target="blank">Link to publication</a></dd>
                    <dt>Level</dt>
                    <dd>${publication.level}</dd>
-                   <dt>Completion date</dt>
-                   <dd>${publication.completionDate}</dd></dl>`);
-
+                   <dt>Price</dt>
+                   <dd>${publication.price}</dd></dl>`);
+                });
             });
         }
 

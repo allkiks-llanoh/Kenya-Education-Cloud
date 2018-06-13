@@ -21,13 +21,13 @@
        
         var row = $("<tr />")
         row.append($('<td class="hidden"> + rowData.Id + </td>'));
-        row.append($("<td>" + rowData.Description + "</td>"));
+        row.append($("<td>" + rowData.description + "</td>"));
         row.append($(`<td class="pull-right"> <button type="button" data-schooltype=${rowData.Id} data-county='${code}' class="btn btn-w-m btn-info btn-md NewBatch" role="button">CREATE BATCH</button>`));  
         return row[0];
        }
        function reloadSchoolTypes(){
         $.ajax({
-            url: `http://voucherapi-d.kec.ac.ke/api/batches/${id}/pendingschooltypes`,
+            url: `https://voucherapi.kec.ac.ke/api/batches/${id}/pendingschooltypes`,
             type: "GET",
             dataType: "json",   
             success: function(data,status,jqhxr){
@@ -58,7 +58,7 @@
                 $('div.alert-success').toggleClass('hidden');
               }
           },
-          url: "http://voucherapi-d.kec.ac.ke/api/Batches",
+          url: "https://voucherapi.kec.ac.ke/api/Batches",
           type: "POST",
           data: JSON.stringify({CountyCode: countycodes,SchoolTypeId: schooltypeid }),
           success: function(response,status,jxhr) {

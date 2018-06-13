@@ -4,6 +4,7 @@
     ViewBag.Title = "Home Page";
 }
 
+
 <div class="jumbotron text-center" style="margin-top:-20px;margin-bottom:-20px;">
     <h2>Publishers Portal</h2>
 
@@ -69,14 +70,14 @@
 </div>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+    const apiBaseUrls = "https://publishervm.kec.ac.ke/api";
 </script>
 
 <script type="text/JavaScript">
 
     $(document).ready(function () {
         let UserGuid = $('#CurrentUserGuid').val();
-        let PendingUrl = apiBaseUrls.concat(`/curationmanagers/count/all/publisher/${UserGuid}`);
+        let PendingUrl = apiBaseUrls.concat(`/Publications/count/all/publisher/${UserGuid}`);
         var PendingCount = $('#all_wait');
         $.ajax({
             url: PendingUrl,
@@ -92,7 +93,7 @@
 
     $(document).ready(function () {
         let UserGuid = $('#CurrentUserGuid').val();
-        let ApprovedUrl = apiBaseUrls.concat(`/curationmanagers/count/approved/publisher/${UserGuid}`);
+        let ApprovedUrl = apiBaseUrls.concat(`/Publications/count/approved/publisher/${UserGuid}`);
         var ApprovedCount = $('#approved_wait');
         $.ajax({
             url: ApprovedUrl,
@@ -108,7 +109,7 @@
 
     $(document).ready(function () {
         let UserGuid = $('#CurrentUserGuid').val();
-        let RejectedUrl = apiBaseUrls.concat(`/curationmanagers/count/rejected/publisher/${UserGuid}`);
+        let RejectedUrl = apiBaseUrls.concat(`/Publications/count/rejected/publisher/${UserGuid}`);
         var RejectedCount = $('#rejected_wait');
         $.ajax({
             url: RejectedUrl,

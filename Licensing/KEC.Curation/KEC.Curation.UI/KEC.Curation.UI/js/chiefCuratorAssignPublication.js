@@ -40,7 +40,7 @@
                        </div>
                          <div class="col-md-3">
                             <dt>Content Location</dt>
-                            <dd><a href="${publication.url}">Link to publication</a></dd>
+                            <dd><a href="${publication.curationUrl}">Link to publication</a></dd>
                        </div>
                   </div>
                   <br><br>

@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-md-3">
                             <dt>Content Location</dt>
-                            <dd><a href="${publication.url}">Link to publication</a></dd>
+                            <dd><a href="${publication.curationUrl}">Link to publication</a></dd>
                         </div>
                     </div>
                     <br><br>
@@ -83,10 +83,10 @@
         }).done(function (submissions, textStatus, jqXHR) {
 
             submissions.forEach(function (submission) {
-                $('#currator-commets').html(` <dt>Curator Recomendation</dt><dd> ${submission.curatorComments}</dd><br/><hr/>
-                                                  <dt>Chief Curator Recomendation</dt><dd>${submission.chiefCuratorComments}</dd><br/><hr/>
-                                                  <dt>Principal Curator Recomendation</dt><dd>${submission.principalCuratorComments}</dd><br/><hr/>
-                                                  <dt>Curation Managers Recomendation</dt><dd>${submission.cutationManagersCuratorComments}</dd><br/><hr/>`);
+                $('#currator-commets').html(` <dt>Curator Recommendations</dt><dd> ${submission.curatorComments}</dd><br/><hr/>
+                                                  <dt>Chief Curator Recommendations</dt><dd>${submission.chiefCuratorComments}</dd><br/><hr/>
+                                                  <dt>Principal Curator Recommendations</dt><dd>${submission.principalCuratorComments}</dd><br/><hr/>
+                                                  <dt>Curation Managers Recommendations</dt><dd>${submission.cutationManagersCuratorComments}</dd><br/><hr/>`);
 
             });
 

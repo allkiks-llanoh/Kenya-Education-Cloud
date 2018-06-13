@@ -10,7 +10,7 @@
 <script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <script type="text/javascript">
-    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+    const apiBaseUrls = "https://publishervm.kec.ac.ke/api";
 </script>
 <div id="wrapper">
     <div class="row">
@@ -64,7 +64,7 @@
 </div>
 <script type="text/javascript">
     let PublisherGUID = $('#CurrentUserGuid').val();
-    let Url = apiBaseUrls.concat(`/curationmanagers/get/all/publisher/${PublisherGUID}`);
+    let Url = apiBaseUrls.concat(`/Publications/get/all/publisher/${PublisherGUID}`);
     function tableRows(data) {
         var tableRows = [];
         for (var i = 0; i < data.length; i++) {

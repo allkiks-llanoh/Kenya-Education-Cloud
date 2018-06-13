@@ -21,7 +21,7 @@
 
 }
 <script type="text/javascript">
-    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+    const apiBaseUrls = "https://publishervm.kec.ac.ke/api";
 </script>
 
 
@@ -98,7 +98,7 @@
         ///Functions Section
         function getPublication() {
             let publicationId = $('#publication-view').attr('data-publicationId');
-            var urls = apiBaseUrls.concat(`/CurationManagers/get/approved/${publicationId}`);
+            var urls = apiBaseUrls.concat(`/publications/get/rejected/${publicationId}`);
 
             $.ajax({
                 url: urls,

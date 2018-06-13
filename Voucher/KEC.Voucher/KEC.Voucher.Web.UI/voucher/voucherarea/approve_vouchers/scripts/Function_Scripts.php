@@ -13,7 +13,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: "http://voucherapi-d.kec.ac.ke/api/batches",
+        url: "https://voucherapi.kec.ac.ke/api/batches",
       dataType:'JSON',
       success:function(data){
         //clear the current content of the select

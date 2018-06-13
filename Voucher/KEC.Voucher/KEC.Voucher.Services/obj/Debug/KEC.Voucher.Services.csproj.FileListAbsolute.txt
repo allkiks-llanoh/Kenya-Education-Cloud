@@ -24,4 +24,4 @@ C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Vouch
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Services\obj\Debug\KEC.Voucher.Services.csproj.CopyComplete
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Services\obj\Debug\KEC.Voucher.Services.dll
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Services\obj\Debug\KEC.Voucher.Services.pdb
-C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Services\obj\Debug\KEC.Voucher.Services.csprojResolveAssemblyReference.cache
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Services\obj\Debug\KEC.Voucher.Services.csprojAssemblyReference.cache

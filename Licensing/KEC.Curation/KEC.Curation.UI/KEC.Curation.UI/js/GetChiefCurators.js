@@ -1,13 +1,16 @@
 ﻿
 //get a reference to the select element
 $select = $('#UserGuid');
+let baseUrl = "https://curation.kec.ac.ke/GetUsers/GetChiefCurators"
+let PrincipalCuratorsubjectId = $('#SubjectId').val();
+let url = baseUrl.concat(`?subjectId=${PrincipalCuratorsubjectId}`)
 //request the JSON data and parse into the select element
 $.ajax({
     headers : {
         'Access-Controll-Allow-Origin': '*'
     },
     type: 'POST',
-    url: 'https://curation.kec.ac.ke/GetUsers/GetChiefCurators',
+    url: url,
     dataType: 'JSON',
     async: false,
     crossDomain: true,

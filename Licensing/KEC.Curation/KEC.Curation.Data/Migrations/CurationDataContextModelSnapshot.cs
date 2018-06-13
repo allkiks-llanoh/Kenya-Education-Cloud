@@ -154,6 +154,8 @@ namespace KEC.Curation.Data.Migrations
 
                     b.Property<DateTime>("CreatedTimeUtc");
 
+                    b.Property<string>("CutationUrl");
+
                     b.Property<string>("Description");
 
                     b.Property<bool>("FullyAssigned");

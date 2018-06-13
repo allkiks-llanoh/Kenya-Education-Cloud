@@ -2,7 +2,7 @@
 @model Publishers
 @{
     ViewBag.Title = "Upload Content";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 
@@ -76,7 +76,7 @@
                                     <label for="Title">Price</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="text" name="Price" id="Price" class="form-control" placeholder="Give Publication Price">
+                                    <input type="number" name="Price" id="Price" class="form-control" placeholder="Give Publication Price">
                                 </div>
                             </div>
                             <br>
@@ -187,7 +187,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: "https://curationapi-d.kec.ac.ke/api/Subjects",
+        url: "https://publishervm.kec.ac.ke/api/Subjects",
         dataType: 'JSON',
         success: function (data) {
             //clear the current content of the select
@@ -211,7 +211,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: "https://curationapi-d.kec.ac.ke/api/Levels",
+        url: "https://publishervm.kec.ac.ke/api/Levels",
         dataType: 'JSON',
         success: function (data) {
             //clear the current content of the select
@@ -234,7 +234,7 @@
     //request the JSON data and parse into the select element
     $.ajax({
         type: 'GET',
-        url: 'https://curationapi-d.kec.ac.ke/api/SubjectTypes',
+        url: 'https://publishervm.kec.ac.ke/api/SubjectTypes',
         dataType: 'JSON',
         success: function (data) {
             //clear the current content of the select
@@ -252,7 +252,7 @@
 
 </script>
 <script type="text/JavaScript">
-    const apiBaseUrls = "https://curationapi-d.kec.ac.ke/api";
+    const apiBaseUrls = "https://publishervm.kec.ac.ke/api";
     let publicationSubmitUrl = apiBaseUrls.concat(`/Publications/submit`);
 
     $('#btn-postFile').click(function (e) {
@@ -266,7 +266,7 @@
             url: publicationSubmitUrl,
             processData: false,
             contentType: false,
-            async: true,
+            crossDomain: true,
             cache: false,
             data: form_data,
             success: function (response, status, jxhr) {
