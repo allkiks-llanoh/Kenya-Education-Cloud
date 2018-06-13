@@ -11,6 +11,7 @@
     <script src="@Url.Content("~/js/GetChiefCurators.js")"></script>
     <link href="~/Content/CustomStyles/DocumentViewer.css" rel="stylesheet" />
     <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+    @*<script src="https://hypothes.is/embed.js" async></script>*@
     @Scripts.Render("~/plugins/sweetAlert")
 }
 @{
@@ -49,56 +50,56 @@
 
                                 </dl>
                                 @*<div class="row">
-                                    <div class="form-group" style="text-align:left;">
-                                        
-                                        <button type="button" class="button btn btn-w-m btn-primary pull-right" name="LoadContent" id="LoadContent" style="background-color:#00B55F; margin-right:15px;">Load Content</button>
-                                    </div>
-                                </div>*@
+                                        <div class="form-group" style="text-align:left;">
+
+                                            <button type="button" class="button btn btn-w-m btn-primary pull-right" name="LoadContent" id="LoadContent" style="background-color:#00B55F; margin-right:15px;">Load Content</button>
+                                        </div>
+                                    </div>*@
 
                             </div>
                             <div class="panel-footer">
-                                @*<div class="ibox-content no-padding">
-                                    <div class="hidden" id="htmlView">
+                                <div class="ibox-content no-padding">
+                                    @*<div class="hidden" id="htmlView">
+                                            <div class="visible-scrollbar">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
+                                                                src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                    @*<div id="epubView">
                                         <div class="visible-scrollbar">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
-                                                            src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                                                    <iframe enable-annotation allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
+                                                            src='@Url.Content("~/Publications/test.epub")'></iframe>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="hidden" id="epubView">
-                                        <div class="visible-scrollbar">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
-                                                            src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                                    </div>*@
+                                    @*<div class="hidden" id="mp4View">
+                                            <div class="visible-scrollbar">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
+                                                                src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="hidden" id="mp4View">
-                                        <div class="visible-scrollbar">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
-                                                            src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                                        </div>*@
+                                    @*<div id="pdfView">
+                                            <div class="visible-scrollbar">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
+                                                                src='@Url.Content("~/Scripts/plugins/MobiJs/")#@Url.Content(Urls)'></iframe>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div id="pdfView">
-                                        <div class="visible-scrollbar">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
-                                                            src='@Url.Content("~/Scripts/plugins/MobiJs/")#@Url.Content(Urls)'></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
+                                        </div>*@
+                                </div>
                                 <div class="row">
                                     <div class="ibox-content no-padding">
                                         <div class="summernote" style="height:100px">
@@ -184,7 +185,6 @@
     $(document).ready(function () {
 
         $('.summernote').summernote();
-        $('#LoadContent').click(loadContentFunction);
 
     });
 
@@ -196,24 +196,21 @@
         var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
         $('.click2edit').destroy();
     };
-    function loadContentFunction(e) {
-        e.preventDefault();
-        var check = $('#MimeTypes').val();
-        if (check == "application/pdf") {
-            $('pdfView').show();
-        }
-        if (check == "application/x-zip-compressed") {
-            $('htmlView').show();
-        }
+
     }
 </script>
-@*<script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
-      
+
+        var check = $('#MimeTypes').val();
+        if (check == "application/epub") {
+            $('#epubView').show();
+        }
+        if (check == "application/x-zip-compressed") {
+            $('#htmlView').show();
+        }
     });
-  
-    
-</script>*@
+</script>
 
 section Styles {
 @Styles.Render("~/plugins/sweetAlertStyles")
