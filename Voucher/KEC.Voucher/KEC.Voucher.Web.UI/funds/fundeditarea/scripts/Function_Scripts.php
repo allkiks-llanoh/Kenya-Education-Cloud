@@ -12,7 +12,7 @@
 $(document).ready(function(){
        var year = (new Date()).getFullYear();
         $.ajax({
-        url: `http://voucherapi-d.kec.ac.ke/api/fundallocations/${year}`,
+        url: `https://voucherapi.kec.ac.ke/api/fundallocations/${year}`,
         type: "GET",
         headers : {
                   'Accept' : 'application/json',
@@ -70,9 +70,9 @@ function tableRows(data) {
             headers : {
                 'Accept' : 'application/json',
                 'Content-Type' : 'application/json',
-                'Access-Control-Allow-Origin': 'http://voucherapi-d.kec.ac.ke/api/'
+                'Access-Control-Allow-Origin': 'https://voucherapi.kec.ac.ke/api/'
             } ,
-        url: "http://voucherapi-d.kec.ac.ke/api/Vouchers/selected/reject",
+        url: "https://voucherapi.kec.ac.ke/api/Vouchers/selected/reject",
         type: "PATCH",
         data: ajaxData() ,
         success: function(data,status,jxhr) {

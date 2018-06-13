@@ -16,7 +16,7 @@
                   'Accept' : 'application/json',
                   'Content-Type' : 'application/json'
               } ,
-            url: "http://voucherapi-d.kec.ac.ke/api/vouchers",
+            url: "https://voucherapi.kec.ac.ke/api/vouchers",
             type: "POST",
             data: JSON.stringify({BatchId:batchId,SchoolTypeId:schoolTypeId}),
             success: function(response,status,jxhr) {

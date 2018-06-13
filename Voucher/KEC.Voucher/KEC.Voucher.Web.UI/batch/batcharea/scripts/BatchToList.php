@@ -10,7 +10,7 @@
     var d = new Date();
     var n = d.getFullYear();
         $.ajax({
-            url: `http://voucherapi-d.kec.ac.ke/api/counties/batch/pending/${n}`,
+            url: `https://voucherapi.kec.ac.ke/api/counties/batch/pending/${n}`,
             type: "GET",
             dataType: "json",   
             success: function(data,status,jqhxr){

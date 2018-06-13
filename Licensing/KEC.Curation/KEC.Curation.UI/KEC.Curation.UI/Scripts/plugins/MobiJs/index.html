@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <script src="mobi.min.js"></script>
+        <script>
+            function onChange(event) {
+              var file = event.target.files[0];
+              var reader = new FileReader();
+              reader.onload = function(event) {
+                var file_content = event.target.result;
+                new MobiFile(file_content).render_to("book");
+              };
+              reader.readAsArrayBuffer(file);
+            }
+
+        </script>
+
+    </head>
+    <body>
+    <input type="file" onchange="onChange(event)">
+    <div id="book"></div>
+    <style type="text/css">
+        #book {
+            font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, SimSun, Heiti, sans-serif; line-height:150%;
+            width: 80%;
+            margin: 0 auto;
+        }
+    </style>
+    </body>
+</html>

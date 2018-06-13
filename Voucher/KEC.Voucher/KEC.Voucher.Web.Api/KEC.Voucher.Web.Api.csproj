@@ -502,6 +502,7 @@
     <Compile Include="Models\Batch.cs" />
     <Compile Include="Models\BatchParam.cs" />
     <Compile Include="Models\County.cs" />
+    <Compile Include="Models\CreatedVouchers.cs" />
     <Compile Include="Models\FundAllcationParam.cs" />
     <Compile Include="Models\FundAllocation.cs" />
     <Compile Include="Models\School.cs" />

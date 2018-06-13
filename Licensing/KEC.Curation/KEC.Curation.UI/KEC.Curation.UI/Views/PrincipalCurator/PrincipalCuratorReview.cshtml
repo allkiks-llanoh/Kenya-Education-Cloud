@@ -20,6 +20,7 @@
     var Publication = Request.Params["Publication"];
     var Urls = Request.Params["Urls"];
     var KICDNumber = Request.Params["KICDN"];
+    var MimeType = Request.Params["Mime"];
 }
 
 <div class="text-center m-t-lg">
@@ -47,21 +48,57 @@
                                     <dd><a href="@Urls" target="_blank">Link to publication</a></dd>
 
                                 </dl>
-                                <div>
+                                @*<div class="row">
+                                    <div class="form-group" style="text-align:left;">
+                                        
+                                        <button type="button" class="button btn btn-w-m btn-primary pull-right" name="LoadContent" id="LoadContent" style="background-color:#00B55F; margin-right:15px;">Load Content</button>
+                                    </div>
+                                </div>*@
 
-                                </div>
                             </div>
                             <div class="panel-footer">
-                                <div class="ibox-content no-padding">
-                                    <div class="visible-scrollbar" id="document_viewer">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
-                                                        src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                                @*<div class="ibox-content no-padding">
+                                    <div class="hidden" id="htmlView">
+                                        <div class="visible-scrollbar">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
+                                                            src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="hidden" id="epubView">
+                                        <div class="visible-scrollbar">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
+                                                            src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hidden" id="mp4View">
+                                        <div class="visible-scrollbar">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
+                                                            src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="pdfView">
+                                        <div class="visible-scrollbar">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
+                                                            src='@Url.Content("~/Scripts/plugins/MobiJs/")#@Url.Content(Urls)'></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
                                 <div class="row">
                                     <div class="ibox-content no-padding">
                                         <div class="summernote" style="height:100px">
@@ -139,6 +176,7 @@
 </div>
 <div class="form-group col-md-10">
     <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
+    <input type="text" name="MimeTypes" id="MimeTypes" class="form-control hidden" value="@MimeType">
 </div>
 <script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
 
@@ -146,6 +184,7 @@
     $(document).ready(function () {
 
         $('.summernote').summernote();
+        $('#LoadContent').click(loadContentFunction);
 
     });
 
@@ -157,7 +196,24 @@
         var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
         $('.click2edit').destroy();
     };
+    function loadContentFunction(e) {
+        e.preventDefault();
+        var check = $('#MimeTypes').val();
+        if (check == "application/pdf") {
+            $('pdfView').show();
+        }
+        if (check == "application/x-zip-compressed") {
+            $('htmlView').show();
+        }
+    }
 </script>
+@*<script type="text/javascript">
+    $(document).ready(function () {
+      
+    });
+  
+    
+</script>*@
 
 section Styles {
 @Styles.Render("~/plugins/sweetAlertStyles")
