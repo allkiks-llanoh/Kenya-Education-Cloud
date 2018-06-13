@@ -15,7 +15,7 @@ require '.../config.php';
 $(document).ready(function(){
         var batchId     =  $('#batchId').attr('data-batch');
         $.ajax({
-        url: {$baseurl}'api/vouchers/created?batchId=' ${batchId},
+        url: `https://voucherapi.kec.ac.ke/api/vouchers/created?batchId=' ${batchId}`,
         type: "GET",
         headers : {
                   'Accept' : 'application/json',
