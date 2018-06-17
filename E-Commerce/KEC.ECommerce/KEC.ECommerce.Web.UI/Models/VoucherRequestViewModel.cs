@@ -8,11 +8,15 @@ namespace KEC.ECommerce.Web.UI.Models
     public class VoucherRequestViewModel
     {
         public int OrderId { get; private set; }
+
+        public string Vouchercode { get; private set; }
+
         public string ErrorMessage { get; private set; }
-        public VoucherRequestViewModel(int orderId,string errorMessage=null)
+        public VoucherRequestViewModel(int orderId,string vouchercode=null,string errorMessage=null)
         {
             ErrorMessage = errorMessage;
             OrderId = orderId;
+            Vouchercode = vouchercode;
         }
     }
 }

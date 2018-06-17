@@ -10,9 +10,7 @@
 </div>
 <div class="row">
     <div class="cell-md-full">
-        <div asp-validation-summary="All"  class="fg-red text-center">
-         
-        </div>
+        <div asp-validation-summary="All" class="fg-red text-center"></div>
     </div>
 </div>
 <div class="row">
@@ -22,7 +20,7 @@
               data-ajax-mode="replace" data-ajax-loading="#spinner">
             <input type="hidden" name="orderId" value="@Model.OrderId" />
             <div class="h-center">
-                <input type="text" required data-role="input" placeholder="Enter voucher code"
+                <input type="text" asp-for="@Model.Vouchercode" required data-role="input" placeholder="Enter voucher code"
                        name="VoucherCode" data-prepend="<span>Voucher:</span>">
                 <button class="button info outline rounded m-2 place-right">Submit Code</button>
             </div>
