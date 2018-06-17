@@ -1,0 +1,5 @@
+﻿@model ProductPageViewModel
+@foreach (var product in Model.Products)
+{
+    Html.RenderPartial("_ProductDetailPartial", product);
+}

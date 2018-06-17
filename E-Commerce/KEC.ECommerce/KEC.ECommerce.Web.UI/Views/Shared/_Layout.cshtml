@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>@ViewData["Title"] | KEC Store</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/owl/css/owl.theme.default.min.css" />
+        <link rel="stylesheet" href="~/lib/owl/css/animate.css" />
+        <link rel="stylesheet" href="~/lib/owl/css/owl.carousel.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/css/divider.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/css/step.min.css" />
+        <link rel="stylesheet" href="~/css/fluid-typography.css" />
+        <link rel="stylesheet" href="~/css/ribbon.css" />
+        <link rel="stylesheet" href="~/css/spinner.css" />
+        <link rel="stylesheet" href="~/lib/metro/css/metro-all.min.css" />
+        <link rel="stylesheet" href="~/lib/simple-pagination/css/simplePagination.css"/>
+        <link rel="stylesheet" href="~/css/tables.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"
+              asp-fallback-href="~/lib/metro/css/metro-all.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/lib/owl/css/owl.theme.default.min.css" />
+        <link rel="stylesheet" href="~/lib/owl/css/animate.css" />
+        <link rel="stylesheet" href="~/lib/owl/css/owl.carousel.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/css/step.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/css/divider.min.css" />
+        <link rel="stylesheet" href="~/css/fluid-typography.css" />
+        <link rel="stylesheet" href="~/css/ribbon.css" />
+        <link rel="stylesheet" href="~/css/spinner.css" />
+        <link rel="stylesheet" href="~/css/tables.css" />
+        <link rel="stylesheet" href="~/lib/simple-pagination/css/simplePagination.css" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    </environment>
+</head>
+<body>
+    <header class="app-bar bg-blue fg-white app-bar-expand-md" data-role="appbar" id="main-appbar">
+        <button type="button" class="hamburger menu-down hidden"><span class="line"></span><span class="line"></span><span class="line"></span></button>
+        <a href="/" class="d-block brand fg-white no-hover"><span class="border bd-white border-radius p-2">KEC STORE</span></a>
+        <ul class="app-bar-menu">
+            <li><a asp-action="Index" asp-controller="Home"><span class="mif-home icon"></span>Home</a></li>
+            <li>@await Component.InvokeAsync("ProductsMenu")</li>
+            <li><a href="#"><span class="mif-info icon"></span>About</a></li>
+            <li id="shoppingcart">@await Component.InvokeAsync("ShoppingCart")</li>
+        </ul>
+        <ul class="app-bar-menu ml-auto">
+            <li><a href="#"><span class="mif-user icon"></span>Login</a></li>
+            <li><a href="#"><span class="mif-pencil icon"></span>Register</a></li>
+        </ul>
+    </header>
+    <div id="wrap">
+        <div class="loading hidden" id="spinner">Loading&#8230;</div>
+        <div id="content" class="container-fluid p-2">
+            <div class="grid">
+                <div class="row">
+                    <div class="cell-md-12 cell-sm-12">
+                        <div class="border bd-gray p-1 m-1">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer" class="bg-blue fg-white">
+            <footer>
+                <p>&copy; 2018 - KEC.ECommerce.Web.UI</p>
+            </footer>
+        </div>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/jquery-3.3.1.min.js"></script>
+        <script src="~/lib/jquery/jquery.unobtrusive-ajax.min.js"></script>
+        <script src="~/lib/jquery/jquery.matchHeight-min.js"></script>
+        <script src="~/lib/metro/js/metro.min.js"></script>
+        <script src="~/lib/simple-pagination/js/jquery.simplePagination.js"></script>
+        <script src="~/lib/owl//js/owl.carousel.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/jquery-3.3.1.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous">
+        </script>
+        <script src="~/lib/jquery/jquery.unobtrusive-ajax.min.js"></script>
+        <script src="~/lib/jquery/jquery.matchHeight-min.js"></script>
+        <script src="~/lib/simple-pagination/js/jquery.simplePagination.js"></script>
+        <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"
+                asp-fallback-src="~/lib/metro/js/metro.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous">
+        </script>
+        <script src="~/lib/owl/js/owl.carousel.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

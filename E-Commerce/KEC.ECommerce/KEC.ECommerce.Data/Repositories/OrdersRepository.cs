@@ -3,11 +3,8 @@ using KEC.ECommerce.Data.Helpers;
 using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.Repositories.Core;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KEC.ECommerce.Data.Repositories
 {
@@ -19,12 +16,12 @@ namespace KEC.ECommerce.Data.Repositories
         {
             _eCommerceContext = context as ECommerceDataContext;
         }
-        public string GetOrderNumber(string prefix = "KECORD#")
+        public string GetNextOrderNumber(string prefix = "KECORD#")
         {
             var orderNumber = string.Empty;
             do
             {
-                orderNumber = OrderNumberGenerator.GetOrderNumber(prefix);
+                orderNumber = RandomCodeGenerator.GetOrderNumber(prefix);
             } while ((Find(p => p.OrderNumber.Equals(orderNumber)).FirstOrDefault() != null));
             return orderNumber;
         }

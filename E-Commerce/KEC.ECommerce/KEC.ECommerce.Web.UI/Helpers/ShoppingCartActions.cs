@@ -95,7 +95,7 @@ namespace KEC.ECommerce.Web.UI.Helpers
             {
                 var order = new Order
                 {
-                    OrderNumber = _uow.OrdersRepository.GetOrderNumber(),
+                    OrderNumber = _uow.OrdersRepository.GetNextOrderNumber(),
                     CustomerGuid = customerGuid,
                     Amount = cartItems.Sum(p => p.Quantity * p.UnitPrice),
                     SubmittedAt = DateTime.Now,

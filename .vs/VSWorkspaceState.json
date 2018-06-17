@@ -1,15 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\E-Commerce\\KEC.ECommerce",
-    "\\E-Commerce\\KEC.ECommerce\\KEC.Ecommerce.Web.UI",
-    "\\E-Commerce\\KEC.ECommerce\\KEC.Ecommerce.Web.UI\\Views",
-    "\\Licensing\\KEC.Curation",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.Data",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.UI",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI",
-    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI\\Views"
+    ""
   ],
   "PreviewInSolutionExplorer": false
 }
