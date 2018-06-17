@@ -434,3 +434,6 @@ C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Vouch
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.dll
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.pdb
 C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.csprojAssemblyReference.cache
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\Microsoft.ApplicationInsights.dll
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\bin\Debug\Microsoft.ApplicationInsights.TraceListener.dll
+C:\Users\LLANOH\source\repos\Kenya Education Cloud\Voucher\KEC.Voucher\KEC.Voucher.Data\obj\Debug\KEC.Voucher.Data.Migrations.Try.resources

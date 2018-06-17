@@ -38,15 +38,15 @@ namespace KEC.Voucher.Web.Api.Controllers
         public HttpResponseMessage Post(TransactionParam transactionParam)
         {
             var voucherCode = transactionParam.VoucherCode;
-            var adminGuid = transactionParam.AdminGuid;
+            var adminEmail = transactionParam.Email;
             var transactionAmount = transactionParam.Amount;
             var transactionDescription = transactionParam.Description;
             var voucher = _uow.VoucherRepository.Find(p => p.VoucherCode.Equals(voucherCode)
                                                       && p.Status.StatusValue==VoucherStatus.Active).FirstOrDefault();
-            var admin = _uow.SchoolAdminRepository.Find(p => p.guid.Equals(adminGuid)).FirstOrDefault();
+            var admin = _uow.SchoolAdminRepository.Find(p => p.guid.Equals(adminEmail)).FirstOrDefault();
             var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, 
                 message: "Invalid voucher number or pin or School admin or transction amount or description");
-            if (voucherCode == null || adminGuid == null || transactionAmount == 0 || transactionDescription == null)
+            if (voucherCode == null || adminEmail == null || transactionAmount == 0 || transactionDescription == null)
             {
                 return requestError;
             }

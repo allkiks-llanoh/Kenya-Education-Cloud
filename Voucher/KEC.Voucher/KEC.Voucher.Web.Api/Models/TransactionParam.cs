@@ -9,7 +9,7 @@ namespace KEC.Voucher.Web.Api.Models
     {
         public string Pin { get; set; }
         public string VoucherCode { get; set; }
-        public string AdminGuid { get; set; }
+        public string Email { get; set; }
         public decimal Amount { get; set; }
         public string  Description { get; set; }
     }

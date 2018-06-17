@@ -24,6 +24,7 @@ namespace KEC.Voucher.Data.UnitOfWork
             StatusRepository = new StatusRepository(_context);
             TransactionRepository = new TransactionRepository(_context);
             VoucherRepository = new VoucherRepository(_context);
+            VoucherPinRepository = new VoucherPinRepository(_context);
             WalletRepository = new WalletRepository(_context);
             FundAllocationRespository = new FundAllocationRespository(_context);
         }

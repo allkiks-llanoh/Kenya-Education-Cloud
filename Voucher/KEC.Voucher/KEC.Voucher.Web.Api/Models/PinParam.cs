@@ -8,6 +8,7 @@ namespace KEC.Voucher.Web.Api.Models
     public class PinParam
     {
         public string VoucherCode { get; set; }
-        public string UserGuid { get; set; }
+        public string Email { get; set; }
+        public decimal Amount { get; set; }
     }
 }

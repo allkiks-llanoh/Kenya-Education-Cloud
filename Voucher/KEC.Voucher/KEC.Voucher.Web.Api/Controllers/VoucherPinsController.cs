@@ -19,19 +19,20 @@ namespace KEC.Voucher.Web.Api.Controllers
         public HttpResponseMessage Post(PinParam pinParam)
         {
             var voucherCode = pinParam.VoucherCode;
-            var userguid = pinParam.UserGuid;
+            var email = pinParam.Email;
+            var voucherAmount = pinParam.Amount;
             var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, message: "Invalid voucher code or user guid");
-            if (voucherCode == null || userguid == null)
+            if (voucherCode == null || email == null || pinParam.Amount.Equals(default(decimal)))
             {
                 return requestError;
             }
             var voucher = _uow.VoucherRepository.Find(p => p.VoucherCode.Equals(voucherCode)
-                            && p.Status.StatusValue==VoucherStatus.Active).FirstOrDefault();
+                            && p.Status.StatusValue==VoucherStatus.Active  && p.Wallet.Balance >= voucherAmount).FirstOrDefault();
             if (voucher == null)
             {
                 return requestError;
             }
-            var schoolAdmin = _uow.SchoolAdminRepository.Find(p => p.guid.Equals(userguid)).FirstOrDefault();
+            var schoolAdmin = _uow.SchoolAdminRepository.Find(p => p.Email.Equals(email)).FirstOrDefault();
             if (voucher.School.SchoolAdmin.Id != schoolAdmin.Id)
             {
                 return requestError;
@@ -52,16 +53,16 @@ namespace KEC.Voucher.Web.Api.Controllers
                 _uow.VoucherPinRepository.Add(pin);
                 _uow.Complete();
                 var smsService = new AfricasTalkingSmsService();
-                if (!schoolAdmin.PhoneNumber.PhoneValid())
-                {
-                   return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Invalid School admin phone number");
-                }
-                smsService.SendSms(schoolAdmin.PhoneNumber, pin.Pin);
+                //if (!schoolAdmin.PhoneNumber.PhoneValid())
+                //{
+                //   return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Invalid School admin phone number");
+                //}
+                smsService.SendSms("0704033581", pin.Pin);
                 return Request.CreateResponse(HttpStatusCode.OK, value: "Sending voucher pin sms");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                ex.ToString();
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message: "Internal server error");
             }
         }

@@ -25,16 +25,18 @@ namespace KEC.Voucher.Data.Repositories
                 var hasAllocation = _voucherDbContext.FundAllocations
                                      .Any(p => p.SchoolId == retrievedSchool.Id
                                      && p.Year == fundAllocation.Year);
-                
+                retrievedSchool.SchoolAdmin = schoolAdmin;
                 if (!hasAllocation)
                 {
                     retrievedSchool.FundAllocations.Add(fundAllocation);
+                    _voucherDbContext.SchoolAdmins.Add(schoolAdmin);
                 }
             }
             else
             {
                 school.FundAllocations.Add(fundAllocation);
                 Add(school);
+                _voucherDbContext.SchoolAdmins.Add(schoolAdmin);
             }
            
         }
