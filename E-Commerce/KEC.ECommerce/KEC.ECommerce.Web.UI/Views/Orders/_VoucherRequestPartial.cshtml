@@ -10,10 +10,8 @@
 </div>
 <div class="row">
     <div class="cell-md-full">
-        <div asp-validation-summary="All" class="fg-red text-center">
-            <ul>
-                <li style="display: none;"></li>
-            </ul>
+        <div asp-validation-summary="All"  class="fg-red text-center">
+         
         </div>
     </div>
 </div>
@@ -21,7 +19,7 @@
     <div class="cell-md-full">
         <form class="h-center inline-form" asp-controller="Orders" asp-action="ProcessVoucher"
               data-ajax="true" data-ajax-update="#payment" data-ajax-method="POST"
-              data-ajax-mode="replace" data-ajax-loading="#Spinner">
+              data-ajax-mode="replace" data-ajax-loading="#spinner">
             <input type="hidden" name="orderId" value="@Model.OrderId" />
             <div class="h-center">
                 <input type="text" required data-role="input" placeholder="Enter voucher code"
@@ -32,4 +30,3 @@
         </form>
     </div>
 </div>
-

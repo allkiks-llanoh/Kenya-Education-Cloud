@@ -3,6 +3,7 @@ using KEC.ECommerce.Web.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using RestSharp;
+using System.Threading.Tasks;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -29,7 +30,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ProcessVoucher(int orderId,string voucherCode)
+        public async Task<IActionResult> ProcessVoucher(int orderId,string voucherCode)
         {
            
             var pinEndPoint = _configuration["VoucherPinEndPoint"];
@@ -39,7 +40,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             var email = HttpContext.User.Identity.Name;
             var pinParam = new { VoucherCode = voucherCode,Amount = amount,Email= email };
             request.AddJsonBody(pinParam);
-            var response = client.Execute(request);
+            var response = await client.ExecuteTaskAsync(request);
             if (response.IsSuccessful)
             {
                 var model = new PinRequestViewModel(orderId, voucherCode);
@@ -47,7 +48,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             }
             else
             {
-                var message = "Your voucher may have insufficient fund or you are not authorized to use it";
+                var message = "Your may have entered an invalid voucher code or the voucher has insufficient fund or you are not authorized to use it";
                 ModelState.AddModelError("", message);
                 var model = new VoucherRequestViewModel(orderId, message);
                 return PartialView("_VoucherRequestPartial", model);
