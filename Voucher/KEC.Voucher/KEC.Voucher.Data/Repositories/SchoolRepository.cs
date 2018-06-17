@@ -1,9 +1,5 @@
 ﻿using KEC.Voucher.Data.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KEC.Voucher.Data.Repositories
 {
@@ -19,6 +15,7 @@ namespace KEC.Voucher.Data.Repositories
         {
             var retrievedSchool = _voucherDbContext.Schools
                                    .FirstOrDefault(p => p.SchoolCode.Equals(school.SchoolCode));
+           
             if (retrievedSchool != null)
             {
 
@@ -30,10 +27,12 @@ namespace KEC.Voucher.Data.Repositories
                 {
                     retrievedSchool.FundAllocations.Add(fundAllocation);
                 }
+                retrievedSchool.SchoolAdmin = schoolAdmin;
             }
             else
             {
                 school.FundAllocations.Add(fundAllocation);
+                school.SchoolAdmin = schoolAdmin;
                 Add(school);
             }
            

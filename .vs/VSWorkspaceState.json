@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\E-Commerce",
-    "\\E-Commerce\\KEC.ECommerce"
+    "\\E-Commerce\\KEC.ECommerce",
+    "\\Voucher",
+    "\\Voucher\\KEC.Voucher"
   ],
-  "SelectedNode": "\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.sln",
+  "SelectedNode": "\\Voucher\\KEC.Voucher\\KEC.Voucher.sln",
   "PreviewInSolutionExplorer": false
 }
