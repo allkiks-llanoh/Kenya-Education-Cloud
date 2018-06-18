@@ -233,7 +233,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             catch (Exception)
             {
                 //TODO: use logged in user number
-                smsService.SendSms("0711861170", "An error occured while processing schools csv");
+                smsService.SendSms("0704033581", "An error occured while processing schools csv");
             }
         }
     }
