@@ -19,7 +19,7 @@ namespace KEC.Publishers.Api.Serializers
         [DisplayName("Completion Date")]
         public DateTime? CompletionDate { get; set; }
         [Required(ErrorMessage = "Please provide brief descriptio (200 words)")]
-        [StringLength(200, ErrorMessage = "A maximum of 200 words is required")]
+        [StringLength(500, ErrorMessage = "A maximum of 200 words is required")]
         public string Description { get; set; }
         [Required(ErrorMessage = "Please specified the publication subject")]
         [DisplayName("Subject")]

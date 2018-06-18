@@ -284,6 +284,27 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bib\i.css" />
+    <Content Include="bib\i.js" />
+    <Content Include="bib\i\extensions\analytics\analytics.js" />
+    <Content Include="bib\i\extensions\epubcfi\epubcfi.js" />
+    <Content Include="bib\i\extensions\fontsize\fontsize.css" />
+    <Content Include="bib\i\extensions\fontsize\fontsize.js" />
+    <Content Include="bib\i\extensions\jatex\jatex.js" />
+    <Content Include="bib\i\extensions\loupe\loupe.css" />
+    <Content Include="bib\i\extensions\loupe\loupe.js" />
+    <Content Include="bib\i\extensions\overreflow\overreflow.js" />
+    <Content Include="bib\i\extensions\share\share.js" />
+    <Content Include="bib\i\extensions\unaccessibilizer\unaccessibilizer.js" />
+    <Content Include="bib\i\extensions\unzipper\unzipper.js" />
+    <Content Include="bib\i\index.html" />
+    <Content Include="bib\i\presets\default.js" />
+    <Content Include="bib\i\res\fonts\MaterialIcons\material-icons.css" />
+    <Content Include="bib\i\res\fonts\MaterialIcons\MaterialIcons-Regular.svg" />
+    <Content Include="bib\i\res\images\bibi-logo_black.png" />
+    <Content Include="bib\i\res\images\bibi-logo_white.png" />
+    <Content Include="bib\i\res\scripts\bibi.js" />
+    <Content Include="bib\i\res\styles\bibi.css" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -527,6 +548,20 @@
     <Content Include="Content\plugins\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
     <Content Include="Connected Services\kecpublicationsAzureStorage\ConnectedService.json" />
+    <Content Include="bib\i\presets\README.md" />
+    <Content Include="bib\i\res\fonts\ElegantIcons\ElegantIcons.ttf" />
+    <Content Include="bib\i\res\fonts\ElegantIcons\ElegantIcons.woff" />
+    <Content Include="bib\i\res\fonts\FontAwesome\fontawesome-webfont.ttf" />
+    <Content Include="bib\i\res\fonts\FontAwesome\fontawesome-webfont.woff" />
+    <Content Include="bib\i\res\fonts\FontAwesome\fontawesome-webfont.woff2" />
+    <Content Include="bib\i\res\fonts\MaterialIcons\MaterialIcons-Regular.eot" />
+    <Content Include="bib\i\res\fonts\MaterialIcons\MaterialIcons-Regular.ijmap" />
+    <Content Include="bib\i\res\fonts\MaterialIcons\MaterialIcons-Regular.ttf" />
+    <Content Include="bib\i\res\fonts\MaterialIcons\MaterialIcons-Regular.woff" />
+    <Content Include="bib\i\res\fonts\MaterialIcons\MaterialIcons-Regular.woff2" />
+    <Content Include="bib\i\res\fonts\MaterialIcons\README.md" />
+    <Content Include="bib\LICENSE" />
+    <Content Include="bib\README.md" />
     <None Include="Content\font-awesome\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Scripts\globalConstants.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -1124,6 +1159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bib\bookshelf\" />
     <Folder Include="Scripts\plugins\NewFolder1\" />
     <Folder Include="Views\GetUsers\" />
     <Folder Include="Views\Groups\" />

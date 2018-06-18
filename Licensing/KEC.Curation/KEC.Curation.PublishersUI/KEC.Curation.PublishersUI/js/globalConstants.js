@@ -1,4 +1,4 @@
-﻿const apiBaseUrl = "https://publishervm.kec.ac.ke/api";
+﻿const apiBaseUrls = "https://publishervm.kec.ac.ke/api";
 var currentUserGuid;
 $(document).ready(function () {
 

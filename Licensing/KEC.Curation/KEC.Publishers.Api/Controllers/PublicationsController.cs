@@ -50,12 +50,37 @@ namespace KEC.Publishers.Api.Controllers
             {
                 return BadRequest(modelState: ModelState);
             }
-            var invaliExtension = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".exe");
+            var invaliExtensionEXE = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".exe");
+            var invaliExtensionDOCX = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".docx");
+            var invaliExtensionPDF = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".pdf");
+            var invaliExtensionDOC = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".doc");
+            var invaliExtensionMOBI = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".mobi");
+            var invaliExtensionRAR = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".rar");
             var htmlFile = Path.GetExtension(model.PublicationFile.FileName).ToLower().Equals(".zip");
 
-            if (invaliExtension == true)
+            if (invaliExtensionEXE == true)
             {
-                ModelState.AddModelError("File", ".EXE File Extensions are not Permited");
+               return BadRequest("Invalid Extension");
+            }
+            if (invaliExtensionDOCX== true)
+            {
+                return BadRequest("Invalid Extension");
+            }
+            if (invaliExtensionDOC == true)
+            {
+                return BadRequest("Invalid Extension");
+            }
+            if (invaliExtensionPDF == true)
+            {
+                return BadRequest("Invalid Extension");
+            }
+            if (invaliExtensionMOBI == true)
+            {
+                return BadRequest("Invalid Extension");
+            }
+            if (invaliExtensionRAR == true)
+            {
+                return BadRequest("Invalid Extension");
             }
             #endregion
             #region Blobs Connection 
