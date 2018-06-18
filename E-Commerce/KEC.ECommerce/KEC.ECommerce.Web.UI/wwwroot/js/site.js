@@ -1,5 +1,5 @@
 ﻿/////////////////////////////////Public Functions and variables /////////////////////////////////////////////////////
-var notify = function feedbackInfo(message, msgClass,title) {
+var notify = function feedbackInfo(message, msgClass, title) {
     let notify = Metro.notify;
     notify.setup({
         duration: 2000,
@@ -8,12 +8,27 @@ var notify = function feedbackInfo(message, msgClass,title) {
     notify.create(message, title, { cls: msgClass });
     notify.reset();
 }
+var showValidationErrorInfoBox = function (data) {
+    var elements = $.parseHTML(data);
+    var found = $('.validation-summary-errors', $(elements))
+    if (found !== null && found.children().length > 0) {
+        Metro.infobox.create(found, "alert");
 
-var notifySuccess = function () {
-    notify("Item(s) added to cart successfully", "success","Cart");
+    }
+}
+var notifySuccess = function (data) {
+    var elements = $.parseHTML(data);
+    var found = $('.validation-summary-errors', $(elements));
+    if (found !== null && found.children().length > 0) {
+        Metro.infobox.create(found, "alert");
+
+    } else{
+        notify("Item(s) added to cart successfully", "success", "Cart");
+    }
+    
 }
 var notifyFail = function () {
-    notify("Item(s) could not be added to cart", "alert","Cart");
+    notify("Item(s) could not be added to cart", "alert", "Cart");
 }
 
 function getAllUrlParams(url) {

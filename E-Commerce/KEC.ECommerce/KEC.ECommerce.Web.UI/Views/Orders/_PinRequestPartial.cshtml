@@ -8,7 +8,15 @@
 </div>
 <div class="row">
     <div class="cell-md-full">
+        @{
+            Html.RenderPartial("_ValidationErrorPartial");
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="cell-md-full">
         <form class="h-center inline-form" asp-controller="Order" asp-action="ProcessPin">
+            @Html.AntiForgeryToken()
             <div class="h-center">
                 <input type="text" required data-role="input" placeholder="Enter voucher pin"
                        name="VoucherPin" asp-for="@Model.VoucherPin" data-prepend="<span>Pin:</span>">

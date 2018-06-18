@@ -11,10 +11,10 @@ namespace KEC.ECommerce.Web.UI.Models
 
         public string Vouchercode { get; private set; }
 
-        public string ErrorMessage { get; private set; }
-        public VoucherRequestViewModel(int orderId,string vouchercode=null,string errorMessage=null)
+      
+        public VoucherRequestViewModel(int orderId,string vouchercode=null)
         {
-            ErrorMessage = errorMessage;
+           
             OrderId = orderId;
             Vouchercode = vouchercode;
         }

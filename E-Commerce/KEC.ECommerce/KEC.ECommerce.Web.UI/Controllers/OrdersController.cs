@@ -50,7 +50,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             {
                 var message = "Your may have entered an invalid voucher code or the voucher has insufficient fund or you are not authorized to use it";
                 ModelState.AddModelError("", message);
-                var model = new VoucherRequestViewModel(orderId, voucherCode, message);
+                var model = new VoucherRequestViewModel(orderId, voucherCode);
                 return PartialView("_VoucherRequestPartial", model);
             }
           
