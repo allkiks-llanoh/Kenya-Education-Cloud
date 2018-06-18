@@ -21,7 +21,7 @@
                 <td class="cart">
                     <form class="inline-form" asp-controller="Shopping" asp-action="RemoveFromCart" asp-route-productId="@cartItem.ProductId"
                           data-ajax="true" data-ajax-update="#mycart" data-ajax-method="DELETE" data-ajax-mode="replace"
-                          data-ajax-loading="#Spinner">
+                          data-ajax-loading="#spinner">
                         @Html.AntiForgeryToken()
                         <button class="button alert outline rounded m-1 size-small"><span class="mif-bin"></span></button>
                     </form>

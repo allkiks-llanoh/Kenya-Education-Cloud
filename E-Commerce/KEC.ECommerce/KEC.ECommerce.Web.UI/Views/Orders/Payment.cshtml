@@ -50,27 +50,10 @@
                 }
             </div>
         </div>
-        <div class="row">
-            <div class="cell-md-full">
-                <div class="ui horizontal divider">
-                    <p class="text-center text-bold text-upper fg-orange"><span class="mif-note"></span>Voucher Payment</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="cell-md-full" id="payment">
-                <form class="h-center inline-form" asp-controller="Orders" asp-action="ProcessVoucher" 
-                      data-ajax="true" data-ajax-update="#payment" data-ajax-method="POST" 
-                      data-ajax-mode="replace" data-ajax-loading="#Spinner">
-                    <input type="hidden" name="orderId" value="@Model.Id"/>
-                    <div class="h-center">
-                        <input type="text" required  data-role="input" placeholder="Enter voucher code"
-                          name="VoucherCode"     data-prepend="<span>Voucher:</span>">
-                        <button class="button info outline rounded m-2 place-right">Submit Code</button>
-                    </div>
-
-                </form>
-            </div>
+        <div id="payment">
+            @{
+                Html.RenderPartial("_VoucherRequestPartial", new VoucherRequestViewModel(Model.Id));
+            }
         </div>
     </div>
 </div>
