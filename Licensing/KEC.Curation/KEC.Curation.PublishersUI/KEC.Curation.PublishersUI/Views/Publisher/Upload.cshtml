@@ -4,12 +4,21 @@
     ViewBag.Title = "Upload Content";
 
 }
+<style>
+    #progress p.success {
+        background: #0c0 none 0 0 no-repeat;
+    }
 
-
-    <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
-   
-
+    #progress p.failed {
+        background: #c00 none 0 0 no-repeat;
+    }
+</style>
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+
 <div class="wrapper wrapper-content animated fadeInRight" style="margin-top:-40px;">
     <div class="row">
         <div class="col-lg-12">
@@ -149,38 +158,41 @@
                     </div>
 
                     <div>
-                            <button data-toggle="modal" data-target="#confirm" style="background-color:#00af57;" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>
-                        </div>
-                        <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title">Confirm Submission</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p id="messagem">
-                                            Are you sure you want to submit this publication?
-                                        </p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                                        <button type="submit" id="btn-postFile" class="btn btn-primary">Yes</button>
-                                    </div>
+                        <button data-toggle="modal" data-target="#confirm" style="background-color:#00af57;" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>
+                    </div>
+                    <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">Confirm Submission</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p id="messagem">
+                                        Are you sure you want to submit this publication?
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                    <button type="submit" id="btn-postFile" class="btn btn-primary">Yes</button>
+                                    <br /><br />
+                                    @*<div class="progress">
+                                        <div class="progress-bar-warning">0%</div>
+                                    </div>*@
+
+                                    <div id="status" style="font-weight:bold; color:red;"></div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </form>
 
             </div>
         </div>
     </div>
 </div>
-<script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
 
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="~/Scripts/plugins/notify/notify.min.js"></script>
+
 <script type="text/JavaScript">
     //get a reference to the select element
     $subjectId = $('#SubjectId');
@@ -259,6 +271,9 @@
         e.preventDefault();
 
         $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+        var bar = $('.progress-bar-warning');
+        var percent = $('.progress-bar-warning');
+        var status = $('#status');
         var form_data = new FormData($('#uploadform')[0]);
 
         $.ajax({
@@ -269,8 +284,22 @@
             crossDomain: true,
             cache: false,
             data: form_data,
+            beforeSend: function () {
+                status.empty();
+                status.html("Please Wait While We Upload Your File(s)");
+                let percentValue = '0%';
+                bar.width(percentValue);
+                percent.html(percentValue);
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+                let percentValue = percentComplete + '%';
+                bar.width(percentValue);
+                percent.html(percentValue);
+            },
             success: function (response, status, jxhr) {
-               
+                let percentValue = '100%';
+                bar.width(percentValue);
+                percent.html(percentValue);
                 $('#div-danger').toggle('hidden');
                 $('#btn-postFile').html('Yes');
                 $('#confirm').modal('hide');
@@ -281,6 +310,9 @@
                     window.location.reload(1);
                 }, 5000);
             },
+            complete: function (xhr) {
+                status.html("Complete");
+            },
             error: function (response, status, jxhr) {
 
                 $('#btn-postFile').html('Yes');
@@ -288,8 +320,9 @@
                 $('.modal-backdrop').remove();
                 $('#error').html("Please Fill All Fields")
                 $('div.alert-danger').toggleClass('hidden');
-                
+
             }
+
         });
     });
 </script>
