@@ -166,9 +166,10 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
                                         <button type="submit" id="btn-postFile" class="btn btn-primary">Yes</button>
-                                   <br /><br />
+                                    <br><br>
                                         <div id="status"></div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -275,7 +276,7 @@
             data: form_data,
             beforeSend: function () {
                 status.empty();
-                status.html("Please Wait While We Upload Your File(s)");
+                status.html("Please Wait While We Upload Your File");
                 let percentValue = '0%';
                 bar.width(percentValue);
                 percent.html(percentValue);
