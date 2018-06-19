@@ -5,7 +5,7 @@ $(document).ready(function(){
     var years = dd.getFullYear();
    var Count= $('#batch');
         $.ajax({
-        url: `http://localhost:60823/api/batches/${years}/withpendingvouchers/count`,
+        url: `https://voucherapi.kec.ac.ke/api/batches/${years}/withpendingvouchers/count`,
         type: "GET",
     
         dataType: "json",    
@@ -24,7 +24,7 @@ $(document).ready(function(){
  
    var Count= $('#voucher');
         $.ajax({
-        url:` http://localhost:60823/api/schools/approvedvouchers/${year}`,
+        url:` https://voucherapi.kec.ac.ke/api/schools/approvedvouchers/${year}`,
         type: "GET",
         dataType: "json",    
         success: function(data,status,jqhxr) {

@@ -60,7 +60,7 @@
                     'Accept' : 'application/json',
                     'Content-Type' : 'application/json'
                 } ,
-            url: "http://localhost:60823/api/vouchers/approve",
+            url: "https://voucherapi.kec.ac.ke/api/vouchers/approve",
             type: "PATCH",
             data: ajaxData() ,
             success: function(data,status,jxhr) {
@@ -82,7 +82,7 @@
         
             var BatchId  = $('#BatchId').val();
                 $.ajax({
-                url: "http://localhost:60823/api/Batches",
+                url: "https://voucherapi.kec.ac.ke/api/Batches",
                 type: "GET",
                 dataType: "json",    
                 success: function(data) {
@@ -121,7 +121,7 @@
                         'Accept' : 'application/json',
                         'Content-Type' : 'application/json'
                     } ,
-                url: "http://localhost:60823/api/Vouchers/selected/reject",
+                url: "https://voucherapi.kec.ac.ke/api/Vouchers/selected/reject",
                 type: "PATCH",
                 data: ajaxData() ,
                 success: function(data,status,jxhr) {

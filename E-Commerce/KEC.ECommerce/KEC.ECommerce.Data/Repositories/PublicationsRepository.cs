@@ -51,5 +51,26 @@ namespace KEC.ECommerce.Data.Repositories
                                                .FirstOrDefault(p => p.Id.Equals(publicationId));
             return publication;
         }
+        public IQueryable<Publication> QueryablePublications(int categoryId,string searchTerm)
+        {
+            var publications = default(IQueryable<Publication>);
+            if (searchTerm == null)
+            {
+                 publications = _ecommerceContext.Publications.Where(p => p.CategoryId.Equals(categoryId));
+            }
+            else
+            {
+                publications = _ecommerceContext.Publications.Where(p => p.CategoryId.Equals(categoryId)
+                                                                    && (p.Description.Contains(searchTerm)
+                                                                    || p.Level.Name.Contains(searchTerm))
+                                                                    || p.Title.Contains(searchTerm) ||
+                                                                    p.Subject.Name.Contains(searchTerm) ||
+                                                                    p.Publisher.Company.Contains(searchTerm) ||
+                                                                    p.Author.FirstName.Contains(searchTerm) || 
+                                                                    p.Author.LastName.Contains(searchTerm)); 
+            }
+          
+            return publications;
+        }
     }
 }
