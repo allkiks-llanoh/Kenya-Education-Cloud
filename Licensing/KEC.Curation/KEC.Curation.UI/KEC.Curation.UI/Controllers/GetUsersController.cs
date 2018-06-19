@@ -14,12 +14,11 @@ namespace Authentication_Test.Controllers
     {
         private readonly ApplicationDbContext  context = new ApplicationDbContext();
         // GET: GetUsers
-        public ActionResult GetChiefCurators(int subjectId)
+        public ActionResult GetChiefCurators()
         {
             var role = "6c5175a7-372f-4cfe-a559-f862651813b2";
 
-            var user = context.Users.Where(p => p.Roles.Any(s=>s.RoleId.Equals(role))
-                       && p.SubjectId.Equals(subjectId)).ToList();
+            var user = context.Users.Where(p => p.Roles.Any(s=>s.RoleId.Equals(role))).ToList();
          
             return Json(new SelectList(user, "FullName", "Id"));
         }
