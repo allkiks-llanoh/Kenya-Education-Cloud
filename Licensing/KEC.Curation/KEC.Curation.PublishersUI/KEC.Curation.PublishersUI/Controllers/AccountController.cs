@@ -87,8 +87,8 @@ namespace KEC.Curation.PublishersUI.Controllers
             {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
-                    ViewBag.errorMessage = "You must have a confirmed email to log on.";
-                    return View("Error");
+                    ViewBag.errorMessage = "You Must Confirm Email Before Loging In, Please check your email";
+                    return View("ErrorLogin");
                 }
             }
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -181,8 +181,7 @@ namespace KEC.Curation.PublishersUI.Controllers
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\""
-               + callbackUrl + "\">here</a>");
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking or copy and paste this link to your browser:" + callbackUrl );
 
                     return RedirectToAction("ConfirmRegitration", "Account");
                 }
@@ -422,9 +421,8 @@ namespace KEC.Curation.PublishersUI.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Login", "Account");
+            return Redirect("https://kec.ac.ke");
         }
-
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
