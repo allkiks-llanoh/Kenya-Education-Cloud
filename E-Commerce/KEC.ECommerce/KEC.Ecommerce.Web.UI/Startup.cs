@@ -1,5 +1,6 @@
 ﻿using KEC.ECommerce.Data.UnitOfWork;
 using KEC.ECommerce.Data.UnitOfWork.Core;
+using KEC.ECommerce.Web.UI.Pagination;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,9 +10,12 @@ namespace KEC.ECommerce.Web.UI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                 .SetBasePath(env.ContentRootPath)
+                 .AddJsonFile("appsettings.json");
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -22,6 +26,8 @@ namespace KEC.ECommerce.Web.UI
             services.AddMvc()
                 .AddSessionStateTempDataProvider();
             services.AddSession();
+            services.AddTransient(typeof(IPageHelper<>), typeof(PageHelper<>));
+            services.AddSingleton<IPageConfig, PageConfig>();
             services.AddTransient<IUnitOfWork>(m => new EFUnitOfWork());
         }
 

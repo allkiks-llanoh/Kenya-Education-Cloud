@@ -41,6 +41,8 @@ namespace KEC.ECommerce.Data.UnitOfWork
 
         public LicencesRepository LicencesRepository => new LicencesRepository(_context);
 
+        public PaymentsRepository PaymentsRepository => new PaymentsRepository(_context);
+
         public int Complete()
         {
             return _context.SaveChanges();

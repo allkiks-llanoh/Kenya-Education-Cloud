@@ -1,0 +1,31 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<img src="~/Content/images/KEClogo.png" style="width:200px;" />
+<h2 class="text-danger">Error On Account Validation.</h2>
+@{
+    if (String.IsNullOrEmpty(ViewBag.errorMessage))
+    {
+
+        <p>
+            <h3 class="text-danger">You Must Confirm Email Before Loging In, Please check your email</h3>
+        </p>
+       
+    }
+    else
+    {
+        <h2 class="text-danger">@ViewBag.errorMessage</h2>
+    }
+    <div style="margin-left:50px;">
+
+        <p>
+            @Html.ActionLink("Click Here to login", "Login")
+            <hr />
+            &copy;Kenya Education Cloud 2018
+        </p>
+    </div>
+}

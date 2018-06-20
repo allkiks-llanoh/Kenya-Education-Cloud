@@ -1,5 +1,7 @@
-﻿using KEC.ECommerce.Data.UnitOfWork.Core;
+﻿using KEC.ECommerce.Data.Models;
+using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Models;
+using KEC.ECommerce.Web.UI.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +11,35 @@ namespace KEC.ECommerce.Web.UI.Controllers
     public class StoreController : Controller
     {
         private readonly IUnitOfWork _uow;
+        private readonly IPageHelper<Publication> _paginationHelper;
 
-        public StoreController(IUnitOfWork uow)
+        public StoreController(IUnitOfWork uow, IPageHelper<Publication> pageHelper)
         {
             _uow = uow;
+            _paginationHelper = pageHelper;
         }
-        public IActionResult Publications(int categoryId)
+        public IActionResult Publications(int categoryId, int pageNumber=1,string searchTerm=null)
         {
-            ViewBag.Category = _uow.CategoriesRepository.Get(categoryId)?.Name;
-            var publications = _uow.PublicationsRepository.Find(p => p.CategoryId.Equals(categoryId));
-            var publicationList = publications.Any() ? 
-                publications.Select(p => new ProductViewModel(_uow, p)).ToList() : new List<ProductViewModel>();
-            return View(publicationList);
+            var category = _uow.CategoriesRepository.Get(categoryId);
+            ViewBag.Category = category?.Name;
+            ViewBag.CategoryId = category?.Id;
+            var query = _uow.PublicationsRepository.QueryablePublications(categoryId,searchTerm?.ToLower());
+            var result = _paginationHelper.GetPage(query, pageNumber);
+            var model = new ProductPageViewModel
+            {
+                Products = result.Items?.Select(p => new ProductViewModel(_uow, p)),
+                Pager = result.Pager
+            };
+            if (searchTerm!=null)
+            {
+                return PartialView("_PublicationListPartial", model);
+            }
+            else
+            {
+                return View(model);
+            }
+           
+
         }
     }
 }

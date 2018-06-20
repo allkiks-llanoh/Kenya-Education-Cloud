@@ -81,7 +81,16 @@ namespace KEC.Curation.PublishersUI.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
+            // Require the user to have a confirmed email before they can log on.
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user != null)
+            {
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                {
+                    ViewBag.errorMessage = "You Must Confirm Email Before Loging In, Please check your email";
+                    return View("ErrorLogin");
+                }
+            }
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
@@ -172,7 +181,8 @@ namespace KEC.Curation.PublishersUI.Controllers
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking " + callbackUrl +" ");
+                    var htmlBody = HttpUtility.HtmlEncode( @" " + callbackUrl);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", htmlBody);
 
                     return RedirectToAction("ConfirmRegitration", "Account");
                 }
@@ -412,9 +422,8 @@ namespace KEC.Curation.PublishersUI.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Login", "Account");
+            return Redirect("https://kec.ac.ke");
         }
-
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]

@@ -88,73 +88,6 @@ namespace KEC.Voucher.Web.Api.Controllers
         [HttpPost, Route("")]
         public HttpResponseMessage SchoolsUpload()
         {
-            //var httpRequest = HttpContext.Current.Request;
-            //if (httpRequest.Files.Count <= 0)
-            //{
-            //    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Please upload your csv file");
-            //}
-            //if (httpRequest.Files.Count < 1)
-            //{
-            //    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Multiple file upload is not supported");
-            //}
-            //var postedFile = httpRequest.Files[0];
-            //if (!postedFile.FileName.EndsWith(".csv"))
-            //{
-            //    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, new Exception("The file format is not supported"));
-            //}
-            //try
-            //{
-            //    StreamReader streamReader = new StreamReader(postedFile.InputStream);
-            //    using (CsvReader csvReader = new CsvReader(streamReader, false))
-            //    {
-            //        csvReader.Read();
-            //        csvReader.ReadHeader();
-            //        while (csvReader.Read())
-            //        {
-            //            var schoolType = csvReader.GetField<string>("SchoolType");
-            //            var schoolTypeId = _uow.SchoolTypeRepository
-            //                .Find(p => p.SchoolType.Equals(schoolType))
-            //                .FirstOrDefault()?.Id;
-            //            var county = csvReader.GetField<string>("County");
-            //            var countyId = _uow.CountyRepository
-            //                .Find(p => p.CountyName.Equals(county))
-            //                .FirstOrDefault()?.Id;
-            //            var school = new DbSchool
-            //            {
-            //                SchoolName = csvReader.GetField<string>("SchoolName"),
-            //                SchoolCode = csvReader.GetField<string>("SchoolCode"),
-            //                SchoolTypeId = schoolTypeId.GetValueOrDefault(),
-            //                CountyId = countyId.GetValueOrDefault(),
-            //                DateCreated = DateTime.Now,
-            //                DateChanged = DateTime.Now,
-
-            //            };
-            //            var fundAllocation = new DbFundAllocation
-            //            {
-            //                Amount = csvReader.GetField<Decimal>("Amount"),
-            //                Year = csvReader.GetField<int>("Year")
-            //            };
-            //            var schoolAdmin = new DbSchoolAdmin
-            //            {
-            //                FirstName = csvReader.GetField<string>("FirstName"),
-            //                LastName = csvReader.GetField<string>("LastName"),
-            //                Email = csvReader.GetField<string>("Email"),
-            //                PhoneNumber = csvReader.GetField<string>("PhoneNumber")
-
-            //            };
-            //            _uow.SchoolRepository.AddFromCSV(school, fundAllocation, schoolAdmin);
-
-            //        }
-            //        _uow.Complete();
-            //        return Request.CreateResponse(HttpStatusCode.OK);
-
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    ex.ToString();
-            //    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
-            //}
 
             var httpRequest = HttpContext.Current.Request;
             if (httpRequest.Files.Count <= 0)
@@ -218,7 +151,8 @@ namespace KEC.Voucher.Web.Api.Controllers
                                 Email = csvReader.GetField<string>("Email"),
                                 PhoneNumber = csvReader.GetField<string>("PhoneNumber")
                             };
-                            _uow.SchoolRepository.AddFromCSV(school, fundAllocation, schoolAdmin);
+                            schoolAdmin = _uow.SchoolAdminRepository.AddFromCSV(schoolAdmin);
+                            _uow.SchoolRepository.AddFromCSV(school, fundAllocation,schoolAdmin);
 
                         }
                         _uow.Complete();
@@ -233,7 +167,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             catch (Exception)
             {
                 //TODO: use logged in user number
-                smsService.SendSms("0704033581", "An error occured while processing schools csv");
+                smsService.SendSms("0711861170", "An error occured while processing schools csv");
             }
         }
     }

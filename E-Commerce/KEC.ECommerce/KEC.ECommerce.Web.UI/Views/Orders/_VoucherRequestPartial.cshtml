@@ -1,0 +1,33 @@
+﻿@model VoucherRequestViewModel
+
+
+<div class="row">
+    <div class="cell-md-full">
+        <div class="ui horizontal divider">
+            <p class="text-center text-bold text-upper fg-orange"><span class="mif-note"></span>Voucher Payment</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="cell-md-full">
+        @{
+            Html.RenderPartial("_ValidationErrorPartial");
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="cell-md-full">
+        <form class="h-center inline-form" asp-controller="Orders" asp-action="ProcessVoucher"
+              data-ajax="true" data-ajax-update="#payment" data-ajax-method="POST" data-ajax-success="showValidationErrorInfoBox"
+              data-ajax-mode="replace" data-ajax-loading="#spinner">
+            @Html.AntiForgeryToken();
+            <input type="hidden" name="orderId" value="@Model.OrderId" />
+            <div class="h-center">
+                <input type="text" asp-for="@Model.Vouchercode" required data-role="input" placeholder="Enter voucher code"
+                       name="VoucherCode" data-prepend="<span>Voucher:</span>">
+                <button class="button info outline rounded m-2 place-right">Submit Code</button>
+            </div>
+
+        </form>
+    </div>
+</div>

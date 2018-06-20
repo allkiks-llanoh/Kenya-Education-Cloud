@@ -3,7 +3,7 @@
 $select = $('#UserGuid');
 let baseUrl = "https://curation.kec.ac.ke/GetUsers/GetChiefCurators"
 let PrincipalCuratorsubjectId = $('#SubjectId').val();
-let url = baseUrl.concat(`?subjectId=${PrincipalCuratorsubjectId}`)
+let url = baseUrl
 //request the JSON data and parse into the select element
 $.ajax({
     headers : {

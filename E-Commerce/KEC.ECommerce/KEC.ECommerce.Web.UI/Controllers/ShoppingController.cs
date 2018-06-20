@@ -24,7 +24,17 @@ namespace KEC.ECommerce.Web.UI.Controllers
         public async Task<IActionResult> AddToCart(int productId, int quantity)
         {
             var cartActions = new ShoppingCartActions(_uow, HttpContext);
-            await cartActions.AddItem(productId, quantity);
+            var productQty = _uow.PublicationsRepository.Get(productId)?.Quantity;
+            var errorMessage = default(string);
+            if (productQty>= quantity)
+            {
+                await cartActions.AddItem(productId, quantity);
+            }
+            else
+            {
+                ModelState.AddModelError("", $"only {productQty} piece(s) remaining");
+            }
+          
             return CreateView(cartActions, "_ShoppingCartPartial");
         }
         public IActionResult Cart()
@@ -33,9 +43,13 @@ namespace KEC.ECommerce.Web.UI.Controllers
             var model = new ShoppingCartViewModel(_uow, cartActions.ShoppingCart, true);
             return View(model);
         }
-        private IActionResult CreateView(ShoppingCartActions cartActions, string view, bool includeItems = false)
+        private IActionResult CreateView(ShoppingCartActions cartActions, string view, bool includeItems = false,string errorMessage=null)
         {
             var model = new ShoppingCartViewModel(_uow, cartActions.ShoppingCart, includeItems);
+            if (errorMessage != null)
+            {
+                ModelState.AddModelError("",errorMessage);
+            }
             return PartialView(view, model);
         }
 
