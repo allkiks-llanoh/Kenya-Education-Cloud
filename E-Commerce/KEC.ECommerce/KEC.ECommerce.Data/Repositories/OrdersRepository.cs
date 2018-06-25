@@ -5,6 +5,7 @@ using KEC.ECommerce.Data.Repositories.Core;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace KEC.ECommerce.Data.Repositories
 {
@@ -50,6 +51,12 @@ namespace KEC.ECommerce.Data.Repositories
                                              .Sum(p => p.Quantity * p.UnitPrice);
 
             return totalCost;
+        }
+        public async Task<Order> GetOrderByUser(int orderId, string userMail,OrderStatus status)
+        {
+            var order =await  _eCommerceContext.Orders.FirstOrDefaultAsync(p => p.CustomerEmail.Equals(userMail) 
+                                 && p.Id.Equals(orderId) && p.Status == status);
+            return order;
         }
     }
 }

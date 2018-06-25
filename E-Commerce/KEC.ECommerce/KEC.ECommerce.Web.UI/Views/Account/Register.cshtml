@@ -1,0 +1,49 @@
+﻿@model RegisterViewModel;
+@{
+    ViewData["Title"] = "Register Account";
+}
+<div class="grid">
+    <div class="row">
+        <div class="cell-md-6 h-center">
+            <form role="form" class="p-2 border bd-blue" asp-action="Register"
+                  asp-controller="Account" asp-antiforgery="true">
+                <div class="ui horizontal divider">
+                    <p class="text-center text-bold text-upper fg-orange">User Registration</p>
+                </div>
+                @{
+                    Html.RenderPartial("_ValidationErrorPartial");
+                }
+                <div class="form-group">
+                    <label asp-for="FirstName"></label>
+                    <input type="text" required asp-for="FirstName" data-role="input" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName"></label>
+                    <input type="text" required asp-for="LastName" data-role="input" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmailAddress"></label>
+                    <input type="email" required asp-for="EmailAddress" data-role="input" class="text-lower" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="SchoolCode"></label>
+                    <input type="text" asp-for="SchoolCode" data-role="input" class="text-upper" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input type="password" required asp-for="Password" data-role="input" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword"></label>
+                    <input type="password" required asp-for="ConfirmPassword" data-role="input" />
+                </div>
+                <div class="clear mt-2">
+                    <button class="button success outline rounded place-left">Register</button>
+                    <a role="button" asp-controller="Home" asp-action="Index" class="button alert outline rounded place-right">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -245,6 +245,8 @@
     <Content Include="Content\assets\js\util.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cert\cert.jpg" />
+    <Content Include="Content\cert\logo.png" />
     <Content Include="Content\email.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
@@ -529,6 +531,7 @@
     <Content Include="Content\font-awesome\scss\_variables.scss" />
     <Content Include="Content\font-awesome\scss\font-awesome.scss" />
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Publisher\Certificate.cshtml" />
     <None Include="Properties\PublishProfiles\publishers-dev - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dialog.css" />
@@ -964,8 +967,7 @@
     <Content Include="Views\Account\ConfirmRegitration.cshtml" />
     <Content Include="Views\Account\TermsAndConditions.cshtml" />
     <Content Include="Views\Account\UserNotFound.cshtml" />
-    <Content Include="Views\Shared\ErrorLogin.cshtml" />
-    <Content Include="Views\Shared\ErrorLogOff.cshtml" />
+    <Content Include="Views\Shared\_LayoutCert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

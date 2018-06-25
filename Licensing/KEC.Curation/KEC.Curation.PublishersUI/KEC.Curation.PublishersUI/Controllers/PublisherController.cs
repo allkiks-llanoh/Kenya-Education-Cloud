@@ -57,6 +57,25 @@ namespace KEC.Curation.PublishersUI.Controllers
             }
           
         }
+        public ActionResult Certificate()
+        {
+            ViewData["SubTitle"] = "Publishers Certificte";
+            ViewData["Message"] = "Certificate";
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+                return View(publisher);
+            }
+
+        }
         public ActionResult Conditional()
         {
             ViewData["SubTitle"] = "Publishers Portal";

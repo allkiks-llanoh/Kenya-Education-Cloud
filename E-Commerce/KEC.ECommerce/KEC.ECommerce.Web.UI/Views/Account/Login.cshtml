@@ -1,0 +1,37 @@
+﻿@model LoginViewModel;
+@{
+    ViewData["Title"] = "Login";
+}
+<div class="grid">
+    
+    <div class="row">
+        <div class="cell-md-4 h-center v-center">
+            <form role="form" class="p-2 border bd-blue" asp-action="Login"
+                  asp-controller="Account" asp-antiforgery="true">
+                <div class="ui horizontal divider">
+                    <p class="text-center text-bold text-upper fg-orange">Welcome back</p>
+                </div>
+                @{
+                    Html.RenderPartial("_ValidationErrorPartial");
+                }
+                <div class="form-group">
+                    <label asp-for="EmailAddress"></label>
+                    <input type="email" required asp-for="EmailAddress" data-role="input" class="text-lower" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input type="password" required asp-for="Password" data-role="input" />
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" asp-for="RememberMe" data-role="checkbox" data-caption="Remember me">
+                </div>
+                <div class="clear mt-2">
+                    <button class="button success outline rounded place-left">Login</button>
+                    <a role="button" asp-controller="Home" asp-action="Index" class="button alert outline rounded place-right">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

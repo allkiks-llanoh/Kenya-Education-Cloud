@@ -1,0 +1,237 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
+<link href="~/Content/footable/footable.core.css" rel="stylesheet" />
+<div id="wrapper">
+    <br>
+    <div class="row">
+        <div class="col-lg-4">
+            <a href="#">
+                <div class="widget style1 navy-bg">
+                    <div class="row">
+
+                        <div class="col-xs-12 text-right">
+                            <span style="font-size:20px;"> Batches Available</span>
+                            <h2 id="batch">Loading...</h2><br><br>
+
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-4">
+            <a href="#">
+                <div class="widget style1 lazur-bg">
+                    <div class="row">
+
+                        <div class="col-xs-12 text-right">
+                            <span style="font-size:20px;"> Vouchers Approved in KEC </span>
+                            <h2 id="voucher">Loading...</h2><br><br>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-4">
+            <a href="#">
+                <div class="widget style1 yellow-bg">
+                    <div class="row">
+
+                        <div class="col-xs-12 text-right">
+                            <span style="font-size:20px;"> Batches with Missing Vouchers </span>
+                            <h2 id="vouchers">
+                                <button class="btn btn-info" onclick="show()" style="font-size: 14px;">View List</button>
+                            </h2>
+
+
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        <div class="col-lg-12" id="list">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="row" class="form-group">
+                        <div col-md-6>
+                            <h5 style="margin-left: 25px; margin-top:10px;">List Of Batches Available for Voucher Creation</h5>
+                        </div>
+                        <div col-md-6>
+                            <a href="@Url.Action("CreateVoucher", "Voucher")" style="float:right; margin-right:20px;" class="btn btn-primary">
+                                <span>CREATE THESE VOUCHERS</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+
+
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="alert alert-success hidden">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p id="message"></p>
+                    </div>
+                    <div class="alert alert-danger hidden">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p id="error"></p>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="createdbatches" style="text-align:left;" class="footable table table-stripped toggle-arrow-tiny">
+                            <tr>
+                                <th class="hidden"> ID </th>
+                                <th> BATCH NUMBER </th>
+                                <th> COUNTY NAME </th>
+                                <th> COUNTY CODE</th>
+
+                            <tr>
+                            <tfoot>
+                                <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer" style="">
+            <strong>Copyright</strong> KEC  &copy; 2018
+        </div>
+
+    </div>
+    <script type="text/JavaScript">
+        function tableRows(data) {
+            var tableRows = [];
+            for (var i = 0; i < data.length; i++) {
+                tableRows.push(drawRow(data[i]));
+            }
+            return tableRows;
+        };
+        //Start by getting voucher list based on batch Id
+        var year = (new Date()).getFullYear();
+
+        $.ajax({
+
+            url: `https://voucherapi.kec.ac.ke/api/batches/${year}/withpendingvouchers`,
+            type: "GET",
+            dataType: "json",
+            success: function (data, status, jqhxr) {
+                console.log(data);
+
+                //This code snipet prepares to append Json Data
+                $('#createdbatches').append(tableRows(data));
+                console.log(year);
+            }
+        });
+
+        //This functionpopulates the tbody inner HTML with json data on call
+        function drawRow(rowData) {
+            var row = $("<tr />")
+            row.append($(`<td id="bId" data-bachid=${rowData.Id} class="hidden">${rowData.Id}</td>`));
+            row.append($("<td>" + rowData.BatchNumber + "</td>"));
+            row.append($("<td>" + rowData.CountyName + "</td>"));
+            row.append($("<td>" + rowData.CountyCode + "</td>"));
+            row.append($(`<td id="sId" class="hidden"> + rowData.SchoolTypeId + </td>`));
+            return row[0];
+        }
+
+        function CreateVouchers() {
+            $('#newvoucher').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+            var batchId = $('#bId').attr('data-bachid');
+
+
+            console.log(`${batchId} `);
+            $.ajax({
+                headers : {
+                    'Accept' : 'application/json',
+                    'Content-Type' : 'application/json'
+                },
+                url: "https://voucherapi.kec.ac.ke/api/Vouchers",
+                type: "POST",
+                data: JSON.stringify({ BatchId: batchId }),
+                success: function (response, status, jxhr) {
+                    console.log(response);
+                    console.log(status);
+
+                    $('#message').html(` ${response}.`)
+                    $('div.alert-success').toggleClass('hidden');
+                    $('#newvoucher').html('CREATE VOUCHERS');
+
+                },
+                error: function (request, status, error) {
+                    console.log(request);
+                    console.log(status);
+
+                    console.log(request.responseText);
+                    $('#error').html(request.responseText)
+                    $('div.alert-danger').toggleClass('hidden');
+                    $('#newvoucher').html('CREATE VOUCHERS');
+                }
+            });
+        }
+    </script>
+
+    <!--HAPPY CODDING TO YOU LAZZY TESTERS-->
+    <script type="text/JavaScript">
+        //getting voucheCounties and do a count
+        $(document).ready(function () {
+            var dd = new Date();
+            var years = dd.getFullYear();
+            var Count = $('#batch');
+            $.ajax({
+                url: `https://voucherapi.kec.ac.ke/api/batches/${years}/withpendingvouchers/count`,
+                type: "GET",
+
+                dataType: "json",
+                success: function (data, status, jqhxr) {
+                    console.log(data);
+                    $('#batch').html(data)
+                }
+            });
+        }) ;
+    </script>
+    <script type="text/JavaScript">
+        //getting voucheCounties and do a count
+        $(document).ready(function () {
+            var d = new Date();
+            var year = d.getFullYear();
+
+            var Count = $('#voucher');
+            $.ajax({
+                url: ` https://voucherapi.kec.ac.ke/api/schools/approvedvouchers/${year}`,
+                type: "GET",
+                dataType: "json",
+                success: function (data, status, jqhxr) {
+
+                    console.log(year);
+                    $('#voucher').html(data)
+                }
+            });
+        }) ;
+    </script>
+    <script type="text/javascript">
+
+        $("#list").hide();
+
+        function show() {
+            var x = document.getElementById("list");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+    </script>

@@ -23,18 +23,45 @@ namespace KEC.Voucher.UI.Controllers
             }
         }
 
-        public ActionResult About()
+        public ActionResult CreateVoucher()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var voucherUser = new VoucherUser
+                {
+                    Guid = user.Id,
+                    FullName = user.FullName
+                };
+                return View(voucherUser);
+            }
         }
 
-        public ActionResult Contact()
+        public ActionResult ApproveVoucher()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var voucherUser = new VoucherUser
+                {
+                    Guid = user.Id,
+                    FullName = user.FullName
+                };
+                return View(voucherUser);
+            }
+        }
+        public ActionResult ManageVoucher()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var voucherUser = new VoucherUser
+                {
+                    Guid = user.Id,
+                    FullName = user.FullName
+                };
+                return View(voucherUser);
+            }
         }
     }
 }

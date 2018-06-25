@@ -1,5 +1,7 @@
-﻿using KEC.ECommerce.Data.UnitOfWork.Core;
+﻿using KEC.ECommerce.Data.Models;
+using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using RestSharp;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace KEC.ECommerce.Web.UI.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IUnitOfWork _uow;
@@ -21,10 +24,10 @@ namespace KEC.ECommerce.Web.UI.Controllers
         }
        
         [HttpGet]
-        public IActionResult Payment(int orderId)
+        public async Task<IActionResult> Payment(int orderId)
         {
-            //TODO: Filter order by current logged in user
-            var order = _uow.OrdersRepository.Get(orderId);
+            var mail = User.FindFirst("Email")?.Value;
+            var order = await _uow.OrdersRepository.GetOrderByUser(orderId, mail,OrderStatus.Submitted);
             var model = new OrderViewModel(_uow, order, true);
             return View(model);
         }

@@ -59,6 +59,30 @@ namespace KEC.ECommerce.Data.Migrations
                     b.ToTable("Levels");
                 });
 
+            modelBuilder.Entity("KEC.ECommerce.Data.Models.Licence", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Code");
+
+                    b.Property<DateTime>("ExpiryDate");
+
+                    b.Property<int>("OrderId");
+
+                    b.Property<int>("PublicationId");
+
+                    b.Property<string>("SchoolCode");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("PublicationId");
+
+                    b.ToTable("Licences");
+                });
+
             modelBuilder.Entity("KEC.ECommerce.Data.Models.LineItem", b =>
                 {
                     b.Property<int>("Id")
@@ -88,7 +112,7 @@ namespace KEC.ECommerce.Data.Migrations
 
                     b.Property<decimal>("Amount");
 
-                    b.Property<string>("CustomerGuid");
+                    b.Property<string>("CustomerEmail");
 
                     b.Property<string>("OrderNumber");
 
@@ -230,6 +254,19 @@ namespace KEC.ECommerce.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Subjects");
+                });
+
+            modelBuilder.Entity("KEC.ECommerce.Data.Models.Licence", b =>
+                {
+                    b.HasOne("KEC.ECommerce.Data.Models.Order", "Order")
+                        .WithMany("Licences")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("KEC.ECommerce.Data.Models.Publication", "Publication")
+                        .WithMany()
+                        .HasForeignKey("PublicationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("KEC.ECommerce.Data.Models.LineItem", b =>
