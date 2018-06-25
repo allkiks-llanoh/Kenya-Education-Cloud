@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="~/css/ribbon.css" />
         <link rel="stylesheet" href="~/css/spinner.css" />
         <link rel="stylesheet" href="~/lib/metro/css/metro-all.min.css" />
-        <link rel="stylesheet" href="~/lib/simple-pagination/css/simplePagination.css"/>
+        <link rel="stylesheet" href="~/lib/simple-pagination/css/simplePagination.css" />
         <link rel="stylesheet" href="~/css/tables.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -47,18 +47,36 @@
             <li><a href="#"><span class="mif-info icon"></span>About</a></li>
             <li id="shoppingcart">@await Component.InvokeAsync("ShoppingCart")</li>
         </ul>
-        <ul class="app-bar-menu ml-auto">
-            <li><a href="#"><span class="mif-user icon"></span>Login</a></li>
-            <li><a href="#"><span class="mif-pencil icon"></span>Register</a></li>
-        </ul>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <ul class="app-bar-menu ml-auto">
+                <li><a asp-action="Dashboard" asp-active-route asp-hide-if-active="true" asp-controller="Account"><span class="mif-apps icon"></span>Dashboard</a></li>
+                <li>
+                    <a href="#" class="logout">
+                        <form asp-action="Logout" id="logout-form" class="hidden" asp-controller="Account" method="POST"></form>
+                        <span class="mif-user icon"></span>
+                        @string.Concat("Logout", " ", User.FindFirst("DisplayName")?.Value)
+                    </a>
+                </li>
+
+            </ul>
+        }
+        else
+        {
+            <ul class="app-bar-menu ml-auto">
+                <li><a asp-action="Login" asp-controller="Account" asp-active-route asp-hide-if-active="true"><span class="mif-user icon"></span>Login</a></li>
+                <li><a asp-controller="Account" asp-action="Register" asp-active-route asp-hide-if-active="true"><span class="mif-pencil icon"></span>Register</a></li>
+            </ul>
+
+        }
     </header>
-    <div id="wrap">
+    <div id="wrap" class="border bd-blue">
         <div class="loading hidden" id="spinner">Loading&#8230;</div>
         <div id="content" class="container-fluid p-2">
             <div class="grid">
                 <div class="row">
                     <div class="cell-md-12 cell-sm-12">
-                        <div class="border bd-gray p-1 m-1">
+                        <div class="p-1 m-1">
                             @RenderBody()
                         </div>
                     </div>

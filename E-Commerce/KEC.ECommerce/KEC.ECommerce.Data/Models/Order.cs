@@ -15,7 +15,7 @@ namespace KEC.ECommerce.Data.Models
         public string OrderNumber { get; set; }
         public DateTime SubmittedAt { get; set; }
         public decimal Amount { get; set; }
-        public string CustomerGuid { get; set; }
+        public string CustomerEmail { get; set; }
         public OrderStatus Status { get; set;}
         #endregion
 

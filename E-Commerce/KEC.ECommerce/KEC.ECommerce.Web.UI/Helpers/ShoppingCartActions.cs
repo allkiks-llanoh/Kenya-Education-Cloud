@@ -11,7 +11,6 @@ namespace KEC.ECommerce.Web.UI.Helpers
     {
         private readonly IUnitOfWork _uow;
         private readonly HttpContext _context;
-        private const string CartSessionKey = "CartId";
         public ShoppingCart ShoppingCart
         {
             get
@@ -61,7 +60,8 @@ namespace KEC.ECommerce.Web.UI.Helpers
         }
         public int GetCartId()
         {
-            var cartId = _context.Session.GetInt32(CartSessionKey);
+            
+            var cartId = _context.Session.GetInt32(CartKey());
             if (cartId.HasValue)
             {
                 return cartId.Value;
@@ -71,7 +71,7 @@ namespace KEC.ECommerce.Web.UI.Helpers
                 var cart = new ShoppingCart { CreatedAt = DateTime.Now };
                 _uow.ShoppingCartsRepository.Add(cart);
                 _uow.Complete();
-                _context.Session.SetInt32(CartSessionKey, cart.Id);
+                _context.Session.SetInt32(CartKey(), cart.Id);
                 return cart.Id;
             }
 
@@ -83,7 +83,7 @@ namespace KEC.ECommerce.Web.UI.Helpers
             var cart = _uow.ShoppingCartsRepository.Get(cartId);
             _uow.ShoppingCartsRepository.Remove(cart);
             _uow.Complete();
-            _context.Session.Remove(CartSessionKey);
+            _context.Session.Remove(CartKey());
 
         }
         public int CreateOrder(string customerGuid)
@@ -96,7 +96,7 @@ namespace KEC.ECommerce.Web.UI.Helpers
                 var order = new Order
                 {
                     OrderNumber = _uow.OrdersRepository.GetNextOrderNumber(),
-                    CustomerGuid = customerGuid,
+                    CustomerEmail = customerGuid,
                     Amount = cartItems.Sum(p => p.Quantity * p.UnitPrice),
                     SubmittedAt = DateTime.Now,
                     Status = OrderStatus.Submitted
@@ -116,10 +116,16 @@ namespace KEC.ECommerce.Web.UI.Helpers
                 _uow.OrdersRepository.Add(order);
                 _uow.ShoppingCartsRepository.Remove(ShoppingCart);
                 _uow.Complete();
-                _context.Session.Remove(CartSessionKey);
+                _context.Session.Remove(CartKey());
                 orderId = order.Id;
             }
             return orderId;
+        }
+        private string CartKey()
+        {
+            var userMail = _context.User.FindFirst("Email")?.Value;
+            var cartKey = $"{userMail}-CartId";
+            return cartKey;
         }
     }
 }

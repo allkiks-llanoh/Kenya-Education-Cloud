@@ -1,10 +1,16 @@
 ﻿using KEC.ECommerce.Data.UnitOfWork;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Pagination;
+using KEC.ECommerce.Web.UI.Security.Database;
+using KEC.ECommerce.Web.UI.Security.Extensions;
+using KEC.ECommerce.Web.UI.Security.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace KEC.ECommerce.Web.UI
 {
@@ -28,6 +34,31 @@ namespace KEC.ECommerce.Web.UI
             services.AddSession();
             services.AddTransient(typeof(IPageHelper<>), typeof(PageHelper<>));
             services.AddSingleton<IPageConfig, PageConfig>();
+            services.AddDbContext<IdentityDataContext>(options =>
+            {
+                var connectionString = Configuration.GetConnectionString("IdentityDataContext");
+                options.UseSqlServer(connectionString);
+            });
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityDataContext>()
+                .AddDefaultTokenProviders();
+            services.Configure<IdentityOptions>(options =>
+            {
+            
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 6;
+           
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+              
+                options.User.RequireUniqueEmail = true;
+            });
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
             services.AddTransient<IUnitOfWork>(m => new EFUnitOfWork());
         }
 
@@ -43,6 +74,7 @@ namespace KEC.ECommerce.Web.UI
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseAuthentication();
             app.UseSession();
             app.UseStaticFiles();
             app.UseMvc(routes =>
