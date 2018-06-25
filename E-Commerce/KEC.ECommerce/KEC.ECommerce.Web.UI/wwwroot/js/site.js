@@ -9,11 +9,10 @@ var notify = function feedbackInfo(message, msgClass, title) {
     notify.reset();
 }
 var showValidationErrorInfoBox = function (data) {
-    var elements = $.parseHTML(data);
-    var found = $('.validation-summary-errors', $(elements))
+    let elements = $.parseHTML(data);
+    let found = $('.validation-summary-errors', $(elements))
     if (found !== null && found.children().length > 0) {
         Metro.infobox.create(found, "alert");
-
     }
 }
 var notifySuccess = function (data) {
@@ -21,11 +20,9 @@ var notifySuccess = function (data) {
     var found = $('.validation-summary-errors', $(elements));
     if (found !== null && found.children().length > 0) {
         Metro.infobox.create(found, "alert");
-
-    } else{
+    } else {
         notify("Item(s) added to cart successfully", "success", "Cart");
     }
-    
 }
 var notifyFail = function () {
     notify("Item(s) could not be added to cart", "alert", "Cart");
@@ -163,4 +160,13 @@ $(document).ready(function () {
         }
     });
     $('.loading').hide();
+    let found = $('.validation-summary-errors');
+    if (found !== null && found.children().length > 0) {
+        Metro.infobox.create(found, "alert");
+    }
+    $('#logout').on('click', function (e) {
+        e.preventDefault();
+        $('#logout-form').submit();
+    })
+
 })
