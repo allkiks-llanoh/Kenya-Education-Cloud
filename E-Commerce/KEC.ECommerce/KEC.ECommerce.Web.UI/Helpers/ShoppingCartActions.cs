@@ -61,7 +61,9 @@ namespace KEC.ECommerce.Web.UI.Helpers
         }
         public int GetCartId()
         {
-            var cartId = _context.Session.GetInt32(CartSessionKey);
+            var userMail = _context.User.FindFirst("Email")?.Value;
+            var cartKey = $"{userMail}-{CartSessionKey}";
+            var cartId = _context.Session.GetInt32(cartKey);
             if (cartId.HasValue)
             {
                 return cartId.Value;
@@ -71,7 +73,7 @@ namespace KEC.ECommerce.Web.UI.Helpers
                 var cart = new ShoppingCart { CreatedAt = DateTime.Now };
                 _uow.ShoppingCartsRepository.Add(cart);
                 _uow.Complete();
-                _context.Session.SetInt32(CartSessionKey, cart.Id);
+                _context.Session.SetInt32(cartKey, cart.Id);
                 return cart.Id;
             }
 
@@ -96,7 +98,7 @@ namespace KEC.ECommerce.Web.UI.Helpers
                 var order = new Order
                 {
                     OrderNumber = _uow.OrdersRepository.GetNextOrderNumber(),
-                    CustomerGuid = customerGuid,
+                    CustomerEmail = customerGuid,
                     Amount = cartItems.Sum(p => p.Quantity * p.UnitPrice),
                     SubmittedAt = DateTime.Now,
                     Status = OrderStatus.Submitted

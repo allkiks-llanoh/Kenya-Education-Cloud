@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Helpers;
 using KEC.ECommerce.Web.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 
 namespace KEC.ECommerce.Web.UI.Controllers
 {
+    [Authorize]
     public class ShoppingController : Controller
     {
         private readonly IUnitOfWork _uow;
@@ -25,7 +25,6 @@ namespace KEC.ECommerce.Web.UI.Controllers
         {
             var cartActions = new ShoppingCartActions(_uow, HttpContext);
             var productQty = _uow.PublicationsRepository.Get(productId)?.Quantity;
-            var errorMessage = default(string);
             if (productQty>= quantity)
             {
                 await cartActions.AddItem(productId, quantity);
@@ -37,6 +36,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
           
             return CreateView(cartActions, "_ShoppingCartPartial");
         }
+      
         public IActionResult Cart()
         {
             var cartActions = new ShoppingCartActions(_uow, HttpContext);
@@ -77,8 +77,8 @@ namespace KEC.ECommerce.Web.UI.Controllers
         {
             var cartActions = new ShoppingCartActions(_uow, HttpContext);
             //TODO: Use logged in user guid
-            var guid = Guid.NewGuid().ToString();
-            var orderId = cartActions.CreateOrder(guid);
+            var email = User.FindFirst("Email")?.Value;
+            var orderId = cartActions.CreateOrder(email);
             return RedirectToAction("Payment", "Orders", new { orderId });
         }
     }
