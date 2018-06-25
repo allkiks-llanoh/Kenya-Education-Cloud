@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using KEC.ECommerce.Web.UI.Security.Models;
 using KEC.ECommerce.Web.UI.Security.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        [Authorize]
         public IActionResult Dashboard()
         {
             return View();
@@ -54,6 +56,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             }
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Logout(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();

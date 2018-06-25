@@ -52,7 +52,7 @@
             <ul class="app-bar-menu ml-auto">
                 <li><a asp-action="Dashboard" asp-active-route asp-hide-if-active="true" asp-controller="Account"><span class="mif-apps icon"></span>Dashboard</a></li>
                 <li>
-                    <a href="#" id="logout">
+                    <a href="#" class="logout">
                         <form asp-action="Logout" id="logout-form" class="hidden" asp-controller="Account" method="POST"></form>
                         <span class="mif-user icon"></span>
                         @string.Concat("Logout", " ", User.FindFirst("DisplayName")?.Value)

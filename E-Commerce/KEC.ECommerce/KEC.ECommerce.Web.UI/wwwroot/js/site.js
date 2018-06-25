@@ -24,7 +24,7 @@ var notifySuccess = function (data) {
         notify("Item(s) added to cart successfully", "success", "Cart");
     }
 }
-var notifyFail = function () {
+var notifyFail = function (jXHR) {
     notify("Item(s) could not be added to cart", "alert", "Cart");
 }
 
@@ -164,7 +164,7 @@ $(document).ready(function () {
     if (found !== null && found.children().length > 0) {
         Metro.infobox.create(found, "alert");
     }
-    $('#logout').on('click', function (e) {
+    $('.logout').on('click', function (e) {
         e.preventDefault();
         $('#logout-form').submit();
     })

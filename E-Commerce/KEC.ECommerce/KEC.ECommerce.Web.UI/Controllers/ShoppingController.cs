@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KEC.ECommerce.Web.UI.Controllers
 {
-    [Authorize]
+   
     public class ShoppingController : Controller
     {
         private readonly IUnitOfWork _uow;
@@ -25,18 +25,25 @@ namespace KEC.ECommerce.Web.UI.Controllers
         {
             var cartActions = new ShoppingCartActions(_uow, HttpContext);
             var productQty = _uow.PublicationsRepository.Get(productId)?.Quantity;
-            if (productQty>= quantity)
+            if (User.Identity.IsAuthenticated)
             {
-                await cartActions.AddItem(productId, quantity);
+                if (productQty >= quantity)
+                {
+                    await cartActions.AddItem(productId, quantity);
+                }
+                else
+                {
+                    ModelState.AddModelError("", $"only {productQty} piece(s) remaining");
+                }
             }
             else
             {
-                ModelState.AddModelError("", $"only {productQty} piece(s) remaining");
+                ModelState.AddModelError("", "Please login or sign up first");
             }
           
             return CreateView(cartActions, "_ShoppingCartPartial");
         }
-      
+        [Authorize]
         public IActionResult Cart()
         {
             var cartActions = new ShoppingCartActions(_uow, HttpContext);
@@ -54,6 +61,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public IActionResult RemoveFromCart(int productId)
         {
@@ -63,6 +71,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             return CreateView(cartActions, "_ShoppingCartItemsPartial", true);
         }
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public IActionResult DestroyCart()
         {
@@ -72,11 +81,11 @@ namespace KEC.ECommerce.Web.UI.Controllers
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public IActionResult CheckOut()
         {
             var cartActions = new ShoppingCartActions(_uow, HttpContext);
-            //TODO: Use logged in user guid
             var email = User.FindFirst("Email")?.Value;
             var orderId = cartActions.CreateOrder(email);
             return RedirectToAction("Payment", "Orders", new { orderId });
