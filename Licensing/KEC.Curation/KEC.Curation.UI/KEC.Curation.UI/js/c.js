@@ -1,9 +1,5 @@
-﻿
-
-
-let ectId = $('#SubjectId').val();
+﻿let ectId = $('#SubjectId').val();
 let chiefCuratorGUIDss = $('#CurrentUserGuid').val();
-
 let cUrl = apiBaseUrl.concat(`/chiefcurator/publication/withcomments?userId=${chiefCuratorGUIDss}`);
 function tableRows(data) {
     var tableRows = [];
@@ -12,10 +8,8 @@ function tableRows(data) {
     }
     return tableRows;
 };
-
 //Start by getting publication list based on Payment Verification Stage
 $.ajax({
-   
     url: cUrl,
     type: "GET",
     dataType: "json",
@@ -24,7 +18,6 @@ $.ajax({
         $('#unassigned-publications').append(tableRows(data));
     }
 });
-
 //This functionpopulates the tbody inner HTML with json data on call
 function drawRow(rowData) {
     var row = $("<tr />")
