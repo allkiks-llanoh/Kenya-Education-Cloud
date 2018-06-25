@@ -11,7 +11,7 @@
    
         $.ajax({
            
-            url: `http://localhost:60823/api/batches/${year}/withpendingvouchers`,
+            url: `https://voucherapi.kec.ac.ke/api/batches/${year}/withpendingvouchers`,
             type: "GET",
             dataType: "json",   
             success: function(data,status,jqhxr){
@@ -45,7 +45,7 @@
                                 'Accept' : 'application/json',
                                 'Content-Type' : 'application/json'
               } ,
-            url: "http://localhost:60823/api/Vouchers",
+            url: "https://voucherapi.kec.ac.ke/api/Vouchers",
             type: "POST",
             data: JSON.stringify({BatchId:batchId}),
             success: function(response,status,jxhr) {
