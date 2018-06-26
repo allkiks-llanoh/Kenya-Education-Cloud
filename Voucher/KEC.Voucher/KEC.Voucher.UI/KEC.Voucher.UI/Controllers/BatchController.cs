@@ -36,5 +36,18 @@ namespace KEC.Voucher.UI.Controllers
                 return View(voucherUser);
             }
         }
+        public ActionResult ManageBatch()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var voucherUser = new VoucherUser
+                {
+                    Guid = user.Id,
+                    FullName = user.FullName
+                };
+                return View(voucherUser);
+            }
+        }
     }
 }

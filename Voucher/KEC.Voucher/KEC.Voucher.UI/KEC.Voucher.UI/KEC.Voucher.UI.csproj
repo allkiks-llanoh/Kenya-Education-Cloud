@@ -194,6 +194,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BatchController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\GetUsersController.cs" />
     <Compile Include="Controllers\SchoolAdminController.cs" />
     <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ReturnedUsers.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\VoucherUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -805,6 +807,7 @@
     <Content Include="Views\Client\Transaction.cshtml" />
     <Content Include="Views\Batch\Index.cshtml" />
     <Content Include="Views\Batch\CreateBatch.cshtml" />
+    <Content Include="Views\Batch\ManageBatch.cshtml" />
     <None Include="Views\Client\index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -865,9 +868,11 @@
     <Content Include="Views\Voucher\CreateVoucher.cshtml" />
     <Content Include="Views\Voucher\ApproveVoucher.cshtml" />
     <Content Include="Views\Voucher\ManageVoucher.cshtml" />
+    <Content Include="Views\Role\UserList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\GetUsers\" />
     <Folder Include="Views\SchoolAdmin\" />
   </ItemGroup>
   <ItemGroup>

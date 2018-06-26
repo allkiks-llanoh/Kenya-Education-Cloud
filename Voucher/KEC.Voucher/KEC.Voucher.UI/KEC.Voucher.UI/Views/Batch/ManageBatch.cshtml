@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewBag.Title = "ManageBatch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var Id = Request.Params["Id"];
+    var Code = Request.Params["countyCode"];
+
+}
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
+<link href="~/Content/style.css" rel="stylesheet" />
+<link href="~/Content/footable/footable.core.css" rel="stylesheet" />
+<div id="wrapper">
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center m-t-lg">
+                    <h1>
+                        Kenya Education Cloud
+                    </h1>
+                    <small>
+                        You Must Select County and Type of School to Enable Creation of a Batch For The County Selected
+
+                    </small>
+                    <br>
+                    <br>
+                    <div class="alert alert-success hidden">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p id="alert"></p>
+                    </div>
+                    <!--Submission Form starts here-->
+
+                    <div class="ibox float-e-margins">
+                        <div class="row">
+                            <div class="ibox-title" col-md-6>
+                                <div col-md-6>
+                                    <h5>Search For a School Type To Create a Batch for it</h5>
+                                </div>
+                                <div col-md-6>
+
+                                    <a href="@Url.Action("CreateBatch", "Batch")" style="float:right; margin-right:20px;" class="btn btn-primary">
+                                        <span>BACK TO LIST</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="ibox-content" col-md-6>
+                            <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Search For Batch / County">
+                            <div>
+                                <table id="SchoolTypesTable" class="footable table table-stripped" data-page-size="20" data-filter=#filter>
+                                    <tr class="footable-sortable">
+                                        <th class="hidden"> ID</th>
+                                        <th> SCHOOL TYPE </th>
+                                        <th class="pull-right"> ACTIONS</th>
+                                    </tr>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2">
+                                                <ul class="pagination pull-right"></ul>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+    </div>
+            </div>
+                    <div class="form-group col-md-10">
+                        <input type="text" name="cId" id="cId" class="form-control hidden" value="@Id">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <input type="text" name="cCode" id="cCode" class="form-control hidden" value="@Code">
+                    </div>
+
+                    <script type="text/JavaScript">
+                        function tableRows(data) {
+                            var tableRows = [];
+                            for (var i = 0; i < data.length; i++) {
+                                tableRows.push(drawRow(data[i]));
+                            }
+                            return tableRows;
+                        };
+                        //Start by getting voucher list based on batch Id
+                        var id = $('#cId').val();
+                        var code = $('#cCode').val();
+                        console.log(id);
+                        console.log(code);
+                        reloadSchoolTypes();
+
+
+
+                        //This functionpopulates the tbody inner HTML with json data on call
+                        function drawRow(rowData) {
+
+                            var row = $("<tr />")
+                            row.append($('<td class="hidden"> + rowData.Id + </td>'));
+                            row.append($("<td>" + rowData.description + "</td>"));
+                            row.append($(`<td class="pull-right"> <button type="button" data-schooltype=${rowData.Id} data-county='${code}' class="btn btn-w-m btn-info btn-md NewBatch" role="button">CREATE BATCH</button>`));
+                            return row[0];
+                        }
+                        function reloadSchoolTypes() {
+                            $.ajax({
+                                url: `https://voucherapi.kec.ac.ke/api/batches/${id}/pendingschooltypes`,
+                                type: "GET",
+                                dataType: "json",
+                                success: function (data, status, jqhxr) {
+                                    console.log(data);
+
+                                    //This code snipet prepares to append Json Data
+                                    $('#SchoolTypesTable').html(tableRows(data));
+                                    hookCreateBatchButtons();
+                                },
+
+                            });
+                        }
+                        function hookCreateBatchButtons() {
+                            $('.NewBatch').click(function () {
+                                $(this).html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+
+                                var countycodes = $(this).attr('data-county');
+                                var schooltypeid = $(this).attr('data-schooltype');
+                                console.log($(this).attr('data-county'));
+                                $.ajax({
+                                    headers : {
+                                        'Accept' : 'application/json',
+                                        'Content-Type' : 'application/json'
+                                    },
+                                    beforeSend: function () {
+                                        if (!$('div.alert-success').attr('class').includes('hidden')) {
+                                            $('div.alert-success').toggleClass('hidden');
+                                        }
+                                    },
+                                    url: "https://voucherapi.kec.ac.ke/api/Batches",
+                                    type: "POST",
+                                    data: JSON.stringify({ CountyCode: countycodes, SchoolTypeId: schooltypeid }),
+                                    success: function (response, status, jxhr) {
+                                        console.log(response);
+                                        console.log(status);
+                                        $('#alert').html(`Batch number ${response} created successfully.`)
+                                        $('div.alert-success').toggleClass('hidden');
+                                        reloadSchoolTypes();
+
+                                    }
+                                });
+                            });
+                        }
+                    </script>
