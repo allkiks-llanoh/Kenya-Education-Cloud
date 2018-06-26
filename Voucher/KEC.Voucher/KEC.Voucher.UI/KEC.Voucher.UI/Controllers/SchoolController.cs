@@ -6,7 +6,7 @@ namespace KEC.Voucher.UI.Controllers
 {
     public class SchoolController : Controller
     {
-        [CustomAuthorize(Roles = "Schools Creator")]
+       // [CustomAuthorize(Roles = "Schools Creator")]
         public ActionResult Index()
         {
             using (var context = new ApplicationDbContext())
