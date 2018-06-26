@@ -240,7 +240,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChiefCuratorController.cs" />
     <Compile Include="Controllers\CurationController.cs" />
@@ -1206,7 +1205,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63772</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63775/</IISUrl>
+          <IISUrl>http://localhost:63776/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
           <IISAppRootUrl>http://localhost:63775/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

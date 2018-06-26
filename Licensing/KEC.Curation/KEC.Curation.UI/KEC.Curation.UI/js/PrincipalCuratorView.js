@@ -1,6 +1,6 @@
 ﻿
 
-let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurator`)
+let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/new`)
 
 
 //Definition of global draw rows function

@@ -34,20 +34,21 @@ namespace KEC.Curation.Web.Api.Controllers
                 publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
         }
-        [HttpGet]
+        [HttpGet("new")]
         public IActionResult Principal()
         {
-            var publicatons = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
-                              (PublicationStage.PrincipalCurator));
+            var publicatons = _uow.PublicationRepository.Find(p => p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.PrincipalCurator);
             var publicationList = publicatons.Any() ?
-                publicatons.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
+                publicatons.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
             return Ok(value: publicationList);
         }
         [HttpGet("publications/assignedtochiefs")]
         public IActionResult ToCuration()
         {
-            var publicatons = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals
-                              (PublicationStage.Curation));
+            var publicatons = _uow.PublicationRepository.Find(p =>p.PublicationStageLogs
+                                                        .Max(l => l.Stage) == PublicationStage.Curation && !p.FullyAssigned 
+                                                         && !p.ChiefCuratorAssignment.Submitted);
             var publicationList = publicatons.Any() ?
                 publicatons.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
             return Ok(value: publicationList);
@@ -292,22 +293,37 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpDelete("publication/assignment/{id}")]
-        public IActionResult DeleteUnAssignedPublication(int Id, [FromBody]string principalCuratorGuid)
+        [HttpDelete("publication/remove/{id}")]
+        public IActionResult DeleteUnAssignedPublication([FromBody] ReverseSerializer model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
             try
             {
-                var assignment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PrincipalCuratorGuid.Equals(principalCuratorGuid) && p.Id.Equals(Id)).FirstOrDefault();
+                var assignment = _uow.ChiefCuratorAssignmentRepository.Find(p => !p.Submitted 
+                                                                        && p.PrincipalCuratorGuid.Equals(model.UserGuid) 
+                                                                        && p.PublicationId.Equals(model.Id)).FirstOrDefault();
                 if (assignment == null)
                 {
                     return BadRequest(error: new { message = "Chief Curator assigment cannot be deleted" });
                 }
+
+                var assignmentPublication = _uow.PublicationRepository.Find(p => p.Id.Equals(model.Id)).FirstOrDefault();
+                var publication = _uow.PublicationStageLogRepository.Find(p => p.PublicationId.Equals(model.Id)
+                                                       && p.Stage.Equals( PublicationStage.Curation)).FirstOrDefault();
+              
+                assignmentPublication.ChiefCuratorAssignmentId = null;
+                _uow.PublicationStageLogRepository.Remove(publication);
                 _uow.ChiefCuratorAssignmentRepository.Remove(assignment);
+                
                 _uow.Complete();
                 return Ok(value: new { message = "Chief Curator assignment deleted successfully" });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ex.GetBaseException();
                 return StatusCode(statusCode: StatusCodes.Status500InternalServerError);
             }
         }
