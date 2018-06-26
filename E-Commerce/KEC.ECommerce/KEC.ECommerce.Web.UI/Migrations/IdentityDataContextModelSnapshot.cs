@@ -37,6 +37,8 @@ namespace KEC.ECommerce.Web.UI.Migrations
 
                     b.Property<string>("FirstName");
 
+                    b.Property<string>("IdentificationCode");
+
                     b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
@@ -54,8 +56,6 @@ namespace KEC.ECommerce.Web.UI.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SchoolCode");
 
                     b.Property<string>("SecurityStamp");
 
