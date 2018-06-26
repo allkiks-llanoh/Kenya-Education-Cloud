@@ -1,6 +1,6 @@
 ﻿
 
-let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/Curation`)
+let principalCuratorAssignedUrl = apiBaseUrl.concat(`/PrincipalCurator/publications/assignedtochiefs`)
 //var prGuid = $('#dataGUID').attr('data-pGUID');
 
     function tableRows(data) {

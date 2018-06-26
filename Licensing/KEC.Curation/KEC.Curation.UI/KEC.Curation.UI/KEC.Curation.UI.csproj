@@ -240,7 +240,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChiefCuratorController.cs" />
     <Compile Include="Controllers\CurationController.cs" />
@@ -456,6 +455,7 @@
     <Content Include="js\ListingLevels.js" />
     <Content Include="js\ListingSubjects.js" />
     <Content Include="js\PrincipalCuratorComments.js" />
+    <Content Include="js\ReverseAssignmenttPrincipalCurator.js" />
     <Content Include="js\ReviewPublication.js" />
     <Content Include="js\SelectedContentDrawTable.js" />
     <Content Include="js\TryAssignMultiple.js" />
@@ -1156,6 +1156,7 @@
     <Content Include="Views\PrincipalCurator\_HTMLPartial.cshtml" />
     <Content Include="Views\PrincipalCurator\_EPUBPartial.cshtml" />
     <Content Include="Views\PrincipalCurator\_MPFourPartial.cshtml" />
+    <Content Include="Views\PrincipalCurator\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1206,9 +1207,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63772</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63775/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost:63775/</IISAppRootUrl>
+          <IISUrl>http://localhost:63776/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
