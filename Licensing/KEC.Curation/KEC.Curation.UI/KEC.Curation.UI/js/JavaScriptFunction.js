@@ -41,8 +41,11 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.description + "</td>"));
     row.append($("<td>" + rowData.kicdNumber + "</td>"));
-    row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.id} class="btn btn-w-m btn-info btn-md" id="allan" role="button">Remove Assignment</button>`));
+    row.append($(`<td> 
 
+<a href="/PrincipalCurator/Delete?Id=${rowData.id}" class="btn btn-danger" " role="button"><i class="fa fa-trash"></i> Reverse Assignment</a> 
+
+`));
     return row[0];
 
 }

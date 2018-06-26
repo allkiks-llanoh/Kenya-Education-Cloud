@@ -455,6 +455,7 @@
     <Content Include="js\ListingLevels.js" />
     <Content Include="js\ListingSubjects.js" />
     <Content Include="js\PrincipalCuratorComments.js" />
+    <Content Include="js\ReverseAssignmenttPrincipalCurator.js" />
     <Content Include="js\ReviewPublication.js" />
     <Content Include="js\SelectedContentDrawTable.js" />
     <Content Include="js\TryAssignMultiple.js" />
