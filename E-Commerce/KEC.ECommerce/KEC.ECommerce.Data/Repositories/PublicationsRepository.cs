@@ -1,0 +1,76 @@
+﻿using KEC.ECommerce.Data.Database;
+using KEC.ECommerce.Data.Models;
+using KEC.ECommerce.Data.Repositories.Core;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace KEC.ECommerce.Data.Repositories
+{
+    public class PublicationsRepository : Repository<Publication>
+    {
+        private ECommerceDataContext _ecommerceContext;
+
+        public PublicationsRepository(ECommerceDataContext context) : base(context)
+        {
+            _ecommerceContext = context as ECommerceDataContext;
+        }
+        public async Task<IEnumerable<Publication>> TopPublicationsAsyc(int count = 6)
+        {
+            var publications = await (_context as ECommerceDataContext).Publications
+                                            .Where(p => !p.ThumbnailUrl.Equals(null))
+                                            .OrderByDescending(p => p.CreatedAt)
+                                            .Take(count).ToListAsync();
+            return publications;
+        }
+        public IEnumerable<Publication> TopProductsPerCategory(int categoryId, int count = 4)
+        {
+            var publications = _ecommerceContext.Publications
+                                            .Include(p => p.Category)
+                                            .Include(p => p.Author)
+                                            .Where(p => p.CategoryId.Equals(categoryId))
+                                            .OrderByDescending(p => p.CreatedAt)
+                                            .Take(count).ToList();
+            return publications;
+        }
+        public async Task<decimal> PublicationUnitPrice(int publicationId)
+        {
+
+            var publication = await _ecommerceContext.Publications.FindAsync(publicationId);
+            return publication.UnitPrice;
+        }
+        public Publication GetPublicationDetails(int publicationId)
+        {
+            var publication = _ecommerceContext.Publications
+                                               .Include(p => p.Author)
+                                               .Include(p => p.Category)
+                                               .Include(p => p.Subject)
+                                               .Include(p => p.Level)
+                                               .Include(p => p.Publisher)
+                                               .FirstOrDefault(p => p.Id.Equals(publicationId));
+            return publication;
+        }
+        public IQueryable<Publication> QueryablePublications(int categoryId,string searchTerm)
+        {
+            var publications = default(IQueryable<Publication>);
+            if (searchTerm == null)
+            {
+                 publications = _ecommerceContext.Publications.Where(p => p.CategoryId.Equals(categoryId));
+            }
+            else
+            {
+                publications = _ecommerceContext.Publications.Where(p => p.CategoryId.Equals(categoryId)
+                                                                    && (p.Description.Contains(searchTerm)
+                                                                    || p.Level.Name.Contains(searchTerm))
+                                                                    || p.Title.Contains(searchTerm) ||
+                                                                    p.Subject.Name.Contains(searchTerm) ||
+                                                                    p.Publisher.Company.Contains(searchTerm) ||
+                                                                    p.Author.FirstName.Contains(searchTerm) || 
+                                                                    p.Author.LastName.Contains(searchTerm)); 
+            }
+          
+            return publications;
+        }
+    }
+}

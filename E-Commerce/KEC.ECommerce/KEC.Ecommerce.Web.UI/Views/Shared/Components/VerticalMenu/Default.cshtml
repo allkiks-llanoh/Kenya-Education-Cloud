@@ -1,0 +1,10 @@
+﻿@using KEC.ECommerce.Web.UI.Models;
+@model IEnumerable<CategoryViewModel>
+<a href="#" data-hotkey="Alt+F1"><span class="mif-menu icon"></span>Products</a>
+<ul class="v-menu bg-blue fg-white" data-role="dropdown" >
+    @foreach (var item in Model)
+    {
+        <li class="divider"></li>
+        <li ><a asp-controller="Store" asp-action="Publications" asp-route-categoryid="@item.Id"><span class="mif-link icon"></span>@item.Name</a></li>
+    }
+</ul>

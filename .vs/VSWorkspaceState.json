@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\E-Commerce"
+    "\\E-Commerce",
+    "\\E-Commerce\\KEC.ECommerce",
+    "\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Web.UI"
   ],
-  "SelectedNode": "\\E-Commerce",
+  "SelectedNode": "\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.sln",
   "PreviewInSolutionExplorer": false
 }
