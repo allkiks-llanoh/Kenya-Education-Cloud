@@ -41,7 +41,7 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.description + "</td>"));
     row.append($("<td>" + rowData.kicdNumber + "</td>"));
-    row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.id} class="btn btn-w-m btn-info btn-md DeleteAssignment" id="allan" role="button">Remove Assignment</button>`));
+    row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.id} class="btn btn-w-m btn-info btn-md" id="allan" role="button">Remove Assignment</button>`));
 
     return row[0];
 
@@ -49,10 +49,10 @@ function drawRow(rowData) {
 function deleteAssignment() {
 
     let cGuid = $('#CurrentUserGuid').val();
-    let pId = $(this).attr('data-assignmentId');
-    let url = apiBaseUrl.concat(`/chiefcurator/publication/assignment/${pId}?chiefCuratorGuid=${cGuid}`);
+    let pId = $('#allan').attr('data-assignmentId');
+    let url = apiBaseUrl.concat(`/principalcurator/publication/remove/${pId}`)
 
-    $(this).html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+    $('#allan').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
 
     console.log($(this).attr('data-assignmentId'));
     $.ajax({
@@ -63,11 +63,14 @@ function deleteAssignment() {
 
         url: url,
         type: "DELETE",
-
+        contentType: 'application/json',
+        crossDomain: true,
+        accepts: 'application/json',
+        data: JSON.stringify({ UserGuid: CuserGuid, Id: pId }),
         success: function (response, status, jxhr) {
             console.log(response);
             console.log(status);
-            ShowAlert('Assignment removed from curator', 'success');
+            ShowAlert('Assignment removed from Chief Curator', 'success');
         },
         error: function (request, status, error) {
 

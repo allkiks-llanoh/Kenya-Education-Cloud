@@ -1155,6 +1155,7 @@
     <Content Include="Views\PrincipalCurator\_HTMLPartial.cshtml" />
     <Content Include="Views\PrincipalCurator\_EPUBPartial.cshtml" />
     <Content Include="Views\PrincipalCurator\_MPFourPartial.cshtml" />
+    <Content Include="Views\PrincipalCurator\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1206,8 +1207,6 @@
           <DevelopmentServerPort>63772</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:63776/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost:63775/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
