@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.UnitOfWork.Core;
+using KEC.ECommerce.Web.UI.Models;
 using KEC.ECommerce.Web.UI.Security.Models;
 using KEC.ECommerce.Web.UI.Security.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -112,11 +113,13 @@ namespace KEC.ECommerce.Web.UI.Controllers
             }
             return RedirectToAction("Login");
         }
+        [Authorize]
         public IActionResult Orders()
         {
             var mail = User.FindFirst("Email")?.Value;
             var orders = _uow.OrdersRepository.Find(p => p.CustomerEmail.Equals(mail) && p.Status == OrderStatus.Submitted);
-            return View();
+            var model = orders?.Select(p => new OrderViewModel(_uow, p))?.ToList();
+            return View(model);
         }
     }
 }
