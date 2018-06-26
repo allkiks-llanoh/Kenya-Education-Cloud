@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using KEC.ECommerce.Data.Models;
+using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Security.Models;
 using KEC.ECommerce.Web.UI.Security.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -13,11 +15,13 @@ namespace KEC.ECommerce.Web.UI.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUnitOfWork _uow;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,IUnitOfWork uow)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _uow = uow;
         }
         [Authorize]
         public IActionResult Dashboard()
@@ -93,7 +97,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             {
                 Email = model.EmailAddress,
                 UserName = model.EmailAddress,
-                SchoolCode = model.SchoolCode,
+                IdentificationCode = model.IdentificationCode,
                 LastName = model.LastName,
                 FirstName = model.FirstName
             };
@@ -107,6 +111,12 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 return View();
             }
             return RedirectToAction("Login");
+        }
+        public IActionResult Orders()
+        {
+            var mail = User.FindFirst("Email")?.Value;
+            var orders = _uow.OrdersRepository.Find(p => p.CustomerEmail.Equals(mail) && p.Status == OrderStatus.Submitted);
+            return View();
         }
     }
 }
