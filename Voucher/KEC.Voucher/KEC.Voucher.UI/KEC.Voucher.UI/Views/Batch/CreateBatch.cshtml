@@ -1,0 +1,207 @@
+﻿
+@{
+    ViewBag.Title = "CreateBatch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<div id="wrapper">
+
+
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center m-t-lg">
+                    <h1>
+                        Kenya Education Cloud
+                    </h1>
+                    <small>
+                        You Must Select County and Type of School to Enable Creation of a Batch For The County Selected
+
+                    </small>
+                    <br>
+                    <br>
+                    <div class="alert alert-success hidden">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p id="alert"></p>
+                    </div>
+                    <!--Submission Form starts here-->
+
+                    <div class="ibox float-e-margins">
+                        <div class="row">
+                            <div class="ibox-title">
+                                <div col-md-6>
+                                    <h5>Search For a County To Create a Batch</h5>
+                                </div>
+                                <div col-md-6>
+                                    <a href="@Url.Action("Index", "Batch")" style="float:right; margin-right:20px;" class="btn btn-primary">
+                                        <span>BACK TO START</span>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div>
+                                <div class="ibox-content">
+                                    <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Search For Batch / County">
+
+                                    <table id="countylist" class="footable table table-stripped" data-page-size="20" data-filter=#filter>
+                                        <tr class="footable-sortable">
+                                            <th class="hidden"> ID</th>
+                                            <th> COUNTY NAME </th>
+                                            <th> COUNTY CODE</th>
+                                            <th> ACTIONS</th>
+                                        </tr>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <ul class="pagination pull-right"></ul>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Submission form ends here-->
+                        <!--BEGIN REFRESH-->
+                        <script>
+                            function myFunction() {
+                                location.reload();
+                            }
+                        </script>
+
+                        <!--END REFRESH-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="footer">
+        <div>
+            <strong>Copyright</strong> KICD &copy; 2018
+        </div>
+    </div>
+</div>
+<script type="text/JavaScript">
+    function tableRows(data) {
+        var tableRows = [];
+        for (var i = 0; i < data.length; i++) {
+            tableRows.push(drawRow(data[i]));
+        }
+        return tableRows;
+    };
+    var d = new Date();
+    var n = d.getFullYear();
+    //Start by getting voucher list based on batch Id
+    $.ajax({
+        url: `https://voucherapi.kec.ac.ke/api/counties/batch/pending/${n}`,
+        type: "GET",
+        dataType: "json",
+        success: function (data, status, jqhxr) {
+            console.log(data);
+
+            //This code snipet prepares to append Json Data
+            $('#countylist').append(tableRows(data));
+        }
+    });
+
+    //This functionpopulates the tbody inner HTML with json data on call
+    function drawRow(rowData) {
+        var row = $("<tr />")
+        row.append($('<td class="hidden"> + rowData.Id + </td>'));
+        row.append($("<td>" + rowData.CountyName + "</td>"));
+        row.append($("<td>" + rowData.CountyCode + "</td>"));
+        row.append($(`<td> <a href="new_create_batch/Index.php?Id=${rowData.Id}&countyCode=${rowData.CountyCode.toString()}" class="btn btn-w-m btn-info btn-xs" role="button">CREATE BATCH</a>`));
+        console.log(rowData.CountyCode);
+        return row[0];
+    }
+
+
+</script>
+<script type="text/JavaScript">
+    //get a reference to the select element
+    $select = $('#countycode');
+    //request the JSON data and parse into the select element
+    $.ajax({
+        type: 'GET',
+        url: "https://voucherapi.kec.ac.ke/api/counties",
+        dataType: 'JSON',
+        success: function (data) {
+            //clear the current content of the select
+            $select.html('');
+            //iterate over the data and append a select option
+            $.each(data, function (index, val) {
+                $select.append(`<option id=${val.Id}  value='${val.CountyCode}'+ >${val.CountyName}</option>`);
+            })
+        },
+        error: function () {
+            //if there is an error append a 'none available' option
+            $select.html('<option id="-1">none available</option>');
+        }
+    });
+
+</script>
+
+
+<script type="text/JavaScript">
+
+    //get a reference to the select element
+    $selects = $('#schooltypeid');
+    //request the JSON data and parse into the select element
+    $.ajax({
+        type: 'GET',
+        url: "https://voucherapi.kec.ac.ke/api/schooltypes",
+        dataType: 'JSON',
+        success: function (data) {
+            //clear the current content of the select
+            $selects.html('');
+            //iterate over the data and append a select option
+            $.each(data, function (index, val) {
+                $selects.append(`<option id=${val.Id}  value='${val.Id}'+ >${val.Description}</option>`);
+            })
+        },
+        error: function () {
+            //if there is an error append a 'none available' option
+            $selects.html('<option id="-1">none available</option>');
+        }
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#newclient').click(function () {
+            $('#newclient').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+
+            var countycode = $('#countycode').val();
+            var schooltypeid = $('#schooltypeid').val();
+            $.ajax({
+                headers :  {
+                    'Accept' :  'application/json',
+                    'Content-Type' :  'application/json'
+                },
+                url: "https://voucherapi.kec.ac.ke/api/Batches",
+                type: "POST",
+                data: JSON.stringify({ CountyCode: countycode, SchoolTypeId: schooltypeid }),
+                success: function (response, status, jxhr) {
+                    console.log(response);
+                    console.log(status);
+                    $('#alert').html(`Batch number ${response} created successfully.`)
+                    $('div.alert-success').toggleClass('hidden');
+                    $('#newclient').html('CREATE BATCH');
+
+                }
+            });
+
+
+        });
+    },
+
+    );
+</script>
+
+
+<!--HAPPY CODDING TO YOU LAZZY TESTERS-->

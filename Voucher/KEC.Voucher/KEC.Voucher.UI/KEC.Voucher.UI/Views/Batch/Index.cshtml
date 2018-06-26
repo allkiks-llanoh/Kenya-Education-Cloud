@@ -66,7 +66,7 @@
                         <h5 style="margin-left: 25px; margin-top:10px;">List Of Batches Available for Voucher Creation</h5>
                     </div>
                     <div col-md-6>
-                        <a href="batch/" style="float:right; margin-right:20px;" class="btn btn-primary">CREATE THESE BATCHES</a>
+                        <a href="CreateBatch/" style="float:right; margin-right:20px;" class="btn btn-primary">CREATE THESE BATCHES</a>
                     </div>
                 </div>
                 <div class="ibox-tools">
@@ -103,5 +103,84 @@
 
                 });
             </script>
+            <script type="text/JavaScript">
+                function tableRows(data) {
+                    var tableRows = [];
+                    for (var i = 0; i < data.length; i++) {
+                        tableRows.push(drawRow(data[i]));
+                    }
+                    return tableRows;
+                };
+                //Start by getting voucher list based on batch Id
+                var d = new Date();
+                var n = d.getFullYear();
+                $.ajax({
+                    url: `https://voucherapi.kec.ac.ke/api/counties/batch/pending/${n}`,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data, status, jqhxr) {
+                        console.log(data);
+
+                        //This code snipet prepares to append Json Data
+                        $('#createdvouchers').append(tableRows(data));
+                    }
+                });
+
+                //This functionpopulates the tbody inner HTML with json data on call
+                function drawRow(rowData) {
+                    var row = $("<tr />")
+                    row.append($('<td class="hidden"> + rowData.Id + </td>'));
+                    row.append($("<td>" + rowData.CountyName + "</td>"));
+                    row.append($("<td>" + rowData.CountyCode + "</td>"));
+
+                    return row[0];
+                }
+            </script>
+            <script type="text/JavaScript">
+                //getting voucheCounties and do a count
+                $(document).ready(function () {
+                    var Count = $('#count');
+                    $.ajax({
+                        url: "https://voucherapi.kec.ac.ke/api/counties/count",
+                        type: "GET",
+                        dataType: "json",
+                        success: function (data, status, jqhxr) {
+                            console.log(data);
+                            $('#count').html(data)
+                        }
+                    });
+                }) ;
+            </script>
+            <script type="text/JavaScript">
+                //getting voucheCounties and do a count
+                $(document).ready(function () {
+                    var Count = $('#types');
+                    $.ajax({
+                        url: "https://voucherapi.kec.ac.ke/api/schooltypes/count",
+                        type: "GET",
+                        dataType: "json",
+                        success: function (data, status, jqhxr) {
+                            console.log(data);
+                            $('#types').html(data)
+                        }
+                    });
+                }) ;
+            </script>
+            <script type="text/JavaScript">
+                //getting voucheCounties and do a count
+                $(document).ready(function () {
+                    var Count = $('#batches');
+                    $.ajax({
+                        url: "https://voucherapi.kec.ac.ke/api/batches/count",
+                        type: "GET",
+                        dataType: "json",
+                        success: function (data, status, jqhxr) {
+                            console.log(data);
+                            $('#batches').html(data)
+                        }
+                    });
+                }) ;
+            </script>
+            <!--HAPPY CODDING TO YOU LAZZY TESTERS-->
         }
 

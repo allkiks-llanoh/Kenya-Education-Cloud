@@ -194,6 +194,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BatchController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\SchoolAdminController.cs" />
     <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -803,6 +804,7 @@
     <None Include="Scripts\_references.js" />
     <Content Include="Views\Client\Transaction.cshtml" />
     <Content Include="Views\Batch\Index.cshtml" />
+    <Content Include="Views\Batch\CreateBatch.cshtml" />
     <None Include="Views\Client\index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -859,10 +861,14 @@
     <Content Include="Views\Account\SignOutCallback.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\School\Index.cshtml" />
+    <Content Include="Views\Voucher\Index.cshtml" />
+    <Content Include="Views\Voucher\CreateVoucher.cshtml" />
+    <Content Include="Views\Voucher\ApproveVoucher.cshtml" />
+    <Content Include="Views\Voucher\ManageVoucher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Voucher\" />
+    <Folder Include="Views\SchoolAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

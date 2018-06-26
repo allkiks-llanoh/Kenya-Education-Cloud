@@ -9,6 +9,7 @@ namespace KEC.Voucher.UI.Controllers
 {
     public class VoucherController : Controller
     {
+        [CustomAuthorize(Roles = "Voucher Creator")]
         public ActionResult Index()
         {
             using (var context = new ApplicationDbContext())
@@ -22,19 +23,47 @@ namespace KEC.Voucher.UI.Controllers
                 return View(voucherUser);
             }
         }
-
-        public ActionResult About()
+        [CustomAuthorize(Roles = "Voucher Creator")]
+        public ActionResult CreateVoucher()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var voucherUser = new VoucherUser
+                {
+                    Guid = user.Id,
+                    FullName = user.FullName
+                };
+                return View(voucherUser);
+            }
         }
-
-        public ActionResult Contact()
+        [CustomAuthorize(Roles = "Voucher Approver")]
+        public ActionResult ApproveVoucher()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var voucherUser = new VoucherUser
+                {
+                    Guid = user.Id,
+                    FullName = user.FullName
+                };
+                return View(voucherUser);
+            }
+        }
+        [CustomAuthorize(Roles = "Voucher Approver ")]
+        public ActionResult ManageVoucher()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+                var voucherUser = new VoucherUser
+                {
+                    Guid = user.Id,
+                    FullName = user.FullName
+                };
+                return View(voucherUser);
+            }
         }
     }
 }
