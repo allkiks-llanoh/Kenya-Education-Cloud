@@ -1,6 +1,5 @@
-﻿@using KEC.ECommerce.Web.UI.Models;
-@model ShoppingCartViewModel;
+﻿@model ShoppingCartViewModel;
 @if (Model != null && Model.ItemsCount > 0)
 {
-    Html.RenderPartial("_ShoppingCartPartial",Model);
+    await Html.RenderPartialAsync("_ShoppingCartPartial",Model);
 }

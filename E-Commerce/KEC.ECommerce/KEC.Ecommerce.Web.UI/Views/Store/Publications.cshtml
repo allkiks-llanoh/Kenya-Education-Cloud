@@ -25,7 +25,7 @@
             </div>
             <div class="row match-height" id="products-list">
                 @{
-                    Html.RenderPartial("_PublicationListPartial", Model);
+                    await Html.RenderPartialAsync("_PublicationListPartial", Model);
                 }
             </div>
             <div class="row">

@@ -1,5 +1,4 @@
-﻿@using KEC.ECommerce.Web.UI.Models;
-@model IEnumerable<ProductViewModel>
+﻿@model IEnumerable<ProductViewModel>
 @if (Model.Any())
 {
     <div class="border bd-blue">
@@ -42,7 +41,7 @@
                         </div>
                         @{
 
-                            Html.RenderPartial("_ShoppingForm", product);
+                            await Html.RenderPartialAsync("_ShoppingForm", product);
                         }
                     </div>
                 </div>

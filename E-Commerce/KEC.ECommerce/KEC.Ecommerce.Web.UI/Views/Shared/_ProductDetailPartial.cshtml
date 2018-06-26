@@ -30,7 +30,7 @@
         </div>
         <div class="card-footer">
             @{
-                Html.RenderPartial("_ShoppingForm", Model);
+                await Html.RenderPartialAsync("_ShoppingForm", Model);
             }
         </div>
     </div>

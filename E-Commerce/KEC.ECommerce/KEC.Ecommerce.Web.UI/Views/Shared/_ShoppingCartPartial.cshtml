@@ -1,7 +1,7 @@
 ﻿@using KEC.ECommerce.Web.UI.Models;
 @model ShoppingCartViewModel;
 @{
-    Html.RenderPartial("_ValidationErrorPartial");
+    await Html.RenderPartialAsync("_ValidationErrorPartial");
 }
 @if (Model != null && Model.ItemsCount > 0)
 {

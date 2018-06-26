@@ -11,7 +11,7 @@
                     <p class="text-center text-bold text-upper fg-orange">User Registration</p>
                 </div>
                 @{
-                    Html.RenderPartial("_ValidationErrorPartial");
+                    await Html.RenderPartialAsync("_ValidationErrorPartial");
                 }
                 <div class="form-group">
                     <label asp-for="FirstName"></label>
