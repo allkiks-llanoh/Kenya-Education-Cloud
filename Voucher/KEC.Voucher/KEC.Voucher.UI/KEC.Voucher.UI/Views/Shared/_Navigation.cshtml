@@ -1,5 +1,4 @@
-﻿
-<nav class="navbar-default navbar-static-side" role="navigation">
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
             <li class="">
@@ -15,16 +14,72 @@
                     KEC
                 </div>
             </li>
-            <li>
-                <a href="/Client/Index"><i class="fa fa-th-large"></i> <span class="nav-label">Vouchers</span> </a>
-            </li>
+            @if (User.IsInRole("System Admin"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Role")" data-toggle="tooltip" data-placement="top" title="User Management" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Management</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="@Url.Action("Index", "Role")"><i class="glyphicon glyphicon-list"></i>Manage Users</a></li>
+                        <li><a href="@Url.Action("UserList", "Role")"><i class="glyphicon glyphicon-list"></i>Registered User List</a></li>
+                    </ul>
+                </li>
+            }
 
-            
-            <li>
-                <a href="/Client/Transaction"><i class="fa fa-dollar"></i> <span class="nav-label">Transactions</span></a>
-            </li>
-            
+            @if (User.IsInRole("School Admin"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "School")" data-toggle="tooltip" data-placement="top" title="School Management" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Create Schools</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="@Url.Action("Index", "School")"><i class="glyphicon glyphicon-list"></i>Upload School Data</a></li>
+                    </ul>
+                </li>
+            }
+            @if (User.IsInRole("Batch Creator"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Batch")" data-toggle="tooltip" data-placement="top" title="Batch Management" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Create Batch</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="@Url.Action("Index", "Batch")"><i class="glyphicon glyphicon-list"></i>Upload Data</a></li>
+                    </ul>
+                </li>
+            }
+            @if (User.IsInRole("Voucher Creator"))
+            {
+
+                <li>
+                    <a href="@Url.Action("Index", "Home")" data-toggle="tooltip" data-placement="top" title="Voucher Management" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Voucher Menu</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="@Url.Action("Index", "Voucher")"><i class="glyphicon glyphicon-list"></i>Create Voucher</a></li>
+                    </ul>
+                </li>
+
+            }
+
+            @if (User.IsInRole("Voucher Approver"))
+            {
+
+                <li>
+                    <a href="@Url.Action("Index", "Home")" data-toggle="tooltip" data-placement="top" title="Approvals" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Voucher Menu</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="@Url.Action("ApproveVoucher", "Voucher")"><i class="glyphicon glyphicon-list"></i> Approve Voucher</a></li>
+                    </ul>
+                </li>
+
+            }
+            @if (User.IsInRole("Data Creator"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Batch")" data-toggle="tooltip" data-placement="top" title="Data Management" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Data Menu</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="@Url.Action("Index", "Batch")"><i class="glyphicon glyphicon-list"></i>Create Data</a></li>
+                    </ul>
+                </li>
+
+            }
+
 
         </ul>
     </div>
 </nav>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>

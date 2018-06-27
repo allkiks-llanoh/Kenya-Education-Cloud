@@ -9,7 +9,7 @@ namespace KEC.Voucher.UI.Controllers
 {
     public class VoucherController : Controller
     {
-        [CustomAuthorize(Roles = "Voucher Creator")]
+       // [CustomAuthorize(Roles = "Voucher Creator")]
         public ActionResult Index()
         {
             using (var context = new ApplicationDbContext())
@@ -23,7 +23,7 @@ namespace KEC.Voucher.UI.Controllers
                 return View(voucherUser);
             }
         }
-        [CustomAuthorize(Roles = "Voucher Creator")]
+      //  [CustomAuthorize(Roles = "Voucher Creator")]
         public ActionResult CreateVoucher()
         {
             using (var context = new ApplicationDbContext())
@@ -37,7 +37,7 @@ namespace KEC.Voucher.UI.Controllers
                 return View(voucherUser);
             }
         }
-        [CustomAuthorize(Roles = "Voucher Approver")]
+      //  [CustomAuthorize(Roles = "Voucher Approver")]
         public ActionResult ApproveVoucher()
         {
             using (var context = new ApplicationDbContext())
@@ -51,7 +51,7 @@ namespace KEC.Voucher.UI.Controllers
                 return View(voucherUser);
             }
         }
-        [CustomAuthorize(Roles = "Voucher Approver ")]
+        //[CustomAuthorize(Roles = "Voucher Approver ")]
         public ActionResult ManageVoucher()
         {
             using (var context = new ApplicationDbContext())
