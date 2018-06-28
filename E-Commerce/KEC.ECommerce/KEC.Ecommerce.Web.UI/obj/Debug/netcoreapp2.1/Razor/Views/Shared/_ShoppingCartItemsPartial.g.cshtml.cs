@@ -132,7 +132,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("</td>\r\n                <td class=\"cart\">\r\n                    ");
             EndContext();
             BeginContext(712, 503, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cf6afdfe6bbc43df857a8dd698938520", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c30789f544074ae49782da1e15362fa1", async() => {
                 BeginContext(1012, 26, true);
                 WriteLiteral("\r\n                        ");
                 EndContext();

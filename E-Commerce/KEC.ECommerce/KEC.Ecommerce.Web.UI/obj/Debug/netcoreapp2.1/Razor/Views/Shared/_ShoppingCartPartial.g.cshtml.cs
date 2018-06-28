@@ -79,7 +79,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("    ");
             EndContext();
             BeginContext(190, 204, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6215b7570f714d6ab5474cd4af8d937a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a5d52245eba4460ebffbe48fb738182f", async() => {
                 BeginContext(290, 76, true);
                 WriteLiteral("<span class=\"mif-cart icon\"></span>My Cart<span class=\"badge badge-top m-1\">");
                 EndContext();
