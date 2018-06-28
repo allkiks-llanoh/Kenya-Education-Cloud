@@ -17,6 +17,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IUnitOfWork _uow;
+
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,IUnitOfWork uow)
         {
             _userManager = userManager;
