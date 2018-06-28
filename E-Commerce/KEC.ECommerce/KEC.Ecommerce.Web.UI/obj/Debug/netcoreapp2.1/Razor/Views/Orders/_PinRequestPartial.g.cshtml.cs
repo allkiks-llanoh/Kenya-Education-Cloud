@@ -94,7 +94,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("    </div>\r\n</div>\r\n<div class=\"row\">\r\n    <div class=\"cell-md-full\">\r\n        ");
             EndContext();
             BeginContext(513, 557, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f271bf5a65384aca8461051b947f4554", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "43ab3e8889724a1c9cbc2200741aba68", async() => {
                 BeginContext(595, 14, true);
                 WriteLiteral("\r\n            ");
                 EndContext();
@@ -109,7 +109,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
                 WriteLiteral("\r\n            <div class=\"h-center\">\r\n                ");
                 EndContext();
                 BeginContext(687, 181, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "0dfdefab21604eea9939ae0f9f157ba3", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "c7609bdaba764fb39e2bb87eecf786f4", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -142,7 +142,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 WriteLiteral("\r\n                ");
                 EndContext();
                 BeginContext(886, 48, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4a8c94aa1dcf4d54bc4c108a77fdd755", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1805072a35164760818864c9bf97abe4", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();

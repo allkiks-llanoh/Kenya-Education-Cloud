@@ -80,7 +80,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("<div class=\"border bd-blue\">\r\n    <div class=\"grid\">\r\n        <div class=\"row\">\r\n            <div class=\"cell-md-full\">\r\n                <div class=\"ui horizontal divider\">\r\n                    ");
             EndContext();
             BeginContext(310, 364, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "89f4ac085d8b48ca8b6973e7a31b92e7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f191663abf3148e3980ebfe036f9e31d", async() => {
                 BeginContext(387, 26, true);
                 WriteLiteral("\r\n                        ");
                 EndContext();
@@ -127,7 +127,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"cell-md-full clear\">\r\n                ");
             EndContext();
             BeginContext(1066, 599, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7538d5775e9a44bf8ee087e11b57c16e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ff543f1f70f04089b17b26da48fe809c", async() => {
                 BeginContext(1145, 22, true);
                 WriteLiteral("\r\n                    ");
                 EndContext();
@@ -142,7 +142,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
                 WriteLiteral("\r\n                    <div class=\"clear\">\r\n                        ");
                 EndContext();
                 BeginContext(1258, 181, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c90ead23722d4a21a3ee17beabb5824e", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "549914b4d1e549bb9f1143e8a537e0e1", async() => {
                     BeginContext(1370, 65, true);
                     WriteLiteral("<span class=\"mif-add-shopping-cart icon\"></span>Continue shopping");
                     EndContext();

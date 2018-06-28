@@ -74,7 +74,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("        <li class=\"divider\"></li>\r\n        <li >");
             EndContext();
             BeginContext(270, 133, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2b04b3bfb65047b3aa40c4e513f5d81d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "25fd96657d464f36a1004652b39acad9", async() => {
                 BeginContext(354, 35, true);
                 WriteLiteral("<span class=\"mif-link icon\"></span>");
                 EndContext();

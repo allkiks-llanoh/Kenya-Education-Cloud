@@ -74,7 +74,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("        <li>");
             EndContext();
             BeginContext(238, 98, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "444d91b167de474e82348a26af63f0fd", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1adc180b33b64c4f9b2038151fe3a99c", async() => {
                 BeginContext(323, 9, false);
 #line 7 "E:\Projects\Miyabi\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Web.UI\Views\Shared\Components\ProductsMenu\Default.cshtml"
                                                                                            Write(item.Name);

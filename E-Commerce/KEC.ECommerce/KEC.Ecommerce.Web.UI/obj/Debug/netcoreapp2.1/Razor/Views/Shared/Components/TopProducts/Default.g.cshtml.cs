@@ -105,7 +105,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("                </div>\r\n                <div class=\"row p-2\">\r\n                    <div class=\"cell\">\r\n                        ");
             EndContext();
             BeginContext(905, 264, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "73e85a593d1c42959b46b05af7153056", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12ab6bb64da745cc96a3918897f817f3", async() => {
                 BeginContext(1042, 39, true);
                 WriteLiteral("\r\n                            View all ");
                 EndContext();

@@ -92,7 +92,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
                 ");
             EndContext();
             BeginContext(427, 255, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e5209422d6164e1b93c977728d55c7b4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "435722af061f47b496c4e1edf7f089eb", async() => {
                 BeginContext(529, 149, true);
                 WriteLiteral("\r\n                    <span class=\"mif-add-shopping-cart icon\"></span>\r\n                    <span class=\"branding-bar\">Store</span>\r\n                ");
                 EndContext();
@@ -118,7 +118,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("\r\n                ");
             EndContext();
             BeginContext(700, 256, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1626cc949fbf47eb84eab41f5c9c1114", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "862d35a2e8ef4f78bd3a353a02270d9d", async() => {
                 BeginContext(807, 145, true);
                 WriteLiteral("\r\n                    <span class=\"mif-cart icon\"></span>\r\n                    <span class=\"branding-bar\">Pending orders</span>\r\n                ");
                 EndContext();
@@ -144,7 +144,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("\r\n                ");
             EndContext();
             BeginContext(974, 251, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "639e48d63bc348cb99f084dac117463a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "181eeba4c5e34525a4401d5fe29d1626", async() => {
                 BeginContext(1080, 141, true);
                 WriteLiteral("\r\n                    <span class=\"mif-profile icon\"></span>\r\n                    <span class=\"branding-bar\">Profile</span>\r\n                ");
                 EndContext();
@@ -170,7 +170,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("\r\n                ");
             EndContext();
             BeginContext(1243, 246, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "acf595dd91f147d8abf8695918f90709", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01a848ccccf14657902148f15bd5bc33", async() => {
                 BeginContext(1344, 141, true);
                 WriteLiteral("\r\n                    <span class=\"mif-money icon\"></span>\r\n                    <span class=\"branding-bar\">Purchases</span>\r\n                ");
                 EndContext();
@@ -196,7 +196,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("\r\n                ");
             EndContext();
             BeginContext(1507, 257, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "21fbbac49ee449a587e845c7390b4278", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ff17cbc6e8e44d388d1c7a785c080d38", async() => {
                 BeginContext(1608, 152, true);
                 WriteLiteral("\r\n                    <span class=\"mif-library icon\"></span>\r\n                    <span class=\"branding-bar\">Purchased Licences</span>\r\n                ");
                 EndContext();
@@ -222,7 +222,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("\r\n                ");
             EndContext();
             BeginContext(1782, 248, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ea80eece6add4bc691403830af3f7b69", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "86717fcd3fc540cc9e9570e4d9fb0a28", async() => {
                 BeginContext(1884, 142, true);
                 WriteLiteral("\r\n                    <span class=\"mif-envelop icon\"></span>\r\n                    <span class=\"branding-bar\">Messages</span>\r\n                ");
                 EndContext();
@@ -248,7 +248,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("\r\n                ");
             EndContext();
             BeginContext(2048, 313, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a35d5ba3e6554972b9a362e5c246a378", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5a6b27c8adff4a1aadcdd7e420b47ea5", async() => {
                 BeginContext(2159, 106, true);
                 WriteLiteral("\r\n                    <span class=\"mif-exit icon\"></span>\r\n                    <span class=\"branding-bar\">");
                 EndContext();

@@ -78,7 +78,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             var cartActions = new ShoppingCartActions(_uow, HttpContext);
             var cart = cartActions.ShoppingCart;
             cartActions.DestroyCart();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Dashboard", "Account");
         }
         [HttpPost]
         [Authorize]

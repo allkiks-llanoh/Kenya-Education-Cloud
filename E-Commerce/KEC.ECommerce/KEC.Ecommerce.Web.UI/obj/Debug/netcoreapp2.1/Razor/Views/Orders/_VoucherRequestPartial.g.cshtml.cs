@@ -100,7 +100,7 @@ using KEC.ECommerce.Web.UI.Security.ViewModels;
             WriteLiteral("    </div>\r\n</div>\r\n<div class=\"row\">\r\n    <div class=\"cell-md-full\">\r\n        ");
             EndContext();
             BeginContext(509, 780, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "abb55295f55a492f96c75fb377a4374c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c72562007ffd453bb260052213daca91", async() => {
                 BeginContext(796, 14, true);
                 WriteLiteral("\r\n            ");
                 EndContext();
@@ -125,7 +125,7 @@ WriteAttributeValue("", 892, Model.OrderId, 892, 14, false);
                 WriteLiteral(" />\r\n            <div class=\"h-center\">\r\n                ");
                 EndContext();
                 BeginContext(964, 188, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "f7c87fa9e86d4c0b9180094bc58c6782", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "4f01721d615a48868ec8c78fb7b77c48", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();

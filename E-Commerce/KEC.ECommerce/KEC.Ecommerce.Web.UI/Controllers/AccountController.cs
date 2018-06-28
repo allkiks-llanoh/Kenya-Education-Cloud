@@ -118,7 +118,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
         {
             var mail = User.FindFirst("Email")?.Value;
             var orders = _uow.OrdersRepository.Find(p => p.CustomerEmail.Equals(mail) && p.Status == OrderStatus.Submitted);
-            var model = orders?.Select(p => new OrderViewModel(_uow, p))?.ToList();
+            var model = orders?.Select(p => new OrderViewModel(_uow, p))?.OrderByDescending(p=> p.OrderDate)?.ToList();
             return View(model);
         }
     }

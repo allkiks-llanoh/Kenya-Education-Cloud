@@ -10,13 +10,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="cell-md-8 h-center">
+        <div class="cell-md-3">
+            <ul class="v-menu bg-blue fg-white">
+                <li class="menu-title">Store</li>
+                <li>
+                   @await Component.InvokeAsync("VerticalMenu")
+                </li>
+                <li class="menu-title">Shop</li>
+                <li><a href="#"><span class="mif-cart icon"></span> Cart</a></li>
+            </ul>
+        </div>
+        <div class="cell-md-9">
             <div class="tiles-grid">
-                <a asp-action="Index" asp-controller="Home"
-                   data-role="tile" class="bg-green m-2">
-                    <span class="mif-add-shopping-cart icon"></span>
-                    <span class="branding-bar">Store</span>
-                </a>
                 <a asp-action="Orders" asp-controller="Account"
                    data-role="tile" class="bg-orange m-2">
                     <span class="mif-cart icon"></span>
