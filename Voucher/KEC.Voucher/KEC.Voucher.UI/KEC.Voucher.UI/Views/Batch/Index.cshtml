@@ -13,7 +13,7 @@
                 <div class="row">
 
                     <div class="col-xs-12 text-right">
-                        <span style="font-size:18px;">Counties Registerd</span>
+                        <span style="font-size:18px;">Counties<br /> Registered</span>
                         <h2 id="count">Loading...</h2>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
     </div>
     <div class="col-lg-3">
         <a href="#">
-            <div class="widget style1 red-bg">
+            <div class="widget style1 yellow-bg">
                 <div class="row">
 
                     <div class="col-xs-12 text-right">
@@ -48,11 +48,11 @@
     </div>
     <div class="col-lg-3">
         <a href="#">
-            <div class="widget style1 yellow-bg">
+            <div class="widget style1 red-bg">
                 <div class="row">
                     <div class="col-xs-12 text-right">
                         <span style="margin-left:25; font-size:18px; margin-top:20px;"> Counties with Missing Batches </span>
-                        <h2> <button onclick="show()" style="float:right;" class="btn btn-info">View List</button></h2>
+                        <h2> <button onclick="show()" style="float:right;" class="btn btn-danger">View List</button></h2>
                     </div>
                 </div>
             </div>
@@ -102,6 +102,19 @@
                     $('.footable2').footable();
 
                 });
+            </script>
+            <script type="text/javascript">
+
+                $("#list").hide();
+
+                function show() {
+                    var x = document.getElementById("list");
+                    if (x.style.display === "block") {
+                        x.style.display = "none";
+                    } else {
+                        x.style.display = "block";
+                    }
+                }
             </script>
             <script type="text/JavaScript">
                 function tableRows(data) {
