@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using RestSharp;
+using System.Linq;
 using System.Threading.Tasks;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -58,6 +59,34 @@ namespace KEC.ECommerce.Web.UI.Controllers
             }
           
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteOrder(int orderId)
+        {
+            var order = _uow.OrdersRepository.Get(orderId);
+            if (order.Status == OrderStatus.Submitted)
+            {
+                _uow.OrdersRepository.Remove(order);
+                _uow.Complete();
+                var model = GetOrders();
+                return PartialView("_OrdersPartial",model);
+            }
+            else
+            {
+                var model = GetOrders();
+                ModelState.AddModelError(string.Empty, "Oders cannot be deleted at this point");
+                return PartialView("_OrdersPartial", model);
+            }
+        }
+
+        private System.Collections.Generic.List<OrderViewModel> GetOrders()
+        {
+            var mail = User.FindFirst("Email")?.Value;
+            var orders = _uow.OrdersRepository.Find(p => p.CustomerEmail.Equals(mail) && p.Status == OrderStatus.Submitted);
+            var model = orders?.Select(p => new OrderViewModel(_uow, p))?.ToList();
+            return model;
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CompletePayment(int orderId , string voucherCode)
