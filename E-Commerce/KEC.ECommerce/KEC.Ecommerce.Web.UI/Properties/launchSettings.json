@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/KEC.ECommerce.Web.UI",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:53162/",
       "sslPort": 0
@@ -13,7 +17,8 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "use64Bit": true
     },
     "KEC.ECommerce.Web.UI": {
       "commandName": "Project",

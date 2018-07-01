@@ -9,6 +9,13 @@ namespace KEC.Voucher.Data.Repositories
         public VoucherPinRepository(VoucherDb context) : base(context)
         {
         }
+        public void MarkPinAsUsed(int id)
+        {
+            var ctx = _context as VoucherDb;
+           var pin = ctx.VoucherPins.Find(id);
+            pin.Status = PinStatus.Used;
+            ctx.SaveChanges();
+        }
         public string GetVoucherPin()
         {
             var pin = string.Empty;
