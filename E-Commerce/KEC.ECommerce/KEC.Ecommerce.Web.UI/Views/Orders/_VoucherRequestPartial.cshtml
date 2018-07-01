@@ -21,7 +21,7 @@
               data-ajax="true" data-ajax-update="#payment" data-ajax-method="POST" data-ajax-success="showValidationErrorInfoBox"
               data-ajax-mode="replace" data-ajax-loading="#spinner" asp-antiforgery="true">
             <input type="hidden" name="orderId" value="@Model.OrderId" />
-            <div class="ui stacked segment">
+            <div class="ui segment">
                 <div class="field">
                     <input type="text" asp-for="@Model.Vouchercode" required data-role="input" placeholder="Enter voucher code"
                            name="VoucherCode" data-prepend="<span>Voucher:</span>">
