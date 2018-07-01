@@ -18,3 +18,13 @@ E:\Projects\Miyabi\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.
 E:\Projects\Miyabi\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.AssemblyInfo.cs
 E:\Projects\Miyabi\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.dll
 E:\Projects\Miyabi\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.pdb
+C:\Users\LLANOH\Source\Repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\bin\Debug\netcoreapp2.0\Database.json
+C:\Users\LLANOH\Source\Repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\bin\Debug\netcoreapp2.0\KEC.ECommerce.Data.deps.json
+C:\Users\LLANOH\Source\Repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\bin\Debug\netcoreapp2.0\KEC.ECommerce.Data.dll
+C:\Users\LLANOH\Source\Repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\bin\Debug\netcoreapp2.0\KEC.ECommerce.Data.pdb
+C:\Users\LLANOH\Source\Repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.csprojAssemblyReference.cache
+C:\Users\LLANOH\Source\Repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.csproj.CoreCompileInputs.cache
+C:\Users\LLANOH\Source\Repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.AssemblyInfoInputs.cache
+C:\Users\LLANOH\Source\Repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.AssemblyInfo.cs
+C:\Users\LLANOH\Source\Repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.dll
+C:\Users\LLANOH\Source\Repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.pdb
