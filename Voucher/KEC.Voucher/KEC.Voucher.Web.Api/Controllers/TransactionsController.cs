@@ -63,7 +63,8 @@ namespace KEC.Voucher.Web.Api.Controllers
             }
             var voucherPin = _uow.VoucherPinRepository.Find(p => p.VoucherId == voucher.Id && 
                                                        !p.Status.Equals(PinStatus.Expired)
-                                                       && !p.Status.Equals(PinStatus.Used)).FirstOrDefault();
+                                                       && !p.Status.Equals(PinStatus.Used)
+                                                       && p.Pin.Equals(transactionParam.VoucherPin)).FirstOrDefault();
 
          
             if (voucherPin == null)
