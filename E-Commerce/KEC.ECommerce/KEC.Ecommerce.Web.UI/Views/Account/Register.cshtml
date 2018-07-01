@@ -15,30 +15,31 @@
                         await Html.RenderPartialAsync("_ValidationErrorPartial");
                     }
                     <div class="form-group">
-                        <input type="text" required asp-for="FirstName" data-role="input"  
-                              placeholder="First Name" data-clear-button="false"/>
+                        <input type="text" required asp-for="FirstName" data-role="input"
+                               placeholder="First Name" data-clear-button="false" />
                     </div>
                     <div class="form-group">
-                        <input type="text" required asp-for="LastName" data-role="input"  
-                           placeholder="Last Name"    data-clear-button="false"/>
+                        <input type="text" required asp-for="LastName" data-role="input"
+                               placeholder="Last Name" data-clear-button="false" />
                     </div>
                     <div class="form-group">
-                        <input type="email" required asp-for="EmailAddress" data-role="input" class="text-lower"  
-                               data-clear-button="false" placeholder="Email Address"/>
+                        <input type="email" required asp-for="EmailAddress" data-role="input" class="text-lower"
+                               data-clear-button="false" placeholder="Email Address" />
                     </div>
                     <div class="form-group">
-                        <input type="text" asp-for="IdentificationCode" data-role="input" class="text-upper" 
-                                data-clear-button="false" placeholder="Identification Code"/>
+                        <input type="text" asp-for="IdentificationCode" data-role="input" class="text-upper"
+                               data-clear-button="false" placeholder="Identification Code" />
                     </div>
                     <div class="form-group">
-                        <input type="password" required asp-for="Password" data-role="input" 
-                                data-clear-button="false" placeholder="Password"/>
+                        <input type="password" required asp-for="Password" data-role="input"
+                               data-clear-button="false" placeholder="Password" />
                     </div>
                     <div class="form-group">
-                        <input type="password" required asp-for="ConfirmPassword" data-role="input" 
-                         placeholder="Confirm Password"     data-clear-button="false"/>
+                        <input type="password" required asp-for="ConfirmPassword" data-role="input"
+                               placeholder="Confirm Password" data-clear-button="false" />
                     </div>
-                    <div class="clear mt-2 field">
+                    <hr class="fg-darkGray" />
+                    <div class="clear mt-2 field form-actions">
                         <button class="button success outline rounded place-left">Register</button>
                         <a role="button" asp-controller="Home" asp-action="Index" class="button alert outline rounded place-right">Cancel</a>
                     </div>
