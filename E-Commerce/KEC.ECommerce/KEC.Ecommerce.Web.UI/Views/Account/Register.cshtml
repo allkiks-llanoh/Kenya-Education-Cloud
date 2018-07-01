@@ -14,29 +14,29 @@
                     @{
                         await Html.RenderPartialAsync("_ValidationErrorPartial");
                     }
-                    <div class="field">
-                        <label asp-for="FirstName" class="fg-darkGray fg-black-hover"></label>
-                        <input type="text" required asp-for="FirstName" data-role="input" />
+                    <div class="form-group">
+                        <input type="text" required asp-for="FirstName" data-role="input"  
+                              placeholder="First Name" data-clear-button="false"/>
                     </div>
-                    <div class="field">
-                        <label asp-for="LastName" class="fg-darkGray fg-black-hover"></label>
-                        <input type="text" required asp-for="LastName" data-role="input" />
+                    <div class="form-group">
+                        <input type="text" required asp-for="LastName" data-role="input"  
+                           placeholder="Last Name"    data-clear-button="false"/>
                     </div>
-                    <div class="field">
-                        <label asp-for="EmailAddress" class="fg-darkGray fg-black-hover"></label>
-                        <input type="email" required asp-for="EmailAddress" data-role="input" class="text-lower" />
+                    <div class="form-group">
+                        <input type="email" required asp-for="EmailAddress" data-role="input" class="text-lower"  
+                               data-clear-button="false" placeholder="Email Address"/>
                     </div>
-                    <div class="field">
-                        <label asp-for="IdentificationCode" class="fg-darkGray fg-black-hover"></label>
-                        <input type="text" asp-for="IdentificationCode" data-role="input" class="text-upper" />
+                    <div class="form-group">
+                        <input type="text" asp-for="IdentificationCode" data-role="input" class="text-upper" 
+                                data-clear-button="false" placeholder="Identification Code"/>
                     </div>
-                    <div class="field">
-                        <label asp-for="Password" class="fg-darkGray fg-black-hover"></label>
-                        <input type="password" required asp-for="Password" data-role="input" />
+                    <div class="form-group">
+                        <input type="password" required asp-for="Password" data-role="input" 
+                                data-clear-button="false" placeholder="Password"/>
                     </div>
-                    <div class="field">
-                        <label asp-for="ConfirmPassword" class="fg-darkGray fg-black-hover"></label>
-                        <input type="password" required asp-for="ConfirmPassword" data-role="input" />
+                    <div class="form-group">
+                        <input type="password" required asp-for="ConfirmPassword" data-role="input" 
+                         placeholder="Confirm Password"     data-clear-button="false"/>
                     </div>
                     <div class="clear mt-2 field">
                         <button class="button success outline rounded place-left">Register</button>
