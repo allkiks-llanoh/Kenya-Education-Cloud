@@ -22,7 +22,8 @@
             <div class="ui segment">
                 <div class="field">
                     <input type="text" required data-role="input" placeholder="Enter voucher pin"
-                           name="voucherPin" asp-for="@Model.VoucherPin" data-prepend="<span>Pin:</span>">
+                           name="voucherPin" asp-for="@Model.VoucherPin" data-prepend="<span>Pin:</span>"
+                           data-clear-button="false">
                     <button class="button info outline rounded mt-2">Submit Pin</button>
                 </div>
             </div>
