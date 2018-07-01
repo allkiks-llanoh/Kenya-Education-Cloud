@@ -35,7 +35,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         }
 
         // POST api/<controller>
-        public HttpResponseMessage Post([FromBody]TransactionParam transactionParam)
+        public HttpResponseMessage Post(TransactionParam transactionParam)
         {
             var voucherCode = transactionParam.VoucherCode;
             var adminEmail = transactionParam.Email;
