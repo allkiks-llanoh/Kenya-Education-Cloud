@@ -7,7 +7,7 @@ namespace KEC.Voucher.Web.Api.Models
 {
     public class TransactionParam
     {
-        public string Pin { get; set; }
+        public string voucherPin { get; set; }
         public string VoucherCode { get; set; }
         public string Email { get; set; }
         public decimal Amount { get; set; }

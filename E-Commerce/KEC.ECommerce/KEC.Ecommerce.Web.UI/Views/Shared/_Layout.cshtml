@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>@ViewData["Title"] | KEC Store</title>
 
-    <environment include="Development">
+    <environment names="Development">
         <link rel="stylesheet" href="~/lib/owl/css/owl.theme.default.min.css" />
         <link rel="stylesheet" href="~/lib/owl/css/animate.css" />
         <link rel="stylesheet" href="~/lib/owl/css/owl.carousel.min.css" />
@@ -19,7 +19,8 @@
         <link rel="stylesheet" href="~/css/tables.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
-    <environment exclude="Development">
+    <environment names="Production">
+
         <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"
               asp-fallback-href="~/lib/metro/css/metro-all.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />

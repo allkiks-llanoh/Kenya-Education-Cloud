@@ -3582,11 +3582,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj",
+      "projectUniqueName": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj",
       "projectName": "KEC.ECommerce.Data",
-      "projectPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj",
+      "projectPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj",
       "packagesPath": "C:\\Users\\LLANOH\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\obj\\",
+      "outputPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

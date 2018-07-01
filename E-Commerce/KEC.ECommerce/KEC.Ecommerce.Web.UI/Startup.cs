@@ -6,7 +6,10 @@ using KEC.ECommerce.Web.UI.Security.Extensions;
 using KEC.ECommerce.Web.UI.Security.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +26,10 @@ namespace KEC.ECommerce.Web.UI
                  .AddJsonFile("appsettings.json");
             Configuration = builder.Build();
         }
-
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -38,6 +44,21 @@ namespace KEC.ECommerce.Web.UI
             {
                 var connectionString = Configuration.GetConnectionString("IdentityDataContext");
                 options.UseSqlServer(connectionString);
+            });
+            services.Configure<IISOptions>(options =>
+            {
+                options.ForwardClientCertificate = false;
+                
+            });
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost;
+            });
+            services.Configure<MvcOptions>(option =>
+            {
+                option.OutputFormatters.RemoveType
+                <XmlDataContractSerializerOutputFormatter>();
             });
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDataContext>()
@@ -73,6 +94,7 @@ namespace KEC.ECommerce.Web.UI
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseForwardedHeaders();
             app.UseAuthentication();
             app.UseSession();
             app.UseStaticFiles();
