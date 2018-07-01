@@ -12,12 +12,11 @@
     <div class="row">
         <div class="cell-md-3">
             <ul class="v-menu bg-blue fg-white">
+                <li class="bg-green">@await Component.InvokeAsync("ShoppingCart")</li>
                 <li class="menu-title">Store</li>
                 <li>
-                   @await Component.InvokeAsync("VerticalMenu")
+                    @await Component.InvokeAsync("VerticalMenu")
                 </li>
-                <li class="menu-title">Shop</li>
-                <li><a href="#"><span class="mif-cart icon"></span> Cart</a></li>
             </ul>
         </div>
         <div class="cell-md-9">
@@ -37,7 +36,7 @@
                     <span class="mif-money icon"></span>
                     <span class="branding-bar">Purchases</span>
                 </a>
-                <a asp-action="Index" asp-controller="Home"
+                <a asp-action="Licences" asp-controller="Account"
                    data-role="tile" class="bg-pink m-2">
                     <span class="mif-library icon"></span>
                     <span class="branding-bar">Purchased Licences</span>

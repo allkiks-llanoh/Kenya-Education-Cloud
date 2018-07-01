@@ -5,43 +5,48 @@
 <div class="grid">
     <div class="row">
         <div class="cell-md-6 h-center">
-            <form role="form" class="p-2 border bd-blue" asp-action="Register"
+            <form role="form" class="p-2" asp-action="Register"
                   asp-controller="Account" asp-antiforgery="true">
-                <div class="ui horizontal divider">
-                    <p class="text-center text-bold text-upper fg-orange">User Registration</p>
-                </div>
-                @{
-                    await Html.RenderPartialAsync("_ValidationErrorPartial");
-                }
-                <div class="form-group">
-                    <label asp-for="FirstName"></label>
-                    <input type="text" required asp-for="FirstName" data-role="input" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="LastName"></label>
-                    <input type="text" required asp-for="LastName" data-role="input" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="EmailAddress"></label>
-                    <input type="email" required asp-for="EmailAddress" data-role="input" class="text-lower" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="IdentificationCode"></label>
-                    <input type="text" asp-for="IdentificationCode" data-role="input" class="text-upper" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password"></label>
-                    <input type="password" required asp-for="Password" data-role="input" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="ConfirmPassword"></label>
-                    <input type="password" required asp-for="ConfirmPassword" data-role="input" />
-                </div>
-                <div class="clear mt-2">
-                    <button class="button success outline rounded place-left">Register</button>
-                    <a role="button" asp-controller="Home" asp-action="Index" class="button alert outline rounded place-right">Cancel</a>
+                <div class="ui stacked segment">
+                    <div class="ui horizontal divider">
+                        <p class="text-center text-bold text-upper fg-orange">User Registration</p>
+                    </div>
+                    @{
+                        await Html.RenderPartialAsync("_ValidationErrorPartial");
+                    }
+                    <div class="field">
+                        <label asp-for="FirstName" class="fg-darkGray fg-black-hover"></label>
+                        <input type="text" required asp-for="FirstName" data-role="input" />
+                    </div>
+                    <div class="field">
+                        <label asp-for="LastName" class="fg-darkGray fg-black-hover"></label>
+                        <input type="text" required asp-for="LastName" data-role="input" />
+                    </div>
+                    <div class="field">
+                        <label asp-for="EmailAddress" class="fg-darkGray fg-black-hover"></label>
+                        <input type="email" required asp-for="EmailAddress" data-role="input" class="text-lower" />
+                    </div>
+                    <div class="field">
+                        <label asp-for="IdentificationCode" class="fg-darkGray fg-black-hover"></label>
+                        <input type="text" asp-for="IdentificationCode" data-role="input" class="text-upper" />
+                    </div>
+                    <div class="field">
+                        <label asp-for="Password" class="fg-darkGray fg-black-hover"></label>
+                        <input type="password" required asp-for="Password" data-role="input" />
+                    </div>
+                    <div class="field">
+                        <label asp-for="ConfirmPassword" class="fg-darkGray fg-black-hover"></label>
+                        <input type="password" required asp-for="ConfirmPassword" data-role="input" />
+                    </div>
+                    <div class="clear mt-2 field">
+                        <button class="button success outline rounded place-left">Register</button>
+                        <a role="button" asp-controller="Home" asp-action="Index" class="button alert outline rounded place-right">Cancel</a>
+                    </div>
                 </div>
             </form>
+            <div class="ui message bg-orange fg-white">
+                <a asp-controller="Account" asp-action="Login" class="fg-white">Already have an account? Login</a>
+            </div>
         </div>
     </div>
 </div>

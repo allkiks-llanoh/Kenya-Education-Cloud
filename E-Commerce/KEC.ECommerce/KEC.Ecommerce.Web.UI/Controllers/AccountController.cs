@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Models;
+using KEC.ECommerce.Web.UI.Pagination;
 using KEC.ECommerce.Web.UI.Security.Models;
 using KEC.ECommerce.Web.UI.Security.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -17,12 +18,15 @@ namespace KEC.ECommerce.Web.UI.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IUnitOfWork _uow;
+        private readonly IPageHelper<Licence> _paginationHelper;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,IUnitOfWork uow)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager
+            , IPageHelper<Licence> paginationHelper, IUnitOfWork uow)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _uow = uow;
+            _paginationHelper = paginationHelper;
         }
         [Authorize]
         public IActionResult Dashboard()
@@ -120,6 +124,26 @@ namespace KEC.ECommerce.Web.UI.Controllers
             var orders = _uow.OrdersRepository.Find(p => p.CustomerEmail.Equals(mail) && p.Status == OrderStatus.Submitted);
             var model = orders?.Select(p => new OrderViewModel(_uow, p))?.OrderByDescending(p=> p.OrderDate)?.ToList();
             return View(model);
+        }
+        [Authorize]
+        public IActionResult Licences(string searchTerm, int pageNumber = 1)
+        {
+            var code = User.FindFirst("IdentificationCode")?.Value;
+            var licencesQuery = _uow.LicencesRepository.QueryableLicences(code, searchTerm);
+            var result = _paginationHelper.GetPage(licencesQuery, pageNumber);
+            var model = new LicencePageViewModel
+            {
+                Licences = result.Items?.Select(p => new LicenceViewModel(_uow, p)),
+                Pager = result.Pager
+            };
+            if (searchTerm != null)
+            {
+                return PartialView("_LicenceListPartial", model);
+            }
+            else
+            {
+                return View(model);
+            }
         }
     }
 }

@@ -14,16 +14,18 @@
     </div>
 </div>
 <div class="row">
-    <div class="cell-md-full">
-        <form class="h-center inline-form" asp-controller="Order" asp-action="ProcessPin">
-            @Html.AntiForgeryToken()
-            <div class="h-center">
-                <input type="text" required data-role="input" placeholder="Enter voucher pin"
-                       name="VoucherPin" asp-for="@Model.VoucherPin" data-prepend="<span>Pin:</span>">
-                <input type="hidden" asp-for="@Model.OrderId" />
-                <button class="button info outline rounded m-2 place-right">Submit Pin</button>
+    <div class="cell-md-6 h-center">
+        <form class="m-2" asp-controller="Orders" asp-action="CompletePayment" asp-antiforgery="true"
+              asp-route-orderId="@Model.OrderId" asp-route-voucherCode="@Model.VoucherCode" 
+              data-ajax="true" data-ajax-update="#payment" data-ajax-method="POST" data-ajax-success="showValidationErrorInfoBox"
+              data-ajax-mode="replace" data-ajax-loading="#spinner">
+            <div class="ui stacked segment">
+                <div class="field">
+                    <input type="text" required data-role="input" placeholder="Enter voucher pin"
+                           name="voucherPin" asp-for="@Model.VoucherPin" data-prepend="<span>Pin:</span>">
+                    <button class="button info outline rounded mt-2">Submit Pin</button>
+                </div>
             </div>
-
         </form>
     </div>
 </div>

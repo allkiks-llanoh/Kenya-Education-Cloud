@@ -9,7 +9,7 @@ namespace KEC.ECommerce.Data.Models
         #region Properties
         public int Id { get; set; }
         public string Code { get; set; }
-        public string SchoolCode { get; set; }
+        public string IdentificationCode { get; set; }
         public DateTime ExpiryDate { get; set; }
         #endregion
 

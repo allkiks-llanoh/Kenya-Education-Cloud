@@ -1,0 +1,24 @@
+﻿@model LicencePageViewModel
+@{
+    ViewData["Title"] = "Licences";
+}
+<div class="border bd-blue">
+    <div class="grid">
+        <div class="row">
+            <div class="cell-md-full">
+                @{
+                    await Html.RenderPartialAsync("_LicenceListPartial", Model);
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-md-12 p-2">
+                <div class="pagination-container m-2 border bd-blue">
+                    <ul id="pagination" class="mt-2"></ul>
+                    <input asp-for="Pager.NumberOfPages" type="hidden" id="hdnTotalNumberOfPages" value="@Model.Pager.NumberOfPages" />
+                    <input asp-for="Pager.CurrentPage" type="hidden" id="hdnCurrentPage" value="@Model.Pager.CurrentPage" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

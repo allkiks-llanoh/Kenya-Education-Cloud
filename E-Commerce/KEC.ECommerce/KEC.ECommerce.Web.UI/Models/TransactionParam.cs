@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace KEC.ECommerce.Web.UI.Models
+{
+    public class TransactionParam
+    {
+        public string VoucherPin { get; set; }
+        public string VoucherCode { get; set; }
+        public string Email { get; set; }
+        public decimal Amount { get; set; }
+        public string Description { get; set; }
+    }
+}
