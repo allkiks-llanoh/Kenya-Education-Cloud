@@ -20,11 +20,11 @@ namespace KEC.Voucher.Web.Api.Models
                 return _dbTransaction.Id;
             }
         }
-        public string Pin
+        public decimal Balance
         {
             get
             {
-                return _uow.VoucherPinRepository.Get(_dbTransaction.PinId).Pin;
+                return _dbTransaction.Voucher.Wallet.WalletAmount;
             }
         }
         public string TransactionDescription

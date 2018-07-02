@@ -33,6 +33,16 @@ namespace KEC.Voucher.Web.Api.Controllers
                 Request.CreateResponse(HttpStatusCode.OK, value: new Transaction(dbTransaction, _uow));
 
         }
+        // GET api/<controller>/5
+        [HttpGet, Route("email")]
+        public HttpResponseMessage GetTransactionByEmail(string email)
+        {
+            var dbTransaction = _uow.TransactionRepository.Find(p => p.SchoolAdmin.Email.Equals(email)).ToList();
+            return dbTransaction.Any() ? Request.CreateResponse(HttpStatusCode.OK, value: dbTransaction.Select(v => new Models.Transaction(v, _uow)).ToList()) :
+               Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "Transaction not found");
+
+        }
+
 
         // POST api/<controller>
         public HttpResponseMessage Post(TransactionParam transactionParam)

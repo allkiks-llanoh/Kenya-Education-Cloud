@@ -17,7 +17,9 @@ namespace KEC.Voucher.UI.Controllers
                 var voucherUser = new VoucherUser
                 {
                     Guid = user.Id,
-                    FullName = user.FullName
+                    FullName = user.FullName,
+                    Email = user.UserName
+                    
                 };
                 return View(voucherUser);
             }
@@ -31,7 +33,8 @@ namespace KEC.Voucher.UI.Controllers
                 var voucherUser = new VoucherUser
                 {
                     Guid = user.Id,
-                    FullName = user.FullName
+                    FullName = user.FullName,
+                    Email = user.UserName
                 };
                 return View(voucherUser);
             }
