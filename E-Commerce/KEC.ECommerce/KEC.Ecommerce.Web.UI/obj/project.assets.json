@@ -12117,11 +12117,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Web.UI\\KEC.ECommerce.Web.UI.csproj",
+      "projectUniqueName": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Web.UI\\KEC.ECommerce.Web.UI.csproj",
       "projectName": "KEC.ECommerce.Web.UI",
-      "projectPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Web.UI\\KEC.ECommerce.Web.UI.csproj",
+      "projectPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Web.UI\\KEC.ECommerce.Web.UI.csproj",
       "packagesPath": "C:\\Users\\LLANOH\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Web.UI\\obj\\",
+      "outputPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Web.UI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12140,8 +12140,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj": {
-              "projectPath": "C:\\Users\\LLANOH\\source\\repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj"
+            "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj": {
+              "projectPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj"
             }
           }
         }
@@ -12160,8 +12160,10 @@
             "version": "[1.6.19, )"
           },
           "Microsoft.AspNetCore.App": {
+            "suppressParent": "All",
             "target": "Package",
-            "version": "[2.1.1, )"
+            "version": "[2.1.1, )",
+            "autoReferenced": true
           },
           "Microsoft.NETCore.App": {
             "target": "Package",
