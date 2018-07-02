@@ -30,8 +30,13 @@ namespace KEC.ECommerce.Web.UI.Controllers
         {
             var mail = User.FindFirst("Email")?.Value;
             var order = await _uow.OrdersRepository.GetOrderByUser(orderId, mail, OrderStatus.Submitted);
-            var model = new OrderViewModel(_uow, order, true);
+            var model = default(OrderViewModel);
+            if (order != null)
+            {
+                model = new OrderViewModel(_uow, order, true);
+            }
             return View(model);
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

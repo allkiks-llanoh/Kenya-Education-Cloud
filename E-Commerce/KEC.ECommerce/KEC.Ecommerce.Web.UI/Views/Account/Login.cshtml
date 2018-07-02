@@ -8,25 +8,29 @@
         <div class="cell-md-4 h-center v-center">
             <form role="form" asp-action="Login"
                   asp-controller="Account" asp-antiforgery="true">
-                <div class="ui stacked segment">
+                <div class="ui segment">
                     <div class="ui horizontal divider">
                         <p class="text-center text-bold text-upper fg-orange">Welcome back</p>
                     </div>
                     @{
                         await Html.RenderPartialAsync("_ValidationErrorPartial");
                     }
-                    <div class="field">
-                        <label asp-for="EmailAddress" class="fg-darkGray fg-black-hover"></label>
-                        <input type="email" required asp-for="EmailAddress" data-role="input" class="text-lower" />
+                    <div class="form-group">
+                        <input type="email" required asp-for="EmailAddress" placeholder="Email Address"
+                               data-prepend="<span class='mif-user icon'></span>"
+                               data-role="input" data-clear-button="false" />
                     </div>
-                    <div class="field">
-                        <label asp-for="Password" class="fg-darkGray fg-black-hover"></label>
-                        <input type="password" required asp-for="Password" data-role="input" />
+                    <div class="field form-group">
+                        <input type="password" required asp-for="Password" placeholder="Password"
+                               data-prepend="<span class='mif-lock icon'></span>" data-role="input"
+                               data-clear-button="false" />
                     </div>
-                    <div class="field">
+                    <hr class="fg-darkGray" />
+                    <div class=" form-group">
                         <input type="checkbox" asp-for="RememberMe" data-role="checkbox" data-caption="Remember me">
                     </div>
-                    <div class="clear mt-2 field">
+                    <hr class="fg-darkGray" />
+                    <div class="clear mt-2 form-actions">
                         <button class="button success outline rounded place-left">Login</button>
                         <a role="button" asp-controller="Home" asp-action="Index" class="button alert outline rounded place-right">Cancel</a>
                     </div>
