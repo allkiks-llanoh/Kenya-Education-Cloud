@@ -30,7 +30,8 @@ namespace KEC.ECommerce.Data.Repositories
             var currentDate = DateTime.Now;
             if (searchTerm == null)
             {
-                licences = _ecommerceContext.Licences.Where(p => p.IdentificationCode.Equals(identificationCode) && p.ExpiryDate >= currentDate);
+                licences = _ecommerceContext.Licences.Where(p => p.IdentificationCode.Equals(identificationCode) && p.ExpiryDate >= currentDate)
+                                                      .OrderByDescending(p => p.ExpiryDate);
             }
             else
             {
@@ -41,7 +42,8 @@ namespace KEC.ECommerce.Data.Repositories
                                                                     p.Publication.Subject.Name.Contains(searchTerm) ||
                                                                     p.Publication.Publisher.Company.Contains(searchTerm) ||
                                                                     p.Publication.Author.FirstName.Contains(searchTerm) ||
-                                                                    p.Publication.Author.LastName.Contains(searchTerm));
+                                                                    p.Publication.Author.LastName.Contains(searchTerm))
+                                                                    .OrderByDescending(p=> p.ExpiryDate);
             }
 
             return licences;
