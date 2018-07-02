@@ -2,6 +2,6 @@
 {
     public interface IPageConfig
     {
-        int PageSize { get; }
+        int PageSize { get; set; }
     }
 }

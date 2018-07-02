@@ -27,6 +27,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             _signInManager = signInManager;
             _uow = uow;
             _paginationHelper = paginationHelper;
+            _paginationHelper.PageConfig.PageSize = 10;
         }
         [Authorize]
         public IActionResult Dashboard()
@@ -126,7 +127,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             return View(model);
         }
         [Authorize]
-        public IActionResult Licences(string searchTerm, int pageNumber = 1)
+        public IActionResult Licences(int pageNumber = 1, string searchTerm=null)
         {
             var code = User.FindFirst("IdentificationCode")?.Value;
             var licencesQuery = _uow.LicencesRepository.QueryableLicences(code, searchTerm);

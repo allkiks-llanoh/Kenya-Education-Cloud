@@ -4,18 +4,20 @@ namespace KEC.ECommerce.Web.UI.Pagination
 {
     public class PageConfig : IPageConfig
     {
-        private readonly IConfiguration _configuration;
+       
+        private int _pageSize;
 
-        public PageConfig(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        
         public int PageSize
         {
             get
             {
-                int.TryParse(_configuration["Pager:PageSize"], out int val);
-                return val < 1 ? 20 : val;
+                
+                return _pageSize < 1 ? 20 : _pageSize;
+            }
+            set
+            {
+                _pageSize = value;
             }
         }
     }
