@@ -1,0 +1,20 @@
+﻿@model LicencePageViewModel
+<table class="table striped table-border cell-border">
+    <thead>
+        <tr>
+            <th>Licence Code</th>
+            <th>Publication</th>
+            <th>Expiry Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var licence in Model.Licences)
+        {
+            <tr>
+                <td class="license">@licence.Code</td>
+                <td class="license">@licence.Publication</td>
+                <td class="license">@licence.ExpiryDate</td>
+            </tr>
+        }
+    </tbody>
+</table>

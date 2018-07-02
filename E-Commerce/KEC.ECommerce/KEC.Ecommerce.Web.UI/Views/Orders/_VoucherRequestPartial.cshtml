@@ -16,18 +16,19 @@
     </div>
 </div>
 <div class="row">
-    <div class="cell-md-full">
-        <form class="h-center inline-form" asp-controller="Orders" asp-action="ProcessVoucher"
+    <div class="cell-md-6 h-center">
+        <form asp-controller="Orders" class="m-2" asp-action="ProcessVoucher"
               data-ajax="true" data-ajax-update="#payment" data-ajax-method="POST" data-ajax-success="showValidationErrorInfoBox"
-              data-ajax-mode="replace" data-ajax-loading="#spinner">
-            @Html.AntiForgeryToken();
+              data-ajax-mode="replace" data-ajax-loading="#spinner" asp-antiforgery="true">
             <input type="hidden" name="orderId" value="@Model.OrderId" />
-            <div class="h-center">
-                <input type="text" asp-for="@Model.Vouchercode" required data-role="input" placeholder="Enter voucher code"
-                       name="VoucherCode" data-prepend="<span>Voucher:</span>">
-                <button class="button info outline rounded m-2 place-right">Submit Code</button>
+            <div class="ui segment">
+                <div class="form-group">
+                    <input type="text" asp-for="@Model.Vouchercode" required data-role="input" placeholder="Enter voucher code"
+                           name="VoucherCode" data-prepend="<span>Voucher:</span>" data-clear-button="false">
+                    <button class="button info outline rounded mt-2">Submit Code</button>
+                </div>
             </div>
-
         </form>
+
     </div>
 </div>

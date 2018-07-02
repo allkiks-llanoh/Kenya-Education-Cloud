@@ -5,29 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>@ViewData["Title"] | KEC Store</title>
 
-    <environment include="Development">
+    <environment names="Development">
         <link rel="stylesheet" href="~/lib/owl/css/owl.theme.default.min.css" />
         <link rel="stylesheet" href="~/lib/owl/css/animate.css" />
         <link rel="stylesheet" href="~/lib/owl/css/owl.carousel.min.css" />
-        <link rel="stylesheet" href="~/lib/semantic-ui/css/divider.min.css" />
-        <link rel="stylesheet" href="~/lib/semantic-ui/css/step.min.css" />
         <link rel="stylesheet" href="~/css/fluid-typography.css" />
         <link rel="stylesheet" href="~/css/ribbon.css" />
         <link rel="stylesheet" href="~/css/spinner.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/components/divider.min.css" />
         <link rel="stylesheet" href="~/lib/metro/css/metro-all.min.css" />
         <link rel="stylesheet" href="~/lib/simple-pagination/css/simplePagination.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/components/form.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/components/segment.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/components/step.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/components/message.min.css" />
         <link rel="stylesheet" href="~/css/tables.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
-    <environment exclude="Development">
+    <environment names="Production">
+
         <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css"
               asp-fallback-href="~/lib/metro/css/metro-all.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/lib/owl/css/owl.theme.default.min.css" />
         <link rel="stylesheet" href="~/lib/owl/css/animate.css" />
         <link rel="stylesheet" href="~/lib/owl/css/owl.carousel.min.css" />
-        <link rel="stylesheet" href="~/lib/semantic-ui/css/step.min.css" />
-        <link rel="stylesheet" href="~/lib/semantic-ui/css/divider.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/components/divider.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/components/form.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/components/segment.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/components/message.min.css" />
+        <link rel="stylesheet" href="~/lib/semantic-ui/components/step.min.css" />
         <link rel="stylesheet" href="~/css/fluid-typography.css" />
         <link rel="stylesheet" href="~/css/ribbon.css" />
         <link rel="stylesheet" href="~/css/spinner.css" />
@@ -85,7 +92,7 @@
         </div>
         <div id="footer" class="bg-blue fg-white">
             <footer>
-                <p>&copy; 2018 - Kenya Education Cloud Book Store</p>
+                <p>&copy; 2018 - KEC.ECommerce.Web.UI</p>
             </footer>
         </div>
     </div>
@@ -108,12 +115,10 @@
         <script src="~/lib/jquery/jquery.unobtrusive-ajax.min.js"></script>
         <script src="~/lib/jquery/jquery.matchHeight-min.js"></script>
         <script src="~/lib/simple-pagination/js/jquery.simplePagination.js"></script>
-        <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"
-                asp-fallback-src="~/lib/metro/js/metro.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+        <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js" asp-fallback-src="~/lib/metro/js/metro.min.js" 
                 crossorigin="anonymous">
         </script>
-        <script src="~/lib/owl/js/owl.carousel.min.js" asp-append-version="true"></script>
+        <script src="~/lib/owl/js/owl.carousel.min.js"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 

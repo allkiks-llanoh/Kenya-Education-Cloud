@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Helpers;
 using KEC.ECommerce.Web.UI.Models;
@@ -10,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KEC.ECommerce.Web.UI.Controllers
 {
-   
+
     public class ShoppingController : Controller
     {
         private readonly IUnitOfWork _uow;
@@ -78,7 +77,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             var cartActions = new ShoppingCartActions(_uow, HttpContext);
             var cart = cartActions.ShoppingCart;
             cartActions.DestroyCart();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Dashboard", "Account");
         }
         [HttpPost]
         [Authorize]

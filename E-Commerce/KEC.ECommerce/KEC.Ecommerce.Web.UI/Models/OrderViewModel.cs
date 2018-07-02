@@ -84,5 +84,12 @@ namespace KEC.ECommerce.Web.UI.Models
                 return _order.Status;
             }
         }
+        public DateTime OrderDate
+        {
+            get
+            {
+                return _order.SubmittedAt;
+            }
+        }
     }
 }

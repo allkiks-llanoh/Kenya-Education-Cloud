@@ -9,19 +9,28 @@ namespace KEC.ECommerce.Web.UI.Models
     {
         private readonly IUnitOfWork _uow;
         private readonly Order _order;
-        private readonly HttpContext _context;
+        private readonly string _userEmail;
+        private readonly string _identificationCode;
 
-        public OrderActions(IUnitOfWork uow, Order order, HttpContext context)
+        public OrderActions(IUnitOfWork uow, Order order, string userEmail,string identificationCode)
         {
             _uow = uow;
             _order = order;
-            _context = context;
+            _userEmail = userEmail;
+            _identificationCode = identificationCode;
         }
         public void PostVoucherPayment(string pinNumber)
         {
-            //TODO: Post transaction to the api
+            ChangeOrderStatus();
             PostPaymentRecord(pinNumber,PaymentMethod.Voucher);
             DeductSoldQuantities();
+        }
+
+        private void ChangeOrderStatus()
+        {
+            var order = _uow.OrdersRepository.Get(_order.Id);
+            order.Status = OrderStatus.Paid;
+            _uow.Complete();
         }
 
         public void GenerateLicences()
@@ -36,7 +45,8 @@ namespace KEC.ECommerce.Web.UI.Models
                         Code = _uow.LicencesRepository.GetNextLicence(),
                         PublicationId = lineItem.PublicationId,
                         OrderId = _order.Id,
-                        ExpiryDate = DateTime.Now.AddYears(1)
+                        ExpiryDate = DateTime.Now.AddYears(1),
+                        IdentificationCode = _identificationCode
                     };
                     _uow.LicencesRepository.Add(licence);
                 }
@@ -64,7 +74,7 @@ namespace KEC.ECommerce.Web.UI.Models
             {
                 TransactionNumber = transactionId,
                 TransactionDate = DateTime.Now,
-                TransactedBy = _context.User.Identity.Name,
+                TransactedBy = _userEmail,
                 OrderId = _order.Id,
                 PaymentMethod = method
             };

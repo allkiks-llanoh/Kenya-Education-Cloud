@@ -24,6 +24,7 @@ namespace KEC.ECommerce.Data.Repositories
                                             .Take(count).ToListAsync();
             return publications;
         }
+
         public IEnumerable<Publication> TopProductsPerCategory(int categoryId, int count = 4)
         {
             var publications = _ecommerceContext.Publications
@@ -51,12 +52,24 @@ namespace KEC.ECommerce.Data.Repositories
                                                .FirstOrDefault(p => p.Id.Equals(publicationId));
             return publication;
         }
-        public IQueryable<Publication> QueryablePublications(int categoryId,string searchTerm)
+        public bool AddPublicationToStore(Publication publication)
+        {
+            var notExist = !_ecommerceContext.Publications.Any(p => p.ContentNumber.Equals(publication.ContentNumber));
+            var added = default(bool);
+            if (notExist)
+            {
+                _ecommerceContext.Publications.Add(publication);
+                _ecommerceContext.SaveChanges();
+                added = true;
+            }
+            return added;
+        }
+        public IQueryable<Publication> QueryablePublications(int categoryId, string searchTerm)
         {
             var publications = default(IQueryable<Publication>);
             if (searchTerm == null)
             {
-                 publications = _ecommerceContext.Publications.Where(p => p.CategoryId.Equals(categoryId));
+                publications = _ecommerceContext.Publications.Where(p => p.CategoryId.Equals(categoryId));
             }
             else
             {
@@ -66,10 +79,10 @@ namespace KEC.ECommerce.Data.Repositories
                                                                     || p.Title.Contains(searchTerm) ||
                                                                     p.Subject.Name.Contains(searchTerm) ||
                                                                     p.Publisher.Company.Contains(searchTerm) ||
-                                                                    p.Author.FirstName.Contains(searchTerm) || 
-                                                                    p.Author.LastName.Contains(searchTerm)); 
+                                                                    p.Author.FirstName.Contains(searchTerm) ||
+                                                                    p.Author.LastName.Contains(searchTerm));
             }
-          
+
             return publications;
         }
     }

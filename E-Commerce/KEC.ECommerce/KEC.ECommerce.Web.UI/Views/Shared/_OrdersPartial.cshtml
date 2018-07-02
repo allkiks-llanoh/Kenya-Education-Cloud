@@ -1,0 +1,44 @@
+﻿@model IEnumerable<OrderViewModel>
+<div class="row">
+    <div class="cell-md-full">
+        @{
+            await Html.RenderPartialAsync("_ValidationErrorPartial");
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="cell-md-full">
+        <table class="table striped table-border cell-border">
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="orders">
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td class="cart">@order.OrderNumber</td>
+                        <td class="cart">@order.OrderDate</td>
+                        <td class="cart">@order.ItemsCount</td>
+                        <td class="cart">@order.TotalCost</td>
+                        <td class="cart">
+                            <form class="inline-form" asp-controller="Orders" asp-action="DeleteOrder" asp-route-orderId="@order.Id"
+                                  data-ajax="true" data-ajax-update="#orders" data-ajax-method="DELETE" data-ajax-mode="replace"
+                                  data-ajax-loading="#spinner" asp-antiforgery="true">
+                                @Html.AntiForgeryToken()
+                                <a role="button" asp-route-orderId="@order.Id" asp-controller="Orders" asp-action="Payment" class="button success outline rounded m-1 size-small"><span class="mif-money"></span>Pay</a>
+                                <button type="submit" class="button alert outline rounded m-1 size-small"><span class="mif-bin"></span></button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -6,6 +6,7 @@ namespace KEC.ECommerce.Data.Models
     {
         #region Properties
         public int Id { get; set; }
+        public string ContentNumber { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal UnitPrice { get; set; }
@@ -13,6 +14,7 @@ namespace KEC.ECommerce.Data.Models
         public int Quantity { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+        public bool Available { get; set; }
         #endregion
 
 

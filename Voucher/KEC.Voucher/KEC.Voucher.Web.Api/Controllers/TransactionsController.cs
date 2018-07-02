@@ -33,6 +33,16 @@ namespace KEC.Voucher.Web.Api.Controllers
                 Request.CreateResponse(HttpStatusCode.OK, value: new Transaction(dbTransaction, _uow));
 
         }
+        // GET api/<controller>/5
+        [HttpGet, Route("email")]
+        public HttpResponseMessage GetTransactionByEmail(string email)
+        {
+            var dbTransaction = _uow.TransactionRepository.Find(p => p.SchoolAdmin.Email.Equals(email)).ToList();
+            return dbTransaction.Any() ? Request.CreateResponse(HttpStatusCode.OK, value: dbTransaction.Select(v => new Models.Transaction(v, _uow)).ToList()) :
+               Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "Transaction not found");
+
+        }
+
 
         // POST api/<controller>
         public HttpResponseMessage Post(TransactionParam transactionParam)
@@ -43,7 +53,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             var transactionDescription = transactionParam.Description;
             var voucher = _uow.VoucherRepository.Find(p => p.VoucherCode.Equals(voucherCode)
                                                       && p.Status.StatusValue==VoucherStatus.Active).FirstOrDefault();
-            var admin = _uow.SchoolAdminRepository.Find(p => p.guid.Equals(adminEmail)).FirstOrDefault();
+            var admin = _uow.SchoolAdminRepository.Find(p => p.Email.Equals(adminEmail)).FirstOrDefault();
             var requestError = Request.CreateErrorResponse(HttpStatusCode.Forbidden, 
                 message: "Invalid voucher number or pin or School admin or transction amount or description");
             if (voucherCode == null || adminEmail == null || transactionAmount == 0 || transactionDescription == null)
@@ -61,8 +71,12 @@ namespace KEC.Voucher.Web.Api.Controllers
             {
                 return requestError;
             }
-            var voucherPin = _uow.VoucherPinRepository.Find(p => p.VoucherId == voucher.Id).FirstOrDefault();
-            //TODO: Check pin against expiry and mark it as used
+            var voucherPin = _uow.VoucherPinRepository.Find(p => p.VoucherId == voucher.Id && 
+                                                       !p.Status.Equals(PinStatus.Expired)
+                                                       && !p.Status.Equals(PinStatus.Used)
+                                                       && p.Pin.Equals(transactionParam.VoucherPin)).FirstOrDefault();
+
+         
             if (voucherPin == null)
             {
                 return requestError;
@@ -80,7 +94,9 @@ namespace KEC.Voucher.Web.Api.Controllers
                 CreatedOnUtc = DateTime.UtcNow,
                 SchoolAdminId = admin.Id
             };
+            _uow.VoucherPinRepository.MarkPinAsUsed(voucherPin.Id);
             voucher.Wallet.Balance -= transactionAmount;
+            _uow.TransactionRepository.Add(transaction);
             _uow.Complete();
             return Request.CreateResponse(HttpStatusCode.OK, value: "Transaction processed successfully");
         }

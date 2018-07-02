@@ -3,58 +3,75 @@
     ViewData["Title"] = "Order Payment";
 }
 <div class="border bd-blue">
-    <div class="grid">
-        <div class="row">
-            <div class="cell-md-full">
-                <div class="ui horizontal divider">
-                    <p class="text-center text-bold text-upper fg-orange">Order Payment - @Model.OrderNumber</p>
+    @if (Model != null)
+    {
+        <div class="grid">
+            <div class="row">
+                <div class="cell-md-full">
+                    <div class="ui horizontal divider">
+                        <p class="text-center text-bold text-upper fg-orange">Order Payment - @Model.OrderNumber</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="cell-md-full">
+            <div class="row">
+                <div class="cell-md-full">
 
-                <div class="ui ordered steps h-center">
-                    <div class="@Model.StepperClass(1)">
-                        <div class="content">
-                            <div class="title">Submit Order</div>
-                            <div class="description">Checkout your shopping cart</div>
+                    <div class="ui ordered steps h-center">
+                        <div class="@Model.StepperClass(1)">
+                            <div class="content">
+                                <div class="title">Submit Order</div>
+                                <div class="description">Checkout your shopping cart</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="@Model.StepperClass(2)">
-                        <div class="content">
-                            <div class="title">Order Payment</div>
-                            <div class="description">Choose your payment option and pay</div>
+                        <div class="@Model.StepperClass(2)">
+                            <div class="content">
+                                <div class="title">Order Payment</div>
+                                <div class="description">Choose your payment option and pay</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="@Model.StepperClass(3)">
-                        <div class="content">
-                            <div class="title">Order Processing</div>
-                            <div class="description">Certificates generated</div>
+                        <div class="@Model.StepperClass(3)">
+                            <div class="content">
+                                <div class="title">Order Processing</div>
+                                <div class="description">Certificates generated</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="cell-md-full">
-                <div class="ui horizontal divider">
-                    <p class="text-center text-bold text-upper fg-orange"><span class="mif-cart icon"></span>Order Items</p>
+            <div class="row">
+                <div class="cell-md-full">
+                    <div class="ui horizontal divider">
+                        <p class="text-center text-bold text-upper fg-orange"><span class="mif-cart icon"></span>Order Items</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="cell-md-full">
+            <div class="row">
+                <div class="cell-md-full">
+                    @{
+                        await Html.RenderPartialAsync("_LineItemsPartial", Model);
+                    }
+                </div>
+            </div>
+            <div id="payment">
                 @{
-                    await Html.RenderPartialAsync("_LineItemsPartial", Model);
+                    await Html.RenderPartialAsync("_VoucherRequestPartial", new VoucherRequestViewModel(Model.Id));
                 }
             </div>
         </div>
-        <div id="payment">
-            @{
-                await Html.RenderPartialAsync("_VoucherRequestPartial", new VoucherRequestViewModel(Model.Id));
-            }
+
+    }
+    else
+    {
+        <div class="row">
+            <div class="cell">
+                <div class="border bd-blue m-1">
+                    <h4 class="text-upper text-center text-bold fg-orange p-2">Order already paid for </h4>
+                    <h6 class="fg-blue text-center text-upper text-light p-2">You will be notified once the licences have been processed</h6>
+                </div>
+            </div>
         </div>
-    </div>
+
+
+    }
 </div>
 
