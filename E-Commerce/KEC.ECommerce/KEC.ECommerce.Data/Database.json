@@ -1,6 +1,8 @@
 ﻿{
   "ConnectionStrings": {
 
-    "EcommerceDatabase": "Server=localhost;Database=ECommerceDb;Trusted_Connection=True;"
+    "EcommerceDatabase": "Data Source=tcp:keccurationsvr.database.windows.net,1433;Initial Catalog=ECommerceDb;Persist Security Info=False;User ID=miyabi;Password=Ftt%cg#@hjhWtq3zn;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=300;"
   }
 }
+ //"EcommerceDatabase": "Server=localhost;Database=ECommerceDb;Trusted_Connection=True;"
+  

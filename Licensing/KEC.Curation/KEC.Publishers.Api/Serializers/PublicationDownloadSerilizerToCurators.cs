@@ -157,11 +157,10 @@ namespace KEC.Publishers.Api.Serializers
                 {
                     return string.Empty;
                 }
-                else
-                {
-                    var stageName = Enum.GetName((typeof(PublicationStage)), currentStage);
-                    return stageName;
+                else {
+                    return currentStage.Stage.ToString();
                 }
+                
             }
         }
     }

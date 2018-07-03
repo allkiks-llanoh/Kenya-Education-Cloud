@@ -5,15 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Scripts
-{
-    <script src="@Url.Content("~/js/PrincipalCurator.js")"></script>
-    <script src="~/js/GetChiefCurators.js"></script>
-    <link href="~/Content/CustomStyles/DocumentViewer.css" rel="stylesheet" />
-    <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
-    @*<script src="https://hypothes.is/embed.js" async></script>*@
-    @Scripts.Render("~/plugins/sweetAlert")
-}
+
 @{
     var Title = Request.Params["Title"];
     var PId = Request.Params["Identity"];
@@ -23,7 +15,14 @@
     var KICDNumber = Request.Params["KICDN"];
     var MimeType = Request.Params["Mime"];
 }
-
+@section Scripts
+{
+    <script src="@Url.Content("~/js/PrincipalCurator.js")"></script>
+    <script src="~/js/GetChiefCurators.js"></script>
+    <link href="~/Content/CustomStyles/DocumentViewer.css" rel="stylesheet" />
+    <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+    @Scripts.Render("~/plugins/sweetAlert")
+}
 <div class="text-center m-t-lg">
     <h1>
         @ViewData["SubTitle"]
@@ -39,67 +38,54 @@
                         <div class="panel panel-success">
                             <div class="panel-heading" style="background-color:#2855a8;">Publication Information</div>
                             <div class="panel-body">
-
-                                <dl>
-                                    <dt>Curation Number</dt>
-                                    <dd>@Publication</dd>
-                                    <dt>Title</dt>
-                                    <dd>@Title</dd>
-                                    <dt>Publication</dt>
-                                    <dd><a href="@Urls" target="_blank">Link to publication</a></dd>
-
-                                </dl>
-                                @*<div class="row">
-                                        <div class="form-group" style="text-align:left;">
-
-                                            <button type="button" class="button btn btn-w-m btn-primary pull-right" name="LoadContent" id="LoadContent" style="background-color:#00B55F; margin-right:15px;">Load Content</button>
+                                @if (MimeType == "application/x-zip-compressed")
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div>Curation Number</div>
+                                            <div>@Publication</div>
                                         </div>
-                                    </div>*@
+                                        <div class="col-md-4">
+                                            <div>Title</div>
+                                            <div>@Title</div>
+                                        </div>
 
+                                        <div class="col-md-4">
+                                            <div>Link To Publication</div>
+                                            <div><a href="@Urls" target="_blank">Click To View</a></div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div>Curation Number</div>
+                                            <div>@Publication</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div>Title</div>
+                                            <div>@Title</div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="ibox-content no-padding">
+                                            <div class="visible-scrollbar" id="document_viewer">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                                                src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" + @Urls)'></iframe>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
                             </div>
+
                             <div class="panel-footer">
-                                <div class="ibox-content no-padding">
-                                    @*<div class="hidden" id="htmlView">
-                                            <div class="visible-scrollbar">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
-                                                                src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>*@
-                                    @*<div id="epubView">
-                                        <div class="visible-scrollbar">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <iframe enable-annotation allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
-                                                            src='@Url.Content("~/Publications/test.epub")'></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>*@
-                                    @*<div class="hidden" id="mp4View">
-                                            <div class="visible-scrollbar">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
-                                                                src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>*@
-                                    @*<div id="pdfView">
-                                            <div class="visible-scrollbar">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
-                                                                src='@Url.Content("~/Scripts/plugins/MobiJs/")#@Url.Content(Urls)'></iframe>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>*@
-                                </div>
+
+
                                 <div class="row">
                                     <div class="ibox-content no-padding">
                                         <div class="summernote" style="height:100px">
@@ -117,7 +103,7 @@
 
                                         </div>
                                         <div class="form-group col-md-8">
-                                            <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
+                                            <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid" />
                                         </div>
                                         <div class="form-group col-md-4">
 
@@ -166,18 +152,18 @@
     <h1 id="identity" data-identity=@PId></h1>
     <h1 id="currentUser" data-currentUser=@Model.Guid></h1>
     <h1 id="kicd" data-kicdNumber=@Publication></h1>
-    <span><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
-    <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
+    <span><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br />
+    <span><strong>Stage:&nbsp;</strong></span>@Stage<br />
     <span><strong>Publication:&nbsp;</strong></span>@Publication
 
 
 </div>
 <div class="form-group col-md-10">
-    <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
+    <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid" />
 </div>
 <div class="form-group col-md-10">
-    <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
-    <input type="text" name="MimeTypes" id="MimeTypes" class="form-control hidden" value="@MimeType">
+    <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid" />
+    <input type="text" name="MimeTypes" id="MimeTypes" class="form-control hidden" value="@MimeType" />
 </div>
 <script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
 
@@ -197,7 +183,13 @@
         $('.click2edit').destroy();
     };
 
-    }
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+<script>
+    var book = ePub("@Urls");
+    var rendition = book.renderTo("document_viewer");
+    rendition.display();
 </script>
 <script type="text/javascript">
     $(document).ready(function () {

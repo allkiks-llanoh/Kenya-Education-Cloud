@@ -16,13 +16,11 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
 @{
-    var PubId = Request.Params["Pub"];
+    var PubId = Request.Params["Publication"];
 
 
 }
-<script type="text/javascript">
-    const apiBaseUrls = "https://publishervm.kec.ac.ke/api";
-</script>
+
 
 
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
@@ -72,7 +70,7 @@
                             <br>
                             <br>
                         </div>
-                        <a href="/Home/Approved" class="btn btn-w-m btn-info pull-right" style="background-color:#00B95F;" role="button">Back  To Approved Submissions</a>
+                        <a href="/Home/Rejected" class="btn btn-w-m btn-info pull-right" style="background-color:#00B95F;" role="button">Back  To Approved Submissions</a>
 
                     </div>
                 </div>
@@ -88,6 +86,7 @@
 
 </div>
 <script type="text/javascript">
+    let getPublicationUrl = "https://publishervm.kec.ac.ke/api";
     (function () {
         $(document).ready(function () {
             getPublication();
@@ -98,7 +97,7 @@
         ///Functions Section
         function getPublication() {
             let publicationId = $('#publication-view').attr('data-publicationId');
-            var urls = apiBaseUrls.concat(`/publications/get/rejected/${publicationId}`);
+            var urls = getPublicationUrl.concat(`/publications/get/rejected/${publicationId}`);
 
             $.ajax({
                 url: urls,
@@ -126,7 +125,7 @@
                    <dt>Description</dt>
                    <dd>${publication.description}</dd>
                    <dt>Content</dt>
-                   <dd><a href="${publication.url}" target="blank">Link to publication</a></dd>
+                   <dd><a href="${publication.curationUrl}" target="blank">Link to publication</a></dd>
                    <dt>Level</dt>
                    <dd>${publication.level}</dd>
                    <dt>Completion date</dt>
@@ -136,7 +135,7 @@
         function getPublicationCurationComments() {
 
             let publicationId = $('#publication-view').attr('data-publicationId');
-            let url = apiBaseUrl.concat(`/CurationManagers/getcomments/fromcuration?publicationId=${publicationId}`);
+            let url = getPublicationUrl.concat(`/CurationManagers/getcomments/fromcuration?publicationId=${publicationId}`);
             //let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
             $.ajax({
                 url: url,

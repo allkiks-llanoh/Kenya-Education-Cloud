@@ -12,16 +12,16 @@ namespace KEC.ECommerce.Web.UI.Pagination
     }
     public class PageHelper<T> : IPageHelper<T>
     {
-        private readonly IPageConfig _pageConfig;
+        public IPageConfig PageConfig { get; private set; }
 
         public PageHelper(IPageConfig pageConfig)
         {
-            _pageConfig = pageConfig;
+            PageConfig = pageConfig;
         }
         public IResultSet<T> GetPage(IQueryable<T> items, int pageNumber)
         {
             var numberOfRecords = items.Count();
-            var numberOfPages = GetPaggingCount(numberOfRecords, _pageConfig.PageSize);
+            var numberOfPages = GetPaggingCount(numberOfRecords, PageConfig.PageSize);
             if (pageNumber == 0)
             {
                 pageNumber = 1;
@@ -32,11 +32,11 @@ namespace KEC.ECommerce.Web.UI.Pagination
                 CurrentPage = pageNumber,
                 TotalRecords = numberOfRecords
             };
-            var countFrom = _countFrom(_pageConfig.PageSize, pageNumber);
+            var countFrom = _countFrom(PageConfig.PageSize, pageNumber);
             var resultSet = new ResultSet<T>
             {
                 Pager = pager,
-                Items = items.Skip(countFrom).Take(_pageConfig.PageSize)
+                Items = items.Skip(countFrom).Take(PageConfig.PageSize)
             };
             return resultSet;
         }

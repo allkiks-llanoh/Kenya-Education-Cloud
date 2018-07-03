@@ -17,6 +17,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
         {
             _uow = uow;
             _paginationHelper = pageHelper;
+            _paginationHelper.PageConfig.PageSize = 24;
         }
         public IActionResult Publications(int categoryId, int pageNumber=1,string searchTerm=null)
         {
