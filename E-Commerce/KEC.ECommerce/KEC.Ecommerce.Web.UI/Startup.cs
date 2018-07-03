@@ -1,4 +1,5 @@
-﻿using KEC.ECommerce.Data.UnitOfWork;
+﻿using Hangfire;
+using KEC.ECommerce.Data.UnitOfWork;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Pagination;
 using KEC.ECommerce.Web.UI.Security.Database;
@@ -45,6 +46,7 @@ namespace KEC.ECommerce.Web.UI
                 var connectionString = Configuration.GetConnectionString("IdentityDataContext");
                 options.UseSqlServer(connectionString);
             });
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnectionString")));
             services.Configure<IISOptions>(options =>
             {
                 options.ForwardClientCertificate = false;
@@ -95,6 +97,7 @@ namespace KEC.ECommerce.Web.UI
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseForwardedHeaders();
+            app.UseHangfireServer();
             app.UseAuthentication();
             app.UseSession();
             app.UseStaticFiles();

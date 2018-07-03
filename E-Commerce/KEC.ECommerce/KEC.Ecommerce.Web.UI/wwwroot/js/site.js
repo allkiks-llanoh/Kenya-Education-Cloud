@@ -7,14 +7,14 @@ var notify = function feedbackInfo(message, msgClass, title) {
     });
     notify.create(message, title, { cls: msgClass });
     notify.reset();
-}
+};
 var showValidationErrorInfoBox = function (data) {
     let elements = $.parseHTML(data);
-    let found = $('.validation-summary-errors', $(elements))
+    let found = $('.validation-summary-errors', $(elements));
     if (found !== null && found.children().length > 0) {
         Metro.infobox.create(found, "alert");
     }
-}
+};
 var notifySuccess = function (data) {
     var elements = $.parseHTML(data);
     var found = $('.validation-summary-errors', $(elements));
@@ -23,10 +23,10 @@ var notifySuccess = function (data) {
     } else {
         notify("Item(s) added to cart successfully", "success", "Cart");
     }
-}
+};
 var notifyFail = function (jXHR) {
     notify("Item(s) could not be added to cart", "alert", "Cart");
-}
+};
 
 function getAllUrlParams(url) {
 
@@ -57,7 +57,7 @@ function getAllUrlParams(url) {
             });
 
             // set parameter value (use 'true' if empty)
-            let paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
+            let paramValue = typeof a[1] === 'undefined' ? true : a[1];
 
             // (optional) keep case consistent
             paramName = paramName.toLowerCase();
@@ -119,7 +119,12 @@ $(document).ready(function () {
                 let currentPage = getAllUrlParams(currentUrl).pagenumber;
                 currentUrl = currentUrl.replace(`pageNumber=${currentPage}`, `pageNumber=${pageNo}`);
             } else {
-                currentUrl = `${currentUrl}&pageNumber=${pageNo}`;
+                if (currentUrl.includes('&')) {
+                    currentUrl = `${currentUrl}&pageNumber=${pageNo}`;
+                } else {
+                    currentUrl = `${currentUrl}?pageNumber=${pageNo}`;
+                }
+
             }
             window.location.href = currentUrl;
         },
@@ -167,6 +172,6 @@ $(document).ready(function () {
     $('.logout').on('click', function (e) {
         e.preventDefault();
         $('#logout-form').submit();
-    })
+    });
 
-})
+});

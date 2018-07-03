@@ -17,7 +17,7 @@ html, body {
 
 #footer {
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     width: 100%;
     background-color: #aaa;
 }
@@ -29,5 +29,5 @@ html, body {
     right: 10px;
     cursor: pointer;
     display: none;
-    z-index: 20 !important;
+    z-index: 20;
 }

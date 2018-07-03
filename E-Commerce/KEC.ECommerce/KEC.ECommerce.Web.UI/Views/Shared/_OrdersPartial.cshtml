@@ -22,11 +22,11 @@
                 @foreach (var order in Model)
                 {
                     <tr>
-                        <td class="cart">@order.OrderNumber</td>
-                        <td class="cart">@order.OrderDate</td>
-                        <td class="cart">@order.ItemsCount</td>
-                        <td class="cart">@order.TotalCost</td>
-                        <td class="cart">
+                        <td class="customer-order">@order.OrderNumber</td>
+                        <td class="customer-order">@order.OrderDate</td>
+                        <td class="customer-order">@order.ItemsCount</td>
+                        <td class="customer-order">@order.TotalCost</td>
+                        <td class="customer-order">
                             <form class="inline-form" asp-controller="Orders" asp-action="DeleteOrder" asp-route-orderId="@order.Id"
                                   data-ajax="true" data-ajax-update="#orders" data-ajax-method="DELETE" data-ajax-mode="replace"
                                   data-ajax-loading="#spinner" asp-antiforgery="true">

@@ -6,6 +6,7 @@ namespace KEC.ECommerce.Web.UI.Pagination
     public interface IPageHelper<T>
     {
         IResultSet<T> GetPage(IQueryable<T> items, int pageNumber);
+        IPageConfig PageConfig { get; }
     }
 
     public interface IResultSet<T>
