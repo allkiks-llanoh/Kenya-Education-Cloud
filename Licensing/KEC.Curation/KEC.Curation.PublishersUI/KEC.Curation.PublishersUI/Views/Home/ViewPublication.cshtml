@@ -19,7 +19,7 @@
 
 }
 <script type="text/javascript">
-    const apiBaseUrls = "https://publishervm.kec.ac.ke/api";
+    const viewPublicationUrl = "https://publishervm.kec.ac.ke/api";
 </script>
 <script type="text/javascript">
     (function () {
@@ -32,7 +32,7 @@
         ///Functions Section
         function getPublication() {
             let publicationId = $('#publication-view').attr('data-publicationId');
-            var urls = apiBaseUrls.concat(`/Publications/get/publications/${publicationId}`);
+            var urls = viewPublicationUrl.concat(`/Publications/get/publications/${publicationId}`);
 
             $.ajax({
                 url: urls,
@@ -60,7 +60,7 @@
                    <dt>Description</dt>
                    <dd>${publication.description}</dd>
                    <dt>Content</dt>
-                   <dd><a href="${publication.url}" target="blank">Link to publication</a></dd>
+                   <dd><a href="${publication.curationUrl}" target="blank">Link to publication</a></dd>
                    <dt>Level</dt>
                    <dd>${publication.level}</dd>
                    <dt>Price</dt>
@@ -70,7 +70,7 @@
         }
 
         function getActionsTaken() {
-            var url = apiBaseUrl.concat('/lookups/actions');
+            var url = viewPublicationUrl.concat('/lookups/actions');
             $.ajax({
                 url: url,
                 type: 'GET',
@@ -104,7 +104,7 @@
             let actionSelected = $("#action-selected").val();
             let notes = $('.note-editable').html();
 
-            let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
+            let url = viewPublicationUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
             let userGuid = $('#CurrentUserGuid').val();
             if (notes === null || notes === "") {
                 return ShowAlert("Curation notes cannot be blank", "error");

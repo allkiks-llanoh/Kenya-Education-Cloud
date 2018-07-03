@@ -1,6 +1,5 @@
 ﻿using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.UnitOfWork.Core;
-using Microsoft.AspNetCore.Http;
 using System;
 
 namespace KEC.ECommerce.Web.UI.Models
@@ -12,7 +11,7 @@ namespace KEC.ECommerce.Web.UI.Models
         private readonly string _userEmail;
         private readonly string _identificationCode;
 
-        public OrderActions(IUnitOfWork uow, Order order, string userEmail,string identificationCode)
+        public OrderActions(IUnitOfWork uow, Order order, string userEmail, string identificationCode)
         {
             _uow = uow;
             _order = order;
@@ -22,7 +21,7 @@ namespace KEC.ECommerce.Web.UI.Models
         public void PostVoucherPayment(string pinNumber)
         {
             ChangeOrderStatus();
-            PostPaymentRecord(pinNumber,PaymentMethod.Voucher);
+            PostPaymentRecord(pinNumber, PaymentMethod.Voucher);
             DeductSoldQuantities();
         }
 
@@ -33,27 +32,31 @@ namespace KEC.ECommerce.Web.UI.Models
             _uow.Complete();
         }
 
-        public void GenerateLicences()
+        public static void GenerateLicences(IUnitOfWork uow, string identificationCode, int orderId)
         {
-            var lineItems = _uow.OrdersRepository.GetLineItems(_order.Id);
-            lineItems.ForEach(lineItem =>
+            var lineItems = uow.OrdersRepository.GetLineItems(orderId);
+            var order = uow.OrdersRepository.Get(orderId);
+            if (order != null)
             {
-                for (int count = 1; count <= lineItem.Quantity; count++)
+                lineItems.ForEach(lineItem =>
                 {
-                    var licence = new Licence
+                    for (int count = 1; count <= lineItem.Quantity; count++)
                     {
-                        Code = _uow.LicencesRepository.GetNextLicence(),
-                        PublicationId = lineItem.PublicationId,
-                        OrderId = _order.Id,
-                        ExpiryDate = DateTime.Now.AddYears(1),
-                        IdentificationCode = _identificationCode
-                    };
-                    _uow.LicencesRepository.Add(licence);
-                }
-                _uow.Complete();
-            });
-            _order.Status = OrderStatus.Processed;
-            _uow.Complete();
+                        var licence = new Licence
+                        {
+                            Code = uow.LicencesRepository.GetNextLicence(),
+                            PublicationId = lineItem.PublicationId,
+                            OrderId = order.Id,
+                            ExpiryDate = DateTime.Now.AddYears(1),
+                            IdentificationCode = identificationCode
+                        };
+                        uow.LicencesRepository.Add(licence);
+                    }
+                    uow.Complete();
+                });
+                order.Status = OrderStatus.Processed;
+                uow.Complete();
+            }
             //TODO: Send email to the buyer;
         }
 

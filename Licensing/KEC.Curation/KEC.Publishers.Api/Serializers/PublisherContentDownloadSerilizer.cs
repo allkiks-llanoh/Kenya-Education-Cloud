@@ -52,5 +52,13 @@ namespace KEC.Publishers.Api.Serializers
                 return _assignment.PublisherName;
             }
         }
+        public string CurationUrl
+        {
+            get
+            {
+                return _assignment.CutationUrl == null ? string.Empty : _assignment.CutationUrl;
+            }
+        }
+        
     }
 }

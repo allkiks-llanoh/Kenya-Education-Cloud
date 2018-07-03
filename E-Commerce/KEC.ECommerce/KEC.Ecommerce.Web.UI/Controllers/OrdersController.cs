@@ -126,7 +126,9 @@ namespace KEC.ECommerce.Web.UI.Controllers
                     var model = new OrderViewModel(_uow, order);
                     var orderActions = new OrderActions(_uow, order, mail, code);
                     orderActions.PostVoucherPayment(voucherPin);
-                    orderActions.GenerateLicences();
+                    OrderActions.GenerateLicences(_uow, code, order.Id);
+                    BackgroundJob.Enqueue(() => OrderActions.GenerateLicences(_uow, code, order.Id));
+
                     return PartialView("_MessagePartial", model);
                 }
                 else
@@ -141,5 +143,6 @@ namespace KEC.ECommerce.Web.UI.Controllers
 
         }
 
+        
     }
 }
