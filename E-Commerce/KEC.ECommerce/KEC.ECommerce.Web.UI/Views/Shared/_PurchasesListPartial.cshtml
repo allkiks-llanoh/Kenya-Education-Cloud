@@ -1,0 +1,32 @@
+﻿@model PurchasePageViewModel
+<div class="row">
+    <div class="cell-md-full">
+        <table class="table striped table-border cell-border">
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="orders">
+                @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td class="purchases">@order.OrderNumber</td>
+                        <td class="purchases">@order.OrderDate</td>
+                        <td class="purchases">@order.ItemsCount</td>
+                        <td class="purchases">@order.TotalCost</td>
+                        <td class="purchases">
+                            <a role="button" asp-route-orderId="@order.Id" asp-controller="Account" asp-action="Purchase" 
+                               class="button success outline rounded m-1 size-small"><span class="mif-eye"></span>View items</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
