@@ -95,7 +95,7 @@
 
         row.append($(`<td> <a href="/Home/DetailApproved/${rowData.id}?Pub=${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">View Details</a>`));
 
-        row.append($(`<td> <a href="/Publisher/Certificate?Content=${rowData.contentNumber}&Name=${rowData.publisher}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Print Certificate</a>`));
+        row.append($(`<td> <a href="/Publisher/Certificate?Content=${rowData.contentNumber}&Name=${rowData.publisher}&Publication=${rowData.title}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Print Certificate</a>`));
 
         return row[0];
     };

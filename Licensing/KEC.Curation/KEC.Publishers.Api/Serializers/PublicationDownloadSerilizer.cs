@@ -165,9 +165,9 @@ namespace KEC.Publishers.Api.Serializers
                 }
                 else
                 {
-                    var stageName = Enum.GetName((typeof(PublicationStage)), currentStage);
-                    return stageName;
+                    return currentStage.Stage.ToString();
                 }
+
             }
         }
     }
