@@ -6,6 +6,7 @@
 @{
     var Content = Request.Params["Content"];
     var Name = Request.Params["Name"];
+    var Publication = Request.Params["Publication"];
 
 
 }
@@ -18,11 +19,16 @@
     <img src="~/Content/cert/logo.png" width="200" height="100" style="margin-left:40px;">  <br><br>
     <h1 style="font-family:Tangerine;text-align: center; font-weight: bold; font-size: 60px;">Certificate of  Completion</h1><br /><br />
     <h4>THIS CERTIFIES THAT</h4><br>
-    <p style="text-align:center;">
-        ________________<u>@Name</u>________________<br /><br />
-        HAS SATISFACTORILY COMPLETED THE CURATION REQUIREMENTS<br /><br /> AS <br /><br /> PRESCRIBED BY THE KENYA CLOUD EDUCATION  ON 27th MARCH 2018.
+
+    <p style="font-family:Tangerine;text-align: center; font-weight: bold; font-size: 40px;">
+        <u>@Name</u>
+    
 
     </p>
+    <p>    HAS SATISFACTORILY COMPLETED THE CURATION REQUIREMENTS<br />
+    <p>For Publication</p> <p style="font-weight: bold; font-size: 18px;">@Publication</p> <p> and has been given digital content number</p> <p style="font-weight: bold; font-size: 18px;">@Content</p>
+   
+    <br /> AS <br /><br /> PRESCRIBED BY THE KENYA CLOUD EDUCATION  ON 27th MARCH 2018.</p>
     <br /><br /><br /><br />
     <img src="~/Content/cert/cert.jpg" width="150" height="150">
 
