@@ -5,23 +5,75 @@
 {
     <div class="jumbotron text-center">
 
-        <h3>SYSTEM USER MANAGEMENT PORTAL</h3>
+        <h3 style="font-weight:bold;">Voucher Management Portal</h3>
+        <h4>Admin Portal</h4>
 
     </div>
+
 
     <div class="row">
 
+        <div class="col-lg-6">
+
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <a href="/Role/Index" style="color:black;font-size: 16px;">Manage Users</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-user fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <a href="/Role/UserList" style="color:black;font-size: 16px;">Registered Users</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
     </div>
+
 
 }
 @if (User.IsInRole("School Admin"))
 {
     <div class="jumbotron text-center">
 
-        <h3>SCHOOL MANAGEMENT PORTAL</h3>
+        <h3 style="font-weight:bold;">Voucher Management Portal</h3>
+        <h4>School Management</h4>
 
     </div>
+
+
     <div class="row">
+        <div class="col-lg-6 col-md-offset-3">
+
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <a href="/School/Index" style="color:black;font-size: 16px;">Upload School Data</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 }
@@ -29,10 +81,44 @@
 {
     <div class="jumbotron text-center">
 
-        <h3>BATCH MANAGEMENT PORTAL</h3>
-
+        <h3 style="font-weight:bold;">Voucher Management Portal</h3>
+        <h4>Batch Management</h4>
     </div>
+
+
     <div class="row">
+
+        <div class="col-lg-6">
+
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-bars fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <a href="/Batch/Index" style="color:black;font-size: 16px;">Batch Information</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-bars fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <a href="/Batch/CreateBatch" style="color:black;font-size: 16px;">Create Batch</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
 
     </div>
 }
@@ -40,10 +126,44 @@
 {
     <div class="jumbotron text-center">
 
-        <h3>VOUCHER CREATION PORTAL</h3>
-
+        <h3 style="font-weight:bold;">Voucher Management Portal</h3>
+        <h4>Voucher Creator</h4>
     </div>
+
+
     <div class="row">
+
+        <div class="col-lg-6">
+
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-bars fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <a href="/Voucher/Index" style="color:black;font-size: 16px;">Voucher Information</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-bars fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <a href="/Voucher/CreateVoucher" style="color:black;font-size: 16px;">Create Voucher</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
 
     </div>
 }
@@ -51,10 +171,29 @@
 {
     <div class="jumbotron text-center">
 
-        <h3>VOUCHER APPROVAL PORTAL</h3>
-
+        <h3 style="font-weight:bold;">Voucher Management Portal</h3>
+        <h4>Voucher Approver</h4>
     </div>
+
+
     <div class="row">
+        <div class="row">
+            <div class="col-lg-6 col-md-offset-3">
+
+                <div class="widget style1 lazur-bg">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-users fa-5x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <a href="/Voucher/ApproveVoucher" style="color:black;font-size: 16px;">Approve Voucher</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 }
@@ -62,11 +201,44 @@
 {
     <div class="jumbotron text-center">
 
-        <h3>DATA CREATION PORTAL</h3>
-
+        <h3 style="font-weight:bold;">Voucher Management Portal</h3>
+        <h4>Data Management</h4>
     </div>
+
+
     <div class="row">
 
-        
+        <div class="col-lg-6">
+
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-bars fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <a href="/Batch/Index" style="color:black;font-size: 16px;">Batch Information</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+
+            <div class="widget style1 blue-bg">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <i class="fa fa-bars fa-5x"></i>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <a href="/Batch/CreateBatch" style="color:black;font-size: 16px;">Create Batch</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
     </div>
 }
