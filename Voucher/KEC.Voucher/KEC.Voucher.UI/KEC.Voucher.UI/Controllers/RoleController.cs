@@ -50,6 +50,8 @@ namespace KEC.Voucher.UI.Controllers
         }
 
         // GET: Role
+        [CustomAuthorize(Roles = "System Admin")]
+
         public ActionResult Index()
         {
             List<RoleViewModel> list = new List<RoleViewModel>();
@@ -57,7 +59,8 @@ namespace KEC.Voucher.UI.Controllers
                 list.Add(new RoleViewModel(role));
             return View(list);
         }
-       
+        [CustomAuthorize(Roles = "System Admin")]
+
         public ActionResult Create()
         {
             return View();
@@ -109,6 +112,7 @@ namespace KEC.Voucher.UI.Controllers
             await UserManager.RemoveFromRoleAsync(user.Id, role.Id);
             return RedirectToAction("/CurationManagers/ChiefCurators");
         }
+        [CustomAuthorize(Roles = "System Admin")]
         public ActionResult RemoveFromRole()
         {
             using (var context = new ApplicationDbContext())
@@ -122,6 +126,7 @@ namespace KEC.Voucher.UI.Controllers
                 return View(voucherUser);
             }
         }
+        [CustomAuthorize(Roles = "System Admin")]
         public ActionResult UserList()
         {
             using (var context = new ApplicationDbContext())

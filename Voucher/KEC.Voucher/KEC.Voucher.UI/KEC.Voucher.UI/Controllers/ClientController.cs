@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace KEC.Voucher.UI.Controllers
 {
+    //[CustomAuthorize(Roles = "School Admin")]
     public class ClientController : Controller
     {
         public ActionResult Index()
