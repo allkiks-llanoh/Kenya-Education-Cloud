@@ -1,4 +1,5 @@
 ﻿using Authentication_Test.Models;
+using KEC.Curation.UI.ActionFilters;
 using KEC.Curation.UI.Models;
 using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using System;
@@ -10,17 +11,20 @@ using System.Web.Security;
 
 namespace Authentication_Test.Controllers
 {
+    [AllowCrossSiteJson]
     public class GetUsersController : Controller
     {
         private readonly ApplicationDbContext  context = new ApplicationDbContext();
         // GET: GetUsers
+        [HttpPost]
+        [HttpOptions]
         public ActionResult GetChiefCurators()
         {
             var role = "6c5175a7-372f-4cfe-a559-f862651813b2";
 
             var user = context.Users.Where(p => p.Roles.Any(s=>s.RoleId.Equals(role))).ToList();
          
-            return Json(new SelectList(user, "FullName", "Id"));
+            return Json(new SelectList(user,"FullName", "Id"));
         }
         public ActionResult GetChiefCuratorsList(string role)
         {

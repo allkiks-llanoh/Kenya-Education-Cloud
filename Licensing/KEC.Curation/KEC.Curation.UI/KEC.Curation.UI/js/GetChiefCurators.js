@@ -11,9 +11,8 @@ $.ajax({
     },
     type: 'POST',
     url: url,
-    dataType: 'JSON',
-    async: false,
-    crossDomain: true,
+    dataType: 'json',
+
     success: function (data) {
         //clear the current content of the select
         $select.html('');
