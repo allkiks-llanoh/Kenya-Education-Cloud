@@ -31,7 +31,7 @@
                     <span class="mif-profile icon"></span>
                     <span class="branding-bar">Profile</span>
                 </a>
-                <a asp-action="Index" asp-controller="Home"
+                <a asp-action="Purchases" asp-controller="Account"
                    data-role="tile" class="bg-blue m-2">
                     <span class="mif-money icon"></span>
                     <span class="branding-bar">Purchases</span>
@@ -49,7 +49,7 @@
                 <a asp-action="Logout" asp-controller="Account"
                    data-role="tile" class="bg-red m-2 logout">
                     <span class="mif-exit icon"></span>
-                    <span class="branding-bar">@string.Concat("Logout", " ", User.FindFirst("DisplayName")?.Value)</span>
+                    <span class="branding-bar">Logout</span>
                 </a>
             </div>
         </div>

@@ -18,16 +18,19 @@ namespace KEC.ECommerce.Web.UI.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IUnitOfWork _uow;
-        private readonly IPageHelper<Licence> _paginationHelper;
+        private readonly IPageHelper<Order> _orderPaginationHelper;
+        private readonly IPageHelper<Licence> _licencePaginationHelper;
 
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager
-            , IPageHelper<Licence> paginationHelper, IUnitOfWork uow)
+            , IPageHelper<Licence> licencePaginationHelper, IPageHelper<Order> orderPaginationHelper, IUnitOfWork uow)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _uow = uow;
-            _paginationHelper = paginationHelper;
-            _paginationHelper.PageConfig.PageSize = 10;
+            _orderPaginationHelper = orderPaginationHelper;
+            _licencePaginationHelper = licencePaginationHelper;
+            _licencePaginationHelper.PageConfig.PageSize = 10;
+            _orderPaginationHelper.PageConfig.PageSize = 10;
         }
         [Authorize]
         public IActionResult Dashboard()
@@ -131,7 +134,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
         {
             var code = User.FindFirst("IdentificationCode")?.Value;
             var licencesQuery = _uow.LicencesRepository.QueryableLicences(code, searchTerm);
-            var result = _paginationHelper.GetPage(licencesQuery, pageNumber);
+            var result = _licencePaginationHelper.GetPage(licencesQuery, pageNumber);
             var model = new LicencePageViewModel
             {
                 Licences = result.Items?.Select(p => new LicenceViewModel(_uow, p)),
@@ -145,6 +148,36 @@ namespace KEC.ECommerce.Web.UI.Controllers
             {
                 return View(model);
             }
+        }
+        [HttpGet,Authorize]
+        public IActionResult Purchases(int pageNumber = 1, string searchTerm = null)
+        {
+            var mail = User.FindFirst("Email")?.Value;
+            var ordersQuery = _uow.OrdersRepository.QueryableOrders(mail, searchTerm);
+            var result = _orderPaginationHelper.GetPage(ordersQuery, pageNumber);
+            var model = new PurchasePageViewModel
+            {
+                Orders = result.Items?.Select(p => new OrderViewModel(_uow, p)),
+                Pager = result.Pager
+            };
+            if (searchTerm != null)
+            {
+                return PartialView("_PurchasesListPartial", model);
+            }
+            else
+            {
+                return View(model);    
+            }
+        }
+        public async Task<IActionResult> Purchase(int orderId)
+        {
+            var mail = User.FindFirst("Email")?.Value;
+            var order = await _uow.OrdersRepository.GetOrderByUser(orderId, mail, OrderStatus.Paid);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return View(new OrderViewModel(_uow,order,true));
         }
     }
 }

@@ -18,7 +18,7 @@
                     <form class="inline-form p-2 border bd-blue place-right-md m-2" asp-controller="Store" asp-action="Publications" asp-route-categoryId="@ViewBag.CategoryId"
                           data-ajax="true" data-ajax-update="#products-list" data-ajax-method="GET" data-ajax-mode="replace"
                           data-ajax-loading="#spinner">
-                        <input data-prepend="<span class='text-center'>Search term:</span>" name="searchTerm" type="text" data-role="search" />
+                        <input data-prepend="<span class='text-center'>Search term:</span>" name="searchTerm" type="text" data-role="search" data-clear-button="false"/>
                         <a asp-controller="Store"  asp-action="Publications" asp-route-categoryId="@ViewBag.CategoryId" role="button" class="button alert outline rounded m-2">Reset</a>
                     </form>
                 </div>
