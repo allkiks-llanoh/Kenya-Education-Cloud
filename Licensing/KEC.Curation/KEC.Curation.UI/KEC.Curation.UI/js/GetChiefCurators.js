@@ -9,7 +9,7 @@ $.ajax({
     headers : {
         'Access-Controll-Allow-Origin': '*'
     },
-    type: 'POST',
+    type: 'GET',
     url: url,
     dataType: 'json',
 

@@ -16,15 +16,14 @@ namespace Authentication_Test.Controllers
     {
         private readonly ApplicationDbContext  context = new ApplicationDbContext();
         // GET: GetUsers
-        [HttpPost]
-        [HttpOptions]
+       
         public ActionResult GetChiefCurators()
         {
             var role = "6c5175a7-372f-4cfe-a559-f862651813b2";
 
             var user = context.Users.Where(p => p.Roles.Any(s=>s.RoleId.Equals(role))).ToList();
          
-            return Json(new SelectList(user,"FullName", "Id"));
+            return Json(new SelectList(user,"FullName", "Id"), JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetChiefCuratorsList(string role)
         {
@@ -42,7 +41,7 @@ namespace Authentication_Test.Controllers
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))
                        && p.SubjectId.Equals(subjectId)).ToList();
 
-            return Json(new SelectList(user, "FullName", "Id"));
+            return Json(new SelectList(user, "FullName", "Id"), JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetCuratorsList(string role)
         {
