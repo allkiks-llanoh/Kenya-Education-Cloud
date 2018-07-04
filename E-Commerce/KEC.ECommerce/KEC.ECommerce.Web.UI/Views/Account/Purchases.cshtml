@@ -1,0 +1,29 @@
+﻿@model PurchasePageViewModel
+@{
+    ViewData["Title"] = "Purchases";
+}
+<div class="border bd-blue">
+    <div class="grid">
+        <div class="row">
+            <div class="cell-md-full">
+                <div class="ui horizontal divider">
+                    <p class="text-center text-bold text-upper fg-orange">Purchases</p>
+                </div>
+            </div>
+        </div>
+        <div id="orders">
+            @{
+                await Html.RenderPartialAsync("_PurchasesListPartial", Model);
+            }
+        </div>
+        <div class="row">
+            <div class="cell-md-12 p-2">
+                <div class="pagination-container m-2 border bd-blue">
+                    <ul id="pagination" class="mt-2"></ul>
+                    <input asp-for="Pager.NumberOfPages" type="hidden" id="hdnTotalNumberOfPages" value="@Model.Pager.NumberOfPages" />
+                    <input asp-for="Pager.CurrentPage" type="hidden" id="hdnCurrentPage" value="@Model.Pager.CurrentPage" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
