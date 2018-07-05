@@ -6,7 +6,7 @@ namespace KEC.Voucher.UI.Controllers
 {
     public class SchoolController : Controller
     {
-        [CustomAuthorize(Roles = "Schools Creator")]
+        [CustomAuthorize(Roles = "Data Creator")]
         public ActionResult Index()
         {
             using (var context = new ApplicationDbContext())
@@ -20,7 +20,7 @@ namespace KEC.Voucher.UI.Controllers
                 return View(voucherUser);
             }
         }
-       
+        [CustomAuthorize(Roles = "School Admin")]
         public ActionResult Transaction()
         {
             using (var context = new ApplicationDbContext())

@@ -411,7 +411,7 @@ namespace KEC.Voucher.UI.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Login", "Account");
+            return Redirect("https:kec.ac.ke");
         }
 
         //
