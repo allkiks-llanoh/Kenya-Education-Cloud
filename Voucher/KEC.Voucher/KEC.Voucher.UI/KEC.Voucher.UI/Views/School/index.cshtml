@@ -1,11 +1,11 @@
 @{
+
     ViewBag.Title = "Voucher Portal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/js/UploadSchool.js"></script>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
-
+<link href="~/Content/spinner.css" rel="stylesheet" />
 <div class="row">
     <div class="col-lg-12">
         <div class="text-center m-t-lg">
@@ -46,3 +46,36 @@
         </div>
     </div>
 </div>
+<script type="text/JavaScript">
+
+    $('#btn-postFile').click(function (e) {
+        e.preventDefault();
+        var form_data = new FormData($('#uploadform')[0]);
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:60823/api/schools/upload",
+            processData: false,
+            cache: false,
+            mimeType: "multipart/form-data",
+            beforeSend: function () {
+                $('#spinner').show();
+            },
+            success: function (response, status, jxhr) {
+                console.log(response);
+                $('#message').html(response);
+                $('div.alert-success').toggleClass('hidden');
+            },
+
+            complete: function (xhr, status) {
+                $('#spinner').hide();
+                $('#postedFile').val('');
+            }
+        });
+    });
+
+    $(document).ready(function () {
+
+        $('#spinner').hide();
+
+    });
+</script> 

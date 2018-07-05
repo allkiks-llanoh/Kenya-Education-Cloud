@@ -345,6 +345,7 @@
     <Content Include="Content\plugins\textSpinners\spinners.css" />
     <Content Include="Content\plugins\toastr\toastr.min.css" />
     <Content Include="Content\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
+    <Content Include="Content\spinner.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -417,6 +418,7 @@
     <Content Include="Content\plugins\summernote\font\summernote.ttf" />
     <Content Include="Content\plugins\summernote\font\summernote.woff" />
     <Content Include="Scripts\api\typehead_collection.json" />
+    <None Include="Properties\PublishProfiles\voucherui-dev - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\globalConstants.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
