@@ -111,6 +111,7 @@ namespace KEC.Voucher.Web.Api.Controllers
         private async Task UploadCsv(string postedFilePath)
         {
             var smsService = new AfricasTalkingSmsService();
+            var numberToText = string.Empty;
             try
             {
                 using (var streamReader = new StreamReader(postedFilePath))
@@ -153,9 +154,10 @@ namespace KEC.Voucher.Web.Api.Controllers
                             };
                             schoolAdmin = _uow.SchoolAdminRepository.AddFromCSV(schoolAdmin);
                             _uow.SchoolRepository.AddFromCSV(school, fundAllocation,schoolAdmin);
-
+                            numberToText = schoolAdmin.PhoneNumber;
                         }
                         _uow.Complete();
+                       
                         //TODO: use logged in user number
                         smsService.SendSms("0704033581", "School data processed successfully");
 
@@ -167,7 +169,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             catch (Exception)
             {
                 //TODO: use logged in user number
-                smsService.SendSms("0711861170", "An error occured while processing schools csv");
+                smsService.SendSms("0704033581", "An error occured while processing schools csv");
             }
         }
     }
