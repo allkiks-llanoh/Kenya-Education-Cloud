@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using DNTBreadCrumb.Core;
 using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Models;
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KEC.ECommerce.Web.UI.Controllers
 {
+   
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -20,7 +22,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
         private readonly IUnitOfWork _uow;
         private readonly IPageHelper<Order> _orderPaginationHelper;
         private readonly IPageHelper<Licence> _licencePaginationHelper;
-
+        
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager
             , IPageHelper<Licence> licencePaginationHelper, IPageHelper<Order> orderPaginationHelper, IUnitOfWork uow)
         {
@@ -33,14 +35,17 @@ namespace KEC.ECommerce.Web.UI.Controllers
             _orderPaginationHelper.PageConfig.PageSize = 10;
         }
         [Authorize]
+        [BreadCrumb(Title = "Dashboard", Order = 1)]
         public IActionResult Dashboard()
         {
             return View();
         }
+        [BreadCrumb(Title = "Register", Order = 1)]
         public IActionResult Register()
         {
             return View(new RegisterViewModel());
         }
+        [BreadCrumb(Title = "Login", Order = 1)]
         public IActionResult Login()
         {
             return View(new LoginViewModel());
@@ -122,6 +127,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             return RedirectToAction("Login");
         }
         [Authorize]
+        [BreadCrumb(Title = "Pending Orders", Order = 1)]
         public IActionResult Orders()
         {
             var mail = User.FindFirst("Email")?.Value;
@@ -130,6 +136,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             return View(model);
         }
         [Authorize]
+        [BreadCrumb(Title = "Licences",Order = 1)]
         public IActionResult Licences(int pageNumber = 1, string searchTerm=null)
         {
             var code = User.FindFirst("IdentificationCode")?.Value;
@@ -150,6 +157,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             }
         }
         [HttpGet,Authorize]
+        [BreadCrumb(Title = "Purchases", Order = 1)]
         public IActionResult Purchases(int pageNumber = 1, string searchTerm = null)
         {
             var mail = User.FindFirst("Email")?.Value;

@@ -11,5 +11,10 @@ namespace KEC.ECommerce.Web.UI.Security.Database
         {
        
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<ApplicationUser>().HasAlternateKey(p => p.IdentificationCode);
+        }
     }
 }

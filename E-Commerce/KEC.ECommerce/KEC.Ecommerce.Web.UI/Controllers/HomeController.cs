@@ -4,6 +4,7 @@ using KEC.ECommerce.Web.UI.Models;
 
 namespace KEC.ECommerce.Web.UI.Controllers
 {
+
     public class HomeController : Controller
     {
         public IActionResult Index()

@@ -104,6 +104,24 @@
                 <div class="row">
                     <div class="cell-md-12 cell-sm-12">
                         <div class="p-1 m-1">
+                            <div class="row">
+                                <div class="cell-md-full">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <breadcrumb asp-homepage-title="Account"
+                                                    asp-homepage-url="@Url.Action("Dashboard", "Account", values: new { area = "" })"
+                                                    asp-homepage-glyphicon="mif-user icon"></breadcrumb>
+
+                                    }
+                                    else
+                                    {
+                                        <breadcrumb asp-homepage-title="Home"
+                                                    asp-homepage-url="@Url.Action("Index", "Home", values: new { area = "" })"
+                                                    asp-homepage-glyphicon="mif-home icon"></breadcrumb>
+
+                                    }
+                                </div>
+                            </div>
                             @RenderBody()
                         </div>
                     </div>

@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using DNTBreadCrumb.Core;
+using Hangfire;
 using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Models;
@@ -26,6 +27,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
         }
 
         [HttpGet]
+        [BreadCrumb(Title = "Payment", Order = 1)]
         public async Task<IActionResult> Payment(int orderId)
         {
             var mail = User.FindFirst("Email")?.Value;
