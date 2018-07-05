@@ -510,6 +510,7 @@
     <Compile Include="Models\SchoolType.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TransactionParam.cs" />
+    <Compile Include="Models\UploadCSVViewModel.cs" />
     <Compile Include="Models\Voucher.cs" />
     <Compile Include="Models\PinParam.cs" />
     <Compile Include="Models\VoucherApprovalParam.cs" />

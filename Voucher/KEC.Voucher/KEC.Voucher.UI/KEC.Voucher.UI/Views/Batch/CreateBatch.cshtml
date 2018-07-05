@@ -115,7 +115,7 @@
         row.append($('<td class="hidden"> + rowData.Id + </td>'));
         row.append($("<td>" + rowData.CountyName + "</td>"));
         row.append($("<td>" + rowData.CountyCode + "</td>"));
-        row.append($(`<td> <a href="ManageBatch?Id=${rowData.Id}&countyCode=${rowData.CountyCode.toString()}" class="btn btn-w-m btn-info btn-xs" role="button">CREATE BATCH</a>`));
+        row.append($(`<td> <a href="/Batch/ManageBatch?Id=${rowData.Id}&countyCode=${rowData.CountyCode.toString()}" class="btn btn-w-m btn-info btn-xs" role="button">CREATE BATCH</a>`));
 
         console.log(rowData.CountyCode);
         return row[0];

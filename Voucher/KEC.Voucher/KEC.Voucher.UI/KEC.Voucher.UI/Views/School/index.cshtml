@@ -53,10 +53,12 @@
         var form_data = new FormData($('#uploadform')[0]);
         $.ajax({
             type: "POST",
-            url: "http://localhost:60823/api/schools/upload",
+            url: "https://voucherapi-d.kec.ac.ke/api/schools/upload",
             processData: false,
+            contentType: false,
+            crossDomain: true,
             cache: false,
-            mimeType: "multipart/form-data",
+            data: form_data,
             beforeSend: function () {
                 $('#spinner').show();
             },
