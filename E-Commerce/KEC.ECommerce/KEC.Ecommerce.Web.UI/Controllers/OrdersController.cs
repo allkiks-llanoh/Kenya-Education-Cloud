@@ -1,9 +1,13 @@
-﻿using DNTBreadCrumb.Core;
+﻿using DinkToPdf.Contracts;
+using DNTBreadCrumb.Core;
 using Hangfire;
 using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.UnitOfWork.Core;
+using KEC.ECommerce.Web.UI.Mailer;
 using KEC.ECommerce.Web.UI.Models;
+using KEC.ECommerce.Web.UI.PDF;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using RestSharp;
@@ -19,11 +23,20 @@ namespace KEC.ECommerce.Web.UI.Controllers
     {
         private readonly IUnitOfWork _uow;
         private readonly IConfiguration _configuration;
+        private readonly ITemplateService _templateService;
+        private readonly IEmailService _emailService;
+        private readonly IConverter _converter;
+        private readonly IHostingEnvironment _env;
 
-        public OrdersController(IUnitOfWork uow, IConfiguration configuration)
+        public OrdersController(IUnitOfWork uow, IConfiguration configuration, ITemplateService templateService,
+            IEmailService emailService, IConverter converter, IHostingEnvironment env)
         {
             _uow = uow;
             _configuration = configuration;
+            _templateService = templateService;
+            _emailService = emailService;
+            _converter = converter;
+            _env = env;
         }
 
         [HttpGet]
@@ -105,6 +118,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             //Send mail
             var mail = User.FindFirst("Email")?.Value;
             var code = User.FindFirst("IdentificationCode")?.Value;
+            var customerName = User.FindFirst("DisplayName")?.Value;
             var order = await _uow.OrdersRepository.GetOrderByUser(orderId, mail, OrderStatus.Submitted);
             if (order == null)
             {
@@ -118,7 +132,14 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 var client = new RestClient(transEndPoint);
                 var request = new RestRequest(Method.POST);
                 var amount = _uow.OrdersRepository.GetOrderTotalCost(order.Id);
-                var transactionParam = new TransactionParam { VoucherCode = voucherCode, VoucherPin = voucherPin, Email = mail, Amount = amount, Description = order.OrderNumber };
+                var transactionParam = new TransactionParam
+                {
+                    VoucherCode = voucherCode,
+                    VoucherPin = voucherPin,
+                    Email = mail,
+                    Amount = amount,
+                    Description = order.OrderNumber
+                };
                 var json = request.JsonSerializer.Serialize(transactionParam);
                 request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
                 request.AddHeader("Content-type", "application/json");
@@ -129,7 +150,8 @@ namespace KEC.ECommerce.Web.UI.Controllers
                     var orderActions = new OrderActions(_uow, order, mail, code);
                     orderActions.PostVoucherPayment(voucherPin);
                     OrderActions.GenerateLicences(_uow, code, order.Id);
-                    BackgroundJob.Enqueue(() => OrderActions.GenerateLicences(_uow, code, order.Id));
+                    var jobId = BackgroundJob.Enqueue(() => OrderActions.GenerateLicences(_uow, code, order.Id));
+                    BackgroundJob.ContinueWith(jobId, () => OrderActions.SendLicencesEmail(_uow, _emailService,_templateService,code, customerName, order.Id, _converter, _env));
 
                     return PartialView("_MessagePartial", model);
                 }
@@ -145,6 +167,6 @@ namespace KEC.ECommerce.Web.UI.Controllers
 
         }
 
-        
+
     }
 }
