@@ -33,10 +33,10 @@ namespace KEC.Voucher.Web.Api.Controllers
                 return requestError;
             }
             var schoolAdmin = _uow.SchoolAdminRepository.Find(p => p.Email.Equals(email)).FirstOrDefault();
-            if (voucher.School.SchoolAdmin.Id != schoolAdmin.Id)
-            {
-                return requestError;
-            }
+            //if (voucher.School.SchoolAdmin.Id != schoolAdmin.Id)
+            //{
+            //    return requestError;
+            //}
             if (schoolAdmin == null)
             {
                 return requestError;
