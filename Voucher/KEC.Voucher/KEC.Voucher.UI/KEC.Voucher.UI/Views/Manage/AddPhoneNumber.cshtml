@@ -3,7 +3,8 @@
     ViewBag.Title = "Phone Number";
     Layout = "~/Views/Shared/_LayoutPassword.cshtml";
 }
-
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
 <h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -20,7 +21,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit"  class="btn btn-primary" style="background-color:#00b95f;" value="Add Phone Number" />
+            <input type="submit" class="btn btn-primary" style="background-color:#00b95f;" value="Add Phone Number" />
         </div>
     </div>
 }

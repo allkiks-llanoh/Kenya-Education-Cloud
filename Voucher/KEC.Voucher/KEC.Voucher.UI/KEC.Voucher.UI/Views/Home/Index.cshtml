@@ -1,12 +1,15 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
 @if (User.IsInRole("System Admin"))
 {
     <div class="jumbotron text-center">
 
         <h3 style="font-weight:bold;">Voucher Management Portal</h3>
-        <h4>Admin Portal</h4>
+        <h4>User Management Portal</h4>
 
     </div>
 

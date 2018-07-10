@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180705080901_IncreasedDescriptionFrom200to2000Words.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Views\Home\About.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Index.cshtml" />

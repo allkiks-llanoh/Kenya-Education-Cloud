@@ -9,11 +9,10 @@ $.ajax({
     headers : {
         'Access-Controll-Allow-Origin': '*'
     },
-    type: 'POST',
+    type: 'GET',
     url: url,
-    dataType: 'JSON',
-    async: false,
-    crossDomain: true,
+    dataType: 'json',
+
     success: function (data) {
         //clear the current content of the select
         $select.html('');

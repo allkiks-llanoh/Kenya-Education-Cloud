@@ -1,0 +1,39 @@
+﻿@model OrderViewModel
+@{
+    ViewData["Title"] = "Purchase Items";
+}
+<div class="border bd-blue">
+    <div class="grid">
+        <div class="row">
+            <div class="cell-md-full">
+                <div class="ui horizontal divider">
+                    <p class="text-center text-bold text-upper fg-orange">Order - @Model.OrderNumber</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-md-full">
+                <div class="ui horizontal divider">
+                    <p class="text-center text-bold text-upper fg-orange"><span class="mif-cart icon"></span>Purchased Items</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-md-full">
+                @{
+                    await Html.RenderPartialAsync("_LineItemsPartial", Model);
+                }
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="cell">
+                <a asp-action="Purchases" asp-controller="Account" class="button info h-center m-2 outline rounded">
+                    <span class="mif-backward icon"></span> Back to Purchases
+                </a>
+            </div>
+        </div>
+    </div>
+
+   
+</div>
+

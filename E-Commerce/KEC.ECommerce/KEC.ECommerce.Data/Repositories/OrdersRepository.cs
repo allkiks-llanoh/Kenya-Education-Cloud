@@ -3,6 +3,7 @@ using KEC.ECommerce.Data.Helpers;
 using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.Repositories.Core;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,11 +53,30 @@ namespace KEC.ECommerce.Data.Repositories
 
             return totalCost;
         }
-        public async Task<Order> GetOrderByUser(int orderId, string userMail,OrderStatus status)
+        public async Task<Order> GetOrderByUser(int orderId, string userMail, OrderStatus status)
         {
-            var order =await  _eCommerceContext.Orders.FirstOrDefaultAsync(p => p.CustomerEmail.Equals(userMail) 
+            var order = await _eCommerceContext.Orders.FirstOrDefaultAsync(p => p.CustomerEmail.Equals(userMail)
                                  && p.Id.Equals(orderId) && p.Status == status);
             return order;
+        }
+        public IQueryable<Order> QueryableOrders(string email, string searchTerm)
+        {
+            var orders = default(IQueryable<Order>);
+            var currentDate = DateTime.Now;
+            if (searchTerm == null)
+            {
+                orders = _eCommerceContext.Orders.Where(p => p.CustomerEmail.Equals(email) && p.Status == OrderStatus.Paid)
+                                                      .OrderByDescending(p => p.SubmittedAt);
+            }
+            else
+            {
+                orders = _eCommerceContext.Orders.Where(p => p.CustomerEmail.Equals(email)
+                                                                   && p.OrderNumber.Contains(searchTerm)
+                                                                   && (p.Status == OrderStatus.Paid))
+                                                                   .OrderByDescending(p => p.SubmittedAt);
+            }
+
+            return orders;
         }
     }
 }

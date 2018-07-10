@@ -1,4 +1,4 @@
-﻿const apiBaseUrl = "http://voucherapi-dev.azurewebsites.net/api";
+﻿const apiBaseUrl = "https://voucherapi.kec.ac.ke/api";
 var currentUserGuid;
 $(document).ready(function () {
 

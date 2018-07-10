@@ -37,6 +37,7 @@ namespace KEC.Voucher.Data.Repositories
                 school.FundAllocations.Add(fundAllocation);
                 Add(school);
                 _voucherDbContext.SchoolAdmins.Add(schoolAdmin);
+                
             }
            
         }

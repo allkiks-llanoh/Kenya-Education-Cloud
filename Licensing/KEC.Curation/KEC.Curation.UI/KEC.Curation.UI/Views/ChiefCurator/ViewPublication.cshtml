@@ -17,6 +17,7 @@
 @{
     var PubId = Request.Params["Pub"];
     var Urls = Request.Params["Urls"];
+    var MimeType = Request.Params["Mime"];
 }
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="wrapper wrapper-content animated fadeIn">
@@ -42,17 +43,17 @@
                     </div>
                 </div>
             </div>
-            <div class="ibox-content no-padding">
-                <div class="visible-scrollbar" id="document_viewer">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <iframe allowfullscreen="" webkitallowfullscreen="" style="height:600px;width:800px"
-                                    src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(Urls)'></iframe>
-                        </div>
+            @*<div class="ibox-content no-padding">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div style="color:black; font-weight:bold;font-size:15px;">Content Location:</div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <a href="@Urls" target="_blank">Link to publication</a>
                     </div>
                 </div>
-            </div>
-
+            </div>*@
         </div>
         <div class="row">
             <div class="col-lg-12">

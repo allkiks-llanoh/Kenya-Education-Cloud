@@ -10,7 +10,7 @@ namespace KEC.ECommerce.Web.UI.Models
         public string ContentNumber { get; set; }
         [Required]
         public string Title { get; set; }
-        [MaxLength(200)]
+        [MaxLength(2000)]
         public string Description { get; set; }
         [Required]
         public decimal UnitPrice { get; set; }
