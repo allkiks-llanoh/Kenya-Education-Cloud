@@ -3,8 +3,16 @@
     "",
     "\\E-Commerce",
     "\\E-Commerce\\KEC.ECommerce",
-    "\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Web.UI"
+    "\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Web.UI\\Views",
+    "\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Web.UI\\wwwroot",
+    "\\Licensing",
+    "\\Licensing\\KEC.Curation",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI\\Views\\Account",
+    "\\Licensing\\KEC.Curation\\KEC.Curation.UI\\KEC.Curation.UI"
   ],
-  "SelectedNode": "\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Web.UI\\Startup.cs",
+  "SelectedNode": "\\Licensing\\KEC.Curation\\KEC.Curation.PublishersUI\\KEC.Curation.PublishersUI.sln",
   "PreviewInSolutionExplorer": false
 }
