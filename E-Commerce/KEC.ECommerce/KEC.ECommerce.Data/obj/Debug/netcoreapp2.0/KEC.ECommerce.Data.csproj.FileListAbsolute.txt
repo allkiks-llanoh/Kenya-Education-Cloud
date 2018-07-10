@@ -32,6 +32,7 @@ C:\Users\Makena Riungu\source\repos\Kenya Education Cloud\E-Commerce\KEC.ECommer
 C:\Users\Makena Riungu\source\repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\bin\Debug\netcoreapp2.0\KEC.ECommerce.Data.deps.json
 C:\Users\Makena Riungu\source\repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\bin\Debug\netcoreapp2.0\KEC.ECommerce.Data.dll
 C:\Users\Makena Riungu\source\repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\bin\Debug\netcoreapp2.0\KEC.ECommerce.Data.pdb
+C:\Users\Makena Riungu\source\repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.csprojAssemblyReference.cache
 C:\Users\Makena Riungu\source\repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.csproj.CoreCompileInputs.cache
 C:\Users\Makena Riungu\source\repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.AssemblyInfoInputs.cache
 C:\Users\Makena Riungu\source\repos\Kenya Education Cloud\E-Commerce\KEC.ECommerce\KEC.ECommerce.Data\obj\Debug\netcoreapp2.0\KEC.ECommerce.Data.AssemblyInfo.cs
