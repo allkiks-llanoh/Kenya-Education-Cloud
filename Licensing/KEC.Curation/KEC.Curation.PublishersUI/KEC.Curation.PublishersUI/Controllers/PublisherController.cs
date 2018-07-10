@@ -101,6 +101,23 @@ namespace KEC.Curation.PublishersUI.Controllers
                 return View(publisher);
             }
         }
-       
+        public ActionResult PublishToBookStore()
+        {
+            ViewData["SubTitle"] = "Publishers Portal";
+            ViewData["Message"] = " Publish To KEC Book Store";
+            using (var context = new ApplicationDbContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));
+
+                var publisher = new Publishers
+                {
+                    Company = user.Company,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    guid = user.Id
+                };
+                return View(publisher);
+            }
+        }
     }
 }

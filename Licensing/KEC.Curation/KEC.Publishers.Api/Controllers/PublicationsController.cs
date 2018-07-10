@@ -308,6 +308,14 @@ namespace KEC.Publishers.Api.Controllers
                publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
         }
+        [HttpGet("get/publications/approvedcontent/{Id}")]
+        public IActionResult PublisherArticleById(int Id, string guid)
+        {
+            var publications = _uow.PublicationRepository.Find(p => p.Id.Equals(Id) && p.Owner.Equals(guid));
+            var publicationList = publications.Any() ?
+               publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
+            return Ok(value: publicationList);
+        }
         [HttpGet("get/publications")]
         public IActionResult GetAllPublications()
         {

@@ -968,6 +968,7 @@
     <Content Include="Views\Account\TermsAndConditions.cshtml" />
     <Content Include="Views\Account\UserNotFound.cshtml" />
     <Content Include="Views\Shared\_LayoutCert.cshtml" />
+    <Content Include="Views\Publisher\PublishToBookStore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
