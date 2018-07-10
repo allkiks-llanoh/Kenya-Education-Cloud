@@ -3569,6 +3569,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "Microsoft.EntityFrameworkCore >= 2.1.1",
+      "Microsoft.EntityFrameworkCore.Abstractions >= 2.1.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.1.1",
       "Microsoft.Extensions.Configuration >= 2.1.1",
       "Microsoft.Extensions.Configuration.Json >= 2.1.1",
@@ -3576,23 +3578,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LLANOH\\.nuget\\packages\\": {},
+    "C:\\Users\\hp\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj",
+      "projectUniqueName": "C:\\Users\\Makena Riungu\\source\\repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj",
       "projectName": "KEC.ECommerce.Data",
-      "projectPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj",
-      "packagesPath": "C:\\Users\\LLANOH\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LLANOH\\Source\\Repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\obj\\",
+      "projectPath": "C:\\Users\\Makena Riungu\\source\\repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\KEC.ECommerce.Data.csproj",
+      "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Makena Riungu\\source\\repos\\Kenya Education Cloud\\E-Commerce\\KEC.ECommerce\\KEC.ECommerce.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\LLANOH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3616,6 +3618,14 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[2.1.1, )"
+          },
+          "Microsoft.EntityFrameworkCore.Abstractions": {
+            "target": "Package",
+            "version": "[2.1.1, )"
+          },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "[2.1.1, )"
