@@ -4,21 +4,23 @@
     ViewBag.Title = "RemoveFromRole";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
 @{
     var UserId = Request.Params["Id"];
 }
-    <h2>Remove User From Role</h2>
-    @using (Html.BeginForm("DeleteUserFromRoleChief", "Role"))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
+<h2>Remove User From Role</h2>
+@using (Html.BeginForm("DeleteUserFromRoleChief", "Role"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 
-        <p>
-            Username :   <input type="text" name="guid" id="guid" class="form-control" readonly value="@UserId">
-            Role Name:   <input type="text" name="roleName" id="roleName" class="form-control" readonly value="Chief Curator">
-        </p>
+    <p>
+        Username :   <input type="text" name="guid" id="guid" class="form-control" readonly value="@UserId">
+        Role Name:   <input type="text" name="roleName" id="roleName" class="form-control" readonly value="Chief Curator">
+    </p>
 
-        <input type="submit"  class="btn btn-w-m btn-info" style="background-color:#00B95F;" value="Delete this user from Role" />
-    }
+    <input type="submit" class="btn btn-w-m btn-info" style="background-color:#00B95F;" value="Delete this user from Role" />
+}
 
 

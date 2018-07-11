@@ -39,7 +39,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             var schoolsWithoutVoucher = _uow.SchoolRepository.Find(p => !schoolsWithVoucher.Contains(p.Id)).Count();
             return Request.CreateResponse(HttpStatusCode.OK, schoolsWithoutVoucher);
         }
-        
+
         [HttpGet, Route("approvedvouchers/{year}")]
         public HttpResponseMessage ApprovedVouchers(int year)
         {
@@ -85,8 +85,8 @@ namespace KEC.Voucher.Web.Api.Controllers
                                  Request.CreateErrorResponse(HttpStatusCode.NotFound, message: "No schools of the specified type registered for the county");
         }
         //POST api/<controller>
-        [HttpPost, Route("")]
-        public HttpResponseMessage SchoolsUpload()
+        [HttpPost, Route("upload")]
+        public HttpResponseMessage SchoolsUploadAsync()
         {
 
             var httpRequest = HttpContext.Current.Request;
@@ -107,6 +107,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             postedFile.SaveAs(filePath);
             HostingEnvironment.QueueBackgroundWorkItem(ct => UploadCsv(filePath));
             return Request.CreateResponse(HttpStatusCode.OK, value: "File uploaded successfully.Data processing,you will get an sms alert when done");
+           
         }
         private async Task UploadCsv(string postedFilePath)
         {
@@ -151,23 +152,23 @@ namespace KEC.Voucher.Web.Api.Controllers
                                 Email = csvReader.GetField<string>("Email"),
                                 PhoneNumber = csvReader.GetField<string>("PhoneNumber")
                             };
-                            schoolAdmin = _uow.SchoolAdminRepository.AddFromCSV(schoolAdmin);
-                            _uow.SchoolRepository.AddFromCSV(school, fundAllocation,schoolAdmin);
-
+                            _uow.SchoolRepository.AddFromCSV(school, fundAllocation, schoolAdmin);
+                            school.SchoolAdmin = schoolAdmin;
                         }
                         _uow.Complete();
+
                         //TODO: use logged in user number
                         smsService.SendSms("0704033581", "School data processed successfully");
 
                     }
                 }
 
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ex.Message.ToString();
                 //TODO: use logged in user number
-                smsService.SendSms("0711861170", "An error occured while processing schools csv");
+                smsService.SendSms("0704033581", "An error occured while processing schools csv");
             }
         }
     }

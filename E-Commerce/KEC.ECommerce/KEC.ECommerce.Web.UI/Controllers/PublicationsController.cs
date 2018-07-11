@@ -56,7 +56,6 @@ namespace KEC.ECommerce.Web.UI.Controllers
                     return BadRequest($"Publication number {model.ContentNumber}  already exists in E-Commerce store");
                 }
             }
-
         }
 
         private bool AddToStore(PublicationUploadSerializer model, string thumbnailUrl, Publisher publisher, Author author, Subject subject, Level level,Category category)

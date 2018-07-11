@@ -8,7 +8,7 @@ namespace KEC.Curation.UI.ActionFilters
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
           
-            filterContext.RequestContext.HttpContext.Response.AddHeader("Access-Controll-Allow-Origin", "https://curationapi-d/api");
+            filterContext.RequestContext.HttpContext.Response.AddHeader("Access-Controll-Allow-Origin", "*");
             base.OnActionExecuting(filterContext);
         }
     }

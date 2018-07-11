@@ -4,13 +4,14 @@
     ViewBag.Title = "Voucher Portal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/js/ClientTransaction.js"></script>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
 <script src="~/js/accounting.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <div class="row">
     <div class="col-lg-12">
+
         <div class="text-center m-t-lg">
             <h1>
                 Kenya Education Cloud
@@ -41,6 +42,22 @@
                 </table>
             </div>
         </div>
+
+        @*<div class="panel panel-primary col-md-6 col-md-offset-3">
+                <div class="panel-body">
+                    <div class="border bd-blue">
+                        <div class="text-center m-t-lg">
+                            <h1>
+                                Kenya Education Cloud
+                            </h1>
+                        </div>
+                        <h2 class="text-upper text-center text-bold fg-orange p-2">There are no transactions made yet!</h2>
+                    </div>
+                </div>
+            </div>*@
+
+
+
     </div>
 </div>
 <div class="form-group col-md-10">
@@ -81,10 +98,10 @@
             type: "GET",
             dataType: "json",
             success: function (data, status, jqhxr) {
-                console.log(data);
 
                 //This code snipet prepares to append Json Data
                 $('#createdtransactions').append(tableRows(data));
+
             }
         });
 

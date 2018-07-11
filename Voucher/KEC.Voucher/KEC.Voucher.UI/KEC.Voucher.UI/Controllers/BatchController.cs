@@ -7,6 +7,8 @@ using System.Web.Mvc;
 
 namespace KEC.Voucher.UI.Controllers
 {
+    [CustomAuthorize(Roles = "Batch Creator")]
+
     public class BatchController : Controller
     {
         // GET: Batch

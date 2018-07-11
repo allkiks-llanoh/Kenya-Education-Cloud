@@ -16,65 +16,44 @@
             </li>
             @if (User.IsInRole("System Admin"))
             {
-                <li>
-                    <a href="@Url.Action("Index", "Role")" data-toggle="tooltip" data-placement="top" title="User Management" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Management</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="@Url.Action("Index", "Role")"><i class="glyphicon glyphicon-list"></i>Manage Users</a></li>
-                        <li><a href="@Url.Action("UserList", "Role")"><i class="glyphicon glyphicon-list"></i>Registered User List</a></li>
-                    </ul>
-                </li>
+                <li> <a href="@Url.Action("Index", "Home")" data-toggle="tooltip" data-placement="top" class="green-tooltip"><i class="glyphicon glyphicon-dashboard"></i> <span class="nav-label">Dashboard</span></a></li>
+                <li><a href="@Url.Action("Index", "Role")"><i class="glyphicon glyphicon-list"></i>Manage Users</a></li>
+                <li><a href="@Url.Action("UserList", "Role")"><i class="glyphicon glyphicon-list"></i>Registered User List</a></li>
+
             }
 
-            @if (User.IsInRole("School Admin"))
+            @if (User.IsInRole("Data Creator"))
             {
-                <li>
-                    <a href="@Url.Action("Index", "School")" data-toggle="tooltip" data-placement="top" title="School Management" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Create Schools</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="@Url.Action("Index", "School")"><i class="glyphicon glyphicon-list"></i>Upload School Data</a></li>
-                    </ul>
-                </li>
+                <li><a href="@Url.Action("Index", "Home")" data-toggle="tooltip" data-placement="top" class="green-tooltip"><i class="glyphicon glyphicon-dashboard"></i> <span class="nav-label">Dashboard</span></a></li>
+                <li><a href="@Url.Action("Index", "School")"><i class="glyphicon glyphicon-list"></i>Upload School Data</a></li>
             }
             @if (User.IsInRole("Batch Creator"))
             {
-                <li>
-                    <a href="@Url.Action("Index", "Batch")" data-toggle="tooltip" data-placement="top" title="Batch Management" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Create Batch</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="@Url.Action("Index", "Batch")"><i class="glyphicon glyphicon-list"></i>Upload Data</a></li>
+                <li><a href="@Url.Action("Index", "Home")" data-toggle="tooltip" data-placement="top" title="Batch Management" class="green-tooltip"><i class="glyphicon glyphicon-dashboard"></i> <span class="nav-label">Dahsboard</span></a></li>
+                <li><a href="@Url.Action("Index", "Batch")"><i class="glyphicon glyphicon-list"></i>Upload Data</a></li>
 
-                    </ul>
-                </li>
             }
             @if (User.IsInRole("Voucher Creator"))
             {
 
-                <li>
-                    <a href="@Url.Action("Index", "Voucher")" data-toggle="tooltip" data-placement="top" title="Voucher Management" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Voucher Menu</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="@Url.Action("Index", "Voucher")"><i class="glyphicon glyphicon-list"></i>Create Voucher</a></li>
-                    </ul>
-                </li>
+                <li><a href="@Url.Action("Index", "Home")" data-toggle="tooltip" data-placement="top" title="Voucher Management" class="green-tooltip"><i class="glyphicon glyphicon-dashboard"></i> <span class="nav-label">Dashboard</span></li>
+                <li><a href="@Url.Action("Index", "Voucher")"><i class="glyphicon glyphicon-list"></i>Create Voucher</a></li>
+
 
             }
 
             @if (User.IsInRole("Voucher Approver"))
             {
 
-                <li>
-                    <a href="@Url.Action("Index", "Voucher")" data-toggle="tooltip" data-placement="top" title="Approvals" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Voucher Menu</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="@Url.Action("ApproveVoucher", "Voucher")"><i class="glyphicon glyphicon-list"></i> Approve Voucher</a></li>
-                    </ul>
-                </li>
+                <li><a href="@Url.Action("Index", "Home")" data-toggle="tooltip" data-placement="top" title="Approvals" class="green-tooltip"><i class="glyphicon glyphicon-dashboard"></i> <span class="nav-label">Dashboard</span></a></li>
+                <li><a href="@Url.Action("ApproveVoucher", "Voucher")"><i class="glyphicon glyphicon-list"></i> Approve Voucher</a></li>
 
             }
-            @if (User.IsInRole("Data Creator"))
+            @if (User.IsInRole("School Admin"))
             {
-                <li>
-                    <a href="@Url.Action("Index", "Batch")" data-toggle="tooltip" data-placement="top" title="Data Management" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Data Menu</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="@Url.Action("Index", "Batch")"><i class="glyphicon glyphicon-list"></i>Create Data</a></li>
-                    </ul>
-                </li>
+                <li><a href="@Url.Action("Index", "Home")" data-toggle="tooltip" data-placement="top" title="Data Management" class="green-tooltip"><i class="glyphicon glyphicon-dashboard"></i> <span class="nav-label">Dashboard</span></a></li>
+                <li><a href="@Url.Action("Transaction", "Client")"><i class="glyphicon glyphicon-list"></i>Transactions Ledger</a></li>
+
 
             }
 
