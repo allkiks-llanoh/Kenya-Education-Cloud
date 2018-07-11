@@ -250,13 +250,14 @@ namespace KEC.ECommerce.Web.UI.Controllers
                         Content = messageBody
                     };
                     emailMessage.ToAddresses.Add(new EmailAddress { Name = user.DisplayName, Address = user.Email });
-                    emailMessage.FromAddresses.Add(new EmailAddress { Name = hostname, Address = _emailConfiguration.SmtpUsername });
+                    emailMessage.FromAddresses.Add(new EmailAddress { Name = _emailConfiguration.SmtpUsername,
+                                                    Address = _emailConfiguration.SmtpUsername });
                     emailMessage.Subject = "Password Reset";
                     var emailService = _emailService as EmailService;
                     var emailConfiguration = _emailConfiguration as EmailConfiguration;
-                    BackgroundJob.Enqueue(() => AccountActions.SendEmail(emailMessage, emailService, emailConfiguration));
+                    BackgroundJob.Enqueue(() => MailerActions.SendEmail(emailMessage, emailService, emailConfiguration));
                 }
-                return View("ForgotPasswordConfirmation");
+                return RedirectToAction(nameof(AccountController.ForgotPasswordConfirmation),"Account");
             }
             else
             {
@@ -308,6 +309,16 @@ namespace KEC.ECommerce.Web.UI.Controllers
         public IActionResult ResetPasswordConfirmation()
         {
             return View();
+        }
+        [HttpGet]
+        [BreadCrumb(Title = "Profile", Order = 1)]
+        public IActionResult Profile()
+        {
+            var code = User.FindFirst("IdentificationCode")?.Value;
+            var email = User.FindFirst("Email")?.Value;
+            var fullName = User.FindFirst("DisplayName")?.Value;
+            var model = new ProfileViewModel(code, fullName, email);
+            return View(model);
         }
         private void AddErrors(IdentityResult result)
         {

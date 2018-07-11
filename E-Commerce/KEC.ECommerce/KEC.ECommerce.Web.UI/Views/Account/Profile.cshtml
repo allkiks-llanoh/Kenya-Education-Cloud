@@ -1,0 +1,41 @@
+﻿@model ProfileViewModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+
+<div class="grid">
+
+    <div class="row">
+        <div class="cell-md-4 h-center">
+
+            <div class="ui segment">
+                <div class="ui horizontal divider">
+                    <p class="text-center text-bold text-upper fg-orange">My Profile</p>
+                </div>
+
+                <div class="form-group">
+                    <b><label class="text-upper">Full Name:</label></b>
+                    <label class="text-upper">@Model.FullName</label>
+                </div>
+                <hr class="fg-darkGray" />
+                <div class="field form-group">
+                    <b><label class="text-upper">Email Address:</label></b>
+                    <label class="text-lower fg-blue">@Model.EmailAddress</label>
+                </div>
+                <hr class="fg-darkGray" />
+                <div class=" form-group">
+                    <b><label class="text-upper">Identification code:</label></b>
+                    <label class="text-upper">@Model.IdenficationCode</label>
+                </div>
+                <hr class="fg-darkGray" />
+                <div class="clear mt-2 form-actions">
+                    <a role="button" asp-controller="Account" asp-action="Dashboard" class="button  info h-center m-2 outline rounded">
+                        <span class="mif-backward icon"></span>Back to dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

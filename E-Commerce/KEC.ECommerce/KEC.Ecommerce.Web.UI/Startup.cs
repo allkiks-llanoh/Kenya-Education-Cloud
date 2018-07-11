@@ -47,7 +47,6 @@ namespace KEC.ECommerce.Web.UI
             services.AddTransient<ITemplateService, TemplateService>();
             services.AddSession();
             services.AddTransient(typeof(IPageHelper<>), typeof(PageHelper<>));
-            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
             services.AddSingleton<IPageConfig, PageConfig>();
             services.AddDbContext<IdentityDataContext>(options =>
             {

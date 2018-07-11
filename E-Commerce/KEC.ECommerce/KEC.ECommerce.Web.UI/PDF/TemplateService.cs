@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 using System;
@@ -14,7 +15,7 @@ namespace KEC.ECommerce.Web.UI.PDF
 {
     public class TemplateService : ITemplateService
     {
-        private IRazorViewEngine _viewEngine;
+        private readonly IRazorViewEngine _viewEngine;
         private readonly IServiceProvider _serviceProvider;
         private readonly ITempDataProvider _tempDataProvider;
         public TemplateService(IRazorViewEngine viewEngine, IServiceProvider serviceProvider, ITempDataProvider tempDataProvider)
@@ -47,6 +48,7 @@ namespace KEC.ECommerce.Web.UI.PDF
                     var viewContext = new ViewContext(actionContext, viewResult.View, viewDictionary,
                         tempDataDictionary, outputWriter, new HtmlHelperOptions());
                     await viewResult.View.RenderAsync(viewContext);
+                    
                 }
                 catch (Exception ex)
                 {

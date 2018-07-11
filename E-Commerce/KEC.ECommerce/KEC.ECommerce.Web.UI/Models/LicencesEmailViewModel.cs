@@ -11,6 +11,7 @@ namespace KEC.ECommerce.Web.UI.Models
         public string OrderNumber { get; set; }
         public string GenDate { get; set; }
         public string CustomerEmail { get; set; }
+        public string StoreEmail { get; set; }
         public IEnumerable<LicenceViewModel> Licences { get; set; }
     }
 }

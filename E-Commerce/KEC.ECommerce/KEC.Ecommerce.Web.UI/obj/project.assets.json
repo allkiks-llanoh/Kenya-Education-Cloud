@@ -4849,7 +4849,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
-          "DinkToPdf": "1.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.1.1",
           "Microsoft.Extensions.Configuration": "2.1.1",
           "Microsoft.Extensions.Configuration.Json": "2.1.1"
@@ -12786,6 +12785,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "DNTBreadCrumb.Core >= 1.6.1",
+      "DinkToPdf >= 1.0.8",
       "HangFire >= 1.6.19",
       "KEC.ECommerce.Data >= 1.0.0",
       "MailKit >= 2.0.5",
@@ -12843,6 +12843,10 @@
           "DNTBreadCrumb.Core": {
             "target": "Package",
             "version": "[1.6.1, )"
+          },
+          "DinkToPdf": {
+            "target": "Package",
+            "version": "[1.0.8, )"
           },
           "HangFire": {
             "target": "Package",
