@@ -47,7 +47,9 @@
 <body>
     <header class="app-bar bg-blue fg-white app-bar-expand-md" data-role="appbar" id="main-appbar">
         <button type="button" class="hamburger menu-down hidden"><span class="line"></span><span class="line"></span><span class="line"></span></button>
-        <a href="/" class="d-block brand fg-white no-hover"><span class="border bd-white border-radius p-2">KEC STORE</span></a>
+        <a href="/" class="d-block brand fg-white no-hover">
+            <img src="~/images/white-logo.png" width="110" height="60" />
+        </a>
         <ul class="app-bar-menu">
             <li><a asp-action="Index" asp-controller="Home"><span class="mif-home icon"></span>Home</a></li>
             <li>@await Component.InvokeAsync("ProductsMenu")</li>
@@ -132,7 +134,7 @@
             <footer class="footer-bg">
                 <div class="container">
                     <div class="text-center mt-1 reduce-1">
-                        &copy; @DateTime.Now.Year   K.E.C <b>.</b> All Rights Reserved
+                        <b>Kenya Education Cloud &copy; All Rights Reserved</b>  
                     </div>
                 </div>
             </footer>
