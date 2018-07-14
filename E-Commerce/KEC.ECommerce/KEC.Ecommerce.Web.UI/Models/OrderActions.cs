@@ -18,10 +18,10 @@ namespace KEC.ECommerce.Web.UI.Models
             _userEmail = userEmail;
             _identificationCode = identificationCode;
         }
-        public void PostVoucherPayment(string pinNumber)
+        public void PostVoucherPayment(string pinNumber,PaymentMethod paymentMethod)
         {
             ChangeOrderStatus();
-            PostPaymentRecord(pinNumber, PaymentMethod.Voucher);
+            PostPaymentRecord(pinNumber, paymentMethod);
             DeductSoldQuantities();
         }
 

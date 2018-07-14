@@ -61,7 +61,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 {
                     var code = User.FindFirst("IdentificationCode")?.Value;
                     var customerName = User.FindFirst("DisplayName")?.Value;
-                    var msgModel = ProcessPayment(order.OrderNumber, mail, code, customerName, order);
+                    var msgModel = ProcessPayment(order.OrderNumber, mail, code, customerName, order,PaymentMethod.Free);
                     return View("FreeContent", msgModel);
                 }
             }
@@ -148,7 +148,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 IRestResponse response = await ConfirmVoucherPin(voucherCode, voucherPin, mail, order);
                 if (response.IsSuccessful)
                 {
-                    OrderViewModel model = ProcessPayment(voucherPin, mail, code, customerName, order);
+                    OrderViewModel model = ProcessPayment(voucherPin, mail, code, customerName, order,PaymentMethod.Voucher);
                     return PartialView("_MessagePartial", model);
                 }
                 else
@@ -184,11 +184,11 @@ namespace KEC.ECommerce.Web.UI.Controllers
             return response;
         }
 
-        private OrderViewModel ProcessPayment(string voucherPin, string mail, string code, string customerName, Order order)
+        private OrderViewModel ProcessPayment(string voucherPin, string mail, string code, string customerName, Order order,PaymentMethod paymentMethod)
         {
             var model = new OrderViewModel(_uow, order);
             var orderActions = new OrderActions(_uow, order, mail, code);
-            orderActions.PostVoucherPayment(voucherPin);
+            orderActions.PostVoucherPayment(voucherPin, paymentMethod);
             OrderActions.GenerateLicences(_uow, code, order.Id);
             var licences = _uow.LicencesRepository.Find(p => p.IdentificationCode.Equals(code) && p.OrderId.Equals(order.Id))
                                                   ?.Select(p => new LicenceViewModel(_uow, p))?.ToList();

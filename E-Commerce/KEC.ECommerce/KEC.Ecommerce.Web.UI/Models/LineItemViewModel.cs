@@ -41,11 +41,11 @@ namespace KEC.ECommerce.Web.UI.Models
                 return _lineItem.Quantity;
             }
         }
-        public decimal UnitPrice
+        public string UnitPrice
         {
             get
             {
-                return _lineItem.UnitPrice;
+                return _lineItem.UnitPrice.ToString("N2");
             }
         }
         public string Description

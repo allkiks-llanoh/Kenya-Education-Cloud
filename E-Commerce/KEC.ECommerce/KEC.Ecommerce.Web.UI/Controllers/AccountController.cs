@@ -175,7 +175,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
         public IActionResult Purchases(int pageNumber = 1, string searchTerm = null)
         {
             var mail = User.FindFirst("Email")?.Value;
-            var ordersQuery = _uow.OrdersRepository.QueryableOrders(mail, searchTerm);
+            var ordersQuery = _uow.OrdersRepository.QueryablePaidOrders(mail, searchTerm);
             var result = _orderPaginationHelper.GetPage(ordersQuery, pageNumber);
             var model = new PurchasePageViewModel
             {
@@ -195,7 +195,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
         public async Task<IActionResult> Purchase(int orderId)
         {
             var mail = User.FindFirst("Email")?.Value;
-            var order = await _uow.OrdersRepository.GetOrderByUser(orderId, mail, OrderStatus.Paid);
+            var order = await _uow.OrdersRepository.GetOrderByUser(orderId, mail, OrderStatus.Processed);
             if (order == null)
             {
                 return NotFound();

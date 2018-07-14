@@ -54,7 +54,7 @@ namespace KEC.ECommerce.Web.UI.Models
         {
             get
             {
-                return string.Format("KES {0:#.00}", _uow.OrdersRepository.GetOrderTotalCost(_order.Id));
+                return  _uow.OrdersRepository.GetOrderTotalCost(_order.Id).ToString("N2");
             }
         }
         public string OrderNumber
