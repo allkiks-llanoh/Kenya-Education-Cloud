@@ -95,7 +95,7 @@
                                     <label for="Title">Content Number</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="text" name="ContentNumber" id="ContentNumber" class="form-control" required readonly>
+                                    <input type="text" name="ContentNumber" id="ContentNumber" class="form-control" required >
                                 </div>
                             </div>
                             <br>
@@ -340,7 +340,7 @@
         var percent = $('.progress-bar-warning');
         var status = $('#status');
         var form_data = new FormData($('#uploadform')[0]);
-
+        var publicationContentNumber = $('#ContentNumber').val();
         $.ajax({
             type: 'POST',
             url: publicationSubmitUrl,
@@ -382,9 +382,11 @@
                 a.appendChild(linkText);
                 a.title = "Publishers Instructions";
                 a.href = `https://kec.ac.ke/publishers-instructions`;
-                a.target = "_blank"
-                var stringText = "an error occured, make sure you fill all required fields";
+                a.target = "_blank";
                 var space = " ";
+                var Inftext = " ";
+                var stringText = publicationContentNumber  + "--" + "Already Exixts In Store";
+               
                 $('#btn-postFile').html('Yes');
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
