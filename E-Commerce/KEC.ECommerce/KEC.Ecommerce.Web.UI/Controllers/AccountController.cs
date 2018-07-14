@@ -216,56 +216,8 @@ namespace KEC.ECommerce.Web.UI.Controllers
         {
             return View();
         }
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByEmailAsync(model.EmailAddress);
-                if (user != null)
-                {
-                    var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    var hostname = Request.Host.Host;
-                    var callbackUrl = Url.Action("ResetPassword", "Account", new { code }, protocol: HttpContext.Request.Scheme);
-                    var email = $"&EmailAddress={Uri.EscapeDataString(model.EmailAddress)}";
-                    callbackUrl += email;
-                    var callbackLink = $"<a class='btn' href='{callbackUrl}'>Reset my password »</a>";
-                    var pathToTemplate = Path.Combine(_env.ContentRootPath, "Mailer", "Templates", "PasswordReset.html");
-                    var builder = new BodyBuilder();
-
-                    using (var SourceReader = System.IO.File.OpenText(pathToTemplate))
-                    {
-
-                        builder.HtmlBody = SourceReader.ReadToEnd();
-                       
-                    }
-                    string messageBody = builder.HtmlBody.Replace("@Name", user.DisplayName)
-                                                .Replace("@CallbackLink", callbackLink)
-                                                .Replace("@Host",hostname)
-                                                .Replace("@CallbackUrl",callbackUrl);
-                    var emailMessage = new EmailMessage
-                    {
-                        Content = messageBody
-                    };
-                    emailMessage.ToAddresses.Add(new EmailAddress { Name = user.DisplayName, Address = user.Email });
-                    emailMessage.FromAddresses.Add(new EmailAddress { Name = _emailConfiguration.SmtpUsername,
-                                                    Address = _emailConfiguration.SmtpUsername });
-                    emailMessage.Subject = "Password Reset";
-                    var emailService = _emailService as EmailService;
-                    var emailConfiguration = _emailConfiguration as EmailConfiguration;
-                    BackgroundJob.Enqueue(() => MailerActions.SendEmail(emailMessage, emailService, emailConfiguration));
-                }
-                return RedirectToAction(nameof(AccountController.ForgotPasswordConfirmation),"Account");
-            }
-            else
-            {
-                return View(model);
-            }
-        }
         
-       
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -281,35 +233,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 return View();
             }
         }
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var user = await _userManager.FindByEmailAsync(model.EmailAddress);
-            if (user == null)
-            {
-                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
-            }
-            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
-            }
-            AddErrors(result);
-            return View(model);
-        }
-        [HttpGet]
-        [AllowAnonymous]
-        [BreadCrumb(Title = "Reset Password Confirmation", Order = 1)]
-        public IActionResult ResetPasswordConfirmation()
-        {
-            return View();
-        }
+       
         [HttpGet]
         [BreadCrumb(Title = "Profile", Order = 1)]
         public IActionResult Profile()

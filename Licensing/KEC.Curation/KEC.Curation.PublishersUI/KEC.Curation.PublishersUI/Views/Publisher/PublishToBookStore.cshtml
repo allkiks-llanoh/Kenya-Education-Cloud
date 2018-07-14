@@ -95,7 +95,7 @@
                                     <label for="Title">Content Number</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="text" name="ContentNumber" id="ContentNumber" class="form-control" required readonly>
+                                    <input type="text" name="ContentNumber" id="ContentNumber" class="form-control" required >
                                 </div>
                             </div>
                             <br>
@@ -340,7 +340,7 @@
         var percent = $('.progress-bar-warning');
         var status = $('#status');
         var form_data = new FormData($('#uploadform')[0]);
-
+        var publicationContentNumber = $('#ContentNumber').val();
         $.ajax({
             type: 'POST',
             url: publicationSubmitUrl,
@@ -364,7 +364,7 @@
             success: function (response, status, jxhr) {
 
                 $('#div-danger').toggle('hidden');
-                $('#btn-postFile').html('Yes');
+                $('#btn-postFile').html('Upload To Book Store');
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
                 $('#message').html(response);
@@ -377,18 +377,10 @@
                 status.html("Complete");
             },
             error: function (response, status, jxhr) {
-                var a = document.createElement('a');
-                var linkText = document.createTextNode("Publishers Instructions");
-                a.appendChild(linkText);
-                a.title = "Publishers Instructions";
-                a.href = `https://kec.ac.ke/publishers-instructions`;
-                a.target = "_blank"
-                var stringText = "an error occured, make sure you fill all required fields";
-                var space = " ";
-                $('#btn-postFile').html('Yes');
+                $('#btn-postFile').html('Upload To Book Store');
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
-                $('#error').append(stringText);
+                $('#error').html(response.responseText);
                 $('div.alert-danger').toggleClass('hidden');
 
             }
