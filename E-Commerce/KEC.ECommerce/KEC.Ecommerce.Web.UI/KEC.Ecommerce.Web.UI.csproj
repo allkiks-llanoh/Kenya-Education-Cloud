@@ -51,6 +51,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Mailer\Templates\ConfirmAccount.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Mailer\Templates\Licences.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Mailer\Templates\PasswordReset.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="wkhtmltox\32bit\libwkhtmltox.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

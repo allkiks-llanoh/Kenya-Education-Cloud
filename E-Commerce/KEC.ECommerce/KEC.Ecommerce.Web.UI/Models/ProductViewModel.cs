@@ -42,11 +42,11 @@ namespace KEC.ECommerce.Web.UI.Models
                 return _publication.ThumbnailUrl;
             }
         }
-        public decimal UnitPrice
+        public string UnitPrice
         {
             get
             {
-                return _publication.UnitPrice;
+                return _publication.UnitPrice.Equals(0) ? "Free content" : $"@KES {_publication.UnitPrice.ToString("N2")} ";
             }
         }
         public string Category

@@ -52,8 +52,24 @@ namespace KEC.ECommerce.Web.UI.Controllers
             if (order != null)
             {
                 model = new OrderViewModel(_uow, order, true);
+                var orderCost = _uow.OrdersRepository.GetOrderTotalCost(orderId);
+                if (orderCost > 0)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    var code = User.FindFirst("IdentificationCode")?.Value;
+                    var customerName = User.FindFirst("DisplayName")?.Value;
+                    var msgModel = ProcessPayment(order.OrderNumber, mail, code, customerName, order);
+                    return View("FreeContent", msgModel);
+                }
             }
-            return View(model);
+            else
+            {
+                return NotFound();
+            }
+
 
         }
         [HttpPost]
@@ -117,8 +133,6 @@ namespace KEC.ECommerce.Web.UI.Controllers
         public async Task<IActionResult> CompletePayment(int orderId, string voucherCode, string voucherPin)
         {
 
-            //TODO: Generate Licences
-            //Send mail
             var mail = User.FindFirst("Email")?.Value;
             var code = User.FindFirst("IdentificationCode")?.Value;
             var customerName = User.FindFirst("DisplayName")?.Value;
@@ -131,58 +145,10 @@ namespace KEC.ECommerce.Web.UI.Controllers
             }
             else
             {
-                var transEndPoint = _configuration["VoucherTransactionEndPoint"];
-                var client = new RestClient(transEndPoint);
-                var request = new RestRequest(Method.POST);
-                var amount = _uow.OrdersRepository.GetOrderTotalCost(order.Id);
-                var transactionParam = new TransactionParam
-                {
-                    VoucherCode = voucherCode,
-                    VoucherPin = voucherPin,
-                    Email = mail,
-                    Amount = amount,
-                    Description = order.OrderNumber
-                };
-                var json = request.JsonSerializer.Serialize(transactionParam);
-                request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
-                request.AddHeader("Content-type", "application/json");
-                var response = await client.ExecuteTaskAsync(request);
+                IRestResponse response = await ConfirmVoucherPin(voucherCode, voucherPin, mail, order);
                 if (response.IsSuccessful)
                 {
-                    var model = new OrderViewModel(_uow, order);
-                    var orderActions = new OrderActions(_uow, order, mail, code);
-                    orderActions.PostVoucherPayment(voucherPin);
-                    OrderActions.GenerateLicences(_uow, code, order.Id);
-                    var licences = _uow.LicencesRepository.Find(p => p.IdentificationCode.Equals(code) && p.OrderId.Equals(order.Id))
-                                                          ?.Select(p => new LicenceViewModel(_uow, p))?.ToList();
-                    var viewModel = new LicencesEmailViewModel
-                    {
-                        OrderNumber = order.OrderNumber,
-                        CustomerName = customerName,
-                        CustomerEmail = mail,
-                        GenDate = DateTime.Now.ToLongDateString(),
-                        Licences = licences,
-                        StoreEmail = _emailConfiguration.SmtpUsername
-                    };
-
-                    var documentContent = _templateService.RenderTemplateAsync("Templates/LicencesEmail", viewModel).Result;
-                    var emailService = _emailService as EmailService;
-                    var emailConfiguration = _emailConfiguration as EmailConfiguration;
-                    var pdfParams = new PDFParams
-                    {
-                        PathToMailTemplate = Path.Combine(_env.ContentRootPath, "Mailer", "Templates", "Licences.html"),
-                        PdfOutputFile = Path.Combine(_env.ContentRootPath, "PDFLicences", $"{order.OrderNumber}.pdf")
-                    };
-                    var jobId = BackgroundJob.Schedule(() => MailerActions.ConvertHtml2PDF(documentContent, pdfParams), DateTimeOffset.Now.AddMinutes(10));
-                    var customer = new Customer
-                    {
-                        IdentificationCode = code,
-                        Name = customerName,
-                        Order = order,
-                        PDFParams = pdfParams
-                    };
-                    GenerateMailMessage(emailConfiguration, customer, out string messageBody, out EmailMessage message);
-                    BackgroundJob.ContinueWith(jobId, () => MailerActions.SendLicencesEmail(emailService, emailConfiguration, message));
+                    OrderViewModel model = ProcessPayment(voucherPin, mail, code, customerName, order);
                     return PartialView("_MessagePartial", model);
                 }
                 else
@@ -195,6 +161,66 @@ namespace KEC.ECommerce.Web.UI.Controllers
             }
 
 
+        }
+
+        private async Task<IRestResponse> ConfirmVoucherPin(string voucherCode, string voucherPin, string mail, Order order)
+        {
+            var transEndPoint = _configuration["VoucherTransactionEndPoint"];
+            var client = new RestClient(transEndPoint);
+            var request = new RestRequest(Method.POST);
+            var amount = _uow.OrdersRepository.GetOrderTotalCost(order.Id);
+            var transactionParam = new TransactionParam
+            {
+                VoucherCode = voucherCode,
+                VoucherPin = voucherPin,
+                Email = mail,
+                Amount = amount,
+                Description = order.OrderNumber
+            };
+            var json = request.JsonSerializer.Serialize(transactionParam);
+            request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
+            request.AddHeader("Content-type", "application/json");
+            var response = await client.ExecuteTaskAsync(request);
+            return response;
+        }
+
+        private OrderViewModel ProcessPayment(string voucherPin, string mail, string code, string customerName, Order order)
+        {
+            var model = new OrderViewModel(_uow, order);
+            var orderActions = new OrderActions(_uow, order, mail, code);
+            orderActions.PostVoucherPayment(voucherPin);
+            OrderActions.GenerateLicences(_uow, code, order.Id);
+            var licences = _uow.LicencesRepository.Find(p => p.IdentificationCode.Equals(code) && p.OrderId.Equals(order.Id))
+                                                  ?.Select(p => new LicenceViewModel(_uow, p))?.ToList();
+            var viewModel = new LicencesEmailViewModel
+            {
+                OrderNumber = order.OrderNumber,
+                CustomerName = customerName,
+                CustomerEmail = mail,
+                GenDate = DateTime.Now.ToLongDateString(),
+                Licences = licences,
+                StoreEmail = _emailConfiguration.SmtpUsername
+            };
+
+            var documentContent = _templateService.RenderTemplateAsync("Templates/LicencesEmail", viewModel).Result;
+            var emailService = _emailService as EmailService;
+            var emailConfiguration = _emailConfiguration as EmailConfiguration;
+            var pdfParams = new PDFParams
+            {
+                PathToMailTemplate = Path.Combine(_env.ContentRootPath, "Mailer", "Templates", "Licences.html"),
+                PdfOutputFile = Path.Combine(_env.ContentRootPath, "PDFLicences", $"{order.OrderNumber}.pdf")
+            };
+            var jobId = BackgroundJob.Schedule(() => MailerActions.ConvertHtml2PDF(documentContent, pdfParams), DateTimeOffset.Now.AddMinutes(10));
+            var customer = new Customer
+            {
+                IdentificationCode = code,
+                Name = customerName,
+                Order = order,
+                PDFParams = pdfParams
+            };
+            GenerateMailMessage(emailConfiguration, customer, out string messageBody, out EmailMessage message);
+            BackgroundJob.ContinueWith(jobId, () => MailerActions.SendLicencesEmail(emailService, emailConfiguration, message));
+            return model;
         }
 
         private static void GenerateMailMessage(EmailConfiguration emailConfiguration, Customer customer, out string messageBody, out EmailMessage message)
