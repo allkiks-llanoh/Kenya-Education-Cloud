@@ -307,13 +307,14 @@
                 a.appendChild(linkText);
                 a.title = "Publishers Instructions";
                 a.href = `https://kec.ac.ke/publishers-instructions`;
-                a.target = "_blank"
+                a.target = "_blank";
                 var stringText = "an error occured, make sure you fill all fields else please check";
                 var space = " ";
                 $('#btn-postFile').html('Yes');
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
-                $('#error').append(stringText, space, a, space, "to help you upload content succesfully");
+                $('#error').html(stringText, space, a, space, "to help you upload content succesfully");
+                //$('#error').append(stringText, space, a, space, "to help you upload content succesfully");
                 $('div.alert-danger').toggleClass('hidden');
                 
             }

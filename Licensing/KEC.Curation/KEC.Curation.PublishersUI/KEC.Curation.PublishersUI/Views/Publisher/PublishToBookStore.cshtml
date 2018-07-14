@@ -364,7 +364,7 @@
             success: function (response, status, jxhr) {
 
                 $('#div-danger').toggle('hidden');
-                $('#btn-postFile').html('Yes');
+                $('#btn-postFile').html('Upload To Book Store');
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
                 $('#message').html(response);
@@ -377,20 +377,10 @@
                 status.html("Complete");
             },
             error: function (response, status, jxhr) {
-                var a = document.createElement('a');
-                var linkText = document.createTextNode("Publishers Instructions");
-                a.appendChild(linkText);
-                a.title = "Publishers Instructions";
-                a.href = `https://kec.ac.ke/publishers-instructions`;
-                a.target = "_blank";
-                var space = " ";
-                var Inftext = " ";
-                var stringText = publicationContentNumber  + "--" + "Already Exixts In Store";
-               
-                $('#btn-postFile').html('Yes');
+                $('#btn-postFile').html('Upload To Book Store');
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
-                $('#error').append(stringText);
+                $('#error').html(response.responseText);
                 $('div.alert-danger').toggleClass('hidden');
 
             }
