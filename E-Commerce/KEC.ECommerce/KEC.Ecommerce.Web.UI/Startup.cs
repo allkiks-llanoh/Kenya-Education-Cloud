@@ -1,7 +1,11 @@
-﻿using Hangfire;
+﻿using DinkToPdf;
+using DinkToPdf.Contracts;
+using Hangfire;
 using KEC.ECommerce.Data.UnitOfWork;
 using KEC.ECommerce.Data.UnitOfWork.Core;
+using KEC.ECommerce.Web.UI.Mailer;
 using KEC.ECommerce.Web.UI.Pagination;
+using KEC.ECommerce.Web.UI.PDF;
 using KEC.ECommerce.Web.UI.Security.Database;
 using KEC.ECommerce.Web.UI.Security.Extensions;
 using KEC.ECommerce.Web.UI.Security.Models;
@@ -38,6 +42,9 @@ namespace KEC.ECommerce.Web.UI
         {
             services.AddMvc()
                 .AddSessionStateTempDataProvider();
+            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<ITemplateService, TemplateService>();
             services.AddSession();
             services.AddTransient(typeof(IPageHelper<>), typeof(PageHelper<>));
             services.AddSingleton<IPageConfig, PageConfig>();

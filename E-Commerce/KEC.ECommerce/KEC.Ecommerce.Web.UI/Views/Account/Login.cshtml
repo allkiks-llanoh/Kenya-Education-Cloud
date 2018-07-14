@@ -5,7 +5,7 @@
 <div class="grid">
 
     <div class="row">
-        <div class="cell-md-4 h-center v-center">
+        <div class="cell-md-4 h-center">
             <form role="form" asp-action="Login"
                   asp-controller="Account" asp-antiforgery="true">
                 <div class="ui segment">
@@ -38,6 +38,7 @@
             </form>
             <div class="ui message bg-orange fg-white">
                 <a asp-controller="Account" asp-action="Register" class="fg-white">New to us? Register</a>
+                <a asp-controller="Account" asp-action="ForgotPassword" class="place-right fg-white">Forgot your password?</a>
             </div>
         </div>
     </div>

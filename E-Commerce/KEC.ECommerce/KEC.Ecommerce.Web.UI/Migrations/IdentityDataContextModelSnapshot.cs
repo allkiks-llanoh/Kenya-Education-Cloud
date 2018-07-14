@@ -15,7 +15,8 @@ namespace KEC.ECommerce.Web.UI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("KEC.ECommerce.Web.UI.Security.Models.ApplicationUser", b =>
@@ -35,7 +36,8 @@ namespace KEC.ECommerce.Web.UI.Migrations
 
                     b.Property<string>("FirstName");
 
-                    b.Property<string>("IdentificationCode");
+                    b.Property<string>("IdentificationCode")
+                        .IsRequired();
 
                     b.Property<string>("LastName");
 
@@ -63,6 +65,8 @@ namespace KEC.ECommerce.Web.UI.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("IdentificationCode");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -102,7 +106,8 @@ namespace KEC.ECommerce.Web.UI.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType");
 
@@ -121,7 +126,8 @@ namespace KEC.ECommerce.Web.UI.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType");
 

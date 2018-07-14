@@ -1,12 +1,20 @@
-﻿using Hangfire;
+﻿using DinkToPdf.Contracts;
+using DNTBreadCrumb.Core;
+using Hangfire;
 using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.UnitOfWork.Core;
+using KEC.ECommerce.Web.UI.Helpers;
+using KEC.ECommerce.Web.UI.Mailer;
 using KEC.ECommerce.Web.UI.Models;
+using KEC.ECommerce.Web.UI.PDF;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using RestSharp;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,14 +26,24 @@ namespace KEC.ECommerce.Web.UI.Controllers
     {
         private readonly IUnitOfWork _uow;
         private readonly IConfiguration _configuration;
+        private readonly ITemplateService _templateService;
+        private readonly IEmailService _emailService;
+        private readonly IHostingEnvironment _env;
+        private readonly IEmailConfiguration _emailConfiguration;
 
-        public OrdersController(IUnitOfWork uow, IConfiguration configuration)
+        public OrdersController(IUnitOfWork uow, IConfiguration configuration, ITemplateService templateService,
+            IEmailService emailService, IHostingEnvironment env, IEmailConfiguration emailConfiguration)
         {
             _uow = uow;
             _configuration = configuration;
+            _templateService = templateService;
+            _emailService = emailService;
+            _env = env;
+            _emailConfiguration = emailConfiguration;
         }
 
         [HttpGet]
+        [BreadCrumb(Title = "Payment", Order = 1)]
         public async Task<IActionResult> Payment(int orderId)
         {
             var mail = User.FindFirst("Email")?.Value;
@@ -103,6 +121,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             //Send mail
             var mail = User.FindFirst("Email")?.Value;
             var code = User.FindFirst("IdentificationCode")?.Value;
+            var customerName = User.FindFirst("DisplayName")?.Value;
             var order = await _uow.OrdersRepository.GetOrderByUser(orderId, mail, OrderStatus.Submitted);
             if (order == null)
             {
@@ -116,7 +135,14 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 var client = new RestClient(transEndPoint);
                 var request = new RestRequest(Method.POST);
                 var amount = _uow.OrdersRepository.GetOrderTotalCost(order.Id);
-                var transactionParam = new TransactionParam { VoucherCode = voucherCode, VoucherPin = voucherPin, Email = mail, Amount = amount, Description = order.OrderNumber };
+                var transactionParam = new TransactionParam
+                {
+                    VoucherCode = voucherCode,
+                    VoucherPin = voucherPin,
+                    Email = mail,
+                    Amount = amount,
+                    Description = order.OrderNumber
+                };
                 var json = request.JsonSerializer.Serialize(transactionParam);
                 request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
                 request.AddHeader("Content-type", "application/json");
@@ -127,8 +153,36 @@ namespace KEC.ECommerce.Web.UI.Controllers
                     var orderActions = new OrderActions(_uow, order, mail, code);
                     orderActions.PostVoucherPayment(voucherPin);
                     OrderActions.GenerateLicences(_uow, code, order.Id);
-                    BackgroundJob.Enqueue(() => OrderActions.GenerateLicences(_uow, code, order.Id));
+                    var licences = _uow.LicencesRepository.Find(p => p.IdentificationCode.Equals(code) && p.OrderId.Equals(order.Id))
+                                                          ?.Select(p => new LicenceViewModel(_uow, p))?.ToList();
+                    var viewModel = new LicencesEmailViewModel
+                    {
+                        OrderNumber = order.OrderNumber,
+                        CustomerName = customerName,
+                        CustomerEmail = mail,
+                        GenDate = DateTime.Now.ToLongDateString(),
+                        Licences = licences,
+                        StoreEmail = _emailConfiguration.SmtpUsername
+                    };
 
+                    var documentContent = _templateService.RenderTemplateAsync("Templates/LicencesEmail", viewModel).Result;
+                    var emailService = _emailService as EmailService;
+                    var emailConfiguration = _emailConfiguration as EmailConfiguration;
+                    var pdfParams = new PDFParams
+                    {
+                        PathToMailTemplate = Path.Combine(_env.ContentRootPath, "Mailer", "Templates", "Licences.html"),
+                        PdfOutputFile = Path.Combine(_env.ContentRootPath, "PDFLicences", $"{order.OrderNumber}.pdf")
+                    };
+                    var jobId = BackgroundJob.Schedule(() => MailerActions.ConvertHtml2PDF(documentContent, pdfParams), DateTimeOffset.Now.AddMinutes(10));
+                    var customer = new Customer
+                    {
+                        IdentificationCode = code,
+                        Name = customerName,
+                        Order = order,
+                        PDFParams = pdfParams
+                    };
+                    GenerateMailMessage(emailConfiguration, customer, out string messageBody, out EmailMessage message);
+                    BackgroundJob.ContinueWith(jobId, () => MailerActions.SendLicencesEmail(emailService, emailConfiguration, message));
                     return PartialView("_MessagePartial", model);
                 }
                 else
@@ -143,6 +197,31 @@ namespace KEC.ECommerce.Web.UI.Controllers
 
         }
 
-        
+        private static void GenerateMailMessage(EmailConfiguration emailConfiguration, Customer customer, out string messageBody, out EmailMessage message)
+        {
+            using (var SourceReader = System.IO.File.OpenText(customer.PDFParams.PathToMailTemplate))
+            {
+
+                var templateStr = SourceReader.ReadToEnd();
+                messageBody = templateStr.Replace("@Name", customer.Name).Replace("@Order", customer.Order.OrderNumber);
+            }
+
+            message = new EmailMessage
+            {
+                Content = messageBody
+            };
+            message.ToAddresses.Add(new EmailAddress
+            {
+                Name = customer.Name,
+                Address = customer.Order.CustomerEmail
+            });
+            message.Subject = "Purchased Licences";
+            message.FromAddresses.Add(new EmailAddress
+            {
+                Name = emailConfiguration.SmtpUsername,
+                Address = emailConfiguration.SmtpUsername
+            });
+        }
+
     }
 }

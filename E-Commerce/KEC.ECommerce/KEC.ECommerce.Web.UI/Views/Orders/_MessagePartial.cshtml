@@ -1,11 +1,17 @@
 ﻿@model OrderViewModel
 
-        <div class="row">
-            <div class="cell">
-                <div class="border bd-blue m-1">
-                    <h4 class="text-upper text-center text-bold fg-green p-2">Payment was successful for order number @Model.OrderNumber </h4>
-                    <h6 class="fg-blue text-center text-upper text-light p-2">You will be notified once the licences have been processed</h6>
-                </div>
-            </div>
+<div class="row">
+    <div class="cell">
+        <div class="border bd-blue m-1">
+            <h4 class="text-upper text-center text-bold fg-green p-2">Payment was successful for order number @Model.OrderNumber </h4>
+            <h6 class="fg-blue text-center text-upper text-light p-2">You will be notified once the licences have been processed</h6>
         </div>
- 
+    </div>
+</div>
+<div class="row p-2">
+    <div class="cell">
+        <a asp-action="Dashboard" asp-controller="Account" class="button  info h-center m-2 outline rounded">
+            <span class="mif-backward icon"></span> Back to Dashboard
+        </a>
+    </div>
+</div>

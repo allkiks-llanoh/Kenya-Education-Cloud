@@ -1,13 +1,14 @@
-﻿using KEC.ECommerce.Data.Models;
+﻿using DNTBreadCrumb.Core;
+using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Models;
 using KEC.ECommerce.Web.UI.Pagination;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace KEC.ECommerce.Web.UI.Controllers
 {
+    [BreadCrumb(Title = "Store", UseDefaultRouteUrl = false, Order = 0)]
     public class StoreController : Controller
     {
         private readonly IUnitOfWork _uow;

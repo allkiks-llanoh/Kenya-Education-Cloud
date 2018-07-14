@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using DNTBreadCrumb.Core;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Helpers;
 using KEC.ECommerce.Web.UI.Models;
@@ -43,6 +44,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             return CreateView(cartActions, "_ShoppingCartPartial");
         }
         [Authorize]
+        [BreadCrumb(Title = "Cart", Order = 1)]
         public IActionResult Cart()
         {
             var cartActions = new ShoppingCartActions(_uow, HttpContext);

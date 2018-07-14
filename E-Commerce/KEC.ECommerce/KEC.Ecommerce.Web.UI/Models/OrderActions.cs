@@ -57,9 +57,7 @@ namespace KEC.ECommerce.Web.UI.Models
                 order.Status = OrderStatus.Processed;
                 uow.Complete();
             }
-            //TODO: Send email to the buyer;
         }
-
         private void DeductSoldQuantities()
         {
             var lineItems = _uow.OrdersRepository.GetLineItems(_order.Id);

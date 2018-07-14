@@ -31,3 +31,24 @@ html, body {
     display: none;
     z-index: 20;
 }
+ol.breadcrumb {
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    background-color: #f5f5f5;
+    border-radius: 4px
+}
+
+    ol.breadcrumb > li {
+        display: inline-block
+    }
+
+        ol.breadcrumb > li + li:before {
+            padding: 0 5px;
+            color: #ccc;
+            content: ">>"
+        }
+
+    .breadcrumb > .active {
+        color: #777
+    }
