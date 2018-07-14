@@ -335,4 +335,4 @@ ASALocalRun/
 
 # End of https://www.gitignore.io/api/visualstudio
 # Settings
-appsettings.json
+/appsettings.json
