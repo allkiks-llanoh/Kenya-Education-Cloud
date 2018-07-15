@@ -20,6 +20,7 @@
     var Stage = Request.Params["Stage"];
     var Publication = Request.Params["Publication"];
     var KICDNumber = Request.Params["KICDN"];
+    var MimeType = Request.Params["MimeType"];
 
 }
 
@@ -31,82 +32,104 @@
     <small>@ViewData["Message"]</small>
 </div>
 
-<div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-content">
-                    <div class="row m">
-                        <div class="panel panel-success">
-                            <div class="panel-heading" style="background-color:#2855A8;">Publication Information</div>
-                            <div class="panel-body">
+    <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="row m">
+                            <div class="panel panel-success">
+                                <div class="panel-heading" style="background-color:#2855A8;">Publication Information</div>
+                                @if (MimeType == "application/epub+zip")
+                                {
+                                    <div class="panel-body">
 
-                                <dl>
-                                    <dt>Curation Number</dt>
-                                    <dd>@KICDNumber</dd>
-                                    <dt>Title</dt>
-                                    <dd>@Title</dd>
-                                    <dt>Publication</dt>
-                                    <dd><a href="@Publication" target="_blank">Link to publication</a></dd>
-                                </dl>
-                                <div>
-
-                                </div>
-                            </div>
-                            @*<div class="row">
-                                <div class="col-md-12">
-                                    <iframe allowfullscreen="" webkitallowfullscreen="" style="height:100vh;width:80vw"
-                                            src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content("~/publications/20180303204123LEUKAEMIA.pdf")'></iframe>
-                                </div>
-                            </div>*@
-                            <div class="panel-footer">
-                                <div class="row">
-                                    <div class="ibox-content no-padding">
-                                        <div class="summernote" style="height:100px">
+                                        <dl>
+                                            <dt>Curation Number</dt>
+                                            <dd>@KICDNumber</dd>
+                                            <dt>Title</dt>
+                                            <dd>@Title</dd>
+                                            @*<dt>Publication</dt>
+                                            <dd><a href="@Publication" target="_blank">Link to publication</a></dd>*@
+                                        </dl>
+                                        <div>
 
                                         </div>
                                     </div>
-                                </div>
+                                }
+                                else
+                                {
+                                    <div class="panel-body">
 
-                                <div class="row">
-                                    @*<div class="form-group" style="text-align:left;">
+                                        <dl>
+                                            <dt>Curation Number</dt>
+                                            <dd>@KICDNumber</dd>
+                                            <dt>Title</dt>
+                                            <dd>@Title</dd>
+                                            <dt>Publication</dt>
+                                            <dd><a href="@Publication" target="_blank">Link to publication</a></dd>
+                                        </dl>
+                                        <div>
+                                            <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                                    src='@Url.Content("~/Readium/cloud-reader/index.html?epub="+Publication)'></iframe>
+                                        </div>
+                                    </div>
+                                }
+                                @*<div class="row">
+            <div class="col-md-12">
+                <iframe allowfullscreen="" webkitallowfullscreen="" style="height:100vh;width:80vw"
+                        src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content("~/publications/20180303204123LEUKAEMIA.pdf")'></iframe>
+            </div>
+        </div>*@
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="ibox-content no-padding">
+                                            <div class="summernote" style="height:100px">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        @*<div class="form-group" style="text-align:left;">
                     &nbsp; &nbsp;<label for="actiontaken">Select Action:</label>
                     <select name="actionTaken" id="actionTaken" class="form-control">
                         <option value="PublicationMoveToNextStage">Approve</option>
                         <option value="PublicationRejected">Reject</option>
                     </select>
                 </div>*@
-                                    <div class="form-group col-md-10">
-                                        <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="button" data-toggle="modal" data-target="#confirmlegal" style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
-                                    </div>
-                                    <div class="modal inmodal" id="confirmlegal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                                        <div class="modal-dialog modal-sm">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                                    <h4 class="modal-title">Confirm Submission</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>
-                                                        Are you sure the publication meets all requirements?
-                                                    </p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                                                    <button type="button" name="LegalApprove" id="LegalApprove" class="btn btn-primary">Yes</button>
+                                        <div class="form-group col-md-10">
+                                            <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="button" data-toggle="modal" data-target="#confirmlegal" style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
+                                        </div>
+                                        <div class="modal inmodal" id="confirmlegal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                        <h4 class="modal-title">Confirm Submission</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>
+                                                            Are you sure the publication meets all requirements?
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                                        <button type="button" name="LegalApprove" id="LegalApprove" class="btn btn-primary">Yes</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group" style="text-align:left;">
-                                <a class="button btn btn-w-m btn-primary pull-right" style="background-color:#00B95F;" href="/Stages/Legal">BACK TO PUBLICATIONS</a>
+                            <div class="row">
+                                <div class="form-group" style="text-align:left;">
+                                    <a class="button btn btn-w-m btn-primary pull-right" style="background-color:#00B95F;" href="/Stages/Legal">BACK TO PUBLICATIONS</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -114,35 +137,33 @@
             </div>
         </div>
     </div>
-</div>
-<div class="hidden">
-    <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
-    <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
-    <span><strong>Publication:&nbsp;</strong></span>@Publication
-</div>
-<div class="form-group col-md-10">
-    <input type="text" name="content" id="content" class="form-control hidden" value="@Publication">
-</div>
-<script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <div class="hidden">
+        <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
+        <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
+        <span><strong>Publication:&nbsp;</strong></span>@Publication
+        <input type="text" name="MimeTypes" id="MimeTypes" class="form-control hidden" value="@MimeType" />
+    </div>
+    <div class="form-group col-md-10">
+        <input type="text" name="content" id="content" class="form-control hidden" value="@Publication">
+    </div>
+    <script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-        $('.summernote').summernote();
+            $('.summernote').summernote();
 
-    });
+        });
 
-    var edit = function () {
-        $('.click2edit').summernote({ focus: true });
-    };
+        var edit = function () {
+            $('.click2edit').summernote({ focus: true });
+        };
 
-    var save = function () {
-        var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
-        $('.click2edit').destroy();
-    };
-</script>
-
-
+        var save = function () {
+            var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+            $('.click2edit').destroy();
+        };
+    </script>
 
 
 
@@ -170,57 +191,59 @@
 
 
 
-@*<div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="text-center m-t-lg">
-                    <h1>
-                        @ViewData["SubTitle"]
-                    </h1>
-                    <small>@ViewData["Message"]</small>
-                    <br>
-                    <br>
-                    <div class="alert alert-success hidden">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <p id="message"></p>
-                    </div>
-                    <div class="alert alert-danger hidden">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <p id="error"></p>
-                    </div>
-                    <!--Uploding code starts here-->
-                    <div class="form-group">
-                        <div class="panel panel-info text-justify">
-                            <div class="panel-heading">PUBLICATION INFORMATION</div>
-                            <div class="panel-body">
-
-                                <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
-                                <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
-                                <span><strong>Publication:&nbsp;</strong></span>@Publication
-
-                            </div>
 
 
-                            <a class="button btn btn-w-m btn-primary pull-right" href="/Stages/Legal">BACK TO PUBLICATIONS</a>
-
-                        </div>
-                        <!--Uploding code ends here-->
-                        <div class="form-group" style="text-align:left;">
-                            <label for="comment">Comment:</label>
-                            <textarea class="form-control" rows="5" id="notes" data-notess></textarea>
-                        </div>
+    @*<div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center m-t-lg">
+                        <h1>
+                            @ViewData["SubTitle"]
+                        </h1>
+                        <small>@ViewData["Message"]</small>
                         <br>
-                        <div class="row">
-                            <div class="form-group col-md-10">
-                                <button type="button" name="LegalReject" id="LegalReject" class="btn btn-w-m btn-danger pull-right">REJECT</button>
+                        <br>
+                        <div class="alert alert-success hidden">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <p id="message"></p>
+                        </div>
+                        <div class="alert alert-danger hidden">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <p id="error"></p>
+                        </div>
+                        <!--Uploding code starts here-->
+                        <div class="form-group">
+                            <div class="panel panel-info text-justify">
+                                <div class="panel-heading">PUBLICATION INFORMATION</div>
+                                <div class="panel-body">
+
+                                    <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
+                                    <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
+                                    <span><strong>Publication:&nbsp;</strong></span>@Publication
+
+                                </div>
+
+
+                                <a class="button btn btn-w-m btn-primary pull-right" href="/Stages/Legal">BACK TO PUBLICATIONS</a>
+
                             </div>
-                            <div class="form-group col-md-2">
-                                <button type="button" name="LegalApprove" id="LegalApprove" class="btn btn-w-m btn-primary">APPROVE</button>
+                            <!--Uploding code ends here-->
+                            <div class="form-group" style="text-align:left;">
+                                <label for="comment">Comment:</label>
+                                <textarea class="form-control" rows="5" id="notes" data-notess></textarea>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="form-group col-md-10">
+                                    <button type="button" name="LegalReject" id="LegalReject" class="btn btn-w-m btn-danger pull-right">REJECT</button>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <button type="button" name="LegalApprove" id="LegalApprove" class="btn btn-w-m btn-primary">APPROVE</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
