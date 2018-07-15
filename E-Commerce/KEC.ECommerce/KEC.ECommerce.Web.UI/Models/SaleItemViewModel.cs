@@ -24,7 +24,7 @@ namespace KEC.ECommerce.Web.UI.Models
         {
             get
             {
-                return _uow.PaymentsRepository.GetVoucherNumber(_lineItem.OrderId);
+                return _uow.PaymentsRepository.GetTransactionNumber(_lineItem.OrderId);
             }
         }
         public string VoucherNumber
