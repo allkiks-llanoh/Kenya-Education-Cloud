@@ -2,7 +2,10 @@
 using KEC.ECommerce.Data.Helpers;
 using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.Repositories.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace KEC.ECommerce.Data.Repositories
@@ -24,7 +27,16 @@ namespace KEC.ECommerce.Data.Repositories
             } while ((Find(p => p.Code.Equals(code)).FirstOrDefault() != null));
             return code;
         }
-        public IQueryable<Licence> QueryableLicences (string identificationCode, string searchTerm)
+        public string GetContentUrl(IEnumerable<string> identificationCodes, string licenceKey)
+        {
+            var url = _ecommerceContext.Licences.Include(p => p.Publication)
+                                       .Where(p => identificationCodes.Contains(p.IdentificationCode)
+                                       && p.Code.Equals(licenceKey) &&
+                                       p.ExpiryDate >= DateTime.Now)
+                                       ?.Select(p => p.Publication.ContentUrl)?.FirstOrDefault();
+            return url;
+        }
+        public IQueryable<Licence> QueryableLicences(string identificationCode, string searchTerm)
         {
             var licences = default(IQueryable<Licence>);
             var currentDate = DateTime.Now;
@@ -43,7 +55,7 @@ namespace KEC.ECommerce.Data.Repositories
                                                                     p.Publication.Publisher.Company.Contains(searchTerm) ||
                                                                     p.Publication.Author.FirstName.Contains(searchTerm) ||
                                                                     p.Publication.Author.LastName.Contains(searchTerm))
-                                                                    .OrderByDescending(p=> p.ExpiryDate);
+                                                                    .OrderByDescending(p => p.ExpiryDate);
             }
 
             return licences;

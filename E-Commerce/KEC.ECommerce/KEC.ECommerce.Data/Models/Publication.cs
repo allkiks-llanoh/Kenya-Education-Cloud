@@ -11,6 +11,7 @@ namespace KEC.ECommerce.Data.Models
         public string Description { get; set; }
         public decimal UnitPrice { get; set; }
         public string ThumbnailUrl { get; set; }
+        public string ContentUrl { get; set; }
         public int Quantity { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }

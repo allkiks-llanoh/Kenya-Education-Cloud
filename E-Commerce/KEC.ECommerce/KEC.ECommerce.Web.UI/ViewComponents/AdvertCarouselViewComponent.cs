@@ -19,7 +19,7 @@ namespace KEC.ECommerce.Web.UI.ViewComponents
         {
             var publications =await _uow.PublicationsRepository.TopPublicationsAsyc();
             var productsList = publications.Any() ?
-                               publications.Select(p => new ProductViewModel(_uow, p)).ToList() : new List<ProductViewModel>();
+                               publications.Distinct().Select(p => new ProductViewModel(_uow, p)).ToList() : new List<ProductViewModel>();
             return View(productsList);
         }
     }
