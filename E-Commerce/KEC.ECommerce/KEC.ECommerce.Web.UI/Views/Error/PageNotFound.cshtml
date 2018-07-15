@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "404";
+}
+
+<div class="row">
+    <div class="border bd-blue h-center">
+        <div class="cell-md-full">
+            <h1 class="text-center text-bold text-upper fg-red">404 - Page not found</h1>
+        </div>
+        <div class="cell-md-full">
+            <p class="text-center fg-blue">Oops, better check that URL.</p>
+        </div>
+        <div class="cell-md-full">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-action="Dashboard" asp-controller="Account" class="button  info h-center m-2 outline rounded">
+                    <span class="mif-home icon"></span> Take me home
+                </a>
+
+            }
+            else
+            {
+                <a asp-action="Index" asp-controller="Home" class="button  info h-center m-2 outline rounded">
+                    <span class="mif-home icon"></span> Take me home
+                </a>
+
+            }
+        </div>
+    </div>
+</div>
+

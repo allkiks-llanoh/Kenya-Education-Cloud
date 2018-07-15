@@ -7,6 +7,8 @@ namespace KEC.ECommerce.Data.Models
         [Description("KEC Voucher")]
         Voucher = 0,
         [Description("Safaricom Mpesa")]
-        Mpesa = 1
+        Mpesa = 1,
+        [Description("Free Content")]
+        Free = 1
     }
 }

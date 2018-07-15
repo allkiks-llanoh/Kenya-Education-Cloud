@@ -1,0 +1,14 @@
+﻿@using KEC.ECommerce.Web.UI.Models;
+@model ShoppingCartViewModel;
+@{
+    await Html.RenderPartialAsync("_ValidationErrorPartial");
+}
+@if (Model != null && Model.ItemsCount > 0)
+{
+    <a asp-controller="Shopping" asp-active-route asp-hide-if-active="true" asp-action="Cart" id="cart"><span class="mif-cart icon"></span>My Cart<span class="badge badge-top m-1">@Model.ItemsCount</span></a>
+}
+else
+{
+    <span></span>
+
+}

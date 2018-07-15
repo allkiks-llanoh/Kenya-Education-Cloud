@@ -59,20 +59,21 @@ namespace KEC.ECommerce.Data.Repositories
                                  && p.Id.Equals(orderId) && p.Status == status);
             return order;
         }
-        public IQueryable<Order> QueryableOrders(string email, string searchTerm)
+        
+        public IQueryable<Order> QueryablePaidOrders(string email, string searchTerm)
         {
             var orders = default(IQueryable<Order>);
             var currentDate = DateTime.Now;
             if (searchTerm == null)
             {
-                orders = _eCommerceContext.Orders.Where(p => p.CustomerEmail.Equals(email) && p.Status == OrderStatus.Paid)
+                orders = _eCommerceContext.Orders.Where(p => p.CustomerEmail.Equals(email) && p.Status >= OrderStatus.Paid)
                                                       .OrderByDescending(p => p.SubmittedAt);
             }
             else
             {
                 orders = _eCommerceContext.Orders.Where(p => p.CustomerEmail.Equals(email)
                                                                    && p.OrderNumber.Contains(searchTerm)
-                                                                   && (p.Status == OrderStatus.Paid))
+                                                                   && (p.Status >= OrderStatus.Paid))
                                                                    .OrderByDescending(p => p.SubmittedAt);
             }
 

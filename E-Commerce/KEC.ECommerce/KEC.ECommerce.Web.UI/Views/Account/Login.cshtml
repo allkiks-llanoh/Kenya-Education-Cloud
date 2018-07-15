@@ -1,0 +1,46 @@
+﻿@model LoginViewModel;
+@{
+    ViewData["Title"] = "Login";
+}
+<div class="grid">
+
+    <div class="row">
+        <div class="cell-md-4 h-center">
+            <form role="form" asp-action="Login"
+                  asp-controller="Account" asp-antiforgery="true">
+                <div class="ui segment">
+                    <div class="ui horizontal divider">
+                        <p class="text-center text-bold text-upper fg-orange">Welcome back</p>
+                    </div>
+                    @{
+                        await Html.RenderPartialAsync("_ValidationErrorPartial");
+                    }
+                    <div class="form-group">
+                        <input type="email" required asp-for="EmailAddress" placeholder="Email Address"
+                               data-prepend="<span class='mif-user icon'></span>"
+                               data-role="input" data-clear-button="false" />
+                    </div>
+                    <div class="field form-group">
+                        <input type="password" required asp-for="Password" placeholder="Password"
+                               data-prepend="<span class='mif-lock icon'></span>" data-role="input"
+                               data-clear-button="false" />
+                    </div>
+                    <hr class="fg-darkGray" />
+                    <div class=" form-group">
+                        <input type="checkbox" asp-for="RememberMe" data-role="checkbox" data-caption="Remember me">
+                    </div>
+                    <hr class="fg-darkGray" />
+                    <div class="clear mt-2 form-actions">
+                        <button class="button success outline rounded place-left">Login</button>
+                        <a role="button" asp-controller="Home" asp-action="Index" class="button alert outline rounded place-right">Cancel</a>
+                    </div>
+                </div>
+            </form>
+            <div class="ui message bg-orange fg-white">
+                <a asp-controller="Account" asp-action="Register" class="fg-white">New to us? Register</a>
+                <a asp-controller="Account" asp-action="ForgotPassword" class="place-right fg-white">Forgot your password?</a>
+            </div>
+        </div>
+    </div>
+</div>
+
