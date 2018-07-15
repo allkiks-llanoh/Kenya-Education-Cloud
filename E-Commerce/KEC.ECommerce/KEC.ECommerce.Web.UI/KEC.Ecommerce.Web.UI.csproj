@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180715122632_AddContentUrlToPublication.cs" />
+    <Compile Remove="Migrations\20180715122632_AddContentUrlToPublication.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Views\Home\About.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Index.cshtml" />

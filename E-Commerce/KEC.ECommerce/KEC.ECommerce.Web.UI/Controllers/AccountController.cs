@@ -244,6 +244,53 @@ namespace KEC.ECommerce.Web.UI.Controllers
             var model = new ProfileViewModel(code, fullName, email);
             return View(model);
         }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.EmailAddress);
+                if (user != null)
+                {
+                    var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var hostname = Request.Host.Host;
+                    var callbackUrl = Url.Action("ResetPassword", "Account", new { code }, protocol: HttpContext.Request.Scheme);
+                    var email = $"&EmailAddress={Uri.EscapeDataString(model.EmailAddress)}";
+                    callbackUrl += email;
+                    var callbackLink = $"<a class='btn' href='{callbackUrl}'>Reset my password »</a>";
+                    var pathToTemplate = Path.Combine(_env.ContentRootPath, "Mailer", "Templates", "PasswordReset.html");
+                    var builder = new BodyBuilder();
+
+                    using (var SourceReader = System.IO.File.OpenText(pathToTemplate))
+                    {
+
+                        builder.HtmlBody = SourceReader.ReadToEnd();
+
+                    }
+                    string messageBody = builder.HtmlBody.Replace("@Name", user.DisplayName)
+                                                .Replace("@CallbackLink", callbackLink)
+                                                .Replace("@Host", hostname)
+                                                .Replace("@CallbackUrl", callbackUrl);
+                    var emailMessage = new EmailMessage
+                    {
+                        Content = messageBody
+                    };
+                    emailMessage.ToAddresses.Add(new EmailAddress { Name = user.DisplayName, Address = user.Email });
+                    emailMessage.FromAddresses.Add(new EmailAddress { Name = hostname, Address = _emailConfiguration.SmtpUsername });
+                    emailMessage.Subject = "Password Reset";
+                    var emailService = _emailService as EmailService;
+                    var emailConfiguration = _emailConfiguration as EmailConfiguration;
+                    BackgroundJob.Enqueue(() => MailerActions.SendEmail(emailMessage, emailService, emailConfiguration));
+                }
+                return View("ForgotPasswordConfirmation");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
