@@ -7,6 +7,7 @@ namespace KEC.ECommerce.Data.Models
         #region Properties
         public int Id { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
+        public string VoucherNumber { get; set; }
         public string TransactionNumber { get; set; }
         public DateTime TransactionDate { get; set; }
         public string TransactedBy { get; set; }
