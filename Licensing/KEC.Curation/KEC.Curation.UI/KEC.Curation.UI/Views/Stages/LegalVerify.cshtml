@@ -9,9 +9,9 @@
 
 
     <script src="@Url.Content("~/js/legalVerify.js")"></script>
-    <script src="@Url.Content("~/js/GetChiefCurators.js")"></script>
-    <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
 
+    <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 
     @Scripts.Render("~/plugins/sweetAlert")
 }
@@ -20,8 +20,7 @@
     var Stage = Request.Params["Stage"];
     var Publication = Request.Params["Publication"];
     var KICDNumber = Request.Params["KICDN"];
-    var MimeType = Request.Params["MimeType"];
-
+    var MimeTypes = Request.Params["MimeType"];
 }
 
 
@@ -40,26 +39,27 @@
                         <div class="row m">
                             <div class="panel panel-success">
                                 <div class="panel-heading" style="background-color:#2855A8;">Publication Information</div>
-                                @if (MimeType == "application/epub+zip")
-                                {
-                                    <div class="panel-body">
+                              
+                                    <div id="html" class="panel-body ">
 
                                         <dl>
                                             <dt>Curation Number</dt>
                                             <dd>@KICDNumber</dd>
                                             <dt>Title</dt>
                                             <dd>@Title</dd>
-                                            @*<dt>Publication</dt>
-                                            <dd><a href="@Publication" target="_blank">Link to publication</a></dd>*@
+                                            <dt>Publication</dt>
+                                            <dd><a href="/Readium/cloud-reader/index.html?epub=https://kecpublications.blob.core.windows.net/publications/20180613134725KISWAHILI_GRADE2_WB.epub" target="_blank">Link to publication</a></dd>
+
                                         </dl>
                                         <div>
-
+                                            <div>
+                                                <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                                        src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Publication)'></iframe>
+                                            </div>
                                         </div>
                                     </div>
-                                }
-                                else
-                                {
-                                    <div class="panel-body">
+                              
+                                    <div id="epub" class="panel-body hidden">
 
                                         <dl>
                                             <dt>Curation Number</dt>
@@ -71,16 +71,9 @@
                                         </dl>
                                         <div>
                                             <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
-                                                    src='@Url.Content("~/Readium/cloud-reader/index.html?epub=https://kecpublications.blob.core.windows.net/publications/20180613134725KISWAHILI_GRADE2_WB.epub")'></iframe>
+                                                    src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Publication)'></iframe>
                                         </div>
                                     </div>
-                                }
-                                @*<div class="row">
-            <div class="col-md-12">
-                <iframe allowfullscreen="" webkitallowfullscreen="" style="height:100vh;width:80vw"
-                        src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content("~/publications/20180303204123LEUKAEMIA.pdf")'></iframe>
-            </div>
-        </div>*@
                                 <div class="panel-footer">
                                     <div class="row">
                                         <div class="ibox-content no-padding">
@@ -141,13 +134,26 @@
         <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
         <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
         <span><strong>Publication:&nbsp;</strong></span>@Publication
-        <input type="text" name="MimeTypes" id="MimeTypes" class="form-control hidden" value="@MimeType" />
+        <input type="text" name="MimeTypeCheck" id="MimeTypeCheck" class="form-control hidden" value="@MimeTypes" />
     </div>
     <div class="form-group col-md-10">
         <input type="text" name="content" id="content" class="form-control hidden" value="@Publication">
     </div>
     <script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let uICheck = $('#MimeTypeCheck').val();
+            if (uICheck == "application/epub+zip")
+            {
+                $('#epub').toggleClass('hidden');
+            }
+            if (uICheck == "application/x-zip-compressed")
+            {
+                $('#html').toggleClass('hidden');
+            }
+            });
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function () {
 
