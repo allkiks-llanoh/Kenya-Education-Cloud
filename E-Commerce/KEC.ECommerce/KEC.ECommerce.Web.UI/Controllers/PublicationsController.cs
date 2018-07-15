@@ -161,5 +161,16 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 return Ok(publicationUrl);
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> Sales(SalesQueryViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(model);
+            }
+            var sales = await _uow.LineItemsRepository.GetPublisherSales(model.PublisherGuid, model.StartDate, model.EndDate, model.PaymentMethod);
+            var salesList = sales.Any() ? sales.Select(p => new SaleItemViewModel(p, _uow)).ToList() : new List<SaleItemViewModel>();
+            return Ok(salesList);
+        }
     }
 }

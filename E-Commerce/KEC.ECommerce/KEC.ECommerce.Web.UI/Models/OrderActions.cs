@@ -18,10 +18,10 @@ namespace KEC.ECommerce.Web.UI.Models
             _userEmail = userEmail;
             _identificationCode = identificationCode;
         }
-        public void PostVoucherPayment(string pinNumber,PaymentMethod paymentMethod)
+        public void PostVoucherPayment(string voucherCode, string pinNumber,PaymentMethod paymentMethod)
         {
             ChangeOrderStatus();
-            PostPaymentRecord(pinNumber, paymentMethod);
+            PostPaymentRecord(pinNumber, voucherCode, paymentMethod);
             DeductSoldQuantities();
         }
 
@@ -69,7 +69,7 @@ namespace KEC.ECommerce.Web.UI.Models
             _uow.Complete();
         }
 
-        private void PostPaymentRecord(string transactionId, PaymentMethod method)
+        private void PostPaymentRecord(string transactionId,string voucherCode, PaymentMethod method)
         {
             var payment = new Payment
             {
@@ -77,7 +77,8 @@ namespace KEC.ECommerce.Web.UI.Models
                 TransactionDate = DateTime.Now,
                 TransactedBy = _userEmail,
                 OrderId = _order.Id,
-                PaymentMethod = method
+                PaymentMethod = method,
+                VoucherNumber = voucherCode
             };
             _uow.PaymentsRepository.Add(payment);
             _uow.Complete();
