@@ -20,6 +20,13 @@ namespace KEC.ECommerce.Web.UI.Models
                 return _uow.OrdersRepository.Get(_lineItem.OrderId)?.OrderNumber;
             }
         }
+        public string TransactionId
+        {
+            get
+            {
+                return _uow.PaymentsRepository.GetVoucherNumber(_lineItem.OrderId);
+            }
+        }
         public string VoucherNumber
         {
             get

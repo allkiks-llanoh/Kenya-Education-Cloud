@@ -17,5 +17,10 @@ namespace KEC.ECommerce.Data.Repositories
             return _ecommerceContext.Payments.Where(p => p.OrderId.Equals(orderId))
                                      ?.Select(p => p.VoucherNumber).FirstOrDefault();
         }
+        public string GetTransactionNumber(int orderId)
+        {
+            return _ecommerceContext.Payments.Where(p => p.OrderId.Equals(orderId))
+                                     ?.Select(p => p.TransactionNumber).FirstOrDefault();
+        }
     }
 }
