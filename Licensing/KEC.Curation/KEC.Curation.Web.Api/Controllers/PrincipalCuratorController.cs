@@ -204,6 +204,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 _uow.ChiefCuratorAssignmentRepository.Add(asignment);
                 _uow.PublicationStageLogRepository.Add(nextStage);
                 publication.ChiefCuratorAssignmentId = (asignment.Id);
+                asignment.Assigned = true;
                 _uow.Complete();
 
                 return Ok(value: $"Publication {model.KICDNumber} moved to curation");
