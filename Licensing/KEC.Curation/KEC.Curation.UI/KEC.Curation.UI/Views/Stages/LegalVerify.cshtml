@@ -71,12 +71,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="epub" class="panel-body">
-                                <div id="showError" class="hidden">
+                            <div id="showError" class="panel-body hidden">
+                                <div id="">
 
-                                    <div>
-
-                                    </div><div class="row">
+                                    <div class="row">
                                         <div class="cell">
                                             <div class="border bd-blue">
                                                 <h1 class="text-upper text-center text-bold" style="color:red">Content is not curatable</h1>
@@ -86,28 +84,30 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="defaultFooter" class="panel-footer">
-                                <div class="row">
-                                    <div class="ibox-content no-padding">
-                                        <div class="summernote" style="height:100px">
+                            <div class="panel-footer">
+                                <div id="defaultFooter" class="panel-footer">
+                                    <div class="row">
+                                        <div class="ibox-content no-padding">
+                                            <div class="summernote" style="height:100px">
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    @*<div class="form-group" style="text-align:left;">
-                                        &nbsp; &nbsp;<label for="actiontaken">Select Action:</label>
-                                        <select name="actionTaken" id="actionTaken" class="form-control">
-                                            <option value="PublicationMoveToNextStage">Approve</option>
-                                            <option value="PublicationRejected">Reject</option>
-                                        </select>
-                                    </div>*@
-                                    <div class="form-group col-md-10">
-                                        <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="button" data-toggle="modal" data-target="#confirmlegal" style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
+                                    <div class="row">
+                                        @*<div class="form-group" style="text-align:left;">
+                        &nbsp; &nbsp;<label for="actiontaken">Select Action:</label>
+                        <select name="actionTaken" id="actionTaken" class="form-control">
+                            <option value="PublicationMoveToNextStage">Approve</option>
+                            <option value="PublicationRejected">Reject</option>
+                        </select>
+                    </div>*@
+                                        <div class="form-group col-md-10">
+                                            <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="button" data-toggle="modal" data-target="#confirmlegal" style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
+                                        </div>
                                     </div>
                                     <div class="modal inmodal" id="confirmlegal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                                         <div class="modal-dialog modal-sm">
@@ -157,11 +157,13 @@
         let uICheck = $('#MimeTypeCheck').val();
         if (uICheck == "application/epub zip") {
             $('#showEpub').toggleClass('hidden');
+            $('#showError').toggleClass('hidden');
         }
         if (uICheck == "application/x-zip-compressed") {
-            $('#showHtml').toggleClass('hidden');
+            $('#showHtml').toggleClass();
+            $('#showError').toggleClass('hidden');
         }
-        if (uICheck != "application/x-zip-compressed" || "application/epub zip") {
+        if (uICheck != "application/x-zip-compressed" || uICheck != "application/epub zip") {
             $('#showError').toggleClass('hidden');
             $('#defaultFooter').hide();
         }
