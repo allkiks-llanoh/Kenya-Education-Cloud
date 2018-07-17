@@ -198,7 +198,7 @@
     $(document).ready(function () {
         let uICheck = $('#MimeTypeCheck').val();
         if (uICheck == "application/epub zip") {
-            $('#showEpub').show('hidden');
+            $('#showEpub').toggleClass('hidden');
             $('#showError').hide();
         }
         if (uICheck == "application/x-zip-compressed") {
