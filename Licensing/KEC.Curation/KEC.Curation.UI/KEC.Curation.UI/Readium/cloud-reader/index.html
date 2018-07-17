@@ -111,7 +111,24 @@
             }
         });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //Disable cut copy paste
+            $('body').bind('cut copy paste', function (e) {
+                e.preventDefault();
+            });
 
+            //Disable mouse right click
+            $("body").on("contextmenu", function (e) {
+                return false;
+            });
+            //Disable cut copy paste on iframe
+            $('#app-container').bind('cut copy paste', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+   
 </head>
 
     <!-- This is all application-specific HTML -->
