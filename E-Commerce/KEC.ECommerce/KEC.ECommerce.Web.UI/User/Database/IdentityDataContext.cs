@@ -1,8 +1,8 @@
-﻿using KEC.ECommerce.Web.UI.Security.Models;
+﻿using KEC.ECommerce.Web.UI.User.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace KEC.ECommerce.Web.UI.Security.Database
+namespace KEC.ECommerce.Web.UI.User.Database
 {
     public class IdentityDataContext : IdentityDbContext<ApplicationUser> 
     {

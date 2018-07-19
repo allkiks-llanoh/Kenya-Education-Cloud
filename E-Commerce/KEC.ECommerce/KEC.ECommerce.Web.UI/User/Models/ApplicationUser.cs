@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace KEC.ECommerce.Web.UI.Security.Models
+namespace KEC.ECommerce.Web.UI.User.Models
 {
     public class ApplicationUser : IdentityUser
     {
