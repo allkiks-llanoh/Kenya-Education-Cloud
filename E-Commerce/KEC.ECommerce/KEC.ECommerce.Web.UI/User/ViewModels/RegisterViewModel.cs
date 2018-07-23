@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace KEC.ECommerce.Web.UI.Security.ViewModels
+namespace KEC.ECommerce.Web.UI.User.ViewModels
 {
     public class RegisterViewModel
     {

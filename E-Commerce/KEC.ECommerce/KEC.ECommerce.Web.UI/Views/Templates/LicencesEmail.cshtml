@@ -1,81 +1,105 @@
 ﻿@model LicencesEmailViewModel
 <!DOCTYPE html>
-<html>
-<head>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
+<html style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;height:100%;font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:10px;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);">
+
+<head style="-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;">
 </head>
 
-<body>
-    <div class="container">
-        <div class="row">
+<body style='-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;min-height:100%;margin:0;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;font-size:14px;line-height:1.42857143;color:#333;background-color:#fff;'>
+    <div class="container" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;">
+        <div class="row" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin-right:-15px;margin-left:-15px;min-height:100%;">
 
-            <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
-                <div class="row">
-                    <div class="receipt-header">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;background:#ffffff none repeat scroll 0 0;border-bottom:12px solid #333333;border-top:12px solid #9f181c;padding:40px 30px !important;position:relative;box-shadow:0 1px 21px #acacac;color:#333333;font-family:open sans;min-height:1px;padding-right:15px;padding-left:15px;float:left;width:100%;min-height:100%;height:100vh">
+                <div class="row" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin-right:-15px;margin-left:-15px;">
+                    <div class="receipt-header" style="-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;">
+                        <div class="col-xs-6 col-sm-6 col-md-6" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:relative;min-height:1px;padding-right:15px;padding-left:15px;float:left;width:50%;">
 
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
-                            <div class="receipt-right">
-                                <h5>Kenya Education Cloud Store</h5>
-                                <p>@Model.StoreEmail<i class="fa fa-envelope-o"></i></p>
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;text-align:right;position:relative;min-height:1px;padding-right:15px;padding-left:15px;float:left;width:50%;">
+                            <div class="receipt-right" style="-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;">
+                                <h5 style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-family:inherit;font-weight:bold;line-height:1.1;color:inherit;margin-top:10px;margin-bottom:10px;font-size:16px;margin:0 0 7px 0;">KEC Store</h5>
+                                <p style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:0px;color:#333333;font-family:open sans;line-height:1.42857;font-size:12px;">
+                                    @Model.StoreEmail
+                                    <i class="fa fa-envelope-o" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;text-align:center;width:18px;"></i>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="receipt-header receipt-header-mid">
-                        <div class="col-xs-8 col-sm-8 col-md-8 text-left">
-                            <div class="receipt-right">
-                                <h5>@Model.CustomerName &ndash;<small>Order Number: @Model.OrderNumber</small></h5>
-                                <p><b>Email :</b> @Model.CustomerEmail</p>
+                <div class="row" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin-right:-15px;margin-left:-15px;">
+                    <div class="receipt-header receipt-header-mid" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:24px 0;">
+                        <div class="col-xs-8 col-sm-8 col-md-8 text-left" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;text-align:left;position:relative;min-height:1px;padding-right:15px;padding-left:15px;float:left;width:66.66666667%;">
+                            <div class="receipt-right" style="-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;">
+                                <h5 style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-family:inherit;font-weight:bold;line-height:1.1;color:inherit;margin-top:10px;margin-bottom:10px;font-size:16px;margin:0 0 7px 0;">
+                                    @Model.CustomerName
+                                    <small style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-size:75%;font-weight:normal;line-height:1;color:#777;">&nbsp; | &nbsp; Order Number :  @Model.OrderNumber</small>
+                                </h5>
+                                <p style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:0px;color:#333333;font-family:open sans;line-height:1.42857;font-size:12px;">
+                                <p style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:0px;color:#333333;font-family:open sans;line-height:1.42857;font-size:12px;">
+                                    <b style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-weight:bold;">Email :</b>@Model.CustomerEmail
+                                </p>
                             </div>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4">
-                            <div class="receipt-left">
-                                <h1>Licences</h1>
+                        <div class="col-xs-4 col-sm-4 col-md-4" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:relative;min-height:1px;padding-right:15px;padding-left:15px;float:left;width:33.33333333%;">
+                            <div class="receipt-left" style="-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;">
+                                <h1 style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:34px 0 0;font-size:36px;font-family:inherit;font-weight:100;line-height:1.1;color:inherit;margin-top:20px;margin-bottom:10px;text-align:right;text-transform:uppercase;">Licences</h1>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Publication</th>
-                                <th>Licence Code</th>
-                                <th>Expiry date</th>
+                <div style="-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;">
+                    <table class="table table-bordered" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-spacing:0;border-collapse:collapse;background-color:transparent;width:100%;max-width:100%;margin-bottom:20px;border:1px solid #ddd;">
+                        <thead style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;background:#414143 none repeat scroll 0 0;">
+                            <tr style="-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;">
+                                <th style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:8px;text-align:left;line-height:1.42857143;vertical-align:bottom;border-top:1px solid #ddd;border-bottom:2px solid #ddd;color:#fff;border:1px solid #ddd;border-bottom-width:2px;">Publication</th>
+                                <th style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:8px;text-align:left;line-height:1.42857143;vertical-align:bottom;border-top:1px solid #ddd;border-bottom:2px solid #ddd;color:#fff;border:1px solid #ddd;border-bottom-width:2px;">Licence Code</th>
+                                <th style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:8px;text-align:left;line-height:1.42857143;vertical-align:bottom;border-top:1px solid #ddd;border-bottom:2px solid #ddd;color:#fff;border:1px solid #ddd;border-bottom-width:2px;">Expiry date</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;">
                             @if (Model.Licences != null)
-                            {
-                                @foreach (var licence in Model.Licences)
+                            {@foreach (var licence in Model.Licences)
                                 {
-                                    <tr>
-                                        <td>@licence.Publication</td>
-                                        <td>@licence.Code</td>
-                                        <td>@licence.ExpiryDate</td>
+                                    <tr style="-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;">
+                                        <td style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:8px;font-size:13px;font-weight:initial !important;line-height:1.42857143;vertical-align:top;border-top:1px solid #ddd;border:1px solid #ddd;">@licence.Publication</td>
+                                        <td style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:8px;font-size:13px;font-weight:initial !important;line-height:1.42857143;vertical-align:top;border-top:1px solid #ddd;border:1px solid #ddd;">@licence.Code</td>
+                                        <td style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:8px;font-size:13px;font-weight:initial !important;line-height:1.42857143;vertical-align:top;border-top:1px solid #ddd;border:1px solid #ddd;">@licence.ExpiryDate</td>
                                     </tr>
-                                }
-
-                            }
+                                }}
                         </tbody>
                     </table>
                 </div>
 
-                <div class="row">
-                    <div class="receipt-header receipt-header-mid receipt-footer">
-                        <div class="col-xs-8 col-sm-8 col-md-8 text-left">
-                            <div class="receipt-right">
-                                <p><b>Date :</b>@Model.GenDate</p>
-                                <h5 style="color: rgb(140, 140, 140);">Thank you for your business!</h5>
+                <div class="row" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin-right:-15px;margin-left:-15px;">
+                    <div class="receipt-header receipt-header-mid receipt-footer" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:24px 0;overflow:hidden;">
+                        <div class="col-xs-8 col-sm-8 col-md-8 text-left" style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;text-align:left;position:relative;min-height:1px;padding-right:15px;padding-left:15px;float:left;width:66.66666667%;">
+                            <div class="receipt-right" style="-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;">
+                                <p style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:0px;color:#333333;font-family:open sans;line-height:1.42857;font-size:12px;">
+                                    <b style="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-weight:bold;">Date :</b>@Model.GenDate
+                                </p>
+                                <h5 style="color:inherit;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-family:inherit;font-weight:bold;line-height:1.1;margin-top:10px;margin-bottom:10px;font-size:16px;margin:0 0 7px 0;">Thank you for your business!</h5>
                             </div>
                         </div>
 

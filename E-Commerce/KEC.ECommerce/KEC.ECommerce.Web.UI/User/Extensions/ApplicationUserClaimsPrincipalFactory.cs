@@ -1,10 +1,10 @@
-﻿using KEC.ECommerce.Web.UI.Security.Models;
+﻿using KEC.ECommerce.Web.UI.User.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace KEC.ECommerce.Web.UI.Security.Extensions
+namespace KEC.ECommerce.Web.UI.User.Extensions
 {
     public class ApplicationUserClaimsPrincipalFactory : UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>
     {
