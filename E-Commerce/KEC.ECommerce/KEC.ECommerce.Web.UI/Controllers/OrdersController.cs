@@ -218,13 +218,14 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 Order = order,
                 PDFParams = pdfParams
             };
-            GenerateMailMessage(emailConfiguration, customer, out string messageBody, out EmailMessage message);
+            var message = GenerateMailMessage(emailConfiguration, customer);
             BackgroundJob.ContinueWith(jobId, () => MailerActions.SendLicencesEmail(emailService, emailConfiguration, message));
             return model;
         }
 
-        private static void GenerateMailMessage(EmailConfiguration emailConfiguration, Customer customer, out string messageBody, out EmailMessage message)
+        private static EmailMessage GenerateMailMessage(EmailConfiguration emailConfiguration, Customer customer)
         {
+            var messageBody = default(string);
             using (var SourceReader = System.IO.File.OpenText(customer.PDFParams.PathToMailTemplate))
             {
 
@@ -232,7 +233,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 messageBody = templateStr.Replace("@Name", customer.Name).Replace("@Order", customer.Order.OrderNumber);
             }
 
-            message = new EmailMessage
+            var message = new EmailMessage
             {
                 Content = messageBody
             };
@@ -248,6 +249,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 Address = emailConfiguration.SmtpUsername
             });
             message.Attachments.Add(customer.PDFParams.PdfOutputFile);
+            return message;
         }
 
     }

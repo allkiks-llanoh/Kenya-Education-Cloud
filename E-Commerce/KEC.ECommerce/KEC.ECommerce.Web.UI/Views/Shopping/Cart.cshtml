@@ -26,9 +26,9 @@
             <div class="cell-md-full clear">
                 <form asp-controller="Shopping" asp-action="CheckOut" class="h-center w-50-md">
                     @Html.AntiForgeryToken()
-                    <div class="clear">
-                        <a class="button info outline rounded m-1 place-left-sm" role="button" asp-controller="Home" asp-action="Index"><span class="mif-add-shopping-cart icon"></span>Continue shopping</a>
-                        <button type="submit" class="button success outline rounded m-1 place-right-sm" role="button"><span class="mif-cart icon"></span>Check out</button>
+                    <div style="margin:auto; width:50%;">
+                                <a class="button info outline rounded m-1" role="button" asp-controller="Home" asp-action="Index"><span class="mif-add-shopping-cart icon"></span>Continue shopping</a>
+                                <button type="submit" class="button success outline rounded m-1" role="button"><span class="mif-cart icon"></span>Check out</button>
                     </div>
                 </form>
 

@@ -1,7 +1,5 @@
 ﻿using DinkToPdf;
-using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Web.UI.Mailer;
-using System.IO;
 
 namespace KEC.ECommerce.Web.UI.Helpers
 {

@@ -16,6 +16,13 @@
                 await Html.RenderPartialAsync("_OrdersPartial", Model);
             }
         </div>
+        <div class="row p-2">
+            <div class="cell-md-full">
+                <a asp-action="Dashboard" asp-controller="Account" class="button  info h-center m-2 outline rounded">
+                    <span class="mif-backward icon"></span> Back to Dashboard
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
