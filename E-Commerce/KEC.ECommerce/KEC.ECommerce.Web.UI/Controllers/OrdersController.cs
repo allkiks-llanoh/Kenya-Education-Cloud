@@ -247,6 +247,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 Name = emailConfiguration.SmtpUsername,
                 Address = emailConfiguration.SmtpUsername
             });
+            message.Attachments.Add(customer.PDFParams.PdfOutputFile);
         }
 
     }

@@ -54,6 +54,7 @@
 
   <ItemGroup>
     <Folder Include="PDFLicences\" />
+    <Folder Include="wwwroot\PDFLicences\" />
   </ItemGroup>
 
   <ItemGroup>
