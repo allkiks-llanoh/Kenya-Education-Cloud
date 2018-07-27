@@ -1,9 +1,7 @@
 ﻿
-
 $(document).ready(function () {
     var publicationID = parseInt($('#identity').attr('data-identity'));
-    let principalCuratorPostUrl = apiBaseUrl.concat(`/PrincipalCurator/publication/assignment/${publicationID}`)
-    
+    let principalCuratorPostUrl = apiBaseUrl.concat(`/PrincipalCurator/publication/assignment/${publicationID}`)  
     $('#LegalApprove').click(function () {
         $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         var stage = "PrincipalCurator"
@@ -23,28 +21,17 @@ $(document).ready(function () {
             url: principalCuratorPostUrl,
             type: "POST",
             data: JSON.stringify({ Id: publicationID}),
-
             success: function (response, status, jxhr) {
-                console.log(response);
-                console.log(status);
-                $('#message').html(` ${response}.`)
+                $('#message').html(response)
                 $('div.alert-success').toggleClass('hidden');
                 $('#LegalApprove').html('APPROVE');
-
             },
-            error: function (request, status, error) {
-
-             
-                $('#error').html(request.statusText)
+            error: function (response, status, error) {
+                $('#error').html(response.responseText)
                 $('div.alert-danger').toggleClass('hidden');
                 $('#LegalApprove').html('APPROVE');
-
-
             }
         });
-
-
     });
 },
-
 );

@@ -8,7 +8,6 @@
         let Id = $('#publication-view').attr('data-publicationId');
         let CuserGuid = $('#CurrentUserGuid').val();   
         let url = apiBaseUrl.concat(`/principalcurator/update/chiefcuratorcomments/${Id}?publicationId=${Id}`);
-
         $.ajax({
             headers : {
                 'Accept' : 'application/json',
@@ -31,5 +30,4 @@
             ShowAlert("Curators submissions already submitted", 'error');
         });
     }
-
 })();

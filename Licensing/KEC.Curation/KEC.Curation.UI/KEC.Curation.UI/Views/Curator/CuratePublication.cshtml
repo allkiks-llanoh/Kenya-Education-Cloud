@@ -7,7 +7,10 @@
 @section Scripts{
     <script src="@Url.Content("~/js/curate.js")"></script>
 }
-@{ var Urls = Request.Params["Urls"]; }
+@{
+    var Urls = Request.Params["Urls"];
+
+}
 <div class="wrapper wrapper-content animated fadeInRight" id="assignment-view" data-assignmentId="@ViewBag.AssignmentId">
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">
@@ -32,13 +35,22 @@
                 </div>
             </div>
             <div class="ibox-content no-padding">
-                <div class="row">
+                <div id="showHtml" class="hidden">
                     <div class="col-md-6">
                         <div style="color:black; font-weight:bold;font-size:15px;">Content Location:</div>
-
                     </div>
+                    <div>
+                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                src='@Urls'></iframe>
+                    </div>
+                </div>
+                <div id="showEpub" class="hidden">
                     <div class="col-md-6">
-                        <a href="@Urls" target="_blank">Link to publication</a>
+                        <div style="color:black; font-weight:bold;font-size:15px;">Content Location:</div>
+                    </div>
+                    <div>
+                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Urls)'></iframe>
                     </div>
                 </div>
             </div>

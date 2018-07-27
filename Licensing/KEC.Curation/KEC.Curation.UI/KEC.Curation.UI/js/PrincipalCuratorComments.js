@@ -8,7 +8,6 @@
         let actionSelected = $("#action-selected").val();
         let notes = $('.note-editable').html();
         let url = apiBaseUrl.concat(`/principalCurator/PrincipalCuratorComments/${publicationId}?publicationId=${publicationId}`);
-
         let userGuid = $('#CurrentUserGuid').val();
         console.log(`${userGuid}`);
         if (notes === null || notes === "") {
@@ -17,7 +16,6 @@
         if (actionSelected === null || actionSelected === "") {
             return ShowAlert("Please select an action taken from the list", "error");
         }
-
         $.ajax({
             headers : {
                 'Accept' : 'application/json',
@@ -30,6 +28,7 @@
             accepts: 'application/json',
             data: JSON.stringify({ PrincipalCuratorGuid: userGuid, Notes: notes, ActionTaken: actionSelected }),
             statusCode: {
+                400: () => { ShowAlert("Comments aready Exist", 'error'); },
                 404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to process publication"); },
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
@@ -40,5 +39,4 @@
             ShowAlert("Something went wrong while processing publication", 'error');
         });
     }
-
 })();

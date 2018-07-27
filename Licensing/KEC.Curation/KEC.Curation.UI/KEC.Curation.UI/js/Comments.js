@@ -7,7 +7,6 @@
         let publicationId = $('#publication-view').attr('data-publicationId');
         let actionSelected = $("#action-selected").val(); 
         let notes = $('.note-editable').html();
-        
         let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
         let userGuid = $('#CurrentUserGuid').val();
         if (notes === null || notes === "") {
@@ -28,6 +27,7 @@
             accepts: 'application/json',
             data: JSON.stringify({ ChiefCuratorGuid: userGuid, Notes: notes, ActionTaken: actionSelected, publicationId: publicationId, Status: true }),
             statusCode: {
+                400: () => { ShowAlert("Comments aready Exist", 'error'); },
                 404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to process publication"); },
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
@@ -38,5 +38,4 @@
             ShowAlert("Something went wrong while processing publication", 'error');
         });
     }
-
 })();

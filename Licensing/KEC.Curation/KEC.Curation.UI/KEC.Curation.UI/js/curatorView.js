@@ -8,8 +8,6 @@ function tableRows(data) {
     }
     return tableRows;
 };
-
-
 //Start by getting publication list based on Payment Verification Stage
 $.ajax({
     url: assignmentUrl,
@@ -18,8 +16,6 @@ $.ajax({
     crossDomain: true,
     accepts: 'application/json',
     success: function (data, status, jqhxr) {
-        console.log(data);
-
         //This code snipet prepares to append Json Data
         $('#unassigned-publications').append(tableRows(data));
     }

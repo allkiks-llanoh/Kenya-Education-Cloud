@@ -231,6 +231,11 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return NotFound(value: new { message = "Publication Not Found in Repository." });
             }
+            var exists = _uow.PrincipalCuratorCommentRepository.Find(p => p.PublicationId.Equals(model.PublicationId)).Any();
+            if (exists)
+            {
+                return BadRequest("Comments for this publication already exists");
+            }
             var _publication = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
             try
             {

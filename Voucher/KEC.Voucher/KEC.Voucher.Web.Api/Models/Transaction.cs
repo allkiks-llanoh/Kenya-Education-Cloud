@@ -24,7 +24,7 @@ namespace KEC.Voucher.Web.Api.Models
         {
             get
             {
-                return _dbTransaction.Voucher.Wallet.WalletAmount;
+                return _dbTransaction.Voucher.Wallet.Balance;
             }
         }
         public string TransactionDescription

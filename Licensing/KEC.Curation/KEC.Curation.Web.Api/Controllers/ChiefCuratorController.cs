@@ -441,11 +441,16 @@ namespace KEC.Curation.Web.Api.Controllers
                                   .Find(p => p.Id.Equals(publicationId)
                                   && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(model.ChiefCuratorGuid))
                                   .FirstOrDefault();
+           
             if (publication == null)
             {
                 return NotFound(value: new { message = "Publication Not Found in Repository." });
             }
-
+            var exists = _uow.ChiefCuratorCommentRepository.Find(p => p.PublicationId.Equals(model.PublicationId)).Any(); 
+            if (exists)
+            {
+                return BadRequest("Comments for this publication already exists");
+            }
             try
             {
                 var update = _uow.ChiefCuratorAssignmentRepository

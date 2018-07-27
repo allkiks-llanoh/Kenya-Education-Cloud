@@ -2,9 +2,7 @@
 $(document).ready(function () {
     $('#btn-postFile').click(function () {
         $('#btn-postFile').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
-
         var name = $('#Name').val();
-
         $.ajax({
             headers : {
 
@@ -19,24 +17,15 @@ $(document).ready(function () {
             crossDomain: true,
             data: JSON.stringify({ Name: name }),
             success: function (response, status, jxhr) {
-                console.log(response);
-                console.log(status);
                 $('#alert').html(`${response}.`)
                 $('div.alert-success').toggleClass('hidden');
                 $('#btn-postFile').html('CREATE CATEGORY');
                 window.location.assign("http://curation.kec.ac.ke/Home/ListCategory");
             },
-            error: function (request, status, error) {
-
-                console.log(request);
-                console.log(status);
-
-                console.log(request.responseText);
-                $('#error').html(request.responseText)
+            error: function (response, status, error) {
+                $('#error').html(response.responseText)
                 $('div.alert-danger').toggleClass('hidden');
                 $('#btn-postFile').html('CREATE CATEGORY');
-
-
             }
         });
 

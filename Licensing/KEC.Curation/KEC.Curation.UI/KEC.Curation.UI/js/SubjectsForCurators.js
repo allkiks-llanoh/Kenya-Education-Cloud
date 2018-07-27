@@ -1,7 +1,5 @@
 ﻿const apiBaseUrl = "https://curationapi.kec.ac.ke/api";
 let subjectsUrl = apiBaseUrl.concat(`/Subjects/ForCurators`);
-
-
 //get a reference to the select element
 $select = $('#SubjectTypeId');
 //request the JSON data and parse into the select element

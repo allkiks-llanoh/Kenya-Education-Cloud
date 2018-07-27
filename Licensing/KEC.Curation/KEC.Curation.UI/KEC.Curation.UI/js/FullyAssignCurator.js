@@ -4,10 +4,7 @@
         $('#recommend').click(updateChiefCuratorAssignment);
     });
     function updateChiefCuratorAssignment(e) {
-        e.preventDefault();
-        
-        var kbid ="05497821-09e9-4910-9338-b8a5953af127"       
-       
+        e.preventDefault();   
         $.ajax({
             headers : {
                 'Accept' : 'application/json',
@@ -30,5 +27,4 @@
             ShowAlert("Something went wrong while processing publication", 'error');
         });
     }
-
 })();

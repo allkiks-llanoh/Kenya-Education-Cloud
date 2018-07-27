@@ -11,9 +11,6 @@
             }
         });
     });
-
-
-
     ///Functions Section
     function getPublication() {
         let publicationId = $('#publication-view').attr('data-publicationId');
@@ -56,7 +53,6 @@
             getPublicationCurationComments();
         });
     }
-
     function getPublicationCurationComments() {
         let publicationId = $('#publication-view').attr('data-publicationId');
         let url = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorsubmissions`);
@@ -70,8 +66,7 @@
                 404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to access curator submissions"); },
                 500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
-            }
-            ,
+            },
             data: JSON.stringify({ chiefCuratorGuid: currentUserGuid })
         }).done(function (submissions, textStatus, jqXHR) {
             let commentsHtml = "";
@@ -97,7 +92,6 @@
             $('#curator-comments').html(`<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">${commentsHtml}</div>`);
         });
     }
-
     function getActionsTaken() {
         var url = apiBaseUrl.concat('/lookups/actions');
         $.ajax({
@@ -107,12 +101,10 @@
             contentType: 'application/json',
             crossDomain: true
 
-
         }).done(function (data, textStatus, jqXHR) {
             let itemsHtml = '';
             data.forEach(function (actionItem) {
                 itemsHtml = itemsHtml.concat(`<li id='${actionItem.name}'>${actionItem.description}<li>`);
-
             });
             $('#action-taken').html(itemsHtml);
             hookBtnSelect();
@@ -120,9 +112,5 @@
             ShowAlert("Something went wrong while loading actions", "error");
         });
     }
-
-
     //Functions Section
-
-
 })();

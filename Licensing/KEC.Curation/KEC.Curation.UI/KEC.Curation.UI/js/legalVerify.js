@@ -1,19 +1,13 @@
 ﻿
 let legalVerifyUrl = apiBaseUrl.concat(`/Publications/process`);
-
 $(document).ready(function () {
     $('#LegalApprove').click(function () {
         $('#LegalApprove').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
-
         var kicdnumber = $('#kicd').attr('data-kicdNumber');
         var notes = $('.note-editable').html();
         var userGuid = $('#CurrentUserGuid').val();
         var action = $('#actionTaken').val();
         var stages = "LegalVerification";
-
-        console.log(`${kicdnumber}`);
-        console.log(` ${notes} `);
-        console.log(` ${userGuid} `);
         $.ajax({
             headers : {
                 'Accept' : 'application/json',
@@ -22,37 +16,23 @@ $(document).ready(function () {
             url: legalVerifyUrl,
             type: "PATCH",
             data: JSON.stringify({ KICDNumber: kicdnumber, Notes: notes, ActionTaken: action, Stage: stages, UserGuid: userGuid }),
-
             success: function (response, status, jxhr) {
-                console.log(response);
-                console.log(status);
                 $('#message').html(` ${response}.`)
                 $('div.alert-success').toggleClass('hidden');
                 ShowAlert("Conformity Verified", "success");
                 $('#LegalApprove').html('Yes');
                 $('#confirmlegal').modal('hide');
                 $('.modal-backdrop').remove();
-
             },
-            error: function (request, status, error) {
-
-                console.log(request);
-                console.log(status);
-
-                console.log(request.responseText);
-                $('#error').html(responseText)
+            error: function (response, status, error) {
+                $('#error').html(response.responseText)
                 $('div.alert-danger').toggleClass('hidden');
                 $('#LegalApprove').html('Yes');
                 $('#confirmlegal').modal('hide');
                 $('.modal-backdrop').remove();
-
-
             }
         });
-
-
     });
 },
-
 );
 

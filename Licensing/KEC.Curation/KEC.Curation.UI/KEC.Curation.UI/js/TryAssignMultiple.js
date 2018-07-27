@@ -1,9 +1,7 @@
 ﻿
 $(document).ready(function () {
-
     let principalCuratorGetUrl = apiBaseUrl.concat(`/PrincipalCurator/PrincipalCurator`)
     function ajaxDatas() {
-
         var principalCuratorGuid = $('#CurrentUserGuid').val();
         var chiefCuratorGuid = $('#UserGuid').val();
         var publicationIdArray = []

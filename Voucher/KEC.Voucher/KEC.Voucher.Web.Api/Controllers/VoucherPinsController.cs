@@ -32,6 +32,7 @@ namespace KEC.Voucher.Web.Api.Controllers
             {
                 return requestError;
             }
+            
             var schoolAdmin = _uow.SchoolAdminRepository.Find(p => p.Email.Equals(email)).FirstOrDefault();
             //if (voucher.School.SchoolAdmin.Id != schoolAdmin.Id)
             //{
@@ -57,7 +58,7 @@ namespace KEC.Voucher.Web.Api.Controllers
                 //{
                 //   return Request.CreateErrorResponse(HttpStatusCode.BadRequest, message: "Invalid School admin phone number");
                 //}
-                smsService.SendSms("0704033581", pin.Pin);
+                smsService.SendSms(schoolAdmin.PhoneNumber, pin.Pin);
                 return Request.CreateResponse(HttpStatusCode.OK, value: "Sending voucher pin sms");
             }
             catch (Exception ex)

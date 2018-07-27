@@ -4,10 +4,8 @@
      
         loadPublication();
     
-      
     });
     //Functions Section
-
     function loadPublication() {
         let publicationId = $('#publication-view').attr('data-publicationId');
         let chiefCuratorGuid = $('#CurrentUserGuid').val();
@@ -64,7 +62,6 @@
             ShowAlert('Something went wrong while loading publication', 'error');
         });
     }
-
     function submitCuratorAssignment(e) {
         e.preventDefault();
         let curator = $("unassigned-curator");
@@ -101,7 +98,6 @@
             ShowAlert('Something went wrong while processing curator assignment', 'error');
         });
     }
-
     let chiefCuratorGuid = $('#CurrentUserGuid').val();
     let publicationId = $('#publication-view').attr('data-publicationId');
     let assignmentGETUrl = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/assignments?chiefCuratorGuid=${chiefCuratorGuid}`);
@@ -112,21 +108,16 @@
         }
         return tableRows;
     };
-
     //Start by getting publication list based on Payment Verification Stage
     $.ajax({
         url: assignmentGETUrl,
         type: "GET",
-    
         dataType: "json",
         success: function (data, status, jqhxr) {
-            console.log(data);
-
             //This code snipet prepares to append Json Data
             $('#publication-assignments').append(tableRows(data));
         }
     });
-
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $("<tr />")
@@ -137,18 +128,12 @@
         row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.assignmentId} class="btn btn-w-m btn-info btn-md DeleteAssignment" id="delete" role="button">Remove Assignment</button>`));  
         return row[0];
     }
-    
-    
     function deleteAssignment() {
         $('#delete').click(function () {
             let url = apiBaseUrl.concat(`/chiefcurator/publication/assignment/${publicationId}?chiefCuratorGuid=${chiefCuratorGuid}`);
-
             $(this).html('<i class="fa fa-refresh fa-spin"></i> Please wait');
-
             var publicationId = $(this).attr('data-assignmentId');
             var chiefCuratorGuid = $('#CurrentUserGuid').val();
-
-            console.log($(this).attr('data-county'));
             $.ajax({
                 headers : {
                     'Accept' : 'application/json',
@@ -161,14 +146,10 @@
                 },
                 url: url,
                 type: "POST",
-
                 success: function (response, status, jxhr) {
-                    console.log(response);
-                    console.log(status);
-                    $('#alert').html(`${response}`)
+                    $('#alert').html(response)
                     $('div.alert-success').toggleClass('hidden');
                     reloadSchoolTypes();
-
                 }
             });
         });

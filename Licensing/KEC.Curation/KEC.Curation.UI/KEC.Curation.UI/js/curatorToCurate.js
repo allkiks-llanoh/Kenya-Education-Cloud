@@ -1,11 +1,9 @@
 ﻿
 (function () {
-
     $(document).ready(function () {
         getPublicationCurationComments();
     });
 function getPublicationCurationComments() {
-
     let publicationId = $('#publication-view').attr('data-publicationId');
     let url = apiBaseUrl.concat(`/CurationManagers/getcomments/fromcuration?publicationId=${publicationId}`);
     //let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
@@ -20,8 +18,6 @@ function getPublicationCurationComments() {
             403: () => { ShowAlert("You are not authorized to access curator submissions"); },
             500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
         },
-
-
     }).done(function (submissions, textStatus, jqXHR) {
 
         submissions.forEach(function (submission) {
@@ -29,9 +25,7 @@ function getPublicationCurationComments() {
                                                   <dt>Chief Curator Recommendations</dt><dd>${submission.assignmentId}</dd>
                                                   <dt>Principal Curator Recommendations</dt><dd>${submission.publication}</dd>
                                                   <dt>Curation Managers Recommendations</dt><dd>${submission.sectionToCurate}</dd>`);
-
         });
-
     });
     }
 })();

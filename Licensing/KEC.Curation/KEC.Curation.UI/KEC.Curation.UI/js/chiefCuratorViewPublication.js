@@ -29,9 +29,7 @@
                 404: () => { ShowAlert("Publication record could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
                 500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
-            },
-          
-
+            },          
         }).done(function (publication, textStatus, jqXHR) {
             showChiefCuratorSubmissionSection(publication, "#publication-view");
             $('#publication-details').replaceWith(
@@ -66,10 +64,8 @@
                        </div>
                   </div>
                  </dl>`);
-       
         });
     }
-
     function getPublicationCurationComments() {
         let chiefCuratorGUID = $('#CurrentUserGuid').val();
         let publicationId = $('#publication-view').attr('data-publicationId');
@@ -86,18 +82,12 @@
                 403: () => { ShowAlert("You are not authorized to access curator submissions"); },
                 500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
             },
-          
-
         }).done(function (submissions, textStatus, jqXHR) {
-           
             submissions.forEach(function (submission) {
                 $('#currator-commets').html(`${submission.notes}`);
-
             });
-        
         });
     }
-
     function getActionsTaken() {
         var url = apiBaseUrl.concat('/lookups/actions');
         $.ajax({
@@ -106,13 +96,10 @@
             accept: 'application/json',
             contentType: 'application/json',
             crossDomain: true
-
-
         }).done(function (data, textStatus, jqXHR) {
             let itemsHtml = '';
             data.forEach(function (actionItem) {
                 itemsHtml = itemsHtml.concat(`<li id='${actionItem.name}'>${actionItem.description}<li>`);
-               
             });
             $('#action-taken').html(itemsHtml);
             hookBtnSelect();
@@ -133,7 +120,6 @@
         let publicationId = $('#publication-view').attr('data-publicationId');
         let actionSelected = $("#action-selected").val();
         let notes = $('.note-editable').html();
-
         let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
         let userGuid = $('#CurrentUserGuid').val();
         if (notes === null || notes === "") {
@@ -142,7 +128,6 @@
         if (actionSelected === null || actionSelected === "") {
             return ShowAlert("Please select an action taken from the list", "error");
         }
-
         $.ajax({
             headers : {
                 'Accept' : 'application/json',
@@ -166,8 +151,7 @@
         });
     }
     //Functions Section
-    
-
+   
 })();
 
 
