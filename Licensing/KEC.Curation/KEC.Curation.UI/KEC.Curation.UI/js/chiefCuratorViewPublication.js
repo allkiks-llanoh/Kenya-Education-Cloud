@@ -2,7 +2,7 @@
     $(document).ready(function () {
         getPublication();
         //getPublicationCurationComments();
-        $('#recommend').click(submitChiefNotesAndAction);
+         $('#recommend').click(submitChiefNotesAndAction);
     });
     $(document).ready(function () {
         $(".btn-select").each(function (e) {
@@ -116,6 +116,7 @@
         }
     }
     function submitChiefNotesAndAction(e) {
+        $('#recommend').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         e.preventDefault();
         let publicationId = $('#publication-view').attr('data-publicationId');
         let actionSelected = $("#action-selected").val();
@@ -146,6 +147,9 @@
             }
         }).success(function (data, textStatus, jqXHR) {
             ShowAlert("Recomendations passed to Principal Curator", "success");
+            $('#recommend').html('Yes');
+            $('#confirm').modal('hide');
+            $('.modal-backdrop').remove();
         }).fail(function () {
             ShowAlert("Something went wrong while processing publication", "error");
         });

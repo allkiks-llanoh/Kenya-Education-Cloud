@@ -3,6 +3,7 @@
         $('#recommend').click(submitNotesAndAction);
     });
     function submitNotesAndAction(e) {
+        $('#recommend').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         e.preventDefault();
         let publicationId = $('#publication-view').attr('data-publicationId');
         let actionSelected = $("#action-selected").val();
@@ -35,6 +36,9 @@
             }
         }).success(function (data, textStatus, jqXHR) {
             ShowAlert("Recommendations passed to  Curation Manager", "success");
+            $('#recommend').html('Yes');
+            $('#confirm').modal('hide');
+            $('.modal-backdrop').remove();
         }).fail(function () {
             ShowAlert("Something went wrong while processing publication", 'error');
         });
