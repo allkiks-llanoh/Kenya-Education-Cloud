@@ -4,13 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/CustomStyles/DocumentViewer.css" rel="stylesheet" />
+@{
+    var Urls = Request.Params["Urls"];
+}
 @section Scripts{
     <script src="@Url.Content("~/js/curate.js")"></script>
 }
-@{
-    var Urls = Request.Params["Urls"];
 
-}
 <div class="wrapper wrapper-content animated fadeInRight" id="assignment-view" data-assignmentId="@ViewBag.AssignmentId">
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">

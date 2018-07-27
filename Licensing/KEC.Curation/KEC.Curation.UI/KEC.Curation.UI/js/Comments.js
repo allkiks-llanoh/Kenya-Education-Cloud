@@ -1,6 +1,6 @@
 ﻿(function () {
           $(document).ready(function () {
-          //$('#recommend').click(submitChiefNotesAndAction);
+          $('#recommend').click(submitChiefNotesAndAction);
     });
     function submitChiefNotesAndAction(e) {
         e.preventDefault();
