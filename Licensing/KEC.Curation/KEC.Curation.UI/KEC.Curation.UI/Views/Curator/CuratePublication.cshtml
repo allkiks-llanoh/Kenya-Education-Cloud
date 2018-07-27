@@ -6,11 +6,27 @@
 <link href="~/Content/CustomStyles/DocumentViewer.css" rel="stylesheet" />
 @{
     var Urls = Request.Params["Urls"];
+    //var type = "https://kecpublications.blob.core.windows.net/publications/20180613134725KISWAHILI_GRADE2_WB.epub";
 }
 @section Scripts{
     <script src="@Url.Content("~/js/curate.js")"></script>
-}
+    <script type="text/javascript">
 
+ var fileName, fileExtension;
+        fileName = "@Urls";
+        fileExtension = fileName.split('.').pop();
+        console.log(fileExtension);
+        let mimeTypeCheck = fileExtension;
+        console.log(mimeTypeCheck);
+        if(mimeTypeCheck == "epub")
+        {
+            $('#showEpub').toggleClass('hidden');
+        }
+        if (mimeTypeCheck == "html") {
+            $('#showHtml').toggleClass('hidden');
+        }
+    </script>
+}
 <div class="wrapper wrapper-content animated fadeInRight" id="assignment-view" data-assignmentId="@ViewBag.AssignmentId">
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">
@@ -24,7 +40,6 @@
                             </a>
                         </div>
                     </div>
-
                     <div class="ibox-content">
                         <dl id="assignment-details"></dl>
                     </div>
@@ -37,19 +52,23 @@
             <div class="ibox-content no-padding">
                 <div id="showHtml" class="hidden">
                     <div class="col-md-6">
-                        <div style="color:black; font-weight:bold;font-size:15px;">Content Location:</div>
+                        <br>
+                        <div style="color:black; font-weight:bold;font-size:15px;">Online Curation, View Content On This Frame</div>
+                        <br>
                     </div>
                     <div>
-                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:820px;width:100%;"
                                 src='@Urls'></iframe>
                     </div>
                 </div>
                 <div id="showEpub" class="hidden">
                     <div class="col-md-6">
-                        <div style="color:black; font-weight:bold;font-size:15px;">Content Location:</div>
+                        <br>
+                        <div style="color:black; font-weight:bold;font-size:15px;">Online Curation, View Content On This Frame</div>
+                        <br>
                     </div>
                     <div>
-                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:820px;width:100%;"
                                 src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Urls)'></iframe>
                     </div>
                 </div>
@@ -111,3 +130,4 @@
 <div class="form-group col-md-10">
     <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
 </div>
+
