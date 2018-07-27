@@ -26,6 +26,6 @@ function drawRow(rowData) {
     row.append($(`<td class="hidden"> + rowData.id + </td>`));
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.kicdNumber + "</td>"));
-    row.append($(`<td> <a href="/PrincipalCurator/ViewPublication/${rowData.id}?Pub=${rowData.id}&Urls=${rowData.curationUrl}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Curation Recommendations</a>`));
+    row.append($(`<td> <a href="/PrincipalCurator/ViewPublication/${rowData.id}?Pub=${rowData.id}&Urls=${rowData.url}&MimeType=${rowData.type}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Curation Recommendations</a>`));
     return row[0];
 } 

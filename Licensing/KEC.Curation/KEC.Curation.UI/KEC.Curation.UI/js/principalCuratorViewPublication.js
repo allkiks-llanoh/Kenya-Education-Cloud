@@ -32,22 +32,7 @@
             showChiefCuratorSubmissionSection(publication, "#publication-view");
             $('#publication-details').replaceWith(
                 `<dl >
-                  <div class="row">
-                       <div class="col-md-3">
-                           <dt>Curation</dt>
-                           <dd id="kicd-number">${publication.kicdNumber}</dd>  
-                       </div>
-                       <div class="col-md-3">
-                            <dt>Title</dt>
-                            <dd>${publication.title}</dd> 
-                       </div>
-                         <div class="col-md-3">
-                            <dt>Content Location</dt>
-                            <dd><a href="${publication.curationUrl}">Link to publication</a></dd>
-                       </div>
-                  </div>
-                  <br><br>
-                  <div class="row">
+                   <div class="row">
                        <div class="col-md-3">
                             <dt>Subject</dt>
                             <dd>${publication.subject}</dd>
@@ -61,6 +46,22 @@
                             <dd>${publication.description}</dd>
                        </div>
                   </div>
+                  <div class="row">
+                       <div class="col-md-3">
+                           <dt>Curation</dt>
+                           <dd id="kicd-number">${publication.kicdNumber}</dd>  
+                       </div>
+                       <div class="col-md-3">
+                            <dt>Title</dt>
+                            <dd>${publication.title}</dd> 
+                       </div>
+                        <div class="col-md-4">
+                            <dt>Principla Curator</dt>
+                            <dd>KEC</dd> 
+                       </div>
+                  </div>
+                  <br><br>
+                
                  </dl>`);
         });
     }

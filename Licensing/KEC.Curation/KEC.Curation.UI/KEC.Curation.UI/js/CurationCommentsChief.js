@@ -21,7 +21,6 @@ function tableRows(data) {
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $("<tr />")
-        row.append($("<td>" + rowData.status + "</td>"));
         row.append($("<td>" + rowData.notes + "</td>"));
         row.append($("<td>" + rowData.recommendation + "</td>"));
        
