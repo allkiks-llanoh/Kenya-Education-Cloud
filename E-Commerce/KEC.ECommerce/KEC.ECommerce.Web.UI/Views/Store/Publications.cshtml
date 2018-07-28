@@ -49,28 +49,25 @@ else
             <div class="border bd-blue">
                 <h4 class="text-upper text-center text-bold fg-orange p-2">No products for the selected category or search criteria yet</h4>
                 <h6 class="fg-blue text-center text-upper text-light p-2">Please check later</h6>
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                    <a asp-action="Dashboard" asp-controller="Account" class="button  info h-center m-2 outline rounded">
+                        <span class="mif-backward icon"></span> Back to Dashboard
+                    </a>
+
+                }
+                else
+                {
+                    <a asp-action="Index" asp-controller="Home" class="button  info h-center m-2 outline rounded">
+                        <span class="mif-backward icon"></span> Take me home
+                    </a>
+
+                }
             </div>
         </div>
     </div>
-    <div class="row p-2">
-        <div class="cell-md-full">
-            @if (User.Identity.IsAuthenticated)
-            {
-
-                <a asp-action="Dashboard" asp-controller="Account" class="button  info h-center m-2 outline rounded">
-                    <span class="mif-backward icon"></span> Back to Dashboard
-                </a>
-
-            }
-            else
-            {
-                <a asp-action="Index" asp-controller="Home" class="button  info h-center m-2 outline rounded">
-                    <span class="mif-backward icon"></span> Take me home
-                </a>
-
-            }
-        </div>
-    </div>
+    
 
 }
 
