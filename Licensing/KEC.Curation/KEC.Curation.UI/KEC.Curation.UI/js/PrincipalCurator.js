@@ -17,11 +17,6 @@ function submitAssignment(e) {
         var principalCuratorGuid = $('#CurrentUserGuid').val();
         var kicdNumber = $('#kicd').attr('data-kicdNumber');
         var chiefCuratorGuid = $('#UserGuid').val();
-        console.log(`${publicationID}`);
-        console.log(`${principalCuratorGuid}`);
-        console.log(` ${chiefCuratorGuid} `);
-        console.log(` ${notes} `);
-
         $.ajax({
             headers : {
                 'Accept' : 'application/json',
@@ -41,30 +36,19 @@ function submitAssignment(e) {
                 }
             },
             data: JSON.stringify({ PrincipalCuratorGuid: principalCuratorGuid, ChiefCuratorGuid: chiefCuratorGuid, KICDNumber: kicdNumber, Notes: notes, Stage: stage, ActionTaken: actiontaken }),
-
             success: function (response, status, jxhr) {
-                console.log(response);
-                console.log(status);
-                $('#message').html(` ${response}.`)
+                $('#message').html(response)
                 $('div.alert-success').toggleClass('hidden');
                 $('#LegalApprove').html('Yes');
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
                 ShowAlert("Title Assigned Succesfully", "success");
             },
-            error: function (request, responseTex, jxhr) {
-
-                console.log(request);
-                console.log(responseTex);
-
-                console.log(request.responseText);
-              
+            error: function (response, jxhr) {
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
                 $('#LegalApprove').html('APPROVE');
                 ShowAlert("Assignment Instructions Are Required", "error");
-
-
             }
         });
     }

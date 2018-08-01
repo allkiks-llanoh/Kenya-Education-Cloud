@@ -22,7 +22,6 @@
                     ShowAlert("You are not authorized to access the specified resource", "warning");
                 }
             },
-           
             type: 'GET'
         }).done(function (assignment, textStatus, jqXHR) {
             $('#assignment-details').replaceWith(
@@ -35,6 +34,7 @@
                    <dd>${assignment.assignmentDateUtc}</dd>
                    <dt>Url</dt>
                    <dd><a href="${assignment.publicationUrl}" target="blank">Link to publication</a></dd></dl>`);
+            
             $('.note-editable').html($.parseHTML(assignment.notes))
         })
     }
@@ -65,7 +65,7 @@
                 }
             },
             data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: subs }),
-           
+
         }).done(function (data, textStatus, jqXHR) {
             ShowAlert("Curation notes saved and submitted successfully", "success");
             $('#confirmsave').modal('hide');
@@ -102,13 +102,13 @@
                 }
             },
             data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: sub }),
-         
+
         }).done(function (data, textStatus, jqXHR) {
             ShowAlert("Curation notes saved successfully", "success");
-            
+
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert("Something went wrong while saving your notes", "error");
         });
     }
-   
+
 })();

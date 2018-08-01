@@ -37,8 +37,8 @@ namespace KEC.Curation.Web.Api.Serializers
             get
             {
                 var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
-                var section = _uow.PublicationSectionRepository.Find(p=> p.PublicationId.Equals(publication.Id)).FirstOrDefault();
-             
+                var section = _uow.PublicationSectionRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+
                 if (section == null)
                 {
                     return "Whole Document";
@@ -63,6 +63,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _assignment.Submitted ? "Submitted" : "Pending";
             }
         }
+
         public string Title
         {
             get
@@ -71,7 +72,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 return publication.Title;
             }
         }
-        public int publicationId 
+        public int publicationId
         {
             get
             {
@@ -86,7 +87,7 @@ namespace KEC.Curation.Web.Api.Serializers
             {
                 var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
                 var publicationId = _uow.PublicationSectionRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
-               
+
                 if (publication == null)
                 {
                     return string.Empty;
@@ -95,6 +96,23 @@ namespace KEC.Curation.Web.Api.Serializers
                 {
                     return publication.CutationUrl;
                 }
+            }
+        }
+        public string Assignee
+        {
+            get
+            {
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                var _assignee = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+                if (_assignee == null)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    return _assignee.Assignee;
+                }
+               
             }
         }
     }

@@ -7,8 +7,8 @@
 
 
 
-    <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
-   
+<script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+
 
 <div class="wrapper wrapper-content animated fadeInRight" style="margin-top:-40px;">
     <div class="row">
@@ -149,30 +149,30 @@
                     </div>
 
                     <div>
-                            <button data-toggle="modal" data-target="#confirm" style="background-color:#00af57;" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>
-                        </div>
-                        <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title">Confirm Submission</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p id="messagem">
-                                            Are you sure you want to submit this publication?
-                                        </p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                                        <button type="submit" id="btn-postFile" class="btn btn-primary">Yes</button>
-                                    <br><br>
-                                        <div id="status"></div>
-                                    </div>
-
+                        <button data-toggle="modal" data-target="#confirm" style="background-color:#00af57;" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>
+                    </div>
+                    <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">Confirm Submission</h4>
                                 </div>
+                                <div class="modal-body">
+                                    <p id="messagem">
+                                        Are you sure you want to submit this publication?
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                    <button type="submit" id="btn-postFile" class="btn btn-primary">Yes</button>
+                                    <br><br>
+                                    <div id="status"></div>
+                                </div>
+
                             </div>
                         </div>
+                    </div>
                 </form>
 
             </div>
@@ -256,7 +256,7 @@
     const apiBaseUrls = "https://publishervm.kec.ac.ke/api";
     let publicationSubmitUrl = apiBaseUrls.concat(`/Publications/submit`);
 
-   
+
     $('#btn-postFile').click(function (e) {
         e.preventDefault();
 
@@ -265,7 +265,7 @@
         var percent = $('.progress-bar-warning');
         var status = $('#status');
         var form_data = new FormData($('#uploadform')[0]);
-       
+
         $.ajax({
             type: 'POST',
             url: publicationSubmitUrl,
@@ -287,7 +287,7 @@
                 percent.html(percentValue);
             },
             success: function (response, status, jxhr) {
-               
+
                 $('#div-danger').toggle('hidden');
                 $('#btn-postFile').html('Yes');
                 $('#confirm').modal('hide');
@@ -316,7 +316,7 @@
                 $('#error').html(stringText, space, a, space, "to help you upload content succesfully");
                 //$('#error').append(stringText, space, a, space, "to help you upload content succesfully");
                 $('div.alert-danger').toggleClass('hidden');
-                
+
             }
 
         });

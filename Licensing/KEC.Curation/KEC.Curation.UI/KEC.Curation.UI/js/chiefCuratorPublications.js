@@ -71,7 +71,6 @@
                 ShowAlert(`Something went wrong while loading ${publicationType} publication subjects`, 'error');
         });
     }
-
     function loadPublications(url, tagetTableId, actionText, publicationType) {
         $.ajax({
             url: url,

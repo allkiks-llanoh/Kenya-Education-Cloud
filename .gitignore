@@ -396,3 +396,5 @@ $RECYCLE.BIN/
 #Project specific Ignores
 Voucher/KEC.Voucher/.vs/KEC.Voucher/v15/.suo
 Voucher/KEC.Voucher/.vs/KEC.Voucher/v15/Server/sqlite3/storage.ide
+/E-Commerce/KEC.ECommerce/KEC.Ecommerce.Web.UI/PDFLicences.rar
+/E-Commerce/KEC.ECommerce/KEC.Ecommerce.Web.UI/PDFLicences.zip

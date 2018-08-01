@@ -18,10 +18,18 @@ namespace KEC.ECommerce.Web.UI.Models
             _userEmail = userEmail;
             _identificationCode = identificationCode;
         }
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< development
         public void PostVoucherPayment(string pinNumber,PaymentMethod paymentMethod)
+========================================================================
+        public void PostVoucherPayment(string voucherCode, string pinNumber,PaymentMethod paymentMethod)
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> final
         {
             ChangeOrderStatus();
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< development
             PostPaymentRecord(pinNumber, paymentMethod);
+========================================================================
+            PostPaymentRecord(pinNumber, voucherCode, paymentMethod);
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> final
             DeductSoldQuantities();
         }
 
@@ -69,7 +77,11 @@ namespace KEC.ECommerce.Web.UI.Models
             _uow.Complete();
         }
 
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< development
         private void PostPaymentRecord(string transactionId, PaymentMethod method)
+========================================================================
+        private void PostPaymentRecord(string transactionId,string voucherCode, PaymentMethod method)
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> final
         {
             var payment = new Payment
             {
@@ -77,7 +89,12 @@ namespace KEC.ECommerce.Web.UI.Models
                 TransactionDate = DateTime.Now,
                 TransactedBy = _userEmail,
                 OrderId = _order.Id,
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< development
                 PaymentMethod = method
+========================================================================
+                PaymentMethod = method,
+                VoucherNumber = voucherCode
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> final
             };
             _uow.PaymentsRepository.Add(payment);
             _uow.Complete();

@@ -95,8 +95,11 @@ namespace KEC.Voucher.Web.Api.Controllers
                 SchoolAdminId = admin.Id
             };
             _uow.VoucherPinRepository.MarkPinAsUsed(voucherPin.Id);
-            voucher.Wallet.Balance -= transactionAmount;
+            var voucherAmount = voucher.Wallet.Balance;
+            var voucherBalance = (voucherAmount - transactionAmount);
             _uow.TransactionRepository.Add(transaction);
+            _uow.Complete();
+            voucher.Wallet.Balance = voucherBalance;
             _uow.Complete();
             return Request.CreateResponse(HttpStatusCode.OK, value: "Transaction processed successfully");
         }

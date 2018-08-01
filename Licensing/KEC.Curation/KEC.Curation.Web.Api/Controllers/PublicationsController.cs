@@ -25,7 +25,7 @@ using System.IO.Compression;
 
 namespace KEC.Curation.Web.Api.Controllers
 {
-
+    [AllowCrossSiteJson]
     [Produces("application/json")]
     [Route("api/Publications")]
     public class PublicationsController : Controller
@@ -423,7 +423,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("allpublications")]
         public IActionResult AllPublications()
         {
-            var assignments = _uow.PublicationRepository.Find(p => p.PublicationStageLogs.Equals(PublicationStage.NewPublication));
+            var assignments = _uow.PublicationRepository.GetAll();
             var assignmentList = assignments.Any() ?
                 assignments.Select(p => new PublicationDownloadSerilizer(p, _uow)).ToList() : new List<PublicationDownloadSerilizer>();
             return Ok(assignmentList);

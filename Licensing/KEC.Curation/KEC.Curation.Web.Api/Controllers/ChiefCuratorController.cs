@@ -373,10 +373,9 @@ namespace KEC.Curation.Web.Api.Controllers
         }
 
         [HttpGet("curator/listings/{id}")]
-        public IActionResult GetAllCuratorAssignments(int id)
-        {
-            var publication = _uow.PublicationRepository.Get(id);
-            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted && p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+        public IActionResult GetAllCuratorAssignments([FromQuery]int id)
+        { 
+            var assigment = _uow.CuratorAssignmentRepository.Find(p => p.Submitted && p.PublicationId.Equals(id)).FirstOrDefault();
             if (assigment == null)
             {
                 return NotFound("Curation record could not be retrieved or has been submitted");
@@ -441,11 +440,16 @@ namespace KEC.Curation.Web.Api.Controllers
                                   .Find(p => p.Id.Equals(publicationId)
                                   && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(model.ChiefCuratorGuid))
                                   .FirstOrDefault();
+           
             if (publication == null)
             {
                 return NotFound(value: new { message = "Publication Not Found in Repository." });
             }
-
+            var exists = _uow.ChiefCuratorCommentRepository.Find(p => p.PublicationId.Equals(model.PublicationId)).Any(); 
+            if (exists)
+            {
+                return BadRequest("Comments for this publication already exists");
+            }
             try
             {
                 var update = _uow.ChiefCuratorAssignmentRepository

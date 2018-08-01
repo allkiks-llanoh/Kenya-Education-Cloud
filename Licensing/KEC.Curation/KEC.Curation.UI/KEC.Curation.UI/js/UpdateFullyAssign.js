@@ -30,5 +30,4 @@
             ShowAlert("Publication Has no Chief Curator Assignment", 'error');
         });
     }
-
 })();

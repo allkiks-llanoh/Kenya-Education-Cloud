@@ -4,21 +4,19 @@
     ViewBag.Title = "Principal Curator";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @section Scripts
 {
     <script src="~/js/PrincipalCuratorAssigned.js"></script>
     <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
 }
-
-    <div class="text-center m-t-lg">
-        <h1>
-            @ViewData["SubTitle"]
-        </h1>
-        <small>@ViewData["Message"]</small>
-    </div>
+<div class="text-center m-t-lg">
+    <h1>
+        @ViewData["SubTitle"]
+    </h1>
+    <small>@ViewData["Message"]</small>
+</div>
 <div class="tabs-container">
-    <ul class="nav nav-tabs">  
+    <ul class="nav nav-tabs">
         <li class=""><a href="/PrincipalCurator/PrincipalCurator" style="background-color:#00B85F; color:white;" aria-expanded="false">Go To Assign Single</a></li>
         <li class=""><a href="/PrincipalCurator/AssignMultiple" style="background-color:#1C84C6; color:white;" aria-expanded="false">GoTo Assign Multiple</a></li>
     </ul>
@@ -30,7 +28,6 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="ibox float-e-margins">
-
                                 </div>
                             </div>
                         </div>
@@ -47,7 +44,7 @@
                                                     <tr>
                                                         <th class="hidden">ID</th>
                                                         <th>Title</th>
-                                                        
+
                                                         <th>Curation Number</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -70,7 +67,6 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="ibox float-e-margins">
-
                                 </div>
                             </div>
                         </div>
@@ -89,7 +85,6 @@
                                                         <th>Title</th>
                                                         <th>Curation Number</th>
                                                         <th>Action</th>
-
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>
@@ -110,7 +105,6 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="ibox float-e-margins">
-
                                 </div>
                             </div>
                         </div>
@@ -144,7 +138,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <div class="form-group col-md-10">
     <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">

@@ -4,8 +4,6 @@
     ViewBag.Title = "Review";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 @{
     var Title = Request.Params["Title"];
     var PId = Request.Params["Identity"];
@@ -22,14 +20,6 @@
     <link href="~/Content/CustomStyles/DocumentViewer.css" rel="stylesheet" />
     <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
     @Scripts.Render("~/plugins/sweetAlert")
-    @*<script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
-        <script>
-            var book = ePub("/alice.epub");
-            var rendition = book.renderTo("document_viewer");
-            rendition.display();
-        </script>*@
-
-
 }
 <div class="text-center m-t-lg">
     <h1>
@@ -45,197 +35,106 @@
                     <div class="row m">
                         <div class="panel panel-success">
                             <div class="panel-heading" style="background-color:#2855a8;">Publication Information</div>
-                            <div class="panel-body">
-                                @*..........................to remove starts here.......................*@
-                                <div class="row">
-
-                                    <div class="col-md-4">
-                                        <br />
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div style="color:black; font-weight:bold;font-size:15px;"> Curation Number:</div>
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div style="color:black;font-size:15px;"> @Publication</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <br />
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div style="color:black; font-weight:bold;font-size:15px;">Title:</div>
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div style="color:black;font-size:15px;">@Title</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <br />
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div style="color:black; font-weight:bold;font-size:15px;">Content Location:</div>
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <a href="@Urls" target="_blank">Link to publication</a>
-                                            </div>
-                                        </div>
+                            @*-------------------------------------html starts here-------------------------------------*@
+                            <div id="html" class="panel-body ">
+                                <div id="showHtml" class="hidden">
+                                    <dl>
+                                        <dt>Curation Number</dt>
+                                        <dd>@KICDNumber</dd>
+                                        <dt>Title</dt>
+                                        <dd>@Title</dd>
+                                        @*<dt>Publication</dt>
+                                        <dd><a href="@Publication" target="_blank">Link to publication</a></dd>*@
+                                    </dl>
+                                    <div>
+                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:820px;width:100%;"
+                                                src='@Publication)'></iframe>
                                     </div>
                                 </div>
-                                @*..........................To remove ends here.........................*@
-
-
-                                @*@if (MimeType == "application/x-zip-compressed")
-                                    {
-
-                                        <div class="row">
-
-                                            <div class="col-md-6">
-                                                <br />
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                        <div style="color:black; font-weight:bold;font-size:15px;"> Curation Number:</div>
-
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <div style="color:black;font-size:15px;"> @Publication</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <br />
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <div style="color:black; font-weight:bold;font-size:15px;">Title:</div>
-
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <div style="color:black;font-size:15px;">@Title</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel-footer">
-                                                <div class="ibox-content no-padding">
-                                                    <div class="visible-scrollbar" id="document_viewer">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
-                                                                        src='@Url.Content(@Urls)'></iframe>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    }
-                                    else
-                                    {
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div>Curation Number</div>
-                                                <div>@Publication</div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div>Title</div>
-                                                <div>@Title</div>
-                                            </div>
-                                        </div>
-                                        <div class="panel-footer">
-                                            <div class="ibox-content no-padding">
-                                                <div class="visible-scrollbar" id="document_viewer">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
-                                                                    src='@Url.Content("~/Readium/cloud-reader/index.html?epub="+@Urls)'></iframe>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }*@
                             </div>
-
-                            <div class="panel-footer">
-
-
-                                <div class="row">
-                                    <div class="ibox-content no-padding">
-                                        <div class="summernote" style="height:100px">
-
-                                        </div>
+                            @*--------------------------------------html ends here--------------------------------------*@
+                            @*--------------------------------------epub starts here------------------------------------*@
+                            <div id="epub" class="panel-body">
+                                <div id="showEpub" class="hidden">
+                                    <dl>
+                                        <dt>Curation Number</dt>
+                                        <dd>@KICDNumber</dd>
+                                        <dt>Title</dt>
+                                        <dd>@Title</dd>
+                                        <dt>Publication</dt>
+                                        <dd><a href="@Publication" target="_blank">Link to publication</a></dd>
+                                    </dl>
+                                    <div>
+                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:820px;width:100%;"
+                                                src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Publication)'></iframe>
                                     </div>
+                                </div>
+                            </div>
+                            @*--------------------------------------epub ends here-------------------------------------*@
+                            @*--------------------------------------footer starts here---------------------------------*@
+                            <div id="showFooter" class="hidden">
+                                <div class="panel-footer">
                                     <div class="row">
-                                        <br />
-                                        <div class="form-group" style="margin-left:15px;">
-                                            <label for="comment" class="col-md-4">Select Chief Curator:</label>
-
+                                        <div class="ibox-content no-padding">
+                                            <div class="summernote" style="height:100px">
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-10">
-                                            <select name="UserGuid" id="UserGuid" class="col-md-8 form-control" style="color:black; margin-left:15px;"></select>
-
-                                        </div>
-                                        <div class="form-group col-md-8">
-                                            <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid" />
-                                        </div>
-                                        <div class="form-group col-md-4">
-
-                                            <button type="button" data-toggle="modal" data-target="#confirm" style="background-color:#00B55F; margin-right:15px;" class="btn btn-w-m btn-primary pull-right">ASSIGN</button>
-                                        </div>
-                                        <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                                            <div class="modal-dialog modal-sm">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                                        <h4 class="modal-title">Confirm Submission</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>
-                                                            Are you sure you want to assign to this curator?
-                                                        </p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                                                        <button type="button" name="LegalApprove" id="LegalApprove" class="btn btn-primary">Yes</button>
+                                        <div class="row">
+                                            <br />
+                                            <div class="form-group" style="margin-left:15px;">
+                                                <label for="comment" class="col-md-4">Select Chief Curator:</label>
+                                            </div>
+                                            <div class="form-group col-md-10">
+                                                <select name="UserGuid" id="UserGuid" class="col-md-8 form-control" style="color:black; margin-left:15px;"></select>
+                                            </div>
+                                            <div class="form-group col-md-8">
+                                                <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid" />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <button type="button" data-toggle="modal" data-target="#confirm" style="background-color:#00B55F; margin-right:15px;" class="btn btn-w-m btn-primary pull-right">ASSIGN</button>
+                                            </div>
+                                            <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                <div class="modal-dialog modal-sm">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                            <h4 class="modal-title">Confirm Submission</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>
+                                                                Are you sure you want to assign to this curator?
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                                            <button type="button" name="LegalApprove" id="LegalApprove" class="btn btn-primary">Yes</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="form-group" style="text-align:left;">
                                 <a class="button btn btn-w-m btn-primary pull-right" style="background-color:#00B55F; margin-right:15px;" href="/PrincipalCurator/PrincipalCurator">BACK TO PUBLICATIONS</a>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="  hidden">
-
+<div class="hidden">
     <h1 id="identity" data-identity=@PId></h1>
     <h1 id="currentUser" data-currentUser=@Model.Guid></h1>
     <h1 id="kicd" data-kicdNumber=@Publication></h1>
     <span><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br />
     <span><strong>Stage:&nbsp;</strong></span>@Stage<br />
     <span><strong>Publication:&nbsp;</strong></span>@Publication
-
-
 </div>
 <div class="form-group col-md-10">
     <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid" />
@@ -244,28 +143,42 @@
     <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid" />
     <input type="text" name="MimeTypes" id="MimeTypes" class="form-control hidden" value="@MimeType" />
     <input type="text" name="epubUrls" id="epubUrls" class="form-control hidden" value="@Urls" />
+    <input type="text" name="MimeTypeCheck" id="MimeTypeCheck" class="form-control hidden" value="@MimeType" />
 </div>
 <script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
-
 <script type="text/javascript">
-
     $(document).ready(function () {
-
-        $('.summernote').summernote();
-
+        let uICheck = $('#MimeTypeCheck').val();
+        if (uICheck == "application/epub zip") {
+            $('#showEpub').toggleClass('hidden');
+            $('#showFooter').toggleClass('hidden');
+            $('#showError').hide();
+        }
+        if (uICheck == "application/x-zip-compressed") {
+            $('#showHtml').toggleClass('hidden');
+            $('#showFooter').toggleClass('hidden');
+            $('#showError').hide();
+        }
+        if (uICheck != "application/x-zip-compressed" || uICheck != "application/epub zip") {
+            $('#showError').toggleClass('hidden');
+            $('#hideThise').hide();
+        }
     });
-
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.summernote').summernote();
+    });
     var edit = function () {
         $('.click2edit').summernote({ focus: true });
     };
-
     var save = function () {
         var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
         $('.click2edit').destroy();
     };
 </script>
-section Styles {
-@Styles.Render("~/plugins/sweetAlertStyles")
+@section Styles {
+    @Styles.Render("~/plugins/sweetAlertStyles")
 }
 
 

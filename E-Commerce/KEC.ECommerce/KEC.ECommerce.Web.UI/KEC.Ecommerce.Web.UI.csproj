@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< development
+========================================================================
+    <Compile Remove="bin\**" />
+    <Content Remove="bin\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <None Remove="bin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180715122632_AddContentUrlToPublication.cs" />
+    <Compile Remove="Migrations\20180715122632_AddContentUrlToPublication.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> final
     <None Include="Views\Home\About.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
@@ -49,6 +64,10 @@
 
   <ItemGroup>
     <Folder Include="PDFLicences\" />
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< development
+========================================================================
+    <Folder Include="wwwroot\PDFLicences\" />
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> final
   </ItemGroup>
 
   <ItemGroup>

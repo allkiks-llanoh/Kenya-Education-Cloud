@@ -15,7 +15,7 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult Legal()
         {
             ViewData["SubTitle"] = "Curation Management System";
-            ViewData["Message"] = "Verify Legal Requirements";
+            ViewData["Message"] = "Verify Conformity Requirements and Standards";
 
           using (var context = new ApplicationDbContext())
             {
@@ -55,7 +55,7 @@ namespace KEC.Curation.UI.Controllers
         public ActionResult LegalVerify()
         {
             ViewData["SubTitle"] = "Curation Management System";
-            ViewData["Message"] = "Verify Legality of Publication";
+            ViewData["Message"] = "Verify Conformity Requirements and Standards";
 
             using (var context = new ApplicationDbContext())
             {

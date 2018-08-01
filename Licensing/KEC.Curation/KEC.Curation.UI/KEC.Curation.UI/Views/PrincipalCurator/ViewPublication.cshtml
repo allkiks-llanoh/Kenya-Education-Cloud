@@ -7,7 +7,7 @@
 @{
     var PubId = Request.Params["Pub"];
     var Urls = Request.Params["Urls"];
-
+    var Type = Request.Params["MimeType"];
 }
 <link href="~/Content/CustomStyles/DocumentViewer.css" rel="stylesheet" />
 @section Scripts{
@@ -34,133 +34,154 @@
                             </a>
                         </div>
                     </div>
-
                     <div class="ibox-content">
                         <dl id="publication-details"></dl>
                     </div>
                     <div class="ibox-footer">
-
                         Publication Details
                     </div>
                 </div>
             </div>
             @*<div class="ibox-content no-padding">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div style="color:black; font-weight:bold;font-size:15px;">Content Location:</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div style="color:black; font-weight:bold;font-size:15px;">Content Location:</div>
 
+                        </div>
+                        <div class="col-md-6">
+                            <a href="@Urls" target="_blank">Link to publication</a>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <a href="@Urls" target="_blank">Link to publication</a>
-                    </div>
-                </div>
-            </div>*@
+                </div>*@
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Recommendation for Consideration From Curators</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="row">
-                            <div class="table-responsive">
-                                <table style="border:none;" class="table  table-hover dataTables-example" id="comments">
-                                    <thead>
-                                        <tr>
+                        <div class="table-responsive">
+                            <table style="border:none;" class="table  table-hover dataTables-example" id="curatorComments">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Recommendations</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="border:none;"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="ibox-title">
+                        <h5>Recommendation for Consideration From Chief Curator</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <table style="border:none;" class="table  table-hover dataTables-example" id="chiefcomments">
+                                <thead>
+                                    <tr>
+                                        <th>Recommendations</th>
+                                        <th>Consideration</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="border:none;"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row ibox-title">
+                        <h5>Give Your Recomendations Here</h5>
+                        <div class="ibox-content no-padding">
+                            <div class="summernote" style="height:100px">
 
-
-                                            <th>Status</th>
-                                            <th>Recommendations for consideration</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody style="border:none;"></tbody>
-                                </table>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="ibox-title">
-                                <h5>Chief Curator Recomendations</h5>
-                                <div class="ibox-tools">
-                                    <a class="collapse-link">
-                                        <i class="fa fa-chevron-up"></i>
-                                    </a>
-                                    <a class="close-link">
-                                        <i class="fa fa-times"></i>
-                                    </a>
+                    </div>
+
+                    <div>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <select class="form-control" id="action-selected">
+                                <option>Select Action To Recommend</option>
+                                <option value="PublicationApproved">Approve Content</option>
+                                <option value="PublicationRejected">Reject Content</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="button" class="btn btn-primary form-control" style="background-color:#00B55F; color:white;" data-toggle="modal" data-target="#confirm" value="Submit Recommendation">
+                        </div>
+                        <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title">Confirm Submission</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p id="messagem">
+                                            Are you sure you want to submit this recommendation?
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                        <button type="submit" id="recommend" class="btn btn-primary">Yes</button>
+                                        <br><br>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="table-responsive">
-                                <table style="border:none;" class="table  table-hover dataTables-example" id="chiefcomments">
-                                    <thead>
-                                        <tr>
-
-
-                                            <th>Status</th>
-                                            <th>Recommendations</th>
-                                            <th>Consideration</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody style="border:none;"></tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="row ibox-title">
-                            <h5>Give Your Recomendations Here</h5>
-                            <div class="ibox-content no-padding">
-                                <div class="summernote" style="height:100px">
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <br>
-                            <br>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <select class="form-control" id="action-selected">
-                                    <option>Select Action To Recommend</option>
-                                    <option value="PublicationApproved">Approve Content</option>
-                                    <option value="PublicationRejected">Reject Content</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <input type="submit" class="btn btn-success form-control" style="background-color:#00B55F; color:white;" value="Submit Recommendation" id="recommend">
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="form-group col-md-10">
     <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
 </div>
 <div class="form-group col-md-10">
     <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
+    <input type="text" name="MimeTypeCheck" id="MimeTypeCheck" class="form-control hidden" value="@Type" />
 </div>
-
 <div class="  hidden">
-
     <h1 id="identity" data-identity=@PubId></h1>
-
-
-
 </div>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        let publicationId = $('#identity').attr('data-identity');
+        let chiefCuratorGUID = $('#CurrentUserGuid').val();
+        let urldrd = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorcomments?publicationId=${publicationId}`);
+        function tableRows(data) {
+            var tableRows = [];
+            for (var i = 0; i < data.length; i++) {
+                tableRows.push(drawRow(data[i]));
+            }
+            return tableRows;
+        };
+        //Start by getting publication list based on Payment Verification Stage
+        $.ajax({
+            url: urldrd,
+            type: "GET",
+            dataType: "json",
+            success: function (data, status, jqhxr) {
+                //This code snipet prepares to append Json Data
+                $('#curatorComments').append(tableRows(data));
+            }
+        });
+        //This functionpopulates the tbody inner HTML with json data on call
+        function drawRow(rowData) {
+            var row = $("<tr />")
+            row.append($("<td>" + "Recomendation" + "</td>"));
+            row.append($("<td>" + rowData.notes + "</td>"));
+            return row[0];
+        }
+    });
+</script>
+
+

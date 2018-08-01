@@ -8,8 +8,6 @@ function tableRows(data) {
     }
     return tableRows;
 };
-
-
 //Start by getting publication list based on Payment Verification Stage
 $.ajax({
     url: assignmentUrl,
@@ -18,8 +16,6 @@ $.ajax({
     crossDomain: true,
     accepts: 'application/json',
     success: function (data, status, jqhxr) {
-        console.log(data);
-
         //This code snipet prepares to append Json Data
         $('#unassigned-publications').append(tableRows(data));
     }
@@ -32,7 +28,7 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.publication + "</td>"));
     row.append($("<td>" + rowData.sectionToCurate + "</td>"));
     row.append($("<td>" + rowData.assignmentDateUtc + "</td>"));
-    row.append($(`<td> <a href="/Curator/CuratePublication/${rowData.assignmentId}?Urls=${rowData.curationUrl}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Curate</a>`));
+    row.append($(`<td> <a href="/Curator/CuratePublication/${rowData.assignmentId}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Curate</a>`));
 
     return row[0];
 }

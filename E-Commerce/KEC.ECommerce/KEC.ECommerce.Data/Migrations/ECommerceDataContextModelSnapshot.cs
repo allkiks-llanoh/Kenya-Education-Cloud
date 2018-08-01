@@ -145,6 +145,8 @@ namespace KEC.ECommerce.Data.Migrations
 
                     b.Property<string>("TransactionNumber");
 
+                    b.Property<string>("VoucherNumber");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId")
@@ -166,6 +168,8 @@ namespace KEC.ECommerce.Data.Migrations
                     b.Property<int>("CategoryId");
 
                     b.Property<string>("ContentNumber");
+
+                    b.Property<string>("ContentUrl");
 
                     b.Property<DateTime>("CreatedAt");
 

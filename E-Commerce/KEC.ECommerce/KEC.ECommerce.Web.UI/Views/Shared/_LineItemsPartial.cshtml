@@ -18,13 +18,20 @@
                 <td class="orderitem">@lineItem.Quantity</td>
                 <td class="orderitem">@lineItem.TotalCost</td>
             </tr>
-        }
 
+
+        }
+        <tr>
+            <td class="orderitem"></td>
+            <td class="orderitem"></td>
+            <td class="orderitem" ><h5 style="color: #00b95f;" class="place-left-fs text-bold pr-2">Total Amount</h5></td>
+            <td class="orderitem"><h5 style="color: #00b95f;" class="place-left text-bold pr-2">@Model.TotalCost</h5></td>
+        </tr>
 
     </tbody>
 </table>
-<div class="row">
+@*<div class="row">
     <div class="cell-md-full clear">
         <h5 class="fg-blue place-right text-bold pr-2">@Model.TotalCost</h5>
     </div>
-</div>
+</div>*@

@@ -2,15 +2,15 @@
 @{
     ViewData["Title"] = "Login";
 }
-<div class="grid">
+<div class="grid" >
 
     <div class="row">
-        <div class="cell-md-4 h-center">
+        <div class="cell-md-4 h-center" >
             <form role="form" asp-action="Login"
                   asp-controller="Account" asp-antiforgery="true">
-                <div class="ui segment">
+                <div class="ui segment"  style="box-shadow:5px 10px 18px #888888;">
                     <div class="ui horizontal divider">
-                        <p class="text-center text-bold text-upper fg-orange">Welcome back</p>
+                        <p class="text-center text-bold text-upper fg-green">Welcome back</p>
                     </div>
                     @{
                         await Html.RenderPartialAsync("_ValidationErrorPartial");
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </form>
-            <div class="ui message bg-orange fg-white">
+            <div class="ui message bg-blue fg-white">
                 <a asp-controller="Account" asp-action="Register" class="fg-white">New to us? Register</a>
                 <a asp-controller="Account" asp-action="ForgotPassword" class="place-right fg-white">Forgot your password?</a>
             </div>

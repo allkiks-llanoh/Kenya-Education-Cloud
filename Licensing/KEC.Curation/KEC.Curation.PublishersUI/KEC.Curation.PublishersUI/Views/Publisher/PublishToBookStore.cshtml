@@ -339,6 +339,37 @@
         var bar = $('.progress-bar-warning');
         var percent = $('.progress-bar-warning');
         var status = $('#status');
+
+        var thumbnailImage = document.forms["uploadform"]["ThumbnailImage"];
+        var quantity = document.forms["uploadform"]["Quantity"];
+        var authorLastName = document.forms["uploadform"]["AuthorLastName"];
+        if (quantity.value == "") {
+            window.alert("Quantity Is A Requirement");
+            $('#confirm').modal('hide');
+            $('.modal-backdrop').remove();
+            quantity.focus();
+            setTimeout(function () {
+                window.location.reload(1);
+            }, 2000);
+        }
+        if (authorLastName.value == "") {
+            window.alert("Author Last Name Is A Requirement");
+            $('#confirm').modal('hide');
+            $('.modal-backdrop').remove();
+            authorLastName.focus();
+            setTimeout(function () {
+                window.location.reload(1);
+            }, 2000);
+        }
+        if (thumbnailImage.value == "") {
+            window.alert("Thumbnail Image Is Required");
+            $('#confirm').modal('hide');
+            $('.modal-backdrop').remove();
+            thumbnailImage.focus();
+            setTimeout(function () {
+                window.location.reload(1);
+            }, 5000);
+        }
         var form_data = new FormData($('#uploadform')[0]);
         var publicationContentNumber = $('#ContentNumber').val();
         $.ajax({

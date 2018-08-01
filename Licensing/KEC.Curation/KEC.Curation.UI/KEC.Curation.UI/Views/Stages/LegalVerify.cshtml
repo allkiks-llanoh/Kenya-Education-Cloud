@@ -6,13 +6,10 @@
 }
 @section Scripts
 {
-
-
     <script src="@Url.Content("~/js/legalVerify.js")"></script>
-    <script src="@Url.Content("~/js/GetChiefCurators.js")"></script>
+    <script src="@Url.Content("~/js/Scripts/bootstrap.min.js")"></script>
     <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
-
-
+    <script src="~/Scripts/bootstrap.min.js"></script>
     @Scripts.Render("~/plugins/sweetAlert")
 }
 @{
@@ -20,17 +17,14 @@
     var Stage = Request.Params["Stage"];
     var Publication = Request.Params["Publication"];
     var KICDNumber = Request.Params["KICDN"];
-
+    var MimeTypes = Request.Params["MimeType"];
 }
-
-
 <div class="text-center m-t-lg">
     <h1>
         @ViewData["SubTitle"]
     </h1>
     <small>@ViewData["Message"]</small>
 </div>
-
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="row">
         <div class="col-lg-12">
@@ -39,70 +33,100 @@
                     <div class="row m">
                         <div class="panel panel-success">
                             <div class="panel-heading" style="background-color:#2855A8;">Publication Information</div>
-                            <div class="panel-body">
-
-                                <dl>
-                                    <dt>Curation Number</dt>
-                                    <dd>@KICDNumber</dd>
-                                    <dt>Title</dt>
-                                    <dd>@Title</dd>
-                                    <dt>Publication</dt>
-                                    <dd><a href="@Publication" target="_blank">Link to publication</a></dd>
-                                </dl>
-                                <div>
-
+                            @*-------------------------------------html starts here-------------------------------------*@
+                            <div id="html" class="panel-body ">
+                                <div id="showHtml" class="hidden">
+                                    <dl>
+                                        <dt>Curation Number</dt>
+                                        <dd>@KICDNumber</dd>
+                                        <dt>Title</dt>
+                                        <dd>@Title</dd>
+                                        <dt>Publication</dt>
+                                        <dd><a href="@Publication" target="_blank">Link to publication</a></dd>
+                                    </dl>
                                 </div>
                             </div>
-                            @*<div class="row">
-                                <div class="col-md-12">
-                                    <iframe allowfullscreen="" webkitallowfullscreen="" style="height:100vh;width:80vw"
-                                            src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content("~/publications/20180303204123LEUKAEMIA.pdf")'></iframe>
+                            @*--------------------------------------html ends here--------------------------------------*@
+                            @*--------------------------------------epub starts here------------------------------------*@
+                            <div id="epub" class="panel-body">
+                                <div id="showEpub" class="hidden">
+                                    <dl>
+                                        <dt>Curation Number</dt>
+                                        <dd>@KICDNumber</dd>
+                                        <dt>Title</dt>
+                                        <dd>@Title</dd>
+                                        <dt>Publication</dt>
+                                        <dd><a href="/Readium/cloud-reader/index.html?epub=@Publication" target="_blank">Link to publication</a></dd>
+                                    </dl>
+                                    <div>
+                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                                src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Publication)'></iframe>
+                                    </div>
+                                    </div>
                                 </div>
-                            </div>*@
-                            <div class="panel-footer">
-                                <div class="row">
-                                    <div class="ibox-content no-padding">
-                                        <div class="summernote" style="height:100px">
-
+                            @*------------------------------------epub ends here-------------------------------------*@
+                            @*------------------------------------footer starts here---------------------------------*@
+                            <div id="showFooter" class="hidden">
+                                <div class="panel-footer">
+                                    <div class="panel-footer">
+                                        <div class="row">
+                                            <div class="ibox-content no-padding">
+                                                <div class="summernote" style="height:100px">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    @*<div class="form-group" style="text-align:left;">
-                    &nbsp; &nbsp;<label for="actiontaken">Select Action:</label>
-                    <select name="actionTaken" id="actionTaken" class="form-control">
-                        <option value="PublicationMoveToNextStage">Approve</option>
-                        <option value="PublicationRejected">Reject</option>
-                    </select>
-                </div>*@
-                                    <div class="form-group col-md-10">
-                                        <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="button" data-toggle="modal" data-target="#confirmlegal" style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
-                                    </div>
-                                    <div class="modal inmodal" id="confirmlegal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                                        <div class="modal-dialog modal-sm">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                                    <h4 class="modal-title">Confirm Submission</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>
-                                                        Are you sure the publication meets all requirements?
-                                                    </p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                                                    <button type="button" name="LegalApprove" id="LegalApprove" class="btn btn-primary">Yes</button>
+                                        <div class="row">
+                                            @*<div class="form-group" style="text-align:left;">
+                                                    &nbsp; &nbsp;<label for="actiontaken">Select Action:</label>
+                                                    <select name="actionTaken" id="actionTaken" class="form-control">
+                                                        <option value="PublicationMoveToNextStage">Approve</option>
+                                                        <option value="PublicationRejected">Reject</option>
+                                                    </select>
+                                                </div>*@
+                                            <div class="form-group col-md-10">
+                                                <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="button" data-toggle="modal" data-target="#confirmlegal" style="background-color:#00B95F; margin-right:10px;" class="btn btn-w-m btn-primary pull-right">APPROVE</button>
+                                            </div>
+                                        </div>
+                                        <div class="modal inmodal" id="confirmlegal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                        <h4 class="modal-title">Confirm Submission</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>
+                                                            Are you sure the publication meets all requirements?
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                                        <button type="button" name="LegalApprove" id="LegalApprove" class="btn btn-primary">Yes</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            @*-----------------------------------footer ends here---------------------------------------*@
+                            @*-----------------------------------show error starts here---------------------------------*@
+                            <div id="showError" class="panel-body hidden">
+                                <div id="">
+                                    <div class="row">
+                                        <div class="cell">
+                                            <div class="border bd-blue">
+                                                <h1 class="text-upper text-center text-bold" style="color:red">Content is not curatable</h1>
+                                                <h2 class="fg-blue text-center text-upper text-r" style="color:cornflowerblue">File format is incorrect</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*-----------------------------------error ends here---------------------------------------*@
                         </div>
                         <div class="row">
                             <div class="form-group" style="text-align:left;">
@@ -119,12 +143,44 @@
     <span id="kicd" data-kicdNumber=@KICDNumber><strong>Title:&nbsp;</strong></span>@Title                &nbsp;&nbsp;<span class="pull-right"><strong>Read Publication:&nbsp;</strong></span><br>
     <span><strong>Stage:&nbsp;</strong></span>@Stage<br>
     <span><strong>Publication:&nbsp;</strong></span>@Publication
+    <input type="text" name="MimeTypeCheck" id="MimeTypeCheck" class="form-control hidden" value="@MimeTypes" />
 </div>
 <div class="form-group col-md-10">
     <input type="text" name="content" id="content" class="form-control hidden" value="@Publication">
 </div>
 <script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        let uICheck = $('#MimeTypeCheck').val();
+        if (uICheck == "application/epub zip") {
+            $('#showEpub').toggleClass('hidden');
+            $('#showFooter').toggleClass('hidden');
+            $('#showError').hide();
+        }
+        if (uICheck == "application/x-zip-compressed") {
+            $('#showHtml').toggleClass('hidden');
+            $('#showFooter').toggleClass('hidden');
+            $('#showError').hide();
+        }
+        if (uICheck != "application/x-zip-compressed" || uICheck != "application/epub zip") {
+            $('#showError').toggleClass('hidden');
+            $('#hideThise').hide();
+        }
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Disable cut copy paste
+        $('body').bind('cut copy paste', function (e) {
+            e.preventDefault();
+        });
 
+        //Disable mouse right click
+        $("body").on("contextmenu", function (e) {
+            return false;
+        });
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
 

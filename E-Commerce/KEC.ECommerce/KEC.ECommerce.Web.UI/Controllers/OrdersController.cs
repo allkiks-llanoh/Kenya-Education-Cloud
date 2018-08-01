@@ -61,7 +61,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 {
                     var code = User.FindFirst("IdentificationCode")?.Value;
                     var customerName = User.FindFirst("DisplayName")?.Value;
-                    var msgModel = ProcessPayment(order.OrderNumber, mail, code, customerName, order,PaymentMethod.Free);
+                    var msgModel = ProcessPayment(null,order.OrderNumber, mail, code, customerName, order,PaymentMethod.Free);
                     return View("FreeContent", msgModel);
                 }
             }
@@ -148,7 +148,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 IRestResponse response = await ConfirmVoucherPin(voucherCode, voucherPin, mail, order);
                 if (response.IsSuccessful)
                 {
-                    OrderViewModel model = ProcessPayment(voucherPin, mail, code, customerName, order,PaymentMethod.Voucher);
+                    OrderViewModel model = ProcessPayment(voucherCode, voucherPin, mail, code, customerName, order,PaymentMethod.Voucher);
                     return PartialView("_MessagePartial", model);
                 }
                 else
@@ -184,11 +184,11 @@ namespace KEC.ECommerce.Web.UI.Controllers
             return response;
         }
 
-        private OrderViewModel ProcessPayment(string voucherPin, string mail, string code, string customerName, Order order,PaymentMethod paymentMethod)
+        private OrderViewModel ProcessPayment(string voucherCode,string voucherPin, string mail, string code, string customerName, Order order,PaymentMethod paymentMethod)
         {
             var model = new OrderViewModel(_uow, order);
             var orderActions = new OrderActions(_uow, order, mail, code);
-            orderActions.PostVoucherPayment(voucherPin, paymentMethod);
+            orderActions.PostVoucherPayment(voucherCode, voucherPin, paymentMethod);
             OrderActions.GenerateLicences(_uow, code, order.Id);
             var licences = _uow.LicencesRepository.Find(p => p.IdentificationCode.Equals(code) && p.OrderId.Equals(order.Id))
                                                   ?.Select(p => new LicenceViewModel(_uow, p))?.ToList();
@@ -218,13 +218,14 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 Order = order,
                 PDFParams = pdfParams
             };
-            GenerateMailMessage(emailConfiguration, customer, out string messageBody, out EmailMessage message);
+            var message = GenerateMailMessage(emailConfiguration, customer);
             BackgroundJob.ContinueWith(jobId, () => MailerActions.SendLicencesEmail(emailService, emailConfiguration, message));
             return model;
         }
 
-        private static void GenerateMailMessage(EmailConfiguration emailConfiguration, Customer customer, out string messageBody, out EmailMessage message)
+        private static EmailMessage GenerateMailMessage(EmailConfiguration emailConfiguration, Customer customer)
         {
+            var messageBody = default(string);
             using (var SourceReader = System.IO.File.OpenText(customer.PDFParams.PathToMailTemplate))
             {
 
@@ -232,7 +233,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 messageBody = templateStr.Replace("@Name", customer.Name).Replace("@Order", customer.Order.OrderNumber);
             }
 
-            message = new EmailMessage
+            var message = new EmailMessage
             {
                 Content = messageBody
             };
@@ -247,6 +248,8 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 Name = emailConfiguration.SmtpUsername,
                 Address = emailConfiguration.SmtpUsername
             });
+            message.Attachments.Add(customer.PDFParams.PdfOutputFile);
+            return message;
         }
 
     }

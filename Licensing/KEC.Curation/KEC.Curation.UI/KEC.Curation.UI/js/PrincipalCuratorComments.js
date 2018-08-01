@@ -3,12 +3,12 @@
         $('#recommend').click(submitNotesAndAction);
     });
     function submitNotesAndAction(e) {
+        $('#recommend').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         e.preventDefault();
         let publicationId = $('#publication-view').attr('data-publicationId');
         let actionSelected = $("#action-selected").val();
         let notes = $('.note-editable').html();
         let url = apiBaseUrl.concat(`/principalCurator/PrincipalCuratorComments/${publicationId}?publicationId=${publicationId}`);
-
         let userGuid = $('#CurrentUserGuid').val();
         console.log(`${userGuid}`);
         if (notes === null || notes === "") {
@@ -17,7 +17,6 @@
         if (actionSelected === null || actionSelected === "") {
             return ShowAlert("Please select an action taken from the list", "error");
         }
-
         $.ajax({
             headers : {
                 'Accept' : 'application/json',
@@ -30,15 +29,18 @@
             accepts: 'application/json',
             data: JSON.stringify({ PrincipalCuratorGuid: userGuid, Notes: notes, ActionTaken: actionSelected }),
             statusCode: {
+                400: () => { ShowAlert("Comments aready Exist", 'error'); },
                 404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to process publication"); },
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
             }
         }).success(function (data, textStatus, jqXHR) {
             ShowAlert("Recommendations passed to  Curation Manager", "success");
+            $('#recommend').html('Yes');
+            $('#confirm').modal('hide');
+            $('.modal-backdrop').remove();
         }).fail(function () {
             ShowAlert("Something went wrong while processing publication", 'error');
         });
     }
-
 })();

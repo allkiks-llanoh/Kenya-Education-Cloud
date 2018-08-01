@@ -18,8 +18,8 @@
                     <form class="inline-form p-2 border bd-blue place-right-md m-2" asp-controller="Store" asp-action="Publications" asp-route-categoryId="@ViewBag.CategoryId"
                           data-ajax="true" data-ajax-update="#products-list" data-ajax-method="GET" data-ajax-mode="replace"
                           data-ajax-loading="#spinner">
-                        <input data-prepend="<span class='text-center'>Search term:</span>" name="searchTerm" type="text" data-role="search" data-clear-button="false"/>
-                        <a asp-controller="Store"  asp-action="Publications" asp-route-categoryId="@ViewBag.CategoryId" role="button" class="button alert outline rounded m-2">Reset</a>
+                        <input data-prepend="<span class='text-center'>Search term:</span>" name="searchTerm" type="text" data-role="search" data-clear-button="false" />
+                        <a asp-controller="Store" asp-action="Publications" asp-route-categoryId="@ViewBag.CategoryId" role="button" class="button warning outline rounded m-2">Reset</a>
                     </form>
                 </div>
             </div>
@@ -49,9 +49,25 @@ else
             <div class="border bd-blue">
                 <h4 class="text-upper text-center text-bold fg-orange p-2">No products for the selected category or search criteria yet</h4>
                 <h6 class="fg-blue text-center text-upper text-light p-2">Please check later</h6>
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                    <a asp-action="Dashboard" asp-controller="Account" class="button  info h-center m-2 outline rounded">
+                        <span class="mif-backward icon"></span> Back to Dashboard
+                    </a>
+
+                }
+                else
+                {
+                    <a asp-action="Index" asp-controller="Home" class="button  info h-center m-2 outline rounded">
+                        <span class="mif-backward icon"></span> Take me home
+                    </a>
+
+                }
             </div>
         </div>
     </div>
+    
 
 }
 

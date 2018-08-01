@@ -18,6 +18,9 @@ namespace KEC.ECommerce.Web.UI.Models
         public IFormFile ThumbnailImage { get; set; }
         [Required]
         public int Quantity { get; set; }
+        [Required]
+        [MaxLength(2048)]
+        public string ContentUrl { get; set; }
         #endregion
 
 

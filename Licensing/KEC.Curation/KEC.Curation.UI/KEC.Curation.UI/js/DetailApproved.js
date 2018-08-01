@@ -2,14 +2,11 @@
     $(document).ready(function () {
         getPublication();
         getPublicationCurationComments();
-
     });
-
     ///Functions Section
     function getPublication() {
         let publicationId = $('#publication-view').attr('data-publicationId');
         var urls = apiBaseUrl.concat(`/CurationManagers/get/approved/${publicationId}`);
-
         $.ajax({
             url: urls,
             type: 'GET',
@@ -21,10 +18,7 @@
                 403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
                 500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
             },
-
-
         }).done(function (publications, textStatus, jqXHR) {
-
             publications.forEach(function (publication) {
                 $('#publication-details').replaceWith(
                     `<dl>
@@ -58,12 +52,10 @@
                             </div>
                         </div>
                  </dl>`);
-
             });
         });
     }
     function getPublicationCurationComments() {
-
         let publicationId = $('#publication-view').attr('data-publicationId');
         let url = apiBaseUrl.concat(`/CurationManagers/getcomments/fromcuration?publicationId=${publicationId}`);
         //let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
@@ -78,8 +70,6 @@
                 403: () => { ShowAlert("You are not authorized to access curator submissions"); },
                 500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
             },
-
-           
             }).done(function (submissions, textStatus, jqXHR) {
 
                 submissions.forEach(function (submission) {
@@ -87,17 +77,13 @@
                                                   <dt>Chief Curator Recommendations</dt><dd>${submission.chiefCuratorComments}</dd><br/><hr/>
                                                   <dt>Principal Curator Recommendations</dt><dd>${submission.principalCuratorComments}</dd><br/><hr/>
                                                   <dt>Curation Managers Recommendations</dt><dd>${submission.cutationManagersCuratorComments}</dd><br/><hr/>`);
-
                 });
-
             });
     }
-
     function showChiefCuratorSubmissionSection(publication, parentElementId) {
         if (publication !== null) {
             let chiefCuratorSection = $('#chief-curator-section').html();
             $(parentElementId).html(chiefCuratorSection);
-
         }
     }
     function submitChiefNotesAndAction(e) {
@@ -105,13 +91,10 @@
         let publicationId = $('#publication-view').attr('data-publicationId');
         let todo = $("#action-selected").val();
         let notes = $('.note-editable').html();
-
         let url = apiBaseUrl.concat(`/CurationManagers`);
-
         if (notes === null || notes === "") {
             return ShowAlert("Curation notes cannot be blank", "error");
         }
-
         $.ajax({
             headers : {
                 'Accept' : 'application/json',
@@ -134,7 +117,5 @@
             ShowAlert("Something went wrong while processing publication", 'error');
         });
     }
-    //Functions Section
-
-
+    // EndFunctions Section
 })();

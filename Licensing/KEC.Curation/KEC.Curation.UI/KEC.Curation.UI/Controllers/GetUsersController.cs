@@ -58,6 +58,15 @@ namespace Authentication_Test.Controllers
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
             return Json(new SelectList(user, "FullName", "Id"));
+            //IEnumerable<UserView> model = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role)))
+            //   .Select(r => new UserView
+            //   {
+            //       FullName = r.FullName,
+            //       SubjectId = r.SubjectId,
+            //       Email = r.Email
+            //   });
+
+            //return Json(model);
         }
         public ActionResult GetPrincipalCuratorsList(string role)
         {
@@ -106,6 +115,12 @@ namespace Authentication_Test.Controllers
             var _users = context.Roles.ToList();
 
             return Json(new SelectList(_users, "Name", "Id"));
+        }
+        public ActionResult UserById(string id)
+        {
+            var _user = context.Users.Where(p => p.Id.Equals(id)).FirstOrDefault();
+
+            return Json(_user, JsonRequestBehavior.AllowGet) ;
         }
     }
 }
