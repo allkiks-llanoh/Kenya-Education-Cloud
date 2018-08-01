@@ -16,6 +16,7 @@ $.ajax({
     success: function (data, status, jqhxr) {
         //This code snipet prepares to append Json Data
         $('#unassigned-publications').append(tableRows(data));
+
     }
 });
 //This functionpopulates the tbody inner HTML with json data on call
@@ -24,6 +25,6 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.publication + "</td>"));
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.status + "</td>"));
-    row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.publicationId}?Pub=${rowData.publicationId}&Urls=${rowData.publicationUrl}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Recommendations</a>`));
+    row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.publicationId}?Pub=${rowData.publicationId}&Urls=${rowData.publicationUrl}&Assignee=${rowData.assignee}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Recommendations</a>`));
     return row[0];
 };

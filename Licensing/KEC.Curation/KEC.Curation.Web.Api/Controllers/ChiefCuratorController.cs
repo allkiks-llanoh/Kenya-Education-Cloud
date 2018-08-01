@@ -373,10 +373,9 @@ namespace KEC.Curation.Web.Api.Controllers
         }
 
         [HttpGet("curator/listings/{id}")]
-        public IActionResult GetAllCuratorAssignments(int id)
-        {
-            var publication = _uow.PublicationRepository.Get(id);
-            var assigment = _uow.CuratorAssignmentRepository.Find(p => !p.Submitted && p.PublicationId.Equals(publication.Id)).FirstOrDefault();
+        public IActionResult GetAllCuratorAssignments([FromQuery]int id)
+        { 
+            var assigment = _uow.CuratorAssignmentRepository.Find(p => p.Submitted && p.PublicationId.Equals(id)).FirstOrDefault();
             if (assigment == null)
             {
                 return NotFound("Curation record could not be retrieved or has been submitted");

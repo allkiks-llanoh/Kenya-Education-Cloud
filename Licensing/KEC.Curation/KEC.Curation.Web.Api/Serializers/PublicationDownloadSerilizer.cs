@@ -165,7 +165,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 }
                 else
                 {
-                    var stageName = Enum.GetName((typeof(PublicationStage)), currentStage);
+                    var stageName = maxStage.GetDescription();
                     return stageName;
                 }
             }

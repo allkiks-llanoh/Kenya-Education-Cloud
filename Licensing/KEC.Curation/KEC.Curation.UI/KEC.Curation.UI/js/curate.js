@@ -34,6 +34,7 @@
                    <dd>${assignment.assignmentDateUtc}</dd>
                    <dt>Url</dt>
                    <dd><a href="${assignment.publicationUrl}" target="blank">Link to publication</a></dd></dl>`);
+            
             $('.note-editable').html($.parseHTML(assignment.notes))
         })
     }

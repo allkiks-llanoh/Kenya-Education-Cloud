@@ -13,6 +13,7 @@ function tableRows(data) {
 $.ajax({
     url: legalGETUrl,
     type: "GET",
+    crossDomain: true,
     dataType: 'json',
     success: function (data, status, jqhxr) {
         //This code snipet prepares to append Json Data
