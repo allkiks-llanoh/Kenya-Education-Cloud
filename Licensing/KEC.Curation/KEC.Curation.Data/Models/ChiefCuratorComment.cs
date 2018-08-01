@@ -12,6 +12,7 @@ namespace KEC.Curation.Data.Models
         public string ChiefCuratorGuid { get; set; }
         public bool Submitted  { get; set; }
         public string Recomendation { get; set; }
-     
+        public string FullName { get; set; }
+
     }
 }

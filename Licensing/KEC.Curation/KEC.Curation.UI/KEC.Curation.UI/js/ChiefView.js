@@ -30,6 +30,6 @@ $.ajax({
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.description + "</td>"));
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
-        row.append($(`<td> <a href="/ChiefCurator/AssignPublication/${rowData.id}?Urls=${rowData.curationUrl}&MimeType=${rowData.type}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Assign</a>`));
+        row.append($(`<td> <a href="/ChiefCurator/AssignPublication/${rowData.id}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Assign</a>`));
         return row[0];
     };

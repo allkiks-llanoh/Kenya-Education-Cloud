@@ -10,7 +10,6 @@
     var Stage = Request.Params["Stage"];
     var Publication = Request.Params["Publication"];
     var Urls = Request.Params["Urls"];
-    var KICDNumber = Request.Params["KICDN"];
     var MimeType = Request.Params["Mime"];
 }
 @section Scripts
@@ -38,35 +37,49 @@
                             @*-------------------------------------html starts here-------------------------------------*@
                             <div id="html" class="panel-body ">
                                 <div id="showHtml" class="hidden">
-                                    <dl>
-                                        <dt>Curation Number</dt>
-                                        <dd>@KICDNumber</dd>
-                                        <dt>Title</dt>
-                                        <dd>@Title</dd>
-                                        @*<dt>Publication</dt>
-                                        <dd><a href="@Publication" target="_blank">Link to publication</a></dd>*@
-                                    </dl>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div>Curation Number</div>
+                                            <div>@Publication</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div>Title</div>
+                                            <div>@Title</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div>Stage</div>
+                                            <div>Principal Curator</div>
+                                        </div>
+                                    </div>
+                                    <br>
                                     <div>
-                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:820px;width:100%;"
-                                                src='@Publication)'></iframe>
+                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                                src='@Urls)'></iframe>
                                     </div>
                                 </div>
                             </div>
                             @*--------------------------------------html ends here--------------------------------------*@
                             @*--------------------------------------epub starts here------------------------------------*@
                             <div id="epub" class="panel-body">
-                                <div id="showEpub" class="hidden">
-                                    <dl>
-                                        <dt>Curation Number</dt>
-                                        <dd>@KICDNumber</dd>
-                                        <dt>Title</dt>
-                                        <dd>@Title</dd>
-                                        <dt>Publication</dt>
-                                        <dd><a href="@Publication" target="_blank">Link to publication</a></dd>
-                                    </dl>
+                                <div id="showEpub" class="center hidden">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div>Curation Number</div>
+                                                <div>@Publication</div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div>Title</div>
+                                                <div>@Title</div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div>Stage</div>
+                                                <div>Principal Curator</div>
+                                            </div>
+                                        </div>
+                                    <br>
                                     <div>
-                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:820px;width:100%;"
-                                                src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Publication)'></iframe>
+                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                                src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Urls)'></iframe>
                                     </div>
                                 </div>
                             </div>

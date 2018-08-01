@@ -2,7 +2,6 @@
     $(document).ready(function () {
         getPublication();
         //getPublicationCurationComments();
-         $('#recommend').click(submitChiefNotesAndAction);
     });
     $(document).ready(function () {
         $(".btn-select").each(function (e) {
@@ -31,22 +30,25 @@
                 500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
             },          
         }).done(function (publication, textStatus, jqXHR) {
+            var date = new Date(publication.completionDate);
             showChiefCuratorSubmissionSection(publication, "#publication-view");
+      
             $('#publication-details').replaceWith(
                 `<dl id="publication-details" data-stage="${publication.stage}">
                   <div class="row">
                        <div class="col-md-3">
-                           <dt>Curation</dt>
+                           <dt>Curation Number</dt>
                            <dd id="kicd-number">${publication.kicdNumber}</dd>  
                        </div>
                        <div class="col-md-3">
                             <dt>Title</dt>
                             <dd>${publication.title}</dd> 
                        </div>
-                         <div class="col-md-3">
-                            <dt>Content Location</dt>
-                            <dd><a href="${publication.curationUrl}">Link to publication</a></dd>
+                      <div class="col-md-3">
+                            <dt>Subject</dt>
+                            <dd>${publication.subject}</dd>
                        </div>
+                       
                   </div>
                   <br><br>
                   <div class="row">
@@ -56,7 +58,7 @@
                        </div>
                         <div class="col-md-3">
                               <dt>Completion date</dt>
-                                <dd>${publication.completionDate}</dd>
+                                <dd>${date.toLocaleTimeString()}</dd>
                        </div>
                         <div class="col-md-3">
                              <dt>Description</dt>
@@ -64,7 +66,7 @@
                        </div>
                   </div>
                  </dl>`);
-        });
+            })
     }
     function getPublicationCurationComments() {
         let chiefCuratorGUID = $('#CurrentUserGuid').val();
@@ -121,6 +123,8 @@
         let publicationId = $('#publication-view').attr('data-publicationId');
         let actionSelected = $("#action-selected").val();
         let notes = $('.note-editable').html();
+        let fullName = $('#FullName').val();
+        console.log(fullName);
         let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
         let userGuid = $('#CurrentUserGuid').val();
         if (notes === null || notes === "") {
@@ -139,7 +143,7 @@
             contentType: 'application/json',
             crossDomain: true,
             accepts: 'application/json',
-            data: JSON.stringify({ ChiefCuratorGuid: userGuid, Notes: notes, ActionTaken: actionSelected, publicationId: publicationId, Status: true }),
+            data: JSON.stringify({ ChiefCuratorGuid: userGuid, Notes: notes, ActionTaken: actionSelected, publicationId: publicationId, Status: true, FullName:fullName }),
             statusCode: {
                 404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
                 403: () => { ShowAlert("You are not authorized to process publication"); },
@@ -152,6 +156,7 @@
             $('.modal-backdrop').remove();
         }).fail(function () {
             ShowAlert("Something went wrong while processing publication", "error");
+            console.log(data);
         });
     }
     //Functions Section

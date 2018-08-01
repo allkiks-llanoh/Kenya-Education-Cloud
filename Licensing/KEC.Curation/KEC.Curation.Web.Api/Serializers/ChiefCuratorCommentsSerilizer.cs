@@ -21,5 +21,6 @@ namespace KEC.Curation.Web.Api.Serializers
         public string Status { get; set; }
         [Required(ErrorMessage = "Action Taken is a requirement")]
         public string ActionTaken { get; set; }
+        public string FullName { get; set; }
     }
 }

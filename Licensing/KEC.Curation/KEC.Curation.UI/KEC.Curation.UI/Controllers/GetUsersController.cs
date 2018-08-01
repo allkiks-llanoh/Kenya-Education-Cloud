@@ -43,6 +43,11 @@ namespace Authentication_Test.Controllers
 
             return Json(new SelectList(user, "FullName", "Id"), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetCuratorByGuid(string guid)
+        {
+            var user = context.Users.Where(p =>p.Id.Equals(guid)).ToList();
+            return Json(new SelectList(user, "FullName", "Id"), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetCuratorsList(string role)
         {
             role = "ff0a2466-90b3-468f-8ed5-60a170414131";

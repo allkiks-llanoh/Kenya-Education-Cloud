@@ -1,9 +1,11 @@
 ﻿
 (function () {
     $(document).ready(function () {
+        
         $('#fully-assign').click(updatePublication);
     });
     function updatePublication(e) {
+        $('#fully-assign').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
         e.preventDefault();
         let Idd = $('#publication-view').attr('data-publicationId');
         let CuserGuids = $('#CurrentUserGuid').val();
@@ -25,8 +27,14 @@
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
             }
         }).success(function (data, textStatus, jqXHR) {
+            $('#fully-assign').html('Yes');
+            $('#fully').modal('hide');
+            $('.modal-backdrop').remove();
             ShowAlert("Publication Fully Assigned", "success");
-        }).fail(function () {
+            }).fail(function () {
+                $('#fully-assign').html('Yes');
+                $('#fully').modal('hide');
+                $('.modal-backdrop').remove();
             ShowAlert("Publication Has no Chief Curator Assignment", 'error');
         });
     }

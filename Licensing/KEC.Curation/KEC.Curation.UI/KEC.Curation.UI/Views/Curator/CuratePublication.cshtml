@@ -6,14 +6,82 @@
 <link href="~/Content/CustomStyles/DocumentViewer.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
 <script src="~/js/curate.js"></script>
+<script type="text/javascript">
+    (function () {
+        $(document).ready(function () {
+            getPublicationInformation();
+        });
 
+        ///Functions Section
+        function getPublicationInformation() {
+            let Idd = $('#assignment-view').attr('data-assignmentId');
+            console.log(Idd);
+            let userGuid2 = $('#CurrentUserGuid').val();
+            let assignmentUrl2 = apiBaseUrl.concat(`/chiefcurator/curator/getlistings/${Idd}?id=${Idd}`);
+            $.ajax({
+                url: assignmentUrl2,
+                type: 'GET',
+                contentType: 'application/json',
+                accepts: 'application/json',
+                crossDomain: true,
+                data: JSON.stringify({ id: Idd }),
+                statusCode: {
+                    404: () => { ShowAlert("Publication record could not be retrieved", 'error'); },
+                    403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
+                    500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
+                },
+
+            }).done(function (publications, textStatus, jqXHR) {
+
+                document.getElementById("publicationUrlGot").value = `${publications.publicationUrl}`;
+                mimeCheck()
+            });
+        }
+        function mimeCheck() {
+
+            var fileName, fileExtension;
+            fileName = $('#publicationUrlGot').val();
+            fileExtension = fileName.split('.').pop();
+            console.log(fileExtension);
+            let mimeTypeCheck = fileExtension;
+            console.log(mimeTypeCheck);
+            if (mimeTypeCheck == "epub") {
+                $('#showEpub').toggleClass('hidden');
+                getEpubValue()
+            }
+            if (mimeTypeCheck == "html") {
+                $('#showHtml').toggleClass('hidden');
+                getHtmlValue()
+            }
+        }
+        function getEpubValue() {
+            var mimi = document.getElementById("publicationUrlGot").value;
+            console.log(mimi);
+            var ifrm = document.createElement("iframe");
+            ifrm.setAttribute("src", "/Readium/cloud-reader/index.html?epub=" + mimi);
+            ifrm.style.width = "1000px";
+            ifrm.style.height = "600px";
+            document.getElementById("showEpub").appendChild(ifrm);
+        }
+        function getHtmlValue() {
+            $(document).ready(function () {
+                var Urlss = document.getElementById("publicationUrlGot").value;
+                var ifrm = document.createElement("iframe");
+                ifrm.setAttribute("src", `${Urlss}`);
+                ifrm.style.width = "1000px";
+                ifrm.style.height = "600px";
+                document.getElementById("showHtml").appendChild(ifrm);
+            });
+        }
+    })();
+</script>
 <div class="wrapper wrapper-content animated fadeInRight" id="assignment-view" data-assignmentId="@ViewBag.AssignmentId">
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">
 
-                <div class="form-group col-md-10">
-                    <input type="text" name="publicationUrlGot" id="publicationUrlGot" class="form-control">
-                </div>
+            <div class="form-group col-md-10 hidden">
+                <input type="text" name="publicationUrlGot" id="publicationUrlGot" class="form-control">
+            </div>
 
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -42,37 +110,14 @@
                         <br>
                     </div>
                     <div>
-
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                let Urlss = $('#publicationUrlGot').val();
-                                var ifrm = document.createElement("iframe");
-                                ifrm.setAttribute("src", `${Urlss}`);
-                                ifrm.style.width = "640px";
-                                ifrm.style.height = "480px";
-                                document.getElementById("showHtml").appendChild(ifrm);
-                            });
-                        </script>
-
                     </div>
                 </div>
-                <div id="showEpub" class="">
+                <div id="showEpub" class="hidden">
                     <div class="col-md-6">
                         <br>
                         <div style="color:black; font-weight:bold;font-size:15px;">Online Curation, View Content On This Frame</div>
                         <br>
                     </div>
-                   
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            let Urlss = $('#publicationUrlGot').val();
-                            var ifrm = document.createElement("iframe");
-                            ifrm.setAttribute("src", "/Readium/cloud-reader/index.html?epub=" + Urlss);
-                            ifrm.style.width = "640px";
-                            ifrm.style.height = "480px";
-                            document.getElementById("showEpub").appendChild(ifrm);
-                        });
-                    </script>
                 </div>
             </div>
             <br>
@@ -132,54 +177,6 @@
 <div class="form-group col-md-10">
     <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
 </div>
-<script src="~/Scripts/jquery-3.1.1.min.js"></script>
-
-<script type="text/javascript">
-    (function () {
-        $(document).ready(function () {
-            getPublicationInformation();
-        });
-
-        ///Functions Section
-        function getPublicationInformation() {
-            let Idd = $('#assignment-view').attr('data-assignmentId');
-            console.log(Idd);
-            let userGuid2 = $('#CurrentUserGuid').val();
-            let assignmentUrl2 = apiBaseUrl.concat(`/chiefcurator/curator/listings/${Idd}?id=${Idd}`);
-            $.ajax({
-                url: assignmentUrl2,
-                type: 'GET',
-                contentType: 'application/json',
-                accepts: 'application/json',
-                crossDomain: true,
-                data: JSON.stringify({id : Idd}),
-                statusCode: {
-                    404: () => { ShowAlert("Publication record could not be retrieved", 'error'); },
-                    403: () => { ShowAlert("You are not authorized to access the requested publication", "warning"); },
-                    500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
-                },
-
-
-            }).done(function (publications, textStatus, jqXHR) {
-
-                document.getElementById("publicationUrlGot").value = `${publications.publicationUrl}`;
-            });
-        }
-
-    })();
-</script>
-<script type="text/javascript">
-    var fileName, fileExtension;
-    fileName = $('#publicationUrlGot').val();
-    fileExtension = fileName.split('.').pop();
-    console.log(fileExtension);
-    let mimeTypeCheck = fileExtension;
-    console.log(mimeTypeCheck);
-    if (mimeTypeCheck == "epub") {
-        $('#showEpub').toggleClass('hidden');
-    }
-    if (mimeTypeCheck == "html") {
-        $('#showHtml').toggleClass('hidden');
-    }
-    console.log($('#assignment-view').attr('data-url'));
-</script>
+<div class="form-group col-md-10">
+    <input type="text" name="FullName" id="FullName" class="form-control hidden" value="@Model.FullName">
+</div>

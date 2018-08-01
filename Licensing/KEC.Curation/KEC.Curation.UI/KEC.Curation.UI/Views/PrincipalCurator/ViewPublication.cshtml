@@ -65,7 +65,7 @@
                             <table style="border:none;" class="table  table-hover dataTables-example" id="curatorComments">
                                 <thead>
                                     <tr>
-                                        <th>Status</th>
+                                        <th>Subject Curator Name</th>
                                         <th>Recommendations</th>
                                     </tr>
                                 </thead>
@@ -81,6 +81,7 @@
                             <table style="border:none;" class="table  table-hover dataTables-example" id="chiefcomments">
                                 <thead>
                                     <tr>
+                                        <th>Chief Curator Name</th>
                                         <th>Recommendations</th>
                                         <th>Consideration</th>
                                     </tr>
@@ -145,6 +146,9 @@
     <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
 </div>
 <div class="form-group col-md-10">
+    <input type="text" name="FullName" id="FullName" class="form-control hidden" value="@Model.FullName">
+</div>
+<div class="form-group col-md-10">
     <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
     <input type="text" name="MimeTypeCheck" id="MimeTypeCheck" class="form-control hidden" value="@Type" />
 </div>
@@ -177,7 +181,7 @@
         //This functionpopulates the tbody inner HTML with json data on call
         function drawRow(rowData) {
             var row = $("<tr />")
-            row.append($("<td>" + "Recomendation" + "</td>"));
+            row.append($("<td>" + rowData.fullName + "</td>"));
             row.append($("<td>" + rowData.notes + "</td>"));
             return row[0];
         }

@@ -43,12 +43,35 @@ namespace KEC.Curation.Web.Api.Serializers
                 return pub.Title;
             }
         }
+        public string PublicationUrl
+        {
+            get
+            {
+                var pub = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                var url = pub.CutationUrl;
+                if (url == null)
+                {
+                    return string.Empty;
+                }
+                else
+                {
+                    return pub.CutationUrl;
+                }
+            }
+        }
         public DateTime AssignmentDateUtc
         {
             get
             {
                 var pub = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
                 return pub.CreatedTimeUtc;
+            }
+        }
+        public string ChiefCuratorGuid
+        {
+            get
+            {
+                return _assignment.ChiefCuratorGuid;
             }
         }
 

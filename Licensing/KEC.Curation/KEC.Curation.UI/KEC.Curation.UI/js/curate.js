@@ -24,17 +24,25 @@
             },
             type: 'GET'
         }).done(function (assignment, textStatus, jqXHR) {
+            var date = new Date(assignment.assignmentDateUtc);
             $('#assignment-details').replaceWith(
                 `<dl id="assignment-details">
-                  <dt>Publication</dt>
-                  <dd>${assignment.publication}</dd>
-                  <dt>Section</dt>
-                   <dd>${assignment.sectionToCurate}</dd>
-                   <dt>Assignment date</dt>
-                   <dd>${assignment.assignmentDateUtc}</dd>
-                   <dt>Url</dt>
-                   <dd><a href="${assignment.publicationUrl}" target="blank">Link to publication</a></dd></dl>`);
-            
+                  <div class="row">
+                        <div class="col-md-4">
+                            <dt>Publication</dt>
+                            <dd>${assignment.publication}</dd>
+                        </div>
+                        <div class="col-md-4">
+                            <dt>Section</dt>
+                            <dd>${assignment.sectionToCurate}</dd>
+                        </div>
+                        <div class="col-md-4">
+
+                             <dt>Assignment date</dt>
+                             <dd>${date.toLocaleTimeString()}</dd>
+                        </div>
+                   </div>`);
+
             $('.note-editable').html($.parseHTML(assignment.notes))
         })
     }
@@ -43,6 +51,8 @@
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
         let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}`);
         let notes = $('.note-editable').html();
+        let fullName = $('#FullName').val();
+        console.log(fullName);
         let subs = "true"
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
@@ -64,8 +74,8 @@
                     ShowAlert("You are not authorized to access the specified resource", "warning");
                 }
             },
-            data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: subs }),
-
+            data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: subs, FullName: fullName }),
+           
         }).done(function (data, textStatus, jqXHR) {
             ShowAlert("Curation notes saved and submitted successfully", "success");
             $('#confirmsave').modal('hide');
@@ -80,6 +90,8 @@
         let assignmentId = $('#assignment-view').attr('data-assignmentId');
         let url = apiBaseUrl.concat(`/chiefcurator/curator/curate/${assignmentId}`);
         let notes = $('.note-editable').html();
+        let fullName = $('#FullName').val();
+        console.log(fullName);
         let sub = "false"
         if (notes === null || notes === "") {
             ShowAlert("Cannot save blank comment", "error");
@@ -101,14 +113,12 @@
                     ShowAlert("You are not authorized to access the specified resource", "warning");
                 }
             },
-            data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: sub }),
-
+            data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: sub, FullName:fullName}),
+           
         }).done(function (data, textStatus, jqXHR) {
             ShowAlert("Curation notes saved successfully", "success");
-
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert("Something went wrong while saving your notes", "error");
         });
     }
-
 })();

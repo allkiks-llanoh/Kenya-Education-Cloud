@@ -267,6 +267,14 @@ namespace KEC.Curation.Web.Api.Controllers
                 assignmentSubmissions.Select(p => new CurationDownloadSerializer(p, _uow)).ToList() : new List<CurationDownloadSerializer>();
             return Ok(assignmentList);
         }
+        [HttpGet("publication/{publicationId:int}/curatorsubmissionsToGetAssignee")]
+        public IActionResult curatorsubmissionsToGetAssignee([FromQuery]int publicationId)
+        {
+            var assignmentSubmissions = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publicationId));
+            var assignmentList = assignmentSubmissions.Any() ?
+                assignmentSubmissions.Select(p => new CurationRepoDownloadSerilizer(p, _uow)).ToList() : new List<CurationRepoDownloadSerilizer>();
+            return Ok(assignmentList);
+        }
         #endregion
         #region Curator Comments For Principal Curators
         [HttpGet("publication/{publicationId:int}/comments")]
@@ -318,14 +326,12 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             try
             {
-
                 assigment.FullyAssigned = true;
                 _uow.Complete();
                 return Ok(value: new { message = "Curation Fully Assigned" });
             }
             catch (Exception)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
@@ -382,6 +388,36 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             return Ok(value: new CurationRepoDownloadSerilizer(assigment, _uow));
         }
+        [HttpGet("curator/getlistings/{id}")]
+        public IActionResult ListAllCuratorAssignments([FromQuery]int id)
+        {
+            var assigment = _uow.CuratorAssignmentRepository.Find(p => p.Id.Equals(id)).FirstOrDefault();
+            if (assigment == null)
+            {
+                return NotFound("Curation record could not be retrieved or has been submitted");
+            }
+            return Ok(value: new CurationRepoDownloadSerilizer(assigment, _uow));
+        }
+        [HttpGet("getlistingsChifCurator/{id}")]
+        public IActionResult getlistingsChifCurator([FromQuery]int id)
+        {
+            var assigment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationId.Equals(id)).FirstOrDefault();
+            if (assigment == null)
+            {
+                return NotFound("Curation record could not be retrieved or has been submitted");
+            }
+            return Ok(value: new CrationPublicationsSerilizer(assigment, _uow));
+        }
+        [HttpGet("getlistingsChifCuratorToGetGuid/{id}")]
+        public IActionResult getlistingsChifCuratorToGetGuid([FromQuery]int id)
+        {
+            var assigment = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(id)).FirstOrDefault();
+            if (assigment == null)
+            {
+                return NotFound("Curation record could not be retrieved or has been submitted");
+            }
+            return Ok(value: new CurationRepoDownloadSerilizer(assigment, _uow));
+        }
         [HttpPatch("curator/curate/{AssignmentId:int}")]
         public IActionResult SubmitCuration(int AssignmentId, [FromBody]CurationUploadSerializer model)
         {
@@ -401,7 +437,7 @@ namespace KEC.Curation.Web.Api.Controllers
             try
             {
                 assigment.Notes = model.Notes;
-
+                assigment.FullName = model.FullName;
                 if (model.Submitted == "true")
                 {
                     assigment.Submitted = true;
@@ -460,7 +496,8 @@ namespace KEC.Curation.Web.Api.Controllers
                     PublicationId = publication.Id,
                     Notes = model.Notes,
                     ChiefCuratorGuid = model.ChiefCuratorGuid,
-                    Recomendation = model.ActionTaken
+                    Recomendation = model.ActionTaken,
+                    FullName = model.FullName
 
                 };
                 _uow.ChiefCuratorCommentRepository.Add(comment);

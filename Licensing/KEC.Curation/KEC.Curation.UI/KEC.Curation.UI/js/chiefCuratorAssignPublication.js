@@ -25,6 +25,7 @@
             type: 'GET',
            
         }).done(function (publication, textStatus, jqXHR) {
+            var date = new Date(publication.completionDate);
             $('#publication-details').replaceWith(
                 `<dl id="publication-details" data-stage="${publication.stage}">
                   <div class="row">
@@ -36,25 +37,26 @@
                             <dt>Title</dt>
                             <dd>${publication.title}</dd> 
                        </div>
-                         <div class="col-md-3">
-                            <dt>Content Location</dt>
-                            <dd><a href="${publication.curationUrl}">Link to publication</a></dd>
+                           <div class="col-md-3">
+                            <dt>Subject</dt>
+                            <dd>${publication.subject}</dd>
                        </div>
                   </div>
                   <br><br>
                   <div class="row">
                        <div class="col-md-3">
-                            <dt>Subject</dt>
-                            <dd>${publication.subject}</dd>
+                            <dt>Level</dt>
+                            <dd>${publication.level}</dd>
                        </div>
-                        <div class="col-md-3">
-                              <dt>Completion date</dt>
-                                <dd>${publication.completionDate}</dd>
-                       </div>
-                        <div class="col-md-3">
+                       <div class="col-md-3">
                              <dt>Description</dt>
                             <dd>${publication.description}</dd>
                        </div>
+                        <div class="col-md-3">
+                              <dt>Completion date</dt>
+                                <dd>${date.toLocaleDateString()}</dd>
+                       </div>
+                       
                   </div>
                  </dl>`);
             loadCurators();

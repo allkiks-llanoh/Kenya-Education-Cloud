@@ -90,7 +90,7 @@ namespace KEC.Curation.Web.Api.Serializers
             {
                 var section = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(_assignment.PublicationId)
                 && p.PublicationSectionId.Equals(_assignment.Id)).FirstOrDefault();
-               
+
                 if (section == null)
                 {
                     return "Whole Document";
@@ -99,7 +99,7 @@ namespace KEC.Curation.Web.Api.Serializers
                 {
                     return section.PublicationSection.SectionDescription;
                 }
-                
+
             }
         }
         public DateTime AssignmentDateUtc
@@ -108,6 +108,37 @@ namespace KEC.Curation.Web.Api.Serializers
             {
                 return _assignment.CreatedUtc;
             }
+        }
+        public string CuratorGuid
+        {
+            get
+            {
+                return _assignment.Assignee;
+            }
+        }
+        public string ChiefCuratorGuid
+        {
+            get
+            {
+                return _assignment.AssignedBy;
+            }
+        }
+        public string FullName
+        {
+            get
+            {
+                var entry = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(_assignment.PublicationId)).FirstOrDefault();
+
+                if (entry == null)
+                {
+                    return "";
+                }
+                else
+                {
+                    return entry.FullName;
+                }
+            }
+
         }
     }
 }

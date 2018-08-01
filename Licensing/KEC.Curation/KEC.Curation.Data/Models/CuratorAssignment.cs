@@ -16,6 +16,7 @@ namespace KEC.Curation.Data.Models
         public bool Submitted { get; set; }
         public bool Status { get; set; }
         public int PublicationId { get; set; }
+        public string FullName { get; set; }
         public virtual Publication Publication { get; set; }
         public virtual PublicationSection PublicationSection { get; set; }
     }

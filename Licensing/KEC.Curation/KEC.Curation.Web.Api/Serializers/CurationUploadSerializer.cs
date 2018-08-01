@@ -10,5 +10,6 @@ namespace KEC.Curation.Web.Api.Serializers
         public string Submitted { get; set; }
         [Required(ErrorMessage = "User cannot be blank")]
         public string UserGuid { get; set; }
+        public string FullName { get; set; }
     }
 }

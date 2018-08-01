@@ -12,9 +12,10 @@ using System;
 namespace KEC.Curation.Data.Migrations
 {
     [DbContext(typeof(CurationDataContext))]
-    partial class CurationDataContextModelSnapshot : ModelSnapshot
+    [Migration("20180801154211_AddedFullNameToCuratorAssignment")]
+    partial class AddedFullNameToCuratorAssignment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,8 +50,6 @@ namespace KEC.Curation.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ChiefCuratorGuid");
-
-                    b.Property<string>("FullName");
 
                     b.Property<string>("Notes");
 
