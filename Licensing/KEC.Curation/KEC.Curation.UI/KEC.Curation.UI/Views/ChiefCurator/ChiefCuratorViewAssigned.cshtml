@@ -1,8 +1,6 @@
 ﻿@using KEC.Curation.UI.Models;
 @model ChiefCurators
 @{
-    /**/
-
     ViewBag.Title = "Chief Curator";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,10 +8,8 @@
 @section Scripts
 {
     <script src="~/js/c.js"></script>
-
     <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
 }
-
 <div class="text-center m-t-lg">
     <h1>
         @ViewData["SubTitle"]
@@ -22,13 +18,11 @@
 </div>
 <div class="tabs-container">
     <ul class="nav nav-tabs">
-
         <li class="active"><a data-toggle="tab" href="#tab-assigned" style="background-color:#00B85F; color:white;" aria-expanded="true">Curation Comments</a></li>
         <li class=""><a href="/ChiefCurator/ChiefCuratorView" style="background-color:red; color:white;" aria-expanded="false">Go To Assign Publications</a></li>
         @*<li class=""><a href="/PrincipalCurator/PrincipalCuratorReverse" style="background-color:#000000; color:white;"> Reverse Assignment</a></li>*@
     </ul>
     <div class="tab-content" data-publicationId="@ViewBag.PublicationId">
-
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -54,7 +48,6 @@
         </div>
     </div>
 </div>
-
 <div class="form-group col-md-10">
     <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
 </div>

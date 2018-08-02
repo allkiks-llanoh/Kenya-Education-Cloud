@@ -141,8 +141,14 @@
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
             }
         }).done(function (data, textStatus, jqXHR) {
-            ShowAlert("Publication processed successfully");
+            $('#recommend').html('Yes');
+            $('#confirm').modal('hide');
+            $('.modal-backdrop').remove();
+            ShowAlert("Successfull, Publication processed successfully", 'success');
         }).fail(function () {
+            $('#recommend').html('Yes');
+            $('#confirm').modal('hide');
+            $('.modal-backdrop').remove();
             ShowAlert("Something went wrong while processing publication", 'error');
         });
     }

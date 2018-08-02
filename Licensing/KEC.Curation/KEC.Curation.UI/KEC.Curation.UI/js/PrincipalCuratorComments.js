@@ -35,11 +35,15 @@
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
             }
         }).success(function (data, textStatus, jqXHR) {
-            ShowAlert("Recommendations passed to  Curation Manager", "success");
             $('#recommend').html('Yes');
             $('#confirm').modal('hide');
             $('.modal-backdrop').remove();
+            ShowAlert("Successfull, Your recommendations have been passed to  Curation Managers", "success");
         }).fail(function () {
+            $('#recommend').html('Yes');
+            $('#confirm').modal('hide');
+            $('.modal-backdrop').remove();
+            $('.modal-backdrop').remove();
             ShowAlert("Something went wrong while processing publication", 'error');
         });
     }

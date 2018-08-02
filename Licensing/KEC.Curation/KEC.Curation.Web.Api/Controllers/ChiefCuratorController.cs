@@ -486,6 +486,13 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest("Comments for this publication already exists");
             }
+            var checkIfAllAssignmentsHaveBeenSubbmitted = _uow.CuratorAssignmentRepository.Find
+                                                          (p => p.PublicationId.Equals(model.PublicationId)
+                                                          && !p.Submitted).Any();
+            if (checkIfAllAssignmentsHaveBeenSubbmitted)
+            {
+                return StatusCode(StatusCodes.Status501NotImplemented, "NOT ALLOWED");
+            }
             try
             {
                 var update = _uow.ChiefCuratorAssignmentRepository

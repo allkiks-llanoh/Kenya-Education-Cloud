@@ -12,21 +12,16 @@
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
-
     </dl>
-
     @using (Html.BeginForm("DeleteConfirmed", "Role", new { id = Model.Id, }))
     {
         @Html.AntiForgeryToken()
-
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-danger" />
             &nbsp; &nbsp; &nbsp;<a href="@Url.Action("Index", "Role")" class="btn btn-primary" style="background-color:#00b95f;"> <i class="fa fa-arrow-circle-left"></i> Back to List </a>
-
         </div>
     }
 </div>

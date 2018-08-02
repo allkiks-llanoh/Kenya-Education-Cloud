@@ -30,7 +30,7 @@
             $('#fully-assign').html('Yes');
             $('#fully').modal('hide');
             $('.modal-backdrop').remove();
-            ShowAlert("Publication Fully Assigned", "success");
+            ShowAlert("Successfull, Publication is now Fully Assigned", "success");
             }).fail(function () {
                 $('#fully-assign').html('Yes');
                 $('#fully').modal('hide');

@@ -17,19 +17,21 @@ $(document).ready(function () {
             type: "PATCH",
             data: JSON.stringify({ KICDNumber: kicdnumber, Notes: notes, ActionTaken: action, Stage: stages, UserGuid: userGuid }),
             success: function (response, status, jxhr) {
-                $('#message').html(` ${response}.`)
                 $('div.alert-success').toggleClass('hidden');
-                ShowAlert("Conformity Verified", "success");
                 $('#LegalApprove').html('Yes');
                 $('#confirmlegal').modal('hide');
                 $('.modal-backdrop').remove();
+                $('#message').html(` ${response}.`)
+                ShowAlert("Successfull, Requirements Conformity Verified", "success");
             },
             error: function (response, status, error) {
-                $('#error').html(response.responseText)
                 $('div.alert-danger').toggleClass('hidden');
                 $('#LegalApprove').html('Yes');
                 $('#confirmlegal').modal('hide');
                 $('.modal-backdrop').remove();
+                $('#error').html(response.responseText)
+                ShowAlert("Bad Reques, Something went wrong, contact administrator", "error");
+            },
             }
         });
     });

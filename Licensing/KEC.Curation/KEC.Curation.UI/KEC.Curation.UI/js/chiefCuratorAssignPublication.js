@@ -1,9 +1,7 @@
 ﻿(function () {
     $(document).ready(function () {
         $('#assign-curator').click(submitCuratorAssignment);
-     
         loadPublication();
-    
     });
     //Functions Section
     function loadPublication() {
@@ -16,14 +14,14 @@
             url: url,
             crossDomain: true,
             statusCode: {
-                404: () => { ShowAlert('Publication record could not be retrievd', "error"); } ,
+                404: () => { ShowAlert('Publication record could not be retrievd', "error"); },
                 403: () => { ShowAlert("You are not authorized to access the specified resource", "warning"); },
                 500: () => { ShowAlert('Something went wrong while loading publication', 'error'); }
             },
             contentType: 'application/json',
             accepts: 'application/json',
             type: 'GET',
-           
+
         }).done(function (publication, textStatus, jqXHR) {
             var date = new Date(publication.completionDate);
             $('#publication-details').replaceWith(
@@ -70,7 +68,7 @@
         //if (curator === null || curator === "") {
         //    return ShowAlert("Please select a curator from the list",'error');
         //}
-        
+
         let section = $("#section-assigned").val();
         section = section === null || section === null ? "Whole publication" : section;
         let publicationId = $('#publication-view').attr('data-publicationId');
@@ -95,8 +93,11 @@
             $('#assign').modal('hide');
             $('.modal-backdrop').remove();
             ShowAlert('Curator assigned sucessfully', 'success');
-           
+
         }).fail(function (jqXHR, textStatus, errorThrown) {
+            $('#assign-curator').html('Yes');
+            $('#assign').modal('hide');
+            $('.modal-backdrop').remove();
             ShowAlert('Something went wrong while processing curator assignment', 'error');
         });
     }
@@ -127,7 +128,7 @@
         row.append($("<td>" + rowData.assignee + "</td>"));
         row.append($("<td>" + rowData.sectionToCurate + "</td>"));
         row.append($("<td>" + rowData.assignmentDateUtc + "</td>"));
-        row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.assignmentId} class="btn btn-w-m btn-info btn-md DeleteAssignment" id="delete" role="button">Remove Assignment</button>`));  
+        row.append($(`<td class="pull-right"> <button type="button" data-assignmentId=${rowData.assignmentId} class="btn btn-w-m btn-info btn-md DeleteAssignment" id="delete" role="button">Remove Assignment</button>`));
         return row[0];
     }
     function deleteAssignment() {
@@ -151,7 +152,6 @@
                 success: function (response, status, jxhr) {
                     $('#alert').html(response)
                     $('div.alert-success').toggleClass('hidden');
-                    reloadSchoolTypes();
                 }
             });
         });

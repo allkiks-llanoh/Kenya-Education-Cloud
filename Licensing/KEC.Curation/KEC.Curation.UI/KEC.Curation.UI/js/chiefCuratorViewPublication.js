@@ -31,8 +31,6 @@
             },          
         }).done(function (publication, textStatus, jqXHR) {
             var date = new Date(publication.completionDate);
-            showChiefCuratorSubmissionSection(publication, "#publication-view");
-      
             $('#publication-details').replaceWith(
                 `<dl id="publication-details" data-stage="${publication.stage}">
                   <div class="row">
@@ -81,7 +79,7 @@
             accepts: 'application/json',
             statusCode: {
                 404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
-                403: () => { ShowAlert("You are not authorized to access curator submissions"); },
+                403: () => { ShowAlert("You are not authorized to access curator submissions", 'warning'); },
                 500: () => { ShowAlert("Something went wrong while retrieving curator submissions", 'error'); }
             },
         }).done(function (submissions, textStatus, jqXHR) {
@@ -90,75 +88,79 @@
             });
         });
     }
-    function getActionsTaken() {
-        var url = apiBaseUrl.concat('/lookups/actions');
-        $.ajax({
-            url: url,
-            type: 'GET',
-            accept: 'application/json',
-            contentType: 'application/json',
-            crossDomain: true
-        }).done(function (data, textStatus, jqXHR) {
-            let itemsHtml = '';
-            data.forEach(function (actionItem) {
-                itemsHtml = itemsHtml.concat(`<li id='${actionItem.name}'>${actionItem.description}<li>`);
-            });
-            $('#action-taken').html(itemsHtml);
-            hookBtnSelect();
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            ShowAlert("Something went wrong while loading actions", "error");
-        });
-    }
-    function showChiefCuratorSubmissionSection(publication, parentElementId) {
-        if (publication !== null && publication.chiefcuratorcanProcess) {
-            let chiefCuratorSection = $('#chief-curator-section').html();
-            $(parentElementId).html(chiefCuratorSection);
-            $('#process-publication').click(submitChiefNotesAndAction);
-            getActionsTaken();
-        }
-    }
-    function submitChiefNotesAndAction(e) {
-        $('#recommend').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
-        e.preventDefault();
-        let publicationId = $('#publication-view').attr('data-publicationId');
-        let actionSelected = $("#action-selected").val();
-        let notes = $('.note-editable').html();
-        let fullName = $('#FullName').val();
-        console.log(fullName);
-        let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
-        let userGuid = $('#CurrentUserGuid').val();
-        if (notes === null || notes === "") {
-            return ShowAlert("Curation notes cannot be blank", "error");
-        }
-        if (actionSelected === null || actionSelected === "") {
-            return ShowAlert("Please select an action taken from the list", "error");
-        }
-        $.ajax({
-            headers : {
-                'Accept' : 'application/json',
-                'Content-Type' : 'application/json'
-            },
-            url: url,
-            type: 'POST',
-            contentType: 'application/json',
-            crossDomain: true,
-            accepts: 'application/json',
-            data: JSON.stringify({ ChiefCuratorGuid: userGuid, Notes: notes, ActionTaken: actionSelected, publicationId: publicationId, Status: true, FullName:fullName }),
-            statusCode: {
-                404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
-                403: () => { ShowAlert("You are not authorized to process publication"); },
-                500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
-            }
-        }).success(function (data, textStatus, jqXHR) {
-            ShowAlert("Recomendations passed to Principal Curator", "success");
-            $('#recommend').html('Yes');
-            $('#confirm').modal('hide');
-            $('.modal-backdrop').remove();
-        }).fail(function () {
-            ShowAlert("Something went wrong while processing publication", "error");
-            console.log(data);
-        });
-    }
+    //function getActionsTaken() {
+    //    var url = apiBaseUrl.concat('/lookups/actions');
+    //    $.ajax({
+    //        url: url,
+    //        type: 'GET',
+    //        accept: 'application/json',
+    //        contentType: 'application/json',
+    //        crossDomain: true
+    //    }).done(function (data, textStatus, jqXHR) {
+    //        let itemsHtml = '';
+    //        data.forEach(function (actionItem) {
+    //            itemsHtml = itemsHtml.concat(`<li id='${actionItem.name}'>${actionItem.description}<li>`);
+    //        });
+    //        $('#action-taken').html(itemsHtml);
+    //        hookBtnSelect();
+    //    }).fail(function (jqXHR, textStatus, errorThrown) {
+    //        ShowAlert("Something went wrong while loading actions", "error");
+    //    });
+    //}
+    //function showChiefCuratorSubmissionSection(publication, parentElementId) {
+    //    if (publication !== null && publication.chiefcuratorcanProcess) {
+    //        let chiefCuratorSection = $('#chief-curator-section').html();
+    //        $(parentElementId).html(chiefCuratorSection);
+    //        $('#process-publication').click(submitChiefNotesAndAction);
+    //        getActionsTaken();
+    //    }
+    //}
+    //function submitChiefNotesAndAction(e) {
+    //    $('#recommend').html('<i class="fa fa-refresh fa-spin"></i> Please wait');
+    //    e.preventDefault();
+    //    let publicationId = $('#publication-view').attr('data-publicationId');
+    //    let actionSelected = $("#action-selected").val();
+    //    let notes = $('.note-editable').html();
+    //    let fullName = $('#ChiefFullName').val();
+    //    console.log(fullName);
+    //    let url = apiBaseUrl.concat(`/ChiefCurator/ChiefCuratorComments/${publicationId}?publicationId=${publicationId}`);
+    //    let userGuid = $('#CurrentUserGuid').val();
+    //    if (notes === null || notes === "") {
+    //        return ShowAlert("Curation notes cannot be blank", "error");
+    //    }
+    //    if (actionSelected === null || actionSelected === "") {
+    //        return ShowAlert("Please select an action taken from the list", "error");
+    //    }
+    //    $.ajax({
+    //        headers : {
+    //            'Accept' : 'application/json',
+    //            'Content-Type' : 'application/json'
+    //        },
+    //        url: url,
+    //        type: 'POST',
+    //        contentType: 'application/json',
+    //        crossDomain: true,
+    //        accepts: 'application/json',
+    //        data: JSON.stringify({ ChiefCuratorGuid: userGuid, Notes: notes, ActionTaken: actionSelected, publicationId: publicationId, Status: true, FullName:fullName }),
+    //        statusCode: {
+    //            404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
+    //            403: () => { ShowAlert("Some curators have not submitted their recommendations", 'warning'); },
+    //            500: () => { ShowAlert("Something went wrong while processing publication", 'error'); },
+              
+    //        }
+    //    }).success(function (data, textStatus, jqXHR) {
+    //        ShowAlert("Recomendations passed to Principal Curator", "success");
+    //        $('#recommend').html('Yes');
+    //        $('#confirm').modal('hide');
+    //        $('.modal-backdrop').remove();
+    //    }).fail(function () {
+    //        ShowAlert("Something went wrong while processing publication", "error");
+    //        $('#recommend').html('Yes');
+    //        $('#confirm').modal('hide');
+    //        $('.modal-backdrop').remove();
+    //        console.log(data);
+    //    });
+    //}
     //Functions Section
    
 })();

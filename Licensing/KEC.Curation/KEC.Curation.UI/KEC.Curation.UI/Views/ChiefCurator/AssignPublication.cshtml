@@ -9,13 +9,11 @@
 <script src="~/js/chiefCuratorAssignPublication.js"></script>
 <script src="~/js/GetCurators.js"></script>
 <script src="~/js/UpdateFullyAssign.js"></script>
-
 <script type="text/javascript">
     (function () {
         $(document).ready(function () {
             getPublicationInformation();
         });
-
         ///Functions Section
         function getPublicationInformation() {
             let Idd = $('#publication-view').attr('data-publicationId');
@@ -80,7 +78,6 @@
         }
     })();
 </script>
-
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="form-group col-md-10 hidden">
         <input type="text" name="publicationUrlGot" id="publicationUrlGot" class="form-control">
@@ -109,19 +106,14 @@
             <div id="html" class="panel-body ">
                 <div id="showHtml" class="hidden">
                     <div>
-
                     </div>
                 </div>
-
                 @*--------------------------------------html ends here--------------------------------------*@
                 @*--------------------------------------epub starts here------------------------------------*@
-
                 <div id="showEpub" class="hidden">
                     <div>
-
                     </div>
                 </div>
-
                 @*------------------------------------epub ends here-------------------------------------*@
             </div>
             <div class="row">
@@ -235,5 +227,4 @@
 <div class="form-group col-md-10">
     <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
 </div>
-
 <script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>

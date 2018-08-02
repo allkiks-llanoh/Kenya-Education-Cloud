@@ -75,12 +75,16 @@
                 }
             },
             data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: subs, FullName: fullName }),
-           
+
         }).done(function (data, textStatus, jqXHR) {
-            ShowAlert("Curation notes saved and submitted successfully", "success");
+            $('#save-notes-submit").').html('Yes');
             $('#confirmsave').modal('hide');
             $('.modal-backdrop').remove();
+            ShowAlert("Curation notes saved and submitted successfully", "success");
         }).fail(function (jqXHR, textStatus, errorThrown) {
+            $('#save-notes-submit").').html('Yes');
+            $('#confirmsave').modal('hide');
+            $('.modal-backdrop').remove();
             ShowAlert("Something went wrong while saving your notes", "error");
         });
     }
@@ -113,8 +117,8 @@
                     ShowAlert("You are not authorized to access the specified resource", "warning");
                 }
             },
-            data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: sub, FullName:fullName}),
-           
+            data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: sub, FullName: fullName }),
+
         }).done(function (data, textStatus, jqXHR) {
             ShowAlert("Curation notes saved successfully", "success");
         }).fail(function (jqXHR, textStatus, errorThrown) {

@@ -18,15 +18,16 @@ $(document).ready(function () {
             success: function (response, status, jxhr) {
                 $('#message').html(` ${response}.`)
                 $('div.alert-success').toggleClass('hidden');
-                ShowAlert("Payment Verified", "success");
                 $('#LegalApprove').html('Yes');
                 $('#confirm').modal('hide');
                 $('.modal-backdrop').remove();
+                ShowAlert("Successfull, Payment Verified", "success");
             },
             error: function (response, status, error) {
                 $('#error').html(response.responseText)
                 $('div.alert-danger').toggleClass('hidden');
                 $('#LegalApprove').html('APPROVE');
+                ShowAlert("Not Succesfull, Something went wrong, contact administrator", "error");
             }
         });
     });

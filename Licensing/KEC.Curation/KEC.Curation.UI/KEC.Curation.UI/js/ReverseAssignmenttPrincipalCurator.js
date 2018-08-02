@@ -24,7 +24,7 @@ function reverseAssignment(e) {
             500: () => { ShowAlert("Something went wrong while processing", 'error'); }
         }
     }).success(function (data, textStatus, jqXHR) {
-        ShowAlert("Category deleted", "success");
+        ShowAlert("Successfull, Category deleted", 'success');
         window.location.assign("https://curation.kec.ac.ke/PrincipalCurator/PrincipalCuratorReverse");
     }).fail(function () {
         ShowAlert("There was an error, please try again", 'error');

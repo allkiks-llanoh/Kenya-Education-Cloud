@@ -663,6 +663,7 @@
     <Content Include="Content\footable\fonts\footable.eot" />
     <Content Include="Content\footable\fonts\footable.ttf" />
     <Content Include="Content\footable\fonts\footable.woff" />
+    <None Include="Properties\PublishProfiles\curationui - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\curationui-dev - Web Deploy.pubxml" />
     <Content Include="Publications\test.epub" />
     <Content Include="Readium\cloud-reader\font-faces\Noto-Serif\Noto-Serif-700.woff" />
