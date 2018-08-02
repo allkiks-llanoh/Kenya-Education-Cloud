@@ -276,7 +276,7 @@ namespace KEC.Curation.Web.Api.Controllers
             return Ok(assignmentList);
         }
         #endregion
-        #region Curator Comments For Principal Curators
+        #region Curator Comments For Principal Curators get all comments with full names 
         [HttpGet("publication/{publicationId:int}/comments")]
         public IActionResult CuratorSubmissionsPrincipal([FromQuery]int publicationId)
         {
