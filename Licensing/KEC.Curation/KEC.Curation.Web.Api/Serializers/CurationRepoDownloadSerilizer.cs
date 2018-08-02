@@ -127,16 +127,8 @@ namespace KEC.Curation.Web.Api.Serializers
         {
             get
             {
-                var entry = _uow.CuratorAssignmentRepository.Find(p => p.PublicationId.Equals(_assignment.PublicationId)).FirstOrDefault();
+                return _assignment.FullName;
 
-                if (entry == null)
-                {
-                    return "";
-                }
-                else
-                {
-                    return entry.FullName;
-                }
             }
 
         }
