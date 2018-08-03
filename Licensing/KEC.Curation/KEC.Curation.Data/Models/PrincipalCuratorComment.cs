@@ -11,5 +11,6 @@ namespace KEC.Curation.Data.Models
         public string Notes { get; set; }
         public string PrincipalCuratorGuid { get; set; }
         public bool Submitted { get; set; }
+        public string FullName { get; set; }
     }
 }

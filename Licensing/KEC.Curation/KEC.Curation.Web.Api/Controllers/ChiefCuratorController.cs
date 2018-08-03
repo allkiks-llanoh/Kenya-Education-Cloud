@@ -488,8 +488,8 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             var checkIfAllAssignmentsHaveBeenSubbmitted = _uow.CuratorAssignmentRepository.Find
                                                           (p => p.PublicationId.Equals(model.PublicationId)
-                                                          && !p.Submitted).Any();
-            if (checkIfAllAssignmentsHaveBeenSubbmitted)
+                                                          && !p.Submitted).Count();
+            if (checkIfAllAssignmentsHaveBeenSubbmitted>0)
             {
                 return StatusCode(StatusCodes.Status501NotImplemented, "NOT ALLOWED");
             }

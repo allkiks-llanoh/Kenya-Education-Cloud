@@ -29,7 +29,7 @@
                 500: () => { ShowAlert("Something went wrong while loading publication", "error"); }
             },
         }).done(function (publication, textStatus, jqXHR) {
-            showChiefCuratorSubmissionSection(publication, "#publication-view");
+       
             $('#publication-details').replaceWith(
                 `<dl >
                    <div class="row">
@@ -85,71 +85,6 @@
             submissions.forEach(function (submission) {
                 $('#comments').html(`${submission.notes}`);
             });
-        });
-    }
-    function getActionsTaken() {
-        var url = apiBaseUrl.concat('/lookups/actions');
-        $.ajax({
-            url: url,
-            type: 'GET',
-            accept: 'application/json',
-            contentType: 'application/json',
-            crossDomain: true
-        }).done(function (data, textStatus, jqXHR) {
-            let itemsHtml = '';
-            data.forEach(function (actionItem) {
-                itemsHtml = itemsHtml.concat(`<li id='${actionItem.name}'>${actionItem.description}<li>`);
-            });
-            $('#action-taken').html(itemsHtml);
-            hookBtnSelect();
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            ShowAlert("Something went wrong while loading actions", "error");
-        });
-    }
-    function showChiefCuratorSubmissionSection(publication, parentElementId) {
-        if (publication !== null) {
-            let chiefCuratorSection = $('#chief-curator-section').html();
-            $(parentElementId).html(chiefCuratorSection);
-            $('#process-publication').click(submitChiefNotesAndAction);
-            getActionsTaken();
-        }
-    }
-    function submitChiefNotesAndAction(e) {
-        e.preventDefault();
-        let actionSelected = $('#action-taken').find('li.selected').attr('id');
-        let notes = $('.note-editable').html();
-        let kicdNumber = $("#kicd-number").val();
-        let stage = $('#publication-details').attr('data-stage');
-        let url = apiBaseUrl.concat('/Publications');
-        let userGuid = currentUserGuid;
-        if (notes === null || notes === "") {
-            return ShowAlert("Curation notes cannot be blank", "error");
-        }
-        if (actionSelected === null || actionSelected === "") {
-            return ShowAlert("Please select an action taken from the list", "error");
-        }
-        $.ajax({
-            url: url,
-            type: 'PATCH',
-            contentType: 'application/json',
-            crossDomain: true,
-            accepts: 'application/json',
-            data: JSON.stringify({ KICDNumber: kicdNumber, Notes: notes, ActionTaken: actionSelected, Stage: stage, UserGuid: userGuid }),
-            statusCode: {
-                404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
-                403: () => { ShowAlert("You are not authorized to process publication"); },
-                500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
-            }
-        }).done(function (data, textStatus, jqXHR) {
-            $('#recommend').html('Yes');
-            $('#confirm').modal('hide');
-            $('.modal-backdrop').remove();
-            ShowAlert("Successfull, Publication processed successfully", 'success');
-        }).fail(function () {
-            $('#recommend').html('Yes');
-            $('#confirm').modal('hide');
-            $('.modal-backdrop').remove();
-            ShowAlert("Something went wrong while processing publication", 'error');
         });
     }
     //Functions Section

@@ -221,12 +221,9 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(modelState: ModelState);
             }
-            var publication = _uow.PublicationRepository
-                                  .Find(p => p.Id.Equals(publicationId)
-                                  && p.ChiefCuratorAssignment.PrincipalCuratorGuid.Equals(model.PrincipalCuratorGuid)
-                                   && p.PublicationStageLogs
-                                                        .Max(l => l.Stage) == PublicationStage.PublicationApproval)
-                                  .FirstOrDefault();
+            var publication = _uow.ChiefCuratorAssignmentRepository
+                                  .Find(p => p.PublicationId.Equals(publicationId)
+                                  && p.PrincipalCuratorGuid.Equals(model.PrincipalCuratorGuid)).FirstOrDefault();
             if (publication == null)
             {
                 return NotFound(value: new { message = "Publication Not Found in Repository." });
@@ -236,26 +233,28 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest("Comments for this publication already exists");
             }
-            var _publication = _uow.ChiefCuratorAssignmentRepository.Find(p => p.PublicationId.Equals(publication.Id)).FirstOrDefault();
             try
             {
                 var comment = new PrincipalCuratorComment
                 {
-                    PublicationId = publication.Id,
+                    PublicationId = publicationId,
                     Notes = model.Notes,
                     PrincipalCuratorGuid = model.PrincipalCuratorGuid,
+                    FullName = model.FullName,
+                    
                 };
                 _uow.PrincipalCuratorCommentRepository.Add(comment);
+                _uow.Complete();
                 var recommendation = new PublicationStageLog
                 {
-                    PublicationId = publication.Id,
+                    PublicationId = publicationId,
                     Notes = model.Notes,
                     CreatedAtUtc = DateTime.UtcNow,
                     Owner = model.PrincipalCuratorGuid,
                     Stage = PublicationStage.IssueOfCertificate
                 };
                 _uow.PublicationStageLogRepository.Add(recommendation);
-
+                _uow.Complete();
                 if (model.ActionTaken == "PublicationApproved")
                 {
                     recommendation.ActionTaken = ActionTaken.PublicationApproved;
@@ -264,13 +263,14 @@ namespace KEC.Curation.Web.Api.Controllers
                 {
                     recommendation.ActionTaken = ActionTaken.PublicationRejected;
                 }
-                _publication.Submitted = true;
-
+                publication.Submitted = true;
                 _uow.Complete();
+
                 return Ok(value: new { message = "Recommendations Sent To Curation Managers" });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ex.GetBaseException();
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
@@ -281,8 +281,7 @@ namespace KEC.Curation.Web.Api.Controllers
             {
                 return BadRequest(modelState: ModelState);
             }
-            var assigment = _uow.ChiefCuratorAssignmentRepository.Find(p => !p.Submitted
-                                                                  && p.PublicationId.Equals(publicationId))
+            var assigment = _uow.ChiefCuratorAssignmentRepository.Find(p =>p.PublicationId.Equals(publicationId))
                                                                   .FirstOrDefault();
             if (assigment == null)
             {

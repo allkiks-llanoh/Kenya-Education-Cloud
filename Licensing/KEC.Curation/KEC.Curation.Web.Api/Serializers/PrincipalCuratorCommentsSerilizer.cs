@@ -17,8 +17,9 @@ namespace KEC.Curation.Web.Api.Serializers
         public string Notes { get; set; }
         [Required(ErrorMessage = "You Have to provide user Guid")]
         public string PrincipalCuratorGuid { get; set; }
-      
         [Required(ErrorMessage = "Action Taken is a requirement")]
         public  string ActionTaken { get; set; }
+        [Required(ErrorMessage = "Your Full Name is a requirement")]
+        public string FullName { get; set; }
     }
 }
