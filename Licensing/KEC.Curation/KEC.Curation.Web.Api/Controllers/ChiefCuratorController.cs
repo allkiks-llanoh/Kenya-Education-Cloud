@@ -301,13 +301,15 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("publication/withcomments")]
         public IActionResult WithCommentsAtChiefCuratorLevel([FromQuery]string userId)
         {
-
+            var searchAssignment = _uow.CuratorAssignmentRepository.Find(p => p.AssignedBy.Equals(userId) && !p.Submitted).Any();
+            if (searchAssignment)
+            {
+                return StatusCode(StatusCodes.Status204NoContent, "Curation Not Done Completly");
+            }
             var assignment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(userId) && !p.Submitted && p.Assigned);
             var assignmentList = assignment.Any() ?
              assignment.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
             return Ok(assignmentList);
-
-
         }
         [HttpPatch("update/curatorcomments/{id}")]
         public IActionResult UpdateCurationComments(int publicationId, [FromBody]ChiefFlagSubmittedSerilizer model)
