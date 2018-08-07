@@ -1,10 +1,10 @@
 ﻿@{
     ViewData["Title"] = "AllPublications";
 }
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-<link href="~/Content/footable/footable.core.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
+<link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <script type="text/javascript">
     const apiBaseUrls = "https://curationapi.kec.ac.ke/api";
 </script>
@@ -23,9 +23,8 @@
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
-                        <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Use Curation Number">
-                        <table id="allpublications" class="footable table table-stripped footable-loaded no-paging" data-page-size="8" data-filter="#filter">
-
+                        <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Search in table">
+                        <table id="allpublications" class="footable table table-stripped" data-page-size="15" data-filter="#filter">
                             <tr class="footable-sortable">
                                 <th> CURATION NUMBER </th>
                                 <th> TITLE </th>
@@ -34,11 +33,9 @@
                                 <th> LEVEL</th>
                                 <th> ACTIONS</th>
                             </tr>
-
                             <tfoot>
                                 <tr>
-                                    
-                                    <td colspan="5">
+                                    <td colspan="7">
                                         <ul class="pagination pull-right"><li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li><li class="footable-page active"><a data-page="0" href="#">1</a></li><li class="footable-page-arrow disabled"><a data-page="next" href="#next">›</a></li><li class="footable-page-arrow disabled"><a data-page="last" href="#last">»</a></li></ul>
                                     </td>
                                 </tr>
@@ -49,7 +46,6 @@
             </div>
         </div>
         <div class="form-group ">
-
             <a href="/CurationManagers/Index" class="btn btn-w-m btn-info pull-right" style="background-color:#00B95F;" role="button">BAck To Index</a>
         </div>
     </div>
@@ -80,8 +76,7 @@
 
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
-        var row = $("<tr />")
-        row.append($(`<td class="hidden"> + rowData.id + </td>`));
+        var row = $('<tr class="footable-sortable" />')
         row.append($("<td>" + rowData.kicdNumber + "</td>"));
         row.append($("<td>" + rowData.title + "</td>"));
         row.append($("<td>" + rowData.publisher + "</td>"));
@@ -94,3 +89,22 @@
     };
 
 </script>
+@section Styles {
+    @Styles.Render("~/plugins/footableStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/footable")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.footable').footable();
+            $('.footable2').footable();
+
+        });
+    </script>
+}
+
+
+

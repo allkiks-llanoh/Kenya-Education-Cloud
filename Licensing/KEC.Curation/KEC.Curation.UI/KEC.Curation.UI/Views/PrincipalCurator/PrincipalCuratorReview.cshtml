@@ -53,29 +53,29 @@
                                     </div>
                                     <br>
                                     @*<div>
-                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:900px;"
-                                                src='@Urls)'></iframe>
-                                    </div>*@
+                    <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:900px;"
+                            src='@Urls)'></iframe>
+                </div>*@
                                 </div>
                             </div>
                             @*--------------------------------------html ends here--------------------------------------*@
                             @*--------------------------------------epub starts here------------------------------------*@
                             <div id="epub" class="panel-body">
                                 <div id="showEpub" class="center hidden">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div>Curation Number</div>
-                                                <div>@Publication</div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div>Title</div>
-                                                <div>@Title</div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div>Stage</div>
-                                                <div>Principal Curator</div>
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div>Curation Number</div>
+                                            <div>@Publication</div>
                                         </div>
+                                        <div class="col-md-4">
+                                            <div>Title</div>
+                                            <div>@Title</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div>Stage</div>
+                                            <div>Principal Curator</div>
+                                        </div>
+                                    </div>
                                     <br>
                                     <div>
                                         <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
@@ -84,6 +84,31 @@
                                 </div>
                             </div>
                             @*--------------------------------------epub ends here-------------------------------------*@
+                            @*------------------------------------PDF starts here-------------------------------------*@
+                            <div id="pdf" class="panel-body">
+                                <div id="showPDF" class="center hidden">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div>Curation Number</div>
+                                            <div>@Publication</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div>Title</div>
+                                            <div>@Title</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div>Stage</div>
+                                            <div>Principal Curator</div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                                src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(""+Urls)'></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            @*------------------------------------PDF ends here-------------------------------------*@
                             @*--------------------------------------footer starts here---------------------------------*@
                             <div id="showFooter" class="hidden">
                                 <div class="panel-footer">
@@ -172,7 +197,12 @@
             $('#showFooter').toggleClass('hidden');
             $('#showError').hide();
         }
-        if (uICheck != "application/x-zip-compressed" || uICheck != "application/epub zip") {
+        if (uICheck == "application/pdf") {
+            $('#showPDF').toggleClass('hidden');
+            $('#showFooter').toggleClass('hidden');
+            $('#showError').hide();
+        }
+        if (uICheck != "application/x-zip-compressed" || uICheck != "application/epub zip" || uICheck != "application/pdf") {
             $('#showError').toggleClass('hidden');
             $('#hideThise').hide();
         }

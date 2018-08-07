@@ -49,11 +49,10 @@ namespace KEC.Curatiom.Web.UI.Controllers
             }
          
         }
-        [HttpGet, Route("AssignPublication/{id:int}")]
+        [HttpGet, Route("AssignPublication/{Id:int}")]
         public ActionResult AssignPublication(int Id)
         {
             ViewBag.PublicationId = Id;
-
             using (var context = new ApplicationDbContext())
             {
                 var user = context.Users.FirstOrDefault(u => u.Email.Equals(User.Identity.Name));

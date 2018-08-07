@@ -70,10 +70,10 @@ namespace KEC.Publishers.Api.Controllers
             {
                 return BadRequest("Invalid Extension");
             }
-            if (invaliExtensionPDF == true)
-            {
-                return BadRequest("Invalid Extension");
-            }
+            //if (invaliExtensionPDF == true)
+            //{
+            //    return BadRequest("Invalid Extension");
+            //}
             if (invaliExtensionMOBI == true)
             {
                 return BadRequest("Invalid Extension");

@@ -32,9 +32,8 @@ $(document).ready(function () {
                 $('#error').html(response.responseText)
                 ShowAlert("Bad Reques, Something went wrong, contact administrator", "error");
             },
-            }
+        });
         });
     });
-},
-);
+
 
