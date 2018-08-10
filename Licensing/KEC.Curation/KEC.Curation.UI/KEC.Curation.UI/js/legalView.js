@@ -28,7 +28,7 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.description + "</td>"));
     row.append($("<td>" + rowData.kicdNumber + "</td>"));
     row.append($("<td class ='hidden'>" + rowData.type + "</td>"));
-    row.append($(`<td> <a href="/Stages/LegalVerify/?Title=${rowData.title}&KICDN=${rowData.kicdNumber}&Publication=${rowData.curationUrl}&Stage=LegalVerification&MimeType=${rowData.type}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Review</a>`));
+    row.append($(`<td> <a href="/Stages/LegalVerify/?Title=${rowData.title}&KICDN=${rowData.kicdNumber}&Publication=${rowData.curationUrl}&Stage=LegalVerification&MimeType=${rowData.type}&Publisher=${rowData.publisher}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Review</a>`));
     return row[0];
 }
 

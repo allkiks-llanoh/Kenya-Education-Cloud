@@ -9,7 +9,6 @@
     <script src="@Url.Content("~/js/legalVerify.js")"></script>
     <script src="@Url.Content("~/js/Scripts/bootstrap.min.js")"></script>
     <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
     @Scripts.Render("~/plugins/sweetAlert")
 }
 @{
@@ -18,6 +17,7 @@
     var Publication = Request.Params["Publication"];
     var KICDNumber = Request.Params["KICDN"];
     var MimeTypes = Request.Params["MimeType"];
+    var Publisher = Request.Params["Publisher"];
 }
 <div class="text-center m-t-lg">
     <h1>
@@ -39,6 +39,8 @@
                                     <dl>
                                         <dt>Curation Number</dt>
                                         <dd>@KICDNumber</dd>
+                                        <dt>Publisher</dt>
+                                        <dd>@Publisher</dd>
                                         <dt>Title</dt>
                                         <dd>@Title</dd>
                                         <dt>Publication</dt>
@@ -50,16 +52,18 @@
                             @*--------------------------------------epub starts here------------------------------------*@
                             <div id="epub" class="panel-body">
                                 <div id="showEpub" class="hidden">
-                                    <dl>
+                                    <dl style="margin-top:-40px;">
                                         <dt>Curation Number</dt>
                                         <dd>@KICDNumber</dd>
+                                        <dt>Publisher</dt>
+                                        <dd>@Publisher</dd>
                                         <dt>Title</dt>
                                         <dd>@Title</dd>
-                                        <dt>Publication</dt>
-                                        <dd><a href="/Readium/cloud-reader/index.html?epub=@Publication" target="_blank">Link to publication</a></dd>
+                                        @*<dt>Publication</dt>
+                                        <dd><a href="/Readium/cloud-reader/index.html?epub=@Publication" target="_blank">Link to publication</a></dd>*@
                                     </dl>
                                     <div>
-                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:800px;width:100%;"
                                                 src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Publication)'></iframe>
                                     </div>
                                 </div>
@@ -68,14 +72,16 @@
                             @*------------------------------------PDF starts here-------------------------------------*@
                             <div id="pdf" class="panel-body ">
                                 <div id="showPDF" class="hidden">
-                                    <dl>
+                                    <dl style="margin-top:-40px;">
                                         <dt>Curation Number</dt>
                                         <dd>@KICDNumber</dd>
+                                        <dt>Publisher</dt>
+                                        <dd>@Publisher</dd>
                                         <dt>Title</dt>
                                         <dd>@Title</dd>
                                     </dl>
                                     <div>
-                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:800px;width:100%;"
                                                 src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(""+Publication)'></iframe>
                                     </div>
                                 </div>
