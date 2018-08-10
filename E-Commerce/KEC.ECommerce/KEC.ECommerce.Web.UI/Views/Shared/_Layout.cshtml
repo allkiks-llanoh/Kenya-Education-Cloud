@@ -43,12 +43,13 @@
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
     </environment>
+    
 </head>
 <body>
-    <header class="app-bar bg-red  fg-white app-bar-expand-md"  data-role="appbar" id="main-appbar">
+    <header class="app-bar bg-red  fg-white app-bar-expand-md" data-role="appbar" id="main-appbar">
         <button type="button" class="hamburger menu-down hidden"><span class="line"></span><span class="line"></span><span class="line"></span></button>
-        <a href="/" class="d-block brand fg-white no-hover">
-            <img src="~/images/white-logo.png" width="110" height="60" />
+        <a href="/" class="">
+            <img src="~/images/white-logo.png" style="width:110px; height:60px!important;" />
         </a>
         <ul class="app-bar-menu">
             <li><a asp-action="Index" asp-controller="Home"><span class="mif-home icon"></span>Home</a></li>
@@ -107,7 +108,7 @@
                     <div class="cell-md-12 cell-sm-12">
                         <div class="p-1 m-1">
                             <div class="row">
-                                <div class="cell-md-full" >
+                                <div class="cell-md-full">
                                     @if (User.Identity.IsAuthenticated)
                                     {
                                         <breadcrumb asp-homepage-title="Account"
@@ -130,13 +131,61 @@
                 </div>
             </div>
         </div>
-        <div id="footer" class="fg-white bg-red" >
+        <div class="fg-white bg-red">
             <footer class="footer-bg">
-                <div class="container">
-                    <div class="text-center mt-1 reduce-1">
-                        <b>Kenya Education Cloud &copy; All Rights Reserved</b>  
+                
+                    <div class="row" style="padding-top:20px;">
+                        <div class="cell-md-3">
+                            <img alt="Kenya Education Cloud" src="~/images/white-logo.png" style="width:110px; margin-left:90px; height:60px!important;" >
+                            <p style="text-align:center;">
+                                <b>Kenya Education Cloud</b><br>
+                                2018 © Copyright
+                            </p>
+                        </div>
+                        <div class="cell-md-3">
+                            <h5>External Links</h5>
+
+                            <ul style="font-size:12px;">
+                                <li> <a target="_blank" style="color: inherit;" href="https://kicd.ac.ke/">Kenya Institute of Curriculum Development</a></li>
+
+                                <li><a target="_blank" style="color: inherit;" href="http://www.education.go.ke/">Ministry of Education</a></li>
+                                <li><a target="_blank" style="color: inherit;" href="http://icta.go.ke/">ICT Authority</a></li>
+                                <li><a target="_blank" style="color: inherit;" href="http://icta.go.ke/digischool/">DigiSchool</a></li>
+                                <li><a target="_blank" style="color: inherit;" href="http://www.tvetauthority.go.ke/">TVET Authority</a></li>
+                                <li><a target="_blank" style="color: inherit;" href="http://elimika.ac.ke/">Elimika</a></li>
+                                <li><a target="_blank" style="color: inherit;" href="http://kicdinteractivecontent.ac.ke/">Interactive Digital Content</a></li>
+                                <li><a target="_blank" style="color: inherit;" href="https://www.knec.ac.ke/">Kenya National Examinations Council</a></li>
+                            </ul>
+                        </div>
+                        <div class="cell-md-3">
+                            <h5>Quick Links </h5>
+                            <ul style="font-size:12px;">
+                                <li><a target="_blank" style="color: inherit;" href="http://store-d.ac.ke/">Home</a></li>
+                                <li><a target="_blank" style="color: inherit;" href="http://store-d.ac.ke/Store/Publications?categoryid=1">Course Books</a></li>
+                                <li><a target="_blank" style="color: inherit;" href="http://store-d.ac.ke/Store/Publications?categoryid=3">Leisure Books</a></li>
+                                <li><a target="_blank" style="color: inherit;" href="http://store-d.ac.ke/Account/Register">Register</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="cell-md-3">
+                            <h5>Our Contacts</h5>
+
+                            <p style="font-size:12px;">
+                                <b>Kenya Education Cloud</b><br>
+                                Desai Rd, Off Muranga Rd,<br>
+                                Nairobi, Kenya.
+                                <br>
+                                <b>Phone Number</b><br>
+                                +254 20 3749900 <br>
+                                <b>Email</b> <br>
+                                info@kicd.ac.ke
+                            </p>
+                        </div>
                     </div>
-                </div>
+                    @*<div class="text-center mt-1 reduce-1">
+                            <b>Kenya Education Cloud &copy; All Rights Reserved</b>
+                        </div>*@
+                
             </footer>
         </div>
     </div>
@@ -159,7 +208,7 @@
         <script src="~/lib/jquery/jquery.unobtrusive-ajax.min.js"></script>
         <script src="~/lib/jquery/jquery.matchHeight-min.js"></script>
         <script src="~/lib/simple-pagination/js/jquery.simplePagination.js"></script>
-        <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js" asp-fallback-src="~/lib/metro/js/metro.min.js" 
+        <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js" asp-fallback-src="~/lib/metro/js/metro.min.js"
                 crossorigin="anonymous">
         </script>
         <script src="~/lib/owl/js/owl.carousel.min.js"></script>
