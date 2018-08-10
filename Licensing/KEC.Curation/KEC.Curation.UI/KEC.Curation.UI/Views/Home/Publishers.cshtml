@@ -1,36 +1,35 @@
 ﻿@{
-    ViewData["Title"] = "Subject Curators";
+    ViewData["Title"] = "Publishers List";
 }
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
 <script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
-<script type="text/javascript">
-    const apiBaseUrls = "https://curation.kec.ac.ke";
-</script>
 <div id="wrapper">
     <div class="row">
         <div class="col-lg-12">
             <div class="text-center m-t-lg">
-                <h1>
-                    @ViewData["SubTitle"]
-                </h1>
-                <small>@ViewData["Message"]</small>
+                <p>
+                    <h1>KEC Registerd Publishers List </h1>
+                </p>
             </div>
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Search For A User</h5>
+                    <h5>Search For A Publiser</h5>
                 </div>
                 <div class="ibox-content">
                     <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Search in table">
-                    <table id="allpublications" class="footable table table-stripped" data-page-size="15" data-filter="#filter">
+                    <table id="publishersList" class="footable table table-stripped" data-page-size="50" data-filter="#filter">
+
                         <tr class="footable-sortable">
-                            <th> NAME </th>
-                            <th> EMAIL </th>
-                            <th> ACTION </th>
+                            <th> Publisher </th>
+                            <th> Contact</th>
+                            <th> Phone Number </th>
+                            <th> Email </th>
                         </tr>
+
                         <tfoot>
                             <tr>
-                                <td colspan="3">
+                                <td colspan="5">
                                     <ul class="pagination pull-right"></ul>
                                 </td>
                             </tr>
@@ -41,6 +40,7 @@
         </div>
         <div class="form-group ">
 
+
         </div>
     </div>
     <div class="footer" style="">
@@ -48,7 +48,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    let Url = apiBaseUrls.concat(`/GetUSers/GetCuratorsList`);
     function tableRows(data) {
         var tableRows = [];
         for (var i = 0; i < data.length; i++) {
@@ -57,32 +56,34 @@
         return tableRows;
     };
     $.ajax({
-        url: Url,
-        type: "POST",
+        url: "https://publishers.azurewebsites.net/api/GetPublishers",
+        type: "GET",
         dataType: "json",
         success: function (data, status, jqhxr) {
             console.log(data);
             //This code snipet prepares to append Json Data
-            $('#allpublications').append(tableRows(data));
+            $('#publishersList').append(tableRows(data));
         }
     });
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $('<tr class="footable-sortable" />')
-        row.append($("<td>" + rowData.Value + "</td>"));
-        row.append($("<td>" + rowData.Text + "</td>"));
-        row.append($(`<td> <a href="/Role/RemoveFromRole?Id=${rowData.Text}&Role=${rowData.Value}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Remove From Role</a>`));
-
+        row.append($("<td>" + rowData.Company + "</td>"));
+        row.append($("<td>" + rowData.FirstName + "</td>"));
+        row.append($("<td>" + rowData.Contact + "</td>"));
+        row.append($("<td>" + rowData.Email + "</td>"));
         return row[0];
     };
 
 </script>
 @section Styles {
-    <script src="@Url.Content("~/js/Scripts/bootstrap.min.js")"></script>
     @Styles.Render("~/plugins/footableStyles")
 }
+
 @section Scripts {
+    <script src="@Url.Content("~/js/Scripts/bootstrap.min.js")"></script>
     @Scripts.Render("~/plugins/footable")
+
     <script type="text/javascript">
         $(document).ready(function () {
 

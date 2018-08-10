@@ -79,7 +79,7 @@ namespace Authentication_Test.Controllers
 
             var user = context.Users.Where(p => p.Roles.Any(s => s.RoleId.Equals(role))).ToList();
 
-            return Json(new SelectList(user, "FullName", "Email"));
+            return Json(new SelectList(user, "FullName", "Email"), JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetAllUsers()
         {

@@ -1293,6 +1293,7 @@
     <Content Include="Views\PrincipalCurator\_MPFourPartial.cshtml" />
     <Content Include="Views\PrincipalCurator\Delete.cshtml" />
     <Content Include="tsconfig.json" />
+    <Content Include="Views\Home\Publishers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
