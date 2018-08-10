@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <script type="text/javascript">
@@ -95,7 +94,7 @@
 }
 @section Scripts {
     @Scripts.Render("~/plugins/footable")
-
+    <script src="@Url.Content("~/js/Scripts/bootstrap.min.js")"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('.footable').footable();
