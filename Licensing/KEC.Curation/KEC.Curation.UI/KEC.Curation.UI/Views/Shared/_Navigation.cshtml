@@ -4,7 +4,7 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="">
                 <div style="background-color:white; height:60px;" class="hidden-sm hidden-xs">
-                    <a style="background-color:white;"  href="/Home/Index">
+                    <a style="background-color:white;" href="/Home/Index">
 
                         <img src="~/Content/plugins/images/KEClogo.png" style="width:150px;" />
 
@@ -21,9 +21,9 @@
                 <li>
                     <a href="@Url.Action("Index", "Home")" data-toggle="tooltip" data-placement="top" title="Administration" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Administration</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="@Url.Action("ListCategory", "Home")" ><i class="glyphicon glyphicon-list"></i>Subject Categories</a></li>
-                        <li><a href="@Url.Action("ListLevels", "Home")" ><i class="glyphicon glyphicon-list"></i> Publication Levels</a></li>
-                        <li><a href="@Url.Action("ListSubjects", "Home")" ><i class="glyphicon glyphicon-list"></i> Publication Subjects</a></li>
+                        <li><a href="@Url.Action("ListCategory", "Home")"><i class="glyphicon glyphicon-list"></i>Subject Categories</a></li>
+                        <li><a href="@Url.Action("ListLevels", "Home")"><i class="glyphicon glyphicon-list"></i> Publication Levels</a></li>
+                        <li><a href="@Url.Action("ListSubjects", "Home")"><i class="glyphicon glyphicon-list"></i> Publication Subjects</a></li>
                     </ul>
                 </li>
                 <li>
@@ -34,6 +34,12 @@
                         <li> <a href="@Url.Action("Approved", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i>Approved Content</a></li>
                         <li> <a href="@Url.Action("Rejected", "CurationManagers")"><i class="glyphicon glyphicon-edit"></i>Not Approved Content</a></li>
 
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="Submission Summary" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publishers List</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse" style="">
+                        <li> <a href="@Url.Action("Publishers", "Home")"><i class="glyphicon glyphicon-edit"></i>Publishers List </a></li>
                     </ul>
                 </li>
                 <li>
@@ -92,7 +98,7 @@
                     {
                         <a href="@Url.Action("Index", "Home")" data-toggle="tooltip" data-placement="top" title="Publication Curation" class="green-tooltip"><i class="glyphicon glyphicon-th"></i> <span class="nav-label">Publication Curation</span> </a>
 
-                        <li> <a href="@Url.Action("AssignMultiple", "PrincipalCurator")" data-toggle="tooltip" data-placement="top" title="Principal Curation" class="green-tooltip"><i class="glyphicon glyphicon-edit" ></i> <span class="nav-label">Principal Curation</span></a></li>
+                        <li> <a href="@Url.Action("AssignMultiple", "PrincipalCurator")" data-toggle="tooltip" data-placement="top" title="Principal Curation" class="green-tooltip"><i class="glyphicon glyphicon-edit"></i> <span class="nav-label">Principal Curation</span></a></li>
 
                     }
                     @if (User.IsInRole("Curation Manager"))

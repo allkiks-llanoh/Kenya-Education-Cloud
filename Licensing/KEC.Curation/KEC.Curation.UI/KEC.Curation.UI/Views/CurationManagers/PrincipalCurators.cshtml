@@ -2,7 +2,6 @@
     ViewData["Title"] = "Principal Curators";
 }
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <script type="text/javascript">
@@ -31,7 +30,7 @@
                         </tr>
                         <tfoot>
                             <tr>
-                                <td colspan="2">
+                                <td colspan="3">
                                     <ul class="pagination pull-right"></ul>
                                 </td>
                             </tr>
@@ -62,7 +61,7 @@
             'Access-Controll-Allow-Origin': '*'
         },
         url: Url,
-        type: "POST",
+        type: "GET",
         dataType: "json",
         success: function (data, status, jqhxr) {
             console.log(data);
@@ -86,6 +85,7 @@
     @Styles.Render("~/plugins/footableStyles")
 }
 @section Scripts {
+    <script src="@Url.Content("~/js/Scripts/bootstrap.min.js")"></script>
     @Scripts.Render("~/plugins/footable")
     <script type="text/javascript">
         $(document).ready(function () {

@@ -251,5 +251,10 @@ namespace KEC.Curation.UI.Controllers
 
 
         }
+        [CustomAuthorize(Roles = "Admin")]
+        public ActionResult Publishers()
+        {
+          return View();
+        }
     }
 }

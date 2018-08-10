@@ -2,7 +2,6 @@
     ViewData["Title"] = "Chief Curators";
 }
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/plugins/footable/footable.all.min.js"></script>
 <link href="~/Content/footable/footable.core.css" rel="stylesheet" />
 <script type="text/javascript">
@@ -24,13 +23,11 @@
                 <div class="ibox-content">
                     <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Search in table">
                     <table id="allpublications" class="footable table table-stripped" data-page-size="15" data-filter="#filter">
-
                         <tr class="footable-sortable">
                             <th> NAME </th>
                             <th> EMAIL </th>
                             <th> ACTION </th>
                         </tr>
-
                         <tfoot>
                             <tr>
                                 <td colspan="3">
@@ -43,8 +40,6 @@
             </div>
         </div>
         <div class="form-group ">
-
-
         </div>
     </div>
     <div class="footer" style="">
@@ -83,6 +78,7 @@
 
 </script>
 @section Styles {
+    <script src="@Url.Content("~/js/Scripts/bootstrap.min.js")"></script>
     @Styles.Render("~/plugins/footableStyles")
 }
 
