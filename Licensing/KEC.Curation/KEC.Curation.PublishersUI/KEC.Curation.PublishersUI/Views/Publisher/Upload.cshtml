@@ -33,7 +33,7 @@
                         <ul style="list-style:none;">
                             <li>HTML5</li>
                             <li>EPUB</li>
-                            <li>Web platforms</li>
+                            <li>Content delivery through web platforms</li>
                             <li>PDFs</li>
                         </ul>
 
@@ -42,155 +42,153 @@
                         This also applies to web platforms. the index.html file should contain all the instructions need to access the platform for curation.
                     </p>
                 </div>
-                <hr />
-
                 <h3 class="text-center m-t-lg">@ViewData["Message"]</h3>
-                <br />
-                <form method="post" enctype="multipart/form-data" id="uploadform">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row align-left">
-                                <div class="col-sm-3">
-                                    <label for="Title">Title</label>
+                <div style="text-align:center; padding:20px;" class="panel panel-default text-center">
+                    <form method="post" enctype="multipart/form-data" id="uploadform">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row align-left">
+                                    <div class="col-sm-3">
+                                        <label for="Title">Title</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="Title" id="Title" class="form-control" placeholder="Enter Title" required>
+                                    </div>
                                 </div>
-                                <div class="col-sm-9">
-                                    <input type="text" name="Title" id="Title" class="form-control" placeholder="Enter Title" required>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-3 hidden">
+                                        <label for="Title">ISBN Number</label>
+                                    </div>
+                                    <div class="col-sm-9 hidden">
+                                        <input type="text" name="ISBNNumber" id="ISBNNumber" class="form-control" placeholder="Enter ISBN Number">
+                                    </div>
                                 </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="Title" style="text-align:right;">Publisher Name</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="PublisherName" id="PublisherName" class="form-control" readonly value="@Model.Company">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="Title">Author Name</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="AuthorName" id="AuthorName" class="form-control" placeholder=" Enter Author's' Name" required>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="Title">Price</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" name="Price" id="Price" class="form-control" placeholder="Give Publication Price">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="Title">Completion Date</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="date" name="CompletionDate" id="CompletionDate" class="form-control" placeholder="elect Completion Date" required>
+                                    </div>
+                                </div>
+                                <br>
                             </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-3 hidden">
-                                    <label for="Title">ISBN Number</label>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="Title">Description</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <textarea name="Description" id="Description" class="form-control" placeholder="Give Brief Description (200 words)" required></textarea>
+                                    </div>
                                 </div>
-                                <div class="col-sm-9 hidden">
-                                    <input type="text" name="ISBNNumber" id="ISBNNumber" class="form-control" placeholder="Enter ISBN Number">
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="Title">Category</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select name="Category" id="Category" class="form-control"></select>
+                                    </div>
                                 </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="Title">Level</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select name="LevelId" id="LevelId" class="form-control"></select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="Title">Subject</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select name="SubjectId" id="SubjectId" class="form-control"></select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-3" hidden>
+                                        <label for="Title">Unique Identifier</label>
+                                    </div>
+                                    <div class="col-sm-9" hidden>
+                                        <input type="text" name="UserGuid" id="UserGuid" class="form-control" readonly value="@Model.guid">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="Title">Publication File</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="file" name="PublicationFile" id="PublicationFile" class="form-control" required>
+                                    </div>
+                                </div>
+                                <br>
                             </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label for="Title" style="text-align:right;">Publisher Name</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input type="text" name="PublisherName" id="PublisherName" class="form-control" readonly value="@Model.Company">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label for="Title">Author Name</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input type="text" name="AuthorName" id="AuthorName" class="form-control" placeholder=" Enter Author's' Name" required>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label for="Title">Price</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input type="number" name="Price" id="Price" class="form-control" placeholder="Give Publication Price">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label for="Title">Completion Date</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input type="date" name="CompletionDate" id="CompletionDate" class="form-control" placeholder="elect Completion Date" required>
-                                </div>
-                            </div>
-                            <br>
                         </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label for="Title">Description</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <textarea name="Description" id="Description" class="form-control" placeholder="Give Brief Description (200 words)" required></textarea>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label for="Title">Category</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <select name="Category" id="Category" class="form-control"></select>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label for="Title">Level</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <select name="LevelId" id="LevelId" class="form-control"></select>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label for="Title">Subject</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <select name="SubjectId" id="SubjectId" class="form-control"></select>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-3" hidden>
-                                    <label for="Title">Unique Identifier</label>
-                                </div>
-                                <div class="col-sm-9" hidden>
-                                    <input type="text" name="UserGuid" id="UserGuid" class="form-control" readonly value="@Model.guid">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label for="Title">Publication File</label>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input type="file" name="PublicationFile" id="PublicationFile" class="form-control" required>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-                    </div>
 
+                        <div>
+                            <button data-toggle="modal" data-target="#confirm" style="background-color:#00af57;" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>
+                        </div>
+                        <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title">Confirm Submission</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p id="messagem">
+                                            Are you sure you want to submit this publication?
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                        <button type="submit" id="btn-postFile" class="btn btn-primary">Yes</button>
+                                        <br><br>
+                                        <div id="status"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <div>
-                        <button data-toggle="modal" data-target="#confirm" style="background-color:#00af57;" class="btn btn-w-m btn-primary pull-right">SUBMIT PUBLICATION</button>
-                    </div>
-                    <div class="modal inmodal" id="confirm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                    <h4 class="modal-title">Confirm Submission</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p id="messagem">
-                                        Are you sure you want to submit this publication?
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                                    <button type="submit" id="btn-postFile" class="btn btn-primary">Yes</button>
-                                    <br><br>
-                                    <div id="status"></div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
+                </div>
             </div>
-        </div>
     </div>
 </div>
 <script src="~/Scripts/jquery-3.1.1.min.js" type="text/javascript"></script>
