@@ -1,15 +1,18 @@
 ﻿(function () {
     $(document).ready(function () {
-        $('#assign-curator').click(submitCuratorAssignment);
         loadPublication();
+        const apiBaseUrl = "https://curationapi.kec.ac.ke/api"
+        let chiefCuratorGuid = $('#CurrentUserGuid').val();
+        let publicationId = $('#publication-view').attr('data-publicationId');
+        let assignmentGETUrl = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/assignments?chiefCuratorGuid=${chiefCuratorGuid}`);
+
+        $('#assign-curator').click(submitCuratorAssignment);  
     });
     //Functions Section
     function loadPublication() {
         let publicationId = $('#publication-view').attr('data-publicationId');
         let chiefCuratorGuid = $('#CurrentUserGuid').val();
         let url = apiBaseUrl.concat(`/chiefcurator/UnAssignedPublication/${publicationId}?chiefCuratorGuid=${chiefCuratorGuid}`);
-        let Geturl = apiBaseUrl.concat(`/chiefcurator/UnAssignedPublications/${publicationId}?chiefCuratorGuid=${chiefCuratorGuid}`);
-        let Geturl2 = apiBaseUrl
         $.ajax({
             url: url,
             crossDomain: true,
@@ -57,7 +60,6 @@
                        
                   </div>
                  </dl>`);
-            loadCurators();
         }).fail(function (jqXHR, textStatus, errorThrown) {
             ShowAlert('Something went wrong while loading publication', 'error');
         });
@@ -65,10 +67,6 @@
     function submitCuratorAssignment(e) {
         e.preventDefault();
         let curator = $("unassigned-curator");
-        //if (curator === null || curator === "") {
-        //    return ShowAlert("Please select a curator from the list",'error');
-        //}
-
         let section = $("#section-assigned").val();
         section = section === null || section === null ? "Whole publication" : section;
         let publicationId = $('#publication-view').attr('data-publicationId');
@@ -101,26 +99,25 @@
             ShowAlert('Something went wrong while processing curator assignment', 'error');
         });
     }
-    let chiefCuratorGuid = $('#CurrentUserGuid').val();
-    let publicationId = $('#publication-view').attr('data-publicationId');
-    let assignmentGETUrl = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/assignments?chiefCuratorGuid=${chiefCuratorGuid}`);
     function tableRows(data) {
+       
+
         var tableRows = [];
         for (var i = 0; i < data.length; i++) {
             tableRows.push(drawRow(data[i]));
         }
         return tableRows;
     };
-    //Start by getting publication list based on Payment Verification Stage
-    $.ajax({
-        url: assignmentGETUrl,
-        type: "GET",
-        dataType: "json",
-        success: function (data, status, jqhxr) {
-            //This code snipet prepares to append Json Data
-            $('#publication-assignments').append(tableRows(data));
-        }
-    });
+   //Start by getting publication list based on Payment Verification Stage
+    //$.ajax({
+    //    url: assignmentGETUrl,
+    //    type: "GET",
+    //    dataType: "json",
+    //    success: function (data, status, jqhxr) {
+    //        //This code snipet prepares to append Json Data
+    //        $('#publication-assignments').append(tableRows(data));
+    //    }
+    //});
     //This functionpopulates the tbody inner HTML with json data on call
     function drawRow(rowData) {
         var row = $("<tr />")

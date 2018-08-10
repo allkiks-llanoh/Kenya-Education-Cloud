@@ -533,6 +533,7 @@
     <Content Include="Connected Services\Application Insights\ConnectedService.json" />
     <Content Include="Views\Publisher\Certificate.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\publishers - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\publishers-dev - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dialog.css" />

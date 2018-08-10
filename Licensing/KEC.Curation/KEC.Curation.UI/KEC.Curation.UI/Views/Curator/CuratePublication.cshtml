@@ -53,6 +53,10 @@
                 $('#showHtml').toggleClass('hidden');
                 getHtmlValue()
             }
+            if (mimeTypeCheck == "pdf") {
+                $('#showPdf').toggleClass('hidden');
+                getPdfValue()
+            }
         }
         function getEpubValue() {
             var mimi = document.getElementById("publicationUrlGot").value;
@@ -62,6 +66,16 @@
             ifrm.style.width = "1000px";
             ifrm.style.height = "600px";
             document.getElementById("showEpub").appendChild(ifrm);
+        }
+        function getPdfValue() {
+            var mimi = document.getElementById("publicationUrlGot").value;
+            console.log(mimi);
+            var ifrm = document.createElement("iframe");
+            ifrm.setAttribute("src", " " + mimi);
+            ifrm.style.width = "1000px";
+            ifrm.style.height = "600px";
+            document.getElementById("showPdf").appendChild(ifrm);
+            window.frames["ifrm"].document.oncontextmenu = function () { return false; };
         }
         function getHtmlValue() {
             $(document).ready(function () {
@@ -80,6 +94,7 @@
         <div class="row">
             <div class="form-group col-md-10 hidden">
                 <input type="text" name="publicationUrlGot" id="publicationUrlGot" class="form-control">
+                <input type="text" name="SubjectId" id="SubjectId" class="form-control" value="@Model.Subjectid">
             </div>
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -116,42 +131,49 @@
                         <br>
                     </div>
                 </div>
+                <div id="showPdf" class="hidden">
+                    <div class="col-md-6">
+                        <br>
+                        <div style="color:black; font-weight:bold;font-size:15px;">Online Curation, View Content On This Frame</div>
+                        <br>
+                    </div>
+                </div>
+                <br>
             </div>
-            <br>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Curator Recomendations</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Curator Recomendations</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="ibox-content" id="chief-curator-comment">
-                        @Html.Partial("_NotesEditorPartial")
-                    </div>
-                    <div class="ibox-footer">
-                        <a href="#" class="btn btn-primary" id="save-notes">Save comments</a>
-                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#confirmsave">Save&nbsp;&amp;&nbsp;Submit</a>
-                        <a href="@Url.Action("CuratorView","Curator")" class="btn btn-warning" id="back-to-assignments">Back to Assignments</a>
-                        <div class="modal inmodal" id="confirmsave" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title">Confirm Submission</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>
-                                            Are you sure you want to submit the recommendations?
-                                        </p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                                        <button type="button" name="LegalApprove" id="save-notes-submit" class="btn btn-primary">Yes</button>
+                        <div class="ibox-content" id="chief-curator-comment">
+                            @Html.Partial("_NotesEditorPartial")
+                        </div>
+                        <div class="ibox-footer">
+                            <a href="#" class="btn btn-primary" id="save-notes">Save comments</a>
+                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#confirmsave">Save&nbsp;&amp;&nbsp;Submit</a>
+                            <a href="@Url.Action("CuratorView","Curator")" class="btn btn-warning" id="back-to-assignments">Back to Assignments</a>
+                            <div class="modal inmodal" id="confirmsave" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title">Confirm Submission</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                Are you sure you want to submit the recommendations?
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                            <button type="button" name="LegalApprove" id="save-notes-submit" class="btn btn-primary">Yes</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +188,7 @@
     <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
 </div>
 <div class="form-group col-md-10">
-    <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
+   
 </div>
 <div class="form-group col-md-10">
     <input type="text" name="FullName" id="FullName" class="form-control hidden" value="@Model.FullName">

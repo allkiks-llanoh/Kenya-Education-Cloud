@@ -147,6 +147,13 @@ namespace KEC.Curation.Web.Api.Serializers
                 return _publication.CutationUrl == null ? string.Empty : _publication.CutationUrl;
             }
         }
+        public string Publisher
+        {
+            get
+            {
+                return _publication.PublisherName;
+            }
+        }
         public string Stage
         {
             get

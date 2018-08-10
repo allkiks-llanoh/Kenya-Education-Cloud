@@ -9,7 +9,6 @@
     <script src="@Url.Content("~/js/legalVerify.js")"></script>
     <script src="@Url.Content("~/js/Scripts/bootstrap.min.js")"></script>
     <script src="~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
     @Scripts.Render("~/plugins/sweetAlert")
 }
 @{
@@ -18,6 +17,7 @@
     var Publication = Request.Params["Publication"];
     var KICDNumber = Request.Params["KICDN"];
     var MimeTypes = Request.Params["MimeType"];
+    var Publisher = Request.Params["Publisher"];
 }
 <div class="text-center m-t-lg">
     <h1>
@@ -39,6 +39,8 @@
                                     <dl>
                                         <dt>Curation Number</dt>
                                         <dd>@KICDNumber</dd>
+                                        <dt>Publisher</dt>
+                                        <dd>@Publisher</dd>
                                         <dt>Title</dt>
                                         <dd>@Title</dd>
                                         <dt>Publication</dt>
@@ -50,21 +52,41 @@
                             @*--------------------------------------epub starts here------------------------------------*@
                             <div id="epub" class="panel-body">
                                 <div id="showEpub" class="hidden">
-                                    <dl>
+                                    <dl style="margin-top:-40px;">
                                         <dt>Curation Number</dt>
                                         <dd>@KICDNumber</dd>
+                                        <dt>Publisher</dt>
+                                        <dd>@Publisher</dd>
                                         <dt>Title</dt>
                                         <dd>@Title</dd>
-                                        <dt>Publication</dt>
-                                        <dd><a href="/Readium/cloud-reader/index.html?epub=@Publication" target="_blank">Link to publication</a></dd>
+                                        @*<dt>Publication</dt>
+                                        <dd><a href="/Readium/cloud-reader/index.html?epub=@Publication" target="_blank">Link to publication</a></dd>*@
                                     </dl>
                                     <div>
-                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:800px;width:100%;"
                                                 src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Publication)'></iframe>
                                     </div>
+                                </div>
+                            </div>
+                            @*------------------------------------epub ends here-------------------------------------*@
+                            @*------------------------------------PDF starts here-------------------------------------*@
+                            <div id="pdf" class="panel-body ">
+                                <div id="showPDF" class="hidden">
+                                    <dl style="margin-top:-40px;">
+                                        <dt>Curation Number</dt>
+                                        <dd>@KICDNumber</dd>
+                                        <dt>Publisher</dt>
+                                        <dd>@Publisher</dd>
+                                        <dt>Title</dt>
+                                        <dd>@Title</dd>
+                                    </dl>
+                                    <div>
+                                        <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:800px;width:100%;"
+                                                src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(""+Publication)'></iframe>
                                     </div>
                                 </div>
-                            @*------------------------------------epub ends here-------------------------------------*@
+                            </div>
+                            @*------------------------------------PDF ends here-------------------------------------*@
                             @*------------------------------------footer starts here---------------------------------*@
                             <div id="showFooter" class="hidden">
                                 <div class="panel-footer">
@@ -77,12 +99,12 @@
                                         </div>
                                         <div class="row">
                                             @*<div class="form-group" style="text-align:left;">
-                                                    &nbsp; &nbsp;<label for="actiontaken">Select Action:</label>
-                                                    <select name="actionTaken" id="actionTaken" class="form-control">
-                                                        <option value="PublicationMoveToNextStage">Approve</option>
-                                                        <option value="PublicationRejected">Reject</option>
-                                                    </select>
-                                                </div>*@
+                            &nbsp; &nbsp;<label for="actiontaken">Select Action:</label>
+                            <select name="actionTaken" id="actionTaken" class="form-control">
+                                <option value="PublicationMoveToNextStage">Approve</option>
+                                <option value="PublicationRejected">Reject</option>
+                            </select>
+                        </div>*@
                                             <div class="form-group col-md-10">
                                                 <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
                                             </div>
@@ -162,7 +184,12 @@
             $('#showFooter').toggleClass('hidden');
             $('#showError').hide();
         }
-        if (uICheck != "application/x-zip-compressed" || uICheck != "application/epub zip") {
+        if (uICheck == "application/pdf") {
+            $('#showPDF').toggleClass('hidden');
+            $('#showFooter').toggleClass('hidden');
+            $('#showError').hide();
+        }
+        if (uICheck != "application/x-zip-compressed" || uICheck != "application/epub zip" || uICheck != "application/pdf") {
             $('#showError').toggleClass('hidden');
             $('#hideThise').hide();
         }
