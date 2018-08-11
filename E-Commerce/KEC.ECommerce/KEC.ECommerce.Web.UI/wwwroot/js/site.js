@@ -94,7 +94,9 @@ function getAllUrlParams(url) {
 $(document).ready(function () {
     $(window).resize(function () {
         $('body').css('padding-top', parseInt($('#main-appbar').css("height")));
+        $('#content').css('margin-bottom', parseInt($('#footer').css("height")));
     });
+    $('#content').css('margin-bottom', parseInt($('#footer').css("height")));
     $('body').css('padding-top', parseInt($('#main-appbar').css("height")));
     $('body').append('<div id="toTop" class="button info"><span class="mif-arrow-up icon fg-white"></span> Back to Top</div>');
     $(window).scroll(function () {
