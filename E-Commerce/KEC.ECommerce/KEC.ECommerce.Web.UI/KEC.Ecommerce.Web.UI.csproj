@@ -65,6 +65,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Shared\Components\ProductsQuickLinks\Default.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Mailer\Templates\ConfirmAccount.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
