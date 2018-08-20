@@ -25,6 +25,6 @@ function drawRow(rowData) {
     row.append($("<td>" + rowData.publication + "</td>"));
     row.append($("<td>" + rowData.title + "</td>"));
     row.append($("<td>" + rowData.status + "</td>"));
-    row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.publicationId}?Pub=${rowData.publicationId}&Urls=${rowData.publicationUrl}&Assignee=${rowData.assignee}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Recommendations</a>`));
+    row.append($(`<td> <a href="/ChiefCurator/ViewPublication/${rowData.publicationId}?Pub=${rowData.publicationId}&Urls=${rowData.publicationUrl}&Assignee=${rowData.assignee}&Mime=${rowData.type}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Read Recommendations</a>`));
     return row[0];
 };

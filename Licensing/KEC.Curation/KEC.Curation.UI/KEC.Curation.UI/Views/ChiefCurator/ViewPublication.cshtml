@@ -19,56 +19,8 @@
     var Urls = Request.Params["Urls"];
     var MimeType = Request.Params["Mime"];
 }
-<script type="text/javascript">
-    (function () {
-        $(document).ready(function () {
-            getPublicationCurationComments();
-        });
-        ///Functions Section
-        function getPublicationCurationComments() {
-            let publicationId = $('#publication-view').attr('data-publicationId');
-            let curatorName = $('#CurrentUserGuid').val();
-            let chiefCuratorGUID = $('#publicationUrlGot').val();
-            let urldrd = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorcomments?publicationId=${publicationId}`);
-            function tableRows(data) {
-                var tableRows = [];
-                for (var i = 0; i < data.length; i++) {
-                    tableRows.push(drawRow(data[i]));
-                }
-                return tableRows;
-            };
-            //Start by getting publication list based on Payment Verification Stage
-            $.ajax({
-                url: urldrd,
-                type: "GET",
-                dataType: "json",
-                success: function (data, status, jqhxr) {
-                    //This code snipet prepares to append Json Data
-                    $('#FinanceList').append(tableRows(data));
-                }
-            });
-            //This functionpopulates the tbody inner HTML with json data on call
-            function drawRow(rowData) {
-                var row = $("<tr />")
-                row.append($("<td>" + rowData.fullName + "</td>"));
-                row.append($("<td>" + rowData.notes + "</td>"));
-                return row[0];
-            }
-        }
-    })();
-</script>
-<div class="form-group col-md-10">
-    <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
-</div>
-<div class="form-group col-md-10">
-    <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
-</div>
-<div class="form-group col-md-10">
-    <input type="text" name="ChiefFullName" id="ChiefFullName" class="form-control hidden" value="@Model.FullName">
-</div>
-<div class="hidden">
-    <h1 id="identity" data-identity=@PubId></h1>
-</div>
+
+
 <div class="wrapper wrapper-content animated fadeInRight" id="publication-view" data-publicationId="@ViewBag.PublicationId">
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">
@@ -92,11 +44,48 @@
                     </div>
                 </div>
             </div>
-            @*-------------------------just in case they need to view publications disply here--------------
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="row m">
+                            <div class="panel panel-success">
+                                <div class="panel-heading" style="background-color:#2855a8;">Curate Content On This Frame</div>
+                                @*-------------------------------------html starts here-------------------------------------*@
+                                    <div id="showHtml"  class="panel-body hidden">
+                                        <br>
+                                        <div>
+                                            <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:900px;"
+                                                    src='@Urls)'></iframe>
+                                        </div>
+                                    </div>
+                                @*--------------------------------------html ends here--------------------------------------*@
+                                @*--------------------------------------epub starts here------------------------------------*@
+                                    <div id="showEpub" class="center hidden panel-body">
+                                        <br>
+                                        <div>
+                                            <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                                    src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Urls)'></iframe>
+                                        </div>
+                                    </div>
+                                @*--------------------------------------epub ends here-------------------------------------*@
+                                @*------------------------------------PDF starts here-------------------------------------*@
+                                    <div id="showPDF" class="center hidden panel-body">
+                                        <br>
+                                        <div>
+                                            <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                                    src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(""+Urls)'></iframe>
+                                        </div>
+                                @*------------------------------------PDF ends here-------------------------------------*@
+                                @*--------------------------------------footer starts here---------------------------------*@
 
-                     ///////////////////////////////////////////////////////////////////////////////////////////
+                            </div>
 
-                -----------------------------------------------------------------------------------------------*@
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -179,5 +168,79 @@
         </div>
     </div>
 </div>
+<div class="form-group col-md-10">
+    <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
+</div>
+<div class="form-group col-md-10">
+    <input type="text" name="SubjectId" id="SubjectId" class="form-control hidden" value="@Model.Subjectid">
+</div>
+<div class="form-group col-md-10">
+    <input type="text" name="ChiefFullName" id="ChiefFullName" class="form-control hidden" value="@Model.FullName">
+</div>
+<div class="hidden">
+    <input type="text" name="MimeTypeCheck" id="MimeTypeCheck" class="form-control hidden" value="@MimeType" />
+    <h1 id="identity" data-identity=@PubId></h1>
+</div>
 
-
+<script type="text/javascript">
+    $(document).ready(function () {
+        let uICheck = $('#MimeTypeCheck').val();
+        if (uICheck == "application/epub zip") {
+            $('#showEpub').toggleClass('hidden');
+            //$('#showFooter').toggleClass('hidden');
+            //$('#showError').hide();
+        }
+        if (uICheck == "application/x-zip-compressed") {
+            $('#showHtml').toggleClass('hidden');
+            //$('#showFooter').toggleClass('hidden');
+            //$('#showError').hide();
+        }
+        if (uICheck == "application/pdf") {
+            $('#showPDF').toggleClass('hidden');
+            //$('#showFooter').toggleClass('hidden');
+            //$('#showError').hide();
+        }
+        if (uICheck != "application/x-zip-compressed" || uICheck != "application/epub zip" || uICheck != "application/pdf") {
+            $('#showError').toggleClass('hidden');
+            $('#hideThise').hide();
+        }
+    });
+</script>
+<script type="text/javascript">
+    (function () {
+        $(document).ready(function () {
+            getPublicationCurationComments();
+        });
+        ///Functions Section
+        function getPublicationCurationComments() {
+            let publicationId = $('#publication-view').attr('data-publicationId');
+            let curatorName = $('#CurrentUserGuid').val();
+            let chiefCuratorGUID = $('#publicationUrlGot').val();
+            let urldrd = apiBaseUrl.concat(`/chiefcurator/publication/${publicationId}/curatorcomments?publicationId=${publicationId}`);
+            function tableRows(data) {
+                var tableRows = [];
+                for (var i = 0; i < data.length; i++) {
+                    tableRows.push(drawRow(data[i]));
+                }
+                return tableRows;
+            };
+            //Start by getting publication list based on Payment Verification Stage
+            $.ajax({
+                url: urldrd,
+                type: "GET",
+                dataType: "json",
+                success: function (data, status, jqhxr) {
+                    //This code snipet prepares to append Json Data
+                    $('#FinanceList').append(tableRows(data));
+                }
+            });
+            //This functionpopulates the tbody inner HTML with json data on call
+            function drawRow(rowData) {
+                var row = $("<tr />")
+                row.append($("<td>" + rowData.fullName + "</td>"));
+                row.append($("<td>" + rowData.notes + "</td>"));
+                return row[0];
+            }
+        }
+    })();
+</script>

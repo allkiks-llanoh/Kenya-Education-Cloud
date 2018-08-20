@@ -112,31 +112,38 @@
         });
     </script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            //Disable cut copy paste
-            $('body').bind('cut copy paste', function (e) {
-                e.preventDefault();
-            });
 
-            //Disable mouse right click
-            $("body").on("contextmenu", function (e) {
-                return false;
-            });
-            //Disable cut copy paste on iframe
-            $('#app-container').bind('cut copy paste', function (e) {
-                e.preventDefault();
+        require(["readium_shared_js/globalsSetup", "readium_shared_js/globals"], function (GlobalsSetup, Globals) {
+            require(['jquery'], function ($) {
+
+                $(document).ready(function () {
+                    console.log(ReadiumSDK.reader);
+                });
+
+                ReadiumSDK.reader.on(ReadiumSDK.Events.CONTENT_DOCUMENT_LOADED, function ($iframe, spineItem) {
+                    Globals.logEvent("CONTENT_DOCUMENT_LOADED", "ON", "index.html");
+
+                    //$iframe.contents()
+
+                    var doc = $iframe[0].contentDocument || $iframe[0].contentWindow.document;
+                    $('body', doc).on("click", function () {
+                        alert("Procedure Not Allowed");
+                    });
+                });
             });
         });
+
+
     </script>
-   
+    
 </head>
 
-    <!-- This is all application-specific HTML -->
-    <body>
-        <nav id="app-navbar" class="navbar" role="banner" aria-label="{{Strings.i18n_toolbar}}">
-        </nav>
-        <div id="app-container">
-        </div>
-    </body>
+<!-- This is all application-specific HTML -->
+<body>
+    <nav id="app-navbar" class="navbar" role="banner" aria-label="{{Strings.i18n_toolbar}}">
+    </nav>
+    <div id="app-container">
+    </div>
+</body>
 
 </html>

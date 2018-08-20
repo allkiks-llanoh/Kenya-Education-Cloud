@@ -1,7 +1,7 @@
 ﻿@using KEC.Curation.UI.Models;
 @model ChiefCurators
 @{
-    ViewBag.Title = "Publication";
+    ViewBag.Title = "Publication Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
@@ -42,6 +42,50 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="row m">
+                            <div class="panel panel-success">
+                                <div class="panel-heading" style="background-color:#2855a8;">Publication Information</div>
+                                @*-------------------------------------html starts here-------------------------------------*@
+                                    <div id="showHtml" class="panel-body hidden">
+                                        <br>
+                                        <div>
+                                                <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:900px;"
+                                                        src='@Urls)'></iframe>
+                                            </div>
+                                    </div>
+                                @*--------------------------------------html ends here--------------------------------------*@
+                                @*--------------------------------------epub starts here------------------------------------*@
+                                    <div id="showEpub" class="panel-body center hidden">
+                                        <br>
+                                        <div>
+                                            <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                                    src='@Url.Content("~/Readium/cloud-reader/index.html?epub=" +Urls)'></iframe>
+                                        </div>
+                                    </div>
+                                @*--------------------------------------epub ends here-------------------------------------*@
+                                @*------------------------------------PDF starts here-------------------------------------*@
+                                    <div id="showPDF" class="panel-body center hidden">
+                                        <br>
+                                        <div>
+                                            <iframe allowfullscreen="true" webkitallowfullscreen="true" style="height:600px;width:100%;"
+                                                    src='@Url.Content("~/Scripts/plugins/ViewerJs/")#@Url.Content(""+Urls)'></iframe>
+                                        </div>
+                                    </div>
+                                @*------------------------------------PDF ends here-------------------------------------*@
+                                @*--------------------------------------footer starts here---------------------------------*@
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
@@ -146,6 +190,30 @@
     <h1 id="identity" data-identity=@PubId></h1>
 </div>
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        let uICheck = $('#MimeTypeCheck').val();
+        if (uICheck == "application/epub zip") {
+            $('#showEpub').toggleClass('hidden');
+            //$('#showFooter').toggleClass('hidden');
+            //$('#showError').hide();
+        }
+        if (uICheck == "application/x-zip-compressed") {
+            $('#showHtml').toggleClass('hidden');
+            //$('#showFooter').toggleClass('hidden');
+            //$('#showError').hide();
+        }
+        if (uICheck == "application/pdf") {
+            $('#showPDF').toggleClass('hidden');
+            //$('#showFooter').toggleClass('hidden');
+            //$('#showError').hide();
+        }
+        if (uICheck != "application/x-zip-compressed" || uICheck != "application/epub zip" || uICheck != "application/pdf") {
+            $('#showError').toggleClass('hidden');
+            $('#hideThise').hide();
+        }
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
         let publicationId = $('#identity').attr('data-identity');

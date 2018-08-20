@@ -56,8 +56,8 @@
                             <dd>${publication.title}</dd> 
                        </div>
                         <div class="col-md-4">
-                            <dt>Principla Curator</dt>
-                            <dd>KEC</dd> 
+                            <dt>Curation Level</dt>
+                            <dd>Principal Curator Approval</dd> 
                        </div>
                   </div>
                   <br><br>

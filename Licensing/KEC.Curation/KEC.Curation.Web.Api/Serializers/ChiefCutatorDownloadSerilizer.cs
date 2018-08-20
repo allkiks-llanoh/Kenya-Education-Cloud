@@ -80,7 +80,14 @@ namespace KEC.Curation.Web.Api.Serializers
                 return publication.Id;
             }
         }
-
+        public string Type
+        {
+            get
+            {
+                var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(_assignment.PublicationId)).FirstOrDefault();
+                return publication.MimeType;
+            }
+        }
         public string PublicationUrl
         {
             get
