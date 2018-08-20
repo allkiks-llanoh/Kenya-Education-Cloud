@@ -19,7 +19,8 @@ namespace KEC.ECommerce.Data.Repositories
         public async Task<IEnumerable<Publication>> TopPublicationsAsyc(int count = 6)
         {
             var publications = await (_context as ECommerceDataContext).Publications
-                                            .Where(p => !p.ThumbnailUrl.Equals(null) && p.Available.Equals(true))
+                                            .Where(p => !p.ThumbnailUrl.Equals(null) 
+                                            && p.Available.Equals(true) && p.Quantity>0)
                                             .OrderByDescending(p => p.CreatedAt)
                                             .Take(count).ToListAsync();
             return publications;
@@ -30,7 +31,7 @@ namespace KEC.ECommerce.Data.Repositories
             var publications = _ecommerceContext.Publications
                                             .Include(p => p.Category)
                                             .Include(p => p.Author)
-                                            .Where(p => p.CategoryId.Equals(categoryId) && p.Available.Equals(true))
+                                            .Where(p => p.CategoryId.Equals(categoryId) && p.Available.Equals(true) && p.Quantity > 0)
                                             .Distinct()
                                             .OrderByDescending(p => p.CreatedAt)
                                             .Take(count).ToList();
@@ -71,13 +72,14 @@ namespace KEC.ECommerce.Data.Repositories
             if (searchTerm == null)
             {
                 publications = _ecommerceContext.Publications.Where(p => p.CategoryId.Equals(categoryId)
-                                                                         && p.Available.Equals(true));
+                                                                         && p.Available.Equals(true) && p.Quantity>0);
             }
             else
             {
                 publications = _ecommerceContext.Publications.Where(p => p.CategoryId.Equals(categoryId)
                                                                     && (p.Description.Contains(searchTerm)
                                                                     && p.Available.Equals(true)
+                                                                    && p.Quantity>0
                                                                     || p.Level.Name.Contains(searchTerm))
                                                                     || p.Title.Contains(searchTerm) ||
                                                                     p.Subject.Name.Contains(searchTerm) ||

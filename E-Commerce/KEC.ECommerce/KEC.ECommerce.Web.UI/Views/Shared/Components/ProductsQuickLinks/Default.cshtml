@@ -1,0 +1,6 @@
+﻿@model IEnumerable<CategoryViewModel>
+
+@foreach (var item in Model)
+{
+    <li ><a class="fg-white" asp-controller="Store" asp-action="Publications" asp-route-categoryid="@item.Id">@item.Name</a></li>
+}

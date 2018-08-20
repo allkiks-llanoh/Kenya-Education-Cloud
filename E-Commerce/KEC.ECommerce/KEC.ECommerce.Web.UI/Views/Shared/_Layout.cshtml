@@ -131,7 +131,7 @@
                 </div>
             </div>
         </div>
-        <div class="fg-white bg-red">
+        <div class="fg-white bg-red" id="footer">
             <footer class="footer-bg">
                 
                     <div class="row" style="padding-top:20px;">
@@ -160,10 +160,9 @@
                         <div class="cell-md-3">
                             <h5>Quick Links </h5>
                             <ul style="font-size:12px;">
-                                <li><a target="_blank" style="color: inherit;" href="http://store-d.ac.ke/">Home</a></li>
-                                <li><a target="_blank" style="color: inherit;" href="http://store-d.ac.ke/Store/Publications?categoryid=1">Course Books</a></li>
-                                <li><a target="_blank" style="color: inherit;" href="http://store-d.ac.ke/Store/Publications?categoryid=3">Leisure Books</a></li>
-                                <li><a target="_blank" style="color: inherit;" href="http://store-d.ac.ke/Account/Register">Register</a></li>
+                                <li><a style="color: inherit;" asp-controller="Home" asp-action="Index">Home</a></li>
+                                @await Component.InvokeAsync("ProductsQuickLinks")
+                                <li><a asp-action="Register" asp-controller="Account" style="color: inherit;">Register</a></li>
 
                             </ul>
                         </div>
