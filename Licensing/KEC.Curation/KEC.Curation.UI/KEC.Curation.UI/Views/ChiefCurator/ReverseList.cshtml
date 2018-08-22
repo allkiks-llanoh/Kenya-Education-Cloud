@@ -1,0 +1,83 @@
+﻿@using KEC.Curation.UI.Models;
+@model ChiefCurators
+@{
+    ViewBag.Title = "Review";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="wrapper wrapper-content animated fadeInRight" id="publication-view">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row m">
+                        <div class="panel panel-success">
+                            <div class="panel-heading" style="background-color:#2855a8;">Publication Already Assigned To Chief Curators</div>
+                            <div class="ibox-content">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dataTables-example" id="unassigned-publications">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Title</th>
+                                                <th>Curation Number</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group" style="text-align:left;">
+                                <a class="button btn btn-w-m btn-primary pull-right" style="background-color:#00B55F; margin-right:15px;" href="/ChiefCurator/ChiefCurator">BACK TO PUBLICATIONS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group col-md-10">
+    <input type="text" name="CurrentUserGuid" id="CurrentUserGuid" class="form-control hidden" value="@Model.Guid">
+</div>
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    let mimi = "http://localhost:15177/api"
+    let chiefCuratorGUID = $('#CurrentUserGuid').val();
+    let url = mimi.concat(`/chiefcurator/reverseList?guid=${chiefCuratorGUID}`);
+    function tableRows(data) {
+        var tableRows = [];
+        for (var i = 0; i < data.length; i++) {
+            tableRows.push(drawRow(data[i]));
+        }
+        return tableRows;
+    };
+    //Start by getting publication list based on Curation Stage
+    $.ajax({
+        url: url,
+        type: "GET",
+        dataType: "json",
+        statusCode: {
+            201: () => { ShowAlert("Curator already assigned content", 'info'); },
+            500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
+        },
+        success: function (data, status, jqhxr) {
+            //This code snipet prepares to append Json Data
+            $('#unassigned-publications').append(tableRows(data));
+        }
+    });
+    //This functionpopulates the tbody inner HTML with json data on call
+    function drawRow(rowData) {
+        var row = $("<tr />")
+        row.append($("<td>" + rowData.publicationId + "</td>"));
+        row.append($("<td>" + rowData.title + "</td>"));
+        row.append($("<td>" + rowData.publication + "</td>"));
+        row.append($(`<td> <a href="/ChiefCurator/Reverse?PublicationId=${rowData.publicationId}" class="btn btn-w-m btn-info" style="background-color:#00B95F;" role="button">Confirm</a>`));
+        return row[0];
+    };
+
+</script>
+

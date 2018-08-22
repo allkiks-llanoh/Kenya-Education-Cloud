@@ -301,7 +301,7 @@ namespace KEC.Curation.Web.Api.Controllers
         [HttpGet("publication/withcomments")]
         public IActionResult WithCommentsAtChiefCuratorLevel([FromQuery]string userId)
         {
-           
+
             var assignment = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(userId) && !p.Submitted && p.Assigned);
             var assignmentList = assignment.Any() ?
              assignment.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
@@ -378,7 +378,7 @@ namespace KEC.Curation.Web.Api.Controllers
 
         [HttpGet("curator/listings/{id}")]
         public IActionResult GetAllCuratorAssignments([FromQuery]int id)
-        { 
+        {
             var assigment = _uow.CuratorAssignmentRepository.Find(p => p.Submitted && p.PublicationId.Equals(id)).FirstOrDefault();
             if (assigment == null)
             {
@@ -474,12 +474,12 @@ namespace KEC.Curation.Web.Api.Controllers
                                   .Find(p => p.Id.Equals(publicationId)
                                   && p.ChiefCuratorAssignment.ChiefCuratorGuid.Equals(model.ChiefCuratorGuid))
                                   .FirstOrDefault();
-           
+
             if (publication == null)
             {
                 return NotFound(value: new { message = "Publication Not Found in Repository." });
             }
-            var exists = _uow.ChiefCuratorCommentRepository.Find(p => p.PublicationId.Equals(model.PublicationId)).Any(); 
+            var exists = _uow.ChiefCuratorCommentRepository.Find(p => p.PublicationId.Equals(model.PublicationId)).Any();
             if (exists)
             {
                 return BadRequest("Comments for this publication already exists");
@@ -487,7 +487,7 @@ namespace KEC.Curation.Web.Api.Controllers
             var checkIfAllAssignmentsHaveBeenSubbmitted = _uow.CuratorAssignmentRepository.Find
                                                           (p => p.PublicationId.Equals(model.PublicationId)
                                                           && !p.Submitted).Count();
-            if (checkIfAllAssignmentsHaveBeenSubbmitted>0)
+            if (checkIfAllAssignmentsHaveBeenSubbmitted > 0)
             {
                 return StatusCode(StatusCodes.Status501NotImplemented, "NOT ALLOWED");
             }
@@ -636,6 +636,50 @@ namespace KEC.Curation.Web.Api.Controllers
                 return NotFound(value: new { message = "Publication record could not be retrieved" });
             }
             return Ok(value: new PublicationDownloadSerilizerToCurators(publication, _uow));
+        }
+        [HttpGet("reverselist")]
+        public IActionResult ReverseList([FromQuery]string guid)
+        {
+            var publication = _uow.ChiefCuratorAssignmentRepository.Find(p => p.ChiefCuratorGuid.Equals(guid)
+                                                                         && !p.Submitted);
+            if (publication == null)
+            {
+                return NotFound(value: new { message = "Publication record could not be retrieved" });
+            }
+            var publicationList = publication.Any() ?
+            publication.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
+            return Ok(publicationList);
+        }
+        [HttpDelete("reverse")]
+        public IActionResult reverse([FromBody] ReverseSerializer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(modelState: ModelState);
+            }
+            var publications = _uow.CuratorAssignmentRepository
+                                .Find(p => p.PublicationId.Equals(model.Id) && !p.Submitted).ToList();
+            if (publications == null)
+            {
+                return NotFound(value: new { message = "Publication could not be retrieved for reversal." });
+            }
+
+            try
+            {
+                Parallel.ForEach(publications, (publication, loopState) =>
+                {
+                    _uow.CuratorAssignmentRepository.Remove(publication);
+                });
+
+                _uow.Complete();
+
+                return Ok(value: new { message = "publication reversed" });
+            }
+            catch (Exception ex)
+            {
+                ex.GetBaseException();
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 

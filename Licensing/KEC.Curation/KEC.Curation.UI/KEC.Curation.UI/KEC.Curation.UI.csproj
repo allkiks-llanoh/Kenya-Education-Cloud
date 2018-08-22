@@ -1295,6 +1295,8 @@
     <Content Include="tsconfig.json" />
     <Content Include="Views\Home\Publishers.cshtml" />
     <Content Include="Views\Home\Documents.cshtml" />
+    <Content Include="Views\ChiefCurator\ReverseList.cshtml" />
+    <Content Include="Views\ChiefCurator\Reverse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
