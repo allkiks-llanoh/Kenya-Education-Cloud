@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using KEC.Curation.PublishersUI.Models;
 using KEC.Curation.PublishersUI.Cors;
+using System.IO;
 
 namespace KEC.Curation.PublishersUI.Controllers
 {
@@ -24,7 +25,7 @@ namespace KEC.Curation.PublishersUI.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -36,9 +37,9 @@ namespace KEC.Curation.PublishersUI.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -137,7 +138,7 @@ namespace KEC.Curation.PublishersUI.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -167,21 +168,68 @@ namespace KEC.Curation.PublishersUI.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
+
             {
-                var user = new ApplicationUser {FirstName=model.FirstName,LastName=model.LastName,Company=model.Company,
-                                                UserName = model.Email, Email = model.Email,
-                                                Address=model.Address, PostalAddress=model.PostalAddress,
-                                                Contact=model.Contact, KraPin=model.KraPin, BusinessNumber=model.BusinessNumber};
+                string registrationFilesavedName = "";
+                string kraPinFilesavedName = "";
+                string basepath = "/Documents/";
+
+                if (model.registrationFile != null && model.kraPinFile != null)
+                {
+                    try
+                    {
+                        var regfile = model.registrationFile;
+                        var pinfile = model.kraPinFile;
+                        if (regfile != null && regfile.ContentLength > 0)
+                        {
+                            var appendVariable = $"{DateTime.UtcNow.ToFileTimeUtc()}";
+                            var fileName = Path.GetFileName(regfile.FileName);
+                            var actualName = $"{appendVariable}{fileName}";
+                            var path = Path.Combine(Server.MapPath(basepath), actualName );
+                            regfile.SaveAs(path);
+                            registrationFilesavedName = basepath + actualName;
+                        }
+                        if (pinfile != null && pinfile.ContentLength > 0)
+                        {
+                            var appendVariablePin = $"{DateTime.UtcNow.ToFileTimeUtc()}";
+                            var fileName = Path.GetFileName(pinfile.FileName);
+                            var actualNamePin = $"{appendVariablePin}{fileName}";
+                            var path = Path.Combine(Server.MapPath(basepath), actualNamePin);
+                            pinfile.SaveAs(path);
+                            kraPinFilesavedName = basepath + actualNamePin;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.GetBaseException();
+                    }
+                }
+                var user = new ApplicationUser
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Company = model.Company,
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Address = model.Address,
+                    PostalAddress = model.PostalAddress,
+                    Contact = model.Contact,
+                    KraPin = model.KraPin,
+                    BusinessNumber = model.BusinessNumber,
+                    RegistrationFilesavedName = registrationFilesavedName,
+                    KraPinFilesavedName = kraPinFilesavedName
+
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    var htmlBody = HttpUtility.HtmlEncode( @" " + callbackUrl);
+                    var htmlBody = HttpUtility.HtmlEncode(@" " + callbackUrl);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", htmlBody);
 
                     return RedirectToAction("ConfirmRegitration", "Account");

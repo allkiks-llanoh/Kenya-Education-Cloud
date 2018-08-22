@@ -256,5 +256,10 @@ namespace KEC.Curation.UI.Controllers
         {
           return View();
         }
+        [CustomAuthorize(Roles = "Admin")]
+        public ActionResult Documents()
+        {
+            return View();
+        }
     }
 }

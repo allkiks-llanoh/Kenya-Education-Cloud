@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace KEC.Curation.PublishersUI.Models
 {
@@ -95,22 +96,13 @@ namespace KEC.Curation.PublishersUI.Models
 
         [Display(Name = "PostalAddress")]
         public string PostalAddress { get; set; }
-
-
         [Display(Name = "Business Number")]
         public string BusinessNumber { get; set; }
-
-
-
-
-
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Please enter a valid email")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
-    
         [Required(ErrorMessage = "password is required")]
         //[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]
@@ -118,11 +110,15 @@ namespace KEC.Curation.PublishersUI.Models
             , ErrorMessage = "Password should contain atleast one symbol, one digit, one capital letter and atleast 8 characters long e.g.#Karibu20.")]
         [Display(Name = "Password")]
         public string Password { get; set; }
-
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        //File Uploads
+        [Required(ErrorMessage = "KRA Pin is required")]
+        public HttpPostedFileBase kraPinFile { get; set; }
+        [Required(ErrorMessage = "Registration certificate is requred is required")]
+        public HttpPostedFileBase registrationFile { get; set; }
     }
 
     public class ResetPasswordViewModel

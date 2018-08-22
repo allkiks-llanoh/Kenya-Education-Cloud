@@ -25,11 +25,12 @@
                             <th> Contact</th>
                             <th> Phone Number </th>
                             <th> Email </th>
+                            <th> Uploaded Files </th>
                         </tr>
 
                         <tfoot>
                             <tr>
-                                <td colspan="5">
+                                <td colspan=6">
                                     <ul class="pagination pull-right"></ul>
                                 </td>
                             </tr>
@@ -72,6 +73,9 @@
         row.append($("<td>" + rowData.FirstName + "</td>"));
         row.append($("<td>" + rowData.Contact + "</td>"));
         row.append($("<td>" + rowData.Email + "</td>"));
+        row.append($(`<td> 
+<a href="/Home/Documents?reg=${rowData.RegistrationFilesavedName}&pin=${rowData.KraPinFilesavedName}" class="btn btn-info" style="background-color:#00B95F;" role="button"><i class="fa fa-edit"></i> View Documents</a> 
+`));
         return row[0];
     };
 

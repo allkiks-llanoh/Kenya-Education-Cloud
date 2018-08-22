@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "EditCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+    <script src="@Url.Content("~/js/EditCategory.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/plugins/typehead/bootstrap3-typeahead.min.js")"></script>
+}
+@{
+    var pin = Request.Params["pin"];
+    var reg = Request.Params["reg"];
+    var baseUrl = "https://cms.kec.ac.ke";
+
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content">
+        <div class="row m">
+            <div class="panel panel-success">
+                <div class="panel-heading" style="background-color:#2855A8;">PIN Certificate</div>
+                <div class="panel-body">
+                    <a href="@baseUrl@pin" target="_blank">View/Download</a>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading" style="background-color:#2855A8;">Registration Certificate</div>
+                <div class="panel-body">
+                    <a href="@baseUrl@reg" target="_blank">View/Download</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
