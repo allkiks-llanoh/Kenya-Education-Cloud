@@ -102,12 +102,11 @@
         }
         function getPdfValue() {
             var mimi = document.getElementById("publicationUrlGot").value;
-            console.log(mimi);
             var ifrm = document.createElement("iframe");
-            ifrm.setAttribute("src", " " + mimi);
+            ifrm.setAttribute("src", "/Scripts/plugins/ViewerJs/#" + mimi);
             ifrm.style.width = "1000px";
             ifrm.style.height = "600px";
-            document.getElementById("showPdf").appendChild(ifrm);
+            document.getElementById("showPdf").appendChild(ifrm);  
         }
         function getHtmlValue() {
             $(document).ready(function () {

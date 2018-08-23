@@ -31,7 +31,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group" style="text-align:left;">
-                                <a class="button btn btn-w-m btn-primary pull-right" style="background-color:#00B55F; margin-right:15px;" href="/ChiefCurator/ChiefCurator">BACK TO PUBLICATIONS</a>
+                                <a class="button btn btn-w-m btn-primary pull-right" style="background-color:#00B55F; margin-right:15px;" href="/ChiefCurator/ChiefCuratorView">BACK TO PUBLICATIONS</a>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
 </div>
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
-    let mimi = "https://curationapi.kec.ac.ke/api"
+    let mimi = "https://curationapi.kec.ac.ke/api";
     let chiefCuratorGUID = $('#CurrentUserGuid').val();
     let url = mimi.concat(`/chiefcurator/reverseList?guid=${chiefCuratorGUID}`);
     function tableRows(data) {
