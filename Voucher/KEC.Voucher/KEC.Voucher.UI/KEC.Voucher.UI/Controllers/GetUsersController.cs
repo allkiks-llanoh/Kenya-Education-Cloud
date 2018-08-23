@@ -17,5 +17,11 @@ namespace KEC.Voucher.UI.Controllers
 
             return Json(new SelectList(_users, "FullName", "Email"));
         }
+        public ActionResult GetAdmin()
+        {
+            var _users = context.Users.ToList();
+
+            return Json(new SelectList(_users, "FullName", "Email"));
+        }
     }
 }

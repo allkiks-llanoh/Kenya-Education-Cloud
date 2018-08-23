@@ -559,6 +559,19 @@ namespace KEC.Curation.Web.Api.Controllers
 
         }
         #endregion
+        #region Get Chief Curator Comments
+
+        [HttpGet("publications/{publicationId:int}/curator/comments")]
+        public IActionResult ReadCurationCommentsFromCurators(int publicationId)
+        {
+            var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(publicationId)).FirstOrDefault();
+            if (publication == null)
+            {
+                return NotFound(value: new { message = "Publication record could not be retrieved" });
+            }
+            return Ok(value: new PublicationDownloadSerilizerToCurators(publication, _uow));
+        }
+        #endregion
         #region Methods
         private List<CurationDownloadSerializer> CurationAssignments(string userGuid, IUnitOfWork uow)
         {
@@ -627,16 +640,8 @@ namespace KEC.Curation.Web.Api.Controllers
             }
         }
         #endregion
-        [HttpGet("publications/{publicationId:int}/curator/comments")]
-        public IActionResult ReadCurationCommentsFromCurators(int publicationId)
-        {
-            var publication = _uow.PublicationRepository.Find(p => p.Id.Equals(publicationId)).FirstOrDefault();
-            if (publication == null)
-            {
-                return NotFound(value: new { message = "Publication record could not be retrieved" });
-            }
-            return Ok(value: new PublicationDownloadSerilizerToCurators(publication, _uow));
-        }
+        #region Reverse
+        //Get list here
         [HttpGet("reverselist")]
         public IActionResult ReverseList([FromQuery]string guid)
         {
@@ -650,6 +655,7 @@ namespace KEC.Curation.Web.Api.Controllers
             publication.Select(p => new ChiefCutatorDownloadSerilizer(p, _uow)).ToList() : new List<ChiefCutatorDownloadSerilizer>();
             return Ok(publicationList);
         }
+        // Delete at this point
         [HttpDelete("reverse")]
         public IActionResult reverse([FromBody] ReverseSerializer model)
         {
@@ -659,18 +665,19 @@ namespace KEC.Curation.Web.Api.Controllers
             }
             var publications = _uow.CuratorAssignmentRepository
                                 .Find(p => p.PublicationId.Equals(model.Id) && !p.Submitted).ToList();
+
             if (publications == null)
             {
                 return NotFound(value: new { message = "Publication could not be retrieved for reversal." });
             }
-
+            var changeFullyAssigned = _uow.PublicationRepository.Find(p => p.Id.Equals(model.Id)).FirstOrDefault();
             try
             {
                 Parallel.ForEach(publications, (publication, loopState) =>
                 {
                     _uow.CuratorAssignmentRepository.Remove(publication);
                 });
-
+                changeFullyAssigned.FullyAssigned = false;
                 _uow.Complete();
 
                 return Ok(value: new { message = "publication reversed" });
@@ -681,6 +688,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        #endregion
     }
 
 }

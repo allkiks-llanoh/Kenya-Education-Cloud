@@ -26,6 +26,7 @@ namespace KEC.Curation.Web.Api.Controllers
         {
             _uow = uow;
         }
+        #region View Publication
         [HttpGet("viewpublication/{publicationId:int}")]
         public IActionResult ViewPublication(int publicationId)
         {
@@ -34,6 +35,8 @@ namespace KEC.Curation.Web.Api.Controllers
                 publications.Select(p => new PublicationDownloadSerilizerToCurators(p, _uow)).ToList() : new List<PublicationDownloadSerilizerToCurators>();
             return Ok(value: publicationList);
         }
+        #endregion
+        #region Get Publications
         [HttpGet("new")]
         public IActionResult Principal()
         {
@@ -43,6 +46,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 publicatons.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
             return Ok(value: publicationList);
         }
+        //Get Publications Assigned to chief curators
         [HttpGet("publications/assignedtochiefs")]
         public IActionResult ToCuration()
         {
@@ -64,6 +68,7 @@ namespace KEC.Curation.Web.Api.Controllers
                 publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
             return Ok(value: publicationList);
         }
+        //Get Publications at Approval Stage
         [HttpGet("withcomments")]
         public IActionResult WithComments(string principalCuratorGuid)
         {
@@ -131,31 +136,8 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpGet("Reverse/{stage}")]
-        public IActionResult PublicationsToReverse(PublicationStage stage)
-        {
-            try
-            {
-                var stageLevel = (int)stage;
-                var publicationIds = _uow.PublicationRepository
-                                         .Find(p => p.PublicationStageLogs.Count == stageLevel
-                                               && !p.PublicationStageLogs.Any(l => l.Stage > stage)
-
-                                               && !p.PublicationStageLogs
-
-                                                   .Any(l => l.ActionTaken == ActionTaken.PublicationRejected))
-                                               .Select(p => p.Id);
-
-                var publications = _uow.PublicationRepository.Find(p => publicationIds.Contains(p.Id));
-                var publicationList = publications.Any() ?
-                            publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
-                return Ok(value: publicationList);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }
+        #endregion
+        #region Assign Chief
         // POST: api/PrincipalCurator/publication/publicationId/assign
         [HttpPost("publication/{publicationId:int}/assign")]
         public IActionResult Assign(int publicationId, [FromBody]ChiefCuratorAssignmentSerializer model)
@@ -214,6 +196,8 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        #endregion
+        #region coments
         [HttpPost("PrincipalCuratorComments/{id}")]
         public IActionResult Comments(int publicationId, [FromBody] PrincipalCuratorCommentsSerilizer model)
         {
@@ -298,6 +282,33 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        #endregion
+        #region Reverse
+        [HttpGet("Reverse/{stage}")]
+        public IActionResult PublicationsToReverse(PublicationStage stage)
+        {
+            try
+            {
+                var stageLevel = (int)stage;
+                var publicationIds = _uow.PublicationRepository
+                                         .Find(p => p.PublicationStageLogs.Count == stageLevel
+                                               && !p.PublicationStageLogs.Any(l => l.Stage > stage)
+
+                                               && !p.PublicationStageLogs
+
+                                                   .Any(l => l.ActionTaken == ActionTaken.PublicationRejected))
+                                               .Select(p => p.Id);
+
+                var publications = _uow.PublicationRepository.Find(p => publicationIds.Contains(p.Id));
+                var publicationList = publications.Any() ?
+                            publications.Select(p => new PrincipalCuratorDownloadSerilizer(p, _uow)).ToList() : new List<PrincipalCuratorDownloadSerilizer>();
+                return Ok(value: publicationList);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
         [HttpDelete("publication/remove/{id}")]
         public IActionResult DeleteUnAssignedPublication([FromBody] ReverseSerializer model)
         {
@@ -332,5 +343,6 @@ namespace KEC.Curation.Web.Api.Controllers
                 return StatusCode(statusCode: StatusCodes.Status500InternalServerError);
             }
         }
+        #endregion
     }
 }
