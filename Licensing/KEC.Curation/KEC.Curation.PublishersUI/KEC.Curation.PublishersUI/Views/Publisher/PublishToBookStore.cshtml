@@ -47,6 +47,7 @@
                     document.getElementById("Description").value = `${publication.description}`;
                     document.getElementById("Subject").value = `${publication.subject}`;
                     document.getElementById("Level").value = `${publication.level}`;
+                    document.getElementById("ContentUrl").value = `${publication.curationUrl}`;
                 });
             });
         }
@@ -95,7 +96,7 @@
                                     <label for="Title">Content Number</label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="text" name="ContentNumber" id="ContentNumber" class="form-control" required >
+                                    <input type="text" name="ContentNumber" id="ContentNumber" class="form-control" readonly required >
                                 </div>
                             </div>
                             <br>
@@ -204,6 +205,14 @@
                                 </div>
                             </div>
                             <br>
+                            <div class="row hidden">
+                                <div class="col-sm-3">
+                                    <label for="ContentUrl">ContentUrl<small style="color:red;">*</small></label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" name="ContentUrl" id="ContentUrl" class="form-control" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
