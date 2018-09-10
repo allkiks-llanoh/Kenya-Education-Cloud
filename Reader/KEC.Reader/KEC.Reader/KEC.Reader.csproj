@@ -6,6 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\Home\pwabuilder-sw.js" />
+    <None Remove="Views\Shared\pwabuilder-sw.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Home\pwabuilder-sw.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Shared\pwabuilder-sw.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
     <PackageReference Include="WebEssentials.AspNetCore.PWA" Version="1.0.42" />
