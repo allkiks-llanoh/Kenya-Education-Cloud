@@ -48,6 +48,20 @@ namespace KEC.ECommerce.Web.UI.Models
                 return _uow.PublicationsRepository.Get(_lineItem.PublicationId)?.ContentNumber;
             }
         }
+        public string ThumbNailImage
+        {
+            get
+            {
+                return _uow.PublicationsRepository.Get(_lineItem.PublicationId)?.ThumbnailUrl;
+            }
+        }
+        public string PublicationUrl
+        {
+            get
+            {
+                return _uow.PublicationsRepository.Get(_lineItem.PublicationId)?.ContentUrl;
+            }
+        }
         public string Description
         {
             get

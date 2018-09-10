@@ -67,6 +67,11 @@ namespace KEC.ECommerce.Web.UI
                 option.OutputFormatters.RemoveType
                 <XmlDataContractSerializerOutputFormatter>();
             });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://example.com"));
+            });
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDataContext>()
                 .AddDefaultTokenProviders();
@@ -101,6 +106,7 @@ namespace KEC.ECommerce.Web.UI
             {
                 app.UseExceptionHandler("/error/500");
             }
+            app.UseCors("AllowSpecificOrigin");
             app.Use(async (ctx, next) =>
             {
                 await next();

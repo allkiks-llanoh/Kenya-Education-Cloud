@@ -1,4 +1,5 @@
 ﻿using KEC.ECommerce.Data.Database;
+using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.Repositories;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,8 @@ namespace KEC.ECommerce.Data.UnitOfWork
         public LicencesRepository LicencesRepository => new LicencesRepository(_context);
 
         public PaymentsRepository PaymentsRepository => new PaymentsRepository(_context);
+        public PurchasedBookRepository PurchasedBookRepository => new PurchasedBookRepository(_context);
+
 
         public int Complete()
         {

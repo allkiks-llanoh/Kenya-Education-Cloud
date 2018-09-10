@@ -31,5 +31,6 @@ namespace KEC.ECommerce.Data.Database
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<PurchasedBook> PurchasedBooks { get; set; }
     }
 }

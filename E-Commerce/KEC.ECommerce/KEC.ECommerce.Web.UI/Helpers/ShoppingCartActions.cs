@@ -60,7 +60,7 @@ namespace KEC.ECommerce.Web.UI.Helpers
         }
         public int GetCartId()
         {
-            
+
             var cartId = _context.Session.GetInt32(CartKey());
             if (cartId.HasValue)
             {
@@ -101,6 +101,7 @@ namespace KEC.ECommerce.Web.UI.Helpers
                     SubmittedAt = DateTime.Now,
                     Status = OrderStatus.Submitted
                 };
+               
                 cartItems.ForEach(item =>
                 {
                     var lineItem = new LineItem
@@ -111,8 +112,21 @@ namespace KEC.ECommerce.Web.UI.Helpers
                         UnitPrice = item.UnitPrice
                     };
                     _uow.LineItemsRepository.Add(lineItem);
+                    var userEmail = _context.User.FindFirst("Email")?.Value;
+                    var existingBook = _uow.PurchasedBookRepository.Find(p => p.PublicationId.Equals(item.PublicationId)
+                                                                          && p.IdentificationCode.Equals(userEmail)).Any();
+                    if (existingBook==false)
+                    {
+                        var purchasedModel = new PurchasedBook
+                        {
+                            PublicationId = item.PublicationId,
+                            IdentificationCode = _context.User.FindFirst("Email")?.Value,
+                            PaymentStatus = false,
+                            OrderNumber = order.OrderNumber
+                        };
+                        _uow.PurchasedBookRepository.Add(purchasedModel);
+                    }                   
                 });
-
                 _uow.OrdersRepository.Add(order);
                 _uow.ShoppingCartsRepository.Remove(ShoppingCart);
                 _uow.Complete();

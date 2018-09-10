@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<br>
+<script src="~/js/jquery-3.1.1.min.js"></script>
+<script src="~/js/GetContent.js"></script>
+<div class="container-fluid">
+    <div class="well">
+        <div class="ibox-content">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover dataTables-example" id="unassigned-publications">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Book</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @{
+        var email = User.Identity.Name;
+    }
+    <input class="hidden" type="text" name=userEmail id="userEmail" value="@email" />
+</div>
+@*<script type="text/javascript">var data = null;
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+            console.log(this.responseText);
+        }
+    });
+
+    xhr.open("GET", "https://store-d.kec.ac.ke/Publications/GetBooksToRead?email=allan@miyabiafrica.com");
+    xhr.setRequestHeader("Cache-Control", "no-cache");
+    xhr.setRequestHeader("Postman-Token", "ccb1e1e9-7456-40b4-8813-302215f9531e");
+
+    xhr.send(data);
+    </script>*@

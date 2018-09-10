@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+
+<script src="~/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    (function () {
+        $(document).ready(function () {
+            getPublicationInformation();
+        });
+
+        ///Functions Section
+        function getPublicationInformation() {
+            let id = $('#content-id').attr('data-publicationId');
+            console.log(id);
+            const apiBaseUrl = "https://store-d.kec.ac.ke/Publications";
+            let url = apiBaseUrl.concat(`/ReadById?publicationId=${id}`);
+            $.ajax({
+                url: url,
+                type: 'GET',
+                contentType: 'application/json',
+                accepts: 'application/json',
+                crossDomain: true
+            }).done(function (publication, textStatus, jqXHR) {
+
+                document.getElementById("publicationUrl").value = `${publication.contentUrl}`;
+                mimeCheck();
+            });
+        }
+        function mimeCheck() {
+
+            var fileName, fileExtension;
+            fileName = $('#publicationUrl').val();
+            fileExtension = fileName.split('.').pop();
+            console.log(fileExtension);
+            let mimeTypeCheck = fileExtension;
+            console.log(mimeTypeCheck);
+            if (mimeTypeCheck === "epub") {
+                $('#showEpub').toggleClass('hidden');
+                getEpubValue();
+            }
+            if (mimeTypeCheck === "html") {
+                $('#showHtml').toggleClass('hidden');
+                getHtmlValue();
+            }
+            if (mimeTypeCheck === "pdf") {
+                $('#showPdf').toggleClass('hidden');
+                getPdfValue();
+            }
+        }
+        function getEpubValue() {
+            var mimi = document.getElementById("publicationUrl").value;
+            console.log(mimi);
+            var ifrm = document.createElement("iframe");
+            ifrm.setAttribute("src", "/Readium/cloud-reader/index.html?epub=" + mimi);
+            ifrm.style.width = "1000px";
+            ifrm.style.height = "600px";
+            document.getElementById("showEpub").appendChild(ifrm);
+        }
+        function getPdfValue() {
+            var mimi = document.getElementById("publicationUrl").value;
+            console.log(mimi);
+            var ifrm = document.createElement("iframe");
+            ifrm.setAttribute("src", "/Scripts/plugins/ViewerJs/#" + mimi);
+            ifrm.style.width = "1000px";
+            ifrm.style.height = "600px";
+            document.getElementById("showPdf").appendChild(ifrm);
+        }
+        function getHtmlValue() {
+            $(document).ready(function () {
+                var Urlss = document.getElementById("publicationUrl").value;
+                var ifrm = document.createElement("iframe");
+                ifrm.setAttribute("src", `${Urlss}`);
+                ifrm.style.width = "1000px";
+                ifrm.style.height = "600px";
+                document.getElementById("showHtml").appendChild(ifrm);
+            });
+        }
+    })();
+</script>
+<div class="wrapper wrapper-content animated fadeInRight" id="content-id" data-publicationId="@ViewBag.Id">
+    <div class="container-fluid">
+        <input type="text" name="publicationUrl" id="publicationUrl" class="hidden" value="@ViewBag.Id" />
+        <div id="showHtml" class="hidden">
+            <div class="col-md-6">
+                <br>
+                <div style="color:black; font-weight:bold;font-size:15px;"></div>
+                <br>
+            </div>
+            <div>
+            </div>
+        </div>
+        <div id="showEpub" class="hidden">
+            <div class="col-md-6">
+                <br>
+                <div style="color:black; font-weight:bold;font-size:15px;"></div>
+                <br>
+            </div>
+        </div>
+        <div id="showPdf" class="hidden">
+
+            <div class="col-md-6">
+                <br>
+                <div style="color:black; font-weight:bold;font-size:15px;"></div>
+                <br>
+
+            </div>
+        </div>
+        <br>
+    </div>
+</div>

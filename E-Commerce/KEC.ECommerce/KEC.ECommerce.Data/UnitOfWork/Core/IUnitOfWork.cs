@@ -16,6 +16,7 @@ namespace KEC.ECommerce.Data.UnitOfWork.Core
         LineItemsRepository LineItemsRepository { get; }
         LicencesRepository LicencesRepository { get;}
         PaymentsRepository PaymentsRepository { get; }
+        PurchasedBookRepository PurchasedBookRepository { get; }
         int Complete();
     }
 }

@@ -181,6 +181,8 @@ namespace KEC.ECommerce.Data.Migrations
 
                     b.Property<int>("PublisherId");
 
+                    b.Property<int?>("PurchasedBookId");
+
                     b.Property<int>("Quantity");
 
                     b.Property<int>("SubjectId");
@@ -200,6 +202,8 @@ namespace KEC.ECommerce.Data.Migrations
                     b.HasIndex("LevelId");
 
                     b.HasIndex("PublisherId");
+
+                    b.HasIndex("PurchasedBookId");
 
                     b.HasIndex("SubjectId");
 
@@ -223,6 +227,25 @@ namespace KEC.ECommerce.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Publishers");
+                });
+
+            modelBuilder.Entity("KEC.ECommerce.Data.Models.PurchasedBook", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("IdentificationCode");
+
+                    b.Property<string>("OrderNumber");
+
+                    b.Property<bool>("PaymentStatus");
+
+                    b.Property<int>("PublicationId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PurchasedBooks");
                 });
 
             modelBuilder.Entity("KEC.ECommerce.Data.Models.ShoppingCart", b =>
@@ -329,6 +352,10 @@ namespace KEC.ECommerce.Data.Migrations
                         .WithMany("Publications")
                         .HasForeignKey("PublisherId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("KEC.ECommerce.Data.Models.PurchasedBook")
+                        .WithMany("Publications")
+                        .HasForeignKey("PurchasedBookId");
 
                     b.HasOne("KEC.ECommerce.Data.Models.Subject", "Subject")
                         .WithMany("Publications")

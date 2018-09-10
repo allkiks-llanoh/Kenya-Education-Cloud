@@ -19,7 +19,7 @@ namespace KEC.ECommerce.Web.UI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("KEC.ECommerce.Web.UI.Security.Models.ApplicationUser", b =>
+            modelBuilder.Entity("KEC.ECommerce.Web.UI.User.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -199,7 +199,7 @@ namespace KEC.ECommerce.Web.UI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("KEC.ECommerce.Web.UI.Security.Models.ApplicationUser")
+                    b.HasOne("KEC.ECommerce.Web.UI.User.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -207,7 +207,7 @@ namespace KEC.ECommerce.Web.UI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("KEC.ECommerce.Web.UI.Security.Models.ApplicationUser")
+                    b.HasOne("KEC.ECommerce.Web.UI.User.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -220,7 +220,7 @@ namespace KEC.ECommerce.Web.UI.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("KEC.ECommerce.Web.UI.Security.Models.ApplicationUser")
+                    b.HasOne("KEC.ECommerce.Web.UI.User.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -228,7 +228,7 @@ namespace KEC.ECommerce.Web.UI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("KEC.ECommerce.Web.UI.Security.Models.ApplicationUser")
+                    b.HasOne("KEC.ECommerce.Web.UI.User.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

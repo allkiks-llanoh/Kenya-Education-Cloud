@@ -137,6 +137,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
             var code = User.FindFirst("IdentificationCode")?.Value;
             var customerName = User.FindFirst("DisplayName")?.Value;
             var order = await _uow.OrdersRepository.GetOrderByUser(orderId, mail, OrderStatus.Submitted);
+           
             if (order == null)
             {
                 var model = new PinRequestViewModel(orderId, voucherCode);
@@ -201,7 +202,7 @@ namespace KEC.ECommerce.Web.UI.Controllers
                 Licences = licences,
                 StoreEmail = _emailConfiguration.SmtpUsername
             };
-
+            
             var documentContent = _templateService.RenderTemplateAsync("Templates/LicencesEmail", viewModel).Result;
             var emailService = _emailService as EmailService;
             var emailConfiguration = _emailConfiguration as EmailConfiguration;

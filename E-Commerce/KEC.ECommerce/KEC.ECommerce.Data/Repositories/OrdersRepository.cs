@@ -59,7 +59,14 @@ namespace KEC.ECommerce.Data.Repositories
                                  && p.Id.Equals(orderId) && p.Status == status);
             return order;
         }
-        
+        public IQueryable<Order> GroupBy(string email)
+        {
+            var orders = default(IQueryable<Order>);
+               orders =  _eCommerceContext.Orders.Where(p => p.CustomerEmail.Equals(email)
+                                 && p.Status == OrderStatus.Processed);
+            return orders;
+        }
+
         public IQueryable<Order> QueryablePaidOrders(string email, string searchTerm)
         {
             var orders = default(IQueryable<Order>);

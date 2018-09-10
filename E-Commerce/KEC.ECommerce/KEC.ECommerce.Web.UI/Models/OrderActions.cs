@@ -1,6 +1,7 @@
 ﻿using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using System;
+using System.Linq;
 
 namespace KEC.ECommerce.Web.UI.Models
 {
@@ -29,6 +30,19 @@ namespace KEC.ECommerce.Web.UI.Models
         {
             var order = _uow.OrdersRepository.Get(_order.Id);
             order.Status = OrderStatus.Paid;
+            var productItems = _uow.PurchasedBookRepository.Find(p => p.OrderNumber.Equals(order.OrderNumber) && !p.PaymentStatus).ToList();
+            if (productItems == null)
+            {
+                _uow.Complete();
+            }
+            else
+            {
+                productItems.ForEach(item =>
+                {
+                    item.PaymentStatus = true;
+                });
+
+            }
             _uow.Complete();
         }
 

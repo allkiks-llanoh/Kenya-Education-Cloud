@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using KEC.ECommerce.Data.Models;
 using KEC.ECommerce.Data.UnitOfWork.Core;
 using KEC.ECommerce.Web.UI.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
@@ -171,6 +172,61 @@ namespace KEC.ECommerce.Web.UI.Controllers
             var sales = await _uow.LineItemsRepository.GetPublisherSales(model.PublisherGuid, model.StartDate, model.EndDate, model.PaymentMethod);
             var salesList = sales.Any() ? sales.Select(p => new SaleItemViewModel(p, _uow)).ToList() : new List<SaleItemViewModel>();
             return Ok(salesList);
+        }
+        [HttpGet]
+        public IActionResult ListBooksByOrderId(int orderId)
+        {
+            var books = _uow.LineItemsRepository.Find(p => p.OrderId.Equals(orderId));
+            var booksList = books.Any() ? books.Select(p => new BooksListViewModel(p, _uow)).ToList() : new List<BooksListViewModel>();
+            return Ok(booksList);
+        }
+        [HttpGet]
+        public IActionResult ListBooksByEmail(string email)
+        {
+            var books = _uow.OrdersRepository.Find(p => p.CustomerEmail.Equals(email) && p.Status == OrderStatus.Processed);
+            var booksList = books.Any() ? books.Select(p => new BooksByEmailViewModel(p, _uow)).ToList() : new List<BooksByEmailViewModel>();
+            return Ok(booksList);
+        }
+        [HttpGet]
+        public IActionResult GroupBy(string email)
+        {
+            //var booksList = _uow.OrdersRepository.GroupBy(email).GroupBy(x=> x.OrderNumber);
+            var books = _uow.OrdersRepository.Find(p => p.CustomerEmail.Equals(email) && p.Status == OrderStatus.Processed);
+            var booksList = books.Any() ? books.Select(p => new BooksByEmailViewModel(p, _uow)).ToList() : new List<BooksByEmailViewModel>();
+            return Ok(booksList);
+        }
+        [HttpGet]
+        [EnableCors("AllowSpecificOrigin")]
+        public IActionResult GetBooksToRead(string email)
+        {
+            try
+            {
+                var books = _uow.PurchasedBookRepository.Find(p => p.IdentificationCode.Equals(email) && p.PaymentStatus);
+                var booksList = books.Any() ? books.Select(p => new BooksList(p, _uow)).ToList() : new List<BooksList>();
+                return Ok(booksList);
+            }
+            catch (Exception ex)
+            {
+                ex.GetBaseException();
+                return BadRequest(ex);
+            }
+
+        }
+        [HttpGet]
+        [EnableCors("AllowSpecificOrigin")]
+        public IActionResult ReadById(int publicationId)
+        {
+            try
+            {
+                var _book = _uow.PublicationsRepository.Find(p => p.Id.Equals(publicationId)).FirstOrDefault();
+                return Ok(_book);
+            }
+            catch (Exception ex)
+            {
+                ex.GetBaseException();
+                return BadRequest(ex);
+            }
+
         }
     }
 }
