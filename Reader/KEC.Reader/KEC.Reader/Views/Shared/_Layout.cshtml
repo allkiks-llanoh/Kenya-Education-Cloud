@@ -9,7 +9,7 @@
     <script src="~/pwabuilder-sw.js"></script>
     <script type="text/javascript">
         if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("./pwabuilder-sw.js", { scope: "./" }).then(function (reg) {
+            navigator.serviceWorker.register("~/pwabuilder-sw.js", { scope: "./" }).then(function (reg) {
                 if (reg.installing) {
                     console.info("Service worker installing.");
                 }
