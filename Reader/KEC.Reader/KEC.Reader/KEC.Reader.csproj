@@ -25,4 +25,8 @@
     <PackageReference Include="WebEssentials.AspNetCore.PWA" Version="1.0.42" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
 </Project>

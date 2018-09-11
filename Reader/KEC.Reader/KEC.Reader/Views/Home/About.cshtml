@@ -53,8 +53,9 @@
             console.log(mimi);
             var ifrm = document.createElement("iframe");
             ifrm.setAttribute("src", "/Readium/cloud-reader/index.html?epub=" + mimi);
-            ifrm.style.width = "1000px";
-            ifrm.style.height = "600px";
+            ifrm.style.width = "750px";
+            ifrm.style.height = "700px";
+            ifrm.style.align = "center";
             document.getElementById("showEpub").appendChild(ifrm);
         }
         function getPdfValue() {
@@ -78,8 +79,28 @@
         }
     })();
 </script>
+<nav class="navbar navbar-default navbar-fixed-top" style="height:70px;">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                <img src="~/images/KEClogo.png" style="margin-top:-20px;" width="150" height="70" />
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav"></ul>
+            <partial name="_LoginPartial" />
+        </div>
+    </div>
+</nav>
+<br />
 <div class="wrapper wrapper-content animated fadeInRight" id="content-id" data-publicationId="@ViewBag.Id">
-    <div class="container-fluid">
+    <div class="col-md-10 col-lg-offset-1">
         <input type="text" name="publicationUrl" id="publicationUrl" class="hidden" value="@ViewBag.Id" />
         <div id="showHtml" class="hidden">
             <div class="col-md-6">
