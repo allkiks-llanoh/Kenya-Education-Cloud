@@ -18,7 +18,5 @@ namespace KEC.Curation.Data.Models
         PublicationApproval=6,
         [Description("Issue of certificate")]
         IssueOfCertificate = 7
-
-
     }
 }
