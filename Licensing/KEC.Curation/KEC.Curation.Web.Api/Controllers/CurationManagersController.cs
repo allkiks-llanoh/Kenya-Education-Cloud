@@ -99,13 +99,14 @@ namespace KEC.Curation.Web.Api.Controllers
 
             var assigment = _uow.PublicationRepository.Find(p => p.Id.Equals(model.PublicationId)
                                                                      && p.PublicationStageLogs.Max(l => l.Stage)
-                                                                     == PublicationStage.IssueOfCertificate)
+                                                                     == PublicationStage.IssueOfCertificate
+                                                                     && !p.Approved && !p.Rejected)
                                                                     .FirstOrDefault();
             
 
             if (assigment == null)
             {
-                return NotFound("Record could not be retrieved");
+                return StatusCode(StatusCodes.Status404NotFound);
             }
             var subject = _uow.SubjectRepository.Find(p => p.Id.Equals(assigment.SubjectId)).FirstOrDefault();
             #region Get Licence TYpe

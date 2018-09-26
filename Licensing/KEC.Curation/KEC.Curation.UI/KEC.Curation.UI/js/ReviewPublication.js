@@ -8,6 +8,7 @@
     function getPublication() {
         let publicationId = $('#publication-view').attr('data-publicationId');
         var urls = apiBaseUrls.concat(`/CurationManagers/get/publications/${publicationId}`);
+      
         $.ajax({
             url: urls,
             type: 'GET',
@@ -101,6 +102,10 @@
         if (notes === null || notes === "") {
             return ShowAlert("Curation notes cannot be blank", "error");
         }
+        if (todo === null || todo === "") {
+            return ShowAlert("Please select an action taken from the list", "error");
+            return ShowAlert("You cannot submit without selecting Approve or Reject", "info");
+        }
         $.ajax({
             headers : {
                 'Accept' : 'application/json',
@@ -113,7 +118,8 @@
             accepts: 'application/json',
             data: JSON.stringify({ PublicationId: publicationId, Notes: notes, ToDo: todo }),
             statusCode: {
-                404: () => { ShowAlert("Curators submissions could not be retrieved", 'error'); },
+                404: () => { ShowAlert("Double Submission is NOT allowed", 'error'); },
+                404: () => { ShowAlert("The publication is already submitted", 'info'); },
                 403: () => { ShowAlert("You are not authorized to process publication"); },
                 500: () => { ShowAlert("Something went wrong while processing publication", 'error'); }
             }
@@ -121,6 +127,8 @@
             ShowAlert("Succesfull, Curated Publication Processed Succesfully", 'success');
         }).fail(function () {
             ShowAlert("Something went wrong while processing publication", 'error');
+            ShowAlert("Double Submission is NOT allowed", 'warning');
+            ShowAlert("The publication is already submitted", 'info');
         });
     }
     //Functions Section
