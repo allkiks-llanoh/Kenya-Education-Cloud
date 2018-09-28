@@ -8,6 +8,9 @@
         let Id = $('#publication-view').attr('data-publicationId');
         let CuserGuid = $('#CurrentUserGuid').val();   
         let url = apiBaseUrl.concat(`/principalcurator/update/chiefcuratorcomments/${Id}?publicationId=${Id}`);
+        if (actionSelected === null || actionSelected === "") {
+            return ShowAlert("Please select an action taken from the list", "error");
+        }
         $.ajax({
             headers : {
                 'Accept' : 'application/json',

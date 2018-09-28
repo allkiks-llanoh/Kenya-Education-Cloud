@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <ApplicationInsightsResourceId>/subscriptions/8eaca2a2-dc2f-4e58-8ae2-28580934830b/resourcegroups/curation/providers/microsoft.insights/components/curationapi</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/8eaca2a2-dc2f-4e58-8ae2-28580934830b/resourcegroups/curation/providers/microsoft.insights/components/curationapi</ApplicationInsightsAnnotationResourceId>
+    <UserSecretsId>a6293227-c25e-4f27-a39d-9b55eb36fdc0</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

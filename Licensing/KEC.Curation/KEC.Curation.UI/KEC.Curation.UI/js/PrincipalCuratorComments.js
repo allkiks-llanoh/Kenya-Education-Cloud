@@ -17,6 +17,9 @@
             return ShowAlert("Curation notes cannot be blank", "error");
         }
         if (actionSelected === null || actionSelected === "") {
+            $('#recommend').html('Yes');
+            $('#confirm').modal('hide');
+            $('.modal-backdrop').remove();
             return ShowAlert("Please select an action taken from the list", "error");
         }
         $.ajax({

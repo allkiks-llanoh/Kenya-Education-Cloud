@@ -77,12 +77,12 @@
             data: JSON.stringify({ userGuid: userGuid, Notes: notes, Submitted: subs, FullName: fullName }),
 
         }).done(function (data, textStatus, jqXHR) {
-            $('#save-notes-submit").').html('Yes');
+            $('#save-notes-submit').html('Yes');
             $('#confirmsave').modal('hide');
             $('.modal-backdrop').remove();
             ShowAlert("Curation notes saved and submitted successfully", "success");
         }).fail(function (jqXHR, textStatus, errorThrown) {
-            $('#save-notes-submit").').html('Yes');
+            $('#save-notes-submit').html('Yes');
             $('#confirmsave').modal('hide');
             $('.modal-backdrop').remove();
             ShowAlert("Something went wrong while saving your notes", "error");
