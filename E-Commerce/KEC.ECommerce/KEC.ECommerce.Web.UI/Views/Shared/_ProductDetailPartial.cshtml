@@ -1,13 +1,14 @@
 ﻿@using KEC.ECommerce.Web.UI.Models;
 @model ProductViewModel;
 <link href="~/css/ImageCrop.css" rel="stylesheet" />
-<div class="cell-md-3">
+<div class="cell-md-2">
     <div class="card">
         <div class="card-header">
             <h6 class="text fg-green fg-red-hover">@Model.Subject</h6>
         </div>
         <div class="card-content p-2">
-            <img src="@Url.Content(Model.ThumbnailUrl)" class="img">
+            <img src="@Url.Content(Model.ThumbnailUrl)" data-role="popover" data-popover-hide="5000" data-cls-popover="bg-blue fg-white drop-shadow"
+                 data-popover-text="<div style='height:auto;width:250px; border-radius:5px; text-align:center; font-size:18px; background-color:#00B2EE;color:white'><b>Product Description</b><br>@Model.Description</div>" data-popover-position="right" class="img">
             @*class="img-thumbnail"*@
         </div>
         <div class="card-content">
@@ -20,11 +21,7 @@
                 <h5 class="text fg-green fg-red-hover">@Model.Title</h5>
             </div>
         </div>
-        <div class="card-content">
-            <div class="cell">
-                <p class="pt-2">@Model.Description</p>
-            </div>
-        </div>
+        
         <div class="card-content">
             <div class="cell">
                 <h5 class="text fg-green fg-red-hover">@Model.UnitPrice</h5>

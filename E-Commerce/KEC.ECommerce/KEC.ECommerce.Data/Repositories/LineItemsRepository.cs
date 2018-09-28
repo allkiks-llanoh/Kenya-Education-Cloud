@@ -29,5 +29,13 @@ namespace KEC.ECommerce.Data.Repositories
             return lineItems;
 
         }
+        public async Task<IEnumerable<LineItem>> BestSellerPublicationsAsyc(int count = 6)
+        {
+            var publications = await (_context as ECommerceDataContext).LineItems
+                                            
+                                            .OrderByDescending(p => p.PublicationId)
+                                            .Take(count).ToListAsync();
+            return publications;
+        }
     }
 }

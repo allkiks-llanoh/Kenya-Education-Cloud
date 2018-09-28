@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductViewModel>
+﻿@model IEnumerable<BestSellerViewModel>
 
 @if (Model.Any())
 {
@@ -6,15 +6,15 @@
     <div class="border bd-blue">
         <div class="cell-md-full">
             <div class="ui horizontal divider">
-                <p class="text-center text-bold text-upper fg-orange">New in stock</p>
+                <p class="text-center text-bold text-upper fg-indigo">Best Sellers</p>
             </div>
         </div>
         <div class="owl-carousel  p-1 owl-theme">
             @foreach (var product in Model)
             {
                 <div class="item grid">
-                    <div class="ribbon-wrapper-orange">
-                        <div class="ribbon-orange">NEW</div>
+                    <div class="ribbon-wrapper-indigo">
+                        <div class="ribbon-orange">Best Sellers</div>
                     </div>
                     <div class="row">
                         <div class="cell-md-7 cell-sm-12 img-container">
@@ -41,10 +41,10 @@
                                     <h4 class="text fg-green mt-4">@product.UnitPrice</h4>
                                 </div>
                             </div>
-                            @{
+                            @*@{
 
                                 await Html.RenderPartialAsync("_ShoppingForm", product);
-                            }
+                            }*@
                         </div>
                     </div>
                 </div>

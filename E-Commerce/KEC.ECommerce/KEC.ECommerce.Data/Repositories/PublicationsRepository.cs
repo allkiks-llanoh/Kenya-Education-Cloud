@@ -25,7 +25,14 @@ namespace KEC.ECommerce.Data.Repositories
                                             .Take(count).ToListAsync();
             return publications;
         }
+        public async Task<IEnumerable<ShoppingCartItem>> BestSellerPublicationsAsyc(int count = 6)
+        {
+            var publications = await (_context as ECommerceDataContext).ShoppingCartItems
 
+                                            .OrderByDescending(p => p.PublicationId)
+                                            .Take(count).ToListAsync();
+            return publications;
+        }
         public IEnumerable<Publication> TopProductsPerCategory(int categoryId, int count = 4)
         {
             var publications = _ecommerceContext.Publications
