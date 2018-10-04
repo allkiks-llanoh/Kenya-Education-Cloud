@@ -334,7 +334,6 @@ namespace KEC.Curation.Web.Api.Controllers
             }
         }
         #endregion
-
         #region Curation History
         [HttpGet("publications/{subjectId:int}/history")]
         public IActionResult PublicationsCurationHistory(string chiefCuratorGuid, int subjectId)

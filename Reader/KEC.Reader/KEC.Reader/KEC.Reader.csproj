@@ -6,11 +6,95 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\plugins\ViewerJS\compatibility.js" />
+    <None Remove="Scripts\plugins\ViewerJS\example.local.css" />
+    <None Remove="Scripts\plugins\ViewerJS\images\kogmbh.png" />
+    <None Remove="Scripts\plugins\ViewerJS\images\logo-white.png" />
+    <None Remove="Scripts\plugins\ViewerJS\images\nlnet.png" />
+    <None Remove="Scripts\plugins\ViewerJS\images\texture.png" />
+    <None Remove="Scripts\plugins\ViewerJS\images\toolbarButton-download.png" />
+    <None Remove="Scripts\plugins\ViewerJS\images\toolbarButton-fullscreen.png" />
+    <None Remove="Scripts\plugins\ViewerJS\images\toolbarButton-menuArrows.png" />
+    <None Remove="Scripts\plugins\ViewerJS\images\toolbarButton-pageDown.png" />
+    <None Remove="Scripts\plugins\ViewerJS\images\toolbarButton-pageUp.png" />
+    <None Remove="Scripts\plugins\ViewerJS\images\toolbarButton-presentation.png" />
+    <None Remove="Scripts\plugins\ViewerJS\images\toolbarButton-zoomIn.png" />
+    <None Remove="Scripts\plugins\ViewerJS\images\toolbarButton-zoomOut.png" />
+    <None Remove="Scripts\plugins\ViewerJS\index.html" />
+    <None Remove="Scripts\plugins\ViewerJS\pdf.js" />
+    <None Remove="Scripts\plugins\ViewerJS\pdf.worker.js" />
+    <None Remove="Scripts\plugins\ViewerJS\pdfjsversion.js" />
+    <None Remove="Scripts\plugins\ViewerJS\text_layer_builder.js" />
+    <None Remove="Scripts\plugins\ViewerJS\ui_utils.js" />
+    <None Remove="Scripts\plugins\ViewerJS\webodf.js" />
     <None Remove="Views\Home\pwabuilder-sw.js" />
     <None Remove="Views\Shared\pwabuilder-sw.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Scripts\plugins\ViewerJS\compatibility.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\example.local.css">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\kogmbh.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\logo-white.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\nlnet.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\texture.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-download.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-fullscreen.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-menuArrows.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-pageDown.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-pageUp.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-presentation.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-zoomIn.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\images\toolbarButton-zoomOut.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\index.html">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\pdf.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\pdf.worker.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\pdfjsversion.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\text_layer_builder.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\ui_utils.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\plugins\ViewerJS\webodf.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="Views\Home\pwabuilder-sw.js">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -27,6 +111,16 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Scripts\plugins\ViewerJS\compatibility.js" />
+    <None Include="wwwroot\Scripts\plugins\ViewerJS\pdf.js" />
+    <None Include="wwwroot\Scripts\plugins\ViewerJS\pdf.worker.js" />
+    <None Include="wwwroot\Scripts\plugins\ViewerJS\pdfjsversion.js" />
+    <None Include="wwwroot\Scripts\plugins\ViewerJS\text_layer_builder.js" />
+    <None Include="wwwroot\Scripts\plugins\ViewerJS\ui_utils.js" />
+    <None Include="wwwroot\Scripts\plugins\ViewerJS\webodf.js" />
   </ItemGroup>
 
 </Project>

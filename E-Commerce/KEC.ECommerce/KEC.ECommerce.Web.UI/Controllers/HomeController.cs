@@ -11,7 +11,10 @@ namespace KEC.ECommerce.Web.UI.Controllers
         {
             return View();
         }
-
+        public IActionResult CheckEducationProfile ()
+        {
+            return View();
+        }
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
